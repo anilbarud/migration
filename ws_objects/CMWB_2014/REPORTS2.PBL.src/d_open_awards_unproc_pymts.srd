@@ -1,0 +1,142 @@
+﻿$PBExportHeader$d_open_awards_unproc_pymts.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=240 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=award_no dbname="award_no" )
+ column=(type=char(4) updatewhereclause=yes name=award_type_code dbname="award_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_payment_amount dbname="total_payment_amount" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=char(8) updatewhereclause=yes name=award_pymt_group dbname="award_pymt_group" )
+ column=(type=long updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(1) updatewhereclause=yes name=provider_type_code dbname="provider_type_code" )
+ column=(type=char(30) updatewhereclause=yes name=name dbname="name" )
+ column=(type=datetime updatewhereclause=yes name=scheduled_processing_date dbname="scheduled_processing_date" )
+ retrieve="SELECT	a.claim_no,
+			a.admin_region_code,
+			a.claim_status_code,
+			b.payment_no,
+			award_no = 0,
+			award_type_code = '',
+   		     b.payment_type_code,
+			b.payment_sub_type_code,
+			b.total_payment_amount,
+			b.create_user_id,
+			award_pymt_group = 'Payments',
+			c.provider_no,
+			c.provider_type_code,
+			c.name,
+			d.scheduled_processing_date
+FROM   	CLAIM a, 
+      		PAYMENT b,
+			PROVIDER c,
+        		UNAPPLIED_CLAIM_TXN d
+WHERE   a.claim_no  					= b.claim_no
+AND     	b.claim_no 					= d.claim_no
+AND     	b.payment_no				= d.payment_no
+AND     	c.provider_no				= d.recipient_no
+AND     	c.provider_type_code	= d.recipient_type_code
+AND     	d.recipient_no  			= :provider_no
+AND     	d.recipient_type_code 	= :provider_type
+
+UNION ALL
+
+SELECT	a.claim_no,
+			a.admin_region_code,
+			a.claim_status_code,
+			payment_no = 0,
+			b.award_no,
+			b.award_type_code,
+   		     b.payment_type_code,
+			payment_sub_type_code = '',
+			b.total_payment_amount,
+			b.create_user_id,
+			award_pymt_group = 'Awards',
+			d.provider_no,
+			d.provider_type_code,
+			d.name,
+ 			e.scheduled_processing_date
+FROM   	CLAIM a,
+      		PERIODIC_AWARD b, 
+       		PERIODIC_RECIPIENT c,
+			PROVIDER d,
+			PERIODIC_AWARD_CONTROL e
+WHERE   a.claim_no 					= b.claim_no
+AND     	b.claim_no     				= c.claim_no
+AND     	b.award_no					= c.award_no
+AND		d.provider_no				= c.recipient_no
+AND     	d.provider_type_code	= c.recipient_type_code
+AND     	c.recipient_no 				= :provider_no
+AND     	c.recipient_type_code 	= :provider_type
+AND     	( b.award_end_date > Convert(char(10),getdate(),120)
+OR      	  b.award_end_date IS NULL )
+AND	e.award_type_code = b.award_type_code
+AND	e.scheduled_processing_date IN ( SELECT MIN(f.scheduled_processing_date)
+					  								   FROM PERIODIC_AWARD_CONTROL f
+					 								 WHERE f.award_type_code = b.award_type_code
+													      AND f.period_from_date >= Getdate()	)
+" arguments=(("provider_no", number),("provider_type", string))  sort="admin_region_code A claim_no A award_pymt_group A " )
+group(level=1 header.height=180 trailer.height=0 by=("create_user_id" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=244 trailer.height=32 by=("award_pymt_group" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="0" y="0" height="236" width="3552"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="15987699" )
+rectangle(band=header x="0" y="0" height="8" width="9"  name=r_2 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="32" y="40" height="60" width="338" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="421" y="40" height="60" width="389" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="32" y1="212" x2="3502" y2="212"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Scheduled Payments to Providers/Recipients" border="0" color="0" x="923" y="24" height="76" width="1545" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="32" y="120" height="64" width="521" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="case( provider_type when 'M' then 'Medical Aid' when 'O' then 'Other' when 'V' then 'Vocational Rehab' )  + ~" Provider # ~" + provider_no + ~" - ~" + name
+"border="0" color="0" x="585" y="124" height="60" width="2313" format="[general]" html.valueishtml="0"  name=c_parameter visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="1" text="Total # records:" border="0" color="0" x="2962" y="120" height="64" width="411" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="count(claim_no for all)"border="0" color="0" x="3406" y="120" height="64" width="82" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2958" y="44" height="56" width="530" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header.1 alignment="0" text="Created by:" border="0" color="0" x="9" y="76" height="64" width="334" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+column(band=header.1 id=10 alignment="0" tabsequence=32766 border="0" color="0" x="379" y="76" height="64" width="375" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=11 alignment="0" tabsequence=32766 border="0" color="0" x="18" y="8" height="64" width="494" format="[general]" html.valueishtml="0"  name=award_pymt_group_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+line(band=header.2 x1="18" y1="236" x2="3502" y2="236"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="1" text="Claim No.:" border="0" color="0" x="27" y="164" height="64" width="302" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Payment
+Sub Type" border="0" color="0" x="965" y="100" height="128" width="274" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Payment
+No." border="0" color="0" x="1783" y="100" height="128" width="256" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Award
+Type" border="0" color="0" x="2190" y="100" height="128" width="201" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Claim
+Status" border="0" color="0" x="393" y="100" height="128" width="178" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Payment
+Type" border="0" color="0" x="645" y="100" height="128" width="256" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Award
+No." border="0" color="0" x="2473" y="100" height="128" width="192" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Scheduled Processing Date" border="0" color="0" x="2743" y="100" height="128" width="494" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Admin. Region" border="0" color="0" x="3273" y="100" height="128" width="229" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Payment
+Amount" border="0" color="0" x="1435" y="100" height="128" width="274" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="27" y="8" height="60" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2199" y="4" height="64" width="201" format="[general]" html.valueishtml="0"  name=award_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1783" y="4" height="64" width="352" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="965" y="4" height="64" width="274" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="645" y="4" height="64" width="256" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="393" y="4" height="64" width="192" format="[general]" html.valueishtml="0"  name=claim_status_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2473" y="4" height="64" width="178" format="[general]" html.valueishtml="0"  name=award_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="2743" y="4" height="64" width="453" format="yyyy-mm-dd" html.valueishtml="0"  name=scheduled_processing_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="3278" y="4" height="64" width="123" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="1307" y="4" height="64" width="402" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=total_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,26 @@
+﻿$PBExportHeader$s_user_profile.srs
+$PBExportComments$Application Driver - contains user profile and authorization information
+global type s_user_profile from structure
+	string		user_id
+	string		user_name
+	string		user_initials
+	string		position_code
+	string		position_english_desc
+	string		phone_no
+	string		position_french_desc
+	string		default_admin_region_code
+	string		authorizations[5, 2]
+	string		account_authorizations[5, 2]
+	long		default_image_working_setid
+	string		pension_authorizations[5, 2]
+	string		cost_analysis_authorizations[5, 2]
+	string		survivor_authorizations[5, 2]
+	string		annuity_authorizations[5,2]
+	string		maintain_action_item_flag
+	string		maintain_sin_med_flag
+	string		maintain_3rd_party_status_flag
+	string		work_group_code
+	string		registry_viewer_setting_flag
+	string		maintain_formulary_flag
+end type
+

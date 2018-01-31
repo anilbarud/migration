@@ -1,0 +1,42 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "benefit_entitlement.pbl" "";
+@end;
+@begin Objects 
+ "d_be_claim_information_iw.srd" "benefit_entitlement.pbl";
+ "d_be_claim_information_ss.srd" "benefit_entitlement.pbl";
+ "d_benefit_entitlement.srd" "benefit_entitlement.pbl";
+ "d_benefit_error_messages.srd" "benefit_entitlement.pbl";
+ "d_benefit_qualification.srd" "benefit_entitlement.pbl";
+ "d_entitlement_access.srd" "benefit_entitlement.pbl";
+ "d_entitlement_annuity_dates.srd" "benefit_entitlement.pbl";
+ "d_entitlement_award.srd" "benefit_entitlement.pbl";
+ "d_entitlement_award_ss.srd" "benefit_entitlement.pbl";
+ "d_entitlement_bencalc.srd" "benefit_entitlement.pbl";
+ "d_entitlement_opening.srd" "benefit_entitlement.pbl";
+ "d_entitlement_opening_ss.srd" "benefit_entitlement.pbl";
+ "d_entitlement_overpayment.srd" "benefit_entitlement.pbl";
+ "d_entitlement_payment_list.srd" "benefit_entitlement.pbl";
+ "d_entitlement_qualification.srd" "benefit_entitlement.pbl";
+ "d_entitlement_worker_info.srd" "benefit_entitlement.pbl";
+ "d_worker_details.srd" "benefit_entitlement.pbl";
+ "dddw_award_frequency.srd" "benefit_entitlement.pbl";
+ "dddw_be_claims.srd" "benefit_entitlement.pbl";
+ "dddw_ben_calcs_for_annuities.srd" "benefit_entitlement.pbl";
+ "dddw_openings_list_ann.srd" "benefit_entitlement.pbl";
+ "dddw_payment_types_annuities.srd" "benefit_entitlement.pbl";
+ "dddw_populate_claim.srd" "benefit_entitlement.pbl";
+ "ds_claims.srd" "benefit_entitlement.pbl";
+ "ds_openings.srd" "benefit_entitlement.pbl";
+ "ds_payment_dates_for_sort.srd" "benefit_entitlement.pbl";
+ "ds_span_annuity_interest.srd" "benefit_entitlement.pbl";
+ "f_get_claim_role_code.srf" "benefit_entitlement.pbl";
+ "m_benefit_action.srm" "benefit_entitlement.pbl";
+ "s_quarters.srs" "benefit_entitlement.pbl";
+ "n_maintain_benefit.sru" "benefit_entitlement.pbl";
+ "w_injured_worker_or_ss.srw" "benefit_entitlement.pbl";
+ "w_maintain_benefit_entitlement.srw" "benefit_entitlement.pbl";
+ "w_payment_details_for_entitlement.srw" "benefit_entitlement.pbl";
+ "w_prompt_user_for_be_count.srw" "benefit_entitlement.pbl";
+ "w_view_benefit_error_msgs.srw" "benefit_entitlement.pbl";
+@end;

@@ -1,0 +1,99 @@
+﻿$PBExportHeader$d_rx_termination_coverage_list.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=208 color="10789024" )
+summary(height=0 color="536870912" )
+footer(height=88 color="10789024" )
+detail(height=88 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime updatewhereclause=yes name=eligibility_end_date dbname="eligibility_end_date" )
+ column=(type=char(1) updatewhereclause=yes name=eligibility_type dbname="eligibility_type" )
+ column=(type=char(16) updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(20) updatewhereclause=yes name=claim_status_desc dbname="claim_status_desc" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(42) updatewhereclause=yes name=individual_name dbname="individual_name" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ retrieve="select  ce.claim_no,
+	'eligibility_end_date' = max(ce.eligibility_end_date),        
+	'eligibility_type'='E',       
+	c.claim_manager_user_id, 
+	c.admin_region_code,
+	c.claim_status_code,
+	cs.claim_status_desc,
+	i.individual_no, 
+	'individual_name' = (i.last_name + ', ' + i.given_names),
+	i.birth_date     
+  from 	CLAIM_ELIGIBILITY ce, 
+	INDIVIDUAL i, 
+        CLAIM c, 
+        Claim_Status cs
+ where ce.claim_no = c.claim_no
+   and c.claim_status_code = cs.claim_status_code
+   and i.individual_no = c.individual_no
+   and  c.claim_status_code in ('A','F') 
+   and ((:coverage_type = 'O' and ce.eligibility_end_date is null)
+          or (:coverage_type = 'T' and abs(datediff(day,GetDate(),ce.eligibility_end_date)) <= abs(:eligibility_days) and (sign(datediff(day,GetDate(),ce.eligibility_end_date)) = sign(:eligibility_days)  or sign(datediff(day,GetDate(),ce.eligibility_end_date)) = 0) ))
+   and (:payment_days = 0 or exists(select * from PAYMENT p WHERE p.claim_no = c.claim_no and payment_type_code = '22' and Abs(DateDiff(day,GetDate(),create_date)) <= :payment_days))
+group by ce.claim_no,       
+         c.claim_manager_user_id, 
+         c.admin_region_code,
+	 c.claim_status_code,
+         cs.claim_status_desc,
+         i.individual_no, 
+         i.last_name, 
+         i.given_names,
+         i.birth_date
+ 
+union All
+
+select 	cf.claim_no,
+	'eligibility_end_date' = cf.formulary_end_date,              
+	formulary_type_code,       
+	c.claim_manager_user_id, 
+	c.admin_region_code,
+	c.claim_status_code,
+	cs.claim_status_desc,
+	i.individual_no, 
+	'individual_name' = (i.last_name + ', ' + i.given_names),
+	i.birth_date      
+  from 	CLAIM_FORMULARY cf, 
+        INDIVIDUAL i, 
+        CLAIM c, 
+        Claim_Status cs
+ where 	cf.claim_no = c.claim_no
+    and c.claim_status_code = cs.claim_status_code
+    and i.individual_no = c.individual_no
+    and c.claim_status_code in ('A','F')
+
+   and (   (:coverage_type = 'O' and cf.formulary_end_date is null) 
+        or (:coverage_type = 'T' and abs(datediff(day,GetDate(),cf.formulary_end_date)) <= abs(:eligibility_days) and (sign(datediff(day,GetDate(),cf.formulary_end_date)) = sign(:eligibility_days)  or sign(datediff(day,GetDate(),cf.formulary_end_date)) = 0) ))
+   and (:payment_days = 0 
+        or exists(select * from PAYMENT p WHERE p.claim_no = c.claim_no and payment_type_code = '22' and Abs(DateDiff(day,GetDate(),create_date)) <= :payment_days))
+order by eligibility_end_date, ce.claim_no, c.claim_status_code " arguments=(("eligibility_days", number),("payment_days", number),("coverage_type", string)) )
+line(band=header x1="9" y1="200" x2="2816" y2="200"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Claim No" border="0" color="33554432" x="27" y="120" height="64" width="297" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Coverage End Date" border="0" color="33554432" x="375" y="120" height="64" width="562" html.valueishtml="0"  name=eligibility_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Status" border="0" color="33554432" x="992" y="120" height="64" width="183" html.valueishtml="0"  name=claim_status_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="0" color="33554432" x="1458" y="120" height="64" width="178" html.valueishtml="0"  name=last_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Birth Date" border="0" color="33554432" x="2094" y="120" height="64" width="288" html.valueishtml="0"  name=compute_0010_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="0" y1="80" x2="2811" y2="80"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="27" y="4" height="64" width="302" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=30 border="0" color="33554432" x="974" y="4" height="64" width="251" format="[general]" html.valueishtml="0"  name=claim_status_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=9 alignment="0" tabsequence=40 border="0" color="33554432" x="1294" y="4" height="64" width="754" format="[general]" html.valueishtml="0"  name=individual_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=10 alignment="0" tabsequence=50 border="0" color="33554432" x="2075" y="4" height="64" width="320" format="yyyy-mm-dd" html.valueishtml="0"  name=birth_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="if(not isnull(eligibility_end_date),String(eligibility_end_date,'yyyy-mm-dd'),'open-ended')"border="0" color="33554432" x="366" y="4" height="64" width="576" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=footer alignment="0" text="Number of claims found: " border="0" color="0" x="32" y="8" height="64" width="645" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count( claim_no for all)"border="0" color="0" x="686" y="8" height="64" width="197" format="#,##0" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="'Filter: ' + if(DESCRIBE(~"DataWindow.Table.Filter~")='?','',DESCRIBE(~"DataWindow.Table.Filter~"))"border="0" color="33554432" x="901" y="8" height="64" width="1915" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

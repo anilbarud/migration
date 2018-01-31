@@ -1,0 +1,24 @@
+﻿$PBExportHeader$dddw_authorization_task_specific_code.srd
+$PBExportComments$List of all authorized Task Specifics (selects active flag so that inactive can be filtered out)
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=65 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="Task_Specific.task_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="Task_Specific.task_sub_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="Task_Specific.task_specific_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_specific_desc dbname="Task_Specific.task_specific_desc" )
+ column=(type=char(1) updatewhereclause=yes name=comment_required_flag dbname="Task_Specific.comment_required_flag" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="Task_Specific.active_flag" )
+ column=(type=char(1) updatewhereclause=yes name=task_entry_flag dbname="Task_Specific.task_entry_flag" )
+ retrieve="   SELECT Distinct Task_Specific.task_type_code,   
+         Task_Specific.task_sub_type_code,  
+         Task_Specific.task_specific_code,   
+         Task_Specific.task_specific_desc,   
+         Task_Specific.comment_required_flag,
+	 		Task_Specific.active_flag,   
+         Task_Specific.task_entry_flag
+    FROM Task_Specific"  sort="task_specific_desc A " )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="4" height="57" width="919" format="[general]"  name=task_specific_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

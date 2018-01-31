@@ -1,0 +1,78 @@
+﻿$PBExportHeader$ds_annuity_subledger_gl_summary_excel.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="536870912" )
+summary(height=88 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(6) updatewhereclause=yes name=compute_0001 dbname="compute_0001" )
+ column=(type=decimal(4) updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ column=(type=char(2) updatewhereclause=yes name=claim_role_code dbname="claim_role_code" )
+ retrieve="SELECT 'other:', Sum(d.txn_amount)  , cp.claim_role_code  
+  from PAYMENT b,  CLAIM c,APPLIED_CLAIM_TXN d ,EMPLOYER e, CLAIM_PARTICIPANT cp
+ WHERE d.claim_no 		   >= :r_claim_from 
+   and d.claim_no 		   <= :r_claim_to 
+   and d.create_date        >= :r_from_date
+   and d.create_date        < :r_to_date
+   and b.payment_type_code  = '97' 
+   and b.payment_no 		    = d.payment_no 
+   and b.claim_no 		    = c.claim_no 
+   and d.txn_type_code 		 <> '4'
+   and c.cost_alloc_no      = e.employer_no 
+   and c.claim_no = cp.claim_no
+   and d.recipient_no = cp.individual_no  
+   and e.employer_type_code not in ('S', 'F')
+group by  cp.claim_role_code  
+union
+SELECT 'FCA:', Sum(d.txn_amount) , cp.claim_role_code  
+  from PAYMENT b,  CLAIM c,APPLIED_CLAIM_TXN d ,EMPLOYER e, CLAIM_PARTICIPANT cp
+ WHERE d.claim_no 		   >= :r_claim_from 
+   and d.claim_no 		   <= :r_claim_to 
+   and d.create_date        >= :r_from_date
+   and d.create_date        < :r_to_date
+   and b.payment_type_code  = '97' 
+   and b.payment_no 		    = d.payment_no 
+   and b.claim_no 		    = c.claim_no 
+   and d.txn_type_code 		 <> '4'
+   and c.cost_alloc_no      = e.employer_no
+   and c.claim_no = cp.claim_no
+   and d.recipient_no = cp.individual_no  
+   and e.employer_type_code = 'F'
+group by  cp.claim_role_code  
+union
+SELECT Substring(Convert(varchar(7),c.cost_alloc_no),1,2) ,Sum(d.txn_amount),  cp.claim_role_code    
+  from PAYMENT b,  CLAIM c,APPLIED_CLAIM_TXN d ,EMPLOYER e, CLAIM_PARTICIPANT cp
+ WHERE b.payment_type_code 	 = '97' 
+   and d.txn_type_code 		    <> '4'   
+   and b.payment_no 		       = d.payment_no  
+   and b.claim_no 		       = c.claim_no 
+   and c.cost_alloc_no         = e.employer_no  
+   and d.claim_no 		      >= :r_claim_from
+   and d.claim_no 		      <= :r_claim_to
+   and d.create_date          >= :r_from_date
+   and d.create_date          < :r_to_date
+   and e.employer_type_code   = 'S'
+   and c.claim_no = cp.claim_no
+   and d.recipient_no = cp.individual_no 
+group by c.cost_alloc_no, cp.claim_role_code  
+
+" arguments=(("r_claim_from", number),("r_claim_to", number),("r_from_date", date),("r_to_date", date))  sort="compute_0001 A " )
+text(band=header alignment="1" text="CLASS: " border="0" color="33554432" x="14" y="24" height="60" width="471" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="1" text="AMOUNT: " border="0" color="33554432" x="494" y="24" height="60" width="581" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="1" text="CLAIM ROLE: " border="0" color="33554432" x="1088" y="28" height="60" width="498" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="52" width="471" format="[general]" html.valueishtml="0"  name=compute_0001 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="1093" y="12" height="60" width="494" format="[general]" html.valueishtml="0"  name=claim_role_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="494" y="12" height="52" width="581" format="#,##0.00" html.valueishtml="0"  name=compute_0002 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=summary alignment="1" text="Total " border="0" color="33554432" x="14" y="20" height="60" width="430" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(compute_0002 for all)"border="0" color="33554432" x="494" y="20" height="52" width="581" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,65 @@
+﻿$PBExportHeader$dddw_billable_item_for_invoice.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=authorizationno dbname="authorizationno" )
+ column=(type=long updatewhereclause=yes name=billablexrefno dbname="billablexrefno" )
+ column=(type=decimal(2) updatewhereclause=yes name=authorizedquantity dbname="authorizedquantity" )
+ column=(type=decimal(2) updatewhereclause=yes name=authorizedamount dbname="authorizedamount" )
+ column=(type=datetime updatewhereclause=yes name=authorizeddate dbname="authorizeddate" )
+ column=(type=char(70) updatewhereclause=yes name=billableitem dbname="billableitem" )
+ column=(type=char(1) updatewhereclause=yes name=fixedfeeflag dbname="fixedfeeflag" )
+ column=(type=decimal(2) updatewhereclause=yes name=authorized_quantity dbname="authorized_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=authorized_amount dbname="authorized_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=paid_quantity dbname="paid_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=paid_amount dbname="paid_amount" )
+ column=(type=char(1) updatewhereclause=yes name=taxable_flag dbname="taxable_flag" )
+ column=(type=char(80) updatewhereclause=yes name=other_billable_item_desc dbname="other_billable_item_desc" )
+ retrieve="select	b.authorization_no    as AuthorizationNo,
+        c.billable_xref_no          as BillableXrefNo,
+        c.default_authorized_qty    as AuthorizedQuantity,
+        case when b.fixed_fee_flag = 'Y' then 999999.99 else c.max_authorized_amount END  as AuthorizedAmount,
+        GetDate()                   as AuthorizedDate,
+        d.billable_item_desc_e      as BillableItem,
+        b.fixed_fee_flag            as FixedFeeFlag,
+        b.authorized_quantity       as authorized_quantity,
+        b.authorized_amount         as authorized_amount,
+        b.paid_quantity             as paid_quantity,
+        b.paid_amount               as paid_amount,
+        d.taxable_flag, 
+        b.other_billable_item_desc  
+from REHAB_TASK a 
+	join REHAB_TASK_AUTHORIZATION b 
+		on a.task_no = b.task_no and a.claim_no = b.claim_no
+	join Billable_Item_Rehab_Task_Xref c 
+		on a.rehab_service_code		  = c.rehab_service_code
+			and a.rehab_program_code  = c.rehab_program_code
+			and a.task_type_code      = c.task_type_code
+			and a.task_sub_type_code  = c.task_sub_type_code
+			and a.task_specific_code  = c.task_specific_code
+			and b.billable_xref_no    = c.billable_xref_no
+	join Billable_Item d 
+		on c.billable_item_no = d.billable_item_no  
+where	a.task_no					  =  :al_task_no
+and		a.claim_no				      =  :al_claim_no
+and     (b.authorized_quantity -  b.paid_quantity) > 0
+and      c.payment_type_code <> ''
+
+" arguments=(("al_task_no", number),("al_claim_no", number))  sort="billableitem A " )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="1655" y="8" height="60" width="334" format="[general]" html.valueishtml="0"  name=authorizationno visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" billableitem +  if(trim(other_billable_item_desc) > '' ,~" - ~" + other_billable_item_desc, '')"border="0" color="33554432" x="18" y="8" height="60" width="1614" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="authorizationno")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,51 @@
+﻿$PBExportHeader$ds_txn_sum_for_tier.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=decimal(4) updatewhereclause=yes name=sum_txns dbname="sum_txns" )
+ retrieve="SELECT   IsNull(sum(b.sum_txn_amount),0) + IsNull(sum(c.sum_txn_amount),0) as sum_txns
+FROM                     PAYMENT                            a
+LEFT OUTER JOIN       ( select zz.payment_no ,
+                               IsNull(sum(z.txn_amount),0) as sum_txn_amount
+                        from   APPLIED_CLAIM_TXN z
+                        join   PAYMENT          zz  ON z.payment_no = zz.payment_no 
+                        where  NOT ( z.txn_type_code     = 'J'
+                                 AND z.txn_sub_type_code = '5' )
+                        and    zz.payment_type_code = 'R1'
+                        and    zz.claim_no          = :al_claim_no
+                        and    zz.opening_no        = :ai_opening_no
+                        group by zz.payment_no ) b     ON a.payment_no = b.payment_no
+
+LEFT OUTER JOIN       ( select yy.payment_no ,
+                               IsNull(sum(y.txn_amount),0) as sum_txn_amount
+                        from   UNAPPLIED_CLAIM_TXN y
+                        join   PAYMENT            yy  ON y.payment_no = yy.payment_no 
+                        where  NOT ( y.txn_type_code     = 'J'
+                                 AND y.txn_sub_type_code = '5' )
+                        and    yy.payment_type_code = 'R1'
+                        and    yy.claim_no          = :al_claim_no
+                        and    yy.opening_no        = :ai_opening_no
+                        group by yy.payment_no ) c     ON a.payment_no = c.payment_no
+
+JOIN       RTW_INCENTIVE_PAYMENT_XREF    d  ON  a.payment_no = d.payment_no
+JOIN       RTW_INCENTIVE_QUALIFICATION   e  ON  d.claim_no = e.claim_no AND d.rtw_incentive_no = e.rtw_incentive_no
+WHERE      a.claim_no       = :al_claim_no
+AND        a.payment_type_code = 'R1'
+AND        d.tier_no         = :ai_tier_no
+AND        e.opening_no  = :ai_opening_no" arguments=(("al_claim_no", number),("ai_opening_no", number),("ai_tier_no", number)) )
+text(band=header alignment="0" text="Sum Txns" border="0" color="33554432" x="5" y="4" height="76" width="457" html.valueishtml="0"  name=sum_txns_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="0" height="76" width="453" format="$#,##0;($#,##0)" html.valueishtml="0"  name=sum_txns visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

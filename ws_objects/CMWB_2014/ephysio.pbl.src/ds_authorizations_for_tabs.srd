@@ -1,0 +1,55 @@
+﻿$PBExportHeader$ds_authorizations_for_tabs.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=96 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=100 color="536870912" )
+table(column=(type=char(4) updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ column=(type=datetime updatewhereclause=yes name=planned_start_date dbname="planned_start_date" )
+ column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=datetime updatewhereclause=yes name=actual_completion_date dbname="actual_completion_date" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ retrieve="SELECT a.rehab_program_code, a.planned_start_date, e.rehab_program_desc_e, actual_completion_date, a.task_no
+FROM REHAB_TASK  a
+	JOIN REHAB_TASK_AUTHORIZATION b ON a.claim_no = b.claim_no AND a.task_no = b.task_no
+    join Billable_Item_Rehab_Task_Xref c 
+		on a.rehab_service_code		  = c.rehab_service_code
+			and a.rehab_program_code  = c.rehab_program_code
+			and a.task_type_code      = c.task_type_code
+			and a.task_sub_type_code  = c.task_sub_type_code
+			and a.task_specific_code  = c.task_specific_code
+			and b.billable_xref_no    = c.billable_xref_no
+	join Billable_Item d on c.billable_item_no		= d.billable_item_no 
+    join Rehab_Program e on a.rehab_program_code	= e.rehab_program_code 
+WHERE a.claim_no				= :al_claim_no
+AND   a.rehab_service_code		= 'S022'
+AND   a.task_status_code		<> '03'
+AND	  a.rehab_conversion_code   <> 'A'
+AND   c.payment_type_code		<> ''
+AND   ((b.authorized_quantity - b.paid_quantity > 0) 
+OR exists ( select * from REHAB_INVOICE_LINE_ITEM x 
+			join PAYMENT y on x.payment_no = y.payment_no and y.processed_date is null
+            where x.claim_no = b.claim_no and x.task_no = b.task_no))
+GROUP BY a.rehab_program_code, a.planned_start_date, e.rehab_program_desc_e, actual_completion_date, a.task_no
+" arguments=(("al_claim_no", number))  sort="planned_start_date D " )
+text(band=header alignment="1" text=" Program" border="0" color="33554432" x="14" y="16" height="64" width="247" html.valueishtml="0"  name=rehab_program_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Planned" border="0" color="33554432" x="283" y="16" height="64" width="320" html.valueishtml="0"  name=authorized_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Desc" border="0" color="33554432" x="617" y="12" height="64" width="713" html.valueishtml="0"  name=rehab_program_desc_e_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Completion" border="0" color="33554432" x="1349" y="16" height="64" width="370" html.valueishtml="0"  name=actual_completion_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="4" height="76" width="247" format="[general]" html.valueishtml="0"  name=rehab_program_code visible="1" edit.limit=4 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="617" y="12" height="76" width="713" format="[general]" html.valueishtml="0"  name=rehab_program_desc_e visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1349" y="12" height="76" width="370" format="yyyy-mm-dd" html.valueishtml="0"  name=actual_completion_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1737" y="20" height="64" width="229" format="[general]" html.valueishtml="0"  name=task_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="274" y="12" height="64" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=planned_start_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

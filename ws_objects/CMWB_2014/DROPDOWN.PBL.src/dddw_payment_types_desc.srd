@@ -1,0 +1,26 @@
+﻿$PBExportHeader$dddw_payment_types_desc.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=72 color="-1" )
+table(column=(type=char(3) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(4) updatewhereclause=yes name=benefit_category_code dbname="benefit_category_code" )
+ column=(type=char(1) updatewhereclause=yes name=fromto_dates_flag dbname="fromto_dates_flag" )
+ column=(type=decimal(4) updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" )
+ column=(type=char(1) updatewhereclause=yes name=days_hours_flag dbname="days_hours_flag" )
+ column=(type=char(1) updatewhereclause=yes name=repeat_payment_allowed_flag dbname="repeat_payment_allowed_flag" )
+ column=(type=char(40) updatewhereclause=yes name=payment_type_desc dbname="payment_type_desc" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ column=(type=char(4) updatewhereclause=yes name=authorization_type_code dbname="authorization_type_code" )
+ column=(type=char(4) updatewhereclause=yes name=opening_type_code dbname="opening_type_code" )
+ column=(type=char(4) updatewhereclause=yes name=award_type_code dbname="award_type_code" )
+ retrieve="  SELECT a.payment_type_code,        a.benefit_category_code, a.fromto_dates_flag,   
+         a.benefit_level_percentage, a.days_hours_flag,       a.repeat_payment_allowed_flag,   
+         a.payment_type_desc,        a.active_flag,           b.authorization_type_code,   
+         b.opening_type_code,        b.award_type_code  
+    FROM Payment_Type a,   Payment_Combination  b
+   WHERE a.payment_type_code = b.payment_type_code "  sort="payment_type_code A " )
+compute(band=detail alignment="0" expression="payment_type_code + ~"   ~"+ payment_type_desc "border="0" color="0" x="5" y="4" height="60" width="1326" format="[general]" html.valueishtml="0"  name=payment_type_and_description visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

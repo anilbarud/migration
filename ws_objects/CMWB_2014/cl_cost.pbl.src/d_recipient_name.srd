@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_recipient_name.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(30) updatewhereclause=no name=recipient_name dbname="recipient_name" )
+ column=(type=number updatewhereclause=no name=recipient_no dbname="recipient_no" )
+ column=(type=char(40) updatewhereclause=no name=claim_role_desc dbname="name_1" )
+ )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="791" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.imemode=0 edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="818" y="4" height="76" width="219" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1216" y="4" height="76" width="544" format="[general]" html.valueishtml="0"  name=claim_role_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

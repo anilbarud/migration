@@ -1,0 +1,12 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "inbasket_old.pbl" "";
+@end;
+@begin Objects 
+ "d_cat_list_external_old.srd" "inbasket_old.pbl";
+ "d_inbasket_document_list.srd" "inbasket_old.pbl";
+ "d_inbasket_folder_list.srd" "inbasket_old.pbl";
+ "d_inbasket_user_category_list_old.srd" "inbasket_old.pbl";
+ "d_inbasket_work_folder_index_old.srd" "inbasket_old.pbl";
+ "w_inbasket_old.srw" "inbasket_old.pbl";
+@end;

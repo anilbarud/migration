@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_benefit_category.srd
+$PBExportComments$Drop Down Data Window of all active Benefit Category codes and descriptions.
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=69 color="536870912" )
+table(column=(type=char(4) key=yes name=benefit_category_code dbname="Benefit_Category.benefit_category_code" )
+ column=(type=char(30) name=benefit_category_desc dbname="Benefit_Category.benefit_category_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Benefit_Category~" ) COLUMN(NAME=~"Benefit_Category.benefit_category_code~") COLUMN(NAME=~"Benefit_Category.benefit_category_desc~")WHERE( EXP1 =~"Benefit_Category.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="Benefit_Category" updatewhere=0 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1" y="4" height="57" width="819" format="[general]"  name=benefit_category_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

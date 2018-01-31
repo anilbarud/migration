@@ -1,0 +1,31 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "BENCALC.PBL" "";
+@end;
+@begin Objects 
+ "d_benefit_calculation_capable_data.srd" "BENCALC.PBL";
+ "d_benefit_calculation_cppd.srd" "BENCALC.PBL";
+ "d_benefit_calculation_deductions.srd" "BENCALC.PBL";
+ "d_benefit_calculation_details.srd" "BENCALC.PBL";
+ "d_benefit_calculation_display_computed.srd" "BENCALC.PBL";
+ "d_benefit_calculation_frozen_data.srd" "BENCALC.PBL";
+ "d_benefit_calculation_legend.srd" "BENCALC.PBL";
+ "d_benefit_calculation_list.srd" "BENCALC.PBL";
+ "d_benefit_calculation_preaccident_data.srd" "BENCALC.PBL";
+ "d_benefit_calculation_remunerations.srd" "BENCALC.PBL";
+ "d_copy_cost_analysis_list.srd" "BENCALC.PBL";
+ "d_copy_opening_list.srd" "BENCALC.PBL";
+ "d_opening_date_parameters.srd" "BENCALC.PBL";
+ "d_opening_list.srd" "BENCALC.PBL";
+ "d_opening_types.srd" "BENCALC.PBL";
+ "ds_rtw_incentive_linked_bencalcs.srd" "BENCALC.PBL";
+ "f_convert_frequency.srf" "BENCALC.PBL";
+ "n_benefit_calculation.sru" "BENCALC.PBL";
+ "u_top_bar.sru" "BENCALC.PBL";
+ "u_top_tab.sru" "BENCALC.PBL";
+ "w_bencalc_legend.srw" "BENCALC.PBL";
+ "w_benefits.srw" "BENCALC.PBL";
+ "w_calculation_details.srw" "BENCALC.PBL";
+ "w_copy_opening_list.srw" "BENCALC.PBL";
+ "w_cost_analysis_parameters.srw" "BENCALC.PBL";
+@end;

@@ -1,0 +1,41 @@
+﻿$PBExportHeader$d_eligibility_composite.srd
+$PBExportComments$Used for the composite
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=208 color="16777215" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=datetime updatewhereclause=yes name=eligibility_start_date dbname="eligibility_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=eligibility_end_date dbname="eligibility_end_date" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=datetime updatewhereclause=yes name=registration_date dbname="registration_date" )
+ column=(type=long updatewhereclause=yes name=eligibility_record_no dbname="eligibility_record_no" )
+ column=(type=long updatewhereclause=yes name=export_no dbname="export_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(100) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=char(1) updatewhereclause=yes name=manual_entry_flag dbname="manual_entry_flag" )
+ column=(type=char(16) updatewhereclause=yes name=export_user_id dbname="export_user_id" )
+ column=(type=datetime updatewhereclause=yes name=export_date dbname="export_date" )
+ retrieve="  SELECT a.eligibility_start_date, a.eligibility_end_date, b.claim_status_code, 
+         b.claim_status_type_code, c.registration_date,    a.eligibility_record_no, 
+         a.export_no,              a.claim_no,             a.comment, 
+         a.manual_entry_flag,      a.export_user_id,       a.export_date
+    FROM CLAIM_ELIGIBILITY a, CLAIM b, X001_REGISTRATION c
+   WHERE a.claim_no = b.claim_no   
+     AND a.claim_no = c.claim_no
+" )
+text(band=header alignment="0" text="CLAIM ELIGIBILITY" border="0" color="33554432" x="14" y="12" height="76" width="914" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Claim Eligibility Period" border="0" color="33554432" x="18" y="128" height="56" width="608" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1326" y="124" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=registration_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd" edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Registration Date:" border="0" color="33554432" x="855" y="124" height="60" width="453" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="27" y1="204" x2="3630" y2="204"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=detail alignment="0" text="To" border="0" color="33554432" x="361" y="4" height="60" width="82" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="14" y="4" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=eligibility_start_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd" edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="485" y="4" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=eligibility_end_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="818" y="4" height="60" width="2482" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="3323" y="4" height="60" width="311" format="[general]" html.valueishtml="0"  name=eligibility_record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Elig Record No" border="0" color="33554432" x="3255" y="140" height="56" width="379" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

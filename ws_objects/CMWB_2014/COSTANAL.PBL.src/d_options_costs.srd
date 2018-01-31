@@ -1,0 +1,78 @@
+﻿$PBExportHeader$d_options_costs.srd
+$PBExportComments$SELECT from COST_ANALYSIS_OPTION & COST_ANALYSIS_OPTION_TASK. Updates COST_ANALYSIS_OPTION.
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=553 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="COST_ANALYSIS_OPTION.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=cost_no dbname="COST_ANALYSIS_OPTION.cost_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=option_no dbname="COST_ANALYSIS_OPTION.option_no" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=option_name dbname="COST_ANALYSIS_OPTION.option_name" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=option_desc dbname="COST_ANALYSIS_OPTION.option_desc" )
+ column=(type=long update=yes updatewhereclause=yes name=rloe_benefit_calc_no dbname="COST_ANALYSIS_OPTION.rloe_benefit_calc_no" )
+ column=(type=long update=yes updatewhereclause=yes name=ltd_benefit_calc_no dbname="COST_ANALYSIS_OPTION.ltd_benefit_calc_no" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_benefit_amount dbname="COST_ANALYSIS_OPTION.total_benefit_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=capitalization_factor_yyyymm dbname="COST_ANALYSIS_OPTION.capitalization_factor_yyyymm" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="COST_ANALYSIS_OPTION.timestamp" )
+ column=(type=long update=yes updatewhereclause=yes name=capitalization_benefit_calc_no dbname="COST_ANALYSIS_OPTION.capitalization_benefit_calc_no" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=capitalized_amount dbname="COST_ANALYSIS_OPTION.capitalized_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=age dbname="COST_ANALYSIS_OPTION.age" )
+ column=(type=datetime update=yes updatewhereclause=yes name=start_date dbname="COST_ANALYSIS_OPTION.start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=end_date dbname="COST_ANALYSIS_OPTION.end_date" )
+ column=(type=long updatewhereclause=yes name=rloe_opening dbname="rloe_opening" )
+ column=(type=long updatewhereclause=yes name=ltd_opening dbname="ltd_opening" )
+ column=(type=long updatewhereclause=yes name=capitalization_opening dbname="capitalization_opening" )
+ retrieve="  SELECT COST_ANALYSIS_OPTION.claim_no,   
+         COST_ANALYSIS_OPTION.cost_no,   
+         COST_ANALYSIS_OPTION.option_no,   
+         COST_ANALYSIS_OPTION.option_name,   
+         COST_ANALYSIS_OPTION.option_desc,   
+         COST_ANALYSIS_OPTION.rloe_benefit_calc_no,   
+         COST_ANALYSIS_OPTION.ltd_benefit_calc_no,   
+         COST_ANALYSIS_OPTION.total_benefit_amount,   
+         COST_ANALYSIS_OPTION.capitalization_factor_yyyymm,
+         COST_ANALYSIS_OPTION.timestamp,   
+         COST_ANALYSIS_OPTION.capitalization_benefit_calc_no,   
+         COST_ANALYSIS_OPTION.capitalized_amount,   
+         COST_ANALYSIS_OPTION.age,   
+         COST_ANALYSIS_OPTION.start_date,   
+         COST_ANALYSIS_OPTION.end_date,
+         0 'rloe_opening',
+         0 'ltd_opening',
+         0 'capitalization_opening'
+    FROM COST_ANALYSIS_OPTION  
+   WHERE ( COST_ANALYSIS_OPTION.claim_no = :al_claimno ) AND  
+         ( COST_ANALYSIS_OPTION.cost_no = :al_costno ) AND  
+         ( COST_ANALYSIS_OPTION.option_no = :al_optionno )    
+" update="COST_ANALYSIS_OPTION" updatewhere=0 updatekeyinplace=yes arguments=(("al_claimno", number),("al_costno", number),("al_optionno", number)) )
+rectangle(band=detail x="19" y="28" height="513" width="2574" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="2" background.color="0" )
+rectangle(band=detail x="23" y="32" height="513" width="2574" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=detail alignment="0" text="Details"border="0" color="0" x="51" y="4" height="57" width="179"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="2" text="Name :"border="0" color="0" x="55" y="68" height="61" width="179"  name=option_name_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=30 border="5" color="0" x="2241" y="68" height="57" width="321" format="YYYY-MM-DD"  name=start_date editmask.mask="YYYY-MM-DD" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Description :"border="0" color="0" x="55" y="144" height="61" width="325"  name=option_desc_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=40 border="5" color="0" x="2241" y="144" height="57" width="321" format="YYYY-MM-DD"  name=end_date editmask.mask="YYYY-MM-DD" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="5" color="0" x="2241" y="220" height="57" width="174" format="[general]"  name=age edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="RLOE Opening :"border="0" color="33554432" x="51" y="308" height="61" width="398"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=16 alignment="0" tabsequence=50 border="5" color="0" x="476" y="308" height="57" width="330" format="[general]"  name=rloe_opening dddw.name=dddw_rloe_openings dddw.displaycolumn=display dddw.datacolumn=opening_no dddw.percentwidth=650 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="LTD Opening :"border="0" color="33554432" x="865" y="308" height="61" width="357"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=17 alignment="0" tabsequence=70 border="5" color="0" x="1249" y="308" height="57" width="330" format="[general]"  name=ltd_opening dddw.name=dddw_ltd_openings dddw.displaycolumn=display dddw.datacolumn=opening_no dddw.percentwidth=650 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Capitalization Opening :"border="0" color="33554432" x="1614" y="308" height="61" width="604"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="0" tabsequence=90 border="5" color="0" x="2241" y="308" height="57" width="330" format="[general]"  name=capitalization_opening dddw.name=dddw_ltd_openings dddw.displaycolumn=display dddw.datacolumn=opening_no dddw.percentwidth=650 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="RLOE :"border="0" color="0" x="55" y="384" height="61" width="170"  name=rloe_benefit_calc_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="5" color="0" x="476" y="384" height="57" width="330" format="[General]"  name=rloe_benefit_calc_no dddw.name=dddw_rloe_ben_calcs dddw.displaycolumn=display_value dddw.datacolumn=benefit_calculation_no dddw.percentwidth=700 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="LTD :"border="0" color="0" x="865" y="384" height="61" width="129"  name=ltd_benefit_calc_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=80 border="5" color="0" x="1249" y="384" height="57" width="330" format="[General]"  name=ltd_benefit_calc_no dddw.name=dddw_ltd_ben_calcs dddw.displaycolumn=display_value dddw.datacolumn=benefit_calculation_no dddw.percentwidth=700 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Capitalization :"border="0" color="0" x="1614" y="384" height="61" width="375"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=100 border="5" color="0" x="2241" y="384" height="57" width="330" format="[General]"  name=capitalization_benefit_calc_no dddw.name=dddw_ltd_ben_calcs dddw.displaycolumn=display_value dddw.datacolumn=benefit_calculation_no dddw.percentwidth=700 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Total Benefit Amt :"border="0" color="0" x="750" y="460" height="57" width="471"  name=total_benefit_amount_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="5" color="0" x="1249" y="460" height="57" width="330" format="$#,##0.00;($#,##0.00)"  name=total_benefit_amount edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Capitalized Amount :"border="0" color="0" x="1614" y="460" height="57" width="526"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="5" color="0" x="2241" y="460" height="57" width="330" format="$#,##0.00;($#,##0.00)"  name=capitalized_amount edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="0" x="476" y="68" height="57" width="1386" format="[general]"  name=option_name edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=20 border="5" color="0" x="476" y="144" height="145" width="1386" format="[general]"  name=option_desc edit.limit=255 edit.case=any edit.autoselect=yes edit.autovscroll=yes edit.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Cap'ztn Age :"border="0" color="0" x="1889" y="220" height="61" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="End Date :"border="0" color="0" x="1889" y="144" height="61" width="257"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Start Date :"border="0" color="0" x="1889" y="68" height="61" width="289"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

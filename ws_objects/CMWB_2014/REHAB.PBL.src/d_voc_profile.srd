@@ -1,0 +1,54 @@
+﻿$PBExportHeader$d_voc_profile.srd
+$PBExportComments$Vocational Profile
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=629 color="-1" )
+table(column=(type=char(2) update=yes updatewhereclause=yes name=school_grade_completed_code dbname="VOCATIONAL_PROFILE.school_grade_completed_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=post_secondary_education_flag dbname="VOCATIONAL_PROFILE.post_secondary_education_flag" values="Has Post Secondary Education:	Y/Has Post Secondary Education:	N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=language_skill_code dbname="VOCATIONAL_PROFILE.language_skill_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=literacy_flag dbname="VOCATIONAL_PROFILE.literacy_flag" values="Literate:	Y/Literate:	N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=bondable_flag dbname="VOCATIONAL_PROFILE.bondable_flag" values="Bondable:	Y/Bondable:	N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=union_affiliation_flag dbname="VOCATIONAL_PROFILE.union_affiliation_flag" values="Affiliated with a Union:	Y/Affiliated with a Union:	N" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="VOCATIONAL_PROFILE.timestamp" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="VOCATIONAL_PROFILE.claim_no" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=pre_unit_group_code dbname="VOCATIONAL_PROFILE.pre_unit_group_code" )
+ column=(type=long update=yes updatewhereclause=yes name=pre_unit_group_occupation_no dbname="VOCATIONAL_PROFILE.pre_unit_group_occupation_no" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=post_unit_group_code dbname="VOCATIONAL_PROFILE.post_unit_group_code" )
+ column=(type=long update=yes updatewhereclause=yes name=post_unit_group_occupation_no dbname="VOCATIONAL_PROFILE.post_unit_group_occupation_no" )
+ column=(type=long updatewhereclause=yes name=claim_claim_no dbname="CLAIM.claim_no" )
+ retrieve="  SELECT VOCATIONAL_PROFILE.school_grade_completed_code,   
+         VOCATIONAL_PROFILE.post_secondary_education_flag,   
+         VOCATIONAL_PROFILE.language_skill_code,   
+         VOCATIONAL_PROFILE.literacy_flag,   
+         VOCATIONAL_PROFILE.bondable_flag,   
+         VOCATIONAL_PROFILE.union_affiliation_flag,   
+         VOCATIONAL_PROFILE.timestamp,   
+         VOCATIONAL_PROFILE.claim_no,   
+         VOCATIONAL_PROFILE.pre_unit_group_code,   
+         VOCATIONAL_PROFILE.pre_unit_group_occupation_no,   
+         VOCATIONAL_PROFILE.post_unit_group_code,   
+         VOCATIONAL_PROFILE.post_unit_group_occupation_no,   
+         CLAIM.claim_no  
+    FROM VOCATIONAL_PROFILE,   
+         CLAIM  
+   WHERE ( CLAIM.claim_no = VOCATIONAL_PROFILE.claim_no ) and  
+         ( ( VOCATIONAL_PROFILE.claim_no = :al_claim_no ) )    
+" update="VOCATIONAL_PROFILE" updatewhere=2 updatekeyinplace=yes arguments=(("al_claim_no", number)) )
+rectangle(band=detail x="14" y="88" height="529" width="2625" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="1" background.color="553648127" )
+rectangle(band=detail x="10" y="84" height="529" width="2625" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+column(band=detail id=2 alignment="0" tabsequence=50 border="0" color="0" x="1619" y="140" height="61" width="942" format="[general]"  name=post_secondary_education_flag checkbox.text="Has Post Secondary Education:" checkbox.on="Y" checkbox.off="N" checkbox.lefttext=yes checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=60 border="0" color="0" x="1619" y="260" height="61" width="942" format="[general]"  name=bondable_flag checkbox.text="Bondable:" checkbox.on="Y" checkbox.off="N" checkbox.lefttext=yes checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=70 border="0" color="0" x="1619" y="380" height="61" width="942" format="[general]"  name=union_affiliation_flag checkbox.text="Affiliated with a Union:" checkbox.on="Y" checkbox.off="N" checkbox.lefttext=yes checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=80 border="0" color="0" x="1619" y="496" height="61" width="942" format="[general]"  name=literacy_flag checkbox.text="Literate:" checkbox.on="Y" checkbox.off="N" checkbox.lefttext=yes checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="School Grade Completed :"border="0" color="0" x="65" y="140" height="61" width="668"  name=school_grade_completed_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Language Skill:"border="0" color="0" x="65" y="260" height="61" width="394"  name=language_skill_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Pre-Accident NOC Code:"border="0" color="0" x="65" y="380" height="61" width="627"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Post-Accident NOC Code:"border="0" color="0" x="65" y="508" height="61" width="654"  name=post_accident_occupation_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="951" y="140" height="61" width="494" format="[general]"  name=school_grade_completed_code dddw.name=dddw_school_grade_list dddw.displaycolumn=school_grade_desc dddw.datacolumn=school_grade_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="5" color="0" x="951" y="260" height="61" width="444" format="[general]"  name=language_skill_code dddw.name=dddw_language_list dddw.displaycolumn=language_desc dddw.datacolumn=language_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=30 border="0" color="0" x="951" y="380" height="61" width="334" format="[general]"  name=pre_unit_group_code dddw.name=dddw_noc_codes dddw.displaycolumn=unit_group_code dddw.datacolumn=unit_group_code dddw.percentwidth=500 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=40 border="0" color="0" x="951" y="508" height="61" width="334" format="[general]"  name=post_unit_group_code dddw.name=dddw_noc_codes dddw.displaycolumn=unit_group_code dddw.datacolumn=unit_group_code dddw.percentwidth=500 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=0 border="0" color="0" x="2638" y="0" height="61" width="83"  name=claim_claim_no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

@@ -1,0 +1,17 @@
+﻿$PBExportHeader$dddw_user_first_last_name.srd
+$PBExportComments$Displays user's first name and last name for current and former users of the WorkBench (active and inactive)
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=77 color="536870912" )
+table(column=(type=char(8) updatewhereclause=yes name=user_id dbname="User_Profile.user_id" )
+ column=(type=char(46) updatewhereclause=yes name=user_first_last_name dbname="user_first_last_name" )
+ retrieve="  SELECT User_Profile.user_id,   
+         user_first_name + ~" ~" + user_last_name user_first_last_name
+    FROM User_Profile  
+   WHERE  ( User_Profile.workbench_flag <> ~"I~" )   
+
+" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="0" x="10" y="8" height="61" width="1057"  name=user_first_last_name  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

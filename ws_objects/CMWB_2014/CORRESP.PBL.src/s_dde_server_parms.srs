@@ -1,0 +1,12 @@
+﻿$PBExportHeader$s_dde_server_parms.srs
+$PBExportComments$Stores client and server enviroment information for DDE session to be used on n_word_server.
+global type s_dde_server_parms from structure
+    window dde_client_window
+    unsignedinteger dde_client_handle
+    unsignedinteger dde_server_handle
+    string dde_server_name
+    string dde_server_share_name
+    string dde_server_dir_path
+    string dde_server_program_name
+end type
+

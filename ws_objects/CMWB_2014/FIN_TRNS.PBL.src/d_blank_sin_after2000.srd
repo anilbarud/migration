@@ -1,0 +1,65 @@
+﻿$PBExportHeader$d_blank_sin_after2000.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=216 color="10789024" )
+summary(height=0 color="536870912" )
+footer(height=84 color="10789024" )
+detail(height=68 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(40) updatewhereclause=yes name=claim_role_claim_role_desc dbname="claim_role_desc" )
+ retrieve="SELECT APPLIED_CLAIM_TXN.recipient_no, 
+	INDIVIDUAL.last_name, 
+	INDIVIDUAL.given_names, 
+	APPLIED_CLAIM_TXN.claim_no,
+	Claim_Role.claim_role_desc 
+FROM APPLIED_CLAIM_TXN, INDIVIDUAL, PAYMENT, Payment_Type, CLAIM_PARTICIPANT, Claim_Role 
+WHERE APPLIED_CLAIM_TXN.recipient_no = INDIVIDUAL.individual_no 
+AND PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no 
+AND Payment_Type.payment_type_code = PAYMENT.payment_type_code 
+AND APPLIED_CLAIM_TXN.claim_no = CLAIM_PARTICIPANT.claim_no 
+AND APPLIED_CLAIM_TXN.recipient_no = CLAIM_PARTICIPANT.individual_no 
+AND CLAIM_PARTICIPANT.claim_role_code = Claim_Role.claim_role_code 
+AND INDIVIDUAL.sin_no = 0 
+AND APPLIED_CLAIM_TXN.create_date >= :adtm_start_date 
+AND APPLIED_CLAIM_TXN.create_date < :adtm_end_date
+AND (APPLIED_CLAIM_TXN.txn_type_code <> '4' 
+ OR NOT(APPLIED_CLAIM_TXN.txn_type_code = 'J' AND APPLIED_CLAIM_TXN.txn_sub_type_code = '5'))  
+AND Payment_Type.benefit_category_code <> 'MA' 
+AND ( PAYMENT.payment_type_code <> '97' OR ( PAYMENT.payment_type_code = '97' AND PAYMENT.payment_sub_type_code = 'CM' )) 
+AND APPLIED_CLAIM_TXN.recipient_type_code = 'I' 
+AND PAYMENT.payment_type_code <> '07' 
+AND PAYMENT.payment_type_code <> '09'
+AND PAYMENT.payment_type_code <> '10' 
+AND PAYMENT.payment_type_code <> 'TA' 
+AND PAYMENT.payment_type_code <> 'WA'
+GROUP BY APPLIED_CLAIM_TXN.recipient_no, 
+	 INDIVIDUAL.last_name, 
+	 INDIVIDUAL.given_names, 
+	 APPLIED_CLAIM_TXN.claim_no,
+	 Claim_Role.claim_role_desc 
+HAVING SUM(APPLIED_CLAIM_TXN.txn_amount) > 0 
+order BY APPLIED_CLAIM_TXN.recipient_no, 
+	 INDIVIDUAL.last_name, 
+	 INDIVIDUAL.given_names, 
+	 APPLIED_CLAIM_TXN.claim_no,
+	 Claim_Role.claim_role_desc 
+" arguments=(("adtm_start_date", datetime),("adtm_end_date", datetime)) )
+text(band=header alignment="0" text="Claim Role" border="4" color="0" x="1984" y="148" height="60" width="654" html.valueishtml="0"  name=claim_role_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2043" y="8" height="56" width="590" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="2043" y="68" height="56" width="590" format="mmmm dd, YYYY" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="T5 BENEFIT STATEMENT BLANK SIN REPORT" border="0" color="0" x="123" y="8" height="80" width="1646" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="year(date(string( adtm_start_date )))"border="0" color="0" x="1792" y="8" height="84" width="224" format="[general]" html.valueishtml="0"  name=taxation_year visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Claim Number" border="4" color="0" x="1554" y="148" height="60" width="402" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Individual Number" border="4" color="0" x="9" y="148" height="60" width="462" html.valueishtml="0"  name=benefit_type_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Individual Name" border="4" color="0" x="494" y="148" height="60" width="1033" html.valueishtml="0"  name=name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1989" y="4" height="60" width="649" format="[general]" html.valueishtml="0"  name=claim_role_claim_role_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="1559" y="4" height="60" width="402" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="4" height="60" width="462" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim(last_name) + ' ' +  Trim(given_names) "border="0" color="0" x="494" y="4" height="60" width="1033" format="[general]" html.valueishtml="0"  name=name visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="Total number of recipients:" border="0" color="0" x="448" y="12" height="60" width="695" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="1" expression="count(recipient_no  for all)"border="0" color="0" x="1166" y="8" height="64" width="379" format="#,##0" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

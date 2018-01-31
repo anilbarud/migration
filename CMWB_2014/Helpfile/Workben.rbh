@@ -1,0 +1,38 @@
+[Project]
+Help Compiler=HCP.EXE
+Extra Language=0
+Remove Unused=1
+Automatic Map Files=1
+HasGlossary=0
+Version=512
+ConvertedFromV1=1
+NextFile=2
+
+[.RBH]
+CopyTo=0
+PreBatch=
+PostBatch=
+TMPDir=
+AutoFixRTF=1
+CurrentDir=C:\ROBOHELP\WENDY
+
+[File Properties]
+HasProperties=1
+BrowseType=1
+AutoMapFile=1
+StartingWith=0
+IncrementBy=0
+NextTopicNumber=0
+AutoFixRTF=0
+StartingNumber=0
+BrowseString=WORKBEN:0
+DefaultBuildTag=
+
+[Document Files]
+CMWBMAN.DOC=1
+
+[FINDLINK_PAIRS]
+?=Active^
+
+[FINDLINK]
+FindText0=?

@@ -1,0 +1,96 @@
+﻿$PBExportHeader$dddw_annuity_payout_history.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=104 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_payout_status_code dbname="annuity_payout_status_code" )
+ column=(type=char(30) updatewhereclause=yes name=annuity_payout_status_desc_e dbname="annuity_payout_status_desc_e" )
+ column=(type=char(50) updatewhereclause=yes name=annuity_payout_status_reason_desc_e dbname="annuity_payout_status_reason_desc_e" )
+ column=(type=char(21) updatewhereclause=yes name=last_stage dbname="last_stage" )
+ column=(type=char(19) updatewhereclause=yes name=last_stage_date dbname="last_stage_date" )
+ retrieve="SELECT b.recipient_no,
+       a.annuity_payout_no,
+       a.annuity_payout_status_code,
+       f.annuity_payout_status_desc_e,
+       CASE g.annuity_payout_status_reason_desc_e 
+            WHEN '' THEN 'Not Applicable' 
+            ELSE         g.annuity_payout_status_reason_desc_e 
+       END AS annuity_payout_status_reason_desc_e,
+       last_stage =          
+       ( CASE WHEN a.annuity_payout_status_code             = 'C'        THEN      'Completed'
+              WHEN a.annuity_payout_status_code             = 'D'        THEN
+                                                                         CASE WHEN c.concluded_date IS NOT NULL
+                                                                              THEN 'Completed'
+                                                                              ELSE 'Completed'
+                                                                         END
+              WHEN a.annuity_payout_status_code             = 'X'        THEN
+                                                                         CASE WHEN c.concluded_date IS NOT NULL
+                                                                              THEN 'Cancelled'
+                                                                              ELSE 'Cancelled'
+                                                                         END
+              WHEN a.payout_requested_date              is not null THEN  'Requested'
+              WHEN a.authorized_date                    is not null THEN  'Authorized'
+              WHEN a.payout_amount_confirmed_date       is not null THEN  'Amount Confirmed'
+              WHEN a.prepared_date                      is not null THEN  'Prepared'
+              WHEN a.annuity_eligibility_confirmed_flag =  'Y'      THEN  'Eligibility Confirmed'
+              ELSE                                                        'Initiated'
+         END),
+       last_stage_date =          
+       ( CASE WHEN a.annuity_payout_status_code             = 'C'        THEN      CONVERT( varchar(19), c.concluded_date, 121)
+              WHEN a.annuity_payout_status_code             = 'D'        THEN
+                                                                         CASE WHEN c.concluded_date IS NOT NULL
+                                                                              THEN CONVERT( varchar(19), c.concluded_date, 121)
+                                                                              ELSE CONVERT( varchar(19), d.concluded_date, 121)
+                                                                         END
+              WHEN a.annuity_payout_status_code             = 'X'        THEN
+                                                                         CASE WHEN c.concluded_date IS NOT NULL
+                                                                              THEN CONVERT( varchar(19), c.concluded_date, 121)
+                                                                              ELSE CONVERT( varchar(19), d.concluded_date, 121)
+                                                                         END
+              WHEN a.payout_requested_date              is not null THEN  CONVERT( varchar(19), a.payout_requested_date, 121)
+              WHEN a.authorized_date                    is not null THEN  CONVERT( varchar(19), a.authorized_date, 121)
+              WHEN a.payout_amount_confirmed_date       is not null THEN  CONVERT( varchar(19), a.payout_amount_confirmed_date, 121)
+              WHEN a.prepared_date                      is not null THEN  CONVERT( varchar(19), a.prepared_date, 121)
+              WHEN a.annuity_eligibility_confirmed_flag =  'Y'      THEN  CONVERT( varchar(19), e.confirmed_date, 121)
+              ELSE                                                        CONVERT( varchar(19), a.create_date, 121)
+         END)
+FROM  ANNUITY_PAYOUT                 a
+JOIN  ANNUITY_PAYOUT_PARTICIPANT     b ON a.annuity_payout_no                        = b.annuity_payout_no
+                                      AND a.annuity_account_no                       = b.annuity_account_no
+                                      AND b.annuity_role_code                        IN ('C','SS')
+LEFT OUTER JOIN CHECKLIST            c ON a.confirm_annuity_payout_checklist_no      = c.checklist_no
+JOIN  CHECKLIST                      d ON a.prepare_annuity_payout_checklist_no      = d.checklist_no
+LEFT OUTER JOIN ANNUITY_ELIGIBILITY  e ON a.annuity_eligibility_no                   = e.annuity_eligibility_no
+                                      AND a.annuity_account_no                       = e.annuity_account_no
+                                      AND a.confirm_annuity_eligibility_checklist_no = e.confirm_annuity_eligibility_checklist_no
+JOIN  Annuity_Payout_Status          f ON a.annuity_payout_status_code               = f.annuity_payout_status_code
+JOIN  Annuity_Payout_Status_Reason   g ON a.annuity_payout_status_reason_code        = g.annuity_payout_status_reason_code
+WHERE a.annuity_account_no = :al_annuity_account_no
+ORDER BY a.annuity_payout_no DESC
+" arguments=(("al_annuity_account_no", number)) )
+compute(band=header alignment="0" expression="'Payout: ' + String(annuity_payout_no) + '              ' + 'Status: ' +  annuity_payout_status_desc_e + '                           ' + 'Status Reason: ' +  annuity_payout_status_reason_desc_e + '                                   ' + 'Last Stage Completed: ' +   last_stage + '             ' + last_stage_date"border="0" color="33554432" x="23" y="12" height="64" width="4192" format="[GENERAL]" html.valueishtml="0"  name=drop_down_display visible="0"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Last Stage Completed" border="0" color="33554432" x="2866" y="12" height="60" width="585" html.valueishtml="0"  name=last_stage_completed_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Payout" border="0" color="33554432" x="32" y="12" height="60" width="256" html.valueishtml="0"  name=annuity_payout_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Status" border="0" color="33554432" x="494" y="12" height="60" width="187" html.valueishtml="0"  name=annuity_payout_status_desc_e_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Status Reason" border="0" color="33554432" x="1353" y="12" height="60" width="393" html.valueishtml="0"  name=annuity_payout_status_reason_desc_e_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="14" y1="92" x2="4302" y2="92"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="64" y="12" height="60" width="224" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="494" y="12" height="60" width="622" format="[general]" html.valueishtml="0"  name=annuity_payout_status_desc_e visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1353" y="12" height="60" width="1070" format="[general]" html.valueishtml="0"  name=annuity_payout_status_reason_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2871" y="12" height="60" width="567" format="[general]" html.valueishtml="0"  name=last_stage visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="3461" y="12" height="60" width="763" format="[general]" html.valueishtml="0"  name=last_stage_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd hh:mm:ss" edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

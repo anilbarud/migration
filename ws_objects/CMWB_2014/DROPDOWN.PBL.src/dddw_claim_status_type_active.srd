@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_claim_status_type_active.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(2) key=yes name=claim_status_type_code dbname="Claim_Status_Type.claim_status_type_code" )
+ column=(type=char(25) name=claim_status_type_desc dbname="Claim_Status_Type.claim_status_type_desc" )
+ column=(type=char(1) key=yes name=claim_status_code dbname="Claim_Status_Type.claim_status_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Claim_Status_Type~" ) COLUMN(NAME=~"Claim_Status_Type.claim_status_type_code~") COLUMN(NAME=~"Claim_Status_Type.claim_status_type_desc~") COLUMN(NAME=~"Claim_Status_Type.claim_status_code~")WHERE( EXP1 =~"Claim_Status_Type.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="Claim_Status_Type" updatewhere=0 updatekeyinplace=no  sort="claim_status_type_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="4" height="61" width="956" format="[general]"  name=claim_status_type_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

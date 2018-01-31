@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_batch_type_select.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="553648127" )
+table(column=(type=char(10) updatewhereclause=no name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(10) updatewhereclause=no name=batch_type_code dbname="batch_type_code" )
+ column=(type=number updatewhereclause=no name=top_rows dbname="top_rows" values="Last 10 batches	10/Last 50 batches	50/Last 100 batches	100/Last 1000 batches	1000/All batches	999999/" )
+ )
+text(band=detail alignment="0" text="Type:" border="0" color="33554432" x="9" y="12" height="60" width="133" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="33554432" x="160" y="12" height="60" width="978" format="[general]" html.valueishtml="0"  name=batch_type_code visible="1" dddw.name=dddw_batch_type dddw.displaycolumn=batch_type_desc dddw.datacolumn=batch_type_code dddw.percentwidth=120 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Region:" border="0" color="33554432" x="1157" y="12" height="60" width="201" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=20 border="5" color="33554432" x="1376" y="12" height="60" width="242" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" dddw.name=dddw_admin_region dddw.displaycolumn=admin_region_code dddw.datacolumn=admin_region_code dddw.percentwidth=170 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="5" color="33554432" x="1669" y="12" height="60" width="521" format="[general]" html.valueishtml="0"  name=top_rows visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes ddlb.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,91 @@
+﻿$PBExportHeader$d_account_authorizations.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="553648127" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=228 color="16777215~tif(mod(getrow(),2) = 0,16510444,16777215)" height.autosize=yes )
+table(column=(type=char(4) updatewhereclause=yes name=rehab_service_code dbname="rehab_service_code" )
+ column=(type=char(50) updatewhereclause=yes name=rehab_service_desc_e dbname="rehab_service_desc_e" )
+ column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=long updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=long updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=authorized_quantity dbname="authorized_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=authorized_amount dbname="authorized_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=paid_quantity dbname="paid_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=paid_amount dbname="paid_amount" )
+ column=(type=datetime updatewhereclause=yes name=rehab_task_authorization_create_date dbname="create_date" )
+ column=(type=char(40) updatewhereclause=yes name=provider_name dbname="name" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_amount dbname="max_authorized_amount" )
+ column=(type=char(10) updatewhereclause=yes name=implemenation_date dbname="implemenation_date" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=char(300) updatewhereclause=yes name=authorization_comment dbname="authorization_comment" )
+ column=(type=char(80) updatewhereclause=yes name=other_billable_item_desc dbname="other_billable_item_desc" )
+ column=(type=char(1) updatewhereclause=yes name=expedited_billing_flag dbname="expedited_billing_flag" )
+ retrieve="  SELECT Rehab_Service.rehab_service_code,
+         Rehab_Service.rehab_service_desc_e,
+         Rehab_Program.rehab_program_desc_e,
+         Billable_Item.billable_item_desc_e,
+         REHAB_TASK_AUTHORIZATION.billable_xref_no,   
+         REHAB_TASK_AUTHORIZATION.authorization_no,   
+         REHAB_TASK_AUTHORIZATION.authorized_quantity,   
+         REHAB_TASK_AUTHORIZATION.authorized_amount, 
+         REHAB_TASK_AUTHORIZATION.paid_quantity,   
+         REHAB_TASK_AUTHORIZATION.paid_amount,   
+         REHAB_TASK_AUTHORIZATION.create_date,   
+         PROVIDER.name,
+         Billable_Item_Rehab_Task_Xref.max_authorized_amount,
+         implemenation_date = :implementation_date,
+         REHAB_TASK_AUTHORIZATION.task_no,
+         REHAB_TASK_AUTHORIZATION.authorization_comment,
+         REHAB_TASK_AUTHORIZATION.other_billable_item_desc,
+         REHAB_TASK_AUTHORIZATION.expedited_billing_flag
+FROM  REHAB_TASK_AUTHORIZATION
+      JOIN  REHAB_TASK    ON REHAB_TASK_AUTHORIZATION.claim_no = REHAB_TASK.claim_no and REHAB_TASK_AUTHORIZATION.task_no = REHAB_TASK.task_no  
+      JOIN  Billable_Item_Rehab_Task_Xref ON REHAB_TASK_AUTHORIZATION.billable_xref_no = Billable_Item_Rehab_Task_Xref.billable_xref_no
+      JOIN  Billable_Item ON Billable_Item_Rehab_Task_Xref.billable_item_no = Billable_Item.billable_item_no
+      JOIN  Rehab_Service ON Billable_Item_Rehab_Task_Xref.rehab_service_code = Rehab_Service.rehab_service_code
+      JOIN  Rehab_Program ON Billable_Item_Rehab_Task_Xref.rehab_program_code = Rehab_Program.rehab_program_code
+      LEFT OUTER JOIN  PROVIDER  ON REHAB_TASK_AUTHORIZATION.authorized_provider_no = PROVIDER.provider_no and REHAB_TASK_AUTHORIZATION.authorized_provider_type_code = PROVIDER.provider_type_code
+WHERE   REHAB_TASK_AUTHORIZATION.claim_no = :claim_no   AND 
+        ((REHAB_TASK_AUTHORIZATION.authorized_quantity > REHAB_TASK_AUTHORIZATION.paid_quantity and
+         REHAB_TASK_AUTHORIZATION.authorized_amount > REHAB_TASK_AUTHORIZATION.paid_amount and
+         REHAB_TASK_AUTHORIZATION.create_date >= :implementation_date) OR
+         (REHAB_TASK_AUTHORIZATION.authorized_quantity > REHAB_TASK_AUTHORIZATION.paid_quantity and
+         REHAB_TASK_AUTHORIZATION.create_date < :implementation_date)) and
+         Billable_Item.billable_item_no not in ( 253, 254, 255)
+ORDER BY REHAB_TASK_AUTHORIZATION.authorization_no DESC " arguments=(("claim_no", number),("implementation_date", date)) )
+text(band=header alignment="0" text="Authorized Date" border="6" color="33554432" x="2935" y="12" height="56" width="407" html.valueishtml="0"  name=t_1  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Amt Authorized/Paid" border="6" color="33554432" x="2382" y="12" height="56" width="539" html.valueishtml="0"  name=authorized_amount_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Qty Authorized/Paid" border="6" color="33554432" x="1495" y="12" height="56" width="498" html.valueishtml="0"  name=authorized_quantity_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Serv Provider" border="6" color="33554432" x="2011" y="12" height="56" width="352" html.valueishtml="0"  name=t_7  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Authorized Item" border="6" color="33554432" x="448" y="12" height="56" width="1033" html.valueishtml="0"  name=task_type_code_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Task No/Auth No" border="6" color="33554432" x="18" y="12" height="56" width="411" html.valueishtml="0"  name=authorization_no_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="2999" y="8" height="60" width="338" format="yyyy-mm-dd" html.valueishtml="0"  name=rehab_task_authorization_create_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="1993" y="84" height="60" width="1362" format="[general]" html.valueishtml="0"  name=provider_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="if(  authorized_amount =  max_authorized_amount , ~"Max~", string(authorized_amount,~"$###,##0.00~" ) )"border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="2295" y="8" height="60" width="329" format="" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="/" border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="2638" y="8" height="60" width="23" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="2674" y="8" height="60" width="283" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=paid_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="/" border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="1746" y="8" height="60" width="23" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="1554" y="8" height="60" width="178" format="0" html.valueishtml="0"  name=authorized_quantity visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="1783" y="8" height="60" width="160" format="0" html.valueishtml="0"  name=paid_quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( rehab_service_desc_e )+ ~" / ~"+Trim( rehab_program_desc_e )"border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="430" y="84" height="60" width="1545" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="27" y="8" height="60" width="370" format="[general]" html.valueishtml="0"  name=task_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="27" y="84" height="60" width="370" format="[general]" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="430" y="8" height="60" width="1088" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1~tif( trim(  other_billable_item_desc  ) = '' ,1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0~tIF( rehab_service_code = 'S022' and  rehab_task_authorization_create_date >= Date( implemenation_date ) ,13158600,0)" x="430" y="8" height="60" width="1088" format="[general]" html.valueishtml="0"  name=other_billable_item_desc visible="1~tif( trim(  other_billable_item_desc  ) = '' ,0,1)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="5" y1="68" x2="3314" y2="68"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="430" y="160" height="60" width="2926" format="[general]" html.valueishtml="0"  name=authorization_comment visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Expedited" border="0" color="255" x="18" y="160" height="64" width="370" html.valueishtml="0"  name=t_2 visible="1~tif(expedited_billing_flag = 'Y',1,0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

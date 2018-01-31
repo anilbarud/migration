@@ -1,0 +1,66 @@
+﻿$PBExportHeader$ds_rehab_invoice_select.srd
+$PBExportComments$ephysio
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=924 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=external_invoice_id dbname="external_invoice_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=invoice_date dbname="invoice_date" )
+ column=(type=long update=yes updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=provider_type_code dbname="provider_type_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=submitted_date dbname="submitted_date" )
+ column=(type=long update=yes updatewhereclause=yes name=submitted_by_no dbname="submitted_by_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=submitted_by_type_code dbname="submitted_by_type_code" )
+ column=(type=long update=yes updatewhereclause=yes name=web_create_id dbname="web_create_id" )
+ column=(type=long update=yes updatewhereclause=yes name=web_modify_id dbname="web_modify_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=modify_date dbname="modify_date" )
+ retrieve="  SELECT rehab_invoice_no,   
+         external_invoice_id,   
+        invoice_date,   
+        provider_no,   
+         provider_type_code,   
+        submitted_date,   
+        submitted_by_no,   
+        submitted_by_type_code,   
+        web_create_id,   
+        web_modify_id,   
+        create_date,   
+        modify_date
+    FROM rehab_invoice 
+   WHERE dbo.rehab_invoice.rehab_invoice_no = :al_rehab_invoice_no    
+" update="rehab_invoice" updatewhere=1 updatekeyinplace=no arguments=(("al_rehab_invoice_no", number)) )
+text(band=detail alignment="0" text="Rehab Invoice No:" border="0" color="33554432" x="37" y="4" height="64" width="736" html.valueishtml="0"  name=rehab_invoice_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="791" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=rehab_invoice_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="791" y="96" height="76" width="576" format="[general]" html.valueishtml="0"  name=external_invoice_id visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="External Invoice Id:" border="0" color="33554432" x="37" y="96" height="64" width="736" html.valueishtml="0"  name=external_invoice_id_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="791" y="188" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=invoice_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Invoice Date:" border="0" color="33554432" x="37" y="188" height="64" width="736" html.valueishtml="0"  name=invoice_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="33554432" x="791" y="280" height="76" width="329" format="[general]" html.valueishtml="0"  name=provider_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Provider No:" border="0" color="33554432" x="37" y="280" height="64" width="736" html.valueishtml="0"  name=provider_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="33554432" x="791" y="372" height="76" width="741" format="[general]" html.valueishtml="0"  name=provider_type_code visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Provider Type Code:" border="0" color="33554432" x="37" y="372" height="64" width="736" html.valueishtml="0"  name=provider_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="33554432" x="791" y="464" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=submitted_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Submitted Date:" border="0" color="33554432" x="37" y="464" height="64" width="736" html.valueishtml="0"  name=submitted_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Submitted By No:" border="0" color="33554432" x="37" y="556" height="64" width="736" html.valueishtml="0"  name=submitted_by_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Submitted By Type Code:" border="0" color="33554432" x="37" y="648" height="64" width="736" html.valueishtml="0"  name=submitted_by_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=70 border="0" color="33554432" x="791" y="556" height="76" width="329" format="[general]" html.valueishtml="0"  name=submitted_by_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=80 border="0" color="33554432" x="791" y="648" height="76" width="704" format="[general]" html.valueishtml="0"  name=submitted_by_type_code visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=90 border="0" color="33554432" x="805" y="740" height="76" width="690" format="[general]" html.valueishtml="0"  name=web_create_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=100 border="0" color="33554432" x="800" y="832" height="76" width="690" format="[general]" html.valueishtml="0"  name=web_modify_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Web Create Id:" border="0" color="33554432" x="37" y="740" height="64" width="434" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Web Modify Id:" border="0" color="33554432" x="37" y="832" height="64" width="434" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

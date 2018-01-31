@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_provider_sub_type.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=85 color="536870912" )
+table(column=(type=char(1) update=yes updatewhereclause=yes key=yes name=provider_type_code dbname="Provider_Sub_Type.provider_type_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes key=yes name=provider_sub_type_code dbname="Provider_Sub_Type.provider_sub_type_code" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=provider_sub_type_desc dbname="Provider_Sub_Type.provider_sub_type_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Provider_Sub_Type~" ) COLUMN(NAME=~"Provider_Sub_Type.provider_type_code~") COLUMN(NAME=~"Provider_Sub_Type.provider_sub_type_code~") COLUMN(NAME=~"Provider_Sub_Type.provider_sub_type_desc~")WHERE(    EXP1 =~"Provider_Sub_Type.active_flag~"   OP =~"=~"    EXP2 =~"'Y'~" ) ) " update="Provider_Sub_Type" updatewhere=1 updatekeyinplace=no  sort="provider_sub_type_desc A " )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="0" x="14" y="4" height="73" width="869" format="[general]"  name=provider_sub_type_desc edit.limit=25 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

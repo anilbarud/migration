@@ -1,0 +1,5706 @@
+﻿$PBExportHeader$m_ancestor.srm
+$PBExportComments$Application Driver - Ancestor for all menus
+forward
+global type m_ancestor from menu
+end type
+type m_workbench from menu within m_ancestor
+end type
+type m_worksheet from menu within m_workbench
+end type
+type m_authorizations from menu within m_workbench
+end type
+type m_authorizedpaymentsreport from menu within m_workbench
+end type
+type m_maintainprovider from menu within m_workbench
+end type
+type m_providerinquiry from menu within m_workbench
+end type
+type m_employerinquiry from menu within m_workbench
+end type
+type m_costofclaimsreprint from menu within m_workbench
+end type
+type m_createreportingfeepayments from menu within m_workbench
+end type
+type m_print from menu within m_workbench
+end type
+type m_close from menu within m_workbench
+end type
+type m_printsetup from menu within m_workbench
+end type
+type m_- from menu within m_workbench
+end type
+type m_exit from menu within m_workbench
+end type
+type m_workbench from menu within m_ancestor
+m_worksheet m_worksheet
+m_authorizations m_authorizations
+m_authorizedpaymentsreport m_authorizedpaymentsreport
+m_maintainprovider m_maintainprovider
+m_providerinquiry m_providerinquiry
+m_employerinquiry m_employerinquiry
+m_costofclaimsreprint m_costofclaimsreprint
+m_createreportingfeepayments m_createreportingfeepayments
+m_print m_print
+m_close m_close
+m_printsetup m_printsetup
+m_- m_-
+m_exit m_exit
+end type
+type m_options from menu within m_ancestor
+end type
+type m_maintainusercategories from menu within m_options
+end type
+type m_maintaincardfile from menu within m_options
+end type
+type m_individualduplicationfix from menu within m_options
+end type
+type m_remoteprintparameters from menu within m_options
+end type
+type m_options from menu within m_ancestor
+m_maintainusercategories m_maintainusercategories
+m_maintaincardfile m_maintaincardfile
+m_individualduplicationfix m_individualduplicationfix
+m_remoteprintparameters m_remoteprintparameters
+end type
+type m_reports from menu within m_ancestor
+end type
+type m_claimdisposition from menu within m_reports
+end type
+type m_bybenefitenddate from menu within m_claimdisposition
+end type
+type m_bydispositionentereddate from menu within m_claimdisposition
+end type
+type m_claimdisposition from menu within m_reports
+m_bybenefitenddate m_bybenefitenddate
+m_bydispositionentereddate m_bydispositionentereddate
+end type
+type m_coupreports from menu within m_reports
+end type
+type m_coupaging from menu within m_coupreports
+end type
+type m_mailpackageerrorreport from menu within m_coupreports
+end type
+type m_claimstatuschangeerrorreport from menu within m_coupreports
+end type
+type m_preadjclaimsinmaster from menu within m_coupreports
+end type
+type m_mailpackagestatisticsreport from menu within m_coupreports
+end type
+type m_coupreports from menu within m_reports
+m_coupaging m_coupaging
+m_mailpackageerrorreport m_mailpackageerrorreport
+m_claimstatuschangeerrorreport m_claimstatuschangeerrorreport
+m_preadjclaimsinmaster m_preadjclaimsinmaster
+m_mailpackagestatisticsreport m_mailpackagestatisticsreport
+end type
+type m_statustracking from menu within m_reports
+end type
+type m_paymentreports from menu within m_reports
+end type
+type m_scheduledpayments from menu within m_paymentreports
+end type
+type m_ltdpayments from menu within m_paymentreports
+end type
+type m_duplicatepaymentexceptionreport from menu within m_paymentreports
+end type
+type m_unpaidaccounts from menu within m_paymentreports
+end type
+type m_invoicelist from menu within m_paymentreports
+end type
+type m_awardsscheduledtobecompleted from menu within m_paymentreports
+end type
+type m_firstbenefitcheque from menu within m_paymentreports
+end type
+type m_periodicawardcontrol from menu within m_paymentreports
+end type
+type m_rejectedclaimswithpayments from menu within m_paymentreports
+end type
+type m_ungroupedpaymentsforauthorizationreport from menu within m_paymentreports
+end type
+type m_paymentreports from menu within m_reports
+m_scheduledpayments m_scheduledpayments
+m_ltdpayments m_ltdpayments
+m_duplicatepaymentexceptionreport m_duplicatepaymentexceptionreport
+m_unpaidaccounts m_unpaidaccounts
+m_invoicelist m_invoicelist
+m_awardsscheduledtobecompleted m_awardsscheduledtobecompleted
+m_firstbenefitcheque m_firstbenefitcheque
+m_periodicawardcontrol m_periodicawardcontrol
+m_rejectedclaimswithpayments m_rejectedclaimswithpayments
+m_ungroupedpaymentsforauthorizationreport m_ungroupedpaymentsforauthorizationreport
+end type
+type m_costallocatedtogroupreserve from menu within m_reports
+end type
+type m_claimsadjudicated from menu within m_reports
+end type
+type m_non-pension from menu within m_claimsadjudicated
+end type
+type m_pension from menu within m_claimsadjudicated
+end type
+type m_claimsadjudicated from menu within m_reports
+m_non-pension m_non-pension
+m_pension m_pension
+end type
+type m_formofelectionadjudicatedclaims from menu within m_reports
+end type
+type m_overduereports from menu within m_reports
+end type
+type m_12weekreview from menu within m_overduereports
+end type
+type m_annualreview from menu within m_overduereports
+end type
+type m_overduereports from menu within m_reports
+m_12weekreview m_12weekreview
+m_annualreview m_annualreview
+end type
+type m_nonimagedfilesloggedout from menu within m_reports
+end type
+type m_claimscreated from menu within m_reports
+end type
+type m_overpaymentsummaryreport from menu within m_reports
+end type
+type m_advancesummaryreport from menu within m_reports
+end type
+type m_caseload from menu within m_reports
+end type
+type m_pensionreports from menu within m_reports
+end type
+type m_pensionanniversary from menu within m_pensionreports
+end type
+type m_survivorsanniversaryreport from menu within m_pensionreports
+end type
+type m_p81survivingspouseattaining65 from menu within m_pensionreports
+end type
+type m_3 from menu within m_pensionreports
+end type
+type m_dependentchildrenbybirthdate from menu within m_pensionreports
+end type
+type m_dependentchildrenover18 from menu within m_pensionreports
+end type
+type m_pensionreports from menu within m_reports
+m_pensionanniversary m_pensionanniversary
+m_survivorsanniversaryreport m_survivorsanniversaryreport
+m_p81survivingspouseattaining65 m_p81survivingspouseattaining65
+m_3 m_3
+m_dependentchildrenbybirthdate m_dependentchildrenbybirthdate
+m_dependentchildrenover18 m_dependentchildrenover18
+end type
+type m_claimaging from menu within m_reports
+end type
+type m_adjudicationprofile from menu within m_reports
+end type
+type m_rehabplans from menu within m_reports
+end type
+type m_tasklist from menu within m_rehabplans
+end type
+type m_taskcompletion from menu within m_rehabplans
+end type
+type m_taskauthorization from menu within m_rehabplans
+end type
+type m_rehabplans from menu within m_reports
+m_tasklist m_tasklist
+m_taskcompletion m_taskcompletion
+m_taskauthorization m_taskauthorization
+end type
+type m_casemanagement from menu within m_reports
+end type
+type m_activecmwithmorethan70orlesst from menu within m_casemanagement
+end type
+type m_activewithagegreaterthan50 from menu within m_casemanagement
+end type
+type m_casemanagement from menu within m_reports
+m_activecmwithmorethan70orlesst m_activecmwithmorethan70orlesst
+m_activewithagegreaterthan50 m_activewithagegreaterthan50
+end type
+type m_employerslatefilingf67s from menu within m_reports
+end type
+type m_annuityreports from menu within m_reports
+end type
+type m_byclaim from menu within m_annuityreports
+end type
+type m_summarizedtxns from menu within m_annuityreports
+end type
+type m_appliedinterestsummary from menu within m_annuityreports
+end type
+type m_annuityreports from menu within m_reports
+m_byclaim m_byclaim
+m_summarizedtxns m_summarizedtxns
+m_appliedinterestsummary m_appliedinterestsummary
+end type
+type m_costofclaimsstatements from menu within m_reports
+end type
+type m_paymentprocessingreports from menu within m_reports
+end type
+type m_paymentregisters from menu within m_paymentprocessingreports
+end type
+type m_paymentawardauto-batchreport from menu within m_paymentprocessingreports
+end type
+type m_paymentbalancing1 from menu within m_paymentprocessingreports
+end type
+type m_medicalaidvouchers from menu within m_paymentprocessingreports
+end type
+type m_processedbatchesbytype from menu within m_paymentprocessingreports
+end type
+type m_gltransactions from menu within m_paymentprocessingreports
+end type
+type m_directdepositvouchers from menu within m_paymentprocessingreports
+end type
+type m_paymentprocessingreports from menu within m_reports
+m_paymentregisters m_paymentregisters
+m_paymentawardauto-batchreport m_paymentawardauto-batchreport
+m_paymentbalancing1 m_paymentbalancing1
+m_medicalaidvouchers m_medicalaidvouchers
+m_processedbatchesbytype m_processedbatchesbytype
+m_gltransactions m_gltransactions
+m_directdepositvouchers m_directdepositvouchers
+end type
+type m_chequeinquiry from menu within m_reports
+end type
+type m_t5recipientdetails from menu within m_reports
+end type
+type m_abandonedmedicalaidreport from menu within m_reports
+end type
+type m_nbmsnbcapaymentsreport from menu within m_reports
+end type
+type m_nbmsnbcaglpostings from menu within m_reports
+end type
+type m_deleteddocuments from menu within m_reports
+end type
+type m_survivorsspecialpayment from menu within m_reports
+end type
+type m_specialsurvpaidtodate from menu within m_survivorsspecialpayment
+end type
+type m_survivorsspecialpayment from menu within m_reports
+m_specialsurvpaidtodate m_specialsurvpaidtodate
+end type
+type m_docidreferenceassociation from menu within m_reports
+end type
+type m_abcc from menu within m_reports
+end type
+type m_eligibilitydatareport from menu within m_abcc
+end type
+type m_eligibilityexporterrors from menu within m_abcc
+end type
+type m_prescription_report from menu within m_abcc
+end type
+type m_dinreports from menu within m_abcc
+end type
+type m_invoicereconciliationreport from menu within m_abcc
+end type
+type m_abcc from menu within m_reports
+m_eligibilitydatareport m_eligibilitydatareport
+m_eligibilityexporterrors m_eligibilityexporterrors
+m_prescription_report m_prescription_report
+m_dinreports m_dinreports
+m_invoicereconciliationreport m_invoicereconciliationreport
+end type
+type m_converetedmanualtransactions from menu within m_reports
+end type
+type m_open_awards_os_pymts from menu within m_reports
+end type
+type m_form67information from menu within m_reports
+end type
+type m_claimsnotcodedreport from menu within m_reports
+end type
+type m_t5reviewreports from menu within m_reports
+end type
+type m_reports from menu within m_ancestor
+m_claimdisposition m_claimdisposition
+m_coupreports m_coupreports
+m_statustracking m_statustracking
+m_paymentreports m_paymentreports
+m_costallocatedtogroupreserve m_costallocatedtogroupreserve
+m_claimsadjudicated m_claimsadjudicated
+m_formofelectionadjudicatedclaims m_formofelectionadjudicatedclaims
+m_overduereports m_overduereports
+m_nonimagedfilesloggedout m_nonimagedfilesloggedout
+m_claimscreated m_claimscreated
+m_overpaymentsummaryreport m_overpaymentsummaryreport
+m_advancesummaryreport m_advancesummaryreport
+m_caseload m_caseload
+m_pensionreports m_pensionreports
+m_claimaging m_claimaging
+m_adjudicationprofile m_adjudicationprofile
+m_rehabplans m_rehabplans
+m_casemanagement m_casemanagement
+m_employerslatefilingf67s m_employerslatefilingf67s
+m_annuityreports m_annuityreports
+m_costofclaimsstatements m_costofclaimsstatements
+m_paymentprocessingreports m_paymentprocessingreports
+m_chequeinquiry m_chequeinquiry
+m_t5recipientdetails m_t5recipientdetails
+m_abandonedmedicalaidreport m_abandonedmedicalaidreport
+m_nbmsnbcapaymentsreport m_nbmsnbcapaymentsreport
+m_nbmsnbcaglpostings m_nbmsnbcaglpostings
+m_deleteddocuments m_deleteddocuments
+m_survivorsspecialpayment m_survivorsspecialpayment
+m_docidreferenceassociation m_docidreferenceassociation
+m_abcc m_abcc
+m_converetedmanualtransactions m_converetedmanualtransactions
+m_open_awards_os_pymts m_open_awards_os_pymts
+m_form67information m_form67information
+m_claimsnotcodedreport m_claimsnotcodedreport
+m_t5reviewreports m_t5reviewreports
+end type
+type m_window from menu within m_ancestor
+end type
+type m_cascade from menu within m_window
+end type
+type m_layered from menu within m_window
+end type
+type m_tile from menu within m_window
+end type
+type m_window from menu within m_ancestor
+m_cascade m_cascade
+m_layered m_layered
+m_tile m_tile
+end type
+type m_help from menu within m_ancestor
+end type
+type m_contents from menu within m_help
+end type
+type m_-z from menu within m_help
+end type
+type m_aboutworkbench from menu within m_help
+end type
+type m_help from menu within m_ancestor
+m_contents m_contents
+m_-z m_-z
+m_aboutworkbench m_aboutworkbench
+end type
+type m_finance from menu within m_ancestor
+end type
+type m_addmanualtxns from menu within m_finance
+end type
+type m_maintainmanualtxns from menu within m_finance
+end type
+type m_cocsummarybyglaccount from menu within m_finance
+end type
+type m_closepreviousperiod from menu within m_finance
+end type
+type m_1 from menu within m_finance
+end type
+type m_maintainannuityinterest from menu within m_finance
+end type
+type m_bankreconciliation from menu within m_finance
+end type
+type m_maintenance from menu within m_bankreconciliation
+end type
+type m_paymentverification from menu within m_bankreconciliation
+end type
+type m_sendissuedcheques from menu within m_bankreconciliation
+end type
+type m_reconciledchequelistingreport from menu within m_bankreconciliation
+end type
+type m_bankreconciliation from menu within m_finance
+m_maintenance m_maintenance
+m_paymentverification m_paymentverification
+m_sendissuedcheques m_sendissuedcheques
+m_reconciledchequelistingreport m_reconciledchequelistingreport
+end type
+type m_auditingreports from menu within m_finance
+end type
+type m_journalnoinquiry from menu within m_auditingreports
+end type
+type m_dailychequebalancing from menu within m_auditingreports
+end type
+type m_chequereprintaudit from menu within m_auditingreports
+end type
+type m_gltransfersummary from menu within m_auditingreports
+end type
+type m_auditingreports from menu within m_finance
+m_journalnoinquiry m_journalnoinquiry
+m_dailychequebalancing m_dailychequebalancing
+m_chequereprintaudit m_chequereprintaudit
+m_gltransfersummary m_gltransfersummary
+end type
+type m_t5processing from menu within m_finance
+end type
+type m_t5samplingreport from menu within m_t5processing
+end type
+type m_trusteeassignment from menu within m_t5processing
+end type
+type m_blanksinreport from menu within m_t5processing
+end type
+type m_t5processing from menu within m_finance
+m_t5samplingreport m_t5samplingreport
+m_trusteeassignment m_trusteeassignment
+m_blanksinreport m_blanksinreport
+end type
+type m_2 from menu within m_finance
+end type
+type m_claimcostmaintenance from menu within m_finance
+end type
+type m_finance from menu within m_ancestor
+m_addmanualtxns m_addmanualtxns
+m_maintainmanualtxns m_maintainmanualtxns
+m_cocsummarybyglaccount m_cocsummarybyglaccount
+m_closepreviousperiod m_closepreviousperiod
+m_1 m_1
+m_maintainannuityinterest m_maintainannuityinterest
+m_bankreconciliation m_bankreconciliation
+m_auditingreports m_auditingreports
+m_t5processing m_t5processing
+m_2 m_2
+m_claimcostmaintenance m_claimcostmaintenance
+end type
+global type m_ancestor from menu
+m_workbench m_workbench
+m_options m_options
+m_reports m_reports
+m_window m_window
+m_help m_help
+m_finance m_finance
+end type
+end forward
+
+global type m_ancestor from menu
+m_workbench m_workbench
+m_options m_options
+m_reports m_reports
+m_window m_window
+m_help m_help
+m_finance m_finance
+end type
+global m_ancestor m_ancestor
+
+type variables
+w_sheet		iwi_active_sheet
+end variables
+
+on m_ancestor.create
+m_ancestor=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_workbench=create m_workbench
+this.m_options=create m_options
+this.m_reports=create m_reports
+this.m_window=create m_window
+this.m_help=create m_help
+this.m_finance=create m_finance
+this.Item[UpperBound(this.Item)+1]=this.m_workbench
+this.Item[UpperBound(this.Item)+1]=this.m_options
+this.Item[UpperBound(this.Item)+1]=this.m_reports
+this.Item[UpperBound(this.Item)+1]=this.m_window
+this.Item[UpperBound(this.Item)+1]=this.m_help
+this.Item[UpperBound(this.Item)+1]=this.m_finance
+end on
+
+on m_ancestor.destroy
+call super::destroy
+destroy(this.m_workbench)
+destroy(this.m_options)
+destroy(this.m_reports)
+destroy(this.m_window)
+destroy(this.m_help)
+destroy(this.m_finance)
+end on
+
+type m_workbench from menu within m_ancestor
+m_worksheet m_worksheet
+m_authorizations m_authorizations
+m_authorizedpaymentsreport m_authorizedpaymentsreport
+m_maintainprovider m_maintainprovider
+m_providerinquiry m_providerinquiry
+m_employerinquiry m_employerinquiry
+m_costofclaimsreprint m_costofclaimsreprint
+m_createreportingfeepayments m_createreportingfeepayments
+m_print m_print
+m_close m_close
+m_printsetup m_printsetup
+m_- m_-
+m_exit m_exit
+end type
+
+on m_workbench.create
+call super::create
+this.text = "Work&bench"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_worksheet=create m_worksheet
+this.m_authorizations=create m_authorizations
+this.m_authorizedpaymentsreport=create m_authorizedpaymentsreport
+this.m_maintainprovider=create m_maintainprovider
+this.m_providerinquiry=create m_providerinquiry
+this.m_employerinquiry=create m_employerinquiry
+this.m_costofclaimsreprint=create m_costofclaimsreprint
+this.m_createreportingfeepayments=create m_createreportingfeepayments
+this.m_print=create m_print
+this.m_close=create m_close
+this.m_printsetup=create m_printsetup
+this.m_-=create m_-
+this.m_exit=create m_exit
+this.Item[UpperBound(this.Item)+1]=this.m_worksheet
+this.Item[UpperBound(this.Item)+1]=this.m_authorizations
+this.Item[UpperBound(this.Item)+1]=this.m_authorizedpaymentsreport
+this.Item[UpperBound(this.Item)+1]=this.m_maintainprovider
+this.Item[UpperBound(this.Item)+1]=this.m_providerinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_employerinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_costofclaimsreprint
+this.Item[UpperBound(this.Item)+1]=this.m_createreportingfeepayments
+this.Item[UpperBound(this.Item)+1]=this.m_print
+this.Item[UpperBound(this.Item)+1]=this.m_close
+this.Item[UpperBound(this.Item)+1]=this.m_printsetup
+this.Item[UpperBound(this.Item)+1]=this.m_-
+this.Item[UpperBound(this.Item)+1]=this.m_exit
+end on
+
+on m_workbench.destroy
+call super::destroy
+destroy(this.m_worksheet)
+destroy(this.m_authorizations)
+destroy(this.m_authorizedpaymentsreport)
+destroy(this.m_maintainprovider)
+destroy(this.m_providerinquiry)
+destroy(this.m_employerinquiry)
+destroy(this.m_costofclaimsreprint)
+destroy(this.m_createreportingfeepayments)
+destroy(this.m_print)
+destroy(this.m_close)
+destroy(this.m_printsetup)
+destroy(this.m_-)
+destroy(this.m_exit)
+end on
+
+type m_worksheet from menu within m_workbench
+end type
+
+event clicked;/*	Note: Worksheets toolbar item is invisible.  This is because we don't always 
+	want to see the worksheet toolbar item.  For example, when a worksheet is open
+	it's more important to see options that pertain to the worksheet than it is to
+	have a button to open another worksheet.  If a descendant menu wants the worksheet
+	toolbar item, it can visible the toolbar item.
+
+	Declare an instance of the Case Management Work Bench sheet
+*/
+	w_sheet lw_sheet
+	w_sheet lw_sheet2
+	SetPointer(HourGlass!)
+//	OpenSheet (lw_sheet,Parentwindow,0,Layered!)
+OpenSheetDocked(lw_sheet,ParentWindow,WindowDockTop!,"Sheet 1")
+OpenSheetInTabGroup(lw_sheet2,"w_sheet",lw_sheet,"Sheet2")
+
+end event
+
+on m_worksheet.create
+call super::create
+this.text = "&Work Sheet"
+this.microhelp = "Open a Work Sheet"
+this.toolbaritemvisible = false
+this.toolbaritemname = "form!"
+this.toolbaritemtext = "Worksheet"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_worksheet.destroy
+call super::destroy
+end on
+
+type m_authorizations from menu within m_workbench
+end type
+
+event clicked;S_WINDOW_MESSAGE lstr_message
+
+
+/*	Note: This item is invisible and so is it's toolbaritem.
+	This is because we don't want this option on every sheet.
+	Only on sheets where the item is expected and secured.
+*/
+
+
+If SQLCA.ServiceAvailable() THEN
+	lstr_message.as_mode = 'NORMAL'
+	lstr_message.awi_parent_window = w_frame.GetActiveSheet()
+	OpenSheetWithParm(w_authorizations,lstr_message,w_frame,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_authorizations.create
+call super::create
+this.visible = false
+this.text = "Payment / Award &Authorizations"
+this.microhelp = "Authorize pre-scheduled payments / awards"
+this.toolbaritemvisible = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_authorizations.destroy
+call super::destroy
+end on
+
+type m_authorizedpaymentsreport from menu within m_workbench
+end type
+
+event clicked;If SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_authorized_payments,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_authorizedpaymentsreport.create
+call super::create
+this.text = "Authorized Payments Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_authorizedpaymentsreport.destroy
+call super::destroy
+end on
+
+type m_maintainprovider from menu within m_workbench
+end type
+
+on clicked;S_WINDOW_MESSAGE	lstr_message
+
+/*	Note: This item is invisible and so is it's toolbaritem.
+	This is because we don't want this option on every sheet.
+	Only on sheets where the item is expected and secured.
+*/
+	IF SQLCA.ServiceAvailable() THEN
+		SetPointer(HourGlass!)
+		lstr_message.as_mode = ''
+		OpenSheetWithParm(w_service_provider,lstr_message, ParentWindow,0,Layered!)
+	ELSE
+		Beep(2)
+	END IF
+end on
+
+on m_maintainprovider.create
+call super::create
+this.visible = false
+this.text = "&Maintain Provider Information"
+this.microhelp = "Add & maintaintain data on Service Providers"
+this.toolbaritemvisible = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainprovider.destroy
+call super::destroy
+end on
+
+type m_providerinquiry from menu within m_workbench
+end type
+
+on clicked;S_WINDOW_MESSAGE	lstr_message
+
+/*	Note: This item is invisible and so is it's toolbaritem.
+	This is because we don't want this option on every sheet.
+	Only on sheets where the item is expected and secured.
+*/
+	IF SQLCA.ServiceAvailable() THEN
+		SetPointer(HourGlass!)
+		lstr_message.as_mode = 'READ'
+		OpenSheetWithParm(w_service_provider,lstr_message,ParentWindow,0,Layered!)
+	ELSE
+		Beep(2)
+	END IF
+end on
+
+on m_providerinquiry.create
+call super::create
+this.visible = false
+this.text = "Provider &Inquiry"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_providerinquiry.destroy
+call super::destroy
+end on
+
+type m_employerinquiry from menu within m_workbench
+end type
+
+event clicked;/*	Pass the search window a X which will enable the searching of all types.
+   and disables command buttons on the employer search window.
+*/
+	S_WINDOW_MESSAGE  lstr_open_message
+	
+	IF SQLCA.ServiceAvailable() THEN
+		SetPointer(HourGlass!)
+		
+		lstr_open_message.al_doubleparm[1] = 0
+		lstr_open_message.al_doubleparm[2] = 0
+		
+		lstr_open_message.as_stringparm[1] = 'X'
+		
+		Openwithparm(w_employer_search,lstr_open_message)
+	ELSE
+		Beep(2)
+	END IF
+end event
+
+on m_employerinquiry.create
+call super::create
+this.text = "Employer In&quiry"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_employerinquiry.destroy
+call super::destroy
+end on
+
+type m_costofclaimsreprint from menu within m_workbench
+end type
+
+on m_costofclaimsreprint.create
+call super::create
+this.visible = false
+this.text = "Cost of Claims - Reprint"
+this.microhelp = "CoC for range of Employers"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheetwithparm(w_cost_of_claims_prod,"REPRINT",ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_costofclaimsreprint.destroy
+call super::destroy
+end on
+
+type m_createreportingfeepayments from menu within m_workbench
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_create_reporting_fee_payments,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_createreportingfeepayments.create
+call super::create
+this.text = "&Create Reporting Fee Payments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_createreportingfeepayments.destroy
+call super::destroy
+end on
+
+type m_print from menu within m_workbench
+end type
+
+on clicked;/*	At this level, the print menu option should remain disabled and invisible.
+	and so should its menu bar item.
+
+	This is because it will not always be required.  For example, the Frames'
+	menu does not have a print since there is nothing to print.
+
+	It should be set to enabled and visible in descendant menu's that have a print.  
+*/
+
+WINDOW						vlw_active_sheet
+
+
+
+/*	Check to see if we actually have an active sheet, and if so trigger it's print
+	event.  Note: Powerbuilder will be ok if the active sheet doesn't have a print
+	event.  It just won't do anything.  However, any descendant menu that has print 
+	enabled should also have an active sheet with a ue_print user event.
+*/
+
+	vlw_active_sheet = w_frame.GetActiveSheet()
+	
+	IF IsValid(vlw_active_sheet) THEN
+		SetPointer(HourGlass!)
+		vlw_active_sheet.triggerevent("ue_print")
+	ELSE
+		Beep(1)
+	END IF
+
+
+
+end on
+
+on m_print.create
+call super::create
+this.visible = false
+this.text = "&Print"
+this.enabled = false
+this.microhelp = "Print current sheet or report"
+this.toolbaritemvisible = false
+this.toolbaritemname = "print!"
+this.toolbaritemtext = "Print"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_close from menu within m_workbench
+end type
+
+on clicked;/*	At this level, the close menu option should remain disabled and invisible.
+	and so should it's toolbaritem.
+
+	This is because it will not always be required.  For example, the Frames'
+	menu does not have a close since you don't see the Frames' menu unless
+	all active sheets are closed.
+
+	It should be set to enabled and visible in descendant menu's that have a close.  
+*/
+
+
+	window						vlw_active_sheet
+
+
+/*	Check to see if we actually have an active sheet, and if so try to close it
+*/
+	vlw_active_sheet = w_frame.GetActiveSheet()
+	
+	IF IsValid(vlw_active_sheet) THEN
+		SetPointer(HourGlass!)
+		Close (vlw_active_sheet)
+	ELSE
+		Beep(1)
+	END IF
+
+
+
+end on
+
+on m_close.create
+call super::create
+this.visible = false
+this.text = "&Close"
+this.enabled = false
+this.microhelp = "Close current sheet"
+this.toolbaritemvisible = false
+this.toolbaritemname = "exit!"
+this.toolbaritemtext = "Close"
+this.toolbaritemorder = 14
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_close.destroy
+call super::destroy
+end on
+
+type m_printsetup from menu within m_workbench
+end type
+
+event clicked;PrintSetup()
+end event
+
+on m_printsetup.create
+call super::create
+this.text = "Print Set&up"
+this.microhelp = "Changes page layout settings"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_printsetup.destroy
+call super::destroy
+end on
+
+type m_- from menu within m_workbench
+end type
+
+on m_-.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_exit from menu within m_workbench
+end type
+
+on clicked;/*	Exits toolbar item is invisible since it's not always displayed.  Ie. When 
+	a sheet is open we want them to see close instead of exit.  Probably only on 
+	the frames menu do we want to see the exit toolbar item.
+*/
+
+	SetPointer(HourGlass!)
+	Close (w_frame)
+end on
+
+on m_exit.create
+call super::create
+this.text = "E&xit ~tAlt+X"
+this.shortcut = 600
+this.microhelp = "Exit the Case Management Workbench"
+this.toolbaritemvisible = false
+this.toolbaritemname = "exit!"
+this.toolbaritemtext = "Exit"
+this.toolbaritemorder = 15
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_exit.destroy
+call super::destroy
+end on
+
+type m_options from menu within m_ancestor
+m_maintainusercategories m_maintainusercategories
+m_maintaincardfile m_maintaincardfile
+m_individualduplicationfix m_individualduplicationfix
+m_remoteprintparameters m_remoteprintparameters
+end type
+
+on m_options.create
+call super::create
+this.text = "&Options"
+this.shifttoright = true
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_maintainusercategories=create m_maintainusercategories
+this.m_maintaincardfile=create m_maintaincardfile
+this.m_individualduplicationfix=create m_individualduplicationfix
+this.m_remoteprintparameters=create m_remoteprintparameters
+this.Item[UpperBound(this.Item)+1]=this.m_maintainusercategories
+this.Item[UpperBound(this.Item)+1]=this.m_maintaincardfile
+this.Item[UpperBound(this.Item)+1]=this.m_individualduplicationfix
+this.Item[UpperBound(this.Item)+1]=this.m_remoteprintparameters
+end on
+
+on m_options.destroy
+call super::destroy
+destroy(this.m_maintainusercategories)
+destroy(this.m_maintaincardfile)
+destroy(this.m_individualduplicationfix)
+destroy(this.m_remoteprintparameters)
+end on
+
+type m_maintainusercategories from menu within m_options
+end type
+
+on clicked;//	Note: This item is invisible and so is it's toolbaritem.
+//	This is because we don't want this option on every sheet.
+//	Only on sheets where the item is expected and secured.
+
+If ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_maintain_user_categories,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end on
+
+on m_maintainusercategories.create
+call super::create
+this.visible = false
+this.text = "&Maintain In/Out Buckets"
+this.microhelp = "Maintain categories for viewing and sending documents in the InBasket"
+this.toolbaritemvisible = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainusercategories.destroy
+call super::destroy
+end on
+
+type m_maintaincardfile from menu within m_options
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_maint_card,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end on
+
+on m_maintaincardfile.create
+call super::create
+this.visible = false
+this.text = "Maintain & Cardfile"
+this.toolbaritemvisible = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintaincardfile.destroy
+call super::destroy
+end on
+
+type m_individualduplicationfix from menu within m_options
+end type
+
+event clicked;INTEGER	li_rtn
+N_PROCESS_RUN_STATUS ln_process_run_status
+
+
+If SQLCA.ServiceAvailable() Then
+
+	/******************************************************************************************
+	PR6340 - prevent open of window if T5 printing is in progress
+	- added new function call to prevent updating of tables used by PRODSVCS Payment Processing
+	- new object N_PROCESS_RUN_STATUS is used to determine status of processes (in progress = Y/N)
+	- '009' refers to the Individual Merge module, '047' refers to the T5007 Printing module
+	******************************************************************************************/
+	ln_process_run_status = Create N_PROCESS_RUN_STATUS
+	
+	li_rtn = ln_process_run_status.nf_in_progress('009','047','open',SQLCA)
+	
+	IF li_rtn = 1 THEN
+		// module is blocked
+		return
+	END IF
+	/******************************************************************************************/
+	
+	OpenSheet(w_dup_fix_individual,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_individualduplicationfix.create
+call super::create
+this.visible = false
+this.text = "&Individual Duplication Fix"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_individualduplicationfix.destroy
+call super::destroy
+end on
+
+type m_remoteprintparameters from menu within m_options
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_remote_print_parameters,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_remoteprintparameters.create
+call super::create
+this.text = "&Remote Print Parameters"
+this.microhelp = "Maintain options and parameters for remote mail package generation"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_remoteprintparameters.destroy
+call super::destroy
+end on
+
+type m_reports from menu within m_ancestor
+m_claimdisposition m_claimdisposition
+m_coupreports m_coupreports
+m_statustracking m_statustracking
+m_paymentreports m_paymentreports
+m_costallocatedtogroupreserve m_costallocatedtogroupreserve
+m_claimsadjudicated m_claimsadjudicated
+m_formofelectionadjudicatedclaims m_formofelectionadjudicatedclaims
+m_overduereports m_overduereports
+m_nonimagedfilesloggedout m_nonimagedfilesloggedout
+m_claimscreated m_claimscreated
+m_overpaymentsummaryreport m_overpaymentsummaryreport
+m_advancesummaryreport m_advancesummaryreport
+m_caseload m_caseload
+m_pensionreports m_pensionreports
+m_claimaging m_claimaging
+m_adjudicationprofile m_adjudicationprofile
+m_rehabplans m_rehabplans
+m_casemanagement m_casemanagement
+m_employerslatefilingf67s m_employerslatefilingf67s
+m_annuityreports m_annuityreports
+m_costofclaimsstatements m_costofclaimsstatements
+m_paymentprocessingreports m_paymentprocessingreports
+m_chequeinquiry m_chequeinquiry
+m_t5recipientdetails m_t5recipientdetails
+m_abandonedmedicalaidreport m_abandonedmedicalaidreport
+m_nbmsnbcapaymentsreport m_nbmsnbcapaymentsreport
+m_nbmsnbcaglpostings m_nbmsnbcaglpostings
+m_deleteddocuments m_deleteddocuments
+m_survivorsspecialpayment m_survivorsspecialpayment
+m_docidreferenceassociation m_docidreferenceassociation
+m_abcc m_abcc
+m_converetedmanualtransactions m_converetedmanualtransactions
+m_open_awards_os_pymts m_open_awards_os_pymts
+m_form67information m_form67information
+m_claimsnotcodedreport m_claimsnotcodedreport
+m_t5reviewreports m_t5reviewreports
+end type
+
+on m_reports.create
+call super::create
+this.text = "&Reports"
+this.microhelp = "Reports Menu"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_claimdisposition=create m_claimdisposition
+this.m_coupreports=create m_coupreports
+this.m_statustracking=create m_statustracking
+this.m_paymentreports=create m_paymentreports
+this.m_costallocatedtogroupreserve=create m_costallocatedtogroupreserve
+this.m_claimsadjudicated=create m_claimsadjudicated
+this.m_formofelectionadjudicatedclaims=create m_formofelectionadjudicatedclaims
+this.m_overduereports=create m_overduereports
+this.m_nonimagedfilesloggedout=create m_nonimagedfilesloggedout
+this.m_claimscreated=create m_claimscreated
+this.m_overpaymentsummaryreport=create m_overpaymentsummaryreport
+this.m_advancesummaryreport=create m_advancesummaryreport
+this.m_caseload=create m_caseload
+this.m_pensionreports=create m_pensionreports
+this.m_claimaging=create m_claimaging
+this.m_adjudicationprofile=create m_adjudicationprofile
+this.m_rehabplans=create m_rehabplans
+this.m_casemanagement=create m_casemanagement
+this.m_employerslatefilingf67s=create m_employerslatefilingf67s
+this.m_annuityreports=create m_annuityreports
+this.m_costofclaimsstatements=create m_costofclaimsstatements
+this.m_paymentprocessingreports=create m_paymentprocessingreports
+this.m_chequeinquiry=create m_chequeinquiry
+this.m_t5recipientdetails=create m_t5recipientdetails
+this.m_abandonedmedicalaidreport=create m_abandonedmedicalaidreport
+this.m_nbmsnbcapaymentsreport=create m_nbmsnbcapaymentsreport
+this.m_nbmsnbcaglpostings=create m_nbmsnbcaglpostings
+this.m_deleteddocuments=create m_deleteddocuments
+this.m_survivorsspecialpayment=create m_survivorsspecialpayment
+this.m_docidreferenceassociation=create m_docidreferenceassociation
+this.m_abcc=create m_abcc
+this.m_converetedmanualtransactions=create m_converetedmanualtransactions
+this.m_open_awards_os_pymts=create m_open_awards_os_pymts
+this.m_form67information=create m_form67information
+this.m_claimsnotcodedreport=create m_claimsnotcodedreport
+this.m_t5reviewreports=create m_t5reviewreports
+this.Item[UpperBound(this.Item)+1]=this.m_claimdisposition
+this.Item[UpperBound(this.Item)+1]=this.m_coupreports
+this.Item[UpperBound(this.Item)+1]=this.m_statustracking
+this.Item[UpperBound(this.Item)+1]=this.m_paymentreports
+this.Item[UpperBound(this.Item)+1]=this.m_costallocatedtogroupreserve
+this.Item[UpperBound(this.Item)+1]=this.m_claimsadjudicated
+this.Item[UpperBound(this.Item)+1]=this.m_formofelectionadjudicatedclaims
+this.Item[UpperBound(this.Item)+1]=this.m_overduereports
+this.Item[UpperBound(this.Item)+1]=this.m_nonimagedfilesloggedout
+this.Item[UpperBound(this.Item)+1]=this.m_claimscreated
+this.Item[UpperBound(this.Item)+1]=this.m_overpaymentsummaryreport
+this.Item[UpperBound(this.Item)+1]=this.m_advancesummaryreport
+this.Item[UpperBound(this.Item)+1]=this.m_caseload
+this.Item[UpperBound(this.Item)+1]=this.m_pensionreports
+this.Item[UpperBound(this.Item)+1]=this.m_claimaging
+this.Item[UpperBound(this.Item)+1]=this.m_adjudicationprofile
+this.Item[UpperBound(this.Item)+1]=this.m_rehabplans
+this.Item[UpperBound(this.Item)+1]=this.m_casemanagement
+this.Item[UpperBound(this.Item)+1]=this.m_employerslatefilingf67s
+this.Item[UpperBound(this.Item)+1]=this.m_annuityreports
+this.Item[UpperBound(this.Item)+1]=this.m_costofclaimsstatements
+this.Item[UpperBound(this.Item)+1]=this.m_paymentprocessingreports
+this.Item[UpperBound(this.Item)+1]=this.m_chequeinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_t5recipientdetails
+this.Item[UpperBound(this.Item)+1]=this.m_abandonedmedicalaidreport
+this.Item[UpperBound(this.Item)+1]=this.m_nbmsnbcapaymentsreport
+this.Item[UpperBound(this.Item)+1]=this.m_nbmsnbcaglpostings
+this.Item[UpperBound(this.Item)+1]=this.m_deleteddocuments
+this.Item[UpperBound(this.Item)+1]=this.m_survivorsspecialpayment
+this.Item[UpperBound(this.Item)+1]=this.m_docidreferenceassociation
+this.Item[UpperBound(this.Item)+1]=this.m_abcc
+this.Item[UpperBound(this.Item)+1]=this.m_converetedmanualtransactions
+this.Item[UpperBound(this.Item)+1]=this.m_open_awards_os_pymts
+this.Item[UpperBound(this.Item)+1]=this.m_form67information
+this.Item[UpperBound(this.Item)+1]=this.m_claimsnotcodedreport
+this.Item[UpperBound(this.Item)+1]=this.m_t5reviewreports
+end on
+
+on m_reports.destroy
+call super::destroy
+destroy(this.m_claimdisposition)
+destroy(this.m_coupreports)
+destroy(this.m_statustracking)
+destroy(this.m_paymentreports)
+destroy(this.m_costallocatedtogroupreserve)
+destroy(this.m_claimsadjudicated)
+destroy(this.m_formofelectionadjudicatedclaims)
+destroy(this.m_overduereports)
+destroy(this.m_nonimagedfilesloggedout)
+destroy(this.m_claimscreated)
+destroy(this.m_overpaymentsummaryreport)
+destroy(this.m_advancesummaryreport)
+destroy(this.m_caseload)
+destroy(this.m_pensionreports)
+destroy(this.m_claimaging)
+destroy(this.m_adjudicationprofile)
+destroy(this.m_rehabplans)
+destroy(this.m_casemanagement)
+destroy(this.m_employerslatefilingf67s)
+destroy(this.m_annuityreports)
+destroy(this.m_costofclaimsstatements)
+destroy(this.m_paymentprocessingreports)
+destroy(this.m_chequeinquiry)
+destroy(this.m_t5recipientdetails)
+destroy(this.m_abandonedmedicalaidreport)
+destroy(this.m_nbmsnbcapaymentsreport)
+destroy(this.m_nbmsnbcaglpostings)
+destroy(this.m_deleteddocuments)
+destroy(this.m_survivorsspecialpayment)
+destroy(this.m_docidreferenceassociation)
+destroy(this.m_abcc)
+destroy(this.m_converetedmanualtransactions)
+destroy(this.m_open_awards_os_pymts)
+destroy(this.m_form67information)
+destroy(this.m_claimsnotcodedreport)
+destroy(this.m_t5reviewreports)
+end on
+
+type m_claimdisposition from menu within m_reports
+m_bybenefitenddate m_bybenefitenddate
+m_bydispositionentereddate m_bydispositionentereddate
+end type
+
+on m_claimdisposition.create
+call super::create
+this.text = "&Claim Disposition"
+this.microhelp = "Claim Disposition Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_bybenefitenddate=create m_bybenefitenddate
+this.m_bydispositionentereddate=create m_bydispositionentereddate
+this.Item[UpperBound(this.Item)+1]=this.m_bybenefitenddate
+this.Item[UpperBound(this.Item)+1]=this.m_bydispositionentereddate
+end on
+
+on m_claimdisposition.destroy
+call super::destroy
+destroy(this.m_bybenefitenddate)
+destroy(this.m_bydispositionentereddate)
+end on
+
+type m_bybenefitenddate from menu within m_claimdisposition
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheetWithParm(w_disposition,1,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_bybenefitenddate.create
+call super::create
+this.text = "By &Benefit End Date"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_bybenefitenddate.destroy
+call super::destroy
+end on
+
+type m_bydispositionentereddate from menu within m_claimdisposition
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheetWithParm(w_disposition,2,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_bydispositionentereddate.create
+call super::create
+this.text = "By &Disposition Entered Date"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_bydispositionentereddate.destroy
+call super::destroy
+end on
+
+type m_coupreports from menu within m_reports
+m_coupaging m_coupaging
+m_mailpackageerrorreport m_mailpackageerrorreport
+m_claimstatuschangeerrorreport m_claimstatuschangeerrorreport
+m_preadjclaimsinmaster m_preadjclaimsinmaster
+m_mailpackagestatisticsreport m_mailpackagestatisticsreport
+end type
+
+on m_coupreports.create
+call super::create
+this.text = "C&oup Reports"
+this.microhelp = "Coup Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_coupaging=create m_coupaging
+this.m_mailpackageerrorreport=create m_mailpackageerrorreport
+this.m_claimstatuschangeerrorreport=create m_claimstatuschangeerrorreport
+this.m_preadjclaimsinmaster=create m_preadjclaimsinmaster
+this.m_mailpackagestatisticsreport=create m_mailpackagestatisticsreport
+this.Item[UpperBound(this.Item)+1]=this.m_coupaging
+this.Item[UpperBound(this.Item)+1]=this.m_mailpackageerrorreport
+this.Item[UpperBound(this.Item)+1]=this.m_claimstatuschangeerrorreport
+this.Item[UpperBound(this.Item)+1]=this.m_preadjclaimsinmaster
+this.Item[UpperBound(this.Item)+1]=this.m_mailpackagestatisticsreport
+end on
+
+on m_coupreports.destroy
+call super::destroy
+destroy(this.m_coupaging)
+destroy(this.m_mailpackageerrorreport)
+destroy(this.m_claimstatuschangeerrorreport)
+destroy(this.m_preadjclaimsinmaster)
+destroy(this.m_mailpackagestatisticsreport)
+end on
+
+type m_coupaging from menu within m_coupreports
+end type
+
+event clicked;If ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_coup_age_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_coupaging.create
+call super::create
+this.text = "Coup &Aging"
+this.microhelp = "Coup Aging Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_coupaging.destroy
+call super::destroy
+end on
+
+type m_mailpackageerrorreport from menu within m_coupreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_mail_package_error_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_mailpackageerrorreport.create
+call super::create
+this.text = "&Mail Package Error Report"
+this.microhelp = "Report by Claim Manager of Auto Letter Problems"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mailpackageerrorreport.destroy
+call super::destroy
+end on
+
+type m_claimstatuschangeerrorreport from menu within m_coupreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_claim_status_change_error_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_claimstatuschangeerrorreport.create
+call super::create
+this.text = "&Claim Status Change Error Report"
+this.microhelp = "Report by Claim Manager of Automation Problems"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimstatuschangeerrorreport.destroy
+call super::destroy
+end on
+
+type m_preadjclaimsinmaster from menu within m_coupreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_unassigned_preadj_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_preadjclaimsinmaster.create
+call super::create
+this.text = "&Pre-Adjudication Claims Only in Master"
+this.microhelp = "Pre-Adjudication Claims Only in a Master Folder (Unassigned)"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_preadjclaimsinmaster.destroy
+call super::destroy
+end on
+
+type m_mailpackagestatisticsreport from menu within m_coupreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_mail_package_statistics_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_mailpackagestatisticsreport.create
+call super::create
+this.text = "Mail &Package Statistics &Report"
+this.microhelp = "Summary by year of Packages and Letters Printed"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mailpackagestatisticsreport.destroy
+call super::destroy
+end on
+
+type m_statustracking from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_status_tracking,ParentWindow,0,Layered!)
+Else
+	Beep(2) 
+End If
+end event
+
+on m_statustracking.create
+call super::create
+this.text = "&Status Tracking"
+this.microhelp = "Status Tracking Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_statustracking.destroy
+call super::destroy
+end on
+
+type m_paymentreports from menu within m_reports
+m_scheduledpayments m_scheduledpayments
+m_ltdpayments m_ltdpayments
+m_duplicatepaymentexceptionreport m_duplicatepaymentexceptionreport
+m_unpaidaccounts m_unpaidaccounts
+m_invoicelist m_invoicelist
+m_awardsscheduledtobecompleted m_awardsscheduledtobecompleted
+m_firstbenefitcheque m_firstbenefitcheque
+m_periodicawardcontrol m_periodicawardcontrol
+m_rejectedclaimswithpayments m_rejectedclaimswithpayments
+m_ungroupedpaymentsforauthorizationreport m_ungroupedpaymentsforauthorizationreport
+end type
+
+on m_paymentreports.create
+call super::create
+this.text = "&Payment Reports"
+this.microhelp = "Display list of payment related reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_scheduledpayments=create m_scheduledpayments
+this.m_ltdpayments=create m_ltdpayments
+this.m_duplicatepaymentexceptionreport=create m_duplicatepaymentexceptionreport
+this.m_unpaidaccounts=create m_unpaidaccounts
+this.m_invoicelist=create m_invoicelist
+this.m_awardsscheduledtobecompleted=create m_awardsscheduledtobecompleted
+this.m_firstbenefitcheque=create m_firstbenefitcheque
+this.m_periodicawardcontrol=create m_periodicawardcontrol
+this.m_rejectedclaimswithpayments=create m_rejectedclaimswithpayments
+this.m_ungroupedpaymentsforauthorizationreport=create m_ungroupedpaymentsforauthorizationreport
+this.Item[UpperBound(this.Item)+1]=this.m_scheduledpayments
+this.Item[UpperBound(this.Item)+1]=this.m_ltdpayments
+this.Item[UpperBound(this.Item)+1]=this.m_duplicatepaymentexceptionreport
+this.Item[UpperBound(this.Item)+1]=this.m_unpaidaccounts
+this.Item[UpperBound(this.Item)+1]=this.m_invoicelist
+this.Item[UpperBound(this.Item)+1]=this.m_awardsscheduledtobecompleted
+this.Item[UpperBound(this.Item)+1]=this.m_firstbenefitcheque
+this.Item[UpperBound(this.Item)+1]=this.m_periodicawardcontrol
+this.Item[UpperBound(this.Item)+1]=this.m_rejectedclaimswithpayments
+this.Item[UpperBound(this.Item)+1]=this.m_ungroupedpaymentsforauthorizationreport
+end on
+
+on m_paymentreports.destroy
+call super::destroy
+destroy(this.m_scheduledpayments)
+destroy(this.m_ltdpayments)
+destroy(this.m_duplicatepaymentexceptionreport)
+destroy(this.m_unpaidaccounts)
+destroy(this.m_invoicelist)
+destroy(this.m_awardsscheduledtobecompleted)
+destroy(this.m_firstbenefitcheque)
+destroy(this.m_periodicawardcontrol)
+destroy(this.m_rejectedclaimswithpayments)
+destroy(this.m_ungroupedpaymentsforauthorizationreport)
+end on
+
+type m_scheduledpayments from menu within m_paymentreports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_scheduled_payments,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_scheduledpayments.create
+call super::create
+this.text = "&Scheduled Payments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_scheduledpayments.destroy
+call super::destroy
+end on
+
+type m_ltdpayments from menu within m_paymentreports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_ltd_payments,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_ltdpayments.create
+call super::create
+this.text = "&LTD Payments"
+this.microhelp = "View LTD payments that were processed for any specified period"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ltdpayments.destroy
+call super::destroy
+end on
+
+type m_duplicatepaymentexceptionreport from menu within m_paymentreports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_possible_duplicate_payments_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_duplicatepaymentexceptionreport.create
+call super::create
+this.text = "Duplicate Payment Exception Report"
+this.microhelp = "Exception report identifying possible duplicate payments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_duplicatepaymentexceptionreport.destroy
+call super::destroy
+end on
+
+type m_unpaidaccounts from menu within m_paymentreports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_unpaid_accounts,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_unpaidaccounts.create
+call super::create
+this.text = "&Unpaid Accounts"
+this.microhelp = "List of Unpaid Accounts in Selected Category"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_unpaidaccounts.destroy
+call super::destroy
+end on
+
+type m_invoicelist from menu within m_paymentreports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	OpenSheet(w_duplicate_invoice,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_invoicelist.create
+call super::create
+this.text = "&Invoice List"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_invoicelist.destroy
+call super::destroy
+end on
+
+type m_awardsscheduledtobecompleted from menu within m_paymentreports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_completed_awards_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+
+end on
+
+on m_awardsscheduledtobecompleted.create
+call super::create
+this.text = "&Awards Scheduled to be Completed"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_awardsscheduledtobecompleted.destroy
+call super::destroy
+end on
+
+type m_firstbenefitcheque from menu within m_paymentreports
+end type
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_pay_fin_claim,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end event
+
+on m_firstbenefitcheque.create
+call super::create
+this.text = "First Benefit Cheque"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_firstbenefitcheque.destroy
+call super::destroy
+end on
+
+type m_periodicawardcontrol from menu within m_paymentreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_periodic_award_control,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_periodicawardcontrol.create
+call super::create
+this.text = "Periodic Award Control"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_periodicawardcontrol.destroy
+call super::destroy
+end on
+
+type m_rejectedclaimswithpayments from menu within m_paymentreports
+event create ( )
+event destroy ( )
+end type
+
+on m_rejectedclaimswithpayments.create
+call super::create
+this.text = "Rejected Claims with Payments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rejectedclaimswithpayments.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_rejected_claims_payments,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+type m_ungroupedpaymentsforauthorizationreport from menu within m_paymentreports
+end type
+
+on m_ungroupedpaymentsforauthorizationreport.create
+call super::create
+this.text = "Ungrouped Payments for Authorization Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ungroupedpaymentsforauthorizationreport.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_ungrouped_payments,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+type m_costallocatedtogroupreserve from menu within m_reports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_charge_to_group_reserve,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_costallocatedtogroupreserve.create
+call super::create
+this.text = "Cost &Allocated to Group/Reserve"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_costallocatedtogroupreserve.destroy
+call super::destroy
+end on
+
+type m_claimsadjudicated from menu within m_reports
+m_non-pension m_non-pension
+m_pension m_pension
+end type
+
+on m_claimsadjudicated.create
+call super::create
+this.text = "C&laims Adjudicated"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_non-pension=create m_non-pension
+this.m_pension=create m_pension
+this.Item[UpperBound(this.Item)+1]=this.m_non-pension
+this.Item[UpperBound(this.Item)+1]=this.m_pension
+end on
+
+on m_claimsadjudicated.destroy
+call super::destroy
+destroy(this.m_non-pension)
+destroy(this.m_pension)
+end on
+
+type m_non-pension from menu within m_claimsadjudicated
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_claims_adjudicated,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_non-pension.create
+call super::create
+this.text = "&Non-Pension"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_non-pension.destroy
+call super::destroy
+end on
+
+type m_pension from menu within m_claimsadjudicated
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_pension_claims_adjudicated,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_pension.create
+call super::create
+this.text = "&Pension"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pension.destroy
+call super::destroy
+end on
+
+type m_formofelectionadjudicatedclaims from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_foe_claims_adjudicated,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_formofelectionadjudicatedclaims.create
+call super::create
+this.text = "&Form of Election Adjudicated Claims"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_formofelectionadjudicatedclaims.destroy
+call super::destroy
+end on
+
+type m_overduereports from menu within m_reports
+m_12weekreview m_12weekreview
+m_annualreview m_annualreview
+end type
+
+on m_overduereports.create
+call super::create
+this.text = "&Over Due Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_12weekreview=create m_12weekreview
+this.m_annualreview=create m_annualreview
+this.Item[UpperBound(this.Item)+1]=this.m_12weekreview
+this.Item[UpperBound(this.Item)+1]=this.m_annualreview
+end on
+
+on m_overduereports.destroy
+call super::destroy
+destroy(this.m_12weekreview)
+destroy(this.m_annualreview)
+end on
+
+type m_12weekreview from menu within m_overduereports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_overdue_12_week_review,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_12weekreview.create
+call super::create
+this.text = "12 Week Review"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_12weekreview.destroy
+call super::destroy
+end on
+
+type m_annualreview from menu within m_overduereports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_overdue_annual_review,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_annualreview.create
+call super::create
+this.text = "Annual Review"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_annualreview.destroy
+call super::destroy
+end on
+
+type m_nonimagedfilesloggedout from menu within m_reports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_non_imaged_files_logged_out_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_nonimagedfilesloggedout.create
+call super::create
+this.text = "&Non Imaged Files Logged Out"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_nonimagedfilesloggedout.destroy
+call super::destroy
+end on
+
+type m_claimscreated from menu within m_reports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_claims_created_by_region,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_claimscreated.create
+call super::create
+this.text = "Cla&ims Created by Region"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimscreated.destroy
+call super::destroy
+end on
+
+type m_overpaymentsummaryreport from menu within m_reports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_overpayment_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end on
+
+on m_overpaymentsummaryreport.create
+call super::create
+this.text = "O&verpayment Summary Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_overpaymentsummaryreport.destroy
+call super::destroy
+end on
+
+type m_advancesummaryreport from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_outstanding_advances_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_advancesummaryreport.create
+call super::create
+this.text = "Ad&vance Summary Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_advancesummaryreport.destroy
+call super::destroy
+end on
+
+type m_caseload from menu within m_reports
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_case_load,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end on
+
+on m_caseload.create
+call super::create
+this.text = "Ca&se Load"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_caseload.destroy
+call super::destroy
+end on
+
+type m_pensionreports from menu within m_reports
+m_pensionanniversary m_pensionanniversary
+m_survivorsanniversaryreport m_survivorsanniversaryreport
+m_p81survivingspouseattaining65 m_p81survivingspouseattaining65
+m_3 m_3
+m_dependentchildrenbybirthdate m_dependentchildrenbybirthdate
+m_dependentchildrenover18 m_dependentchildrenover18
+end type
+
+on m_pensionreports.create
+call super::create
+this.text = "Pension Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_pensionanniversary=create m_pensionanniversary
+this.m_survivorsanniversaryreport=create m_survivorsanniversaryreport
+this.m_p81survivingspouseattaining65=create m_p81survivingspouseattaining65
+this.m_3=create m_3
+this.m_dependentchildrenbybirthdate=create m_dependentchildrenbybirthdate
+this.m_dependentchildrenover18=create m_dependentchildrenover18
+this.Item[UpperBound(this.Item)+1]=this.m_pensionanniversary
+this.Item[UpperBound(this.Item)+1]=this.m_survivorsanniversaryreport
+this.Item[UpperBound(this.Item)+1]=this.m_p81survivingspouseattaining65
+this.Item[UpperBound(this.Item)+1]=this.m_3
+this.Item[UpperBound(this.Item)+1]=this.m_dependentchildrenbybirthdate
+this.Item[UpperBound(this.Item)+1]=this.m_dependentchildrenover18
+end on
+
+on m_pensionreports.destroy
+call super::destroy
+destroy(this.m_pensionanniversary)
+destroy(this.m_survivorsanniversaryreport)
+destroy(this.m_p81survivingspouseattaining65)
+destroy(this.m_3)
+destroy(this.m_dependentchildrenbybirthdate)
+destroy(this.m_dependentchildrenover18)
+end on
+
+type m_pensionanniversary from menu within m_pensionreports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheetWithParm(w_pension_reports,"d_pension_anniversary_report",ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_pensionanniversary.create
+call super::create
+this.text = "&Pension Anniversary"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pensionanniversary.destroy
+call super::destroy
+end on
+
+type m_survivorsanniversaryreport from menu within m_pensionreports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheetWithParm(w_pension_reports,"d_survivors_anniversary_report",ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_survivorsanniversaryreport.create
+call super::create
+this.text = "&Survivors Anniversary"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_survivorsanniversaryreport.destroy
+call super::destroy
+end on
+
+type m_p81survivingspouseattaining65 from menu within m_pensionreports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheetWithParm(w_pension_reports,"d_p81_ss_attaining_65_report",ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_p81survivingspouseattaining65.create
+call super::create
+this.text = "P81 S&urviving Spouse Attaining 65"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_p81survivingspouseattaining65.destroy
+call super::destroy
+end on
+
+type m_3 from menu within m_pensionreports
+end type
+
+on m_3.create
+call super::create
+this.text = "All S&urviving Spouse Attaining 65"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheetWithParm(w_pension_reports,"d_all_leg_ss_attaining_65_report",ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+type m_dependentchildrenbybirthdate from menu within m_pensionreports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheetWithParm(w_pension_reports,"d_dependent_child_by_birthdate_report",ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_dependentchildrenbybirthdate.create
+call super::create
+this.text = "&Dependent Children by Birth Date"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_dependentchildrenbybirthdate.destroy
+call super::destroy
+end on
+
+type m_dependentchildrenover18 from menu within m_pensionreports
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheetWithParm(w_pension_reports,"d_dependent_child_over_18_report",ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end on
+
+on m_dependentchildrenover18.create
+call super::create
+this.text = "D&ependent Children Over 18"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_dependentchildrenover18.destroy
+call super::destroy
+end on
+
+type m_claimaging from menu within m_reports
+end type
+
+on clicked;	IF SQLCA.ServiceAvailable() THEN
+		OpenSheet(w_aging_profile,ParentWindow,0,Layered!)
+	ELSE
+		Beep(2)
+	END IF
+end on
+
+on m_claimaging.create
+call super::create
+this.text = "Claim Aging Profile"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimaging.destroy
+call super::destroy
+end on
+
+type m_adjudicationprofile from menu within m_reports
+end type
+
+on clicked;	IF SQLCA.ServiceAvailable() THEN
+		OpenSheet(w_adjudication_profile,ParentWindow,0,Layered!)
+	ELSE
+		Beep(2)
+	END IF
+end on
+
+on m_adjudicationprofile.create
+call super::create
+this.text = "Adjudication Profile"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_adjudicationprofile.destroy
+call super::destroy
+end on
+
+type m_rehabplans from menu within m_reports
+m_tasklist m_tasklist
+m_taskcompletion m_taskcompletion
+m_taskauthorization m_taskauthorization
+end type
+
+on m_rehabplans.create
+call super::create
+this.text = "Rehab Plans"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_tasklist=create m_tasklist
+this.m_taskcompletion=create m_taskcompletion
+this.m_taskauthorization=create m_taskauthorization
+this.Item[UpperBound(this.Item)+1]=this.m_tasklist
+this.Item[UpperBound(this.Item)+1]=this.m_taskcompletion
+this.Item[UpperBound(this.Item)+1]=this.m_taskauthorization
+end on
+
+on m_rehabplans.destroy
+call super::destroy
+destroy(this.m_tasklist)
+destroy(this.m_taskcompletion)
+destroy(this.m_taskauthorization)
+end on
+
+type m_tasklist from menu within m_rehabplans
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_task_list_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_tasklist.create
+call super::create
+this.text = "Task List"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tasklist.destroy
+call super::destroy
+end on
+
+type m_taskcompletion from menu within m_rehabplans
+end type
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_task_completion_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+End IF
+end event
+
+on m_taskcompletion.create
+call super::create
+this.text = "Task Completion"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_taskcompletion.destroy
+call super::destroy
+end on
+
+type m_taskauthorization from menu within m_rehabplans
+end type
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_task_authorization_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+End IF
+end event
+
+on m_taskauthorization.create
+call super::create
+this.text = "Task Authorization"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_taskauthorization.destroy
+call super::destroy
+end on
+
+type m_casemanagement from menu within m_reports
+m_activecmwithmorethan70orlesst m_activecmwithmorethan70orlesst
+m_activewithagegreaterthan50 m_activewithagegreaterthan50
+end type
+
+on m_casemanagement.create
+call super::create
+this.text = "Case Management"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_activecmwithmorethan70orlesst=create m_activecmwithmorethan70orlesst
+this.m_activewithagegreaterthan50=create m_activewithagegreaterthan50
+this.Item[UpperBound(this.Item)+1]=this.m_activecmwithmorethan70orlesst
+this.Item[UpperBound(this.Item)+1]=this.m_activewithagegreaterthan50
+end on
+
+on m_casemanagement.destroy
+call super::destroy
+destroy(this.m_activecmwithmorethan70orlesst)
+destroy(this.m_activewithagegreaterthan50)
+end on
+
+type m_activecmwithmorethan70orlesst from menu within m_casemanagement
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_case_manage_active,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_activecmwithmorethan70orlesst.create
+call super::create
+this.text = "Active CM with more than 70 or less than 50"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_activecmwithmorethan70orlesst.destroy
+call super::destroy
+end on
+
+type m_activewithagegreaterthan50 from menu within m_casemanagement
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_age_great_50,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_activewithagegreaterthan50.create
+call super::create
+this.text = "Active Claims by Age Selected"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_activewithagegreaterthan50.destroy
+call super::destroy
+end on
+
+type m_employerslatefilingf67s from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_late_filing_f67_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_employerslatefilingf67s.create
+call super::create
+this.text = "Employers Late Filing F67~'s"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_employerslatefilingf67s.destroy
+call super::destroy
+end on
+
+type m_annuityreports from menu within m_reports
+m_byclaim m_byclaim
+m_summarizedtxns m_summarizedtxns
+m_appliedinterestsummary m_appliedinterestsummary
+end type
+
+on m_annuityreports.create
+call super::create
+this.text = "Annuity Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_byclaim=create m_byclaim
+this.m_summarizedtxns=create m_summarizedtxns
+this.m_appliedinterestsummary=create m_appliedinterestsummary
+this.Item[UpperBound(this.Item)+1]=this.m_byclaim
+this.Item[UpperBound(this.Item)+1]=this.m_summarizedtxns
+this.Item[UpperBound(this.Item)+1]=this.m_appliedinterestsummary
+end on
+
+on m_annuityreports.destroy
+call super::destroy
+destroy(this.m_byclaim)
+destroy(this.m_summarizedtxns)
+destroy(this.m_appliedinterestsummary)
+end on
+
+type m_byclaim from menu within m_annuityreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_annuity_sub_ledger_individuals,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_byclaim.create
+call super::create
+this.text = "Sub-Ledger"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_byclaim.destroy
+call super::destroy
+end on
+
+type m_summarizedtxns from menu within m_annuityreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_annuity_sub_ledger_summary,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_summarizedtxns.create
+call super::create
+this.text = "Sub-Ledger G/L Distribution"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_summarizedtxns.destroy
+call super::destroy
+end on
+
+type m_appliedinterestsummary from menu within m_annuityreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_annuity_interest_summary,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_appliedinterestsummary.create
+call super::create
+this.text = "Applied Interest Summary"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_appliedinterestsummary.destroy
+call super::destroy
+end on
+
+type m_costofclaimsstatements from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheetwithparm(w_cost_of_claims_prod,"LIMITED",ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_costofclaimsstatements.create
+call super::create
+this.text = "Cost Of Claims Statements"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_costofclaimsstatements.destroy
+call super::destroy
+end on
+
+type m_paymentprocessingreports from menu within m_reports
+m_paymentregisters m_paymentregisters
+m_paymentawardauto-batchreport m_paymentawardauto-batchreport
+m_paymentbalancing1 m_paymentbalancing1
+m_medicalaidvouchers m_medicalaidvouchers
+m_processedbatchesbytype m_processedbatchesbytype
+m_gltransactions m_gltransactions
+m_directdepositvouchers m_directdepositvouchers
+end type
+
+on m_paymentprocessingreports.create
+call super::create
+this.text = "Payment Processing Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_paymentregisters=create m_paymentregisters
+this.m_paymentawardauto-batchreport=create m_paymentawardauto-batchreport
+this.m_paymentbalancing1=create m_paymentbalancing1
+this.m_medicalaidvouchers=create m_medicalaidvouchers
+this.m_processedbatchesbytype=create m_processedbatchesbytype
+this.m_gltransactions=create m_gltransactions
+this.m_directdepositvouchers=create m_directdepositvouchers
+this.Item[UpperBound(this.Item)+1]=this.m_paymentregisters
+this.Item[UpperBound(this.Item)+1]=this.m_paymentawardauto-batchreport
+this.Item[UpperBound(this.Item)+1]=this.m_paymentbalancing1
+this.Item[UpperBound(this.Item)+1]=this.m_medicalaidvouchers
+this.Item[UpperBound(this.Item)+1]=this.m_processedbatchesbytype
+this.Item[UpperBound(this.Item)+1]=this.m_gltransactions
+this.Item[UpperBound(this.Item)+1]=this.m_directdepositvouchers
+end on
+
+on m_paymentprocessingreports.destroy
+call super::destroy
+destroy(this.m_paymentregisters)
+destroy(this.m_paymentawardauto-batchreport)
+destroy(this.m_paymentbalancing1)
+destroy(this.m_medicalaidvouchers)
+destroy(this.m_processedbatchesbytype)
+destroy(this.m_gltransactions)
+destroy(this.m_directdepositvouchers)
+end on
+
+type m_paymentregisters from menu within m_paymentprocessingreports
+end type
+
+on m_paymentregisters.create
+call super::create
+this.text = "Payment Registers"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paymentregisters.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_payment_cheque_register,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+
+end event
+
+type m_paymentawardauto-batchreport from menu within m_paymentprocessingreports
+end type
+
+event clicked;/*	Note: This item is invisible and so is it's toolbaritem.
+	This is because we don't want this option on every sheet.
+	Only on sheets where the item is expected and secured.
+*/
+If SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_payment_processing_autobatch,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_paymentawardauto-batchreport.create
+call super::create
+this.text = "Payment/Award Batch Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paymentawardauto-batchreport.destroy
+call super::destroy
+end on
+
+type m_paymentbalancing1 from menu within m_paymentprocessingreports
+end type
+
+on m_paymentbalancing1.create
+call super::create
+this.text = "Payment and Award Processed"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_payment_processing_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+
+end event
+
+on m_paymentbalancing1.destroy
+call super::destroy
+end on
+
+type m_medicalaidvouchers from menu within m_paymentprocessingreports
+end type
+
+on m_medicalaidvouchers.create
+call super::create
+this.text = "Medical Aid Vouchers"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_med_aid_vouchers,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_medicalaidvouchers.destroy
+call super::destroy
+end on
+
+type m_processedbatchesbytype from menu within m_paymentprocessingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_batch_type_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_processedbatchesbytype.create
+call super::create
+this.text = "Processed Batches By Type"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_processedbatchesbytype.destroy
+call super::destroy
+end on
+
+type m_gltransactions from menu within m_paymentprocessingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_gl_txn_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_gltransactions.create
+call super::create
+this.text = "Claim Cash Receipt Transactions"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_gltransactions.destroy
+call super::destroy
+end on
+
+type m_directdepositvouchers from menu within m_paymentprocessingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_direct_deposit_vouchers_cmwb,ParentWindow,0,Layered!)
+	//OpenSheet(w_direct_deposit_vouchers,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_directdepositvouchers.create
+call super::create
+this.text = "Direct Deposit Vouchers"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_directdepositvouchers.destroy
+call super::destroy
+end on
+
+type m_chequeinquiry from menu within m_reports
+end type
+
+on m_chequeinquiry.create
+call super::create
+this.text = "&Cheque Inquiry"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_cheque_inquiry,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_chequeinquiry.destroy
+call super::destroy
+end on
+
+type m_t5recipientdetails from menu within m_reports
+end type
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_t5_recipient_details,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_t5recipientdetails.create
+call super::create
+this.text = "T5 Recipient Details"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_t5recipientdetails.destroy
+call super::destroy
+end on
+
+type m_abandonedmedicalaidreport from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_abandoned_medaid_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_abandonedmedicalaidreport.create
+call super::create
+this.text = "Abandoned Medical Aid Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_abandonedmedicalaidreport.destroy
+call super::destroy
+end on
+
+type m_nbmsnbcapaymentsreport from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_nbms_nbca_payments,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_nbmsnbcapaymentsreport.create
+call super::create
+this.text = "NBMS/NBCA Payments Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_nbmsnbcapaymentsreport.destroy
+call super::destroy
+end on
+
+type m_nbmsnbcaglpostings from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_nbms_nbca_gl_postings,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_nbmsnbcaglpostings.create
+call super::create
+this.text = "NBMS/NBCA GL Postings"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_nbmsnbcaglpostings.destroy
+call super::destroy
+end on
+
+type m_deleteddocuments from menu within m_reports
+event create ( )
+event destroy ( )
+end type
+
+on m_deleteddocuments.create
+call super::create
+this.text = "Deleted Documents"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_deleteddocuments.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_deleted_documents,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+type m_survivorsspecialpayment from menu within m_reports
+m_specialsurvpaidtodate m_specialsurvpaidtodate
+end type
+
+on m_survivorsspecialpayment.create
+call super::create
+this.text = "&Survivor~'s Special Payment Reports"
+this.microhelp = "Reports relating to Special Survivor One Time Payments."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_specialsurvpaidtodate=create m_specialsurvpaidtodate
+this.Item[UpperBound(this.Item)+1]=this.m_specialsurvpaidtodate
+end on
+
+on m_survivorsspecialpayment.destroy
+call super::destroy
+destroy(this.m_specialsurvpaidtodate)
+end on
+
+type m_specialsurvpaidtodate from menu within m_survivorsspecialpayment
+end type
+
+on m_specialsurvpaidtodate.create
+call super::create
+this.text = "Special Survivors Paid to Date"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_survivor_payment_utd,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_specialsurvpaidtodate.destroy
+call super::destroy
+end on
+
+type m_docidreferenceassociation from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_docid_reference,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_docidreferenceassociation.create
+call super::create
+this.text = "Docid/Reference Association"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_docidreferenceassociation.destroy
+call super::destroy
+end on
+
+type m_abcc from menu within m_reports
+m_eligibilitydatareport m_eligibilitydatareport
+m_eligibilityexporterrors m_eligibilityexporterrors
+m_prescription_report m_prescription_report
+m_dinreports m_dinreports
+m_invoicereconciliationreport m_invoicereconciliationreport
+end type
+
+on m_abcc.create
+call super::create
+this.text = "Bluecross"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_eligibilitydatareport=create m_eligibilitydatareport
+this.m_eligibilityexporterrors=create m_eligibilityexporterrors
+this.m_prescription_report=create m_prescription_report
+this.m_dinreports=create m_dinreports
+this.m_invoicereconciliationreport=create m_invoicereconciliationreport
+this.Item[UpperBound(this.Item)+1]=this.m_eligibilitydatareport
+this.Item[UpperBound(this.Item)+1]=this.m_eligibilityexporterrors
+this.Item[UpperBound(this.Item)+1]=this.m_prescription_report
+this.Item[UpperBound(this.Item)+1]=this.m_dinreports
+this.Item[UpperBound(this.Item)+1]=this.m_invoicereconciliationreport
+end on
+
+on m_abcc.destroy
+call super::destroy
+destroy(this.m_eligibilitydatareport)
+destroy(this.m_eligibilityexporterrors)
+destroy(this.m_prescription_report)
+destroy(this.m_dinreports)
+destroy(this.m_invoicereconciliationreport)
+end on
+
+type m_eligibilitydatareport from menu within m_abcc
+end type
+
+on m_eligibilitydatareport.create
+call super::create
+this.text = "Eligibility Data Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_eligibilitydatareport.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_eligibility_export_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+type m_eligibilityexporterrors from menu within m_abcc
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_registration_error_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_eligibilityexporterrors.create
+call super::create
+this.text = "Eligibility Export Errors"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_eligibilityexporterrors.destroy
+call super::destroy
+end on
+
+type m_prescription_report from menu within m_abcc
+event clicked ( )
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_prescription_payment_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_prescription_report.create
+call super::create
+this.text = "Prescription Payment Maintenance Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_prescription_report.destroy
+call super::destroy
+end on
+
+type m_dinreports from menu within m_abcc
+event clicked ( )
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_din_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_dinreports.create
+call super::create
+this.text = "DIN Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_dinreports.destroy
+call super::destroy
+end on
+
+type m_invoicereconciliationreport from menu within m_abcc
+event clicked ( )
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_invoice_reconciliation_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_invoicereconciliationreport.create
+call super::create
+this.text = "Invoice Reconciliation Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_invoicereconciliationreport.destroy
+call super::destroy
+end on
+
+type m_converetedmanualtransactions from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_converted_manuals,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End IF
+end event
+
+on m_converetedmanualtransactions.create
+call super::create
+this.text = "Converted Manual Transactions"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_converetedmanualtransactions.destroy
+call super::destroy
+end on
+
+type m_open_awards_os_pymts from menu within m_reports
+end type
+
+on m_open_awards_os_pymts.create
+call super::create
+this.text = "Scheduled Payments to Providers/Recipients"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_open_awards_os_pymts.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_open_awards_unproc_pymts,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+type m_form67information from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_electronic_form67_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_form67information.create
+call super::create
+this.text = "Electronic Form67 Filing Stats"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_form67information.destroy
+call super::destroy
+end on
+
+type m_claimsnotcodedreport from menu within m_reports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_claims_not_coded_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_claimsnotcodedreport.create
+call super::create
+this.text = "Potential NLT Claims for NWISP Extract"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimsnotcodedreport.destroy
+call super::destroy
+end on
+
+type m_t5reviewreports from menu within m_reports
+end type
+
+on m_t5reviewreports.create
+call super::create
+this.text = "T5 Review Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_t5reviewreports.destroy
+call super::destroy
+end on
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_t5annualreport, ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+type m_window from menu within m_ancestor
+m_cascade m_cascade
+m_layered m_layered
+m_tile m_tile
+end type
+
+on m_window.create
+call super::create
+this.text = "&Window"
+this.shifttoright = true
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_cascade=create m_cascade
+this.m_layered=create m_layered
+this.m_tile=create m_tile
+this.Item[UpperBound(this.Item)+1]=this.m_cascade
+this.Item[UpperBound(this.Item)+1]=this.m_layered
+this.Item[UpperBound(this.Item)+1]=this.m_tile
+end on
+
+on m_window.destroy
+call super::destroy
+destroy(this.m_cascade)
+destroy(this.m_layered)
+destroy(this.m_tile)
+end on
+
+type m_cascade from menu within m_window
+end type
+
+on clicked;ParentWindow.ArrangeSheets(Cascade!)
+end on
+
+on m_cascade.create
+call super::create
+this.text = "&Cascade"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_layered from menu within m_window
+end type
+
+on clicked;ParentWindow.ArrangeSheets(Layer!)
+end on
+
+on m_layered.create
+call super::create
+this.text = "&Layer"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_layered.destroy
+call super::destroy
+end on
+
+type m_tile from menu within m_window
+end type
+
+on clicked;ParentWindow.ArrangeSheets(Tile!)
+end on
+
+on m_tile.create
+call super::create
+this.text = "&Tile"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_help from menu within m_ancestor
+m_contents m_contents
+m_-z m_-z
+m_aboutworkbench m_aboutworkbench
+end type
+
+on m_help.create
+call super::create
+this.text = "&Help"
+this.shifttoright = true
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_contents=create m_contents
+this.m_-z=create m_-z
+this.m_aboutworkbench=create m_aboutworkbench
+this.Item[UpperBound(this.Item)+1]=this.m_contents
+this.Item[UpperBound(this.Item)+1]=this.m_-z
+this.Item[UpperBound(this.Item)+1]=this.m_aboutworkbench
+end on
+
+on m_help.destroy
+call super::destroy
+destroy(this.m_contents)
+destroy(this.m_-z)
+destroy(this.m_aboutworkbench)
+end on
+
+type m_contents from menu within m_help
+end type
+
+on clicked;STRING ls_help_file
+
+/* Open the appropriate Help file and display its' index
+*/
+
+	
+	ls_help_file = gs_default_dir + 'cmwb.hlp'
+
+	IF CanACCESS(ls_help_file,0) < 0 THEN
+		MessageBox("System Error","Error locating help file...Please call the Help Desk!",StopSign!)
+	ELSE
+		ShowHelp (ls_help_file, Index!)
+	END IF
+
+
+
+end on
+
+on m_contents.create
+call super::create
+this.text = "&Contents"
+this.microhelp = "View Case Management WorkBench Help File"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_contents.destroy
+call super::destroy
+end on
+
+type m_-z from menu within m_help
+end type
+
+on m_-z.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-z.destroy
+call super::destroy
+end on
+
+type m_aboutworkbench from menu within m_help
+end type
+
+event clicked;Open(w_about)
+end event
+
+on m_aboutworkbench.create
+call super::create
+this.text = "&About Workbench..."
+this.microhelp = "View workbench version and development information"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_aboutworkbench.destroy
+call super::destroy
+end on
+
+type m_finance from menu within m_ancestor
+m_addmanualtxns m_addmanualtxns
+m_maintainmanualtxns m_maintainmanualtxns
+m_cocsummarybyglaccount m_cocsummarybyglaccount
+m_closepreviousperiod m_closepreviousperiod
+m_1 m_1
+m_maintainannuityinterest m_maintainannuityinterest
+m_bankreconciliation m_bankreconciliation
+m_auditingreports m_auditingreports
+m_t5processing m_t5processing
+m_2 m_2
+m_claimcostmaintenance m_claimcostmaintenance
+end type
+
+on m_finance.create
+call super::create
+this.visible = false
+this.text = "&Finance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_addmanualtxns=create m_addmanualtxns
+this.m_maintainmanualtxns=create m_maintainmanualtxns
+this.m_cocsummarybyglaccount=create m_cocsummarybyglaccount
+this.m_closepreviousperiod=create m_closepreviousperiod
+this.m_1=create m_1
+this.m_maintainannuityinterest=create m_maintainannuityinterest
+this.m_bankreconciliation=create m_bankreconciliation
+this.m_auditingreports=create m_auditingreports
+this.m_t5processing=create m_t5processing
+this.m_2=create m_2
+this.m_claimcostmaintenance=create m_claimcostmaintenance
+this.Item[UpperBound(this.Item)+1]=this.m_addmanualtxns
+this.Item[UpperBound(this.Item)+1]=this.m_maintainmanualtxns
+this.Item[UpperBound(this.Item)+1]=this.m_cocsummarybyglaccount
+this.Item[UpperBound(this.Item)+1]=this.m_closepreviousperiod
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_maintainannuityinterest
+this.Item[UpperBound(this.Item)+1]=this.m_bankreconciliation
+this.Item[UpperBound(this.Item)+1]=this.m_auditingreports
+this.Item[UpperBound(this.Item)+1]=this.m_t5processing
+this.Item[UpperBound(this.Item)+1]=this.m_2
+this.Item[UpperBound(this.Item)+1]=this.m_claimcostmaintenance
+end on
+
+on m_finance.destroy
+call super::destroy
+destroy(this.m_addmanualtxns)
+destroy(this.m_maintainmanualtxns)
+destroy(this.m_cocsummarybyglaccount)
+destroy(this.m_closepreviousperiod)
+destroy(this.m_1)
+destroy(this.m_maintainannuityinterest)
+destroy(this.m_bankreconciliation)
+destroy(this.m_auditingreports)
+destroy(this.m_t5processing)
+destroy(this.m_2)
+destroy(this.m_claimcostmaintenance)
+end on
+
+type m_addmanualtxns from menu within m_finance
+end type
+
+event clicked;/* This option is only available to finance.
+*/
+
+If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_add_manual_financial_trns,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_addmanualtxns.create
+call super::create
+this.text = "&Add Manual Txn~'s"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_addmanualtxns.destroy
+call super::destroy
+end on
+
+type m_maintainmanualtxns from menu within m_finance
+end type
+
+event clicked;/* This option is only available to finance.
+*/
+
+If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_maintain_manual_financial_trns,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintainmanualtxns.create
+call super::create
+this.text = "&Maintain Manual Txn~'s"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainmanualtxns.destroy
+call super::destroy
+end on
+
+type m_cocsummarybyglaccount from menu within m_finance
+event clicked ( )
+event create ( )
+event destroy ( )
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_coc_summary_by_gl_account,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_cocsummarybyglaccount.create
+call super::create
+this.text = "COC Summary by G/L Account"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cocsummarybyglaccount.destroy
+call super::destroy
+end on
+
+type m_closepreviousperiod from menu within m_finance
+end type
+
+on m_closepreviousperiod.create
+call super::create
+this.text = "Close &Previous Period"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;/*	This option closes the previous Cost of Claims Posting Period.
+*/
+
+INTEGER	li_return_code,					li_year,								li_month, li_rtn
+LONG		ll_current_date,					ll_previous_coc_period,			ll_current_coc_period
+LONG		ll_claim_no, ll_txn_unit_of_work_no
+STRING	ls_previous_coc_closed_flag,	ls_current_date, ls_txn_type_code, ls_module
+DATETIME	ldt_current_datetime
+
+N_PROCESS_RUN_STATUS ln_process_run_status
+
+/******************************************************************************************
+P10275 - Daytime Payment Processing
+- added new function call to prevent updating of tables used by PRODSVCS Payment Processing
+- new object N_PROCESS_RUN_STATUS is used to determine status of processes (in progress = Y/N)
+- '013' refers to the Close Coc Period menu item, '044' refers to the Payment Processing module
+******************************************************************************************/
+ln_process_run_status = Create N_PROCESS_RUN_STATUS
+
+li_rtn = ln_process_run_status.nf_in_progress('013','044','close of the CoC period',SQLCA)
+
+IF li_rtn = 1 THEN
+	// module is blocked
+	return
+END IF
+/******************************************************************************************/
+
+
+IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_close_previous_coc_period,ParentWindow,0,Layered!)
+ELSE
+	Beep(2) 
+END IF
+
+end event
+
+on m_closepreviousperiod.destroy
+call super::destroy
+end on
+
+type m_1 from menu within m_finance
+end type
+
+on m_1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_maintainannuityinterest from menu within m_finance
+end type
+
+event clicked;/* This option is only available to finance.
+*/
+
+If SQLCA.ServiceAvailable()  Then
+	OpenSheet(w_annuity_interest,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintainannuityinterest.create
+call super::create
+this.text = "Annuity Quarterly Interest Process"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainannuityinterest.destroy
+call super::destroy
+end on
+
+type m_bankreconciliation from menu within m_finance
+m_maintenance m_maintenance
+m_paymentverification m_paymentverification
+m_sendissuedcheques m_sendissuedcheques
+m_reconciledchequelistingreport m_reconciledchequelistingreport
+end type
+
+on m_bankreconciliation.create
+call super::create
+this.text = "&Bank Reconciliation"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_maintenance=create m_maintenance
+this.m_paymentverification=create m_paymentverification
+this.m_sendissuedcheques=create m_sendissuedcheques
+this.m_reconciledchequelistingreport=create m_reconciledchequelistingreport
+this.Item[UpperBound(this.Item)+1]=this.m_maintenance
+this.Item[UpperBound(this.Item)+1]=this.m_paymentverification
+this.Item[UpperBound(this.Item)+1]=this.m_sendissuedcheques
+this.Item[UpperBound(this.Item)+1]=this.m_reconciledchequelistingreport
+end on
+
+on m_bankreconciliation.destroy
+call super::destroy
+destroy(this.m_maintenance)
+destroy(this.m_paymentverification)
+destroy(this.m_sendissuedcheques)
+destroy(this.m_reconciledchequelistingreport)
+end on
+
+type m_maintenance from menu within m_bankreconciliation
+end type
+
+on m_maintenance.create
+call super::create
+this.text = "&Maintenance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_maintain_cheques,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintenance.destroy
+call super::destroy
+end on
+
+type m_paymentverification from menu within m_bankreconciliation
+end type
+
+on m_paymentverification.create
+call super::create
+this.text = "&Payment Verification"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_bank_reconcile_cheques,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_paymentverification.destroy
+call super::destroy
+end on
+
+type m_sendissuedcheques from menu within m_bankreconciliation
+end type
+
+on m_sendissuedcheques.create
+call super::create
+this.text = "&Send Issued Cheques"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_bank_reconciliation_extract,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_sendissuedcheques.destroy
+call super::destroy
+end on
+
+type m_reconciledchequelistingreport from menu within m_bankreconciliation
+end type
+
+on m_reconciledchequelistingreport.create
+call super::create
+this.text = "&Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_bank_reconciliation_reports,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+
+end event
+
+on m_reconciledchequelistingreport.destroy
+call super::destroy
+end on
+
+type m_auditingreports from menu within m_finance
+m_journalnoinquiry m_journalnoinquiry
+m_dailychequebalancing m_dailychequebalancing
+m_chequereprintaudit m_chequereprintaudit
+m_gltransfersummary m_gltransfersummary
+end type
+
+on m_auditingreports.create
+call super::create
+this.text = "A&uditing Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_journalnoinquiry=create m_journalnoinquiry
+this.m_dailychequebalancing=create m_dailychequebalancing
+this.m_chequereprintaudit=create m_chequereprintaudit
+this.m_gltransfersummary=create m_gltransfersummary
+this.Item[UpperBound(this.Item)+1]=this.m_journalnoinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_dailychequebalancing
+this.Item[UpperBound(this.Item)+1]=this.m_chequereprintaudit
+this.Item[UpperBound(this.Item)+1]=this.m_gltransfersummary
+end on
+
+on m_auditingreports.destroy
+call super::destroy
+destroy(this.m_journalnoinquiry)
+destroy(this.m_dailychequebalancing)
+destroy(this.m_chequereprintaudit)
+destroy(this.m_gltransfersummary)
+end on
+
+type m_journalnoinquiry from menu within m_auditingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_journal_number_inquiry,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_journalnoinquiry.create
+call super::create
+this.text = "&Journal No. Inquiry"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_journalnoinquiry.destroy
+call super::destroy
+end on
+
+type m_dailychequebalancing from menu within m_auditingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_daily_cheque_balancing_log,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_dailychequebalancing.create
+call super::create
+this.text = "&Daily Cheque Balancing"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_dailychequebalancing.destroy
+call super::destroy
+end on
+
+type m_chequereprintaudit from menu within m_auditingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_cheque_reprint_audit_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_chequereprintaudit.create
+call super::create
+this.text = "&Cheque Reprint Audit"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_chequereprintaudit.destroy
+call super::destroy
+end on
+
+type m_gltransfersummary from menu within m_auditingreports
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_gl_transfer_summary,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_gltransfersummary.create
+call super::create
+this.text = "&GL Transfer Summary"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_gltransfersummary.destroy
+call super::destroy
+end on
+
+type m_t5processing from menu within m_finance
+m_t5samplingreport m_t5samplingreport
+m_trusteeassignment m_trusteeassignment
+m_blanksinreport m_blanksinreport
+end type
+
+on m_t5processing.create
+call super::create
+this.text = "&T5 Processing"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_t5samplingreport=create m_t5samplingreport
+this.m_trusteeassignment=create m_trusteeassignment
+this.m_blanksinreport=create m_blanksinreport
+this.Item[UpperBound(this.Item)+1]=this.m_t5samplingreport
+this.Item[UpperBound(this.Item)+1]=this.m_trusteeassignment
+this.Item[UpperBound(this.Item)+1]=this.m_blanksinreport
+end on
+
+on m_t5processing.destroy
+call super::destroy
+destroy(this.m_t5samplingreport)
+destroy(this.m_trusteeassignment)
+destroy(this.m_blanksinreport)
+end on
+
+type m_t5samplingreport from menu within m_t5processing
+end type
+
+event clicked;If SQLCA.ServiceAvailable()  Then
+	OpenSheet(w_t5_sampling,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_t5samplingreport.create
+call super::create
+this.visible = false
+this.text = "&Sampling Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_t5samplingreport.destroy
+call super::destroy
+end on
+
+type m_trusteeassignment from menu within m_t5processing
+end type
+
+event clicked;If SQLCA.ServiceAvailable()  Then
+	OpenSheet(w_t5_trustees,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_trusteeassignment.create
+call super::create
+this.text = "&Trustee Assignment"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_trusteeassignment.destroy
+call super::destroy
+end on
+
+type m_blanksinreport from menu within m_t5processing
+end type
+
+event clicked;If SQLCA.ServiceAvailable()  Then
+	OpenSheet(w_blank_sin_report,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_blanksinreport.create
+call super::create
+this.text = "&Blank SIN Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_blanksinreport.destroy
+call super::destroy
+end on
+
+type m_2 from menu within m_finance
+end type
+
+on m_2.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_claimcostmaintenance from menu within m_finance
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_claim_cost_maintenance,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_claimcostmaintenance.create
+call super::create
+this.text = "Claim Cost Maintenance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimcostmaintenance.destroy
+call super::destroy
+end on
+

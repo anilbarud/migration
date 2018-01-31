@@ -1,0 +1,51 @@
+﻿$PBExportHeader$d_annuity_payout_recipient_detail.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=124 color="536870912" )
+summary(height=100 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=participant_amount dbname="compute_0001" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_recipient_no dbname="annuity_payout_recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_payout_recipient_type_code dbname="annuity_payout_recipient_type_code" )
+ column=(type=char(41) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=char(40) updatewhereclause=yes name=annuity_role_desc_e dbname="annuity_role_desc_e" )
+ retrieve="SELECT SUM(a.payment_amount)*-1,
+       a.recipient_no,
+       a.annuity_payout_recipient_no,
+       a.annuity_payout_recipient_type_code,
+       b.given_names +' '+ b.last_name       AS 'recipient_name',
+       d.annuity_role_desc_e
+FROM   ANNUITY_PAYOUT_TXN_DETAIL  a
+JOIN   INDIVIDUAL                 b ON a.recipient_no        = b.individual_no
+JOIN   ANNUITY_PAYOUT_PARTICIPANT c ON a.annuity_payout_no   = c.annuity_payout_no
+                                   AND a.recipient_no        = c.recipient_no
+                                   AND a.recipient_type_code = c.recipient_type_code
+JOIN   Annuity_Role               d ON c.annuity_role_code   = d.annuity_role_code
+WHERE  a.annuity_payout_no = :al_annuity_payout_no
+GROUP BY a.recipient_no,
+         a.annuity_payout_recipient_no,
+         a.annuity_payout_recipient_type_code,
+         b.given_names +' '+ b.last_name,
+         d.annuity_role_desc_e" arguments=(("al_annuity_payout_no", number)) )
+rectangle(band=header x="0" y="104" height="16" width="3995"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+rectangle(band=header x="0" y="4" height="16" width="3995"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Participant Amount" border="0" color="33554432" x="3415" y="32" height="64" width="558" html.valueishtml="0"  name=payment_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" recipient_name +' - '+  annuity_role_desc_e"border="0" color="33554432" x="338" y="12" height="60" width="1819" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Participant Name - Annuity Role" border="0" color="33554432" x="338" y="32" height="64" width="928" html.valueishtml="0"  name=payout_recipient_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="3547" y="12" height="60" width="421" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=participant_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(participant_amount for all)"border="0" color="33554432" x="3547" y="32" height="60" width="421" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="3534" y1="16" x2="3977" y2="16"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="3534" y1="4" x2="3977" y2="4"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

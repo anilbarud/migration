@@ -1,0 +1,60 @@
+﻿$PBExportHeader$d_checklist_notes.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=76 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes key=yes name=checklist_step_no dbname="checklist_step_no" )
+ column=(type=char(256) update=yes updatewhereclause=yes name=step_comment dbname="step_comment" )
+ column=(type=char(256) updatewhereclause=yes name=cancelled_comment dbname="cancelled_comment" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=long updatewhereclause=yes name=checklist_no dbname="checklist_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=char(3) updatewhereclause=yes name=checklist_step_status_code dbname="checklist_step_status_code" )
+ column=(type=char(3) updatewhereclause=yes key=yes name=checklist_step_type_code dbname="checklist_step_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=checklist_step_type_desc dbname="checklist_step_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=checklist_step_status_desc dbname="checklist_step_status_desc" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ retrieve="Select CHECKLIST_STEP.checklist_step_no,
+       CHECKLIST_STEP.step_comment,
+       CHECKLIST_STEP.cancelled_comment,
+       CHECKLIST_STEP.create_date,
+       CHECKLIST_STEP.checklist_no,
+       CHECKLIST_STEP.concluded_date,
+       CHECKLIST_STEP.concluded_by_user_id,
+       CHECKLIST_STEP.checklist_step_status_code,
+       CHECKLIST_STEP.checklist_step_type_code,
+       Checklist_Step_Type.checklist_step_type_desc,
+       Checklist_Step_Status. checklist_step_status_desc,
+       User_Profile.user_first_name,
+       User_Profile.user_last_name
+From CHECKLIST_STEP
+INNER JOIN Checklist_Step_Type ON CHECKLIST_STEP.checklist_step_type_code = Checklist_Step_Type.checklist_step_type_code
+INNER JOIN Checklist_Step_Status ON CHECKLIST_STEP.checklist_step_status_code = Checklist_Step_Status.checklist_step_status_code
+LEFT OUTER JOIN User_Profile ON CHECKLIST_STEP.concluded_by_user_id = User_Profile.user_id
+WHERE CHECKLIST_STEP.checklist_no = :ar_checklist_no
+ORDER BY CHECKLIST_STEP.checklist_step_no" update="CHECKLIST_STEP" updatewhere=1 updatekeyinplace=yes arguments=(("ar_checklist_no", number)) )
+compute(band=detail alignment="0" expression="Trim( user_first_name )+' '+Trim( user_last_name )"border="0" color="33554432" x="2112" y="4" height="60" width="1234" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1696" y="4" height="60" width="398" format="YYYY-MM-DD" html.valueishtml="0"  name=concluded_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="1083" y="4" height="60" width="594" format="[general]" html.valueishtml="0"  name=checklist_step_status_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="197" y="4" height="60" width="873" format="[general]" html.valueishtml="0"  name=checklist_step_type_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="101" y="4" height="60" width="87" format="[general]" html.valueishtml="0"  name=checklist_step_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+bitmap(band=detail filename="flag_red_16_h.gif" x="9" y="4" height="60" width="73" border="0"  name=p_1 visible="1~tIF ( (IsNull ( step_comment ) OR  step_comment = '' )  AND  ( IsNull ( cancelled_comment )  OR  cancelled_comment = '') ,0,1)" )
+text(band=header alignment="0" text="Step" border="6" color="33554432" x="9" y="4" height="56" width="1051" html.valueishtml="0"  name=checklist_step_no_t  tag="Checklist Step Number" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Concluded" border="6" color="33554432" x="1701" y="4" height="56" width="393" html.valueishtml="0"  name=concluded_date_t  tag="Concluded Date" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Status" border="6" color="33554432" x="1079" y="4" height="56" width="603" html.valueishtml="0"  name=checklist_step_status_desc_t  tag="Checklist Step Status Description" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="By" border="6" color="33554432" x="2112" y="4" height="56" width="1230" html.valueishtml="0"  name=t_1  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

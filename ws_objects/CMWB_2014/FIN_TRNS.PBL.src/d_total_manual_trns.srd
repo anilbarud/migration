@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_total_manual_trns.srd
+$PBExportComments$External dw used to total all the manual entries that make up one adjustment.
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=105 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=total_manual_trns dbname="total_manual_trns" )
+ )
+text(band=detail alignment="1" text="Grand Total: "border="0" color="0" x="10" y="4" height="61" width="325"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="357" y="4" height="65" width="531" format="$#,##0.00;[RED]($#,##0.00)"  name=total_manual_trns edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+line(band=detail x1="357" y1="76" x2="887" y2="76" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=detail x1="357" y1="88" x2="887" y2="88" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )

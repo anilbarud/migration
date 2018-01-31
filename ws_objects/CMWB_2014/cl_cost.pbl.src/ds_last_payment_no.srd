@@ -1,0 +1,12 @@
+﻿$PBExportHeader$ds_last_payment_no.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=144 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=last_payment_no dbname="Last_Payment_No.last_payment_no" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="Last_Payment_No.timestamp" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dbo.Last_Payment_No~" ) COLUMN(NAME=~"dbo.Last_Payment_No.last_payment_no~") COLUMN(NAME=~"dbo.Last_Payment_No.timestamp~")) " update="dbo.Last_Payment_No" updatewhere=2 updatekeyinplace=yes )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="18" y="36" height="76" width="329" format="[general]" html.valueishtml="0"  name=last_payment_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

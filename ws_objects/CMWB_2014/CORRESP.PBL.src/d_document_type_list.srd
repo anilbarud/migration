@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_document_type_list.srd
+$PBExportComments$Used to display list of Imara Document types and descriptions.
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=233 color="536870912" )
+table(column=(type=char(3) update=yes key=yes name=type_code dbname="Document_Type_Code.type_code" )
+ column=(type=char(40) update=yes name=type_desc dbname="Document_Type_Code.type_desc" )
+ column=(type=char(44) name=comment dbname="comment" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Document_Type_Code~" ) COLUMN(NAME=~"Document_Type_Code.type_code~") COLUMN(NAME=~"Document_Type_Code.type_desc~") COMPUTE(NAME=~"comment = type_code + ~~~" ~~~" + type_desc~")) " update="Document_Type_Code" updatewhere=1 updatekeyinplace=no )
+text(band=detail alignment="1" text="Type Code:"border="0" color="0" x="1" y="20" height="61" width="284"  name=type_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="330" y="20" height="77" width="1226" format="[general]"  name=type_desc dddw.name=dddw_document_types dddw.displaycolumn=type_desc dddw.datacolumn=type_code dddw.percentwidth=100 dddw.limit=3 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.required=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Comment:"border="0" color="0" x="1" y="132" height="61" width="266"  name=type_desc_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="5" color="0" x="330" y="132" height="77" width="1226" format="[general]"  name=comment dddw.name=dddw_document_types dddw.displaycolumn=description dddw.datacolumn=type_code dddw.percentwidth=100 dddw.limit=44 dddw.allowedit=yes dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="67108864" x="1829" y="36" height="61" width="83" format="[general]"  name=type_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

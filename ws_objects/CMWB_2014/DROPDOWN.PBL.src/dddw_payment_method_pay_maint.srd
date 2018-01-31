@@ -1,0 +1,16 @@
+﻿$PBExportHeader$dddw_payment_method_pay_maint.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(1) update=yes updatewhereclause=yes key=yes name=payment_method_code dbname="Payment_Method.payment_method_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=payment_method_desc dbname="Payment_Method.payment_method_desc" )
+ retrieve="  SELECT payment_method_code,   
+         payment_method_desc  
+    FROM dbo.Payment_Method  
+	WHERE payment_method_code in ('A','H','R','D','I') 
+" update="dbo.Payment_Method" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="0" y="4" height="60" width="1234" format="[general]" html.valueishtml="0"  name=payment_method_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

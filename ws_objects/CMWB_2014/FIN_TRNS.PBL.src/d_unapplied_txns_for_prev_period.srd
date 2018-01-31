@@ -1,0 +1,80 @@
+﻿$PBExportHeader$d_unapplied_txns_for_prev_period.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=428 color="553648127" )
+summary(height=132 color="536870912" )
+footer(height=164 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=coc_period dbname="coc_period" )
+ column=(type=long updatewhereclause=yes name=txn_no dbname="txn_no" )
+ column=(type=char(1) updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_sub_type_code dbname="txn_sub_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=char(40) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=long updatewhereclause=yes name=current_coc_period dbname="compute_0011" )
+ retrieve="SELECT a.payment_no,
+       a.claim_no,
+       a.payment_type_code,
+       a.payment_sub_type_code,
+       b.coc_period,
+       b.txn_no,
+       b.txn_type_code,
+       b.txn_sub_type_code,
+       b.txn_amount,
+       b.recipient_name,
+       :al_current_coc_period
+FROM   PAYMENT             a
+JOIN   UNAPPLIED_CLAIM_TXN b ON a.payment_no = b.payment_no
+WHERE  b.coc_period         <> 0
+AND    b.coc_period         <= :al_previous_coc_period
+ORDER BY a.claim_no, a.payment_no, b.txn_no" arguments=(("al_previous_coc_period", number),("al_current_coc_period", number)) )
+group(level=1 header.height=200 trailer.height=120 by=("payment_no" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="14" y="4" height="240" width="3109"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Unprocessed Payments for Previous CoC Period" border="0" color="0" x="338" y="20" height="76" width="2734" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="46" y="28" height="72" width="334" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2629" y="28" height="64" width="421" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="59" y1="192" x2="3081" y2="196"  name=l_2 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="411" y="28" height="64" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="1" text="Payment No" border="0" color="33554432" x="18" y="340" height="60" width="352" html.valueishtml="0"  name=payment_payment_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="416" x2="3150" y2="416"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Pay Type" border="0" color="33554432" x="946" y="340" height="64" width="343" html.valueishtml="0"  name=payment_payment_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Claim No" border="0" color="33554432" x="498" y="340" height="64" width="302" html.valueishtml="0"  name=payment_claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Current CoC Period:" border="0" color="0" x="46" y="100" height="60" width="530" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header id=11 alignment="0" tabsequence=70 border="0" color="33554432" x="599" y="100" height="60" width="320" format="[general]" html.valueishtml="0"  name=current_coc_period visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="23" y="20" height="60" width="352" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.1 x1="238" y1="192" x2="3150" y2="192"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+compute(band=header.1 alignment="2" expression="IF ( payment_sub_type_code <> '',  payment_type_code +' / ' +  Trim(payment_sub_type_code), payment_type_code)"border="0" color="33554432" x="946" y="20" height="60" width="343" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Txn Amount" border="0" color="33554432" x="2336" y="116" height="60" width="311" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Coc Period" border="0" color="33554432" x="2729" y="116" height="60" width="320" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Txn Type" border="0" color="33554432" x="1911" y="116" height="60" width="233" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Txn No" border="0" color="33554432" x="238" y="116" height="60" width="288" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Recipient Name" border="0" color="33554432" x="603" y="116" height="60" width="1042" html.valueishtml="0"  name=provider_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="503" y="20" height="60" width="302" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=60 border="0" color="33554432" x="2240" y="8" height="60" width="407" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="IF (txn_sub_type_code <> '', txn_type_code + '/' + txn_sub_type_code, txn_type_code )"border="0" color="33554432" x="1911" y="8" height="60" width="233" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="603" y="8" height="60" width="1289" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=30 border="0" color="33554432" x="238" y="8" height="60" width="288" format="[general]" html.valueishtml="0"  name=txn_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=20 border="0" color="33554432" x="2729" y="8" height="60" width="320" format="[general]" html.valueishtml="0"  name=coc_period visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2240" y1="0" x2="2670" y2="0"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=trailer.1 x1="2240" y1="88" x2="2670" y2="88"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+compute(band=trailer.1 alignment="1" expression="sum(txn_amount for group 1)"border="0" color="33554432" x="2240" y="16" height="60" width="407" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2240" y1="100" x2="2670" y2="100"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=summary x1="2240" y1="124" x2="2670" y2="124"  name=l_7 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=trailer.1 alignment="0" text="Txn Total:" border="0" color="33554432" x="1975" y="16" height="60" width="238" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(txn_amount for all)"border="0" color="33554432" x="2240" y="32" height="60" width="407" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="1" text="Grand Total:" border="0" color="0" x="1906" y="32" height="60" width="306" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

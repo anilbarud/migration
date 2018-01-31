@@ -1,0 +1,917 @@
+﻿$PBExportHeader$m_document_popup.srm
+$PBExportComments$Claim Retrieve - popup menu displayed when the user right mouse button clicks on the document list at the bottom of the worksheet
+forward
+global type m_document_popup from menu
+end type
+type m_docdetails from menu within m_document_popup
+end type
+type m_moredetails from menu within m_docdetails
+end type
+type m_sort from menu within m_docdetails
+end type
+type m_bydocumenttype from menu within m_sort
+end type
+type m_bydocumentdate from menu within m_sort
+end type
+type m_presenttopast from menu within m_bydocumentdate
+end type
+type m_pasttopresent from menu within m_bydocumentdate
+end type
+type m_bydocumentdate from menu within m_sort
+m_presenttopast m_presenttopast
+m_pasttopresent m_pasttopresent
+end type
+type m_bydatecreated from menu within m_sort
+end type
+type m_presenttopast_date_indexed from menu within m_bydatecreated
+end type
+type m_pasttopresent_date_indexed from menu within m_bydatecreated
+end type
+type m_bydatecreated from menu within m_sort
+m_presenttopast_date_indexed m_presenttopast_date_indexed
+m_pasttopresent_date_indexed m_pasttopresent_date_indexed
+end type
+type m_sort from menu within m_docdetails
+m_bydocumenttype m_bydocumenttype
+m_bydocumentdate m_bydocumentdate
+m_bydatecreated m_bydatecreated
+end type
+type m_filter from menu within m_docdetails
+end type
+type m_print from menu within m_docdetails
+end type
+type m_windowsize from menu within m_docdetails
+end type
+type m_emailtophysioclinicaspdf from menu within m_docdetails
+end type
+type m_email_to_clinic from menu within m_docdetails
+end type
+type m_docdetails from menu within m_document_popup
+m_moredetails m_moredetails
+m_sort m_sort
+m_filter m_filter
+m_print m_print
+m_windowsize m_windowsize
+m_emailtophysioclinicaspdf m_emailtophysioclinicaspdf
+m_email_to_clinic m_email_to_clinic
+end type
+type m_0 from menu within m_document_popup
+end type
+global type m_document_popup from menu
+m_docdetails m_docdetails
+m_0 m_0
+end type
+end forward
+
+global type m_document_popup from menu
+m_docdetails m_docdetails
+m_0 m_0
+end type
+global m_document_popup m_document_popup
+
+type variables
+w_sheet		viw_active_sheet
+datawindow	idw_search_list
+end variables
+
+forward prototypes
+public subroutine mf_set_datawindow (datawindow adw_search_list)
+public subroutine mf_select_files_to_email (string as_mode)
+end prototypes
+
+public subroutine mf_set_datawindow (datawindow adw_search_list);/*--------------------------------------------------------------------*/
+/*  This funciton sets the pointer so the menu can reference the      */
+/*  search list datawindow for sorting and printing.                  */
+/*--------------------------------------------------------------------*/
+
+idw_search_list = adw_search_list
+
+end subroutine
+
+public subroutine mf_select_files_to_email (string as_mode);
+//  This script checks to see if any documents have been accepted for printing.
+//  If at least one document is selected, the user may Email the documents
+//
+//--------------------------------------------------------------------------
+
+INTEGER		li_counter, li_cnt
+STRING		ls_document_limit
+LONG		    	ll_selected_row, ll_doc_id, ll_dod_id_array[], ll_claim_no
+BOOLEAN	lb_exist
+w_sheet		lwi_active_sheet
+u_ds			lds_document_paths
+s_window_message 	lstr_message 
+
+// Get the name of the active work sheet and validate that it exists
+lwi_active_sheet = w_frame.GetActiveSheet()
+IF IsValid(lwi_active_sheet) = FALSE THEN
+   MessageBox("Print Documents","Cannot determine active sheet. Please exit, reboot and try again.")
+	RETURN
+END IF
+
+// Get the first highlighted document
+ll_selected_row = lwi_active_sheet.dw_documents.GetSelectedRow(0)
+IF ll_selected_row = 0 THEN
+    MessageBox("Print Documents", "You must select at least one document to Email.")
+    RETURN
+END IF
+
+/* from the .ini file source files copied from the network drive */
+ls_document_limit = ProfileString(vgs_ini_filename,"PDF CONVERTER","document_limit", " ")
+IF ls_document_limit = "" THEN
+	MessageBox("System Error","Could not determine document limit for PDF Coversion. Call Help Desk.",StopSign!)
+	RETURN 
+END IF
+
+li_counter = 1
+// Get the document id for selected rows
+DO WHILE ll_selected_row <> 0
+
+	ll_doc_id = lwi_active_sheet.dw_documents.GetItemNumber(ll_selected_row,"ref_docid")
+	
+	ll_dod_id_array[li_counter] = ll_doc_id
+	li_counter ++
+
+	// Get the next selected row
+	ll_selected_row = lwi_active_sheet.dw_documents.GetSelectedRow(ll_selected_row)
+LOOP
+
+IF NOT ISNuMBER(ls_document_limit) THEN ls_document_limit = '0'
+
+
+
+/*
+An email may contain up to 10 documents as attachments. Please adjust your selection to 10 documents 
+or less and send another email with the remaining documents, as needed.
+
+*/
+IF integer(ls_document_limit) < upperbound(ll_dod_id_array) THEN
+	messagebox('File Conversion Max', 'An email may contain up to ' + ls_document_limit + ' documents as attachments. ' + '~rPlease adjust your selection to ' + ls_document_limit + ' documents or less and send another email with the remaining documents, as needed.' ) 
+	RETURN 
+END IF 
+
+/*  retrieve the paths for the new array */
+lds_document_paths 						= CREATE u_ds
+lds_document_paths.DataObject 		= 'd_file_path_name_by_array'
+lds_document_paths.SetTransObject(ImageTrans)
+li_cnt = lds_document_paths.Retrieve(ll_dod_id_array)
+ImageTrans.nf_handle_error("cmwb","m_document_popup - mf_select_files_to_email()","lds_document_paths.Retrieve(ll_dod_id_array)") 
+
+
+FOR li_counter = 1 TO li_cnt	
+	lstr_message.as_stringparm[li_counter] 	= lds_document_paths.getitemstring(li_counter,'filename')
+	
+	lb_exist = FileExists(lstr_message.as_stringparm[li_counter])
+	IF lb_exist = FALSE THEN
+		messagebox('File Does Not Exist', 'Could not find the correct file: ' + lstr_message.as_stringparm[li_counter]) 
+		exit
+	END IF 
+NEXT
+
+//pass in the claim_no
+ll_claim_no =  lwi_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+IF ISNULL(ll_claim_no)  THEN ll_claim_no = 0
+
+// PDF/or NOT
+lstr_message.as_mode 				= as_mode
+lstr_message.al_doubleparm[1] 	= ll_claim_no
+
+IF upperbound(lstr_message.as_stringparm) > 0 AND lb_exist <> FALSE THEN 
+	openwithparm(w_email_portal_user, lstr_message)		
+END IF 
+
+
+
+
+
+
+end subroutine
+
+on m_document_popup.create
+m_document_popup=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_docdetails=create m_docdetails
+this.m_0=create m_0
+this.Item[UpperBound(this.Item)+1]=this.m_docdetails
+this.Item[UpperBound(this.Item)+1]=this.m_0
+end on
+
+on m_document_popup.destroy
+call super::destroy
+destroy(this.m_docdetails)
+destroy(this.m_0)
+end on
+
+event clicked;//idw
+end event
+
+type m_docdetails from menu within m_document_popup
+m_moredetails m_moredetails
+m_sort m_sort
+m_filter m_filter
+m_print m_print
+m_windowsize m_windowsize
+m_emailtophysioclinicaspdf m_emailtophysioclinicaspdf
+m_email_to_clinic m_email_to_clinic
+end type
+
+on m_docdetails.create
+call super::create
+this.text = "docdetails"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_moredetails=create m_moredetails
+this.m_sort=create m_sort
+this.m_filter=create m_filter
+this.m_print=create m_print
+this.m_windowsize=create m_windowsize
+this.m_emailtophysioclinicaspdf=create m_emailtophysioclinicaspdf
+this.m_email_to_clinic=create m_email_to_clinic
+this.Item[UpperBound(this.Item)+1]=this.m_moredetails
+this.Item[UpperBound(this.Item)+1]=this.m_sort
+this.Item[UpperBound(this.Item)+1]=this.m_filter
+this.Item[UpperBound(this.Item)+1]=this.m_print
+this.Item[UpperBound(this.Item)+1]=this.m_windowsize
+this.Item[UpperBound(this.Item)+1]=this.m_emailtophysioclinicaspdf
+this.Item[UpperBound(this.Item)+1]=this.m_email_to_clinic
+end on
+
+on m_docdetails.destroy
+call super::destroy
+destroy(this.m_moredetails)
+destroy(this.m_sort)
+destroy(this.m_filter)
+destroy(this.m_print)
+destroy(this.m_windowsize)
+destroy(this.m_emailtophysioclinicaspdf)
+destroy(this.m_email_to_clinic)
+end on
+
+type m_moredetails from menu within m_docdetails
+end type
+
+event clicked;w_sheet	lw_active_sheet
+Long     ll_rownum, ll_docid        
+String   ls_document
+	
+If not SQLCA.ServiceAvailable() or not ImageTrans.ServiceAvailable() Then
+	Beep(2)
+	MessageBox("Document Details is currently unavailable", + &
+					"You cannot open Document Details until Claim Database and Imaging Database are on-line.~r~n" + &
+					"Please try again later!",Exclamation!)
+	Return
+End If
+
+//
+// Check to see if we actually have an active sheet
+//
+
+lw_active_sheet = w_frame.GetActiveSheet()
+If not IsValid(lw_active_sheet) then Return
+
+/* PR 3898 the users would like the highlighted row to come up...
+	If a row is not highlightes then pick the row that is clicked on
+*/
+
+// Get the current docid
+ll_rownum = lw_active_sheet.dw_documents.GetRow()		
+If ll_rownum = 0 Then
+	MessageBox("Document","Could not determine selected document. Please try again.")
+	Return
+End If
+
+ll_docid = lw_active_sheet.dw_documents.GetItemNumber(ll_rownum,"ref_docid")
+
+		
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - ' + string(  ll_docid ) + " docid" )
+END IF 
+
+OpenWithParm(lw_active_sheet.iw_document_details,ll_docid, lw_active_sheet)
+
+end event
+
+on m_moredetails.create
+call super::create
+this.text = "More Details ..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_moredetails.destroy
+call super::destroy
+end on
+
+type m_sort from menu within m_docdetails
+m_bydocumenttype m_bydocumenttype
+m_bydocumentdate m_bydocumentdate
+m_bydatecreated m_bydatecreated
+end type
+
+on m_sort.create
+call super::create
+this.text = "Sort"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_bydocumenttype=create m_bydocumenttype
+this.m_bydocumentdate=create m_bydocumentdate
+this.m_bydatecreated=create m_bydatecreated
+this.Item[UpperBound(this.Item)+1]=this.m_bydocumenttype
+this.Item[UpperBound(this.Item)+1]=this.m_bydocumentdate
+this.Item[UpperBound(this.Item)+1]=this.m_bydatecreated
+end on
+
+on m_sort.destroy
+call super::destroy
+destroy(this.m_bydocumenttype)
+destroy(this.m_bydocumentdate)
+destroy(this.m_bydatecreated)
+end on
+
+type m_bydocumenttype from menu within m_sort
+end type
+
+event clicked;//
+//	Sort the document list by document type Ascending, date Descending, comment Ascending
+//
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - sort by doc type' )
+END IF 
+
+
+idw_search_list.SetSort ("docindex_type A, doc_subtype_code A, docindex_date D, docindex_comment A")
+idw_search_list.Sort()
+
+end event
+
+on m_bydocumenttype.create
+call super::create
+this.text = "by Document Type"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_bydocumenttype.destroy
+call super::destroy
+end on
+
+type m_bydocumentdate from menu within m_sort
+m_presenttopast m_presenttopast
+m_pasttopresent m_pasttopresent
+end type
+
+on m_bydocumentdate.create
+call super::create
+this.text = "by Document Date"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_presenttopast=create m_presenttopast
+this.m_pasttopresent=create m_pasttopresent
+this.Item[UpperBound(this.Item)+1]=this.m_presenttopast
+this.Item[UpperBound(this.Item)+1]=this.m_pasttopresent
+end on
+
+on m_bydocumentdate.destroy
+call super::destroy
+destroy(this.m_presenttopast)
+destroy(this.m_pasttopresent)
+end on
+
+type m_presenttopast from menu within m_bydocumentdate
+end type
+
+on m_presenttopast.create
+call super::create
+this.text = "Present to Past"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_presenttopast.destroy
+call super::destroy
+end on
+
+event clicked;//
+//	Sort the document list by document date-on-document date Descending, type Ascending, comment Ascending
+//
+//  To help clear the confusion here, docindex_date refered below is the name of the datawindow column, but the data 
+//  is drawn from DOCUMENT_INDEX.date_on_document, not the date the document was indexed on
+//
+
+long ll_selected_row
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - sort by doc date - present to past' )
+END IF 
+
+idw_search_list.setSort("docindex_date D, docindex_type A, docindex_comment A" )
+idw_search_list.Sort()
+end event
+
+type m_pasttopresent from menu within m_bydocumentdate
+end type
+
+on m_pasttopresent.create
+call super::create
+this.text = "Past to Present"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pasttopresent.destroy
+call super::destroy
+end on
+
+event clicked;//
+//	Sort the document list by document date-on-document date Ascending, type Ascending, comment Ascending
+//
+//  To help clear the confusion here, docindex_date refered below is the name of the datawindow column, but the data 
+//  is drawn from DOCUMENT_INDEX.date_on_document, not the date the document was indexed on
+
+long ll_selected_row
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - sort by doc date - past to present' )
+END IF 
+
+idw_search_list.setSort("docindex_date A, docindex_date A, docindex_comment A")
+idw_search_list.Sort()
+end event
+
+type m_bydatecreated from menu within m_sort
+m_presenttopast_date_indexed m_presenttopast_date_indexed
+m_pasttopresent_date_indexed m_pasttopresent_date_indexed
+end type
+
+on m_bydatecreated.create
+call super::create
+this.text = "by Date Indexed"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_presenttopast_date_indexed=create m_presenttopast_date_indexed
+this.m_pasttopresent_date_indexed=create m_pasttopresent_date_indexed
+this.Item[UpperBound(this.Item)+1]=this.m_presenttopast_date_indexed
+this.Item[UpperBound(this.Item)+1]=this.m_pasttopresent_date_indexed
+end on
+
+on m_bydatecreated.destroy
+call super::destroy
+destroy(this.m_presenttopast_date_indexed)
+destroy(this.m_pasttopresent_date_indexed)
+end on
+
+type m_presenttopast_date_indexed from menu within m_bydatecreated
+end type
+
+event clicked;//
+//	Sort the document list by document Indexed date Descending, type Ascending, comment Ascending
+//
+//  To help clear the confusion here, doc_doccreated refered below is the name of the datawindow column, but the data 
+//  is drawn from DOCUMENT_INDEX.create_date, which translates to the date the document was indexed on, i.e, 
+//  the date the record was created in DOCUMENT_INDEX
+
+long ll_selected_row
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - sort by date indexed - present to past' )
+END IF 
+
+idw_search_list.setSort( "doc_doccreated D, docindex_type A, docindex_comment A")
+idw_search_list.Sort()
+end event
+
+on m_presenttopast_date_indexed.create
+call super::create
+this.text = "Present to Past"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_presenttopast_date_indexed.destroy
+call super::destroy
+end on
+
+type m_pasttopresent_date_indexed from menu within m_bydatecreated
+end type
+
+event clicked;//
+//	Sort the document list by document Indexed date Ascending, type Ascending, comment Ascending
+
+//  To help clear the confusion here, doc_doccreated refered below is the name of the datawindow column, but the data 
+//  is drawn from DOCUMENT_INDEX.create_date, which translates to the date the document was indexed on, i.e, 
+//  the date the record was created in DOCUMENT_INDEX
+
+long ll_selected_row
+
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - sort by date indexed - past to present' )
+END IF 
+
+idw_search_list.setSort( "doc_doccreated A, docindex_type A, docindex_comment A")
+idw_search_list.Sort()
+end event
+
+on m_pasttopresent_date_indexed.create
+call super::create
+this.text = "Past to Present"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pasttopresent_date_indexed.destroy
+call super::destroy
+end on
+
+type m_filter from menu within m_docdetails
+end type
+
+on m_filter.create
+call super::create
+this.text = "Filter"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_filter.destroy
+call super::destroy
+end on
+
+event clicked;idw_search_list.triggerevent("ue_filter")
+end event
+
+type m_print from menu within m_docdetails
+end type
+
+event clicked;w_sheet	lw_active_sheet
+
+	lw_active_sheet = w_frame.GetActiveSheet()
+	IF NOT IsValid(lw_active_sheet) THEN
+		Return
+	END IF
+	
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - Print' )
+END IF 
+
+	lw_active_sheet.dw_documents.TriggerEvent('ue_print')
+
+end event
+
+on m_print.create
+call super::create
+this.text = "Print"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_windowsize from menu within m_docdetails
+end type
+
+event clicked;w_sheet	lw_active_sheet
+
+lw_active_sheet = w_frame.GetActiveSheet()
+IF NOT IsValid(lw_active_sheet) THEN Return
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - windowsize' )
+END IF 
+
+lw_active_sheet.p_maximize.triggerevent(clicked!)
+
+/* trigger the size button on the information window */
+
+end event
+
+on m_windowsize.create
+call super::create
+this.text = "&Windowsize"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_windowsize.destroy
+call super::destroy
+end on
+
+type m_emailtophysioclinicaspdf from menu within m_docdetails
+end type
+
+event clicked;STRING			ls_mode
+
+// PDF
+ls_mode = 'PDF'
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - email to physio clinic as pdf' )
+END IF 
+
+mf_select_files_to_email(ls_mode)
+
+end event
+
+on m_emailtophysioclinicaspdf.create
+call super::create
+this.text = "Email to Physio Clinic as &PDF"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_emailtophysioclinicaspdf.destroy
+call super::destroy
+end on
+
+type m_email_to_clinic from menu within m_docdetails
+end type
+
+on m_email_to_clinic.create
+call super::create
+this.visible = false
+this.text = "&Email to Physio Clinic"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_email_to_clinic.destroy
+call super::destroy
+end on
+
+event clicked;STRING			ls_mode
+
+// not PDF
+ls_mode = ''
+
+IF gb_additional_logging = TRUE THEN	
+	N_OBJECTHELPER lnv_object_helper
+	// write to the application log
+	f_populate_app_log(gs_appname_and_handle ,lnv_object_helper.get_app_component_type(THIS), lnv_object_helper.getpath(THIS), 'm_document_popup - email to physio clinic' )
+END IF 
+
+
+mf_select_files_to_email(ls_mode)
+
+
+
+
+
+
+end event
+
+type m_0 from menu within m_document_popup
+end type
+
+on m_0.create
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_0.destroy
+call super::destroy
+end on
+

@@ -1,0 +1,14 @@
+﻿$PBExportHeader$ds_t5_t_h_trustee_checker.srd
+$PBExportComments$DataStore used in identifying if there is more than one T5007_TRUSTEE_HISTORY record with a given trustee_individual_no and taxation_year.
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=trustee_individual_no dbname="T5007_TRUSTEE_HISTORY.trustee_individual_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"T5007_TRUSTEE_HISTORY~" ) COLUMN(NAME=~"T5007_TRUSTEE_HISTORY.trustee_individual_no~")WHERE(    EXP1 =~"T5007_TRUSTEE_HISTORY.trustee_individual_no~"   OP =~"in~"    EXP2 =~":li_trustee_array~" )  GROUP(NAME=~"T5007_TRUSTEE_HISTORY.trustee_individual_no~")) ARG(NAME = ~"li_trustee_array~" TYPE = numberlist) " arguments=(("li_trustee_array", numberlist)) )
+text(band=header alignment="2" text="Trustee Individual No" border="0" color="0" x="5" y="8" height="64" width="617" html.valueishtml="0"  name=trustee_individual_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=30 border="0" color="0" x="5" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=trustee_individual_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,19 @@
+﻿$PBExportHeader$d_rehab_task_attachment.srd
+$PBExportComments$Rehab Task Attachment of a document
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=101 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="REHAB_TASK_ATTACHMENT.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=task_no dbname="REHAB_TASK_ATTACHMENT.task_no" )
+ column=(type=long update=yes updatewhereclause=yes name=event_no dbname="REHAB_TASK_ATTACHMENT.event_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=docid dbname="REHAB_TASK_ATTACHMENT.docid" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="REHAB_TASK_ATTACHMENT.timestamp" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"REHAB_TASK_ATTACHMENT~" ) COLUMN(NAME=~"REHAB_TASK_ATTACHMENT.claim_no~") COLUMN(NAME=~"REHAB_TASK_ATTACHMENT.task_no~") COLUMN(NAME=~"REHAB_TASK_ATTACHMENT.event_no~") COLUMN(NAME=~"REHAB_TASK_ATTACHMENT.docid~") COLUMN(NAME=~"REHAB_TASK_ATTACHMENT.timestamp~")WHERE(    EXP1 =~"REHAB_TASK_ATTACHMENT.claim_no~"   OP =~"=~"    EXP2 =~":al_claim_no~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"REHAB_TASK_ATTACHMENT.task_no~"   OP =~"=~"    EXP2 =~":al_task_no~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"REHAB_TASK_ATTACHMENT.docid~"   OP =~"=~"    EXP2 =~":al_docid~" ) ) ARG(NAME = ~"al_claim_no~" TYPE = number)  ARG(NAME = ~"al_task_no~" TYPE = number)  ARG(NAME = ~"al_docid~" TYPE = number) " update="REHAB_TASK_ATTACHMENT" updatewhere=1 updatekeyinplace=yes arguments=(("al_claim_no", number),("al_task_no", number),("al_docid", number)) )
+text(band=header alignment="0" text="Rehab Task Attachment"border="0" color="33554432" x="19" y="32" height="77" width="714"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="1" y="12" height="77" width="330" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="0" x="334" y="12" height="77" width="330" format="[general]"  name=task_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=30 border="0" color="0" x="1002" y="12" height="77" width="330" format="[general]"  name=docid edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="668" y="12" height="77" width="330" format="[general]"  name=event_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

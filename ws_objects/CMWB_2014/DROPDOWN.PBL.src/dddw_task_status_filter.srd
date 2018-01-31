@@ -1,0 +1,21 @@
+﻿$PBExportHeader$dddw_task_status_filter.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(2) update=yes updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=task_status_desc dbname="task_status_desc" )
+ column=(type=char(1) updatewhereclause=yes name=action_item_entry_flag dbname="action_item_entry_flag" )
+ column=(type=char(1) updatewhereclause=yes name=task_entry_flag dbname="task_entry_flag" )
+ retrieve="SELECT  Task_Status.task_status_code ,
+		Task_Status.task_status_desc,
+		Task_Status.action_item_entry_flag,
+		Task_Status.task_entry_flag
+FROM Task_Status    " )
+data("01","planned","Y","Y","02","in progress","N","Y","03","cancelled","Y","Y","04","completed","Y","Y","05","reset","Y","N",) 
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="9" y="4" height="56" width="795" format="[general]" html.valueishtml="0"  name=task_status_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="809" y="0" height="60" width="23" format="[general]" html.valueishtml="0"  name=action_item_entry_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="837" y="0" height="60" width="27" format="[general]" html.valueishtml="0"  name=task_entry_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

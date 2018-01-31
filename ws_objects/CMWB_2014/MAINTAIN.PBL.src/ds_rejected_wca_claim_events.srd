@@ -1,0 +1,62 @@
+﻿$PBExportHeader$ds_rejected_wca_claim_events.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=event_no dbname="event_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=event_date dbname="event_date" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=event_type_code dbname="event_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=event_specific_code dbname="event_specific_code" )
+ column=(type=char(2525) update=yes updatewhereclause=yes name=event_comment dbname="event_comment" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=event_category_code dbname="event_category_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=copied_flag dbname="copied_flag" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=create_date dbname="create_date" )
+ retrieve="SELECT claim_no, 
+       event_no, 
+       event_date, 
+       event_type_code, 
+       event_specific_code, 
+       event_comment, 
+       event_category_code, 
+       copied_flag, 
+       create_user_id, 
+       create_date 
+  FROM CLAIM_EVENT 
+ WHERE claim_no = :al_rejected_WCA_claim_no 
+   AND NOT (event_type_code = '010' AND event_specific_code = 'CC') 
+   AND event_no <> :ai_new_WCA_event_no 
+ORDER BY event_no 
+" update="CLAIM_EVENT" updatewhere=1 updatekeyinplace=yes arguments=(("al_rejected_WCA_claim_no", number),("ai_new_WCA_event_no", number)) )
+text(band=header alignment="2" text="Event No" border="0" color="33554432" x="334" y="8" height="60" width="306" html.valueishtml="0"  name=event_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Event Date" border="0" color="33554432" x="654" y="8" height="60" width="567" html.valueishtml="0"  name=event_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Event Type Code" border="0" color="33554432" x="1234" y="8" height="60" width="462" html.valueishtml="0"  name=event_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Event Specific Code" border="0" color="33554432" x="1710" y="8" height="60" width="549" html.valueishtml="0"  name=event_specific_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Event Category Code" border="0" color="33554432" x="2277" y="8" height="60" width="581" html.valueishtml="0"  name=event_category_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Event Comment" border="0" color="33554432" x="2866" y="4" height="60" width="6578" html.valueishtml="0"  name=event_comment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="14" y="8" height="60" width="306" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Copied Flag" border="0" color="33554432" x="9454" y="4" height="60" width="338" html.valueishtml="0"  name=copied_flag_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="14" y="8" height="68" width="306" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="334" y="8" height="68" width="306" format="[general]" html.valueishtml="0"  name=event_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="654" y="8" height="68" width="567" format="[shortdate] [time]" html.valueishtml="0"  name=event_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="0" color="33554432" x="1234" y="8" height="68" width="462" format="[general]" html.valueishtml="0"  name=event_type_code visible="1" edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="33554432" x="1710" y="8" height="68" width="549" format="[general]" html.valueishtml="0"  name=event_specific_code visible="1" edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=80 border="0" color="33554432" x="2277" y="8" height="68" width="581" format="[general]" html.valueishtml="0"  name=event_category_code visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=90 border="0" color="33554432" x="2871" y="8" height="68" width="6574" format="[general]" html.valueishtml="0"  name=event_comment visible="1" edit.limit=2525 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=100 border="0" color="33554432" x="9458" y="8" height="68" width="334" format="[general]" html.valueishtml="0"  name=copied_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=110 border="0" color="33554432" x="9806" y="8" height="60" width="425" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=120 border="0" color="33554432" x="10245" y="8" height="60" width="850" format="[shortdate] [time]" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

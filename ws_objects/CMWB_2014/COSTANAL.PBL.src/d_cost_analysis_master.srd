@@ -1,0 +1,40 @@
+﻿$PBExportHeader$d_cost_analysis_master.srd
+$PBExportComments$COST_ANALYSIS_MASTER details
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=845 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="COST_ANALYSIS_MASTER.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=cost_no dbname="COST_ANALYSIS_MASTER.cost_no" )
+ column=(type=long update=yes updatewhereclause=yes name=recommended_option_no dbname="COST_ANALYSIS_MASTER.recommended_option_no" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=rationale dbname="COST_ANALYSIS_MASTER.rationale" )
+ column=(type=char(8) update=yes updatewhereclause=yes name=authorized_user_id dbname="COST_ANALYSIS_MASTER.authorized_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=authorized_date dbname="COST_ANALYSIS_MASTER.authorized_date" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="COST_ANALYSIS_MASTER.timestamp" )
+ column=(type=char(1) updatewhereclause=yes name=authorize_flag dbname="authorize_flag" values="	Y/	N" )
+ retrieve="  SELECT  COST_ANALYSIS_MASTER.claim_no,
+          COST_ANALYSIS_MASTER.cost_no,
+          COST_ANALYSIS_MASTER.recommended_option_no,
+          COST_ANALYSIS_MASTER.rationale,
+          COST_ANALYSIS_MASTER.authorized_user_id,
+          COST_ANALYSIS_MASTER.authorized_date,
+          COST_ANALYSIS_MASTER.timestamp,
+			 ~"~" authorize_flag    
+        FROM COST_ANALYSIS_MASTER      
+        WHERE ( COST_ANALYSIS_MASTER.claim_no = :al_claim_no )
+ and          ( COST_ANALYSIS_MASTER.cost_no = :al_cost_no )   " update="COST_ANALYSIS_MASTER" updatewhere=0 updatekeyinplace=yes arguments=(("al_claim_no", number),("al_cost_no", number)) )
+rectangle(band=detail x="19" y="28" height="809" width="2570" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="2" background.color="0" )
+rectangle(band=detail x="23" y="32" height="809" width="2570" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=detail alignment="2" text="Rationale :"border="0" color="0" x="65" y="324" height="61" width="270"  name=rational_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Recommended Option :"border="0" color="0" x="65" y="228" height="61" width="604"  name=recommended_option_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=10 border="5" color="0" x="700" y="228" height="61" width="929" format="[general]"  name=recommended_option_no dddw.name=dddw_options_list dddw.displaycolumn=display_value dddw.datacolumn=option_no dddw.percentwidth=300 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Authorized Date :"border="0" color="0" x="1660" y="228" height="61" width="439"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="0" text="Authorized By :"border="0" color="0" x="1660" y="144" height="61" width="385"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="0" text="Authorize :"border="0" color="0" x="1660" y="60" height="61" width="275"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="0" text="Details"border="0" color="0" x="69" y="4" height="61" width="179"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="5" color="0" x="380" y="324" height="485" width="2154" format="[general]"  name=rationale edit.limit=255 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="5" color="0" x="2117" y="228" height="61" width="417" format="YYYY-MM-DD"  name=authorized_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="5" color="0" x="2117" y="136" height="61" width="417" format="[general]"  name=authorized_user_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=30 border="0" color="0" x="2113" y="60" height="53" width="60" format="[general]"  name=authorize_flag checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

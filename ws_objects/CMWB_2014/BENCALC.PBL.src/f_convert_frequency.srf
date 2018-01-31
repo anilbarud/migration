@@ -1,0 +1,80 @@
+﻿$PBExportHeader$f_convert_frequency.srf
+global type f_convert_frequency from function_object
+end type
+
+forward prototypes
+global function decimal f_convert_frequency (string vas_from_frequency, decimal vac_amount, string vas_to_frequency)
+end prototypes
+
+global function decimal f_convert_frequency (string vas_from_frequency, decimal vac_amount, string vas_to_frequency);/* ---------------------------------------------------------------------------------------------------- */
+/* Function Name: f_convert_frequency                                                                   */
+/*                                                                                                      */
+/* Purpose:       The purpose of this function is to convert an amount from one frequency to another.   */
+/*                                                                                                      */
+/* Arguments:     Parameters passed by calling routine:                                                 */
+/*                                                                                                      */
+/*                vas_from_frequency-	The frequency the amount is reported in                          */
+/*                vac_amount			-	The amount to be converted                                       */
+/*                vas_to_frequency	-	The frequency the amount is to be converted to                   */
+/*                                                                                                      */
+/* Return Value:	vlc_conv_amount	-	The converted amount                                             */
+/*                                                                                                      */
+/* ---------------------------------------------------------------------------------------------------- */
+
+
+Decimal	vlc_conv_amount
+
+
+//
+//	First, convert old amount to annual
+//
+
+	Choose Case vas_from_frequency
+
+	Case "W"
+		vlc_conv_amount = vac_amount * 52
+
+	Case "B"
+		vlc_conv_amount = vac_amount * 26
+
+	Case "S"
+		vlc_conv_amount = vac_amount * 24
+
+	Case "M"
+		vlc_conv_amount = vac_amount * 12
+
+	Case Else
+		vlc_conv_amount = vac_amount * 01
+
+	End Choose
+
+
+//
+//	Now, convert annual amount to new frequency
+//
+
+	Choose Case vas_to_frequency
+
+	Case "W"
+		vlc_conv_amount = vlc_conv_amount / 52
+
+	Case "B"
+		vlc_conv_amount = vlc_conv_amount / 26
+
+	Case "S"
+		vlc_conv_amount = vlc_conv_amount / 24
+
+	Case "M"
+		vlc_conv_amount = vlc_conv_amount / 12
+
+	Case Else
+		vlc_conv_amount = vlc_conv_amount / 01
+
+	End Choose
+
+vlc_conv_amount = Round(vlc_conv_amount,2)
+
+return vlc_conv_amount
+
+end function
+

@@ -1,0 +1,20 @@
+﻿$PBExportHeader$dddw_cheque_type_surv.srd
+$PBExportComments$DDDW for cheque_type_codes that are for Hand Written Cheques
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes key=yes name=cheque_type_code dbname="Cheque_Type.cheque_type_code" )
+ column=(type=char(20) updatewhereclause=yes name=cheque_type_desc dbname="Cheque_Type.cheque_type_desc" )
+ column=(type=char(1) updatewhereclause=yes name=generated_method_code dbname="Cheque_Type.generated_method_code" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="Cheque_Type.active_flag" )
+ retrieve="  SELECT Cheque_Type.cheque_type_code,   
+         Cheque_Type.cheque_type_desc,   
+         Cheque_Type.generated_method_code,   
+         Cheque_Type.active_flag  
+    FROM Cheque_Type  
+   WHERE generated_method_code = 'M'    
+" update="Cheque_Type" updatewhere=0 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="60" width="1038" format="[general]"  name=cheque_type_desc edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

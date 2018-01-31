@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_inbasket_forward_category_list.srd
+$PBExportComments$Lists categories that the user may forward folders to
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="-1" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=68 color="-1" )
+table(column=(type=char(32) updatewhereclause=yes name=cat_catname dbname="CAT.catname" )
+ column=(type=number updatewhereclause=yes name=cat_catid dbname="CAT.catid" )
+ column=(type=number updatewhereclause=yes name=user_category_xref_sort_order dbname="User_Category_Xref.sort_order" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CAT~" ) TABLE(NAME=~"User_Category_Xref~" ) COLUMN(NAME=~"CAT.catname~") COLUMN(NAME=~"CAT.catid~") COLUMN(NAME=~"User_Category_Xref.sort_order~") JOIN (LEFT=~"CAT.catid~" OP =~"=~"RIGHT=~"User_Category_Xref.category_id_nmbr~" )WHERE( EXP1 =~"User_Category_Xref.user_name_text~" OP =~"=~" EXP2 =~":username~" LOGIC =~"and~" ) WHERE( EXP1 =~"User_Category_Xref.category_id_nmbr~" OP =~"<>~" EXP2 =~"2~" LOGIC =~"and~" ) WHERE( EXP1 =~"User_Category_Xref.outbox_yn~" OP =~"=~" EXP2 =~"'Y'~" ) ) ORDER(NAME=~"User_Category_Xref.sort_order~" ASC=yes ) ORDER(NAME=~"CAT.catname~" ASC=yes ) ARG(NAME = ~"username~" TYPE = string) " arguments=(("username", string)) )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="4" height="60" width="1024" format="[general]" html.valueishtml="0"  name=cat_catname visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

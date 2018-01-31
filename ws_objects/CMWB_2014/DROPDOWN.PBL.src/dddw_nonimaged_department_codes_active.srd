@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_nonimaged_department_codes_active.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=85 color="536870912" )
+table(column=(type=char(3) update=yes key=yes name=department_code dbname="Nonimaged_Department.department_code" )
+ column=(type=char(40) update=yes name=department_desc dbname="Nonimaged_Department.department_desc" )
+ column=(type=char(1) update=yes name=active_flag dbname="Nonimaged_Department.active_flag" )
+ column=(type=char(1) name=external_flag dbname="Nonimaged_Department.external_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Nonimaged_Department~" ) COLUMN(NAME=~"Nonimaged_Department.department_code~") COLUMN(NAME=~"Nonimaged_Department.department_desc~") COLUMN(NAME=~"Nonimaged_Department.active_flag~") COLUMN(NAME=~"Nonimaged_Department.external_flag~")WHERE( EXP1 =~"Nonimaged_Department.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) ORDER(NAME=~"Nonimaged_Department.department_desc~" ASC=yes ) " update="Nonimaged_Department" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="14" y="4" height="69" width="1683" format="[general]"  name=department_desc edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

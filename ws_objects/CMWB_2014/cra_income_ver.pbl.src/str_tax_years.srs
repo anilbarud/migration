@@ -1,0 +1,7 @@
+﻿$PBExportHeader$str_tax_years.srs
+global type str_tax_years from structure
+	boolean		single_year
+	long		request_no
+	long		year
+end type
+

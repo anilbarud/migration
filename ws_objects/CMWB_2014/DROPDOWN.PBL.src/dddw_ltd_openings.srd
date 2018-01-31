@@ -1,0 +1,31 @@
+﻿$PBExportHeader$dddw_ltd_openings.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="536870912" )
+footer(height=5 color="536870912" )
+detail(height=77 color="-1" )
+table(column=(type=long updatewhereclause=yes name=opening_no dbname="OPENING.opening_no" )
+ column=(type=char(4) updatewhereclause=yes name=opening_type_code dbname="OPENING.opening_type_code" )
+ column=(type=datetime updatewhereclause=yes name=benefit_start_date dbname="OPENING.benefit_start_date" )
+ column=(type=datetime updatewhereclause=yes name=benefit_end_date dbname="OPENING.benefit_end_date" )
+ column=(type=datetime updatewhereclause=yes name=accident_recurrence_date dbname="OPENING.accident_recurrence_date" )
+ retrieve="  SELECT OPENING.opening_no,   
+         OPENING.opening_type_code,   
+         OPENING.benefit_start_date,   
+         OPENING.benefit_end_date,   
+         OPENING.accident_recurrence_date
+    FROM OPENING  
+   WHERE ( OPENING.claim_no = :claim_no )
+	  AND	 OPENING.opening_type_code = 'LTD'
+" arguments=(("claim_no", number))  sort="opening_no A " )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="10" y="4" height="65" width="74" format="[general]"  name=opening_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="101" y="4" height="69" width="179" format="[general]"  name=opening_type_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="From"border="0" color="0" x="302" y="4" height="65" width="133"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="458" y="4" height="69" width="293" format="yyyy-mm-dd"  name=benefit_start_date editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="to"border="0" color="0" x="769" y="8" height="65" width="46"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="842" y="4" height="69" width="293" format="yyyy-mm-dd"  name=benefit_end_date editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Date of Accident"border="0" color="0" x="1171" y="8" height="65" width="403"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1587" y="8" height="65" width="385" format="yyyy-mm-dd"  name=accident_recurrence_date editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="max(  opening_no  for all )"border="0" color="0" x="2410" y="8" height="61" width="183" format="[GENERAL]"  name=max_opening_no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="opening_type_code + ' ' + String( benefit_start_date ,'yyyy-mm-dd') +'      ' +  String( opening_no )"border="0" color="0" x="2629" y="8" height="65" width="572" format="[GENERAL]"  name=display  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

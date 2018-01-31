@@ -1,0 +1,41 @@
+﻿$PBExportHeader$dddw_payment_sub_types_between_dates.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=76 color="-1" )
+table(column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=payment_sub_type_desc dbname="payment_sub_type_desc" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=datetime updatewhereclause=yes name=effective_to_date dbname="effective_to_date" )
+ retrieve="SELECT PST.payment_sub_type_code ,
+       PST.payment_sub_type_desc ,
+       WGPST.effective_from_date,
+       WGPST.effective_to_date     
+  FROM Payment_Sub_Type PST, 
+       Module_Payment_Sub_Type MPST,
+       Work_Group_Payment_Sub_Type WGPST
+ WHERE MPST.payment_type_code = PST.payment_type_code 
+   AND MPST.payment_sub_type_code = PST.payment_sub_type_code
+   AND WGPST.payment_type_code = PST.payment_type_code
+   AND WGPST.payment_sub_type_code = PST.payment_sub_type_code 
+   AND MPST.module_code = ~"003~" 
+   AND WGPST.work_group_code = 'FS' 
+   AND WGPST.active_flag = 'Y' 
+" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="60" width="142" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="169" y="8" height="60" width="1152" format="[general]" html.valueishtml="0"  name=payment_sub_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1339" y="8" height="60" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1673" y="8" height="60" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_to_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

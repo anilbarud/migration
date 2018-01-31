@@ -1,0 +1,57 @@
+﻿$PBExportHeader$d_processed_request_details.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=iv_request_no dbname="iv_request_no" )
+ column=(type=decimal(0) updatewhereclause=yes name=tax_year dbname="tax_year" )
+ column=(type=char(50) updatewhereclause=yes name=cra_t1_assessment_desc dbname="cra_t1_assessment_desc" )
+ column=(type=char(2) updatewhereclause=yes name=cra_match_status_code dbname="cra_match_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=cra_tax_year_status_code dbname="cra_tax_year_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=cra_request_status_code dbname="cra_request_status_code" )
+ column=(type=char(30) updatewhereclause=yes name=cra_match_status_desc dbname="cra_match_status_desc" )
+ column=(type=char(1) updatewhereclause=yes name=cra_t1_assessment_code dbname="cra_t1_assessment_code" )
+ column=(type=char(1) updatewhereclause=yes name=import_success_flag dbname="import_success_flag" )
+ retrieve="SELECT IV_REQUEST_DETAIL.iv_request_no,   
+         IV_REQUEST_DETAIL.tax_year,   
+        Iv_Cra_T1_Assessment.cra_t1_assessment_desc,  
+        v_I015_IV_RESPONSE_RESPONSE_WHSCC.cra_match_status_code,
+		v_I015_IV_RESPONSE_RESPONSE_WHSCC.cra_tax_year_status_code,
+		v_I015_IV_RESPONSE_RESPONSE_WHSCC.cra_request_status_code,
+		Iv_Cra_Match_Status.cra_match_status_desc,  
+         v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.cra_t1_assessment_code ,
+        import_success_flag
+FROM     IV_REQUEST
+JOIN     IV_REQUEST_DETAIL ON IV_REQUEST.iv_request_no = IV_REQUEST_DETAIL.iv_request_no
+LEFT OUTER JOIN I015_IV_IMPORT_FILE_HISTORY ON I015_IV_IMPORT_FILE_HISTORY.import_no = IV_REQUEST.i015_import_no
+LEFT OUTER JOIN    v_I015_IV_RESPONSE_RESPONSE_WHSCC ON v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no = IV_REQUEST.i015_import_no
+														AND v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year = IV_REQUEST_DETAIL.tax_year
+LEFT OUTER JOIN    v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC ON  v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.import_no = IV_REQUEST.i015_import_no
+														AND v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.tax_year = IV_REQUEST_DETAIL.tax_year
+LEFT OUTER JOIN    Iv_Cra_T1_Assessment 				ON (Iv_Cra_T1_Assessment.cra_t1_assessment_code = v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.cra_t1_assessment_code)
+LEFT OUTER JOIN    Iv_Cra_Match_Status                   ON (Iv_Cra_Match_Status.cra_match_status_code = v_I015_IV_RESPONSE_RESPONSE_WHSCC.cra_match_status_code)
+WHERE  IV_REQUEST.iv_request_no  =  :al_request_no 
+" arguments=(("al_request_no", number)) )
+text(band=header alignment="0" text="Tax Year" border="6" color="33554432" x="0" y="0" height="60" width="279" html.valueishtml="0"  name=tax_year_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="" border="6" color="33554432" x="2235" y="0" height="60" width="343" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="CRA Response Status" border="6" color="33554432" x="297" y="0" height="60" width="1920" html.valueishtml="0"  name=compute_assessment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="0" color="33554432" x="0" y="8" height="64" width="238" format="[general]" html.valueishtml="0"  name=tax_year visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes edit.displayonly=yes  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="IF( import_success_flag = 'Y' ,if( cra_request_status_code  ='01' OR  cra_request_status_code  = '02', 'Tax Assessment Found', 
+if(IsNull( cra_match_status_code ),  'N/A - Response Not Yet Received', 
+if( cra_match_status_code   = '01', 'No Tax Assessment Found For This Year',
+if(  cra_tax_year_status_code  = '02', 'No Tax Assessment Found For This Year - Tax Year Invalid', 
+'Unsuccessful Individual Match' ) ) ) )  , 'N/A - Response Not Yet Received')  "border="0" color="33554432" x="297" y="8" height="64" width="1911" format="[GENERAL]" html.valueishtml="0"  name=compute_assessment visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=detail text="View Details" enabled=yes action="0" border="0" color="16777215" x="2217" y="0" height="72" width="370" vtextalign="0" htextalign="0"  name=b_view visible="1~tIF(   cra_request_status_code   = '01' OR   cra_request_status_code  = '02' AND  import_success_flag = 'Y',IF(getrow() = currentrow(),1, 0), 0)"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217744" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

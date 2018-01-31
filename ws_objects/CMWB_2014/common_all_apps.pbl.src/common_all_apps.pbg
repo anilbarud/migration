@@ -1,0 +1,33 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "common_all_apps.pbl" "";
+@end;
+@begin Objects 
+ "d_dropdown_button.srd" "common_all_apps.pbl";
+ "d_implementation_dates.srd" "common_all_apps.pbl";
+ "f_clean_string_1.srf" "common_all_apps.pbl";
+ "f_clean_string_2.srf" "common_all_apps.pbl";
+ "f_clean_string_3.srf" "common_all_apps.pbl";
+ "f_clean_string_4.srf" "common_all_apps.pbl";
+ "f_implementation_dates.srf" "common_all_apps.pbl";
+ "f_populate_app_log.srf" "common_all_apps.pbl";
+ "f_replace_ascii.srf" "common_all_apps.pbl";
+ "m_dw_rmb_popup.srm" "common_all_apps.pbl";
+ "moduleentry.srs" "common_all_apps.pbl";
+ "processentry.srs" "common_all_apps.pbl";
+ "processentry32.srs" "common_all_apps.pbl";
+ "n_dw_error.sru" "common_all_apps.pbl";
+ "n_dw_filter.sru" "common_all_apps.pbl";
+ "n_dw_resize.sru" "common_all_apps.pbl";
+ "n_dw_rowselection.sru" "common_all_apps.pbl";
+ "n_dw_sort.sru" "common_all_apps.pbl";
+ "n_dw_tooltip.sru" "common_all_apps.pbl";
+ "n_objecthelper.sru" "common_all_apps.pbl";
+ "n_pdf.sru" "common_all_apps.pbl";
+ "n_process_run_status.sru" "common_all_apps.pbl";
+ "n_rtf.sru" "common_all_apps.pbl";
+ "n_transaction.sru" "common_all_apps.pbl";
+ "u_datawindow.sru" "common_all_apps.pbl";
+ "u_dropdown_button.sru" "common_all_apps.pbl";
+ "u_dw_filter_control.sru" "common_all_apps.pbl";
+@end;

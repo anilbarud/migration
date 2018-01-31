@@ -1,0 +1,72 @@
+﻿$PBExportHeader$f_is_exported.srf
+global type f_is_exported from function_object
+end type
+
+forward prototypes
+global function boolean f_is_exported (integer ai_check, long al_claim_no, long al_record_no)
+end prototypes
+
+global function boolean f_is_exported (integer ai_check, long al_claim_no, long al_record_no);LONG ll_count
+
+CHOOSE CASE ai_check
+	CASE 1//ELIGIBILITY
+		
+		SELECT count(*)
+		  INTO :ll_count 
+	     FROM CLAIM_ELIGIBILITY_HISTORY  
+	    WHERE claim_no              = :al_claim_no
+		   AND eligibility_record_no = :al_record_no
+			AND export_no             > 0
+		 USING SQLCA;	 
+			
+		SQLCA.nf_handle_error('f_is_exported(1)','ELIGIBILITY','SELECT count(*) A')
+		
+		IF ISNULL(ll_count) THEN ll_count = 0
+      IF ll_count > 0 THEN RETURN TRUE
+			
+      SELECT count(*) 
+		  INTO :ll_count 
+	     FROM CLAIM_ELIGIBILITY  
+	    WHERE claim_no              = :al_claim_no
+		   AND eligibility_record_no = :al_record_no
+			AND export_no             > 0
+		 USING SQLCA;	 
+		 
+	    SQLCA.nf_handle_error('f_is_exported(1)','ELIGIBILITY','SELECT count(*) B')
+		 
+		 IF ISNULL(ll_count) THEN ll_count = 0
+       IF ll_count > 0 THEN RETURN TRUE
+		
+	CASE 2//FORMULARY
+					
+		SELECT count(*) 
+		  INTO :ll_count 
+	     FROM CLAIM_FORMULARY_HISTORY a  
+	    WHERE a.claim_no            = :al_claim_no
+		   AND a.formulary_record_no = :al_record_no
+			AND a.export_no              > 0
+       USING SQLCA;	 
+		 
+	   SQLCA.nf_handle_error('f_is_exported(2)','FORMULARY','SELECT count(*) C') 
+		
+		IF ISNULL(ll_count) THEN ll_count = 0
+      IF ll_count > 0 THEN RETURN TRUE
+		
+		SELECT count(*) 
+		  INTO :ll_count 
+	     FROM CLAIM_FORMULARY a  
+	    WHERE a.claim_no            = :al_claim_no
+		   AND a.formulary_record_no = :al_record_no
+			AND a.export_no              > 0
+	    USING SQLCA;	 
+			  
+	    SQLCA.nf_handle_error('f_is_exported(2)','FORMULARY','SELECT count(*) D') 
+		 
+		IF ISNULL(ll_count) THEN ll_count = 0
+      IF ll_count > 0 THEN RETURN TRUE
+
+END CHOOSE
+
+RETURN FALSE
+end function
+

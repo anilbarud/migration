@@ -1,0 +1,21 @@
+﻿$PBExportHeader$dddw_coc_period.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=current_coc_period dbname="current_coc_period" )
+ retrieve="SELECT current_coc_period 
+FROM Coc_Control
+WHERE (LEFT(CONVERT(CHAR(6),current_coc_period),4) = DATEPART(YEAR,GETDATE())) AND
+CONVERT(INT,RIGHT(current_coc_period,2)) = CONVERT(INT,DATEPART(MM,GETDATE()))
+UNION 
+SELECT previous_coc_period 
+FROM Coc_Control
+WHERE (LEFT(CONVERT(CHAR(6),current_coc_period),4) = DATEPART(YEAR,GETDATE())) AND
+CONVERT(INT,RIGHT(current_coc_period,2)) = CONVERT(INT,DATEPART(MM,GETDATE())) AND
+previous_coc_closed_flag = 'N';
+" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="4" height="76" width="393" format="[general]" html.valueishtml="0"  name=current_coc_period visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

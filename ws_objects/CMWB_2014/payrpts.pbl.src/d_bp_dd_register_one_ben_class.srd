@@ -1,0 +1,70 @@
+﻿$PBExportHeader$d_bp_dd_register_one_ben_class.srd
+$PBExportComments$Select - Used to produce the direct deposit register for benefit payments which will include one benefit class code.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=456 color="536870912" )
+summary(height=168 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="553648127" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="APPLIED_CLAIM_TXN.claim_no" )
+ column=(type=char(30) updatewhereclause=yes name=recipient_name dbname="APPLIED_CLAIM_TXN.recipient_name" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="APPLIED_CLAIM_TXN.txn_amount" )
+ column=(type=char(3) updatewhereclause=yes name=bank_no dbname="APPLIED_CLAIM_TXN.bank_no" )
+ column=(type=char(18) updatewhereclause=yes name=bank_account_no dbname="APPLIED_CLAIM_TXN.bank_account_no" )
+ column=(type=char(5) updatewhereclause=yes name=bank_transit_no dbname="APPLIED_CLAIM_TXN.bank_transit_no" )
+ column=(type=long updatewhereclause=yes name=direct_deposit_xmit_no dbname="APPLIED_CLAIM_TXN.direct_deposit_xmit_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="APPLIED_CLAIM_TXN.recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="APPLIED_CLAIM_TXN.recipient_type_code" )
+ retrieve="  SELECT APPLIED_CLAIM_TXN.claim_no,   
+         APPLIED_CLAIM_TXN.recipient_name,   
+         APPLIED_CLAIM_TXN.txn_amount,   
+         APPLIED_CLAIM_TXN.bank_no,   
+         APPLIED_CLAIM_TXN.bank_account_no,   
+         APPLIED_CLAIM_TXN.bank_transit_no,   
+         APPLIED_CLAIM_TXN.direct_deposit_xmit_no,   
+         APPLIED_CLAIM_TXN.recipient_no,   
+         APPLIED_CLAIM_TXN.recipient_type_code  
+    FROM APPLIED_CLAIM_TXN  
+   WHERE direct_deposit_xmit_no = (SELECT direct_deposit_xmit_no 
+                                   FROM DIRECT_DEPOSIT_HISTORY 
+                                   WHERE processed_xmit_date = :adt_processed_xmit_date 
+                                   AND benefit_class_code = :as_benefit_class_code )   " arguments=(("as_benefit_class_code", string),("adt_processed_xmit_date", datetime)) )
+rectangle(band=header x="18" y="28" height="324" width="4160"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+line(band=header x1="50" y1="308" x2="4128" y2="304"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3589" y="44" height="72" width="549" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="46" y1="448" x2="4119" y2="448"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim No" border="0" color="0" x="59" y="388" height="60" width="229" html.valueishtml="0"  name=applied_claim_txn_recipient_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="if(as_benefit_class_code = 'MA','MEDICAL AID PAYMENTS',if( as_benefit_class_code = 'P','PENSION PAYMENTS','LOSS OF EARNINGS PAYMENTS')) + ' REGISTER'"border="0" color="0" x="1445" y="44" height="76" width="2066" format="[general]" html.valueishtml="0"  name=calculated_benefit_class_description visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Name" border="0" color="0" x="329" y="388" height="60" width="151" html.valueishtml="0"  name=applied_claim_txn_recipient_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="425" y="44" height="60" width="306" format="YYYY-MM-DD" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="46" y="44" height="60" width="366" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="DIRECT DEPOSIT TRANSACTION FILE NO :" border="0" color="0" x="46" y="116" height="60" width="1129" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+column(band=header id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1198" y="116" height="60" width="165" format="[general]" html.valueishtml="0"  name=direct_deposit_xmit_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="FILE CREATION DATE:" border="0" color="0" x="46" y="188" height="60" width="599" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bank No" border="0" color="0" x="1609" y="388" height="60" width="215" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Bank Transit No" border="0" color="0" x="1870" y="388" height="60" width="411" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Account No" border="0" color="0" x="2322" y="388" height="60" width="297" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Amount" border="0" color="0" x="3483" y="388" height="60" width="201" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" adt_processed_xmit_date "border="0" color="0" x="672" y="192" height="60" width="617" format="YYYY-MM-DD HH:MM:SS" html.valueishtml="0"  name=processed_date visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="59" y="4" height="64" width="229" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="329" y="4" height="64" width="1239" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" height.autosize=yes edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1609" y="4" height="64" width="215" format="[general]" html.valueishtml="0"  name=bank_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1870" y="4" height="64" width="215" format="[general]" html.valueishtml="0"  name=bank_transit_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2322" y="4" height="64" width="503" format="[general]" html.valueishtml="0"  name=bank_account_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="3145" y="4" height="64" width="539" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="2866" y1="64" x2="3698" y2="64"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="2866" y1="72" x2="3698" y2="72"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Report Totals:" border="0" color="0" x="2423" y="88" height="60" width="393" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(  claim_no  for all )"border="0" color="0" x="2880" y="88" height="64" width="224" format="[general]" html.valueishtml="0"  name=calculated_detail_count visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  txn_amount  for all )"border="0" color="0" x="3150" y="88" height="64" width="539" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=calculated_report_amount_total visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

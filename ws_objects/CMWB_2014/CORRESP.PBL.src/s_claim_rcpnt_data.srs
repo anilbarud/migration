@@ -1,0 +1,11 @@
+﻿$PBExportHeader$s_claim_rcpnt_data.srs
+$PBExportComments$Stores claim correspondence recipient data
+global type s_claim_rcpnt_data from structure
+    string rcpnt_type_code
+    long claim_rcpnt_id
+    string claim_rcpnt_label
+    string action
+    string default_status
+    string data_object
+end type
+

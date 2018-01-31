@@ -1,0 +1,36 @@
+﻿$PBExportHeader$d_unapplied_days_hours_quantity.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=sum_adjustment_days_lost dbname="sum_adjustment_days_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=sum_adjustment_hours_lost dbname="sum_adjustment_hours_lost" )
+ column=(type=long updatewhereclause=yes name=sum_adjustment_quantity dbname="sum_adjustment_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=sum_unapplied_txn_amount dbname="sum_unapplied_txn_amount" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ retrieve="  SELECT sum(adjustment_days_lost) as sum_adjustment_days_lost,   
+         sum(adjustment_hours_lost) as sum_adjustment_hours_lost,   
+         sum(adjustment_quantity) as sum_adjustment_quantity,
+         sum(txn_amount) as sum_unapplied_txn_amount,
+         a.payment_no  
+    FROM ADJUSTMENT_TXN_WORK_TABLE a,
+         UNAPPLIED_CLAIM_TXN b
+  WHERE a.payment_no in(:al_payment_no)  
+   and  a.txn_no = b.txn_no
+	and  processed_date is null
+  group by a.payment_no
+   
+" arguments=(("al_payment_no", numberlist)) )
+text(band=header alignment="2" text="Sum Adjustment Days Lost" border="0" color="33554432" x="5" y="4" height="64" width="768" html.valueishtml="0"  name=sum_adjustment_days_lost_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Sum Adjustment Hours Lost" border="0" color="33554432" x="777" y="4" height="64" width="795" html.valueishtml="0"  name=sum_adjustment_hours_lost_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Sum Adjustment Quantity" border="0" color="33554432" x="1577" y="4" height="64" width="736" html.valueishtml="0"  name=sum_adjustment_quantity_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment No" border="0" color="33554432" x="2318" y="4" height="64" width="352" html.valueishtml="0"  name=payment_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=sum_adjustment_days_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="777" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=sum_adjustment_hours_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="1577" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=sum_adjustment_quantity visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2318" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="2670" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=sum_unapplied_txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

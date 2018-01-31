@@ -1,0 +1,11 @@
+﻿$PBExportHeader$d_provider_no.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=number update=yes key=yes name=provider_no dbname="provider_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Unused_Provider_No~" ) COMPUTE(NAME=~"min(Unused_Provider_No.provider_no ) provider_no~")) " update="Unused_Provider_No" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="2" text="Provider No"border="0" color="0" x="5" y="4" height="65" width="343"  name=provider_no_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="5" y="4" height="77" width="330" format="[general]"  name=provider_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

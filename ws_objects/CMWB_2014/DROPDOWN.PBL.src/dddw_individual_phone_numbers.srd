@@ -1,0 +1,26 @@
+﻿$PBExportHeader$dddw_individual_phone_numbers.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="79741120" )
+table(column=(type=char(10) updatewhereclause=yes name=phone_no dbname="INDIVIDUAL.phone_no" )
+ column=(type=char(5) updatewhereclause=yes name=phone_desc dbname="phone_desc" )
+ retrieve="SELECT telephone_no as phone_no, 'Main' as phone_desc
+FROM INDIVIDUAL
+WHERE individual_no = :arg_individual_no
+	and telephone_no <> ''
+UNION ALL
+SELECT cellphone_no as phone_no, 'Cell' as phone_desc
+FROM INDIVIDUAL
+WHERE individual_no = :arg_individual_no
+	and cellphone_no <> ''
+UNION ALL
+SELECT pager_no as phone_no, 'Pager' as phone_desc
+FROM INDIVIDUAL
+WHERE individual_no = :arg_individual_no
+	and pager_no <> ''" arguments=(("arg_individual_no", number)) )
+compute(band=detail alignment="0" expression="string(phone_no,'(@@@) @@@-@@@@') + ~" - ~" +  phone_desc "border="0" color="33554432" x="9" y="4" height="60" width="736" format="[general]"  name=phone_combination  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="1225" y="4" height="60" width="334" format="[general]"  name=phone_no edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1568" y="4" height="60" width="174" format="[general]"  name=phone_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

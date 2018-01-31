@@ -1,0 +1,6 @@
+﻿$PBExportHeader$s_old_individual_array.srs
+$PBExportComments$Holds array of individual_no's for merging of T5007 tables.
+global type s_old_individual_array from structure
+	long		ll_old_individual[]
+end type
+

@@ -1,0 +1,29 @@
+﻿$PBExportHeader$d_inbasket_preadj_67_account.srd
+$PBExportComments$Datawindow used to look at documents by claim for Inbasket filtering
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ retrieve="Select A.claim_no
+From   DOCUMENT_INDEX A 
+Join   REF B on a.docid = B.docid
+Where  ( (B.doccatid = :al_catid)
+AND exists (SELECT * FROM DOCUMENT_INDEX C WHERE C.type_code in	 ('AC ','AD','AH','AI ','AP','AR','AT','SDC','SDD','MPC','MPD') and A.claim_no =	 C.claim_no)) 
+AND exists (SELECT * FROM DOCUMENT_INDEX D WHERE D.type_code =	 'SE' and A.claim_no = D.claim_no)" arguments=(("al_catid", number)) )
+text(band=header alignment="0" text="Pre-Adjudication 67 And Account" border="0" color="0" x="37" y="12" height="60" width="850" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="1" text="Claim No:" border="0" color="0" x="37" y="4" height="64" width="283" html.valueishtml="0"  name=document_index_claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="338" y="4" height="64" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

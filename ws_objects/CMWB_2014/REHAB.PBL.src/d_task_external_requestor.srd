@@ -1,0 +1,64 @@
+﻿$PBExportHeader$d_task_external_requestor.srd
+$PBExportComments$the external requestors for a task - a provider or an 'other'
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=248 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=long update=yes updatewhereclause=yes name=referring_provider_no dbname="referring_provider_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=referring_provider_type_code dbname="referring_provider_type_code" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=rehab_referral_no dbname="rehab_referral_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=referred_on_date dbname="referred_on_date" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=rehab_service_code dbname="rehab_service_code" )
+ column=(type=long update=yes updatewhereclause=yes name=doc_id dbname="doc_id" )
+ column=(type=char(1) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(1) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(1) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(1) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(1) updatewhereclause=yes name=country dbname="country" )
+ column=(type=char(1) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(1) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(1) updatewhereclause=yes name=telephone_no dbname="telephone_no" )
+ retrieve="  SELECT	claim_no ,         
+			task_no ,          
+			referring_provider_no ,          
+			referring_provider_type_code ,           
+			rehab_referral_no ,
+			referred_on_date ,
+            rehab_service_code ,
+            doc_id,
+			' ' name,          
+			' ' address_line1,          
+			' ' address_line2,          
+			' ' city,         
+			' ' country,         
+			' ' postal_code,         
+			' ' prov_state_code,
+           ' ' telephone_no
+ FROM	REHAB_REFERRAL    
+ WHERE	claim_no	= :claim_no  
+ and    task_no		= :task_no " update="REHAB_REFERRAL" updatewhere=1 updatekeyinplace=yes arguments=(("claim_no", number),("task_no", number)) )
+groupbox(band=detail text="Referred By"border="2" color="33554432" x="18" y="0" height="240" width="2542"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Provider Type:" border="0" color="0" x="37" y="80" height="56" width="370" html.valueishtml="0"  name=provider_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="No:" border="0" color="0" x="1120" y="80" height="56" width="82" html.valueishtml="0"  name=provider_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="5" color="0" x="1221" y="84" height="60" width="352" format="########" html.valueishtml="0"  name=referring_provider_no visible="1" editmask.mask="########" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="1705" y="80" height="56" width="832" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+button(band=detail text="?" enabled=yes action="0" border="0" color="33554432" x="1595" y="76" height="72" width="82" vtextalign="0" htextalign="0"  name=b_search_provider2 visible="1"  font.face="Tahoma" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Referred On:" border="0" color="0" x="37" y="160" height="60" width="334" html.valueishtml="0"  name=requested_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="0" x="425" y="76" height="60" width="681" format="[general]" html.valueishtml="0"  name=referring_provider_type_code visible="1" dddw.name=dddw_provider_type dddw.displaycolumn=provider_type_desc dddw.datacolumn=provider_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=30 border="5" color="0" x="425" y="160" height="60" width="457" format="YYYY-MM-DD" html.valueishtml="0"  name=referred_on_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+bitmap(band=detail filename="doc_16_h.gif" x="2459" y="164" height="64" width="73" border="0"  name=p_referral visible="1~tif( doc_id > 0, 1,0)"  hidesnaked=1 )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

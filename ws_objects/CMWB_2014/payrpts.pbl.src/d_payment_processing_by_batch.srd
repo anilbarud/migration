@@ -1,0 +1,202 @@
+﻿$PBExportHeader$d_payment_processing_by_batch.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=344 color="12632256" )
+summary(height=248 color="553648127" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=batch_no dbname="batch_no" )
+ column=(type=char(1) updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=datetime updatewhereclause=yes name=paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=paid_to_date dbname="paid_to_date" )
+ column=(type=char(30) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(4) updatewhereclause=yes name=benefit_category_code dbname="benefit_category_code" )
+ column=(type=char(30) updatewhereclause=yes name=benefit_category_desc dbname="benefit_category_desc" )
+ column=(type=char(50) updatewhereclause=yes name=txn_rejected_reason_desc dbname="txn_rejected_reason_desc" )
+ retrieve="
+SELECT   a.claim_no,   
+         a.payment_no,   
+         a.batch_no,     
+         a.payment_method_code,   
+         a.txn_amount,      
+         a.admin_region_code,   
+         b.payment_type_code,   
+         b.payment_sub_type_code,   
+         b.paid_from_date,   
+         b.paid_to_date,   
+         a.recipient_name,   
+         a.recipient_no,   
+         a.recipient_type_code,       
+         d.processed_date, 
+         d.create_date,   
+         c.benefit_category_code  ,
+			benefit_category_desc,
+			'' AS txn_rejected_reason_desc
+FROM APPLIED_CLAIM_TXN a,   
+     PAYMENT b,    
+     Payment_Type c,    
+     TXN_BATCH_CONTROL d ,
+     Benefit_Category e
+   WHERE a.payment_no 		= b.payment_no  
+     and c.payment_type_code 	= b.payment_type_code  
+     and d.batch_no 		= a.batch_no  
+     and c.benefit_category_code = e.benefit_category_code
+     and d.batch_no = :al_batch_no
+
+UNION ALL
+
+SELECT   a.claim_no,   
+         a.payment_no,   
+         a.batch_no,     
+         a.payment_method_code,   
+         a.txn_amount,      
+         a.admin_region_code,   
+         b.payment_type_code,   
+         b.payment_sub_type_code,   
+         b.paid_from_date,   
+         b.paid_to_date,   
+         a.recipient_name,   
+         a.recipient_no,   
+         a.recipient_type_code,       
+         d.processed_date, 
+         d.create_date,   
+         c.benefit_category_code ,
+	      benefit_category_desc ,
+			f.txn_rejected_reason_desc
+    FROM UNAPPLIED_CLAIM_TXN a,   
+	 PAYMENT b,    
+	 Payment_Type c,    
+	 TXN_BATCH_CONTROL d ,
+	 REJECTED_UNAPPLIED_CLAIM_TXN e,
+	 Txn_Rejected_Reason f,
+     Benefit_Category g
+WHERE a.payment_no 		= b.payment_no  
+     and c.payment_type_code 	= b.payment_type_code     
+     and e.batch_no = d.batch_no
+     and a.txn_no = e.txn_no
+		and e.txn_rejected_reason_code = f.txn_rejected_reason_code
+     and c.benefit_category_code = g.benefit_category_code
+     and d.batch_no = :al_batch_no
+
+UNION ALL
+
+SELECT   a.claim_no,   
+         a.payment_no,   
+         a.batch_no,     
+         a.payment_method_code,   
+         a.txn_amount,      
+         a.admin_region_code,   
+         b.payment_type_code,   
+         b.payment_sub_type_code,   
+         b.paid_from_date,   
+         b.paid_to_date,   
+         a.recipient_name,   
+         a.recipient_no,   
+         a.recipient_type_code,       
+         d.processed_date, 
+         d.create_date,   
+         c.benefit_category_code ,
+	      benefit_category_desc ,
+			f.txn_rejected_reason_desc
+    FROM APPLIED_CLAIM_TXN a,   
+	 PAYMENT b,    
+	 Payment_Type c,    
+	 TXN_BATCH_CONTROL d ,
+	 REJECTED_UNAPPLIED_CLAIM_TXN e,
+	Txn_Rejected_Reason f,
+	Benefit_Category g
+WHERE a.payment_no 		= b.payment_no  
+     and c.payment_type_code 	= b.payment_type_code     
+     and e.batch_no = d.batch_no
+     and a.txn_no = e.txn_no
+		and e.txn_rejected_reason_code = f.txn_rejected_reason_code
+     and c.benefit_category_code = g.benefit_category_code
+     and d.batch_no = :al_batch_no
+" arguments=(("al_batch_no", number))  sort="benefit_category_code A claim_no A payment_no A " )
+group(level=1 header.height=184 trailer.height=240 by=("benefit_category_code" ) header.color="536870912" trailer.color="553648127" )
+group(level=2 header.height=80 trailer.height=92 by=("txn_rejected_reason_desc" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="Payment and Award Processed Report" border="0" color="33554432" x="823" y="56" height="92" width="1632" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="336" x2="3470" y2="336"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="33554432" x="2935" y="260" height="68" width="517" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Region:" border="0" color="33554432" x="1490" y="172" height="60" width="192" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1705" y="172" height="60" width="178" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=header text="Next" filename="" enabled=yes action="0" border="0" color="33554432" x="910" y="252" height="76" width="215" vtextalign="0" htextalign="0"  name=b_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=header id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="389" y="196" height="64" width="256" format="[general]" html.valueishtml="0"  name=batch_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Batch no:" border="0" color="33554432" x="18" y="196" height="60" width="242" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Batched date:" border="0" color="33554432" x="18" y="268" height="60" width="357" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="389" y="268" height="60" width="512" format="[shortdate] [time]" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="80" width="1431" format="[general]" html.valueishtml="0"  name=benefit_category_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Claim" border="0" color="33554432" x="137" y="112" height="60" width="178" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Amount" border="0" color="33554432" x="3159" y="108" height="60" width="201" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Payment" border="0" color="33554432" x="434" y="108" height="60" width="229" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Type" border="0" color="33554432" x="768" y="112" height="60" width="123" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Payment period" border="0" color="33554432" x="1134" y="108" height="60" width="407" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Recipient" border="0" color="33554432" x="1925" y="108" height="60" width="242" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Method" border="0" color="33554432" x="2894" y="108" height="60" width="197" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=header.2 alignment="0" expression="if( txn_rejected_reason_desc = '','Processed transactions','Rejected transactions: ' + txn_rejected_reason_desc )"border="0" color="33554432" x="137" y="8" height="60" width="2834" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="2981" y="8" height="60" width="55" format="[general]" html.valueishtml="0"  name=payment_method_code visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="398" y="4" height="60" width="265" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="/" border="0" color="33554432" x="814" y="4" height="60" width="37" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="709" y="4" height="60" width="91" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="859" y="4" height="60" width="96" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="1006" y="8" height="60" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=paid_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="to" border="0" color="33554432" x="1326" y="8" height="60" width="46" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="1399" y="8" height="60" width="293" format="[shortdate] [time]" html.valueishtml="0"  name=paid_to_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="1728" y="4" height="60" width="247" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="2034" y="4" height="60" width="50" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="2121" y="8" height="60" width="777" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="3054" y="8" height="60" width="329" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="64" y="4" height="60" width="283" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="0" expression="/* if( txn_grouping_type = 'Rejected transactions','-',If( txn_grouping_type = 'NBMS reversals','+','')) */"border="0" color="33554432" x="2679" y="12" height="60" width="37" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression="sum( txn_amount for group 2)"border="0" color="33554432" x="3054" y="12" height="60" width="329" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression="count(claim_no for group 2)"border="0" color="33554432" x="2734" y="12" height="60" width="128" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="'Payments and Awards for ~"' +  benefit_category_code + '~"'"border="0" color="33554432" x="1234" y="20" height="60" width="1367" format="[GENERAL]" html.valueishtml="0"  name=compute_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="'Rejected transactions for ~"' +  benefit_category_code + '~"'"border="0" color="33554432" x="1248" y="88" height="60" width="1353" format="[GENERAL]" html.valueishtml="0"  name=compute_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="5" y1="4" x2="3374" y2="4"  name=l_3 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=trailer.1 x1="0" y1="228" x2="3378" y2="232"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="'Processed transactions for ~"' +  benefit_category_code + '~"'"border="0" color="33554432" x="1248" y="156" height="60" width="1353" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2693" y1="120" x2="2715" y2="120"  name=l_4 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=trailer.1 x1="2683" y1="156" x2="2871" y2="156"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="sum(if(txn_rejected_reason_desc <> '',txn_amount,0)for group 1)"border="0" color="33554432" x="3054" y="88" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="3008" y1="120" x2="3031" y2="120"  name=l_5 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=trailer.1 x1="3003" y1="156" x2="3374" y2="156"  name=l_7 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="sum(if(txn_rejected_reason_desc = '',txn_amount,0)for group 1)"border="0" color="33554432" x="3054" y="156" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="count( claim_no  for group 1)"border="0" color="33554432" x="2706" y="20" height="60" width="160" format="[General]" html.valueishtml="0"  name=compute_17 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(if( txn_rejected_reason_desc <> '',1,0) for group 1)"border="0" color="33554432" x="2706" y="88" height="60" width="160" format="[General]" html.valueishtml="0"  name=compute_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(if( txn_rejected_reason_desc = '',1,0) for group 1)"border="0" color="33554432" x="2706" y="156" height="60" width="160" format="[General]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(txn_amount for group 1)"border="0" color="33554432" x="3054" y="20" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_18 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Summary for Region" border="0" color="33554432" x="78" y="96" height="80" width="1029" html.valueishtml="0"  name=t_23 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="1" text="Rejected transactions" border="0" color="33554432" x="2030" y="100" height="60" width="571" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="1" text="Processed transactions" border="0" color="33554432" x="1952" y="168" height="60" width="649" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="2697" y1="132" x2="2720" y2="132"  name=l_8 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="2688" y1="168" x2="2875" y2="168"  name=l_9 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=summary alignment="1" expression="sum(if( txn_rejected_reason_desc <> '',1,0) for all)"border="0" color="33554432" x="2711" y="100" height="60" width="160" format="[General]" html.valueishtml="0"  name=compute_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(if( txn_rejected_reason_desc = '',1,0) for all)"border="0" color="33554432" x="2711" y="168" height="60" width="160" format="[General]" html.valueishtml="0"  name=compute_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="1" text="Batched by the Region" border="0" color="33554432" x="2025" y="32" height="60" width="576" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="rowcount()"border="0" color="33554432" x="2711" y="32" height="60" width="160" format="[General]" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="3013" y1="132" x2="3035" y2="132"  name=l_10 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="3003" y1="168" x2="3374" y2="168"  name=l_11 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=summary alignment="1" expression="sum(if(txn_rejected_reason_desc <> '',txn_amount,0))"border="0" color="33554432" x="3054" y="100" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(if(txn_rejected_reason_desc = '',txn_amount,0))"border="0" color="33554432" x="3054" y="168" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_19 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(txn_amount )"border="0" color="33554432" x="3054" y="32" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

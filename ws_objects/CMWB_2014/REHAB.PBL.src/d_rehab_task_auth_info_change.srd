@@ -1,0 +1,77 @@
+﻿$PBExportHeader$d_rehab_task_auth_info_change.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=320 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=seq_no dbname="seq_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=old_authorized_quantity dbname="old_authorized_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=old_authorized_amount dbname="old_authorized_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=new_authorized_quantity dbname="new_authorized_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=new_authorized_amount dbname="new_authorized_amount" )
+ column=(type=char(200) updatewhereclause=yes name=changed_amounts_comment dbname="changed_amounts_comment" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_amount dbname="max_authorized_amount" )
+ column=(type=long updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ column=(type=char(50) updatewhereclause=yes name=rehab_service_desc_e dbname="rehab_service_desc_e" )
+ column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=char(40) updatewhereclause=yes name=task_type_desc dbname="task_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=task_sub_type_desc dbname="task_sub_type_desc" )
+ retrieve=" SELECT a.seq_no,   
+        	a.old_authorized_quantity,   
+         	a.old_authorized_amount,   
+         	a.new_authorized_quantity,   
+         	a.new_authorized_amount,   
+         	a.changed_amounts_comment,   
+         	a.create_date,   
+         	a.create_user_id ,
+            c.max_authorized_amount ,
+            c.billable_item_no,
+            e.rehab_service_desc_e,
+			d.rehab_program_desc_e, 
+            g.task_type_desc,
+            h.task_sub_type_desc
+    FROM	rehab_task_authorization_auth_info_change a
+join REHAB_TASK_AUTHORIZATION      b on a.authorization_no    = b.authorization_no 
+join Billable_Item_Rehab_Task_Xref c on b.billable_xref_no    = c.billable_xref_no
+left join Rehab_Program            d on d.rehab_program_code  = c.rehab_program_code
+left join Rehab_Service            e on e.rehab_service_code  = c.rehab_service_code
+join REHAB_TASK                    f on b.claim_no = f.claim_no and b.task_no = f.task_no
+join Task_Type                     g on f.task_type_code = g.task_type_code
+join Task_Sub_Type                 h on f.task_type_code  = h.task_type_code and f.task_sub_type_code = h.task_sub_type_code
+WHERE 	a.authorization_no = :al_authorization_no
+ORDER BY seq_no
+" arguments=(("al_authorization_no", number))  sort="seq_no D " )
+groupbox(band=header text=""border="2" color="33554432" x="9" y="12" height="88" width="3424"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217752" )
+line(band=header x1="9" y1="312" x2="3433" y2="312"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Seq." border="0" color="33554432" x="14" y="236" height="60" width="123" html.valueishtml="0"  name=seq_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Quantity  Entered" border="0" color="33554432" x="165" y="180" height="116" width="242" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total Quantity" border="0" color="33554432" x="434" y="180" height="116" width="219" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total Amt" border="0" color="33554432" x="681" y="236" height="60" width="352" html.valueishtml="0"  name=new_authorized_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Auth Date" border="0" color="33554432" x="1061" y="236" height="60" width="320" html.valueishtml="0"  name=create_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Authorized By " border="0" color="33554432" x="1408" y="236" height="60" width="425" html.valueishtml="0"  name=create_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="rehab_service_desc_e + ' / ' +  if(lenA(trim(rehab_program_desc_e ))>0, rehab_program_desc_e + ' / ' ,'') +   task_type_desc + ' / ' +  task_sub_type_desc  
+"border="0" color="33554432" x="27" y="24" height="60" width="3365" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Change Comment" border="0" color="33554432" x="1851" y="236" height="60" width="462" html.valueishtml="0"  name=changed_amounts_comment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="4" height="64" width="123" format="[general]" html.valueishtml="0"  name=seq_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression=" new_authorized_quantity  - old_authorized_quantity"border="0" color="33554432" x="165" y="4" height="64" width="242" format="#,##0.00" html.valueishtml="0"  name=compute_3 visible="1~tif(  old_authorized_quantity =   new_authorized_quantity ,0,1)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="N/E" border="0" color="33554432" x="165" y="4" height="60" width="242" html.valueishtml="0"  name=t_3 visible="1~tif(  old_authorized_quantity =   new_authorized_quantity ,1,0)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="434" y="4" height="64" width="219" format="0.00" html.valueishtml="0"  name=new_authorized_quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression=" new_authorized_amount"border="0" color="33554432" x="681" y="4" height="64" width="352" format="#,##0.00" html.valueishtml="0"  name=compute_2 visible="1~t if( old_authorized_amount = new_authorized_amount ,0,if( new_authorized_amount  =  max_authorized_amount ,0, 1))"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="if( old_authorized_amount <> new_authorized_amount ,if( new_authorized_amount  <>  max_authorized_amount , ~"Not Changed~", ~"MAX~"),~"Not Changed~")"border="0" color="33554432" x="681" y="4" height="64" width="352" format="[General]" html.valueishtml="0"  name=compute_1 visible="1~tif( old_authorized_amount = new_authorized_amount ,1,if( new_authorized_amount  =  max_authorized_amount ,1, 0))"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="1061" y="4" height="64" width="320" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="1408" y="4" height="64" width="425" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=16 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1851" y="4" height="64" width="1842" format="[general]" html.valueishtml="0"  name=changed_amounts_comment visible="1" edit.limit=200 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

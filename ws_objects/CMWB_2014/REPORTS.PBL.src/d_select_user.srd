@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_select_user.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=105 color="536870912" )
+table(column=(type=char(8) update=yes updatewhereclause=yes key=yes name=user_id dbname="User_Profile.user_id" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=user_last_name dbname="User_Profile.user_last_name" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=user_first_name dbname="User_Profile.user_first_name" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=default_admin_region_code dbname="User_Profile.default_admin_region_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=active_flag dbname="User_Profile.active_flag" )
+ column=(type=char(1) updatewhereclause=yes name=workbench_flag dbname="User_Profile.workbench_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"User_Profile~" ) COLUMN(NAME=~"User_Profile.user_id~") COLUMN(NAME=~"User_Profile.user_last_name~") COLUMN(NAME=~"User_Profile.user_first_name~") COLUMN(NAME=~"User_Profile.default_admin_region_code~") COLUMN(NAME=~"User_Profile.active_flag~") COLUMN(NAME=~"User_Profile.workbench_flag~")WHERE(    EXP1 =~"User_Profile.workbench_flag~"   OP =~"<>~"    EXP2 =~"~~~"I~~~"~" ) ) " update="User_Profile" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="14" y="8" height="69" width="956" format="[general]"  name=user_id dddw.name=dddw_user_profile dddw.displaycolumn=computed_user_full_name dddw.datacolumn=user_id dddw.percentwidth=100 dddw.lines=0 dddw.limit=8 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

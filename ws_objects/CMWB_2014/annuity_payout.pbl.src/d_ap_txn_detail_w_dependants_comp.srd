@@ -1,0 +1,117 @@
+﻿$PBExportHeader$d_ap_txn_detail_w_dependants_comp.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 92 print.margin.right = 92 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=136 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=100 color="536870912" )
+detail(height=224 color="536870912" height.autosize=yes )
+table(column=(type=char(41) updatewhereclause=yes name=benefit_holder_name dbname="benefit_holder_name" )
+ column=(type=decimal(2) updatewhereclause=yes name=claim_total dbname="claim_total" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=payout_total dbname="payout_total" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(40) updatewhereclause=yes name=claim_role_desc dbname="claim_role_desc" )
+ column=(type=char(1) updatewhereclause=yes name=non_benefit_holder_details_flag dbname="non_benefit_holder_details_flag" )
+ retrieve="SELECT c.given_names +' '+ c.last_name AS 'benefit_holder_name',
+       d.sub_total_annuity_payout_amount 'claim_total',
+       d.claim_no,
+       e.sub_total_annuity_payout_amount 'payout_total',
+       e.annuity_payout_no,
+       e.annuity_account_no,
+       c.individual_no,
+       g.claim_role_desc,
+       'Y' AS 'non_benefit_holder_details_flag'
+FROM   ANNUITY_PAYOUT_PARTICIPANT a
+JOIN   Annuity_Role               b ON a.annuity_role_code = b.annuity_role_code
+JOIN   INDIVIDUAL                 c ON a.recipient_no = c.individual_no
+JOIN   ANNUITY_PAYOUT_CLAIM_SUMMARY d ON a.annuity_payout_no = d.annuity_payout_no
+JOIN   ANNUITY_PAYOUT               e ON a.annuity_payout_no = e.annuity_payout_no
+JOIN   ANNUITY_ACCOUNT              f ON e.annuity_account_no = f.annuity_account_no
+JOIN   Claim_Role                   g ON f.claim_role_code = g.claim_role_code
+WHERE  a.recipient_type_code = 'I'
+AND    b.annuity_eligibility_flag = 'Y'
+AND    b.annuity_entitlement_flag = 'Y'
+AND    e.annuity_payout_no = :al_annuity_payout_no
+AND EXISTS ( SELECT *
+             FROM   ANNUITY_PAYOUT_CLAIM_DETAIL h
+             JOIN   ANNUITY_PAYOUT_PARTICIPANT  i ON h.recipient_no = i.recipient_no
+             JOIN   Annuity_Role                j ON a.annuity_role_code = b.annuity_role_code
+             WHERE  h.annuity_payout_no = d.annuity_payout_no
+             AND    h.claim_no          = d.claim_no
+             AND    h.recipient_no     <> c.individual_no
+             AND    h.recipient_type_code = 'I'
+             AND    j.annuity_eligibility_flag = 'N'
+             AND    j.annuity_entitlement_flag = 'Y' )
+UNION ALL
+SELECT c.given_names +' '+ c.last_name AS 'benefit_holder_name',
+       d.sub_total_annuity_payout_amount 'claim_total',
+       d.claim_no,
+       e.sub_total_annuity_payout_amount 'payout_total',
+       e.annuity_payout_no,
+       e.annuity_account_no,
+       c.individual_no,
+       g.claim_role_desc,
+       'N' AS 'non_benefit_holder_details_flag'
+FROM   ANNUITY_PAYOUT_PARTICIPANT a
+JOIN   Annuity_Role               b ON a.annuity_role_code = b.annuity_role_code
+JOIN   INDIVIDUAL                 c ON a.recipient_no = c.individual_no
+JOIN   ANNUITY_PAYOUT_CLAIM_SUMMARY d ON a.annuity_payout_no = d.annuity_payout_no
+JOIN   ANNUITY_PAYOUT               e ON a.annuity_payout_no = e.annuity_payout_no
+JOIN   ANNUITY_ACCOUNT              f ON e.annuity_account_no = f.annuity_account_no
+JOIN   Claim_Role                   g ON f.claim_role_code = g.claim_role_code
+WHERE  a.recipient_type_code = 'I'
+AND    b.annuity_eligibility_flag = 'Y'
+AND    b.annuity_entitlement_flag = 'Y'
+AND    e.annuity_payout_no = :al_annuity_payout_no
+AND NOT EXISTS ( SELECT *
+                 FROM   ANNUITY_PAYOUT_CLAIM_DETAIL h
+                 JOIN   ANNUITY_PAYOUT_PARTICIPANT  i ON h.recipient_no = i.recipient_no
+                 JOIN   Annuity_Role                j ON a.annuity_role_code = b.annuity_role_code
+                 WHERE  h.annuity_payout_no = d.annuity_payout_no
+                 AND    h.claim_no          = d.claim_no
+                 AND    h.recipient_no     <> c.individual_no
+                 AND    h.recipient_type_code = 'I'
+                 AND    j.annuity_eligibility_flag = 'N'
+                 AND    j.annuity_entitlement_flag = 'Y' )
+order by d.claim_no" arguments=(("al_annuity_payout_no", number)) )
+group(level=1 header.height=152 trailer.height=152 by=("annuity_payout_no" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=76 trailer.height=120 by=("claim_no" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="Participant - Role" border="0" color="0" x="416" y="28" height="64" width="503" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Payment Type/Sub Type" border="0" color="0" x="2231" y="28" height="64" width="709" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Transaction Amount" border="0" color="0" x="3319" y="28" height="64" width="581" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment No" border="0" color="0" x="4110" y="28" height="64" width="393" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+rectangle(band=header x="0" y="4" height="16" width="4599"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+rectangle(band=header x="0" y="120" height="16" width="4599"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="Annuity Payout No:" border="0" color="33554432" x="27" y="48" height="64" width="553" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="599" y="48" height="64" width="215" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="402" y="12" height="60" width="242" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="Claim No:" border="0" color="33554432" x="142" y="12" height="60" width="242" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+report(band=detail dataobject="d_bh_with_dependants" x="14" y="8" height="92" width="4507" border="0"  height.autosize=yes criteria="" nest_arguments=(("al_annuity_payout_no ")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_bh_ap_txn_detail_w_dependants" x="14" y="108" height="88" width="4507" border="0"  height.autosize=yes criteria="" nest_arguments=(("al_annuity_payout_no "),("claim_no")) trail_footer = yes  name=dw_bh_comp visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_non_bh_ap_txn_detail_w_dependants" x="14" y="204" height="96" width="4507" border="0"  height.autosize=yes criteria="" nest_arguments=((" al_annuity_payout_no "),(" claim_no ")) trail_footer = yes  name=dw_non_bh_comp visible="1~tIF ( non_benefit_holder_details_flag = 'Y',1,0 )"  slideup=directlyabove )
+text(band=trailer.2 alignment="1" text="Claim Transaction Total:" border="0" color="33554432" x="2647" y="40" height="60" width="626" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=trailer.2 x1="2295" y1="12" x2="4594" y2="12"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+compute(band=trailer.2 alignment="1" expression=" claim_total * -1"border="0" color="33554432" x="3552" y="40" height="60" width="370" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.1 alignment="1" text="Payout Transaction Total:" border="0" color="0" x="2610" y="80" height="60" width="658" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2295" y1="36" x2="4594" y2="36"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=trailer.1 x1="2295" y1="48" x2="4594" y2="48"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression=" payout_total * -1"border="0" color="33554432" x="3552" y="80" height="60" width="370" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="9" y1="8" x2="4645" y2="8"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Annuity Account No:" border="0" color="33554432" x="9" y="28" height="64" width="585" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=footer id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="608" y="28" height="64" width="338" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2683" y="28" height="64" width="402" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=footer id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="3109" y="28" height="64" width="411" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression=" benefit_holder_name + ' - ' + claim_role_desc "border="0" color="33554432" x="1152" y="28" height="64" width="1120" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

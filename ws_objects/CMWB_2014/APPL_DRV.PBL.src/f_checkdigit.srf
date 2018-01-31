@@ -1,0 +1,68 @@
+﻿$PBExportHeader$f_checkdigit.srf
+$PBExportComments$Common - Performs check digit validation for SIN and Medicare #'s.
+global type f_checkdigit from function_object
+end type
+
+forward prototypes
+global function int f_checkdigit (string als_checkstring, int ali_numbersize)
+end prototypes
+
+global function int f_checkdigit (string als_checkstring, int ali_numbersize);// als_CheckString is the number to validate the check digit on 
+//						Individual
+//						SIN
+//						Medicare
+//	ali_NumberSize tells whether it should use a 7 or 8 digit validate 
+//
+
+// What is the entered check digit to compare to calculated check digit later
+
+ 	string vls_ManualCheckDigit
+ 	vls_ManualCheckDigit = Right(als_CheckString,1)
+
+// Take off the check digit (last digit)
+
+	als_CheckString = Left(als_CheckString,Len(als_CheckString)-1)
+
+//	Pad the number on the left to fit the required size
+  
+	Integer A  
+   For A = Len(als_CheckString) + 1 To ali_NumberSize
+       als_CheckString = "0" + als_CheckString
+   Next
+
+// If the number is supposed to be 8 digits, move the last digit to the front of the number
+
+   If ali_NumberSize = 8 Then
+       als_CheckString = Right(als_CheckString, 1) + Left(als_CheckString, 7)
+   End If
+
+// Do the calculation
+	
+	String vls_CheckDigit
+	String vls_Total1
+	Long vll_Total2, vll_Total3, vll_Total4, vll_Total5
+
+   vls_Total1 = Mid(als_CheckString, 1, 1) + Mid(als_CheckString, 3, 1) + Mid(als_CheckString, 5, 1) + Mid(als_CheckString, 7, 1)
+   vls_Total1 = String(Long(vls_Total1) * 2)
+
+   For A = 1 To Len(vls_Total1)
+      vll_Total2 = vll_Total2 + Long(Mid(vls_Total1, A, 1))
+   Next
+
+   vll_Total3 = Long(Mid(als_CheckString, 2, 1)) + Long(Mid(als_CheckString, 4, 1)) + Long(Mid(als_CheckString, 6, 1)) + Long(Mid(als_CheckString, 8, 1))
+
+   vll_Total4 = vll_Total2 + vll_Total3
+
+   vll_Total5 = 100 - vll_Total4
+
+   vls_CheckDigit = Right(String(vll_Total5), 1)
+
+// If the calculated check digit matches the
+ 
+  	If vls_CheckDigit = vls_ManualCheckDigit Then
+		return 0
+	Else 
+		return -1
+	End If
+end function
+

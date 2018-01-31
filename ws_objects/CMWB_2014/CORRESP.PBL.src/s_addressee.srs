@@ -1,0 +1,11 @@
+﻿$PBExportHeader$s_addressee.srs
+global type s_addressee from structure
+	long		rcpnt_id
+	string		rcpnt_addressee_role
+	string		rcpnt_addressee_type
+	string		rcpnt_provider_code
+	string		rcpnt_addressee_location
+	long		claim_no
+	long		correspond_recipient_id
+end type
+

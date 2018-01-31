@@ -1,0 +1,33 @@
+﻿$PBExportHeader$d_checklist_cancelled_comment.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=212 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=checklist_no dbname="checklist_no" )
+ column=(type=char(256) update=yes updatewhereclause=yes name=cancelled_comment dbname="cancelled_comment" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=checklist_status_code dbname="checklist_status_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ retrieve="  SELECT CHECKLIST.checklist_no,   
+              CHECKLIST.cancelled_comment,
+              CHECKLIST.checklist_status_code,
+              CHECKLIST.concluded_date,
+              CHECKLIST.concluded_by_user_id
+    FROM CHECKLIST
+WHERE  CHECKLIST.checklist_no = :ar_checklist_no" update="CHECKLIST" updatewhere=1 updatekeyinplace=yes arguments=(("ar_checklist_no", number)) )
+text(band=header alignment="0" text="Checklist" border="6" color="33554432" x="14" y="8" height="56" width="256" html.valueishtml="0"  name=t_5  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="6" color="33554432" x="288" y="8" height="56" width="1678" format="[general]" html.valueishtml="0"  name=checklist_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="33554432" x="0" y="4" height="200" width="1975" format="[general]" html.valueishtml="0"  name=cancelled_comment visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.required=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

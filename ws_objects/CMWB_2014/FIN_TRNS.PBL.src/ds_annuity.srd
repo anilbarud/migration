@@ -1,0 +1,85 @@
+﻿$PBExportHeader$ds_annuity.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(2) updatewhereclause=yes name=claim_role_code dbname="claim_role_code" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_eligibility_status_code dbname="annuity_eligibility_status_code" )
+ column=(type=datetime updatewhereclause=yes name=annuity_start_date dbname="annuity_start_date" )
+ column=(type=datetime updatewhereclause=yes name=annuity_end_date dbname="annuity_end_date" )
+ column=(type=datetime updatewhereclause=yes name=confirmed_date dbname="confirmed_date" )
+ retrieve="SELECT a.annuity_account_no,
+       a.individual_no,
+       a.claim_no,
+       a.claim_role_code,
+       b.annuity_eligibility_status_code,
+       b.annuity_start_date,
+       b.annuity_end_date,
+       b.confirmed_date
+FROM   ANNUITY_ACCOUNT     a
+JOIN   ANNUITY_ELIGIBILITY b ON a.annuity_account_no = b.annuity_account_no
+WHERE  b.annuity_eligibility_status_code = 'A'
+AND    b.annuity_start_date              IS NOT NULL
+AND    b.annuity_end_date                IS NOT NULL
+AND    a.individual_no                   = :al_individual_no
+AND    a.claim_no                        = :al_claim_no
+UNION ALL
+SELECT a.annuity_account_no,
+       a.individual_no,
+       a.claim_no,
+       a.claim_role_code,
+       b.annuity_eligibility_status_code,
+       b.annuity_start_date,
+       b.annuity_end_date,
+       b.confirmed_date
+FROM   ANNUITY_ACCOUNT     a
+JOIN   ANNUITY_ELIGIBILITY b ON a.annuity_account_no = b.annuity_account_no
+WHERE  b.annuity_eligibility_status_code = 'I'
+AND    b.annuity_start_date              IS NOT NULL
+AND    b.annuity_end_date                IS NOT NULL
+AND    b.confirmed_date                  IS NOT NULL
+AND    a.individual_no                   = :al_individual_no
+AND    a.claim_no                        = :al_claim_no
+AND NOT EXISTS ( SELECT *
+                 FROM   ANNUITY_ELIGIBILITY c
+                 WHERE  c.annuity_account_no              = a.annuity_account_no
+                 AND    c.annuity_eligibility_status_code = 'A' )
+AND NOT EXISTS ( SELECT *
+                 FROM   ANNUITY_ELIGIBILITY d
+                 WHERE  d.annuity_account_no              = a.annuity_account_no
+                 AND    d.annuity_eligibility_status_code = 'I'
+                 AND    d.annuity_start_date              IS NOT NULL
+                 AND    d.annuity_end_date                IS NOT NULL
+                 AND    d.confirmed_date                  > b.confirmed_date )" arguments=(("al_individual_no", number),("al_claim_no", number)) )
+text(band=header alignment="2" text="Annuity Account No" border="0" color="33554432" x="14" y="8" height="64" width="567" html.valueishtml="0"  name=annuity_account_annuity_account_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Individual No" border="0" color="33554432" x="594" y="8" height="64" width="471" html.valueishtml="0"  name=annuity_account_individual_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="1079" y="8" height="64" width="471" html.valueishtml="0"  name=annuity_account_claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Eligibility Status Code" border="0" color="33554432" x="1563" y="8" height="64" width="873" html.valueishtml="0"  name=annuity_eligibility_annuity_eligibility_status_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Start Date" border="0" color="33554432" x="2450" y="8" height="64" width="603" html.valueishtml="0"  name=annuity_eligibility_annuity_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity End Date" border="0" color="33554432" x="3067" y="8" height="64" width="603" html.valueishtml="0"  name=annuity_eligibility_annuity_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Confirmed Date" border="0" color="33554432" x="3685" y="8" height="64" width="603" html.valueishtml="0"  name=annuity_eligibility_confirmed_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Claim Role Code" border="0" color="33554432" x="4297" y="4" height="64" width="544" html.valueishtml="0"  name=claim_role_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="76" width="567" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="594" y="8" height="76" width="471" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="1079" y="8" height="76" width="471" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1563" y="8" height="76" width="873" format="[general]" html.valueishtml="0"  name=annuity_eligibility_status_code visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2450" y="8" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=annuity_start_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="3067" y="8" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=annuity_end_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="3685" y="8" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=confirmed_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="4302" y="0" height="64" width="539" format="[general]" html.valueishtml="0"  name=claim_role_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

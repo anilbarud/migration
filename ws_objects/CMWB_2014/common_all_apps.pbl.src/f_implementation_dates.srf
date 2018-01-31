@@ -1,0 +1,23 @@
+﻿$PBExportHeader$f_implementation_dates.srf
+global type f_implementation_dates from function_object
+end type
+
+forward prototypes
+global function datastore f_implementation_dates (string as_application_name, ref n_transaction an_transaction)
+end prototypes
+
+global function datastore f_implementation_dates (string as_application_name, ref n_transaction an_transaction);DATASTORE  lds_implementation_dates
+INTEGER    li_rows
+
+
+lds_implementation_dates = CREATE DATASTORE
+
+lds_implementation_dates.DataObject = 'd_implementation_dates'
+lds_implementation_dates.SetTransObject(an_transaction)
+
+li_rows =  lds_implementation_dates.Retrieve(as_application_name)
+an_transaction.nf_handle_error('f_implementation_dates','lds_implementation_dates.Retrieve','f_implementation_dates')
+
+return lds_implementation_dates
+end function
+

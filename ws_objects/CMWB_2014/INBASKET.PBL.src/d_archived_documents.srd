@@ -1,0 +1,64 @@
+﻿$PBExportHeader$d_archived_documents.srd
+$PBExportComments$List of archived documents for a claim
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="553648127" )
+summary(height=0 color="-1" )
+footer(height=84 color="134217752" )
+detail(height=84 color="553648127" )
+table(column=(type=char(3) updatewhereclause=yes name=docindex_type dbname="type_code" )
+ column=(type=char(2) updatewhereclause=yes name=doc_subtype_code dbname="doc_subtype_code" )
+ column=(type=char(40) updatewhereclause=yes name=document_type_type_desc dbname="type_desc" )
+ column=(type=datetime updatewhereclause=yes name=docindex_date dbname="date_on_document" )
+ column=(type=char(20) updatewhereclause=yes name=docindex_comment dbname="comment" )
+ column=(type=long updatewhereclause=yes name=claimsmaster_archive_claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=claimsmaster_folderid dbname="folderid" )
+ column=(type=long updatewhereclause=yes name=ref_docid dbname="docid" )
+ column=(type=char(32) updatewhereclause=yes name=doc_docname dbname="docname" )
+ column=(type=datetime updatewhereclause=yes name=doc_create_date dbname="create_date" )
+ column=(type=char(3) updatewhereclause=yes name=doc_file_extension dbname="file_extension" )
+ column=(type=char(1) updatewhereclause=yes name=electronic_flag dbname="electronic_flag" )
+ retrieve="SELECT DOCUMENT_INDEX_ARCHIVE.type_code,
+DOCUMENT_INDEX_ARCHIVE.doc_subtype_code, 
+Document_Type_Code.type_desc, 
+DOCUMENT_INDEX_ARCHIVE.date_on_document, 
+DOCUMENT_INDEX_ARCHIVE.comment, 
+CLAIM_MASTER_ARCHIVE.claim_no, 
+CLAIM_MASTER_ARCHIVE.folderid, 
+REF.docid, DOC.docname, 
+DOC.create_date,
+DOC.file_extension,
+'electronic_flag' = 
+ CASE  
+  WHEN CLAIM..I009_FORM67_IMPORT.docid > 0 THEN  'Y'
+  ELSE 'N'
+  END
+FROM CLAIM_MASTER_ARCHIVE
+INNER JOIN REF ON CLAIM_MASTER_ARCHIVE.folderid = REF.docfldid
+INNER JOIN DOCUMENT_INDEX_ARCHIVE ON REF.docid = DOCUMENT_INDEX_ARCHIVE.docid
+INNER JOIN Document_Type_Code ON DOCUMENT_INDEX_ARCHIVE.type_code = Document_Type_Code.type_code
+INNER JOIN DOC ON DOCUMENT_INDEX_ARCHIVE.docid = DOC.docid
+LEFT OUTER JOIN CLAIM..I009_FORM67_IMPORT ON CLAIM..I009_FORM67_IMPORT.docid = DOCUMENT_INDEX_ARCHIVE.docid
+WHERE CLAIM_MASTER_ARCHIVE.claim_no = :al_claim_no " arguments=(("al_claim_no", number))  sort="docindex_type A " )
+text(band=header alignment="0" text="Type" border="6" color="33554432" x="14" y="12" height="56" width="375" html.valueishtml="0"  name=type_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Date" border="6" color="33554432" x="407" y="12" height="56" width="315" html.valueishtml="0"  name=date_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Comment" border="6" color="33554432" x="745" y="12" height="56" width="1047" html.valueishtml="0"  name=comment_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="e" border="0" color="255" x="14" y="4" height="60" width="32" html.valueishtml="0"  name=electronic_flag visible="1~tIF(electronic_flag = 'Y', 1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="59" y="4" height="64" width="123" format="[general]" html.valueishtml="0"  name=docindex_type visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="197" y="4" height="64" width="183" format="[general]" html.valueishtml="0"  name=doc_subtype_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="402" y="4" height="64" width="302" format="YYYY/MM/DD" html.valueishtml="0"  name=docindex_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="727" y="4" height="64" width="1061" format="[general]" html.valueishtml="0"  name=docindex_comment visible="1" edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="2057" y1="4" x2="0" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Document Count:" border="0" color="0" x="14" y="16" height="60" width="443" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count(  ref_docid  for all )"border="0" color="0" x="480" y="16" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

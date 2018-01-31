@@ -1,0 +1,100 @@
+﻿$PBExportHeader$f_copyfile.srf
+$PBExportComments$Function used to copy a dos file
+global type f_copyfile from function_object
+end type
+
+forward prototypes
+global function integer f_copyfile (string vas_source_file, string vas_dest_file)
+end prototypes
+
+global function integer f_copyfile (string vas_source_file, string vas_dest_file);int     vli_source_fnum       //file handle for source file
+int     vli_dest_fnum         //file handle for destination file
+int     vli_loop_no           //number of loop iterations required to transfer file
+int     vli_loop_cntr         //loop counter
+int     vli_file_close_result //the Return code for a FileClose function call
+long    vll_source_flen       //length of source file in bytes
+long    vll_bytes_read        //number of bytes read
+long    vll_bytes_written     //number of bytes written
+long    vll_new_pos           //starting position in source file of next read
+blob    vlb_binary_record     //binary record buffer
+pointer vlp_oldpointer        //original file pointer
+
+vlp_oldpointer = SetPointer(HourGlass!)
+
+// Get length of source file for calculation of the number of file reads required
+vll_source_flen = FileLength(vas_source_file)
+If vll_source_flen < 0 Then
+   MessageBox("Source File","Error accessing source file: " + vas_source_file + " for file length.~r~nEnsure that document is closed.")
+   Return -1
+End If
+
+// Open the source file in stream mode
+vli_source_fnum = FileOpen(vas_source_file,streammode!,read!,lockread!)
+If vli_source_fnum = -1 Then
+   MessageBox("Source File", "Error opening source file" + vas_source_file + "~r~nEnsure that document is closed.")
+   Return -1
+End If
+
+// Open destination file in stream mode
+vli_dest_fnum = FileOpen(vas_dest_file,streammode!,write!,LockReadWrite!,Replace!)
+If vli_dest_fnum = -1 Then
+	FileClose(vli_source_fnum)
+   MessageBox("Destination File", "Error opening destination file: " + vas_dest_file + "~r~nEnsure that you have permission to write to specified directory.")
+   Return -1
+End If
+
+//Determine how many file read calls are needed to read the entire file
+If vll_source_flen > 32765 Then
+   If Mod(vll_source_flen,32765) = 0 Then
+      vli_loop_no = vll_source_flen/32765
+   Else
+      vli_loop_no = (vll_source_flen/32765) + 1
+   End If
+Else
+   vli_loop_no = 1
+End If
+
+// Copy source file to destination file
+FOR vli_loop_cntr = 1 TO vli_loop_no
+  
+   vll_bytes_read = FileRead(vli_source_fnum, vlb_binary_record)
+   If vll_bytes_read = -1 Then
+		FileClose(vli_source_fnum)
+		FileClose(vli_dest_fnum)
+      MessageBox("Source File","Error reading source file: " + vas_source_file)
+      Return -1
+   End If
+
+   vll_bytes_written = FileWrite(vli_dest_fnum, vlb_binary_record)
+   If vll_bytes_written = -1 Then
+		FileClose(vli_source_fnum)
+		FileClose(vli_dest_fnum)
+      MessageBox("Destination File", "Error writing destination file: " + vas_dest_file)
+      Return -1
+   End If
+
+   vll_new_pos = vll_new_pos + vll_bytes_read
+   FileSeek(vli_source_fnum,vll_new_pos,FromBeginning!)
+
+NEXT
+
+// Close source file
+vli_file_close_result = FileClose(vli_source_fnum)
+If vli_file_close_result = -1 Then
+	MessageBox("Source File", "Error closing source file: " + vas_source_file)
+	Return -1
+End If
+
+// Close destination file
+vli_file_close_result = FileClose(vli_dest_fnum)
+If vli_file_close_result = -1 Then
+	MessageBox("Destination File", "Error closing destination file: " + vas_dest_file)
+	Return -1
+End If
+
+// Set mouse pointer to the state when function was evoked
+SetPointer(vlp_oldpointer)
+
+Return 0
+end function
+

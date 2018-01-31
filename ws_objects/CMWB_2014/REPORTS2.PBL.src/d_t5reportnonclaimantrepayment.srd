@@ -1,0 +1,72 @@
+﻿$PBExportHeader$d_t5reportnonclaimantrepayment.srd
+$PBExportComments$Non-Claimant Repayments in Period T5 report
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=384 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="15793151" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=datetime updatewhereclause=yes name=death_date dbname="death_date" )
+ column=(type=long updatewhereclause=yes name=sin_no dbname="sin_no" )
+ column=(type=char(30) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ retrieve="select a.claim_no,
+		a.recipient_no,
+		i.given_names,
+		i.last_name,
+		i.death_date,
+		i.sin_no,
+	     a.recipient_name,
+   	     a.txn_amount
+  from APPLIED_CLAIM_TXN a,
+   	     CLAIM_PARTICIPANT d,
+		INDIVIDUAL i
+ where 	i.death_date is not null
+	and	a.claim_no = d.claim_no
+   	and 	a.recipient_type_code = 'O'
+	and 	a.create_date > :startdate
+   	and 	a.create_date < :enddate
+   	and 	i.individual_no = d.individual_no
+order by a.claim_no,
+			a.recipient_name" arguments=(("startdate", date),("enddate", date)) )
+group(level=1 header.height=136 trailer.height=0 by=("claim_no" , "compute_name" , "death_date" ) header.color="553648127" trailer.color="536870912" )
+line(band=header x1="50" y1="560" x2="3401" y2="560"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+rectangle(band=header x="14" y="4" height="240" width="3429"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="72" width="334" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="64" width="599" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2862" y="24" height="88" width="549" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="192" x2="3401" y2="192"  name=l_2 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="50" y="100" height="60" width="521" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="" border="0" color="0" x="594" y="104" height="60" width="827" html.valueishtml="0"  name=t_reportparameters visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="5" y="268" height="64" width="329" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claimant Name" border="0" color="33554432" x="402" y="268" height="64" width="448" html.valueishtml="0"  name=recipient_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Amount" border="0" color="33554432" x="1733" y="324" height="64" width="233" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Date of Death" border="0" color="33554432" x="1445" y="268" height="64" width="434" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sin No" border="0" color="33554432" x="402" y="324" height="64" width="471" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Where claimant is deceased" border="0" color="0" x="1746" y="100" height="76" width="960" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Payments to Recipient Type 'Other'" border="0" color="0" x="1486" y="20" height="76" width="1221" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header.1 x1="14" y1="0" x2="3410" y2="0"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=header.1 id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1445" y="12" height="76" width="311" format="[shortdate] [time]" html.valueishtml="0"  name=death_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.nilisnull=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="55" y="12" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="1550" y="0" height="76" width="416" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.1 alignment="0" expression="last_name + ', ' + given_names "border="0" color="33554432" x="407" y="12" height="64" width="987" format="[GENERAL]" html.valueishtml="0"  name=compute_name visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="407" y="80" height="64" width="453" format="[general]" html.valueishtml="0"  name=sin_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="2162" y="0" height="76" width="1317" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="2162" y="12" height="64" width="343" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Recipient Name" border="0" color="33554432" x="2162" y="328" height="64" width="462" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Recipient No" border="0" color="33554432" x="2162" y="268" height="64" width="402" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

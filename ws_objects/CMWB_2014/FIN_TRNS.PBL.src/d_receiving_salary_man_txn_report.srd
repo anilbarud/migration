@@ -1,0 +1,108 @@
+﻿$PBExportHeader$d_receiving_salary_man_txn_report.srd
+$PBExportComments$Report of all manual transactions (including cancellations and adjustments) for receiving salary claims
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=384 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=payment_claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=payment_payment_no dbname="payment_no" )
+ column=(type=char(3) updatewhereclause=yes name=payment_payment_type_code dbname="payment_type_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=payment_paid_days_lost dbname="paid_days_lost" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_to_date dbname="paid_to_date" )
+ column=(type=char(1) updatewhereclause=yes name=applied_claim_txn_txn_type_code dbname="txn_type_code" )
+ column=(type=datetime updatewhereclause=yes name=applied_claim_txn_processed_date dbname="processed_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=applied_claim_txn_txn_amount dbname="txn_amount" )
+ column=(type=char(3) updatewhereclause=yes name=applied_claim_txn_admin_region_code dbname="admin_region_code" )
+ column=(type=long updatewhereclause=yes name=applied_claim_txn_cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=applied_claim_txn_cost_alloc_operation_n dbname="cost_alloc_operation_no" )
+ column=(type=char(4) updatewhereclause=yes name=payment_type_benefit_category_code dbname="benefit_category_code" )
+ column=(type=long updatewhereclause=yes name=individual_individual_no dbname="individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="given_names" )
+ column=(type=long updatewhereclause=yes name=applied_claim_txn_cheque_no dbname="cheque_no" )
+ column=(type=char(40) updatewhereclause=yes name=txn_type_desc dbname="txn_type_desc" )
+ retrieve="SELECT P.claim_no,
+       P.payment_no,
+       P.payment_type_code,
+       P.paid_days_lost,
+       P.paid_from_date,
+       P.paid_to_date,
+       ACT.txn_type_code,
+       ACT.processed_date,
+       ACT.txn_amount,
+       ACT.admin_region_code,
+       COCA.cost_alloc_no,
+       COCA.cost_alloc_operation_no,
+       PT.benefit_category_code,
+       I.individual_no,
+       I.last_name,
+       I.given_names,
+       ACT.cheque_no,
+       TT.txn_type_desc     
+  FROM APPLIED_CLAIM_TXN ACT,
+       PAYMENT P,
+       COST_OF_CLAIMS_ALLOCATED COCA, 
+       Payment_Type PT,
+       CLAIM C,
+       INDIVIDUAL I,
+       Txn_Type TT 
+ WHERE ACT.payment_no = P.payment_no 
+   AND ACT.txn_no = COCA.txn_no 
+   AND P.payment_type_code = PT.payment_type_code 
+   AND C.claim_no = P.claim_no 
+   AND C.individual_no = I.individual_no 
+   AND ACT.processed_date >= :adt_from_date 
+   AND ACT.processed_date <= :adt_to_Date 
+   AND ACT.txn_type_code <> '1' 
+   AND ACT.payment_method_code = 'R' 
+   AND TT.txn_type_code = ACT.txn_type_code 
+ORDER BY ACT.txn_type_code ASC,
+         COCA.cost_alloc_no ASC,
+         COCA.cost_alloc_operation_no ASC,
+         P.claim_no ASC  " arguments=(("adt_from_date", datetime),("adt_to_Date", datetime)) )
+group(level=1 header.height=116 trailer.height=0 by=("applied_claim_txn_txn_type_code" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=72 trailer.height=0 by=("applied_claim_txn_cost_alloc_no" , "applied_claim_txn_cost_alloc_operation_n" ) header.color="536870912" trailer.color="536870912" )
+group(level=3 header.height=80 trailer.height=420 by=("payment_type_benefit_category_code" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="14" y="4" height="228" width="4174"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="60" width="334" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3666" y="32" height="76" width="471" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="192" x2="4151" y2="192"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+line(band=header x1="14" y1="368" x2="4187" y2="368"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Cost
+Allocation" border="0" color="33554432" x="3808" y="244" height="112" width="247" html.valueishtml="0"  name=occurrence_date_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Amount" border="0" color="0" x="3319" y="300" height="56" width="206" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Claim No" border="0" color="0" x="384" y="300" height="56" width="219" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="0" color="0" x="631" y="300" height="56" width="142" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Pymnt
+Type" border="0" color="0" x="2053" y="240" height="112" width="160" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Processed
+Date" border="0" color="0" x="2363" y="244" height="112" width="274" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Cheque
+No" border="0" color="0" x="2871" y="244" height="112" width="197" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Receiving Salary Manual Transactions
+Created by Regions" border="0" color="0" x="1536" y="28" height="152" width="1321" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="46" y="108" height="60" width="521" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="~"From ~" + String(adt_from_date ,~"yyyy-mm-dd~") + ~" to ~" + String( adt_to_Date ,~"yyyy-mm-dd~")"border="0" color="0" x="594" y="108" height="60" width="846" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header.1 id=18 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="12" height="92" width="1504" format="[general]" html.valueishtml="0"  name=txn_type_desc_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-11" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=header.2 alignment="0" expression="'Employer ' + String( applied_claim_txn_cost_alloc_no ) + ~"/~" + String( applied_claim_txn_cost_alloc_operation_n )"border="0" color="0" x="105" y="4" height="60" width="1207" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+column(band=header.3 id=13 alignment="0" tabsequence=32766 border="0" color="0" x="206" y="8" height="64" width="238" format="[general]" html.valueishtml="0"  name=payment_type_benefit_category_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="/" border="0" color="0" x="3918" y="8" height="60" width="27" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="0" x="3579" y="4" height="60" width="329" format="[general]" html.valueishtml="0"  name=applied_claim_txn_cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="3950" y="4" height="60" width="155" format="[general]" html.valueishtml="0"  name=applied_claim_txn_cost_alloc_operation_n visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="384" y="4" height="64" width="219" format="[general]" html.valueishtml="0"  name=payment_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( individual_given_names ) + ~" ~" + Trim( individual_last_name )"border="0" color="0" x="649" y="4" height="60" width="1243" format="[general]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="2075" y="4" height="64" width="110" format="[general]" html.valueishtml="0"  name=payment_payment_type_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="0" x="2318" y="4" height="64" width="361" format="yyyy-mm-dd" html.valueishtml="0"  name=applied_claim_txn_processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="1" tabsequence=32766 border="0" color="0" x="2779" y="4" height="60" width="288" format="[general]" html.valueishtml="0"  name=applied_claim_txn_cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="3195" y="4" height="64" width="329" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=applied_claim_txn_txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.3 x1="14" y1="404" x2="4187" y2="404"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=trailer.3 x1="3195" y1="4" x2="3525" y2="4"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=trailer.3 x1="3195" y1="84" x2="3525" y2="84"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+compute(band=trailer.3 alignment="1" expression="String(sum(applied_claim_txn_txn_amount  for group 3),~"$#,##0.00;($#,##0.00)~") "border="0" color="0" x="3195" y="16" height="60" width="329" format="[general]" html.valueishtml="0"  name=total_for_benefit_type visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.3 alignment="1" text="Total: " border="0" color="0" x="3013" y="16" height="60" width="155" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

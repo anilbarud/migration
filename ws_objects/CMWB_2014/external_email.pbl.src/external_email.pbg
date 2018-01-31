@@ -1,0 +1,14 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "external_email.pbl" "";
+@end;
+@begin Objects 
+ "d_ephysio_provider_controller.srd" "external_email.pbl";
+ "d_ephysio_providers.srd" "external_email.pbl";
+ "d_ephysio_providers_clinic.srd" "external_email.pbl";
+ "d_ephysio_users.srd" "external_email.pbl";
+ "d_file_path_name_by_array.srd" "external_email.pbl";
+ "n_filesys.sru" "external_email.pbl";
+ "n_pdf_converter.sru" "external_email.pbl";
+ "w_email_portal_user.srw" "external_email.pbl";
+@end;

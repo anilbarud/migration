@@ -1,0 +1,52 @@
+﻿$PBExportHeader$ds_annuity_payout_claim_summary.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long update=yes updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long update=yes updatewhereclause=yes name=annuity_calc_no dbname="annuity_calc_no" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=total_annuity_benefit_amount dbname="total_annuity_benefit_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=previous_annuity_payout_amount dbname="previous_annuity_payout_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=overpayment_recovery_amount dbname="overpayment_recovery_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=writeoff_amount dbname="writeoff_amount" )
+ retrieve="SELECT claim_no,   
+       annuity_payout_no,   
+       annuity_account_no,   
+       annuity_calc_no,   
+       total_annuity_benefit_amount,   
+       previous_annuity_payout_amount,   
+       overpayment_recovery_amount,   
+       writeoff_amount  
+FROM   ANNUITY_PAYOUT_CLAIM_SUMMARY   
+" update="ANNUITY_PAYOUT_CLAIM_SUMMARY" updatewhere=1 updatekeyinplace=yes )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="14" y="8" height="64" width="329" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Payout No" border="0" color="33554432" x="357" y="8" height="64" width="535" html.valueishtml="0"  name=annuity_payout_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Account No" border="0" color="33554432" x="905" y="8" height="64" width="567" html.valueishtml="0"  name=annuity_account_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Calc No" border="0" color="33554432" x="1486" y="8" height="64" width="462" html.valueishtml="0"  name=annuity_calc_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total Annuity Benefit Amount" border="0" color="33554432" x="1961" y="8" height="64" width="850" html.valueishtml="0"  name=total_annuity_benefit_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Previous Annuity Payout Amount" border="0" color="33554432" x="2825" y="8" height="64" width="951" html.valueishtml="0"  name=previous_annuity_payout_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Overpayment Recovery Amount" border="0" color="33554432" x="3794" y="8" height="64" width="919" html.valueishtml="0"  name=overpayment_recovery_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Writeoff Amount" border="0" color="33554432" x="4727" y="8" height="64" width="471" html.valueishtml="0"  name=writeoff_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="14" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="357" y="8" height="76" width="535" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="33554432" x="905" y="8" height="76" width="567" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="33554432" x="1486" y="8" height="76" width="462" format="[general]" html.valueishtml="0"  name=annuity_calc_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=50 border="0" color="33554432" x="1961" y="8" height="76" width="850" format="[general]" html.valueishtml="0"  name=total_annuity_benefit_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=60 border="0" color="33554432" x="2825" y="8" height="76" width="951" format="[general]" html.valueishtml="0"  name=previous_annuity_payout_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=70 border="0" color="33554432" x="3794" y="8" height="76" width="919" format="[general]" html.valueishtml="0"  name=overpayment_recovery_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=80 border="0" color="33554432" x="4727" y="8" height="76" width="471" format="[general]" html.valueishtml="0"  name=writeoff_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

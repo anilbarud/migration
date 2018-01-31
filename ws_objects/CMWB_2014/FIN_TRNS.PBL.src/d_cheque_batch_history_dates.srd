@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_cheque_batch_history_dates.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=329 color="536870912" )
+table(column=(type=datetime updatewhereclause=no name=cbh_processed_date dbname="cbh_processed_date" )
+ column=(type=long updatewhereclause=no name=cheque_batch_no dbname="cheque_batch_no" )
+ )
+rectangle(band=detail x="14" y="32" height="261" width="1642" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="2" background.color="0" )
+rectangle(band=detail x="19" y="36" height="261" width="1633" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="33554432" x="599" y="92" height="61" width="641" format="YYYY-MM-DD HH:MM:SS"  name=cbh_processed_date dddw.name=dddw_cheque_batch_history_dates2 dddw.displaycolumn=processed_date dddw.datacolumn=processed_date dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Processed Date:"border="0" color="0" x="69" y="88" height="61" width="430"  name=processed_date_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Report Criteria"border="0" color="0" x="92" y="4" height="61" width="380"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

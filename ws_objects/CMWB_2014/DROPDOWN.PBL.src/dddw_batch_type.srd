@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_batch_type.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=char(40) update=yes updatewhereclause=yes name=batch_type_desc dbname="Batch_Type.batch_type_desc" )
+ column=(type=char(1) update=yes updatewhereclause=yes key=yes name=batch_type_code dbname="Batch_Type.batch_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=admin_region_required_flag dbname="Batch_Type.admin_region_required_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dbo.Batch_Type~" ) COLUMN(NAME=~"dbo.Batch_Type.batch_type_desc~") COLUMN(NAME=~"dbo.Batch_Type.batch_type_code~") COLUMN(NAME=~"dbo.Batch_Type.admin_region_required_flag~")) " update="dbo.Batch_Type" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="5" y="0" height="60" width="1303" format="[general]" html.valueishtml="0"  name=batch_type_desc visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,84 @@
+﻿$PBExportHeader$d_search_results.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=136 color="10789024" )
+summary(height=0 color="553648127" )
+footer(height=60 color="10789024" )
+detail(height=144 color="553648127" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(255) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=char(40) updatewhereclause=yes name=task_status_desc dbname="task_status_desc" )
+ column=(type=char(40) updatewhereclause=yes name=task_sub_type_desc dbname="task_sub_type_desc" )
+ column=(type=char(42) updatewhereclause=yes name=individual_name dbname="individual_name" )
+ column=(type=char(47) updatewhereclause=yes name=claim_manager_name dbname="claim_manager_name" )
+ column=(type=datetime updatewhereclause=yes name=status_date dbname="status_date" )
+ column=(type=char(46) updatewhereclause=yes name=responsible_user_name dbname="responsible_user_name" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(2) updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ retrieve="SELECT a.claim_no,
+       a.comment,
+       a.task_no,
+       Task_Status.task_status_desc,
+       Task_Sub_Type.task_sub_type_desc,
+       INDIVIDUAL_NAME.last_name + ~", ~" + INDIVIDUAL_NAME.given_names as individual_name,
+       c_User_Profile.user_last_name + ~", ~" + c_User_Profile.user_first_name as claim_manager_name,
+       CASE a.task_status_code
+          WHEN '01' THEN a.planned_start_date 
+		 ELSE a.actual_completion_date
+		 END AS status_date    ,
+       r_User_Profile.user_last_name + ',' + r_User_Profile.user_first_name   as responsible_user_name,
+			CLAIM.admin_region_code,
+		a.task_status_code
+ FROM REHAB_TASK a, 
+		Task_Sub_Type,
+		Task_Status,
+		INDIVIDUAL_NAME ,
+		CLAIM, 
+		User_Profile c_User_Profile,
+		User_Profile r_User_Profile
+WHERE INDIVIDUAL_NAME.individual_no   = CLAIM.individual_no
+  	AND a.claim_no             = CLAIM.claim_no
+  	AND a.responsible_user_id  = r_User_Profile.user_id                
+	and CLAIM.claim_manager_user_id = c_User_Profile.user_id  
+	AND (a.task_type_code      = Task_Sub_Type.task_type_code
+  	AND a.task_sub_type_code   = Task_Sub_Type.task_sub_type_code)
+	AND a.task_status_code = Task_Status.task_status_code
+	and INDIVIDUAL_NAME.name_type_code = 'M'
+	and a.task_type_code = 'AC'
+	
+
+"  sort="status_date A " )
+line(band=header x1="9" y1="132" x2="2725" y2="132"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Item Type" border="0" color="33554432" x="704" y="4" height="60" width="343" html.valueishtml="0"  name=task_sub_type_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="0" color="33554432" x="9" y="68" height="60" width="183" html.valueishtml="0"  name=individual_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Comment" border="0" color="33554432" x="704" y="68" height="60" width="279" html.valueishtml="0"  name=comment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Status" border="0" color="33554432" x="1595" y="4" height="60" width="178" html.valueishtml="0"  name=task_status_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Date" border="0" color="33554432" x="1595" y="68" height="60" width="133" html.valueishtml="0"  name=status_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Responsible User" border="0" color="33554432" x="2066" y="64" height="60" width="498" html.valueishtml="0"  name=responsible_user_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Claim Manager" border="0" color="33554432" x="2066" y="0" height="60" width="480" html.valueishtml="0"  name=claim_manager_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Claim No" border="0" color="33554432" x="9" y="4" height="60" width="233" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Region" border="0" color="33554432" x="288" y="4" height="60" width="183" html.valueishtml="0"  name=admin_region_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="9" y1="140" x2="2747" y2="140"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="704" y="4" height="60" width="864" format="[general]" html.valueishtml="0"  name=task_sub_type_desc visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="2066" y="4" height="60" width="1065" format="[general]" html.valueishtml="0"  name=claim_manager_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="311" y="4" height="60" width="165" format="~t'(' + FILL('@',len( Trim(admin_region_code ))) + ')'" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="1595" y="4" height="60" width="443" format="[general]" html.valueishtml="0"  name=task_status_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="9" y="4" height="60" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1"  slideleft=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="2066" y="68" height="60" width="1061" format="[general]" html.valueishtml="0"  name=responsible_user_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="704" y="68" height="60" width="864" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="1595" y="68" height="60" width="439" format="yyyy-mm-dd" html.valueishtml="0"  name=status_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432~tIF( status_date < Today() and  task_status_code = '01',RGB(0,128,0),RGB(0,0,0))" x="9" y="68" height="60" width="681" format="[general]" html.valueishtml="0"  name=individual_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="rowcount()"border="0" color="33554432" x="805" y="0" height="56" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Number of action items found:" border="0" color="33554432" x="9" y="0" height="56" width="777" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

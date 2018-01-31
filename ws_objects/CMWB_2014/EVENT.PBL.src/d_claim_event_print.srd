@@ -1,0 +1,60 @@
+﻿$PBExportHeader$d_claim_event_print.srd
+$PBExportComments$Datawindow used to enter manual events and display details of all events
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=200 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=700 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=event_no dbname="event_no" )
+ column=(type=datetime updatewhereclause=yes name=event_date dbname="event_date" )
+ column=(type=char(3) updatewhereclause=yes name=event_type_code dbname="event_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=event_specific_code dbname="event_specific_code" )
+ column=(type=char(2500) updatewhereclause=yes name=event_comment dbname="event_comment" )
+ column=(type=char(1) updatewhereclause=yes name=event_category_code dbname="event_category_code" )
+ column=(type=char(50) updatewhereclause=yes name=event_specific_code_event_specific_desc dbname="event_specific_desc" )
+ column=(type=char(30) updatewhereclause=yes name=event_type_event_type_desc dbname="event_type_desc" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ retrieve="SELECT	a.claim_no,   
+	a.event_no,   
+	a.event_date,   
+	a.event_type_code,   
+	a.event_specific_code,   
+	a.event_comment,   
+	a.event_category_code,   
+	b.event_specific_desc,   
+	c.event_type_desc ,
+    IND.given_names, 
+    IND.last_name
+FROM CLAIM_EVENT a 
+	LEFT OUTER JOIN CLAIM CL ON a.claim_no = CL.claim_no
+    LEFT OUTER JOIN INDIVIDUAL IND ON CL.individual_no = IND.individual_no
+    LEFT OUTER JOIN Event_Specific b  ON a.event_type_code = b.event_type_code and a.event_specific_code = b.event_specific_code
+     INNER JOIN Event_Type c  ON c.event_type_code = a.event_type_code
+ WHERE a.event_no = :al_event_no
+    and a.claim_no = :al_claim_no    
+" arguments=(("al_event_no", number),("al_claim_no", number)) )
+compute(band=header alignment="0" expression="~"Claim #: ~" +  claim_no + ~" - ~" +  given_names + ~" ~" +   last_name "border="0" color="33554432" x="23" y="72" height="104" width="2313" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Tahoma" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="421" y="20" height="60" width="224" format="[general]" html.valueishtml="0"  name=event_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="33554432" x="421" y="96" height="60" width="315" format="yyyy-mm-dd" html.valueishtml="0" protect="0~t1"  name=event_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="0" text="Event Type:" border="0" color="33554432" x="1033" y="20" height="60" width="293" html.valueishtml="0"  name=event_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="1431" y="20" height="64" width="859" format="[general]" html.valueishtml="0"  name=event_type_event_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="0" text="Specific Type:" border="0" color="33554432" x="1033" y="96" height="60" width="361" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="1431" y="96" height="64" width="658" format="[general]" html.valueishtml="0"  name=event_specific_code_event_specific_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=6 alignment="0" tabsequence=10 border="0" color="33554432" x="50" y="304" height="340" width="3360" format="[general]" html.valueishtml="0"  name=event_comment visible="1" height.autosize=yes edit.limit=2500 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autovscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="0" text="Comments:" border="0" color="33554432" x="50" y="240" height="60" width="297" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="0" text="Event Date:" border="0" color="33554432" x="55" y="96" height="60" width="288" html.valueishtml="0"  name=event_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="0" text="Event No:" border="0" color="33554432" x="55" y="20" height="60" width="238" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

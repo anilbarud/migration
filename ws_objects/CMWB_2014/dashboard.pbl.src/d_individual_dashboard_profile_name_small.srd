@@ -1,0 +1,69 @@
+﻿$PBExportHeader$d_individual_dashboard_profile_name_small.srd
+release 12.5;
+datawindow(units=0 timer_interval=0 color=1073741824 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=160 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" height.autosize=yes )
+table(column=(type=long update=yes updatewhereclause=yes name=individual_no dbname="INDIVIDUAL.individual_no" )
+ column=(type=long update=yes updatewhereclause=yes name=sin_no dbname="INDIVIDUAL.sin_no" )
+ column=(type=long update=yes updatewhereclause=yes name=medicare_no dbname="INDIVIDUAL.medicare_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=birth_date dbname="INDIVIDUAL.birth_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=death_date dbname="INDIVIDUAL.death_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=sex dbname="INDIVIDUAL.sex" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=language_code dbname="INDIVIDUAL.language_code" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=address_line1 dbname="INDIVIDUAL.address_line1" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=address_line2 dbname="INDIVIDUAL.address_line2" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=city dbname="INDIVIDUAL.city" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=prov_state_code dbname="INDIVIDUAL.prov_state_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=country_code dbname="INDIVIDUAL.country_code" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=postal_code dbname="INDIVIDUAL.postal_code" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=telephone_no dbname="INDIVIDUAL.telephone_no" )
+ column=(type=long updatewhereclause=yes name=individual_name_individual_no dbname="INDIVIDUAL_NAME.individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_name_last_name dbname="INDIVIDUAL_NAME.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_name_given_names dbname="INDIVIDUAL_NAME.given_names" )
+ column=(type=char(1) updatewhereclause=yes name=individual_name_name_type_code dbname="INDIVIDUAL_NAME.name_type_code" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=cellphone_no dbname="INDIVIDUAL.cellphone_no" )
+ retrieve="  SELECT dbo.INDIVIDUAL.individual_no,   
+         dbo.INDIVIDUAL.sin_no,   
+         dbo.INDIVIDUAL.medicare_no,   
+         dbo.INDIVIDUAL.birth_date,   
+         dbo.INDIVIDUAL.death_date,   
+         dbo.INDIVIDUAL.sex,   
+         dbo.INDIVIDUAL.language_code,   
+         dbo.INDIVIDUAL.last_name,   
+         dbo.INDIVIDUAL.given_names,   
+         dbo.INDIVIDUAL.address_line1,   
+         dbo.INDIVIDUAL.address_line2,   
+         dbo.INDIVIDUAL.city,   
+         dbo.INDIVIDUAL.prov_state_code,   
+         dbo.INDIVIDUAL.country_code,   
+         dbo.INDIVIDUAL.postal_code,   
+         dbo.INDIVIDUAL.telephone_no,   
+         dbo.INDIVIDUAL_NAME.individual_no,   
+         dbo.INDIVIDUAL_NAME.last_name,   
+         dbo.INDIVIDUAL_NAME.given_names,   
+         dbo.INDIVIDUAL_NAME.name_type_code,   
+         dbo.INDIVIDUAL.cellphone_no  
+    FROM dbo.INDIVIDUAL,   
+         dbo.INDIVIDUAL_NAME  
+   WHERE ( dbo.INDIVIDUAL.individual_no = dbo.INDIVIDUAL_NAME.individual_no ) and  
+         ( ( dbo.INDIVIDUAL.individual_no = :al_individual_no) )    
+" arguments=(("al_individual_no", number)) )
+group(level=1 header.height=0 trailer.height=0 by=("individual_no" ) header.color="536870912" header.transparency="0" header.gradient.color="8421504" header.gradient.transparency="0" header.gradient.angle="0" header.brushmode="0" header.gradient.repetition.mode="0" header.gradient.repetition.count="0" header.gradient.repetition.length="100" header.gradient.focus="0" header.gradient.scale="100" header.gradient.spread="100" trailer.color="536870912" trailer.transparency="0" trailer.gradient.color="8421504" trailer.gradient.transparency="0" trailer.gradient.angle="0" trailer.brushmode="0" trailer.gradient.repetition.mode="0" trailer.gradient.repetition.count="0" trailer.gradient.repetition.length="100" trailer.gradient.focus="0" trailer.gradient.scale="100" trailer.gradient.spread="100" )
+compute(band=header alignment="0" expression=" given_names + ' ' +  last_name"border="0" color="25511203" x="41" y="8" height="68" width="1467" format="[GENERAL]" html.valueishtml="0"  name=compute_name visible="1"  font.face="Verdana" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="0" text="individual" border="0" color="134217730" x="46" y="88" height="52" width="489" html.valueishtml="0"  name=t_1 visible="1"  font.face="Verdana" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="21663449" x="384" y="88" height="64" width="297" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Verdana" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

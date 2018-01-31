@@ -1,0 +1,8 @@
+﻿$PBExportHeader$s_rcpnt_lst.srs
+global type s_rcpnt_lst from structure
+	long		ws_rcpnt_id
+	string		ws_rcpnt_type_cd
+	string		ws_rcpnt_label
+	string		ws_addressee_role
+end type
+

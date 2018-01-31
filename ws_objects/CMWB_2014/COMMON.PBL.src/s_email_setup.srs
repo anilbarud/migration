@@ -1,0 +1,10 @@
+﻿$PBExportHeader$s_email_setup.srs
+global type s_email_setup from structure
+	string		as_application_code
+	integer		ai_app_module_code
+	string		as_template_code
+	integer		ai_email_reason_code
+	long		al_claim_no
+	string		as_subject_type
+end type
+

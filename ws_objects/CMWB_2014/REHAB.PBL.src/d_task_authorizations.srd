@@ -1,0 +1,106 @@
+﻿$PBExportHeader$d_task_authorizations.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="-1" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=756 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long update=yes updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=authorized_quantity dbname="authorized_quantity" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=authorized_amount dbname="authorized_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paid_quantity dbname="paid_quantity" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=paid_amount dbname="paid_amount" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=authorized_provider_type_code dbname="authorized_provider_type_code" )
+ column=(type=long update=yes updatewhereclause=yes name=authorized_provider_no dbname="authorized_provider_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=authorized_date dbname="authorized_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=authorized_by_user_id dbname="authorized_by_user_id" )
+ column=(type=char(300) update=yes updatewhereclause=yes name=authorization_comment dbname="authorization_comment" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=expedited_billing_flag dbname="expedited_billing_flag" initial="N" values="Yes	Y/No	N/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=fixed_fee_flag dbname="fixed_fee_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=auto_created_flag dbname="auto_created_flag" )
+ column=(type=char(40) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(200) updatewhereclause=yes name=revision_comment dbname="revision_comment" )
+ column=(type=char(200) update=yes updatewhereclause=yes name=changed_amounts_comment dbname="changed_amounts_comment" )
+ column=(type=decimal(2) updatewhereclause=yes name=revision_quantity dbname="revision_quantity" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_amount dbname="max_authorized_amount" )
+ column=(type=char(1) updatewhereclause=yes name=rta_other_billable_item_flag dbname="rta_other_billable_item_flag" )
+ column=(type=char(80) update=yes updatewhereclause=yes name=other_billable_item_desc dbname="other_billable_item_desc" )
+ retrieve="SELECT a.authorization_no,   
+         a.task_no,   
+         a.claim_no,   
+         a.billable_xref_no,   
+         a.authorized_quantity,   
+         a.authorized_amount,   
+         a.paid_quantity,   
+         a.paid_amount,   
+         a.authorized_provider_type_code,   
+         a.authorized_provider_no,   
+         a.authorized_date,   
+         a.authorized_by_user_id,   
+         a.authorization_comment,   
+         a.expedited_billing_flag,   
+         a.fixed_fee_flag,   
+         a.auto_created_flag, 
+  		  '                                        ' name,
+          '                                                                                                                                                                                                        ' revision_comment,
+          changed_amounts_comment,
+		  0.00 revision_quantity,
+          b.max_authorized_amount,
+          c.rta_other_billable_item_flag,
+          a.other_billable_item_desc
+    FROM rehab_task_authorization  a
+left join   Billable_Item_Rehab_Task_Xref b on a.billable_xref_no = b.billable_xref_no
+left join   Billable_Item                 c on b.billable_item_no = c.billable_item_no
+WHERE claim_no = :claim_no 
+AND   task_no = :task_no 
+AND   authorization_no = :authorization_no  " update="rehab_task_authorization" updatewhere=1 updatekeyinplace=yes arguments=(("claim_no", number),("task_no", number),("authorization_no", number))  sort="task_no A " )
+groupbox(band=detail text="Authorization Item"border="2" color="0" x="18" y="0" height="744" width="2601"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Billable Item:" border="0" color="0" x="37" y="88" height="60" width="329" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Comment:" border="0" color="0" x="37" y="328" height="60" width="265" html.valueishtml="0"  name=authorization_comment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=50 border="5" color="0" x="320" y="332" height="60" width="2267" format="[general]" html.valueishtml="0"  name=authorization_comment visible="1" edit.limit=300 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Authorized Provider:" border="0" color="0" x="37" y="252" height="60" width="526" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=40 border="5" color="0" x="1225" y="256" height="56" width="279" format="###########" html.valueishtml="0" protect="0~tif(  paid_amount = 0 or (isNull(  authorized_provider_no ) or   authorized_provider_no = 0),0,1)"  name=authorized_provider_no visible="1" editmask.mask="########" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+button(band=detail text="?" enabled=yes action="0" border="0" color="33554432" x="1513" y="248" height="68" width="69" vtextalign="0" htextalign="0"  name=b_provider_search visible="1"  font.face="Tahoma" font.height="-11" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0" x="1595" y="256" height="60" width="1006" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=30 border="5" color="0" x="585" y="256" height="56" width="617" format="[general]" html.valueishtml="0" protect="0~tif(  paid_amount = 0 or (isNull( authorized_provider_type_code ) or  authorized_provider_type_code = ''),0,1)"  name=authorized_provider_type_code visible="1" dddw.name=dddw_provider_type dddw.displaycolumn=provider_type_desc dddw.datacolumn=provider_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="0" tabsequence=80 border="0" color="0" x="1408" y="508" height="56" width="421" format="[general]" html.valueishtml="0"  name=expedited_billing_flag visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Paid Quantity:" border="0" color="0" x="1865" y="508" height="60" width="357" html.valueishtml="0"  name=paid_quantity_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0" x="2235" y="508" height="60" width="352" format="0" html.valueishtml="0"  name=paid_quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Expedited Billing" border="0" color="0" x="1403" y="432" height="60" width="425" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Paid Amount:" border="0" color="0" x="1865" y="432" height="60" width="343" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="2235" y="432" height="60" width="352" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=paid_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="14" y1="408" x2="2615" y2="408"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+text(band=detail alignment="0" text="Authorized Quantity" border="0" color="0" x="37" y="432" height="60" width="521" html.valueishtml="0"  name=authorized_quantity_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Revision Comment:" border="0" color="255" x="37" y="592" height="60" width="498" html.valueishtml="0"  name=t_revision_comment visible="0"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=60 border="5" color="0" x="37" y="512" height="60" width="352" format="0" html.valueishtml="0"  name=authorized_quantity visible="1" editmask.mask="#####" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+button(band=detail text="History" enabled=yes action="0" border="0" color="33554432" x="1106" y="428" height="68" width="215" vtextalign="0" htextalign="0"  name=b_revision_history visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15780518" )
+text(band=detail alignment="1" text="Authorization No:" border="0" color="0" x="37" y="672" height="60" width="439" html.valueishtml="0"  name=authorization_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="494" y="672" height="60" width="261" format="[general]" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Authorized by:" border="0" color="0" x="823" y="672" height="60" width="366" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1207" y="672" height="60" width="507" format="[general]" html.valueishtml="0"  name=authorized_by_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Authorized Date:" border="0" color="0" x="1774" y="672" height="60" width="425" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="2213" y="672" height="60" width="379" format="yyyy-mm-dd" html.valueishtml="0"  name=authorized_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="0" tabsequence=90 border="5" color="33554432" x="590" y="592" height="60" width="1998" format="[general]" html.valueishtml="0"  name=revision_comment visible="0" edit.limit=200 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Authorized Amount" border="0" color="0" x="590" y="432" height="60" width="494" html.valueishtml="0"  name=authorized_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=70 border="5" color="0" x="590" y="512" height="60" width="494" format="[general]" html.valueishtml="0"  name=authorized_amount visible="1" editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Fixed Rate Item ($)" border="0" color="255" x="581" y="516" height="60" width="498" html.valueishtml="0"  name=t_fixed_rate_item visible="1~tif (  fixed_fee_flag ='Y',1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="M" border="0" color="16711680" x="1106" y="508" height="60" width="50" html.valueishtml="0"  name=t_max_indicator visible="0~tif ( authorized_amount =  max_authorized_amount and fixed_fee_flag = 'N',1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Max" border="0" color="255" x="1175" y="508" height="60" width="110" html.valueishtml="0"  name=t_1 visible="1~tif ( authorized_amount =  max_authorized_amount and fixed_fee_flag = 'N',1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="5" color="0" x="5271" y="0" height="60" width="27" format="[general]" html.valueishtml="0"  name=rta_other_billable_item_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="0" x="585" y="88" height="56" width="2011" format="[general]" html.valueishtml="0" protect="0~tif(  paid_amount > 0 ,1,0)"  name=billable_xref_no visible="1" dddw.name=dddw_billable_item_rehab_task_xref dddw.displaycolumn=billable_item_desc_e dddw.datacolumn=billable_xref_no dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.hscrollbar=yes dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=23 alignment="0" tabsequence=20 border="5" color="0" x="585" y="164" height="60" width="2011" format="[general]" html.valueishtml="0" protect="0~tif(  paid_amount > 0 ,1,0)"  name=other_billable_item_desc visible="1~tif (rta_other_billable_item_flag = 'Y', 1,0)" edit.limit=80 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Other Description:" border="0" color="0" x="32" y="164" height="60" width="471" html.valueishtml="0"  name=t_other_billable_item_desc visible="1~tif (rta_other_billable_item_flag = 'Y', 1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

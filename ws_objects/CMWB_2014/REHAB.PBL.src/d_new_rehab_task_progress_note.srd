@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_new_rehab_task_progress_note.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="REHAB_TASK_PROGRESS_NOTE.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=task_no dbname="REHAB_TASK_PROGRESS_NOTE.task_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=event_no dbname="REHAB_TASK_PROGRESS_NOTE.event_no" )
+ column=(type=timestamp update=yes updatewhereclause=yes name=timestamp dbname="REHAB_TASK_PROGRESS_NOTE.timestamp" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"REHAB_TASK_PROGRESS_NOTE~" ) COLUMN(NAME=~"REHAB_TASK_PROGRESS_NOTE.claim_no~") COLUMN(NAME=~"REHAB_TASK_PROGRESS_NOTE.task_no~") COLUMN(NAME=~"REHAB_TASK_PROGRESS_NOTE.event_no~") COLUMN(NAME=~"REHAB_TASK_PROGRESS_NOTE.timestamp~")) " update="REHAB_TASK_PROGRESS_NOTE" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="23" y="4" height="69" width="279" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="334" y="4" height="69" width="279" format="[general]"  name=task_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="636" y="4" height="69" width="279" format="[general]"  name=event_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

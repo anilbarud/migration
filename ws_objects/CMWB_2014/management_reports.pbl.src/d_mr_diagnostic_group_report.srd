@@ -1,0 +1,114 @@
+﻿$PBExportHeader$d_mr_diagnostic_group_report.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=496 color="536870912" )
+summary(height=432 color="536870912" height.autosize=yes )
+footer(height=296 color="536870912" height.autosize=yes )
+detail(height=0 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(1) updatewhereclause=yes name=provider_type_code dbname="provider_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=long updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=long updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=decimal(2) updatewhereclause=yes name=quantity dbname="quantity" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_amount dbname="total_amount" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_service_flag dbname="is_a_service_flag" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_goods_flag dbname="is_a_goods_flag" )
+ column=(type=datetime updatewhereclause=yes name=service_date dbname="service_date" )
+ retrieve="select  REHAB_TASK.claim_no                   , 
+        	REHAB_TASK.provider_no                ,
+        	REHAB_TASK.provider_type_code         ,
+        	PROVIDER.name                       ,             
+        	REHAB_TASK.rehab_program_code         ,
+        	Rehab_Program.rehab_program_desc_e       ,
+        	REHAB_TASK.task_no                    ,
+		REHAB_INVOICE_LINE_ITEM.billable_xref_no           ,
+		Billable_Item_Rehab_Task_Xref.billable_item_no           ,
+		Billable_Item.billable_item_desc_e       ,
+		REHAB_INVOICE_LINE_ITEM.quantity   ,
+		REHAB_INVOICE_LINE_ITEM.total_amount   ,
+		CLAIM.admin_region_code          ,
+        	INDIVIDUAL.given_names ,
+         INDIVIDUAL.last_name ,
+		Billable_Item.is_a_service_flag          ,
+        	Billable_Item.is_a_goods_flag      ,
+        	REHAB_INVOICE_LINE_ITEM.service_date
+from  REHAB_TASK                    
+join REHAB_INVOICE_LINE_ITEM        on REHAB_TASK.claim_no  = REHAB_INVOICE_LINE_ITEM.claim_no and REHAB_TASK.task_no = REHAB_INVOICE_LINE_ITEM.task_no
+join REHAB_INVOICE                  		on REHAB_INVOICE_LINE_ITEM.rehab_invoice_no   = REHAB_INVOICE.rehab_invoice_no
+join PROVIDER                       			on REHAB_INVOICE.provider_no  = PROVIDER.provider_no and REHAB_INVOICE.provider_type_code = PROVIDER.provider_type_code
+join Rehab_Program	                		on REHAB_TASK.rehab_program_code = Rehab_Program.rehab_program_code
+join Billable_Item_Rehab_Task_Xref  on REHAB_INVOICE_LINE_ITEM.billable_xref_no   = Billable_Item_Rehab_Task_Xref.billable_xref_no
+join Billable_Item                  			on Billable_Item_Rehab_Task_Xref.billable_item_no   = Billable_Item.billable_item_no
+join CLAIM                          			on REHAB_TASK.claim_no  = CLAIM.claim_no
+join INDIVIDUAL                     			on CLAIM.individual_no      = INDIVIDUAL.individual_no
+join Admin_Region                   		on Admin_Region.admin_region_code = CLAIM.admin_region_code
+where REHAB_INVOICE_LINE_ITEM.service_date >= :adt_submitted_start and  REHAB_INVOICE_LINE_ITEM.service_date <= :adt_submitted_end 
+AND REHAB_INVOICE_LINE_ITEM.line_item_amended_code     = ''
+order by 		Rehab_Program.rehab_program_desc_e
+" arguments=(("adt_submitted_start", date),("adt_submitted_end", date))  sort="claim_no A rehab_program_desc_e A billable_item_desc_e A " )
+group(level=1 header.height=84 trailer.height=192 by=("rehab_program_code" , "rehab_program_desc_e" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=160 trailer.height=128 by=("provider_no" , "provider_type_code" , "name" ) header.color="536870912" trailer.color="536870912" )
+group(level=3 header.height=0 trailer.height=164 by=("claim_no" ) header.color="536870912" trailer.color="536870912" )
+group(level=4 header.height=92 header.height.autosize=yes trailer.height=0 by=("billable_item_no" , "billable_item_desc_e" ) header.color="536870912" trailer.color="536870912" )
+line(band=header x1="14" y1="484" x2="3717" y2="484"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=header alignment="1" expression="today()"border="0" color="33554432" x="3195" y="208" height="72" width="494" format="yyyy-mm-dd" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="33554432" x="3163" y="12" height="80" width="526" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Volumes and Cost - Detailed" border="0" color="33554432" x="18" y="104" height="64" width="3689" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Physio Management Reports" border="0" color="33554432" x="18" y="12" height="80" width="3675" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Services and Supplies" border="0" color="33554432" x="2825" y="344" height="64" width="873" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Quantity" border="0" color="33554432" x="2825" y="404" height="64" width="242" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Cost" border="0" color="33554432" x="3397" y="404" height="64" width="311" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="32" y="8" height="64" width="1079" format="[general]" html.valueishtml="0"  name=rehab_program_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+groupbox(band=header.2 text=""border="2" color="33554432" x="169" y="4" height="144" width="2126"  name=gb_3 visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="201" y="44" height="64" width="2057" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.4 id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="247" y="12" height="64" width="297" format="[general]" html.valueishtml="0"  name=claim_no visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.4 alignment="0" expression=" given_names + ' ' +  last_name "border="0" color="33554432" x="558" y="12" height="64" width="754" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+column(band=header.4 id=13 alignment="2" tabsequence=32766 border="0" color="33554432" x="1339" y="12" height="64" width="192" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1"  slideup=directlyabove height.autosize=yes edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.4 id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="1568" y="16" height="64" width="1257" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1"  slideup=directlyabove height.autosize=yes edit.limit=70 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.4 alignment="1" expression="sum(quantity for group 4)"border="0" color="33554432" x="2825" y="12" height="64" width="288" format="0" html.valueishtml="0"  name=compute_2 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+compute(band=header.4 alignment="1" expression="sum(total_amount for group 4) "border="0" color="33554432" x="3310" y="12" height="64" width="411" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_9 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+text(band=trailer.3 alignment="0" text="Total For Claim:" border="0" color="33554432" x="2290" y="64" height="64" width="466" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.3 alignment="0" text=">>" border="0" color="33554432" x="2089" y="52" height="92" width="128" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-18" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217752" )
+line(band=trailer.3 x1="2816" y1="4" x2="3730" y2="4"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=trailer.3 x1="2816" y1="20" x2="3730" y2="20"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.3 alignment="1" expression="sum(quantity for group 3)"border="0" color="33554432" x="2825" y="64" height="64" width="306" format="0" html.valueishtml="0"  name=compute_6 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+compute(band=trailer.3 alignment="1" expression=" sum(total_amount for group 3)"border="0" color="33554432" x="3209" y="64" height="64" width="512" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_8 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+text(band=trailer.2 alignment="1" text="Total For Clinic:" border="0" color="33554432" x="2267" y="32" height="64" width="462" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.2 alignment="0" text=">>" border="0" color="33554432" x="2089" y="12" height="92" width="128" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-18" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217752" )
+compute(band=trailer.2 alignment="1" expression="sum(quantity for group 2)"border="0" color="33554432" x="2825" y="32" height="64" width="325" format="0" html.valueishtml="0"  name=compute_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression=" sum(total_amount for group 2)"border="0" color="33554432" x="3209" y="28" height="64" width="512" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="1" text="Total For Program:" border="0" color="33554432" x="2267" y="88" height="64" width="549" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.1 alignment="0" text=">>" border="0" color="33554432" x="2089" y="60" height="92" width="128" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-18" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217752" )
+line(band=trailer.1 x1="2080" y1="48" x2="3726" y2="48"  name=l_4 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="sum(quantity for group 1)"border="0" color="33554432" x="2825" y="88" height="64" width="325" format="0" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression=" sum(total_amount for group 1)"border="0" color="33554432" x="3209" y="84" height="64" width="512" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+groupbox(band=summary text=""border="2" color="33554432" x="2181" y="80" height="128" width="1545"  name=gb_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217752" )
+text(band=summary alignment="1" text="Grand Totals:" border="0" color="33554432" x="2235" y="116" height="64" width="389" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum( total_amount for all )"border="0" color="33554432" x="3168" y="116" height="64" width="530" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression=" sum(quantity for all) "border="0" color="33554432" x="2647" y="116" height="64" width="485" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="2080" y1="56" x2="3726" y2="56"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="2080" y1="32" x2="3726" y2="32"  name=l_3 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=summary alignment="0" text="" border="2" color="33554432" x="41" y="224" height="188" width="3689" html.valueishtml="0"  name=t_filter_info visible="1"  slideup=allabove  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15793151"  height.autosize=yes)
+text(band=footer alignment="0" text="Notes:" border="0" color="33554432" x="46" y="24" height="64" width="251" html.valueishtml="0"  name=t_13 visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="" border="2" color="33554432" x="46" y="108" height="168" width="3643" html.valueishtml="0"  name=t_user_entered_text visible="1"  slideup=allabove  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+
+sparse(names="claim_no	compute_1	admin_region_code	billable_item_desc_e	compute_2	compute_9")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

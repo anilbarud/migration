@@ -1,0 +1,112 @@
+﻿$PBExportHeader$d_annuity_overpayment.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=308 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=124 color="536870912" )
+detail(height=100 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=annuity_payout_txn_detail_recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_payout_txn_detail_recipient_type_code dbname="recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_txn_detail_annuity_payout_recipient_no dbname="annuity_payout_recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_payout_txn_detail_annuity_payout_recipient_type_code dbname="annuity_payout_recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_txn_detail_annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_txn_detail_claim_no dbname="claim_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=annuity_payout_txn_detail_payment_amount dbname="payment_amount" )
+ column=(type=char(41) updatewhereclause=yes name=annuity_recipient dbname="annuity_recipient" )
+ column=(type=long updatewhereclause=yes name=overpayment_detail_overpayment_no dbname="overpayment_no" )
+ column=(type=char(2) updatewhereclause=yes name=overpayment_detail_overpayment_type_code dbname="overpayment_type_code" )
+ column=(type=long updatewhereclause=yes name=overpayment_detail_claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=overpayment_detail_recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=overpayment_detail_recipient_type_code dbname="recipient_type_code" )
+ column=(type=datetime updatewhereclause=yes name=overpayment_detail_overpayment_date dbname="overpayment_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=overpayment_detail_detail_amount dbname="detail_amount" )
+ column=(type=char(30) updatewhereclause=yes name=annuity_role_desc_e dbname="annuity_role_desc_e" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=char(84) updatewhereclause=yes name=benefit_holder_desc dbname="benefit_holder_desc" )
+ column=(type=char(1) updatewhereclause=yes name=benefit_holder dbname="benefit holder" )
+ retrieve="SELECT a.recipient_no,   
+       a.recipient_type_code,   
+       a.annuity_payout_recipient_no,   
+       a.annuity_payout_recipient_type_code,   
+       a.annuity_payout_no,   
+       a.claim_no,   
+       a.payment_amount,
+       d.given_names + ' ' + d.last_name 'annuity_recipient',
+       c.overpayment_no,   
+       c.overpayment_type_code,   
+       c.claim_no,   
+       c.recipient_no,   
+       c.recipient_type_code,   
+       c.overpayment_date,   
+       c.detail_amount,
+       f.annuity_role_desc_e,
+       g.individual_no,
+       g.annuity_account_no,
+       h.given_names + ' ' + h.last_name + ' - ' + k.claim_role_desc 'benefit_holder_desc',
+       CASE WHEN h.individual_no = a.recipient_no 
+            THEN 'Y'
+       ELSE 'N'
+       END          AS 'benefit holder'
+FROM   ANNUITY_PAYOUT_TXN_DETAIL       a
+JOIN   ANNUITY_PAYOUT_OVERPAYMENT_XREF b ON a.claim_no            = b.claim_no
+                                        AND a.annuity_payout_no   = b.annuity_payout_no
+                                        AND a.recipient_no        = b.recipient_no
+                                        AND a.recipient_type_code = b.recipient_type_code
+JOIN   OVERPAYMENT_DETAIL              c ON b.overpayment_no                  = c.overpayment_no
+                                        AND b.overpayment_claim_no            = c.claim_no
+                                        AND b.overpayment_recipient_no        = c.recipient_no
+                                        AND b.overpayment_recipient_type_code = c.recipient_type_code
+JOIN   INDIVIDUAL                      d ON a.recipient_no = d.individual_no
+JOIN   ANNUITY_PAYOUT_PARTICIPANT      e ON a.recipient_no        = e.recipient_no
+                                        AND a.recipient_type_code = e.recipient_type_code
+                                        AND a.annuity_payout_no   = e.annuity_payout_no
+JOIN   Annuity_Role                    f ON e.annuity_role_code = f.annuity_role_code
+JOIN   ANNUITY_ACCOUNT                 g ON a.annuity_account_no = g.annuity_account_no
+JOIN   INDIVIDUAL                      h ON g.individual_no = h.individual_no
+JOIN   ANNUITY_PAYOUT_PARTICIPANT      i ON h.individual_no       = i.recipient_no
+                                        AND a.annuity_payout_no   = i.annuity_payout_no
+JOIN   Annuity_Role                    j ON i.annuity_role_code = j.annuity_role_code
+JOIN   Claim_Role                      k ON g.claim_role_code = k.claim_role_code
+WHERE  a.payment_sub_type_code = 'CO'
+AND    a.annuity_payout_no     = :al_annuity_payout_no
+ORDER BY f.annuity_role_code DESC,
+         a.recipient_no,
+         a.recipient_type_code,
+         c.overpayment_no" arguments=(("al_annuity_payout_no", number)) )
+group(level=1 header.height=280 trailer.height=100 by=("annuity_payout_txn_detail_recipient_no" , "annuity_payout_txn_detail_recipient_type_code" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="0" y="124" height="16" width="4302"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+rectangle(band=header x="0" y="4" height="16" width="4302"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Annuity Payout Overpayment Recovery" border="0" color="33554432" x="0" y="44" height="64" width="1134" html.valueishtml="0"  name=total_annuity_benefit_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Participant - Annuity Role" border="0" color="33554432" x="9" y="220" height="64" width="741" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.1 alignment="0" expression=" annuity_recipient + ' - ' +  annuity_role_desc_e "border="0" color="33554432" x="55" y="32" height="60" width="1810" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.1 x1="873" y1="260" x2="4270" y2="260"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="2" text="Overpayment Detail Amount" border="0" color="33554432" x="2811" y="112" height="128" width="526" html.valueishtml="0"  name=overpayment_detail_detail_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Overpayment Type" border="0" color="33554432" x="3867" y="104" height="132" width="398" html.valueishtml="0"  name=overpayment_detail_overpayment_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Overpayment Claim No" border="0" color="33554432" x="1029" y="112" height="140" width="434" html.valueishtml="0"  name=overpayment_detail_claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Annuity Claim No" border="0" color="33554432" x="2085" y="112" height="132" width="352" html.valueishtml="0"  name=annuity_payout_txn_detail_claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="1" tabsequence=32766 border="0" color="33554432" x="2930" y="12" height="76" width="329" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=overpayment_detail_detail_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="3895" y="12" height="76" width="366" format="[general]" html.valueishtml="0"  name=overpayment_detail_overpayment_type_code visible="1" dddw.name=dddw_overpayment_type dddw.displaycolumn=overpayment_type_desc dddw.datacolumn=overpayment_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="1074" y="12" height="76" width="329" format="[general]" html.valueishtml="0"  name=overpayment_detail_claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="recovered from" border="0" color="33554432" x="1559" y="12" height="60" width="402" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="2039" y="12" height="76" width="329" format="[general]" html.valueishtml="0"  name=annuity_payout_txn_detail_claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(overpayment_detail_detail_amount for group 1)"border="0" color="33554432" x="2930" y="12" height="76" width="329" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2907" y1="0" x2="3282" y2="0"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=trailer.1 x1="2907" y1="96" x2="3282" y2="96"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=footer x1="14" y1="20" x2="4562" y2="20"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Annuity Account No:" border="0" color="33554432" x="37" y="40" height="64" width="585" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="635" y="40" height="64" width="174" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=19 alignment="0" tabsequence=32766 border="0" color="33554432" x="1029" y="40" height="60" width="1691" format="[general]" html.valueishtml="0"  name=benefit_holder_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2917" y="40" height="64" width="402" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=footer id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="3337" y="40" height="64" width="256" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

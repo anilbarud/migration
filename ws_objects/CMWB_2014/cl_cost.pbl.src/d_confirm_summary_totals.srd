@@ -1,0 +1,154 @@
+﻿$PBExportHeader$d_confirm_summary_totals.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=140 color="12632256" )
+summary(height=120 color="536870912" )
+footer(height=12 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=long updatewhereclause=no name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=no name=txn_no dbname="name_1" )
+ column=(type=char(4) updatewhereclause=no name=payment_type_code dbname="name_2" )
+ column=(type=char(3) updatewhereclause=no name=payment_sub_type_code dbname="name_3" )
+ column=(type=char(1) updatewhereclause=no name=txn_type_code dbname="name_4" )
+ column=(type=long updatewhereclause=no name=claim_no dbname="name_5" )
+ column=(type=long updatewhereclause=no name=related_txn_no dbname="name_6" )
+ column=(type=decimal(2) updatewhereclause=no name=txn_amount dbname="name_7" )
+ column=(type=number updatewhereclause=no name=cost_alloc_no dbname="name_8" )
+ column=(type=long updatewhereclause=no name=cost_alloc_operation_no dbname="name_9" )
+ column=(type=datetime updatewhereclause=no name=processed_date dbname="name_10" )
+ column=(type=decimal(2) updatewhereclause=no name=total_payment_amount dbname="name_11" )
+ column=(type=char(1) updatewhereclause=no name=txn_sub_type_code dbname="name_12" )
+ column=(type=char(1) updatewhereclause=no name=indicator dbname="name_13" )
+ column=(type=char(20) updatewhereclause=no name=message dbname="name_14" )
+ column=(type=number updatewhereclause=no name=net_quantity dbname="name_17" )
+ column=(type=long updatewhereclause=no name=recipient_no dbname="name_19" )
+ column=(type=char(1) updatewhereclause=no name=recipient_type_code dbname="name_20" )
+ column=(type=char(2) updatewhereclause=no name=recipient_sub_type_code dbname="name_21" )
+ column=(type=number updatewhereclause=no name=manual_cheque_req_no dbname="name_22" )
+ column=(type=number updatewhereclause=no name=cheque_no dbname="name_23" )
+ column=(type=datetime updatewhereclause=no name=cheque_deposit_date dbname="name_24" )
+ column=(type=number updatewhereclause=no name=direct_deposit_xmit_no dbname="name_25" )
+ column=(type=char(1) updatewhereclause=no name=payment_method_code dbname="name_26" )
+ column=(type=char(3) updatewhereclause=no name=admin_region_code dbname="name_27" )
+ column=(type=char(30) updatewhereclause=no name=recipient_name dbname="name_28" )
+ column=(type=char(30) updatewhereclause=no name=address_line1 dbname="name_29" )
+ column=(type=char(30) updatewhereclause=no name=address_line2 dbname="name_30" )
+ column=(type=char(25) updatewhereclause=no name=city dbname="name_31" )
+ column=(type=char(2) updatewhereclause=no name=prov_state_code dbname="name_32" )
+ column=(type=char(10) updatewhereclause=no name=country dbname="name_33" )
+ column=(type=char(10) updatewhereclause=no name=postal_code dbname="name_34" )
+ column=(type=char(1) updatewhereclause=no name=use_default_address_flag dbname="name_35" )
+ column=(type=char(1) updatewhereclause=no name=cheque_print_group_code dbname="name_36" )
+ column=(type=char(1) updatewhereclause=no name=maintain_allowed_flag dbname="name_37" )
+ column=(type=char(1) updatewhereclause=no name=final_payment_flag dbname="name_38" )
+ column=(type=datetime updatewhereclause=no name=paid_from_date dbname="name_41" )
+ column=(type=datetime updatewhereclause=no name=paid_to_date dbname="name_42" )
+ column=(type=number updatewhereclause=no name=authorization_no dbname="name_43" )
+ column=(type=datetime updatewhereclause=no name=authorized_date dbname="name_44" )
+ column=(type=char(16) updatewhereclause=no name=authorized_by_code dbname="name_45" )
+ column=(type=char(1) updatewhereclause=no name=payment_adjustment_flag dbname="name_46" )
+ column=(type=char(1) updatewhereclause=no name=cost_alloc_type_code dbname="name_47" )
+ column=(type=number updatewhereclause=no name=adjustment_rehab_qty dbname="name_48" )
+ column=(type=number updatewhereclause=no name=group_indicator dbname="name_49" )
+ column=(type=decimal(2) updatewhereclause=no name=adjustment_amount dbname="name_16" )
+ column=(type=number updatewhereclause=no name=txn_unit_of_work_no dbname="name_50" )
+ column=(type=number updatewhereclause=no name=claim_no_original dbname="name_51" )
+ column=(type=decimal(5) updatewhereclause=no name=tax_rate dbname="name_52" )
+ column=(type=number updatewhereclause=no name=provider_no_original dbname="name_53" )
+ column=(type=number updatewhereclause=no name=award_no dbname="name_54" )
+ column=(type=decimal(2) updatewhereclause=no name=net_days_lost dbname="name_55" )
+ column=(type=decimal(2) updatewhereclause=no name=net_hours_lost dbname="name_56" )
+ column=(type=decimal(2) updatewhereclause=no name=adjustment_days_lost dbname="name_57" )
+ column=(type=decimal(2) updatewhereclause=no name=adjustment_hours_lost dbname="name_58" )
+ column=(type=decimal(2) updatewhereclause=no name=txn_tax_amount dbname="name_15" )
+ column=(type=char(1) updatewhereclause=no name=annuity_set_a_side dbname="name_18" )
+ column=(type=char(1) updatewhereclause=no name=new_txn_created dbname="name_60" )
+ column=(type=number updatewhereclause=no name=coc_period dbname="name_61" )
+ column=(type=char(80) updatewhereclause=no name=explanation dbname="name_62" )
+ column=(type=long updatewhereclause=no name=benefit_calculation_no dbname="name_59" )
+ column=(type=long updatewhereclause=no name=opening_no dbname="name_39" )
+ column=(type=char(1) updatewhereclause=no name=split_payment_flag dbname="name_40" )
+ column=(type=number updatewhereclause=no name=ultimate_txn_no dbname="name_63" )
+ column=(type=number updatewhereclause=no name=split_seq_no dbname="name_64" )
+ column=(type=char(1) updatewhereclause=no name=first_remainder_txn_flag dbname="name_65" )
+ )
+group(level=1 header.height=0 trailer.height=72 by=("payment_type_code" , "payment_sub_type_code" ) header.color="536870912" trailer.color="536870912" )
+line(band=header x1="23" y1="136" x2="5024" y2="132"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Sub
+Type" border="0" color="33554432" x="151" y="8" height="120" width="233" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Pay
+Type" border="0" color="33554432" x="9" y="8" height="120" width="233" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Cr
+Amt" border="0" color="33554432" x="334" y="8" height="120" width="233" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Dr
+Amt" border="0" color="33554432" x="800" y="8" height="120" width="137" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Cr
+ Tax Amt" border="0" color="33554432" x="919" y="8" height="120" width="375" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Dr
+Tax Amt" border="0" color="33554432" x="1413" y="8" height="120" width="215" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Cr
+ Qty" border="0" color="33554432" x="1710" y="8" height="120" width="174" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Dr
+ Qty" border="0" color="33554432" x="1947" y="8" height="120" width="174" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Cr Pd
+ Days L" border="0" color="33554432" x="2222" y="8" height="120" width="201" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Dr Pd
+ Days L" border="0" color="33554432" x="2473" y="8" height="120" width="201" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Dr Pd
+ Hours Lost" border="0" color="33554432" x="2903" y="8" height="120" width="201" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Cr Pd
+ Hours Lost" border="0" color="33554432" x="2697" y="8" height="120" width="201" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Total
+Amount" border="0" color="33554432" x="3319" y="8" height="120" width="201" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Total Tax
+Amount" border="0" color="33554432" x="3447" y="8" height="120" width="384" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Total
+Qty" border="0" color="33554432" x="3858" y="8" height="120" width="215" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Total
+Days Lost" border="0" color="33554432" x="4169" y="8" height="120" width="256" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Total
+Hours Lost" border="0" color="33554432" x="4466" y="8" height="120" width="283" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=trailer.1 id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="56" width="91" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=trailer.1 id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="128" y="4" height="60" width="82" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if ( txn_amount < 0,txn_amount,0) for group 1)"border="0" color="33554432" x="219" y="4" height="56" width="347" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_cr_amount visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if ( txn_amount > 0,txn_amount,0) for group 1)"border="0" color="33554432" x="585" y="4" height="56" width="352" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_db_amount visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if ( txn_tax_amount < 0,txn_tax_amount,0) for group 1)"border="0" color="33554432" x="978" y="4" height="60" width="315" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_cr_tax_amount visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if ( txn_tax_amount > 0,txn_tax_amount,0) for group 1)"border="0" color="33554432" x="1321" y="4" height="56" width="306" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_dr_tax_amount visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if (  adjustment_rehab_qty < 0, adjustment_rehab_qty ,0) for group 1)"border="0" color="33554432" x="1710" y="4" height="56" width="174" format="#,##0" html.valueishtml="0"  name=compute_cr_rehab_qty visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if (  adjustment_rehab_qty  > 0, adjustment_rehab_qty ,0) for group 1)"border="0" color="33554432" x="1947" y="4" height="56" width="174" format="#,##0;[RED](#,##0)" html.valueishtml="0"  name=compute_db_rehab_qty visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if (   adjustment_days_lost  < 0,  adjustment_days_lost  ,0) for group 1)"border="0" color="33554432" x="2176" y="4" height="56" width="242" format="#0.00" html.valueishtml="0"  name=compute_cr_paid_days_lost visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if (   adjustment_days_lost   > 0,  adjustment_days_lost  ,0) for group 1)"border="0" color="33554432" x="2418" y="4" height="56" width="242" format="#,##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_db_paid_days_lost visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if (   adjustment_hours_lost   > 0,  adjustment_hours_lost  ,0) for group 1)"border="0" color="33554432" x="2939" y="4" height="56" width="165" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_db_paid_hours_lost visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum ( if (   adjustment_hours_lost  < 0,  adjustment_hours_lost  ,0) for group 1)"border="0" color="33554432" x="2725" y="4" height="56" width="174" format="#,##0.00" html.valueishtml="0"  name=compute_cr_paid_hours_lost visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression=" compute_cr_amount +  compute_db_amount "border="0" color="33554432" x="3109" y="4" height="60" width="411" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_total_amount visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression=" compute_cr_tax_amount +  compute_dr_tax_amount "border="0" color="33554432" x="3525" y="4" height="60" width="306" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_16 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression=" compute_cr_rehab_qty +  compute_db_rehab_qty "border="0" color="33554432" x="3858" y="4" height="60" width="215" format="#,##0;[RED](#,##0)" html.valueishtml="0"  name=compute_total_rehab_qty visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression=" compute_cr_paid_days_lost +  compute_db_paid_days_lost "border="0" color="33554432" x="4128" y="4" height="60" width="297" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_total_days_lost visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression=" compute_cr_paid_hours_lost +   compute_db_paid_hours_lost "border="0" color="33554432" x="4466" y="4" height="60" width="283" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_total_hours_lost visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="23" y1="8" x2="5024" y2="8"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=summary alignment="1" expression="sum ( if ( txn_amount < 0,txn_amount,0) for ALL)"border="0" color="33554432" x="219" y="24" height="56" width="347" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if ( txn_amount> 0,txn_amount,0) for ALL)"border="0" color="33554432" x="590" y="24" height="56" width="347" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if ( txn_tax_amount < 0,txn_tax_amount,0) for ALL)"border="0" color="33554432" x="987" y="24" height="56" width="306" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if ( txn_tax_amount > 0,txn_tax_amount,0) for ALL)"border="0" color="33554432" x="1321" y="24" height="56" width="306" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if (  adjustment_rehab_qty < 0, adjustment_rehab_qty ,0) for all)"border="0" color="33554432" x="1710" y="24" height="56" width="174" format="#,##0" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if (  adjustment_rehab_qty  > 0, adjustment_rehab_qty ,0) for all)"border="0" color="33554432" x="1947" y="24" height="56" width="174" format="#,##0;[RED](#,##0)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if (  adjustment_days_lost < 0,  adjustment_days_lost  ,0) for all)"border="0" color="33554432" x="2176" y="24" height="56" width="242" format="#,##0.00" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if (   adjustment_days_lost   > 0,  adjustment_days_lost ,0) for all)"border="0" color="33554432" x="2418" y="24" height="56" width="242" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if (   adjustment_hours_lost   > 0,  adjustment_hours_lost ,0) for all)"border="0" color="33554432" x="2939" y="24" height="56" width="165" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_10 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum ( if (  adjustment_hours_lost < 0,  adjustment_hours_lost  ,0) for all)"border="0" color="33554432" x="2725" y="24" height="56" width="174" format="#,##0.00" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression=" compute_1 +  compute_3 "border="0" color="33554432" x="3109" y="24" height="56" width="411" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression=" compute_11 +  compute_12"border="0" color="33554432" x="3525" y="24" height="56" width="306" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression=" compute_4 +  compute_5"border="0" color="33554432" x="3858" y="24" height="56" width="215" format="#,##0;[RED](#,##0)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression=" compute_8 +  compute_9"border="0" color="33554432" x="4128" y="24" height="56" width="297" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression=" compute_7+  compute_10"border="0" color="33554432" x="4471" y="24" height="56" width="279" format="##0.00;[RED](#,##0.00)" html.valueishtml="0"  name=compute_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

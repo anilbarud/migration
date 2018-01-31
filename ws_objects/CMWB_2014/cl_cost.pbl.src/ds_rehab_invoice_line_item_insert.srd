@@ -1,0 +1,87 @@
+﻿$PBExportHeader$ds_rehab_invoice_line_item_insert.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=8 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=112 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=line_no dbname="line_no" )
+ column=(type=long update=yes updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=service_date dbname="service_date" )
+ column=(type=long update=yes updatewhereclause=yes name=fee_no dbname="fee_no" )
+ column=(type=long update=yes updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=billable_unit_code dbname="billable_unit_code" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=quantity dbname="quantity" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=units_billed dbname="units_billed" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=unit_price dbname="unit_price" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=total_non_tax_amount dbname="total_non_tax_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=total_tax_amount dbname="total_tax_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=total_amount dbname="total_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=tax_rate_no dbname="tax_rate_no" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=tax_rate dbname="tax_rate" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=tax_applied_flag dbname="tax_applied_flag" )
+ column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=line_item_amended_code dbname="line_item_amended_code" )
+ column=(type=long update=yes updatewhereclause=yes name=from_rehab_invoice_no dbname="from_rehab_invoice_no" )
+ column=(type=long update=yes updatewhereclause=yes name=from_line_no dbname="from_line_no" )
+ retrieve="SELECT rehab_invoice_no
+      ,line_no
+      ,authorization_no
+      ,claim_no
+      ,task_no
+      ,service_date
+      ,fee_no
+      ,billable_xref_no
+      ,billable_unit_code
+      ,quantity
+      ,units_billed
+      ,unit_price
+      ,total_non_tax_amount
+      ,total_tax_amount
+      ,total_amount
+      ,tax_rate_no
+      ,tax_rate
+      ,tax_applied_flag
+      ,payment_no
+      ,line_item_amended_code
+      ,from_rehab_invoice_no
+      ,from_line_no
+  FROM REHAB_INVOICE_LINE_ITEM
+   WHERE dbo.REHAB_INVOICE_LINE_ITEM.payment_no = :payment_no   
+            
+" update="REHAB_INVOICE_LINE_ITEM" updatewhere=1 updatekeyinplace=yes arguments=(("payment_no", number)) )
+text(band=detail alignment="1" text="Line Item Amended Code:" border="0" color="33554432" x="37" y="4" height="64" width="759" html.valueishtml="0"  name=line_item_amended_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="923" y="8" height="76" width="859" format="[general]" html.valueishtml="0"  name=line_item_amended_code visible="1" edit.limit=2 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1783" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="3918" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="6053" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=task_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="8187" y="0" height="64" width="1595" format="[shortdate] [time]" html.valueishtml="0"  name=service_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="9783" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=fee_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="11918" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=billable_xref_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="14053" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=billable_unit_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="14135" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="16270" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=units_billed visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="18405" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=unit_price visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="20539" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=total_non_tax_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="22674" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=total_tax_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="24809" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=total_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="33554432" x="26944" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=tax_rate_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="29079" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=tax_rate visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="31214" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=tax_applied_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="33554432" x="31241" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="33554432" x="33376" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=from_rehab_invoice_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="33554432" x="35511" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=from_line_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml( template=(comment="" name="111" xhtml="﻿<form name=~"ds_rehab_invoice_line_item_dataForm~"><div class=~"ds_rehab_invoice_line_item_band_0~"/><div class=~"ds_rehab_invoice_line_item_detail_0~" __pbband=~"detail~"><div class=~"ds_rehab_invoice_line_item_line_item_amended_code_t~">line_item_amended_code_t</div><input name=~"ds_rehab_invoice_line_item_line_item_amended_code~" type=~"text~" value=~"line_item_amended_code~"/><input name=~"ds_rehab_invoice_line_item_authorization_no~" type=~"text~" value=~"authorization_no~"/><input name=~"ds_rehab_invoice_line_item_claim_no~" type=~"text~" value=~"claim_no~"/><input name=~"ds_rehab_invoice_line_item_task_no~" type=~"text~" value=~"task_no~"/><input name=~"ds_rehab_invoice_line_item_service_date~" type=~"text~" value=~"service_date~"/><input name=~"ds_rehab_invoice_line_item_fee_no~" type=~"text~" value=~"fee_no~"/><input name=~"ds_rehab_invoice_line_item_billable_xref_no~" type=~"text~" value=~"billable_xref_no~"/><input name=~"ds_rehab_invoice_line_item_billable_unit_code~" type=~"text~" value=~"billable_unit_code~"/><input name=~"ds_rehab_invoice_line_item_quantity~" type=~"text~" value=~"quantity~"/><input name=~"ds_rehab_invoice_line_item_units_billed~" type=~"text~" value=~"units_billed~"/><input name=~"ds_rehab_invoice_line_item_unit_price~" type=~"text~" value=~"unit_price~"/><input name=~"ds_rehab_invoice_line_item_total_non_tax_amount~" type=~"text~" value=~"total_non_tax_amount~"/><input name=~"ds_rehab_invoice_line_item_total_tax_amount~" type=~"text~" value=~"total_tax_amount~"/><input name=~"ds_rehab_invoice_line_item_total_amount~" type=~"text~" value=~"total_amount~"/><input name=~"ds_rehab_invoice_line_item_tax_rate_no~" type=~"text~" value=~"tax_rate_no~"/><input name=~"ds_rehab_invoice_line_item_tax_rate~" type=~"text~" value=~"tax_rate~"/><input name=~"ds_rehab_invoice_line_item_tax_applied_flag~" type=~"text~" value=~"tax_applied_flag~"/><input name=~"ds_rehab_invoice_line_item_payment_no~" type=~"text~" value=~"payment_no~"/><input name=~"ds_rehab_invoice_line_item_from_rehab_invoice_no~" type=~"text~" value=~"from_rehab_invoice_no~"/><input name=~"ds_rehab_invoice_line_item_from_line_no~" type=~"text~" value=~"from_line_no~"/><input name=~"ds_rehab_invoice_line_item_web_create_date~" type=~"text~" value=~"web_create_date~"/><input name=~"ds_rehab_invoice_line_item_web_modify_date~" type=~"text~" value=~"web_modify_date~"/><input name=~"ds_rehab_invoice_line_item_web_create_user_id~" type=~"text~" value=~"web_create_user_id~"/><input name=~"ds_rehab_invoice_line_item_web_modify_user_id~" type=~"text~" value=~"web_modify_user_id~"/></div></form>"))
+ 

@@ -1,0 +1,71 @@
+﻿$PBExportHeader$d_formulary_composite.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=216 color="16777215" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(1) update=yes updatewhereclause=yes name=formulary_type_code dbname="formulary_type_code" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=formulary_code dbname="formulary_code" )
+ column=(type=long update=yes updatewhereclause=yes name=formulary_record_no dbname="formulary_record_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=formulary_start_date dbname="formulary_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=formulary_end_date dbname="formulary_end_date" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=formulary_comment dbname="comment" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=char(20) updatewhereclause=yes name=formulary_type_desc dbname="formulary_type_desc" )
+ column=(type=long update=yes updatewhereclause=yes name=export_no dbname="export_no" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=primary_active_flag dbname="primary_active_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=manual_entry_flag dbname="manual_entry_flag" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=primary_noi_code dbname="primary_noi_code" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=export_user_id dbname="export_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=export_date dbname="export_date" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="  SELECT a.formulary_type_code,   
+         a.formulary_code,     
+         a.formulary_record_no,   
+         a.claim_no,   
+         a.formulary_start_date,   
+         a.formulary_end_date,   
+         a.comment,   
+         a.create_user_id,
+         b.formulary_type_desc,
+         a.export_no,
+         c.claim_status_code,
+         c.claim_status_type_code,
+         a.primary_active_flag,
+         a.manual_entry_flag,
+         a.primary_noi_code,
+         a.export_user_id,
+         a.export_date,
+         a.create_date,
+         d.active_flag
+    FROM dbo.CLAIM_FORMULARY a, Formulary_Type b , CLAIM c , Formulary d
+   WHERE a.formulary_type_code = b.formulary_type_code
+     AND a.formulary_code      = d.formulary_code
+     AND a.claim_no            = c.claim_no
+
+"  sort="formulary_code A " )
+line(band=header x1="5" y1="212" x2="4091" y2="212"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="FORMULARY" border="0" color="33554432" x="18" y="12" height="76" width="590" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Type" border="0" color="33554432" x="9" y="144" height="60" width="160" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Code" border="0" color="33554432" x="325" y="144" height="60" width="261" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Formulary Coverage" border="0" color="33554432" x="663" y="144" height="60" width="521" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Formulary Comment" border="0" color="33554432" x="1413" y="144" height="60" width="539" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Form Record No" border="0" color="33554432" x="3685" y="144" height="60" width="471" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Create User" border="0" color="33554432" x="2926" y="144" height="60" width="338" html.valueishtml="0"  name=create_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Create Date" border="0" color="33554432" x="3305" y="144" height="60" width="343" html.valueishtml="0"  name=create_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="60" width="293" format="[general]" html.valueishtml="0"  name=formulary_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=30 border="0" color="33554432" x="325" y="4" height="60" width="325" format="[general]" html.valueishtml="0"  name=formulary_code visible="1" dddw.name=dddw_formulary_code dddw.displaycolumn=formulary_code dddw.datacolumn=formulary_code dddw.percentwidth=750 dddw.lines=10 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0 dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  formulary_type_code  <> ~"P~" and export_no = 0 or isrownew(),rgb(255,255,255),67108864)" )
+column(band=detail id=5 alignment="0" tabsequence=10 border="0" color="33554432" x="672" y="4" height="60" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=formulary_start_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="To" border="0" color="33554432" x="997" y="4" height="60" width="69" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=20 border="0" color="33554432" x="1093" y="4" height="60" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=formulary_end_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=40 border="0" color="33554432" x="1408" y="4" height="60" width="1490" format="[general]" html.valueishtml="0"  name=formulary_comment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="2930" y="4" height="60" width="347" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="3310" y="4" height="60" width="379" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="3753" y="4" height="60" width="347" format="[general]" html.valueishtml="0"  name=formulary_record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

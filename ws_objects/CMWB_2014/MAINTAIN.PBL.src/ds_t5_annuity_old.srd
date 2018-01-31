@@ -1,0 +1,13 @@
+﻿$PBExportHeader$ds_t5_annuity_old.srd
+$PBExportComments$DataStore for T5007_1998_ANNUITY_PAYOUTS table with t5007_recipient_no that is about to be archived.
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=t5007_recipient_no dbname="T5007_1998_ANNUITY_PAYOUTS.t5007_recipient_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=y2k_payment_flag dbname="T5007_1998_ANNUITY_PAYOUTS.y2k_payment_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"T5007_1998_ANNUITY_PAYOUTS~" ) COLUMN(NAME=~"T5007_1998_ANNUITY_PAYOUTS.t5007_recipient_no~") COLUMN(NAME=~"T5007_1998_ANNUITY_PAYOUTS.y2k_payment_flag~")WHERE(    EXP1 =~"T5007_1998_ANNUITY_PAYOUTS.t5007_recipient_no~"   OP =~"=~"    EXP2 =~":ll_id~" ) ) ARG(NAME = ~"ll_id~" TYPE = number) " update="T5007_1998_ANNUITY_PAYOUTS" updatewhere=1 updatekeyinplace=no arguments=(("ll_id", number)) )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="5" y="4" height="76" width="329" format="[general]"  name=t5007_recipient_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="361" y="4" height="76" width="238" format="[general]"  name=y2k_payment_flag edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

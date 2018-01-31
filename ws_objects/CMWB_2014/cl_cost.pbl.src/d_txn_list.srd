@@ -1,0 +1,108 @@
+﻿$PBExportHeader$d_txn_list.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=68 color="10789024" )
+summary(height=8 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=txn_no dbname="APPLIED_CLAIM_TXN.txn_no" )
+ column=(type=long update=yes updatewhereclause=yes name=coc_period dbname="APPLIED_CLAIM_TXN.coc_period" )
+ column=(type=long update=yes updatewhereclause=yes name=cheque_no dbname="APPLIED_CLAIM_TXN.cheque_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=cheque_deposit_date dbname="APPLIED_CLAIM_TXN.cheque_deposit_date" )
+ column=(type=long update=yes updatewhereclause=yes name=direct_deposit_xmit_no dbname="APPLIED_CLAIM_TXN.direct_deposit_xmit_no" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=tax_amount dbname="APPLIED_CLAIM_TXN.tax_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=non_tax_amount dbname="APPLIED_CLAIM_TXN.non_tax_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=txn_amount dbname="APPLIED_CLAIM_TXN.txn_amount" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=admin_region_code dbname="APPLIED_CLAIM_TXN.admin_region_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=processed_date dbname="APPLIED_CLAIM_TXN.processed_date" )
+ column=(type=long update=yes updatewhereclause=yes name=related_txn_no dbname="APPLIED_CLAIM_TXN.related_txn_no" )
+ column=(type=long update=yes updatewhereclause=yes name=txn_unit_of_work_no dbname="APPLIED_CLAIM_TXN.txn_unit_of_work_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=maintain_allowed_flag dbname="APPLIED_CLAIM_TXN.maintain_allowed_flag" )
+ column=(type=char(40) updatewhereclause=yes name=txn_type_txn_type_desc dbname="APPLIED_CLAIM_TXN.txn_type_desc" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="APPLIED_CLAIM_TXN.payment_no" )
+ column=(type=char(40) updatewhereclause=yes name=txn_sub_type_txn_sub_type_desc dbname="APPLIED_CLAIM_TXN.txn_sub_type_desc" )
+ column=(type=long updatewhereclause=yes name=unapplied_claim_txn_no dbname="unapplied_claim_txn_no" )
+ column=(type=char(1) updatewhereclause=yes name=txn_type_code dbname="APPLIED_CLAIM_TXN.txn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_sub_type_code dbname="APPLIED_CLAIM_TXN.txn_sub_type_code" )
+ retrieve="SELECT a.txn_no,   
+         a.coc_period,   
+         a.cheque_no,   
+         a.cheque_deposit_date,   
+         a.direct_deposit_xmit_no,   
+         a.tax_amount,   
+         a.non_tax_amount,   
+         a.txn_amount,   
+         a.admin_region_code,   
+         a.processed_date,   
+         a.related_txn_no,   
+         a.txn_unit_of_work_no,   
+         a.maintain_allowed_flag,   
+         d.txn_type_desc,   
+         a.payment_no,   
+         c.txn_sub_type_desc,
+  	'unapplied_claim_txn_no' = MAX(b.txn_no),
+			a.txn_type_code,
+			a.txn_sub_type_code
+FROM dbo.APPLIED_CLAIM_TXN a 
+     INNER JOIN dbo.Txn_Type d  ON a.txn_type_code = d.txn_type_code
+     INNER JOIN dbo.Txn_Sub_Type c  ON a.txn_sub_type_code = c.txn_sub_type_code
+    LEFT OUTER JOIN dbo.UNAPPLIED_CLAIM_TXN b  ON a.txn_no = b.related_txn_no
+ WHERE a.payment_no = :al_payment_no 
+GROUP BY a.txn_no,   
+         a.coc_period,   
+         a.cheque_no,   
+         a.cheque_deposit_date,   
+         a.direct_deposit_xmit_no,   
+         a.tax_amount,   
+         a.non_tax_amount,   
+         a.txn_amount,   
+         a.admin_region_code,   
+         a.processed_date,   
+         a.related_txn_no,   
+         a.txn_unit_of_work_no,   
+         a.maintain_allowed_flag,   
+         d.txn_type_desc,   
+         a.payment_no,   
+         c.txn_sub_type_desc,
+ 			a.txn_type_code,
+		 	a.txn_sub_type_code
+union 
+SELECT a.txn_no,   
+       a.coc_period,   
+       a.cheque_no,   
+       a.cheque_deposit_date,   
+       a.direct_deposit_xmit_no,   
+       a.tax_amount,   
+       a.non_tax_amount,   
+       a.txn_amount,   
+       a.admin_region_code,   
+        null,
+	  a.related_txn_no,   
+       a.txn_unit_of_work_no,   
+       a.maintain_allowed_flag,   
+       b.txn_type_desc,   
+       a.payment_no,   
+       c.txn_sub_type_desc,
+       'unapplied_claim_txn_no' = 0,
+		 a.txn_type_code,
+		 a.txn_sub_type_code
+FROM dbo.UNAPPLIED_CLAIM_TXN a 
+     INNER JOIN dbo.Txn_Type b  ON a.txn_type_code = b.txn_type_code
+     INNER JOIN dbo.Txn_Sub_Type c  ON a.txn_sub_type_code = c.txn_sub_type_code
+ WHERE a.payment_no = :al_payment_no  
+
+" arguments=(("al_payment_no", number))  sort="txn_no A " )
+text(band=header alignment="0" text="Txn No" border="0" color="33554432" x="137" y="0" height="60" width="251" html.valueishtml="0"  name=txn_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Type" border="0" color="33554432" x="425" y="0" height="60" width="288" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Coc Period" border="0" color="33554432" x="1486" y="0" height="60" width="329" html.valueishtml="0"  name=coc_period_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Proc Date" border="0" color="33554432" x="1833" y="0" height="60" width="398" html.valueishtml="0"  name=processed_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Related Txn No" border="0" color="33554432" x="2190" y="0" height="60" width="448" html.valueishtml="0"  name=related_txn_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="68" x2="2683" y2="64"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="174" y="8" height="76" width="224" format="[general]" html.valueishtml="0"  name=txn_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( txn_sub_type_txn_sub_type_desc = ~"~" , txn_type_txn_type_desc , txn_type_txn_type_desc + ' - ' + txn_sub_type_txn_sub_type_desc )"border="0" color="33554432" x="439" y="8" height="64" width="1047" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1504" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=coc_period visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="1842" y="8" height="76" width="393" format="[shortdate] " html.valueishtml="0"  name=processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="2290" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=related_txn_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+bitmap(band=detail filename="exclamation.gif" x="55" y="8" height="64" width="73" border="0"  name=p_1 visible="1~tIF ( unapplied_claim_txn_no > 0 ,1,0)" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

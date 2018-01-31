@@ -1,0 +1,56 @@
+﻿$PBExportHeader$d_task_authorization_list.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="10789024" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=72 color="-1" )
+table(column=(type=long updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=authorized_quantity dbname="authorized_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=authorized_amount dbname="authorized_amount" )
+ column=(type=char(300) updatewhereclause=yes name=authorization_comment dbname="authorization_comment" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=long updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ column=(type=long updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_service_flag dbname="is_a_service_flag" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_goods_flag dbname="is_a_goods_flag" )
+ column=(type=char(1) updatewhereclause=yes name=manual_invoice_flag dbname="manual_invoice_flag" )
+ column=(type=char(80) updatewhereclause=yes name=other_billable_item_desc dbname="other_billable_item_desc" )
+ column=(type=char(1) updatewhereclause=yes name=rta_other_billable_item_flag dbname="rta_other_billable_item_flag" )
+ retrieve="SELECT  	a.authorization_no ,         
+			a.claim_no ,         
+			a.task_no ,        
+			a.authorized_quantity ,     
+			a.authorized_amount ,     
+			a.authorization_comment ,
+            c.billable_item_desc_e,
+            b.billable_item_no,
+            a.billable_xref_no,
+            c.is_a_service_flag,
+            c.is_a_goods_flag,
+            b.manual_invoice_flag,
+            a.other_billable_item_desc ,
+            c.rta_other_billable_item_flag
+FROM REHAB_TASK_AUTHORIZATION a 
+left JOIN Billable_Item_Rehab_Task_Xref	b on a.billable_xref_no 	= b.billable_xref_no
+left JOIN Billable_Item								c on b.billable_item_no 	= c.billable_item_no
+WHERE	claim_no		= :claim_no  
+AND		task_no			= :task_no  
+ORDER BY authorization_no       DESC  " arguments=(("claim_no", number),("task_no", number))  sort="authorization_no D " )
+text(band=header alignment="0" text="Authorizations" border="0" color="0" x="5" y="4" height="60" width="480" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="14" y="4" height="64" width="210" format="[general]" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="251" y="4" height="60" width="1957" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1~tif(rta_other_billable_item_flag = 'Y',0,1)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="251" y="4" height="60" width="1957" format="[general]" html.valueishtml="0"  name=other_billable_item_desc visible="1~tif(rta_other_billable_item_flag = 'Y',1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

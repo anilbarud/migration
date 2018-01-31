@@ -1,0 +1,67 @@
+﻿$PBExportHeader$d_ref_search_doc_list.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=84 color="134217752" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=document_index_docid dbname="docid" )
+ column=(type=long updatewhereclause=yes name=document_index_claim_no dbname="claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=document_index_type_code dbname="type_code" )
+ column=(type=datetime updatewhereclause=yes name=document_index_date_on_document dbname="date_on_document" )
+ column=(type=char(20) updatewhereclause=yes name=document_index_comment dbname="comment" )
+ column=(type=char(1) updatewhereclause=yes name=document_index_source_code dbname="source_code" )
+ column=(type=long updatewhereclause=yes name=document_index_service_provider_no dbname="service_provider_no" )
+ column=(type=char(1) updatewhereclause=yes name=document_index_service_provider_type_cod dbname="service_provider_type_code" )
+ column=(type=long updatewhereclause=yes name=document_index_reference_no dbname="reference_no" )
+ column=(type=long updatewhereclause=yes name=ref_docfldid dbname="docfldid" )
+ column=(type=long updatewhereclause=yes name=ref_doccatid dbname="doccatid" )
+ column=(type=char(2) updatewhereclause=yes name=doc_subtype_code dbname="doc_subtype_code" )
+ retrieve="SELECT DOCUMENT_INDEX.docid, 
+DOCUMENT_INDEX.claim_no, 
+DOCUMENT_INDEX.type_code, 
+DOCUMENT_INDEX.date_on_document, 
+DOCUMENT_INDEX.comment, 
+DOCUMENT_INDEX.source_code, 
+DOCUMENT_INDEX.service_provider_no, 
+DOCUMENT_INDEX.service_provider_type_code, 
+DOCUMENT_INDEX.reference_no, 
+REF.docfldid, 
+REF.doccatid,
+DOCUMENT_INDEX.doc_subtype_code
+FROM DOCUMENT_INDEX, REF 
+WHERE ( DOCUMENT_INDEX.docid = REF.docid ) AND ( REF.doccatid = 2 OR REF.doccatid = 864) " )
+text(band=header alignment="0" text="Doc ID" border="6" color="33554432" x="443" y="12" height="56" width="329" html.valueishtml="0"  name=document_index_docid_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Ref #/Batch ID" border="6" color="33554432" x="791" y="12" height="56" width="375" html.valueishtml="0"  name=document_index_reference_no_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Claim No" border="6" color="33554432" x="1184" y="12" height="56" width="251" html.valueishtml="0"  name=document_index_claim_no_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Doc Type" border="6" color="33554432" x="1458" y="12" height="56" width="270" html.valueishtml="0"  name=document_index_type_code_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Date On Doc" border="6" color="33554432" x="1746" y="12" height="56" width="398" html.valueishtml="0"  name=document_index_date_on_document_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Category" border="6" color="33554432" x="14" y="12" height="56" width="411" html.valueishtml="0"  name=claim_no_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Comment" border="6" color="33554432" x="2162" y="12" height="56" width="896" html.valueishtml="0"  name=document_index_comment_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="67108864" x="3735" y="8" height="64" width="18" format="[general]" html.valueishtml="0"  name=document_index_service_provider_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="67108864" x="3785" y="8" height="64" width="23" format="[general]" html.valueishtml="0"  name=document_index_service_provider_type_cod visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="67108864" x="3835" y="8" height="64" width="23" format="[general]" html.valueishtml="0"  name=ref_doccatid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="67108864" x="3886" y="8" height="64" width="18" format="[general]" html.valueishtml="0"  name=ref_docfldid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="67108864" x="3936" y="8" height="64" width="18" format="[general]" html.valueishtml="0"  name=document_index_source_code visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="0" y1="4" x2="3602" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Document Count :" border="0" color="0" x="14" y="16" height="60" width="457" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count(  document_index_docid  for all )"border="0" color="0" x="494" y="16" height="56" width="197" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1618" y="4" height="64" width="110" format="[general]" html.valueishtml="0"  name=doc_subtype_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="453" y="4" height="64" width="297" format="[general]" html.valueishtml="0"  name=document_index_docid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="777" y="4" height="64" width="393" format="[general]" html.valueishtml="0"  name=document_index_reference_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="1193" y="4" height="64" width="251" format="[general]" html.valueishtml="0"  name=document_index_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1481" y="4" height="64" width="119" format="[general]" html.valueishtml="0"  name=document_index_type_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1769" y="4" height="64" width="375" format="[shortdate] [time]" html.valueishtml="0"  name=document_index_date_on_document visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( ref_doccatid = 2, 'MASTER', 'CORRECTION' )"border="0" color="0" x="14" y="4" height="64" width="416" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2176" y="4" height="64" width="905" format="[general]" html.valueishtml="0"  name=document_index_comment visible="1" edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

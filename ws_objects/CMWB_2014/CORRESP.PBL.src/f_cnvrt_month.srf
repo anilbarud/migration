@@ -1,0 +1,45 @@
+﻿$PBExportHeader$f_cnvrt_month.srf
+$PBExportComments$convert date to french format
+global type f_cnvrt_month from function_object
+end type
+
+forward prototypes
+global function string f_cnvrt_month (date ad_eng_date)
+end prototypes
+
+global function string f_cnvrt_month (date ad_eng_date);int		vli_month
+string	vls_french_month, vls_french_date
+
+vli_month = Month(ad_eng_date)
+CHOOSE CASE vli_month 
+	CASE 1
+		vls_french_month = "janvier"
+	CASE 2
+		vls_french_month = "février"
+	CASE 3
+		vls_french_month = "mars"
+	CASE 4
+		vls_french_month = "avril"
+	CASE 5
+		vls_french_month = "mai"
+	CASE 6
+		vls_french_month = "juin"
+	CASE 7
+		vls_french_month = "juillet"
+	CASE 8
+		vls_french_month = "août"
+	CASE 9
+		vls_french_month = "septembre"
+	CASE 10
+		vls_french_month = "octobre"
+	CASE 11
+		vls_french_month = "novembre"
+	CASE 12
+		vls_french_month = "décembre"
+END CHOOSE
+
+vls_french_date = Trim(String(Day(ad_eng_date))) + " " + vls_french_month + " " + Trim(String(Year(ad_eng_date)))
+
+return vls_french_date
+end function
+

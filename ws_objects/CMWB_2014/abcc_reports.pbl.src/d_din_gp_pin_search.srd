@@ -1,0 +1,32 @@
+﻿$PBExportHeader$d_din_gp_pin_search.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=88 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=din_gp_pin dbname="din_gp_pin" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=din_gp_pin_desc dbname="din_gp_pin_desc" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=product_type_code dbname="product_type_code" )
+ column=(type=char(45) updatewhereclause=yes name=product_type_desc dbname="product_type_desc" )
+ retrieve="SELECT DGP.din_gp_pin,   
+       DGP.din_gp_pin_desc,   
+       DGP.product_type_code, 
+       PT.product_type_desc   
+  FROM Din_Gp_Pin DGP, 
+       Product_Type PT 
+ WHERE (:as_din_gp_pin_flag = ~"N~"        OR DGP.din_gp_pin = :an_din_gp_pin) 
+   AND (:as_din_gp_pin_desc_flag = ~"N~"   OR DGP.din_gp_pin_desc LIKE :as_din_gp_pin_desc)
+   AND (:as_product_type_code_flag = ~"N~" OR DGP.product_type_code = :as_product_type_code) 
+   AND DGP.product_type_code = PT.product_type_code 
+" arguments=(("as_din_gp_pin_flag", string),("an_din_gp_pin", number),("as_din_gp_pin_desc_flag", string),("as_din_gp_pin_desc", string),("as_product_type_code_flag", string),("as_product_type_code", string))  sort="product_type_code A din_gp_pin_desc A " )
+text(band=header alignment="2" text="Din Gp Pin" border="4" color="33554432" x="14" y="4" height="60" width="329" html.valueishtml="0"  name=din_gp_pin_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Product Type Description" border="4" color="33554432" x="1975" y="4" height="60" width="1097" html.valueishtml="0"  name=product_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Din Gp Pin Desc" border="4" color="33554432" x="375" y="4" height="60" width="1573" html.valueishtml="0"  name=din_gp_pin_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="~"Number of Drugs: ~" + String(count(  din_gp_pin  for all ))"border="0" color="33554432" x="9" y="24" height="60" width="1179" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="9" y1="8" x2="3049" y2="8"  name=l_1 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1975" y="4" height="60" width="1097" format="[general]" html.valueishtml="0"  name=product_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="375" y="4" height="60" width="1573" format="[general]" html.valueishtml="0"  name=din_gp_pin_desc visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="60" width="306" format="[general]" html.valueishtml="0"  name=din_gp_pin visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

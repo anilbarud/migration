@@ -1,0 +1,31 @@
+﻿$PBExportHeader$d_annuity_eligibility_for_all.srd
+$PBExportComments$This dw is used to add/maintian annuity eligibility manually
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=4 color="-1" )
+detail(height=72 color="-1" )
+table(column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ retrieve="Select annuity_account_no
+From  ANNUITY_ACCOUNT
+Where individual_no in ( :al_individual_no)
+" arguments=(("al_individual_no", numberlist)) )
+text(band=header alignment="0" text="Claim Role" border="6" color="33554432" x="425" y="4" height="56" width="745" html.valueishtml="0"  name=t_5  tag="Checklist Step Status Description" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Percent" border="6" color="33554432" x="1879" y="4" height="56" width="283" html.valueishtml="0"  name=t_4  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Benefit Option" border="6" color="33554432" x="2181" y="4" height="56" width="466" html.valueishtml="0"  name=t_6  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Annuity Acct No" border="6" color="33554432" x="14" y="4" height="56" width="393" html.valueishtml="0"  name=checklist_step_no_t  tag="Checklist Step Number" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="End" border="6" color="33554432" x="1536" y="4" height="56" width="325" html.valueishtml="0"  name=concluded_date_t  tag="Concluded Date" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Start" border="6" color="33554432" x="1189" y="4" height="56" width="325" html.valueishtml="0"  name=checklist_step_status_desc_t  tag="Checklist Step Status Description" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="60" width="393" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

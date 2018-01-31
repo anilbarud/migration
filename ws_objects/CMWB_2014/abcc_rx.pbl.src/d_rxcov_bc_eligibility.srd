@@ -1,0 +1,43 @@
+﻿$PBExportHeader$d_rxcov_bc_eligibility.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=176 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=24 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=eligibility_record_no dbname="eligibility_record_no" )
+ column=(type=datetime updatewhereclause=yes name=claim_eligibility_eligibility_start_date dbname="eligibility_start_date" )
+ column=(type=datetime updatewhereclause=yes name=claim_eligibility_eligibility_end_date dbname="eligibility_end_date" )
+ retrieve="
+Select x.eligibility_record_no,x.eligibility_start_date, x.eligibility_end_date
+From CLAIM_ELIGIBILITY x
+WHere x.claim_no = :ar_claim_no
+AND export_no <> 0
+UNION
+Select x.eligibility_record_no,x.eligibility_start_date, x.eligibility_end_date
+From CLAIM_ELIGIBILITY_HISTORY x
+Where x.claim_no = :ar_claim_no
+AND   x.eligibility_history_no = (Select Max(eligibility_history_no)
+                                From CLAIM_ELIGIBILITY_HISTORY
+                                Where claim_no = :ar_claim_no
+                                AND  eligibility_record_no = x.eligibility_record_no
+                                AND export_no = (Select MAX(export_no)
+                                                 From CLAIM_ELIGIBILITY_HISTORY
+                                                 Where claim_no = :ar_claim_no
+                                                 AND  eligibility_record_no = x.eligibility_record_no
+                                                 AND export_no <> 0))
+AND NOT EXISTS   (Select b.eligibility_record_no
+		From CLAIM_ELIGIBILITY b
+		WHere b.claim_no = :ar_claim_no
+		AND export_no <> 0
+		AND b.eligibility_record_no = x.eligibility_record_no)	
+Order By x.eligibility_start_date, x.eligibility_end_date" arguments=(("ar_claim_no", number)) )
+line(band=header x1="14" y1="168" x2="3026" y2="168"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="End Date" border="0" color="33554432" x="425" y="92" height="64" width="329" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Start Date" border="0" color="33554432" x="14" y="88" height="64" width="347" html.valueishtml="0"  name=t_eligibility_start visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Eligibility" border="0" color="33554432" x="14" y="8" height="64" width="357" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="IF ( ISNULL(claim_eligibility_eligibility_end_date ),~"Open-Ended~", STRING(DATE(claim_eligibility_eligibility_end_date ),~"yyyy-mm-dd~"))"border="0" color="33554432" x="425" y="8" height="64" width="384" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=claim_eligibility_eligibility_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="3026" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=eligibility_record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

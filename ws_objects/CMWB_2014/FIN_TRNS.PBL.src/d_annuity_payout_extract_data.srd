@@ -1,0 +1,90 @@
+﻿$PBExportHeader$d_annuity_payout_extract_data.srd
+$PBExportComments$List of all unapplied (unposted) manual cost of claims txns.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=184 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(41) updatewhereclause=yes name=checkstub_recipient dbname="checkstub_recipient" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_recipient_no dbname="annuity_payout_recipient_no" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=char(40) updatewhereclause=yes name=name_on_cheque dbname="name_on_cheque" )
+ column=(type=char(255) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(255) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(255) updatewhereclause=yes name=address_line3 dbname="address_line3" )
+ column=(type=char(255) updatewhereclause=yes name=address_line4 dbname="address_line4" )
+ column=(type=char(255) updatewhereclause=yes name=address_line5 dbname="address_line5" )
+ column=(type=char(40) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=decimal(2) updatewhereclause=yes name=net_annuity_payout_amount dbname="net_annuity_payout_amount" )
+ column=(type=char(40) updatewhereclause=yes name=payment_sub_type_desc dbname="payment_sub_type_desc" )
+ retrieve="SELECT distinct a.annuity_payout_no,
+           c.recipient_no,
+           d.given_names + ' ' + d.last_name as checkstub_recipient,   
+           a.annuity_payout_recipient_no, 
+           a.annuity_account_no,   
+           a.cheque_no,   
+           a.name_on_cheque,   
+           a.address_line1,   
+           a.address_line2,   
+           a.address_line3,   
+           a.address_line4,   
+           a.address_line5,   
+           a.comment,   
+           a.net_annuity_payout_amount,
+           e.payment_sub_type_desc 
+    
+FROM   ANNUITY_PAYOUT_RECIPIENT a
+INNER JOIN   ANNUITY_PAYOUT_TXN_DETAIL b 
+        on   a.annuity_payout_no = b.annuity_payout_no
+        and  a.annuity_payout_recipient_no = b.annuity_payout_recipient_no
+        and  a.annuity_payout_recipient_type_code = b.annuity_payout_recipient_type_code
+JOIN   UNAPPLIED_CLAIM_TXN c on b.txn_no = c.txn_no
+JOIN   INDIVIDUAL d on c.recipient_no = d.individual_no
+JOIN   Payment_Sub_Type e on b.payment_type_code = e.payment_type_code and b.payment_sub_type_code = e.payment_sub_type_code
+where   c.txn_unit_of_work_no = :ar_txn_unit_of_work_no
+" arguments=(("ar_txn_unit_of_work_no", number)) )
+text(band=header alignment="2" text="Annuity Payout No" border="0" color="33554432" x="9" y="16" height="144" width="311" html.valueishtml="0"  name=annuity_payout_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Recipient No" border="0" color="33554432" x="699" y="20" height="144" width="302" html.valueishtml="0"  name=recipient_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Account No" border="0" color="33554432" x="334" y="16" height="144" width="343" html.valueishtml="0"  name=annuity_account_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address Line1" border="0" color="33554432" x="3598" y="100" height="64" width="466" html.valueishtml="0"  name=address_line1_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address Line2" border="0" color="33554432" x="4174" y="100" height="64" width="544" html.valueishtml="0"  name=address_line2_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address Line3" border="0" color="33554432" x="4997" y="100" height="64" width="475" html.valueishtml="0"  name=address_line3_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address Line4" border="0" color="33554432" x="5778" y="100" height="64" width="462" html.valueishtml="0"  name=address_line4_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address Line5" border="0" color="33554432" x="6304" y="100" height="64" width="544" html.valueishtml="0"  name=address_line5_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Net Annuity Payout Amount" border="0" color="33554432" x="7493" y="36" height="132" width="453" html.valueishtml="0"  name=net_annuity_payout_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Comment" border="0" color="33554432" x="6880" y="100" height="64" width="544" html.valueishtml="0"  name=comment_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Payout Recipient No" border="0" color="33554432" x="1609" y="16" height="144" width="453" html.valueishtml="0"  name=annuity_payout_recipient_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cheque No" border="0" color="33554432" x="2117" y="84" height="64" width="315" html.valueishtml="0"  name=cheque_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name On Cheque" border="0" color="33554432" x="2482" y="84" height="64" width="603" html.valueishtml="0"  name=name_on_cheque_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Recipient Name" border="0" color="33554432" x="1033" y="88" height="64" width="494" html.valueishtml="0"  name=recipient_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="checkstub paymen type" border="0" color="33554432" x="7982" y="96" height="64" width="727" html.valueishtml="0"  name=checkstub_payment_type_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="8" height="64" width="329" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="1710" y="8" height="64" width="329" format="[general]" html.valueishtml="0"  name=annuity_payout_recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="357" y="8" height="64" width="279" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1033" y="8" height="60" width="672" format="[general]" html.valueishtml="0"  name=checkstub_recipient visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="2107" y="8" height="64" width="320" format="[general]" html.valueishtml="0"  name=cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="4169" y="8" height="64" width="786" format="[general]" html.valueishtml="0"  name=address_line2 visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="5001" y="8" height="64" width="677" format="[general]" html.valueishtml="0"  name=address_line3 visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="5774" y="8" height="64" width="535" format="[general]" html.valueishtml="0"  name=address_line4 visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="6331" y="8" height="64" width="535" format="[general]" html.valueishtml="0"  name=address_line5 visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="3598" y="8" height="64" width="553" format="[general]" html.valueishtml="0"  name=address_line1 visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="6889" y="8" height="64" width="535" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="33554432" x="7451" y="8" height="64" width="494" format="[general]" html.valueishtml="0"  name=net_annuity_payout_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="2482" y="8" height="64" width="1093" format="[general]" html.valueishtml="0"  name=name_on_cheque visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="667" y="4" height="60" width="315" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="7973" y="8" height="60" width="663" format="[general]" html.valueishtml="0"  name=payment_sub_type_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

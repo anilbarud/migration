@@ -1,0 +1,37 @@
+﻿$PBExportHeader$d_volunteer_coverage.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=80 color="28027307" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=assessment_year dbname="assessment_year" )
+ column=(type=char(30) updatewhereclause=yes name=volunteer_name dbname="volunteer_name" )
+ column=(type=long updatewhereclause=yes name=sin_no dbname="sin_no" )
+ column=(type=datetime updatewhereclause=yes name=coverage_start_date dbname="coverage_start_date" )
+ column=(type=datetime updatewhereclause=yes name=coverage_end_date dbname="coverage_end_date" )
+ column=(type=long updatewhereclause=yes name=employer_no dbname="employer_no" )
+ column=(type=long updatewhereclause=yes name=operation_no dbname="operation_no" )
+ retrieve="SELECT  VOLUNTEER_COVERAGE.assessment_year ,
+           VOLUNTEER_COVERAGE.volunteer_name ,
+           VOLUNTEER_COVERAGE.sin_no ,
+           VOLUNTEER_COVERAGE.coverage_start_date ,
+           VOLUNTEER_COVERAGE.coverage_end_date ,
+           VOLUNTEER_COVERAGE.employer_no ,
+           VOLUNTEER_COVERAGE.operation_no     
+        FROM VOLUNTEER_COVERAGE      
+        WHERE ( VOLUNTEER_COVERAGE.employer_no = :al_employer_no ) And          ( VOLUNTEER_COVERAGE.operation_no = :ai_operation_no ) and          ( VOLUNTEER_COVERAGE.deleted_flag = 'N' )  
+        ORDER BY VOLUNTEER_COVERAGE.assessment_year          DESC,
+           VOLUNTEER_COVERAGE.volunteer_name          ASC  " arguments=(("al_employer_no", number),("ai_operation_no", number)) )
+text(band=header alignment="0" text="Year" border="4" color="33554432" x="32" y="16" height="60" width="238" html.valueishtml="0"  name=assessment_year_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="From" border="4" color="33554432" x="315" y="16" height="60" width="306" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="To" border="4" color="33554432" x="667" y="16" height="60" width="306" html.valueishtml="0"  name=coverage_end_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="4" color="33554432" x="1015" y="16" height="60" width="850" html.valueishtml="0"  name=volunteer_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="SIN" border="4" color="33554432" x="1911" y="16" height="60" width="329" html.valueishtml="0"  name=sin_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="12" height="64" width="219" format="[general]" html.valueishtml="0"  name=assessment_year visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="315" y="12" height="60" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=coverage_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="667" y="12" height="64" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=coverage_end_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1015" y="12" height="64" width="850" format="[general]" html.valueishtml="0"  name=volunteer_name visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="1915" y="12" height="64" width="329" format="###-###-###" html.valueishtml="0"  name=sin_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

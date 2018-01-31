@@ -1,0 +1,107 @@
+﻿$PBExportHeader$d_rejected_claims_w_payments.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=432 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=112 color="536870912"  height.autosize=yes)
+table(column=(type=long updatewhereclause=yes name=claim_claim_no dbname="CLAIM.claim_no" )
+ column=(type=char(2) updatewhereclause=yes name=claim_claim_status_type_code dbname="CLAIM.claim_status_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=claim_admin_region_code dbname="CLAIM.admin_region_code" )
+ column=(type=char(16) updatewhereclause=yes name=claim_claim_manager_user_id dbname="CLAIM.claim_manager_user_id" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=char(31) updatewhereclause=yes name=compute_0007 dbname="compute_0007" )
+ retrieve="  SELECT distinct dbo.CLAIM.claim_no,   
+         dbo.CLAIM.claim_status_type_code,   
+         dbo.CLAIM.admin_region_code,   
+         dbo.CLAIM.claim_manager_user_id,   
+         dbo.INDIVIDUAL.last_name,   
+         dbo.INDIVIDUAL.given_names,  
+			'Payments not fully adjusted'
+    FROM dbo.CLAIM,   
+         dbo.PAYMENT,   
+         dbo.INDIVIDUAL  
+   WHERE ( dbo.CLAIM.claim_no = dbo.PAYMENT.claim_no )
+			and ( dbo.CLAIM.individual_no = dbo.INDIVIDUAL.individual_no )    
+			and CLAIM.claim_status_code = 'R'
+			and (
+			(select sum(P.net_payment_amount) from PAYMENT P where CLAIM.claim_no = P.claim_no
+			and not(P.payment_type_code = '21' and P.payment_sub_type_code in ('03','04', '05','06', '07','08'))) <> 0
+			or (select sum(Q.net_days_lost) from PAYMENT Q where CLAIM.claim_no = Q.claim_no 
+			and not(Q.payment_type_code = '21' and Q.payment_sub_type_code in ('03','04', '05','06', '07','08'))) <> 0
+			or (select sum(R.net_hours_lost) from PAYMENT R where CLAIM.claim_no = R.claim_no
+			and not(R.payment_type_code = '21' and R.payment_sub_type_code in ('03','04', '05','06', '07','08'))) <> 0
+			or (select sum(S.net_quantity) from PAYMENT S where CLAIM.claim_no = S.claim_no
+			and not(S.payment_type_code = '21' and S.payment_sub_type_code in ('03','04', '05','06', '07','08'))) <> 0
+			or (select sum(T.net_tax_amount) from PAYMENT T where CLAIM.claim_no = T.claim_no
+			and not(T.payment_type_code = '21' and T.payment_sub_type_code in ('03','04', '05','06', '07','08'))) <> 0
+			or (select sum(U.net_non_tax_amount) from PAYMENT U where CLAIM.claim_no = U.claim_no
+			and not(U.payment_type_code = '21' and U.payment_sub_type_code in ('03','04', '05','06', '07','08'))) <> 0
+			)
+
+union 
+
+SELECT 	distinct dbo.CLAIM.claim_no,   
+         dbo.CLAIM.claim_status_type_code,   
+         dbo.CLAIM.admin_region_code,   
+         dbo.CLAIM.claim_manager_user_id,   
+         dbo.INDIVIDUAL.last_name,   
+         dbo.INDIVIDUAL.given_names,  
+			'Scheduled Payments Exist'
+  FROM 	UNAPPLIED_CLAIM_TXN, CLAIM, INDIVIDUAL, PAYMENT
+ WHERE	UNAPPLIED_CLAIM_TXN.claim_no = CLAIM.claim_no
+			and UNAPPLIED_CLAIM_TXN.payment_no = PAYMENT.payment_no
+ 			and ( dbo.CLAIM.individual_no = dbo.INDIVIDUAL.individual_no )    
+			and CLAIM.claim_status_code = 'R'
+			and not(PAYMENT.payment_type_code = '21' and PAYMENT.payment_sub_type_code in ('03','04', '05','06', '07','08'))
+
+union 
+
+SELECT 	distinct dbo.CLAIM.claim_no,   
+         dbo.CLAIM.claim_status_type_code,   
+         dbo.CLAIM.admin_region_code,   
+         dbo.CLAIM.claim_manager_user_id,   
+         dbo.INDIVIDUAL.last_name,   
+         dbo.INDIVIDUAL.given_names,  
+			'Awards scheduled for the future'
+ FROM  	PERIODIC_AWARD b , CLAIM, INDIVIDUAL
+ WHERE 	b.claim_no = CLAIM.claim_no
+ 			and ( dbo.CLAIM.individual_no = dbo.INDIVIDUAL.individual_no )    
+			and CLAIM.claim_status_code = 'R'
+		 	AND EXISTS (SELECT * FROM PERIODIC_AWARD_CONTROL a
+           WHERE a.award_type_code  = b.award_type_code
+	          AND a.processed_date   IS NULL
+             AND b.award_start_date <= a.period_from_date
+             AND b.award_end_date   >= a.period_to_date)
+
+ORDER By	CLAIM.admin_region_code, CLAIM.claim_manager_user_id,CLAIM.claim_no
+" )
+rectangle(band=header x="14" y="4" height="232" width="3429"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="407" y="28" height="80" width="475" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="64" width="334" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Rejected Claims with Unadjusted Payments,
+Scheduled Payments or Awards" border="0" color="0" x="1074" y="20" height="152" width="1573" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="80" width="549" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="196" x2="3401" y2="196"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+line(band=header x1="14" y1="424" x2="3822" y2="424"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="2" text="Admin
+Region " border="0" color="33554432" x="14" y="276" height="120" width="233" html.valueishtml="0"  name=claim_admin_region_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Claim No" border="0" color="33554432" x="928" y="276" height="64" width="265" html.valueishtml="0"  name=claim_claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Reject Status
+ Type " border="0" color="33554432" x="2030" y="276" height="120" width="407" html.valueishtml="0"  name=claim_claim_status_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date
+Rejected" border="0" color="33554432" x="2638" y="276" height="120" width="361" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim
+Manager" border="0" color="33554432" x="347" y="276" height="120" width="352" html.valueishtml="0"  name=claim_claim_manager_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Problem Description" border="0" color="33554432" x="3104" y="276" height="60" width="530" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Claimant" border="0" color="33554432" x="1248" y="276" height="60" width="498" html.valueishtml="0"  name=individual_last_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="16" height="76" width="187" format="[general]" html.valueishtml="0"  name=claim_admin_region_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="869" y="16" height="76" width="293" format="[general]" html.valueishtml="0"  name=claim_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="2066" y="16" height="76" width="553" format="[general]" html.valueishtml="0"  name=claim_claim_status_type_code visible="1" dddw.name=dddw_claim_status_type dddw.displaycolumn=claim_status_type_desc dddw.datacolumn=claim_status_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+report(band=detail dataobject="d_reject_date" x="2670" y="16" height="76" width="416" border="0"  height.autosize=yes criteria="" nest_arguments=((" claim_claim_no ")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="229" y="16" height="76" width="613" format="[general]" html.valueishtml="0"  name=claim_claim_manager_user_id visible="1" dddw.name=dddw_user_profile dddw.displaycolumn=computed_user_full_name dddw.datacolumn=user_id dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="3109" y="16" height="76" width="814" format="[general]" html.valueishtml="0"  name=compute_0007 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" trim( individual_last_name ) +', ' + individual_given_names  "border="0" color="33554432" x="1189" y="16" height="76" width="841" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

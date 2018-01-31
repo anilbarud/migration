@@ -1,0 +1,17 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "dropdown2.pbl" "";
+@end;
+@begin Objects 
+ "dddw_claim_participants_active.srd" "dropdown2.pbl";
+ "dddw_correspondence_template.srd" "dropdown2.pbl";
+ "dddw_cppd_status.srd" "dropdown2.pbl";
+ "dddw_firefighter_cost_alloc_no.srd" "dropdown2.pbl";
+ "dddw_op_status.srd" "dropdown2.pbl";
+ "dddw_openings.srd" "dropdown2.pbl";
+ "dddw_provider_inactive_reason.srd" "dropdown2.pbl";
+ "dddw_reminder_status.srd" "dropdown2.pbl";
+ "dddw_reminder_sub_type.srd" "dropdown2.pbl";
+ "dddw_rtw_incentive_pymt_elig.srd" "dropdown2.pbl";
+ "dddw_tier.srd" "dropdown2.pbl";
+@end;

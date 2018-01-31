@@ -1,0 +1,215 @@
+﻿$PBExportHeader$m_convert_manual.srm
+forward
+global type m_convert_manual from menu
+end type
+type m_conversion from menu within m_convert_manual
+end type
+type m_new from menu within m_conversion
+end type
+type m_save from menu within m_conversion
+end type
+type m_cancel from menu within m_conversion
+end type
+type m_delete from menu within m_conversion
+end type
+type m_convert from menu within m_conversion
+end type
+type m_- from menu within m_conversion
+end type
+type m_close from menu within m_conversion
+end type
+type m_conversion from menu within m_convert_manual
+m_new m_new
+m_save m_save
+m_cancel m_cancel
+m_delete m_delete
+m_convert m_convert
+m_- m_-
+m_close m_close
+end type
+global type m_convert_manual from menu
+m_conversion m_conversion
+end type
+end forward
+
+global type m_convert_manual from menu
+m_conversion m_conversion
+end type
+global m_convert_manual m_convert_manual
+
+on m_convert_manual.create
+m_convert_manual=this
+call super::create
+this.text = "m_convert_manual"
+this.m_conversion=create m_conversion
+this.Item[UpperBound(this.Item)+1]=this.m_conversion
+end on
+
+on m_convert_manual.destroy
+call super::destroy
+destroy(this.m_conversion)
+end on
+
+type m_conversion from menu within m_convert_manual
+m_new m_new
+m_save m_save
+m_cancel m_cancel
+m_delete m_delete
+m_convert m_convert
+m_- m_-
+m_close m_close
+end type
+
+on m_conversion.create
+call super::create
+this.text = "Conversion"
+this.m_new=create m_new
+this.m_save=create m_save
+this.m_cancel=create m_cancel
+this.m_delete=create m_delete
+this.m_convert=create m_convert
+this.m_-=create m_-
+this.m_close=create m_close
+this.Item[UpperBound(this.Item)+1]=this.m_new
+this.Item[UpperBound(this.Item)+1]=this.m_save
+this.Item[UpperBound(this.Item)+1]=this.m_cancel
+this.Item[UpperBound(this.Item)+1]=this.m_delete
+this.Item[UpperBound(this.Item)+1]=this.m_convert
+this.Item[UpperBound(this.Item)+1]=this.m_-
+this.Item[UpperBound(this.Item)+1]=this.m_close
+end on
+
+on m_conversion.destroy
+call super::destroy
+destroy(this.m_new)
+destroy(this.m_save)
+destroy(this.m_cancel)
+destroy(this.m_delete)
+destroy(this.m_convert)
+destroy(this.m_-)
+destroy(this.m_close)
+end on
+
+type m_new from menu within m_conversion
+event clicked ( )
+end type
+
+event clicked;ParentWindow.dynamic wf_new_conversion(0)
+end event
+
+on m_new.create
+call super::create
+this.text = "&New"
+this.microhelp = "Start a new conversion"
+this.toolbaritemname = "Insert5!"
+this.toolbaritemtext = "New"
+end on
+
+on m_new.destroy
+call super::destroy
+end on
+
+type m_save from menu within m_conversion
+event clicked ( )
+end type
+
+event clicked;ParentWindow.dynamic wf_save(True)
+end event
+
+on m_save.create
+call super::create
+this.text = "&Save"
+this.microhelp = "Save the current conversion"
+this.toolbaritemname = "Save!"
+this.toolbaritemtext = "Save"
+end on
+
+on m_save.destroy
+call super::destroy
+end on
+
+type m_cancel from menu within m_conversion
+end type
+
+event clicked;ParentWindow.dynamic wf_cancel()
+end event
+
+on m_cancel.create
+call super::create
+this.text = "C&ancel"
+this.toolbaritemname = "Undo!"
+this.toolbaritemtext = "Cancel"
+end on
+
+on m_cancel.destroy
+call super::destroy
+end on
+
+type m_delete from menu within m_conversion
+event clicked ( )
+end type
+
+event clicked;ParentWindow.dynamic wf_delete_conversion()
+end event
+
+on m_delete.create
+call super::create
+this.text = "&Delete"
+this.microhelp = "Delete the current conversion"
+this.toolbaritemname = "DeleteRow!"
+this.toolbaritemtext = "Delete"
+end on
+
+on m_delete.destroy
+call super::destroy
+end on
+
+type m_convert from menu within m_conversion
+event clicked ( )
+end type
+
+event clicked;ParentWindow.dynamic wf_convert()
+end event
+
+on m_convert.create
+call super::create
+this.text = "Con&vert"
+this.microhelp = "Convert the old manual transaction"
+this.toolbaritemname = "Regenerate5!"
+this.toolbaritemtext = "Convert"
+end on
+
+on m_convert.destroy
+call super::destroy
+end on
+
+type m_- from menu within m_conversion
+end type
+
+on m_-.create
+call super::create
+this.text = "-"
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_close from menu within m_conversion
+end type
+
+event clicked;Close(ParentWindow)
+end event
+
+on m_close.create
+call super::create
+this.text = "&Close"
+this.toolbaritemname = "Exit!"
+this.toolbaritemtext = "Close"
+this.toolbaritemspace = 3
+end on
+
+on m_close.destroy
+call super::destroy
+end on
+

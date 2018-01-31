@@ -1,0 +1,68 @@
+﻿$PBExportHeader$d_t5_history_address.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=428 color="553648127"  height.autosize=yes)
+table(column=(type=long updatewhereclause=yes name=t5007_recipient_no dbname="T5007_HISTORY.t5007_recipient_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="T5007_HISTORY.last_name" )
+ column=(type=char(23) updatewhereclause=yes name=given_names dbname="T5007_HISTORY.given_names" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="T5007_HISTORY.address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="T5007_HISTORY.address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="T5007_HISTORY.city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="T5007_HISTORY.prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=country_code dbname="T5007_HISTORY.country_code" )
+ column=(type=char(10) updatewhereclause=yes name=postal_code dbname="T5007_HISTORY.postal_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_benefit_amount dbname="T5007_HISTORY.total_benefit_amount" )
+ column=(type=char(25) updatewhereclause=yes name=location_desc1 dbname="Location.location_desc1" )
+ retrieve=" SELECT T5007_HISTORY.t5007_recipient_no,   
+            T5007_HISTORY.last_name,   
+            T5007_HISTORY.given_names,   
+            T5007_HISTORY.address_line1,   
+            T5007_HISTORY.address_line2,   
+            T5007_HISTORY.city,   
+            T5007_HISTORY.prov_state_code,   
+            T5007_HISTORY.country_code,   
+            T5007_HISTORY.postal_code,   
+            T5007_HISTORY.total_benefit_amount,   
+            Location.location_desc1  
+FROM T5007_HISTORY  
+    LEFT OUTER JOIN Location   ON T5007_HISTORY.country_code = Location.location_code and Location.location_type_code = 'C' 
+where T5007_HISTORY.taxation_year = :an_taxation_year
+AND   T5007_HISTORY.t5007_recipient_no = :an_recipient_no
+union all
+SELECT APPLIED_CLAIM_TXN.recipient_no, 
+	'Manual T5 required',
+	'Annuity > $7,231 exists',
+	'',
+	'',
+	'',
+	'',
+	'',
+	'',
+	NULL,
+	''
+FROM PAYMENT  (NOLOCK)
+     INNER JOIN APPLIED_CLAIM_TXN  (NOLOCK) ON PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no 
+        AND PAYMENT.payment_type_code = '97'
+	AND PAYMENT.payment_sub_type_code IN ('CM', 'DM')
+        AND (ISNULL(PAYMENT.paid_to_date, '1999/01/01') >= '1999/01/01' OR :an_taxation_year >= 2000) 
+     INNER JOIN CLAIM_PARTICIPANT  (NOLOCK) ON APPLIED_CLAIM_TXN.recipient_no = CLAIM_PARTICIPANT.individual_no and APPLIED_CLAIM_TXN.claim_no = CLAIM_PARTICIPANT.claim_no
+WHERE APPLIED_CLAIM_TXN.recipient_no 		= :an_recipient_no
+and CLAIM_PARTICIPANT.claim_role_code 		<> 'TR'
+and DATEPART(YY,APPLIED_CLAIM_TXN.create_date) 	= :an_taxation_year
+and APPLIED_CLAIM_TXN.txn_type_code 		= '8'
+and APPLIED_CLAIM_TXN.recipient_type_code 	= 'I'
+AND (APPLIED_CLAIM_TXN.txn_amount * -1.00) 	>= 7231.00" arguments=(("an_taxation_year", number),("an_recipient_no", number)) )
+compute(band=detail alignment="0" expression="if (Trim(address_line1) = ~"~", ~" ~",  address_line1) +  
+if (Trim(address_line2) = ~"~" , ~" ~", ~"~~r~" + address_line2) +  
+if (Trim(city) = ~"~",  ~" ~", ~"~~r~" + city) +  
+if (Trim(prov_state_code) = ~"~",  ~" ~",  ~" ~" + prov_state_code) +  
+if (Trim(postal_code) = ~"~",  ~" ~",   ~" ~" + postal_code) +
+if (Trim(location_desc1) = ~"~", ~" ~", ~"~~r~" + location_desc1)"border="0" color="0" x="96" y="140" height="280" width="1349" format="[general]"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim(last_name) + ',  ' + given_names"border="0" color="0" x="96" y="72" height="56" width="1349" format="[general]"  name=name  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Individual No:"border="0" color="0" x="23" y="4" height="56" width="411"  name=t5007_recipient_no_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="480" y="4" height="56" width="329" format="[general]"  name=t5007_recipient_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Total Benefit Amount:"border="0" color="0" x="859" y="4" height="56" width="631"  name=total_benefit_amount_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="0" x="1509" y="4" height="68" width="453" format="$#,##0.00;($#,##0.00)"  name=total_benefit_amount edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

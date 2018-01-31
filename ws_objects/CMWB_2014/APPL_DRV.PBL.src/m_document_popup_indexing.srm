@@ -1,0 +1,204 @@
+﻿$PBExportHeader$m_document_popup_indexing.srm
+forward
+global type m_document_popup_indexing from menu
+end type
+type m_docdetails from menu within m_document_popup_indexing
+end type
+type m_moredetails from menu within m_docdetails
+end type
+type m_sort from menu within m_docdetails
+end type
+type m_bydocumenttype from menu within m_sort
+end type
+type m_bydocumentdate from menu within m_sort
+end type
+type m_bydatecreated from menu within m_sort
+end type
+type m_sort from menu within m_docdetails
+m_bydocumenttype m_bydocumenttype
+m_bydocumentdate m_bydocumentdate
+m_bydatecreated m_bydatecreated
+end type
+type m_print from menu within m_docdetails
+end type
+type m_docdetails from menu within m_document_popup_indexing
+m_moredetails m_moredetails
+m_sort m_sort
+m_print m_print
+end type
+end forward
+
+global type m_document_popup_indexing from menu
+m_docdetails m_docdetails
+end type
+global m_document_popup_indexing m_document_popup_indexing
+
+type variables
+w_sheet		viw_active_sheet
+datawindow	idw_search_list
+end variables
+
+forward prototypes
+public subroutine mf_set_datawindow (datawindow adw_search_list)
+end prototypes
+
+public subroutine mf_set_datawindow (datawindow adw_search_list);/*--------------------------------------------------------------------*/
+/*  This funciton sets the pointer so the menu can reference the      */
+/*  search list datawindow for sorting and printing.                  */
+/*--------------------------------------------------------------------*/
+
+idw_search_list = adw_search_list
+end subroutine
+
+on m_document_popup_indexing.create
+m_document_popup_indexing=this
+this.m_docdetails=create m_docdetails
+this.Item[]={this.m_docdetails}
+end on
+
+on m_document_popup_indexing.destroy
+destroy(this.m_docdetails)
+end on
+
+type m_docdetails from menu within m_document_popup_indexing
+m_moredetails m_moredetails
+m_sort m_sort
+m_print m_print
+end type
+
+on m_docdetails.create
+this.Text="docdetails"
+this.m_moredetails=create m_moredetails
+this.m_sort=create m_sort
+this.m_print=create m_print
+this.Item[]={this.m_moredetails, &
+this.m_sort, &
+this.m_print}
+end on
+
+on m_docdetails.destroy
+destroy(this.m_moredetails)
+destroy(this.m_sort)
+destroy(this.m_print)
+end on
+
+type m_moredetails from menu within m_docdetails
+end type
+
+event clicked;	If not SQLCA.ServiceAvailable() or not ImageTrans.ServiceAvailable() Then
+		Beep(2)
+		MessageBox("Document Details is currently unavailable", + &
+						"You cannot open Document Details until Claim Database and Imaging Database are on-line.~r~n" + &
+						"Please try again later!",Exclamation!)
+		Return
+	End If
+
+
+
+	w_sheet	lw_active_sheet
+	Long     ll_rownum,	&
+				ll_docid        
+	String   ls_document
+
+
+// Get the current docid
+	ll_rownum = w_indexing_search.dw_documents.GetRow()
+	If ll_rownum = 0 Then
+		MessageBox("Document","Could not determine selected document. Please try again.")
+		Return
+	End If
+
+	ll_docid = w_indexing_search.dw_documents.GetItemNumber(ll_rownum,"ref_docid")
+
+	OpenWithParm(w_indexing_search.iw_document_details,ll_docid, w_indexing_search)
+
+end event
+
+on m_moredetails.create
+this.Text="More Details ..."
+end on
+
+type m_sort from menu within m_docdetails
+m_bydocumenttype m_bydocumenttype
+m_bydocumentdate m_bydocumentdate
+m_bydatecreated m_bydatecreated
+end type
+
+on m_sort.create
+this.Text="Sort"
+this.m_bydocumenttype=create m_bydocumenttype
+this.m_bydocumentdate=create m_bydocumentdate
+this.m_bydatecreated=create m_bydatecreated
+this.Item[]={this.m_bydocumenttype, &
+this.m_bydocumentdate, &
+this.m_bydatecreated}
+end on
+
+on m_sort.destroy
+destroy(this.m_bydocumenttype)
+destroy(this.m_bydocumentdate)
+destroy(this.m_bydatecreated)
+end on
+
+type m_bydocumenttype from menu within m_sort
+end type
+
+on clicked;//
+//	Sort the document list by document type Ascending, date Descending, comment Ascending
+//
+idw_search_list.SetSort ("docindex_type A, docindex_date D, docindex_comment A")
+idw_search_list.Sort()
+
+end on
+
+on m_bydocumenttype.create
+this.Text="by Document Type"
+end on
+
+type m_bydocumentdate from menu within m_sort
+end type
+
+on clicked;//
+//	Sort the document list by document date Descending, type Ascending, comment Ascending
+//
+idw_search_list.SetSort ("docindex_date D, docindex_type A, docindex_comment A")
+idw_search_list.Sort()
+
+end on
+
+on m_bydocumentdate.create
+this.Text="by Document Date"
+end on
+
+type m_bydatecreated from menu within m_sort
+end type
+
+on clicked;//
+//	Sort the document list by document creation date Descending, type Ascending, comment Ascending
+//
+idw_search_list.SetSort ("doc_doccreated D, docindex_type A, docindex_comment A")
+idw_search_list.Sort()
+
+end on
+
+on m_bydatecreated.create
+this.Text="by Date Indexed"
+end on
+
+type m_print from menu within m_docdetails
+end type
+
+on clicked;w_sheet	lw_active_sheet
+
+	lw_active_sheet = w_frame.GetActiveSheet()
+	IF NOT IsValid(lw_active_sheet) THEN
+		Return
+	END IF
+	lw_active_sheet.dw_documents.TriggerEvent('ue_print')
+
+end on
+
+on m_print.create
+this.Text="Print"
+end on
+

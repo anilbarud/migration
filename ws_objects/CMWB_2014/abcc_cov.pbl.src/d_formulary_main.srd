@@ -1,0 +1,86 @@
+﻿$PBExportHeader$d_formulary_main.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=char(1) update=yes updatewhereclause=yes name=formulary_type_code dbname="formulary_type_code" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=formulary_code dbname="formulary_code" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=formulary_record_no dbname="formulary_record_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=formulary_start_date dbname="formulary_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=formulary_end_date dbname="formulary_end_date" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=formulary_comment dbname="comment" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=char(20) updatewhereclause=yes name=formulary_type_desc dbname="formulary_type_desc" )
+ column=(type=long update=yes updatewhereclause=yes name=export_no dbname="export_no" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=primary_active_flag dbname="primary_active_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=manual_entry_flag dbname="manual_entry_flag" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=primary_noi_code dbname="primary_noi_code" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=export_user_id dbname="export_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=export_date dbname="export_date" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="  SELECT a.formulary_type_code,   
+         a.formulary_code,     
+         a.formulary_record_no,   
+         a.claim_no,   
+         a.formulary_start_date,   
+         a.formulary_end_date,   
+         a.comment,   
+         a.create_user_id,
+         b.formulary_type_desc,
+         a.export_no,
+         c.claim_status_code,
+         c.claim_status_type_code,
+         a.primary_active_flag,
+         a.manual_entry_flag,
+         a.primary_noi_code,
+         a.export_user_id,
+         a.export_date,
+         a.create_date,
+         d.active_flag
+    FROM dbo.CLAIM_FORMULARY a, Formulary_Type b , CLAIM c , Formulary d
+   WHERE a.claim_no            = :al_claim_no 
+     AND a.formulary_type_code = b.formulary_type_code
+     AND a.formulary_code      = d.formulary_code
+     AND a.claim_no            = c.claim_no
+" update="dbo.CLAIM_FORMULARY" updatewhere=2 updatekeyinplace=yes arguments=(("al_claim_no", number))  sort="formulary_type_code A formulary_code A formulary_start_date A " )
+text(band=header alignment="0" text="" border="6" color="33554432" x="5" y="4" height="52" width="69" html.valueishtml="0"  name=t_1  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Type" border="6" color="33554432" x="91" y="4" height="52" width="293" html.valueishtml="0"  name=type_code_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Code" border="6" color="33554432" x="402" y="4" height="52" width="320" html.valueishtml="0"  name=code_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Formulary Coverage" border="6" color="33554432" x="741" y="4" height="52" width="713" html.valueishtml="0"  name=formulary_coverage_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Formulary Comment" border="6" color="33554432" x="1477" y="4" height="52" width="1463" html.valueishtml="0"  name=formulary_comment_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Active" border="6" color="33554432" x="2958" y="4" height="52" width="169" html.valueishtml="0"  name=active_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Create_user" border="6" color="33554432" x="3145" y="4" height="52" width="375" html.valueishtml="0"  name=create_user_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Create Date" border="6" color="33554432" x="3538" y="4" height="52" width="315" html.valueishtml="0"  name=create_date_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Form Record No" border="6" color="33554432" x="3872" y="4" height="52" width="425" html.valueishtml="0"  name=formulary_record_no_t  tag="Type" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+bitmap(band=detail filename="plus_blue_16_h.gif" x="9" y="0" height="64" width="73" border="0"  name=p_1 visible="1~tIF(f_is_exported(2,claim_no,formulary_record_no) and export_no > 0 ,1,0) " )
+bitmap(band=detail filename="minus_blue_16_h.gif" x="9" y="0" height="64" width="73" border="0"  name=p_2 visible="1~tIF(f_is_exported(2, claim_no,formulary_record_no) and export_no  = 0,1,0) " )
+bitmap(band=detail filename="plus_blue_16_d.gif" x="9" y="0" height="64" width="73" border="0"  name=p_3 visible="1~tIF(not f_is_exported(2, claim_no,formulary_record_no),1,0) " )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="3447" y="88" height="76" width="128" format="[general]" html.valueishtml="0"  name=export_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="3621" y="88" height="76" width="32" format="[general]" html.valueishtml="0"  name=primary_active_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and isrownew() or not f_is_exported(2, claim_no,formulary_record_no)),5,0)" color="33554432" x="87" y="4" height="56" width="302" format="[general]" html.valueishtml="0" protect="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and isrownew() or not f_is_exported(2, claim_no,formulary_record_no)),0,1)"  name=formulary_type_code visible="1" dddw.name=dddw_formulary_type dddw.displaycolumn=formulary_type_desc dddw.datacolumn=formulary_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and isrownew() or not f_is_exported(2, claim_no,formulary_record_no)),5,0)" color="33554432" x="402" y="4" height="56" width="325" format="[general]" html.valueishtml="0" protect="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and isrownew() or not f_is_exported(2, claim_no,formulary_record_no)),0,1)"  name=formulary_code visible="1" dddw.name=dddw_formulary_code dddw.displaycolumn=formulary_code dddw.datacolumn=formulary_code dddw.percentwidth=750 dddw.lines=10 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="2" tabsequence=30 border="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  active_flag = 'Y') or isrownew(),5,0)" color="33554432" x="741" y="4" height="56" width="302" format="yyyy-mm-dd" html.valueishtml="0" protect="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  active_flag = 'Y') or isrownew(),0,1)"  name=formulary_start_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  active_flag = 'Y') or isrownew(),rgb(255,255,255),rgb(255,255,255))" )
+text(band=detail alignment="0" text="To" border="0" color="33554432" x="1065" y="4" height="56" width="69" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="2" tabsequence=40 border="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  active_flag = 'Y') or isrownew(),5,0)" color="33554432" x="1157" y="4" height="56" width="302" format="yyyy-mm-dd" html.valueishtml="0" protect="0~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  active_flag = 'Y') or isrownew(),0,1)"  name=formulary_end_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF ((claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) and  active_flag = 'Y') or isrownew(),rgb(255,255,255),rgb(255,255,255))" )
+column(band=detail id=7 alignment="0" tabsequence=50 border="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),5,0)" color="33554432" x="1481" y="4" height="56" width="1490" format="[general]" html.valueishtml="0" protect="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) OR isrownew(),0,1)"  name=formulary_comment visible="1" edit.limit=100 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),rgb(255,255,255),rgb(255,255,255))" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="3008" y="4" height="56" width="64" format="[general]" html.valueishtml="0"  name=primary_active_flag_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="3145" y="4" height="56" width="347" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="2" tabsequence=32766 border="0" color="33554432" x="3547" y="4" height="56" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="3959" y="4" height="56" width="338" format="[general]" html.valueishtml="0"  name=formulary_record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,10 @@
+﻿$PBExportHeader$d_stats_not_coded.srd
+$PBExportComments$Claim Search - Empty datawindow used for 'Stats Not Coded' search type. Stats not Coded does not use any user entered search criteria to retrieve list of claims to be coded.
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(10) name=field1 dbname="Field1" )
+ )

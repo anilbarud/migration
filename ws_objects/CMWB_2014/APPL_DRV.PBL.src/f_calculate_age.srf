@@ -1,0 +1,27 @@
+﻿$PBExportHeader$f_calculate_age.srf
+$PBExportComments$Calculate age in years between two dates
+global type f_calculate_age from function_object
+end type
+
+forward prototypes
+global function integer f_calculate_age (date adt_birth_date, date adt_as_at_date)
+end prototypes
+
+global function integer f_calculate_age (date adt_birth_date, date adt_as_at_date);LONG		ll_birth_date,ll_as_at_date
+STRING	ls_age
+
+/*	Difference in years between the Birth Date and the As At Date 
+	Makes sure the string is 8 characters long so that the first 4 characters reflects the age
+*/
+
+	ll_birth_date = Long(String(adt_birth_date,"YYYYMMDD"))
+
+	ll_as_at_date = Long(String(adt_as_at_date,'YYYYMMDD'))
+
+	ls_age = String(ll_as_at_date - ll_birth_date)
+	ls_age = Space(8 - Len(ls_age)) + ls_age
+	ls_age = Left(ls_age, 4)
+
+Return Integer(ls_age)
+end function
+

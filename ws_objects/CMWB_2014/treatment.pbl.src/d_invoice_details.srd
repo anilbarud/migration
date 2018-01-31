@@ -1,0 +1,76 @@
+﻿$PBExportHeader$d_invoice_details.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ column=(type=long updatewhereclause=yes name=line_no dbname="line_no" )
+ column=(type=long updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=datetime updatewhereclause=yes name=service_date dbname="service_date" )
+ column=(type=long updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=char(3) updatewhereclause=yes name=billable_unit_code dbname="billable_unit_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=quantity dbname="quantity" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_amount dbname="total_amount" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=long updatewhereclause=yes name=iw_travel_expense_no dbname="iw_travel_expense_no" )
+ column=(type=char(1) updatewhereclause=yes name=rta_other_billable_item_flag dbname="rta_other_billable_item_flag" )
+ column=(type=char(80) updatewhereclause=yes name=other_billable_item_desc dbname="other_billable_item_desc" )
+ column=(type=char(2) updatewhereclause=yes name=line_item_amended_code dbname="line_item_amended_code" )
+ column=(type=char(50) updatewhereclause=yes name=line_item_amended_desc_e dbname="line_item_amended_desc_e" )
+ column=(type=long updatewhereclause=yes name=doc_id dbname="doc_id" )
+ column=(type=long updatewhereclause=yes name=web_create_id dbname="web_create_id" )
+ retrieve="   SELECT a.rehab_invoice_no,   
+         a.line_no,   
+         a.authorization_no,   
+         a.claim_no,   
+         a.task_no,   
+         a.service_date,   
+         a.billable_xref_no,   
+         a.billable_unit_code,   
+         a.quantity,   
+         a.total_amount,
+         c.billable_item_desc_e,
+         d.iw_travel_expense_no,
+         c.rta_other_billable_item_flag,
+         e.other_billable_item_desc,
+         a.line_item_amended_code,
+         f.line_item_amended_desc_e,
+         x.doc_id,
+a.web_create_id
+    FROM dbo.REHAB_INVOICE_LINE_ITEM	a
+    left  join PAYMENT_DOCUMENT               x on a.payment_no = x.payment_no
+    JOIN Billable_Item_Rehab_Task_Xref	b on a.billable_xref_no = b.billable_xref_no
+    JOIN Billable_Item					c on b.billable_item_no = c.billable_item_no  
+    LEFT JOIN IW_TRAVEL_EXPENSE			d on a.claim_no = d.claim_no and a.rehab_invoice_no = d.rehab_invoice_no and a.line_no = d.line_no
+	JOIN REHAB_TASK_AUTHORIZATION		e on a.authorization_no = e.authorization_no
+    JOIN Line_Item_Amended              f on a.line_item_amended_code = f.line_item_amended_code
+WHERE a.claim_no = :ar_claim_no
+And   a.task_no = :ar_task_no
+Order By a.service_date DESC" arguments=(("ar_claim_no", number),("ar_task_no", number)) )
+text(band=header alignment="0" text="Service Date" border="6" color="33554432" x="110" y="8" height="56" width="334" html.valueishtml="0"  name=comment_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Billable Item" border="6" color="33554432" x="462" y="8" height="56" width="1417" html.valueishtml="0"  name=t_1  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Travel Expense" border="6" color="33554432" x="2167" y="8" height="56" width="402" html.valueishtml="0"  name=t_3  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Quantity" border="6" color="33554432" x="1897" y="8" height="56" width="251" html.valueishtml="0"  name=t_2  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Amended" border="6" color="33554432" x="2592" y="4" height="60" width="247" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+bitmap(band=detail filename="doc_16_h.gif" x="0" y="12" height="52" width="82" border="0"  name=p_docid visible="1~tif(doc_id > 0 and  web_create_id  > 0,1,0)" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432~tif (trim( line_item_amended_code) <> '',rgb(120,120,120),0)" x="110" y="8" height="64" width="334" format="YYYY-MM-DD" html.valueishtml="0"  name=service_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.strikethrough="0~tif (trim( line_item_amended_code) <> '',1,0)"  background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432~tif (trim( line_item_amended_code) <> '',rgb(120,120,120),0)" x="462" y="4" height="64" width="1417" format="[general]" html.valueishtml="0"  name=other_billable_item_desc visible="1~tif( rta_other_billable_item_flag = 'Y',1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.strikethrough="0~tif (trim( line_item_amended_code) <> '',1,0)"  background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432~tif (trim( line_item_amended_code) <> '',rgb(120,120,120),0)" x="462" y="4" height="64" width="1417" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1~tif( rta_other_billable_item_flag = 'Y',0,1)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.strikethrough="0~tif (trim( line_item_amended_code) <> '',1,0)"  background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Paid" border="0" color="33554432~tif (trim( line_item_amended_code) <> '',rgb(120,120,120),0)" x="2304" y="8" height="64" width="128" html.valueishtml="0"  name=t_4 visible="1~tIF ( ISNULL( iw_travel_expense_no), 0,1)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.strikethrough="0~tif (trim( line_item_amended_code) <> '',1,0)"  background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="33554432~tif (trim( line_item_amended_code) <> '',rgb(120,120,120),0)" x="1897" y="8" height="64" width="251" format="0" html.valueishtml="0"  name=quantity visible="1" edit.limit=0 edit.case=any edit.format="0" edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.strikethrough="0~tif (trim( line_item_amended_code) <> '',1,0)"  background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="33554432~tif (trim( line_item_amended_code) <> '',rgb(120,120,120),0)" x="2592" y="0" height="64" width="1582" format="[general]" html.valueishtml="0"  name=line_item_amended_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.strikethrough="0~tif (trim( line_item_amended_code) <> '',1,0)"  background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,35 @@
+﻿$PBExportHeader$d_t5007_trustee_history.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=1 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no grid.lines=0 )
+header(height=84 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=taxation_year dbname="T5007_TRUSTEE_HISTORY.taxation_year" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=t5007_recipient_no dbname="T5007_TRUSTEE_HISTORY.t5007_recipient_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=trustee_individual_no dbname="T5007_TRUSTEE_HISTORY.trustee_individual_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="T5007_TRUSTEE_HISTORY.claim_no" )
+ column=(type=char(60) update=yes updatewhereclause=yes name=comment dbname="T5007_TRUSTEE_HISTORY.comment" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_benefit_amount dbname="T5007_TRUSTEE_HISTORY.total_benefit_amount" )
+ retrieve="SELECT  T5007_TRUSTEE_HISTORY.taxation_year,
+        T5007_TRUSTEE_HISTORY.t5007_recipient_no,
+        T5007_TRUSTEE_HISTORY.trustee_individual_no,
+        T5007_TRUSTEE_HISTORY.claim_no,
+        T5007_TRUSTEE_HISTORY.comment,
+        T5007_TRUSTEE_HISTORY.total_benefit_amount     
+FROM T5007_TRUSTEE_HISTORY      
+WHERE ( T5007_TRUSTEE_HISTORY.taxation_year = :an_taxation_year ) 
+AND   ( T5007_TRUSTEE_HISTORY.trustee_individual_no = :an_individual_no )   " update="T5007_TRUSTEE_HISTORY" updatewhere=0 updatekeyinplace=no arguments=(("an_taxation_year", number),("an_individual_no", number)) )
+text(band=header alignment="0" text="Taxation Year"border="0" color="0" x="9" y="4" height="64" width="379"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="T5007 Recipient No"border="0" color="0" x="398" y="4" height="64" width="526"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Claim No"border="0" color="0" x="1513" y="4" height="64" width="261"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Comment"border="0" color="0" x="1783" y="4" height="64" width="1669"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Total Benefit Amount"border="0" color="0" x="3461" y="4" height="64" width="594"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Trustee Individual No"border="0" color="33554432" x="933" y="4" height="64" width="571"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="9" y="0" height="64" width="379" format="[general]"  name=taxation_year edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="398" y="0" height="64" width="526" format="[general]"  name=t5007_recipient_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1513" y="0" height="64" width="261" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1783" y="0" height="64" width="1669" format="[general]"  name=comment edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="3461" y="0" height="64" width="594" format="[general]"  name=total_benefit_amount edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="933" y="0" height="64" width="571" format="[general]"  name=trustee_individual_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

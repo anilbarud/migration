@@ -1,0 +1,106 @@
+﻿$PBExportHeader$d_cheque_inquiry.srd
+release 10.5;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=404 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=88 color="-1" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=cheque_header_cheque_no dbname="cheque_no" )
+ column=(type=long updatewhereclause=yes name=cheque_header_cheque_batch_no dbname="cheque_batch_no" )
+ column=(type=char(3) updatewhereclause=yes name=cheque_header_cheque_type_code dbname="cheque_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=cheque_header_benefit_class_code dbname="benefit_class_code" )
+ column=(type=char(1) updatewhereclause=yes name=cheque_header_source_code dbname="source_code" )
+ column=(type=long updatewhereclause=yes name=cheque_header_requisition_no dbname="requisition_no" )
+ column=(type=char(1) updatewhereclause=yes name=cheque_header_payment_method_code dbname="payment_method_code" )
+ column=(type=char(40) updatewhereclause=yes name=cheque_header_name_on_cheque dbname="name_on_cheque" )
+ column=(type=decimal(4) updatewhereclause=yes name=cheque_header_cheque_amount dbname="cheque_amount" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_cheque_date dbname="cheque_date" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_processed_date dbname="processed_date" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_printed_date dbname="printed_date" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_transmit_date dbname="transmit_date" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_reconciled_date dbname="reconciled_date" )
+ column=(type=char(16) updatewhereclause=yes name=cheque_header_reconciled_user_id dbname="reconciled_user_id" )
+ column=(type=char(2) updatewhereclause=yes name=cheque_header_reconciled_code dbname="reconciled_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=cheque_header_reconciled_amount dbname="reconciled_amount" )
+ column=(type=long updatewhereclause=yes name=cheque_header_replacement_cheque_no dbname="replacement_cheque_no" )
+ column=(type=char(20) updatewhereclause=yes name=cheque_type_cheque_type_desc dbname="cheque_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=payment_method_payment_method_desc dbname="payment_method_desc" )
+ retrieve="SELECT  CHEQUE_HEADER.cheque_no ,
+        CHEQUE_HEADER.cheque_batch_no ,
+        CHEQUE_HEADER.cheque_type_code ,
+        CHEQUE_HEADER.benefit_class_code ,
+        CHEQUE_HEADER.source_code ,
+        CHEQUE_HEADER.requisition_no ,
+        CHEQUE_HEADER.payment_method_code ,
+        CHEQUE_HEADER.name_on_cheque ,
+        CHEQUE_HEADER.cheque_amount ,
+        CHEQUE_HEADER.cheque_date ,
+        CHEQUE_HEADER.processed_date ,
+        CHEQUE_HEADER.printed_date ,
+        CHEQUE_HEADER.transmit_date ,
+        CHEQUE_HEADER.reconciled_date ,
+        CHEQUE_HEADER.reconciled_user_id ,
+        CHEQUE_HEADER.reconciled_code ,
+        CHEQUE_HEADER.reconciled_amount ,
+        CHEQUE_HEADER.replacement_cheque_no ,
+        Cheque_Type.cheque_type_desc ,
+        Payment_Method.payment_method_desc
+FROM    CHEQUE_HEADER
+LEFT OUTER JOIN Payment_Method ON CHEQUE_HEADER.payment_method_code = Payment_Method.payment_method_code
+LEFT OUTER JOIN Cheque_Type    ON CHEQUE_HEADER.cheque_type_code    = Cheque_Type.cheque_type_code
+" arguments=(("vas_parameters", string)) )
+rectangle(band=header x="9" y="8" height="228" width="4553"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Cheque Inquiry Report" border="0" color="0" x="1723" y="28" height="76" width="782" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="4050" y="28" height="76" width="466" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="60" width="334" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression=" vas_parameters "border="0" color="33554432" x="590" y="120" height="48" width="3922" format="[general]" html.valueishtml="0"  name=parameters visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="46" y="108" height="60" width="521" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="55" y1="188" x2="4503" y2="188"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Cheque
+No." border="0" color="0" x="41" y="268" height="112" width="197" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Cheque
+Date" border="0" color="0" x="283" y="268" height="112" width="197" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Batch
+No." border="0" color="0" x="539" y="268" height="112" width="137" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Cheque Type" border="0" color="0" x="786" y="324" height="56" width="334" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Requisition
+No." border="0" color="0" x="1211" y="268" height="112" width="283" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Payment
+Method" border="0" color="0" x="1664" y="268" height="112" width="219" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Name on Cheque" border="0" color="0" x="2057" y="324" height="56" width="430" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Processed
+Date" border="0" color="0" x="3017" y="268" height="112" width="274" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Cheque
+Amount" border="0" color="0" x="3346" y="268" height="112" width="201" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Reconciled
+Amount" border="0" color="0" x="3634" y="268" height="112" width="274" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Reconciled
+Date" border="0" color="0" x="3973" y="268" height="112" width="274" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Reconciled
+Code" border="0" color="0" x="4279" y="268" height="112" width="274" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="18" y1="4" x2="4535" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="14" y="20" height="56" width="219" format="[general]" html.valueishtml="0"  name=cheque_header_cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="251" y="20" height="56" width="265" format="yyyy-mm-dd" html.valueishtml="0"  name=cheque_header_cheque_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="535" y="20" height="56" width="206" format="[general]" html.valueishtml="0"  name=cheque_header_cheque_batch_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="768" y="20" height="56" width="462" format="[general]" html.valueishtml="0"  name=cheque_type_cheque_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1248" y="20" height="56" width="215" format="[general]" html.valueishtml="0"  name=cheque_header_requisition_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="0" x="1499" y="20" height="56" width="526" format="[general]" html.valueishtml="0"  name=payment_method_payment_method_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="2057" y="20" height="56" width="919" format="[general]" html.valueishtml="0"  name=cheque_header_name_on_cheque visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="3003" y="20" height="56" width="288" format="yyyy-mm-dd" html.valueishtml="0"  name=cheque_header_processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="3314" y="20" height="56" width="274" format="#,##0.00" html.valueishtml="0"  name=cheque_header_cheque_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=17 alignment="1" tabsequence=32766 border="0" color="0" x="3616" y="20" height="56" width="338" format="#,##0.00" html.valueishtml="0"  name=cheque_header_reconciled_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="3991" y="20" height="56" width="288" format="yyyy-mm-dd" html.valueishtml="0"  name=cheque_header_reconciled_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="4352" y="20" height="56" width="82" format="[general]" html.valueishtml="0"  name=cheque_header_reconciled_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+report(band=detail dataobject="d_txns_for_cheque" x="73" y="84" height="196" width="4453" border="0"  height.autosize=yes criteria="" nest_arguments=(("cheque_header_cheque_no")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

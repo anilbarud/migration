@@ -1,0 +1,60 @@
+﻿$PBExportHeader$f_server_datetime.srf
+$PBExportComments$Obtains database server's date and time.
+global type f_server_datetime from function_object
+end type
+
+forward prototypes
+global function datetime f_server_datetime ()
+end prototypes
+
+global function datetime f_server_datetime ();// ==========================================================================
+//  Server date and time function for SQL Server   (94-11-09 / Version 1.0)
+// ==========================================================================
+//
+//	Description
+// -----------
+//
+// This function obtains the date and time from the database server.  Its
+// usage will ensure that correct date and time is used by an application, 
+// even if the clock on the client PC is WRONG or was TEMPERED with.  It 
+// also helps ensure that any time based logic (comparison of occurrences,
+// most recent occurrence, updated since,  etc...) will be consistent and 
+// chronologically sound across the whole system. 
+//
+//	The technique utilized to avoid the client PC's local time and date 
+//	involves a call to SQL Server and therefore requires that the SQLCA 
+// transaction object be available and linked to an active database.
+// Note that in the case of an application using more than one database,
+// residing on separate servers, date and time will be obtained from the 
+// server involved with the default transaction and database (SQLCA).
+//
+//
+// Arguments
+// ---------
+//	None
+//
+//
+// Outcome					Return Value						Action
+// -------					------------						------
+//	Success					YYYY/MM/DD HH:MM:SS.SSSSSS		None
+//
+//
+// Coding Requirements
+// -------------------
+// 1) Simply call the function with a Datetime variable for return.
+//
+//		vldt_today_and_now = f_server_datetime()
+//
+
+
+datetime	vldt_server_datetime
+
+select top 1 getdate()
+  into :vldt_server_datetime
+  from sysobjects;
+
+SQLCA.nf_handle_error("","f_server_datetime","SELECT getdate() FROM sysobjects WHERE sysobjects.name = 'sysobjects'")
+
+return vldt_server_datetime
+end function
+

@@ -1,0 +1,140 @@
+﻿$PBExportHeader$d_be_calculate_by_account.srd
+$PBExportComments$for the calculate module read only
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=364 color="134217752" )
+detail(height=80 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long update=yes updatewhereclause=yes name=benefit_entitlement_no dbname="benefit_entitlement_no" )
+ column=(type=long update=yes updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no_filtered dbname="opening_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=benefit_entitlement_from_date dbname="benefit_entitlement_from_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=benefit_entitlement_to_date dbname="benefit_entitlement_to_date" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_months dbname="benefit_entitlement_number_of_months" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_weeks dbname="benefit_entitlement_number_of_weeks" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_days dbname="benefit_entitlement_number_of_days" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_hours dbname="benefit_entitlement_number_of_hours" )
+ column=(type=decimal(4) updatewhereclause=yes name=benefit_entitlement_amount dbname="benefit_entitlement_amount" )
+ column=(type=char(3) updatewhereclause=yes name=calculation_type_code dbname="calculation_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=award_amount dbname="award_amount" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=char(4) updatewhereclause=yes name=opening_type_code dbname="opening_type_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_type_filtered dbname="payment_type_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=be_award_amount dbname="be_award_amount" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=award_freq_code dbname="award_freq_code" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=be_total_award_amount dbname="total_award_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=three_day_withhold_deduction_amount dbname="three_day_withhold_deduction_amount" initial="0.00" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_eligibility_status_code dbname="annuity_eligibility_status_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=sixty_percent_flag dbname="sixty_percent_option_lump_sum_flag" initial="N" values="	Y/	N" )
+ column=(type=decimal(2) updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=be_award_amount dbname="award_amount" )
+ column=(type=char(40) updatewhereclause=yes name=calculation_note dbname="calculation_note" )
+ column=(type=char(1) updatewhereclause=yes name=rtw_incentive_flag dbname="rtw_incentive_flag" )
+ column=(type=datetime updatewhereclause=yes name=benefit_start_date dbname="benefit_start_date" )
+ column=(type=datetime updatewhereclause=yes name=benefit_end_date dbname="benefit_end_date" )
+ column=(type=datetime updatewhereclause=yes name=accident_recurrence_date dbname="accident_recurrence_date" )
+ column=(type=char(3) updatewhereclause=yes name=claim_disposition_code dbname="claim_disposition_code" )
+ column=(type=char(1) updatewhereclause=yes name=receiving_ltd_code dbname="receiving_ltd_code" )
+ column=(type=char(1) updatewhereclause=yes name=claimant_working_flag dbname="claimant_working_flag" )
+ column=(type=char(1) updatewhereclause=yes name=recurrence_type_code dbname="recurrence_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=three_day_paid_flag dbname="three_day_paid_flag" )
+ column=(type=char(1) updatewhereclause=yes name=comp_85percent_flag dbname="comp_85percent_flag" )
+ column=(type=datetime updatewhereclause=yes name=review_12_week_date dbname="review_12_week_date" )
+ retrieve="SELECT a.benefit_entitlement_no,             a.annuity_account_no,                   a.opening_no,                        
+       a.claim_no,                           a.benefit_calculation_no,               a.benefit_entitlement_from_date, 
+       a.benefit_entitlement_to_date,        a.benefit_entitlement_number_of_months, a.benefit_entitlement_number_of_weeks, 
+       a.benefit_entitlement_number_of_days, a.benefit_entitlement_number_of_hours , a.benefit_entitlement_amount,
+       b.calculation_type_code,              b.award_amount,                         b.effective_from_date, 
+       c.opening_type_code,                  a.payment_type_code,                    a.payment_sub_type_code, 
+       a.award_amount as 'be_award_amount' , 
+       a.award_freq_code, a.total_award_amount , a.three_day_withhold_deduction_amount, ' ' as 'annuity_eligibility_status_code',
+		a.sixty_percent_option_lump_sum_flag, b.benefit_level_percentage,   b.award_amount,   b.calculation_note,
+        b.rtw_incentive_flag, c.benefit_start_date ,           c.benefit_end_date ,           
+        c.accident_recurrence_date ,           c.claim_disposition_code ,           c.receiving_ltd_code ,           
+        c.claimant_working_flag ,           c.recurrence_type_code ,           c.three_day_paid_flag ,          
+        c.comp_85percent_flag ,           c.review_12_week_date 
+FROM BENEFIT_ENTITLEMENT a 
+LEFT JOIN BENEFIT_CALCULATION b ON a.benefit_calculation_no = b.benefit_calculation_no AND a.claim_no = b.claim_no 
+LEFT JOIN OPENING c 			ON a.opening_no = c.opening_no 						   AND a.claim_no = c.claim_no  
+     JOIN ANNUITY_CALC_BENEFIT_ENTITLEMENT_XREF d  ON a.benefit_entitlement_no = d.benefit_entitlement_no AND a.annuity_account_no = d.annuity_account_no
+WHERE  d.annuity_account_no = :al_annuity_account_no  AND d.annuity_calc_no    = :al_annuity_calc_no
+group by a.benefit_entitlement_no,            a.annuity_account_no,                   a.opening_no,                        
+       a.claim_no,                            a.benefit_calculation_no,               a.benefit_entitlement_from_date, 
+       a.benefit_entitlement_to_date,         a.benefit_entitlement_number_of_months, a.benefit_entitlement_number_of_weeks, 
+       a.benefit_entitlement_number_of_days,  a.benefit_entitlement_number_of_hours , a.benefit_entitlement_amount,
+       b.calculation_type_code,               b.award_amount,                         b.effective_from_date, 
+       c.opening_type_code,                   a.payment_type_code,                    a.payment_sub_type_code, 
+       a.award_amount,                        a.award_freq_code,                      a.total_award_amount,
+       a.three_day_withhold_deduction_amount, a.sixty_percent_option_lump_sum_flag,   b.benefit_level_percentage,  
+       b.award_amount,                        b.calculation_note,                     b.rtw_incentive_flag,
+       c.benefit_start_date ,                 c.benefit_end_date ,                    c.accident_recurrence_date ,           
+       c.claim_disposition_code ,             c.receiving_ltd_code ,                  c.claimant_working_flag ,           
+       c.recurrence_type_code ,               c.three_day_paid_flag ,                 c.comp_85percent_flag ,           
+       c.review_12_week_date 
+order by a.benefit_entitlement_from_date" arguments=(("al_annuity_account_no", number),("al_annuity_calc_no", number))  sort="benefit_entitlement_from_date A benefit_entitlement_to_date A " )
+rectangle(band=footer x="41" y="24" height="316" width="2473"  name=r_1 visible="1" brush.hatch="7" brush.color="570425344" pen.style="0" pen.width="9" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Claim" border="6" color="33554432" x="14" y="8" height="60" width="261" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Opening" border="6" color="33554432" x="293" y="8" height="60" width="667" html.valueishtml="0"  name=opening_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Benefit" border="6" color="33554432" x="978" y="8" height="60" width="1527" html.valueishtml="0"  name=t_5  tag="" visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Effective" border="6" color="33554432" x="2523" y="8" height="60" width="279" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pay Type" border="6" color="33554432" x="2821" y="8" height="60" width="238" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Period" border="6" color="33554432" x="3077" y="8" height="60" width="786" html.valueishtml="0"  name=benefit_entitlement_from_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Days" border="6" color="33554432" x="3881" y="8" height="60" width="187" html.valueishtml="0"  name=benefit_entitlement_number_of_days_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Hours" border="6" color="33554432" x="4087" y="8" height="60" width="183" html.valueishtml="0"  name=benefit_entitlement_number_of_hours_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Weeks" border="6" color="33554432" x="4288" y="8" height="60" width="197" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Months" border="6" color="33554432" x="4503" y="8" height="60" width="210" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Award" border="6" color="33554432" x="4731" y="8" height="60" width="270" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Freq" border="6" color="33554432" x="5019" y="8" height="60" width="293" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Total Award" border="6" color="33554432" x="5330" y="8" height="60" width="370" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="3 Days W/H" border="6" color="33554432" x="5719" y="8" height="60" width="325" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Benefit Amount" border="6" color="33554432" x="6062" y="8" height="60" width="475" html.valueishtml="0"  name=benefit_entitlement_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="60% L/S" border="6" color="33554432" x="6555" y="8" height="60" width="233" html.valueishtml="0"  name=t_8 visible="1~tif( f_get_claim_role_code() = 'SS',1,0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="To" border="0" color="33554432" x="3442" y="16" height="56" width="55" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="14" y="4" height="68" width="265" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" '~~t' + opening_type_code + '~~t~~t~~t' + String( benefit_start_date ,'yyyy-mm-dd') +'~~t~~t' +    opening_no_filtered "border="0" color="33554432" x="283" y="4" height="68" width="686" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="
+IF(benefit_calculation_no > 0 , 
+IF( calculation_note <> '', String( benefit_calculation_no ) + '~~t~~t' + String( award_amount,'$###,###.00' ) + '  Effective from ' + String(  effective_from_date,'YYYY-MM-DD' ) + ' at ' + String( benefit_level_percentage,'###.00 %' ) + ' - ' +  calculation_note , String( benefit_calculation_no ) + '~~t~~t' + String( award_amount,'$###,###.00' ) + '  Effective from ' + String(  effective_from_date,'YYYY-MM-DD' ) + ' at ' + String( benefit_level_percentage,'###.00 %' ))
+, '0'+'~~t~~t'+'$0.00 Effective from 0000-00-00  at 0% ')"border="0" color="33554432" x="974" y="4" height="68" width="1536" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="2514" y="4" height="68" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=17 alignment="2" tabsequence=32766 border="0" color="0" x="2816" y="4" height="68" width="251" format="[general]" html.valueishtml="0"  name=payment_type_filtered visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="3872" y="4" height="68" width="201" format="0.00" html.valueishtml="0"  name=number_of_days  tag="this is a test" visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="3072" y="4" height="68" width="352" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_entitlement_from_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="3515" y="4" height="68" width="352" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_entitlement_to_date  tag="" visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="4078" y="4" height="68" width="201" format="0.00" html.valueishtml="0"  name=number_of_hours visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="4283" y="4" height="68" width="206" format="[general]" html.valueishtml="0"  name=number_of_weeks visible="1" editmask.mask="###,###" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="4494" y="4" height="68" width="229" format="[general]" html.valueishtml="0"  name=number_of_months visible="1" editmask.mask="###,###" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="33554432" x="4727" y="4" height="68" width="288" format="$#,##0.00;($#,##0.00)" html.valueishtml="0" protect="0~tif ( benefit_calculation_no > 0,1,0)"  name=be_award_amount visible="1" editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="5019" y="4" height="68" width="306" format="[general]" html.valueishtml="0" protect="0~tif (benefit_calculation_no > 0,1,0)"  name=award_freq_code visible="1" dddw.name=dddw_award_frequency dddw.displaycolumn=award_freq_desc dddw.datacolumn=award_freq_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=21 alignment="1" tabsequence=32766 border="0" color="33554432" x="5330" y="4" height="68" width="379" format="$#,##0.00;($#,##0.00)" html.valueishtml="0" protect="0~tif ( benefit_calculation_no > 0,1,0)"  name=be_total_award_amount visible="1" editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="1" tabsequence=32766 border="0" color="33554432" x="5714" y="4" height="68" width="338" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=three_day_withhold_deduction_amount visible="1" editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression="IF(ISNULL( be_total_award_amount),0,be_total_award_amount) + IF(ISNULL(three_day_withhold_deduction_amount),0,three_day_withhold_deduction_amount)"border="0" color="33554432" x="6057" y="4" height="68" width="329" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_be_total visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="33554432" x="6423" y="4" height="68" width="27" format="[general]" html.valueishtml="0"  name=annuity_eligibility_status_code visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="33554432" x="6651" y="4" height="68" width="59" format="[general]" html.valueishtml="0"  name=sixty_percent_flag visible="1~tif( f_get_claim_role_code() = 'SS',1,0)" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="Total Benefit Entitlement" border="0" color="33554432" x="46" y="188" height="64" width="722" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="795" y1="268" x2="2450" y2="268"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=footer alignment="1" text="" border="0" color="33554432" x="805" y="184" height="64" width="219" html.valueishtml="0"  name=t_ben_hours visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="Hours" border="0" color="33554432" x="832" y="64" height="56" width="165" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="" border="0" color="33554432" x="1106" y="188" height="64" width="219" html.valueishtml="0"  name=t_ben_days visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="Days" border="0" color="33554432" x="1143" y="64" height="56" width="146" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="" border="0" color="33554432" x="1408" y="188" height="64" width="219" html.valueishtml="0"  name=t_ben_weeks visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="Weeks" border="0" color="33554432" x="1422" y="64" height="56" width="192" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="Months" border="0" color="33554432" x="1719" y="64" height="56" width="201" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="" border="0" color="33554432" x="1710" y="188" height="64" width="219" html.valueishtml="0"  name=t_ben_months visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="" border="0" color="33554432" x="2062" y="188" height="64" width="329" html.valueishtml="0"  name=t_ben_amount visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="Totals" border="0" color="33554432" x="2222" y="64" height="56" width="169" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

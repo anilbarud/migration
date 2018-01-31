@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dddw_outcome.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=5 color="-1" )
+detail(height=77 color="-1" )
+table(column=(type=char(2) updatewhereclause=yes name=outcome_code dbname="Outcome.outcome_code" )
+ column=(type=char(40) updatewhereclause=yes name=outcome_desc dbname="Outcome.outcome_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Outcome~" ) COLUMN(NAME=~"Outcome.outcome_code~") COLUMN(NAME=~"Outcome.outcome_desc~")) ORDER(NAME=~"Outcome.outcome_desc~" ASC=yes ) " )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="0" x="1" y="4" height="65" width="1121"  name=outcome_desc  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

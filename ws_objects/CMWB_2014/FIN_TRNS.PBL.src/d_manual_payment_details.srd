@@ -1,0 +1,72 @@
+﻿$PBExportHeader$d_manual_payment_details.srd
+$PBExportComments$dw to get payment info for updating unpasted manual txns.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=188 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=payment_no dbname="payment_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paid_days_lost dbname="paid_days_lost" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paid_from_date dbname="paid_from_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paid_to_date dbname="paid_to_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_award_amount dbname="total_award_amount" validation="Real(GetText()) > 0" validationmsg="~"The benefit amount must be greater than zero~"" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_deductions dbname="total_deductions" validation="Real(GetText()) >= 0" validationmsg="~"The deduction amount cannot be negative~"" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_payment_amount dbname="total_payment_amount" )
+ column=(type=datetime update=yes updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=payment_adjustment_flag dbname="payment_adjustment_flag" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=adjustment_days_lost dbname="adjustment_days_lost" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=adjustment_hours_lost dbname="adjustment_hours_lost" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=adjustment_payment_amount dbname="adjustment_payment_amount" )
+ column=(type=char(1) updatewhereclause=yes name=zeroed_flag dbname="zeroed_flag" )
+ column=(type=decimal(4) updatewhereclause=yes name=submitted_amount dbname="submitted_amount" )
+ column=(type=char(1) updatewhereclause=yes name=payment_type_description dbname="payment_type_description" )
+ column=(type=char(1) updatewhereclause=yes name=payment_sub_type_description dbname="payment_sub_type_description" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=final_payment_flag dbname="final_payment_flag" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=authorized_by_code dbname="authorized_by_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=authorized_date dbname="authorized_date" )
+ retrieve="SELECT payment_no,
+       claim_no,
+       payment_type_code,
+       payment_sub_type_code, 
+       paid_days_lost,
+       paid_from_date,
+       paid_to_date,
+       total_award_amount,
+       total_deductions,
+       total_payment_amount,
+       processed_date,
+       payment_adjustment_flag,
+       adjustment_days_lost,
+       adjustment_hours_lost,
+       adjustment_payment_amount,
+       zeroed_flag,
+       submitted_amount,
+       ~"~" payment_type_description,
+       ~"~" payment_sub_type_description, 
+       final_payment_flag,
+       authorized_by_code,
+       authorized_date 
+  FROM PAYMENT 
+ WHERE payment_no = :val_payment_no " update="PAYMENT" updatewhere=1 updatekeyinplace=yes arguments=(("val_payment_no", number)) )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="33554432" x="773" y="12" height="60" width="197" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" dddw.name=dddw_payment_sub_types_between_dates dddw.displaycolumn=payment_sub_type_code dddw.datacolumn=payment_sub_type_code dddw.percentwidth=1100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Paid From:" border="0" color="33554432" x="27" y="108" height="60" width="311" html.valueishtml="0"  name=paid_from_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Annuity Payment Sub Type:" border="0" color="33554432" x="27" y="12" height="60" width="699" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=20 border="5" color="33554432" x="379" y="108" height="60" width="297" format="[shortdate] [time]" html.valueishtml="0"  name=paid_from_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="to" border="0" color="33554432" x="709" y="108" height="60" width="50" html.valueishtml="0"  name=paid_to_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=30 border="5" color="33554432" x="782" y="108" height="60" width="297" format="[shortdate] [time]" html.valueishtml="0"  name=paid_to_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="1019" y="16" height="60" width="1682" format="[general]" html.valueishtml="0"  name=payment_sub_type_description visible="1" dddw.name=dddw_payment_sub_types_all dddw.displaycolumn=payment_sub_type_desc dddw.datacolumn=payment_sub_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

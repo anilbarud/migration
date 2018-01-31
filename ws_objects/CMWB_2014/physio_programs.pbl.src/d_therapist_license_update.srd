@@ -1,0 +1,51 @@
+﻿$PBExportHeader$d_therapist_license_update.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=therapist_no dbname="therapist_no" )
+ column=(type=char(2) updatewhereclause=yes key=yes name=license_type_code dbname="license_type_code" initial="03" )
+ column=(type=char(15) updatewhereclause=yes key=yes name=license_no dbname="license_no" )
+ column=(type=char(2) updatewhereclause=yes name=license_prov_state_code dbname="license_prov_state_code" initial="NB" )
+ column=(type=datetime updatewhereclause=yes name=listed_date dbname="listed_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=delisted_date dbname="delisted_date" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=delisted_comment dbname="delisted_comment" )
+ column=(type=char(30) updatewhereclause=yes name=license_type_desc_e dbname="license_type_desc_e" )
+ retrieve="	   SELECT a.therapist_no,
+ 			a.license_type_code, 
+			a.license_no,      
+			a.license_prov_state_code,
+			a.listed_date,            
+			 a.delisted_date,           
+			a.delisted_comment ,
+			b.license_type_desc_e
+    FROM therapist_license  a
+	left join license_type b on a.license_type_code = b.license_type_code
+   WHERE a.therapist_no = :al_therapist_no 
+" update="therapist_license" updatewhere=2 updatekeyinplace=yes arguments=(("al_therapist_no", number)) )
+text(band=header alignment="0" text="License Type" border="6" color="33554432" x="23" y="8" height="64" width="581" html.valueishtml="0"  name=license_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="4" height="68" width="581" format="[general]" html.valueishtml="0"  name=license_type_code visible="1" dddw.name=dddw_license_type dddw.displaycolumn=license_type_desc_e dddw.datacolumn=license_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="622" y="4" height="68" width="453" format="[general]" html.valueishtml="0"  name=license_no visible="1" edit.limit=15 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="License" border="6" color="33554432" x="622" y="8" height="64" width="453" html.valueishtml="0"  name=license_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=10 border="5" color="33554432" x="2126" y="4" height="68" width="411" format="[shortdate] [time]" html.valueishtml="0"  name=delisted_date visible="1" editmask.ddcalendar=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Delisted" border="6" color="33554432" x="2130" y="8" height="64" width="411" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1769" y="4" height="68" width="338" format="[shortdate] [time]" html.valueishtml="0"  name=listed_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Listed" border="6" color="33554432" x="1769" y="8" height="64" width="338" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="0" tabsequence=20 border="5" color="33554432" x="2555" y="4" height="68" width="1161" format="[general]" html.valueishtml="0"  name=delisted_comment visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Delisted Comment" border="6" color="33554432" x="2560" y="8" height="64" width="1161" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+line(band=header x1="9" y1="88" x2="3717" y2="88"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="License Prov" border="6" color="33554432" x="1093" y="8" height="64" width="658" html.valueishtml="0"  name=license_prov_state_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1093" y="4" height="68" width="658" format="[general]" html.valueishtml="0"  name=license_prov_state_code visible="1" dddw.name=dddw_province_can_lookup dddw.displaycolumn=location_desc1 dddw.datacolumn=location_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

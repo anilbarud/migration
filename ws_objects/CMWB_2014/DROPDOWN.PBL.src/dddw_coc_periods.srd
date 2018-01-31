@@ -1,0 +1,10 @@
+﻿$PBExportHeader$dddw_coc_periods.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=77 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=current_coc_period dbname="Coc_Control.current_coc_period" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Coc_Control~" ) COLUMN(NAME=~"Coc_Control.current_coc_period~")) ORDER(NAME=~"Coc_Control.current_coc_period~" ASC=no) " update="Coc_Control" updatewhere=1 updatekeyinplace=no )
+compute(band=detail alignment="0" expression="String( current_coc_period ,~"####-##~")"border="0" color="33554432" x="10" y="4" height="69" width="330" format="[general]"  name=coc_period_string  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

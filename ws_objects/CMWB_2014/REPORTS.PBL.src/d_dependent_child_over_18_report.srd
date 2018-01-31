@@ -1,0 +1,69 @@
+﻿$PBExportHeader$d_dependent_child_over_18_report.srd
+$PBExportComments$Datawindow to report all active dependent children who are at least 18 within user specified time frame.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=365 color="536870912" )
+summary(height=137 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_participant_claim_no dbname="CLAIM_PARTICIPANT.claim_no" )
+ column=(type=long updatewhereclause=yes name=claim_participant_individual_no dbname="CLAIM_PARTICIPANT.individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=datetime updatewhereclause=yes name=individual_birth_date dbname="INDIVIDUAL.birth_date" )
+ column=(type=datetime updatewhereclause=yes name=claim_accident_date dbname="CLAIM.accident_date" )
+ column=(type=char(1) updatewhereclause=yes name=claim_participant_pen_survivor_eligibili dbname="CLAIM_PARTICIPANT.pen_survivor_eligibility_flag" )
+ column=(type=char(3) updatewhereclause=yes name=claim_participant_dependent_reason_code dbname="CLAIM_PARTICIPANT.dependent_reason_code" )
+ retrieve="SELECT CP.claim_no,
+       CP.individual_no,
+       I.last_name,
+       I.given_names,
+       I.birth_date,
+       C.accident_date, 
+       CP.pen_survivor_eligibility_flag,
+       CP.dependent_reason_code 
+  FROM CLAIM_PARTICIPANT CP,
+       INDIVIDUAL I,
+       OPENING O,
+       CLAIM C  
+ WHERE O.claim_no = CP.claim_no 
+	AND I.individual_no = CP.individual_no 
+	AND C.claim_no = CP.claim_no 
+	AND (O.opening_type_code = 'SV' OR O.opening_type_code = 'S1' OR O.opening_type_code = 'S2' )
+	AND (O.benefit_end_date IS NULL OR O.benefit_end_date >= :adt_from_date) 
+	AND CP.dependent_flag = 'Y' 
+	AND CP.claim_role_code = 'DC' 
+	AND (I.birth_date <= :adt_latest_birth_date OR I.birth_date IS NULL) 
+ORDER BY CP.claim_no
+" arguments=(("adt_from_date", datetime),("adt_to_date", datetime),("adt_latest_birth_date", datetime)) )
+rectangle(band=header x="14" y="4" height="197" width="3429" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Dependent Children Over 18 Report"border="0" color="0" x="1139" y="28" height="77" width="1221"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="77" width="549" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:"border="0" color="0" x="51" y="28" height="61" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:"border="0" color="0" x="51" y="108" height="61" width="522"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="595" y="28" height="61" width="398" format="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="~"From ~" + String( adt_from_date ,~"yyyy-mm-dd~") + ~" to ~" + String( adt_to_date ,~"yyyy-mm-dd~")"border="0" color="0" x="595" y="108" height="61" width="2807" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="1" y1="348" x2="3415" y2="348" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Name"border="0" color="0" x="321" y="276" height="61" width="151"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Claim"border="0" color="0" x="133" y="276" height="61" width="147"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Pen/Survivor
+ Eligibility"border="0" color="0" x="1326" y="216" height="121" width="330"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="2" expression="~"Age As of ~" + String(adt_to_date,~"mmm dd, yyyy~") "border="0" color="0" x="2725" y="276" height="61" width="618" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Dependent
+Reason Code"border="0" color="0" x="1742" y="216" height="121" width="444"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Dependent's
+Birth Date"border="0" color="0" x="2254" y="216" height="121" width="343"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="23" y="4" height="61" width="257" format="[general]"  name=claim_participant_claim_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( individual_given_names ) + ~" ~" + Trim( individual_last_name )"border="0" color="0" x="316" y="4" height="61" width="979" format="[GENERAL]"  name=computed_name  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="If(claim_participant_pen_survivor_eligibili = 'Y','Y','')"border="0" color="0" x="1326" y="4" height="61" width="330" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="/* Compute age using the latest value in the user specified date range to determine their age in years at the latest point in time (incase their birthday falls within date range).*/
+                 
+year(  adt_to_date ) - year( individual_birth_date )"border="0" color="0" x="2725" y="4" height="61" width="517" format="[GENERAL]"  name=age_in_years  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="0" x="1742" y="4" height="61" width="444" format="[general]"  name=claim_participant_dependent_reason_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="2263" y="4" height="61" width="330" format="yyyy-mm-dd"  name=individual_birth_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="10" y1="4" x2="3425" y2="4" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+compute(band=summary alignment="0" expression="~"Number of Dependent Children Exceeding Age 18 : ~" + count(  claim_participant_claim_no  for all )"border="0" color="0" x="42" y="20" height="65" width="2177" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1090519039" )
+line(band=summary x1="10" y1="96" x2="3425" y2="96" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=summary x1="10" y1="108" x2="3425" y2="108" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+
+sparse(names="claim_participant_claim_no")

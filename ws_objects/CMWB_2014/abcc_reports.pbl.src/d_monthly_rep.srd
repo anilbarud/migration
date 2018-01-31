@@ -1,0 +1,65 @@
+﻿$PBExportHeader$d_monthly_rep.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=336 color="536870912" )
+summary(height=108 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=decimal(4) updatewhereclause=yes name=plan_pays dbname="plan_pays" )
+ column=(type=datetime updatewhereclause=yes name=adjudication_date dbname="adjudication_date" )
+ column=(type=char(2) updatewhereclause=yes name=transaction_code dbname="transaction_code" )
+ column=(type=long updatewhereclause=yes name=week dbname="week" )
+ column=(type=long updatewhereclause=yes name=year_to_date_trans_count dbname="compute_0005" )
+ retrieve=" 
+SELECT plan_pays, 
+       adjudication_date, 
+       transaction_code, 
+       CASE WHEN datepart(dw,adjudication_date)>= 5 THEN datepart(wk,adjudication_date) + 1 
+                                                    ELSE datepart(wk,adjudication_date) 
+       END week, 
+       (SELECT SUM(CASE WHEN transaction_code = '01' THEN 1 
+                                                     ELSE 1 
+                   END) year_to_date_trans_count 
+          FROM PAYMENT_PRESCRIPTION ) 
+  FROM PAYMENT_PRESCRIPTION 
+ ORDER BY adjudication_date  
+ " )
+group(level=1 header.height=0 trailer.height=72 by=("week" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="To reconcile invoice for Claim Administration Fee for the period of" border="0" color="33554432" x="18" y="16" height="60" width="2921" html.valueishtml="0"  name=t_title visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="From" border="4" color="33554432" x="14" y="256" height="60" width="370" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Paid" border="4" color="33554432" x="878" y="256" height="60" width="434" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="TotalTxn Volume" border="4" color="33554432" x="2117" y="196" height="120" width="361" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="TotalPrescriptions" border="4" color="33554432" x="1339" y="196" height="120" width="361" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="TotalReversals" border="4" color="33554432" x="1728" y="196" height="120" width="361" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="To " border="4" color="33554432" x="439" y="256" height="60" width="384" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="37" y="20" height="76" width="608" format="yyyy-mm-dd" html.valueishtml="0"  name=adjudication_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="695" y="20" height="76" width="174" format="[general]" html.valueishtml="0"  name=transaction_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if( transaction_code = '01' , 1, 1)"border="0" color="33554432" x="901" y="20" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=transaction_count visible="1"  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1193" y="20" height="76" width="96" format="[general]" html.valueishtml="0"  name=week visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if( transaction_code = '01' , 1, 0)"border="0" color="33554432" x="1403" y="24" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=prescription_count visible="1"  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if( transaction_code <> '01' , 1, 0)"border="0" color="33554432" x="1906" y="44" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=reversal_count visible="1"  font.face="Arial" font.height="-11" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="0" expression="min(adjudication_date for group 1) "border="0" color="33554432" x="14" y="4" height="64" width="370" format="mmm d, yyyy" html.valueishtml="0"  name=min_from_date_group1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(prescription_count for group 1)"border="0" color="33554432" x="1339" y="4" height="64" width="329" format="#,##0" html.valueishtml="0"  name=total_prescriptions_weekly visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(reversal_count for group 1)"border="0" color="33554432" x="1728" y="4" height="64" width="306" format="#,##0" html.valueishtml="0"  name=total_reversals_weekly visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(plan_pays  for group 1 )"border="0" color="33554432" x="878" y="4" height="64" width="434" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=plan_pays_weekly visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(transaction_count for group 1)"border="0" color="33554432" x="2117" y="4" height="64" width="361" format="#,##0" html.valueishtml="0"  name=trans_count_weekly visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="0" expression="max(adjudication_date for group 1)"border="0" color="33554432" x="439" y="4" height="64" width="384" format="mmm d, yyyy" html.valueishtml="0"  name=max_to_date_for_group visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="1339" y1="12" x2="1669" y2="12"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="855" y1="12" x2="1312" y2="12"  name=l_5 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="1728" y1="12" x2="2034" y2="12"  name=l_6 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="2112" y1="12" x2="2478" y2="12"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=summary alignment="1" expression="sum(  plan_pays  for all )"border="0" color="33554432" x="855" y="28" height="64" width="457" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=plan_pays_total visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(prescription_count for all)"border="0" color="33554432" x="1339" y="28" height="64" width="329" format="#,##0" html.valueishtml="0"  name=total_prescriptions visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(reversal_count for all)"border="0" color="33554432" x="1728" y="28" height="64" width="306" format="#,##0" html.valueishtml="0"  name=total_reversals visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(transaction_count for all)"border="0" color="33554432" x="2085" y="28" height="64" width="393" format="#,##0" html.valueishtml="0"  name=trans_count_total visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

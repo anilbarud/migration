@@ -1,0 +1,12 @@
+﻿$PBExportHeader$d_trustees.srd
+$PBExportComments$Listing of all trustees in CLAIM_PARTICIPANT.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=1 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no grid.lines=0 )
+header(height=85 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=97 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=individual_no dbname="CLAIM_PARTICIPANT.individual_no" )
+ retrieve="PBSELECT( VERSION(400) DISTINCT ()TABLE(NAME=~"CLAIM_PARTICIPANT~" ) COLUMN(NAME=~"CLAIM_PARTICIPANT.individual_no~")WHERE(    EXP1 =~"CLAIM_PARTICIPANT.claim_role_code~"   OP =~"=~"    EXP2 =~"'TR'~" ) ) " )
+text(band=header alignment="2" text="Individual No"border="0" color="0" x="10" y="8" height="65" width="385"  name=individual_no_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="10" y="8" height="77" width="385" format="[general]"  name=individual_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

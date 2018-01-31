@@ -1,0 +1,33 @@
+﻿$PBExportHeader$ds_t5_trustee_history_recipient_old.srd
+$PBExportComments$DataStore for T5007_TRUSTEE_HISTORY table with t5007_recipient_no that is about to be archived.
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=taxation_year dbname="T5007_TRUSTEE_HISTORY.taxation_year" )
+ column=(type=long update=yes updatewhereclause=yes name=t5007_recipient_no dbname="T5007_TRUSTEE_HISTORY.t5007_recipient_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="T5007_TRUSTEE_HISTORY.claim_no" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_benefit_amount dbname="T5007_TRUSTEE_HISTORY.total_benefit_amount" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=trustee_individual_no dbname="T5007_TRUSTEE_HISTORY.trustee_individual_no" )
+ column=(type=char(60) update=yes updatewhereclause=yes name=comment dbname="T5007_TRUSTEE_HISTORY.comment" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="T5007_TRUSTEE_HISTORY.create_date" )
+ retrieve="  SELECT taxation_year,   
+         t5007_recipient_no,   
+         claim_no,   
+         total_benefit_amount,   
+         trustee_individual_no,   
+         comment,   
+         create_date  
+    FROM T5007_TRUSTEE_HISTORY  
+   WHERE ( taxation_year = :li_year ) AND  
+         ( t5007_recipient_no = :ll_recipient )    
+" update="T5007_TRUSTEE_HISTORY" updatewhere=1 updatekeyinplace=yes arguments=(("li_year", number),("ll_recipient", number)) )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="5" y="4" height="76" width="402" format="[general]"  name=taxation_year edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="0" x="434" y="4" height="76" width="567" format="[general]"  name=t5007_recipient_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="0" x="1029" y="4" height="76" width="297" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="0" x="1353" y="4" height="76" width="631" format="[general]"  name=total_benefit_amount edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=50 border="0" color="0" x="2016" y="4" height="76" width="686" format="[general]"  name=trustee_individual_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2715" y="4" height="76" width="370" format="[general]"  name=comment edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="3104" y="4" height="76" width="517" format="[shortdate] [time]"  name=create_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

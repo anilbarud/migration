@@ -1,0 +1,55 @@
+﻿$PBExportHeader$d_benefit_calculation_deductions.srd
+$PBExportComments$Maintain Benefit Calculation - Datawindow used to display and maintain regular deduction information
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="-1" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=612 color="-1" )
+table(column=(type=number update=yes updatewhereclause=yes key=yes name=claim_no dbname="BENEFIT_CALC_DEDUCTION.claim_no" initial="null" )
+ column=(type=number update=yes updatewhereclause=yes key=yes name=benefit_calculation_no dbname="BENEFIT_CALC_DEDUCTION.benefit_calculation_no" initial="null" )
+ column=(type=number update=yes updatewhereclause=yes key=yes name=deduction_no dbname="BENEFIT_CALC_DEDUCTION.deduction_no" initial="null" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=benefit_calc_deduction_code dbname="BENEFIT_CALC_DEDUCTION.benefit_calc_deduction_code" initial="PPD" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=deduction_amount dbname="BENEFIT_CALC_DEDUCTION.deduction_amount" initial="0" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=comment dbname="BENEFIT_CALC_DEDUCTION.comment" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="BENEFIT_CALC_DEDUCTION.timestamp" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=deduction_earn_freq_code dbname="BENEFIT_CALC_DEDUCTION.deduction_earn_freq_code" initial="W" values="Weekly	W/Bi-Weekly	B/Monthly	M/Semi-Monthly	S/Annually	A/" )
+ column=(type=number updatewhereclause=yes name=deduction_freq_pay dbname="compute_0009" )
+ column=(type=char(10) updatewhereclause=no name=added_for_rtw dbname="compute_0010" )
+ retrieve="SELECT		claim_no,
+ 							benefit_calculation_no,
+							deduction_no,
+							benefit_calc_deduction_code,
+							deduction_amount,
+							comment,
+							timestamp,
+							deduction_earn_freq_code,
+							0,
+							''
+			FROM			BENEFIT_CALC_DEDUCTION
+			WHERE		claim_no = :al_claim_no
+			AND			benefit_calculation_no = :al_benefit_calculation_no " update="BENEFIT_CALC_DEDUCTION" updatewhere=0 updatekeyinplace=yes arguments=(("al_claim_no", number),("al_benefit_calculation_no", number)) )
+text(band=detail alignment="0" text="Deduction Type:" border="0" color="0" x="14" y="172" height="60" width="411" html.valueishtml="0"  name=benefit_calc_deduction_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Frequency:" border="0" color="0" x="14" y="252" height="64" width="283" html.valueishtml="0"  name=deduction_earn_freq_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Deduction Amount:" border="0" color="0" x="14" y="332" height="64" width="489" html.valueishtml="0"  name=deduction_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Deduction Freq Amount:" border="0" color="0" x="14" y="408" height="60" width="617" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="0" x="690" y="168" height="64" width="558" format="[general]" html.valueishtml="0"  name=benefit_calc_deduction_code visible="1" dddw.name=dddw_benefit_calc_deduction_type dddw.displaycolumn=benefit_calc_deduction_desc dddw.datacolumn=benefit_calc_deduction_code dddw.percentwidth=250 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.required=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=20 border="5" color="0" x="690" y="252" height="64" width="334" format="[general]" html.valueishtml="0"  name=deduction_earn_freq_code visible="1" edit.name="ddlb_earnings_frequency" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.required=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="1" tabsequence=30 border="5" color="0" x="690" y="332" height="64" width="334" format="[general]" html.valueishtml="0"  name=deduction_amount visible="1" editmask.mask="#######.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="690" y="408" height="64" width="334" format="$#,##0.00" html.valueishtml="0"  name=deduction_freq_pay visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1042" y="76" height="64" width="64" format="###" html.valueishtml="0"  name=deduction_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="of" border="0" color="0" x="1120" y="76" height="60" width="50" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression="rowcount()"border="0" color="0" x="1179" y="76" height="64" width="64" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Total Regular Deductions:" border="0" color="0" x="14" y="536" height="60" width="663" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression="sum( deduction_freq_pay  for all)"border="0" color="0" x="690" y="536" height="68" width="334" format="$#,##0.00" html.valueishtml="0"  name=sum_deduction_freq_pay visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=40 border="0" color="33554432" x="1815" y="476" height="76" width="439" html.valueishtml="0"  name=added_for_rtw visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

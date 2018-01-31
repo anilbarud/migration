@@ -1,0 +1,59 @@
+﻿$PBExportHeader$f_do_enhanced_logging.srf
+global type f_do_enhanced_logging from function_object
+end type
+
+forward prototypes
+global function boolean f_do_enhanced_logging (string as_control_character, string as_user_ids)
+end prototypes
+
+global function boolean f_do_enhanced_logging (string as_control_character, string as_user_ids);STRING 				ls_key_values[]		
+INTEGER 				li_keycounter, li_start_pos, li_counter
+	
+	
+li_keycounter 	= 1
+li_start_pos 		= 1
+			
+//BREAK OUT THE USERIDS
+FOR li_counter = 1 TO LEN(as_user_ids)
+				
+	IF mid(as_user_ids, li_counter, 1) = as_control_character THEN 
+						
+		ls_key_values[li_keycounter] = mid(as_user_ids, li_start_pos, li_counter - li_start_pos)
+					
+		li_keycounter ++
+		li_start_pos = li_counter + 1
+						
+	ELSE
+						
+		// GRAB THE USERID AT THE END
+		IF li_counter = LEN(as_user_ids) THEN 
+							
+			ls_key_values[li_keycounter] = RIGHT(as_user_ids , li_counter - (li_start_pos - 1))
+						
+			//Just incase the ini file has an added control character
+			IF right (ls_key_values[li_keycounter], 1  )  = as_control_character  THEN 
+				ls_key_values[li_keycounter] = LEFT(ls_key_values[li_keycounter], LEN(	ls_key_values[li_keycounter])-1)
+			END IF 						
+		END IF 
+	END IF 	
+NEXT
+		
+//CHECK THE LIST OF USER IDS FOR 
+IF  upperbound (ls_key_values[]) > 0 THEN 
+			
+//	ib_additional_logging = FALSE
+			
+	FOR  li_counter = 1 to upperbound (ls_key_values)
+		IF  vgst_user_profile.user_id = ls_key_values[li_counter] THEN 
+			RETURN TRUE
+			EXIT
+		END IF 
+	NEXT
+ELSE
+		//DO NOTHING 		
+END IF 
+
+
+RETURN FALSE 
+end function
+

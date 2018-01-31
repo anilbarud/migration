@@ -1,0 +1,62 @@
+﻿$PBExportHeader$d_transfer_from_unapplied.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_operation_no dbname="cost_alloc_operation_no" )
+ column=(type=char(1) updatewhereclause=yes name=txn_sub_type_code dbname="txn_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=max_transfer_txn_no dbname="max_transfer_txn_no" )
+ retrieve="SELECT	a.claim_no,
+			a.payment_no,
+			b.payment_type_code,
+			b.payment_sub_type_code,
+			IsNull(d.cost_alloc_no,0) 'cost_alloc_no',
+			IsNull(d.cost_alloc_operation_no,0) 'cost_alloc_operation_no',
+			c.txn_sub_type_code,
+			Max(c.txn_no) 'max_transfer_txn_no'
+FROM		APPLIED_CLAIM_TXN					a
+			left outer join
+			COST_OF_CLAIMS_ALLOCATED	d
+			on a.txn_no = d.txn_no,
+			PAYMENT								b,
+			UNAPPLIED_CLAIM_TXN				c
+WHERE	a.txn_no				= c.related_txn_no
+AND		a.payment_no		= b.payment_no
+AND		c.txn_type_code	= 'T'
+AND		EXISTS (	SELECT	*
+						FROM		UNAPPLIED_CLAIM_TXN d
+						WHERE	d.related_txn_no	= c.related_txn_no
+						AND		d.txn_no				= :al_txn_no )
+GROUP BY
+			a.claim_no,
+			a.payment_no,
+			b.payment_type_code,
+			b.payment_sub_type_code,
+			d.cost_alloc_no,
+			d.cost_alloc_operation_no,
+			c.txn_sub_type_code" arguments=(("al_txn_no", number)) )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="33554432" x="9" y="0" height="76" width="229" html.valueishtml="0"  name=claim_no visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Claim No" border="0" color="33554432" x="5" y="4" height="60" width="233" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="33554432" x="251" y="0" height="76" width="320" html.valueishtml="0"  name=payment_no visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Payment No" border="0" color="33554432" x="247" y="4" height="60" width="325" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="33554432" x="585" y="0" height="76" width="325" html.valueishtml="0"  name=payment_type_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Payment Type Code" border="0" color="33554432" x="581" y="4" height="60" width="329" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="33554432" x="923" y="0" height="76" width="453" html.valueishtml="0"  name=payment_sub_type_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Payment Sub Type Code" border="0" color="33554432" x="919" y="4" height="60" width="457" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=0 border="0" color="33554432" x="1390" y="0" height="76" width="306" html.valueishtml="0"  name=cost_alloc_no visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Cost Alloc No" border="0" color="33554432" x="1385" y="4" height="60" width="311" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=0 border="0" color="33554432" x="1710" y="0" height="76" width="421" html.valueishtml="0"  name=cost_alloc_operation_no visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Cost Alloc Operation No" border="0" color="33554432" x="1705" y="4" height="60" width="425" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=0 border="0" color="33554432" x="2144" y="0" height="76" width="242" html.valueishtml="0"  name=txn_sub_type_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Txn Sub Type Code" border="0" color="33554432" x="2139" y="4" height="60" width="247" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=0 border="0" color="33554432" x="2400" y="0" height="76" width="293" html.valueishtml="0"  name=max_transfer_txn_no visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Max Transfer Txn No" border="0" color="33554432" x="2395" y="4" height="60" width="297" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

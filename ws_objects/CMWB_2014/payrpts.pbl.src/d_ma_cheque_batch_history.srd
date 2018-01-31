@@ -1,0 +1,36 @@
+﻿$PBExportHeader$d_ma_cheque_batch_history.srd
+$PBExportComments$Shows all Medical Aid Cheque Batch History entries
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=69 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=cheque_batch_no dbname="cheque_batch_no" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=cheque_amount dbname="cheque_amount" )
+ column=(type=char(40) updatewhereclause=yes name=name_on_cheque dbname="name_on_cheque" )
+ column=(type=datetime updatewhereclause=yes name=cheque_date dbname="cheque_date" )
+ retrieve="  SELECT CH.cheque_batch_no,   
+         CH.cheque_no,   
+         CH.cheque_amount,   
+         CH.name_on_cheque,   
+         CH.cheque_date  
+    FROM CHEQUE_BATCH_HISTORY CBH,   
+         CHEQUE_HEADER CH  
+   WHERE CBH.cheque_batch_no = CH.cheque_batch_no  AND  
+         CBH.benefit_class_code = CH.benefit_class_code  AND   
+         CH.benefit_class_code = ~"MA~" AND  
+         (( CH.payment_method_code = ~"A~"  AND  
+         CH.printed_date IS NOT NULL ) OR 
+		   CH.payment_method_code = ~"H~" ) AND  
+         CH.replacement_cheque_no = 0    
+ORDER BY CH.cheque_batch_no ASC,   
+         CH.cheque_no ASC   
+" )
+text(band=header alignment="0" text="Cheque #"border="4" color="0" x="23" y="8" height="61" width="316"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name on Cheque"border="4" color="0" x="357" y="8" height="61" width="618"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cheque Amount"border="4" color="0" x="997" y="8" height="61" width="449"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="23" y="4" height="61" width="316" format="[general]"  name=cheque_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="357" y="4" height="61" width="618" format="[general]"  name=name_on_cheque edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="997" y="4" height="61" width="449" format="$#,##0.00;($#,##0.00)"  name=cheque_amount edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

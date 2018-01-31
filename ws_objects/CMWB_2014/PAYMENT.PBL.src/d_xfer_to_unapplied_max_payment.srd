@@ -1,0 +1,28 @@
+﻿$PBExportHeader$d_xfer_to_unapplied_max_payment.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no grid.lines=0 )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=max_transfer_payment_no dbname="max_transfer_payment_no" )
+ retrieve="SELECT	top 1 a.claim_no,
+			Max(a.payment_no) 'max_transfer_payment_no'
+FROM		UNAPPLIED_CLAIM_TXN	a
+WHERE	a.txn_type_code	= 'T'
+AND	EXISTS (	SELECT	*
+					FROM		APPLIED_CLAIM_TXN	b,
+								PAYMENT				c
+					WHERE	b.txn_no			= a.related_txn_no
+					AND		b.payment_no	= c.payment_no
+					AND		b.txn_no			= :al_txn_no )
+GROUP BY
+			a.claim_no,
+			a.txn_amount
+ORDER BY
+			Max(a.payment_no) desc " arguments=(("al_txn_no", number)) )
+text(band=header alignment="0" text="Max Transfer Payment No" border="0" color="33554432" x="347" y="4" height="64" width="841" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="9" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="347" y="8" height="64" width="841" format="[general]" html.valueishtml="0"  name=max_transfer_payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

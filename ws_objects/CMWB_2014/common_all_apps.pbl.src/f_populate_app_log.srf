@@ -1,0 +1,35 @@
+﻿$PBExportHeader$f_populate_app_log.srf
+global type f_populate_app_log from function_object
+end type
+
+forward prototypes
+global subroutine f_populate_app_log (string as_appname, long al_component_category_code, string as_component_name, string as_message_text)
+end prototypes
+
+global subroutine f_populate_app_log (string as_appname, long al_component_category_code, string as_component_name, string as_message_text);INTEGER li_count
+
+
+SELECT top 1 COUNT(*)
+INTO   :li_count
+FROM   sysobjects
+WHERE  DB_ID('AREA51') IS NOT NULL
+USING SQLCA;
+SQLCA.nf_handle_error('f_populate_app_log','f_populate_app_log','SELECT COUNT(*) FROM sysobjects WHERE DB_ID(AREA51) IS NOT NULL')
+
+
+IF li_count > 0 THEN
+	
+	declare lsp_pop_APP_COMPONENT_RUN_LOG procedure for sp_populate_APP_COMPONENT_RUN_LOG
+	@appname = :as_appname,
+	@component_category_code = :al_component_category_code,
+	@component_name = :as_component_name,
+	@message_text = :as_message_text;
+	SQLCA.nf_handle_error('f_populate_app_log','f_populate_app_log','declare lsp_pop_APP_COMPONENT_RUN_LOG')
+	
+	execute lsp_pop_APP_COMPONENT_RUN_LOG;
+	SQLCA.nf_handle_error('f_populate_app_log','f_populate_app_log','execute lsp_pop_APP_COMPONENT_RUN_LOG')
+	
+END IF
+
+end subroutine
+

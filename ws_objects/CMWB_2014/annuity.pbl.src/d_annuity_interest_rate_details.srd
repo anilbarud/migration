@@ -1,0 +1,41 @@
+﻿$PBExportHeader$d_annuity_interest_rate_details.srd
+$PBExportComments$Data Windows used in the main data entry screen for the Annuity Interest Process - Annuity_Interest
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="16777215" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=annuity_interest_rate_no dbname="annuity_interest_rate_no" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes key=yes name=annuity_interest_rate dbname="annuity_interest_rate" )
+ column=(type=long update=yes updatewhereclause=yes name=year dbname="year" )
+ column=(type=ulong update=yes updatewhereclause=yes name=quarter_no dbname="quarter_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=interest_applied_date dbname="interest_applied_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="SELECT annuity_interest_rate_no
+      ,annuity_interest_rate
+      ,year
+      ,quarter_no
+      ,interest_applied_date
+      ,active_flag
+  FROM Annuity_Interest_Rate
+where active_flag = 'Y'" update="Annuity_Interest_Rate" updatewhere=1 updatekeyinplace=yes  sort="year D quarter_no D " )
+text(band=header alignment="2" text="Interest Rate" border="6" color="33554432" x="809" y="8" height="60" width="503" html.valueishtml="0"  name=annuity_interest_rate_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Quarter" border="6" color="33554432" x="334" y="8" height="60" width="457" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Year" border="6" color="33554432" x="5" y="8" height="60" width="311" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Interest Applied Date" border="6" color="33554432" x="1335" y="8" height="60" width="933" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="1339" y="8" height="56" width="923" format="yyyy-mm-dd" html.valueishtml="0"  name=interest_applied_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="814" y="8" height="56" width="489" format="[general]" html.valueishtml="0"  name=annuity_interest_rate visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="0" x="338" y="8" height="56" width="448" format="[general]" html.valueishtml="0"  name=quarter_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="0" x="14" y="8" height="56" width="293" format="[general]" html.valueishtml="0"  name=year visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

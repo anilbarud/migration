@@ -1,0 +1,172 @@
+﻿$PBExportHeader$d_manual_summary_2.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=68 color="67108864" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=from_txn_no dbname="from_txn_no" )
+ column=(type=long updatewhereclause=yes name=from_claim_no dbname="from_claim_no" )
+ column=(type=long updatewhereclause=yes name=from_payment_no dbname="from_payment_no" )
+ column=(type=char(2) updatewhereclause=yes name=from_payment_type_code dbname="from_payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=from_payment_sub_type_code dbname="from_payment_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=from_cost_alloc_no dbname="from_cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=from_cost_alloc_operation_no dbname="from_cost_alloc_operation_no" )
+ column=(type=char(1) updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(1) updatewhereclause=yes name=new_txn_type_code dbname="new_txn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=new_txn_sub_type_code dbname="new_txn_sub_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=long updatewhereclause=yes name=to_txn_no dbname="to_txn_no" )
+ column=(type=long updatewhereclause=yes name=to_claim_no dbname="to_claim_no" )
+ column=(type=long updatewhereclause=yes name=to_payment_no dbname="to_payment_no" )
+ column=(type=char(2) updatewhereclause=yes name=to_payment_type_code dbname="to_payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=to_payment_sub_type_code dbname="to_payment_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=to_cost_alloc_no dbname="to_cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=to_cost_alloc_operation_no dbname="to_cost_alloc_operation_no" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(40) updatewhereclause=yes name=explanation dbname="explanation" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=long updatewhereclause=yes name=direct_deposit_xmit_no dbname="direct_deposit_xmit_no" )
+ column=(type=datetime updatewhereclause=yes name=cheque_deposit_date dbname="cheque_deposit_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=from_paid_days_lost dbname="from_paid_days_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=from_paid_hours_lost dbname="from_paid_hours_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=to_paid_days_lost dbname="to_paid_days_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=to_paid_hours_lost dbname="to_paid_hours_lost" )
+ column=(type=char(1) updatewhereclause=yes name=from_payment_method_code dbname="from_payment_method_code" )
+ column=(type=char(1) updatewhereclause=yes name=to_payment_method_code dbname="to_payment_method_code" )
+ retrieve="SELECT  ACT.txn_no as from_txn_no,
+        ACT.claim_no                        as from_claim_no,
+        ACT.payment_no                      as from_payment_no,
+        P.payment_type_code		    as from_payment_type_code,
+        P.payment_sub_type_code	     	    as from_payment_sub_type_code,
+        COC.cost_alloc_no                   as from_cost_alloc_no,
+        COC.cost_alloc_operation_no         as from_cost_alloc_operation_no,                                       
+        txn_type_code,
+        ACT.processed_date,
+        CASE
+           WHEN txn_type_code in('4','5') Then 'J'
+           WHEN txn_type_code = '2'       Then 'T'
+        END as new_txn_type_code,
+        CASE
+				WHEN txn_type_code = '4'		Then '5'
+				WHEN txn_type_code = '5' and txn_amount > 0 THEN '3'
+				ELSE ''
+		  END  as new_txn_sub_type_code,
+        txn_amount,
+        0                                   as to_txn_no,
+        0                                   as to_claim_no,
+        0                                   as to_payment_no,
+        ''                                  as to_payment_type_code,
+        ''                                  as to_payment_sub_type_code,
+        0                                   as to_cost_alloc_no,
+        0                                   as to_cost_alloc_operation_no    ,
+        ACT.processed_date,
+	ACT.explanation,
+	ACT.cheque_no,
+        ACT.direct_deposit_xmit_no,
+        ACT.cheque_deposit_date,
+	P.paid_days_lost as from_paid_days_lost,
+        P.paid_hours_lost as from_paid_hours_lost,
+ 	0 as to_paid_days_lost,
+        0 as to_paid_hours_lost,
+	ACT.payment_method_code	as from_payment_method_code,
+	'' as to_payment_method_code
+FROM PAYMENT P 
+     INNER JOIN APPLIED_CLAIM_TXN ACT  ON P.payment_no = ACT.payment_no
+     INNER JOIN Module_Payment_Sub_Type M  ON M.payment_type_code = P.payment_type_code and M.payment_sub_type_code = P.payment_sub_type_code
+     INNER JOIN COST_OF_CLAIMS_ALLOCATED COC  ON COC.txn_no = ACT.txn_no
+ WHERE ACT.processed_date > :adt_processed_date
+  and (
+       ACT.txn_type_code in ('4','5') 
+   OR (ACT.txn_type_code ='2' and ACT.txn_amount < 0)
+      )
+    and ACT.claim_no = :al_claim_no
+    and M.payment_message_group_code = :as_payment_message_group_code
+    and M.module_code = '006'
+    and NOT EXISTS  (select * from NTR_MANUAL_TRANSFER_PAIR a WHERE a.from_txn_no = ACT.txn_no)
+UNION ALL
+SELECT  ACT_from.txn_no                     as from_txn_no,
+        ACT_from.claim_no                   as from_claim_no,
+        ACT_from.payment_no                 as from_payment_no,
+        P_from.payment_type_code            as from_payment_type_code,
+        P_from.payment_sub_type_code        as from_payment_sub_type_code,
+        COC_from.cost_alloc_no              as from_cost_alloc_no,
+        COC_from.cost_alloc_operation_no    as from_cost_alloc_operation_no,
+        ACT_from.txn_type_code,
+        ACT_from.processed_date,
+        MTP.new_txn_type_code                   as new_txn_type_code,
+        MTP.new_txn_sub_type_code               as new_txn_sub_type_code,
+        ACT_from.txn_amount,
+        ACT_to.txn_no                       as to_txn_no,
+        ACT_to.claim_no                     as to_claim_no,
+        ACT_to.payment_no                   as to_payment_no,
+        P_to.payment_type_code              as to_payment_type_code,
+        P_to.payment_sub_type_code          as to_payment_sub_type_code,
+        COC_to.cost_alloc_no                as to_cost_alloc_no,
+        COC_to.cost_alloc_operation_no      as to_cost_alloc_operation_no       ,
+        ACT_from.processed_date   ,
+			ACT_from.explanation,
+		  ACT_from.cheque_no,
+        ACT_from.direct_deposit_xmit_no,
+        ACT_from.cheque_deposit_date,
+			P_from.paid_days_lost							as from_paid_days_lost,
+         P_from.paid_hours_lost							as from_paid_hours_lost,
+ 			P_to.paid_days_lost								as to_paid_days_lost,
+         P_to.paid_hours_lost								as to_paid_hours_lost,
+			ACT_to.payment_method_code                as to_payment_method_code,
+			ACT_from.payment_method_code              as from_payment_method_code  
+FROM PAYMENT P_from 
+     INNER JOIN APPLIED_CLAIM_TXN ACT_from  ON P_from.payment_no = ACT_from.payment_no
+     LEFT OUTER JOIN COST_OF_CLAIMS_ALLOCATED COC_from  ON ACT_from.txn_no = COC_from.txn_no
+     INNER JOIN Module_Payment_Sub_Type M  ON M.payment_type_code = P_from.payment_type_code and M.payment_sub_type_code = P_from.payment_sub_type_code
+     INNER JOIN NTR_MANUAL_TRANSFER_PAIR MTP  ON MTP.from_txn_no = ACT_from.txn_no
+     INNER JOIN APPLIED_CLAIM_TXN ACT_to  ON MTP.to_txn_no = ACT_to.txn_no
+     INNER JOIN PAYMENT P_to  ON P_to.payment_no = ACT_to.payment_no
+     LEFT OUTER JOIN COST_OF_CLAIMS_ALLOCATED COC_to  ON ACT_to.txn_no = COC_to.txn_no
+ WHERE ACT_from.txn_type_code = '2'
+    and ACT_from.txn_amount < 0
+    and ACT_from.processed_date > :adt_processed_date
+    and ACT_from.claim_no = :al_claim_no
+    and M.payment_message_group_code = :as_payment_message_group_code
+    and M.module_code = '006'
+" arguments=(("adt_processed_date", datetime),("al_claim_no", number),("as_payment_message_group_code", string))  sort="processed_date D from_payment_no D " )
+text(band=header alignment="2" text="" border="6" color="33554432" x="9" y="4" height="60" width="110" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Pay Typ" border="6" color="33554432" x="137" y="4" height="60" width="274" html.valueishtml="0"  name=c_payment_type_code_t  tag="Payment type / sub type" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Claim" border="6" color="33554432" x="430" y="4" height="60" width="315" html.valueishtml="0"  name=from_claim_no_t  tag="Claim number" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Cost Alloc" border="6" color="33554432" x="763" y="4" height="60" width="475" html.valueishtml="0"  name=c_from_cost_alloc_no_t  tag="Cost allocation employer / operation" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Txn Typ" border="6" color="33554432" x="1257" y="4" height="60" width="297" html.valueishtml="0"  name=new_txn_type_code_t  tag="Transaction type" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="1" text=" Amount" border="6" color="33554432" x="1573" y="4" height="60" width="384" html.valueishtml="0"  name=txn_amount_t  tag="Transaction amount" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Days" border="6" color="33554432" x="1975" y="4" height="60" width="215" html.valueishtml="0"  name=t_7  tag="Transaction amount" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text="" border="6" color="0" x="2446" y="4" height="60" width="87" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" To Claim" border="6" color="33554432" x="2921" y="4" height="60" width="329" html.valueishtml="0"  name=to_claim_no_t  tag="Transfer to claim number" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Processed" border="6" color="33554432" x="3758" y="4" height="60" width="384" html.valueishtml="0"  name=t_processed_date visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" To Cost Alloc" border="6" color="33554432" x="3269" y="4" height="60" width="475" html.valueishtml="0"  name=c_to_cost_alloc_no_t  tag="Transfer to cost allocation employer / operation" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" To Pay Typ" border="6" color="33554432" x="2551" y="4" height="60" width="352" html.valueishtml="0"  name=c_to_payment_type_code_t  tag="Transfer to payment type" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text="Payment #" border="6" color="33554432" x="4160" y="4" height="60" width="384" html.valueishtml="0"  name=from_payment_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Hours" border="6" color="33554432" x="2208" y="4" height="60" width="219" html.valueishtml="0"  name=t_8  tag="Transaction amount" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Days" border="6" color="33554432" x="4562" y="4" height="60" width="206" html.valueishtml="0"  name=t_9  tag="Transaction amount" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Hours" border="6" color="33554432" x="4786" y="4" height="60" width="206" html.valueishtml="0"  name=t_10  tag="Transaction amount" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="2" text="" border="6" color="33554432" x="9" y="4" height="64" width="110" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="2" text="u" border="0" color="33554432" x="23" y="8" height="60" width="82" html.valueishtml="0"  name=t_6 visible="1~tif( currentRow() = GetRow(),1,0)"  font.face="Wingdings 3" font.height="-10" font.weight="400"  font.family="1" font.pitch="2" font.charset="2" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" from_payment_type_code + ' / ' + from_payment_sub_type_code  "border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="137" y="0" height="64" width="274" format="[GENERAL]" html.valueishtml="0"  name=c_payment_type_code visible="1"  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="430" y="0" height="64" width="315" format="[general]" html.valueishtml="0"  name=from_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" from_cost_alloc_no + ' / ' +  from_cost_alloc_operation_no "border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="763" y="0" height="64" width="475" format="[GENERAL]" html.valueishtml="0"  name=c_from_cost_alloc_no visible="1"  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="1257" y="0" height="64" width="297" format="[general]" html.valueishtml="0"  name=txn_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="1573" y="0" height="64" width="384" format="[currency]" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="1" tabsequence=32766 border="0" color="33554432" x="1975" y="0" height="64" width="219" format="#,##0.00" html.valueishtml="0"  name=from_paid_days_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="â" border="0" color="8421376~tif( GetRow() <> RowCount(),268435456,8421376)" x="2446" y="0" height="68" width="87" html.valueishtml="0"  name=t_1 visible="1~tIf( txn_type_code = '2',1,0)"  font.face="Wingdings 3" font.height="-11" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="1" font.pitch="2" font.charset="2" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="2921" y="0" height="64" width="329" format="[general]" html.valueishtml="0"  name=to_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" to_cost_alloc_no + ' / ' +  to_cost_alloc_operation_no "border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="3269" y="0" height="64" width="475" format="[GENERAL]" html.valueishtml="0"  name=c_to_cost_alloc_no visible="1"  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" to_payment_type_code + IF( to_payment_sub_type_code  <> '',' / ' +  to_payment_sub_type_code ,'')"border="0" color="33554432~tif( GetRow() <> RowCount(),268435456,0)" x="2551" y="0" height="64" width="352" format="[GENERAL]" html.valueishtml="0"  name=c_to_payment_type_code visible="1"  font.face="Arial" font.height="-9" font.weight="700~tif( GetRow() = RowCount(),700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=26 alignment="1" tabsequence=32766 border="0" color="33554432" x="2226" y="0" height="64" width="197" format="#,##0.00" html.valueishtml="0"  name=from_paid_hours_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=27 alignment="1" tabsequence=32766 border="0" color="33554432" x="4562" y="0" height="60" width="206" format="#,##0.00" html.valueishtml="0"  name=to_paid_days_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=28 alignment="1" tabsequence=32766 border="0" color="33554432" x="4795" y="0" height="60" width="197" format="#,##0.00" html.valueishtml="0"  name=to_paid_hours_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="3758" y="0" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="4160" y="0" height="64" width="384" format="[general]" html.valueishtml="0"  name=from_payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=footer alignment="0" expression="Describe( 't_1.color')"border="0" color="33554432" x="41" y="44" height="60" width="512" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="text" border="0" color="268435456" x="594" y="44" height="60" width="800" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=29 alignment="0" tabsequence=0 border="0" color="33554432" x="4992" y="0" height="60" width="27" html.valueishtml="0"  name=from_payment_method_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=30 alignment="0" tabsequence=0 border="0" color="33554432" x="5019" y="0" height="60" width="82" html.valueishtml="0"  name=to_payment_method_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

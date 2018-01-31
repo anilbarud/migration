@@ -1,0 +1,36 @@
+﻿$PBExportHeader$d_indexing_paid_documents.srd
+$PBExportComments$Used in indexing to record paid documents
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=88 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=number update=yes updatewhereclause=yes key=yes name=doc_id dbname="PAYMENT_DOCUMENT.doc_id" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=paid_status_code dbname="PAYMENT_DOCUMENT.paid_status_code" initial="O" )
+ column=(type=number update=yes updatewhereclause=yes key=yes name=payment_no dbname="PAYMENT_DOCUMENT.payment_no" initial="0" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=paid_status_explanation_code dbname="PAYMENT_DOCUMENT.paid_status_explanation_code" initial="05" )
+ column=(type=char(1) updatewhereclause=yes name=payment_zeroed_flag dbname="PAYMENT.zeroed_flag" )
+ retrieve="SELECT PAYMENT_DOCUMENT.doc_id , 
+       PAYMENT_DOCUMENT.paid_status_code , 
+       PAYMENT_DOCUMENT.payment_no , 
+       PAYMENT_DOCUMENT.paid_status_explanation_code , 
+       PAYMENT.zeroed_flag 
+FROM  PAYMENT_DOCUMENT 
+    LEFT OUTER JOIN  PAYMENT  ON PAYMENT_DOCUMENT.payment_no = PAYMENT.payment_no
+ WHERE PAYMENT_DOCUMENT.doc_id = :al_docid " update="PAYMENT_DOCUMENT" updatewhere=0 updatekeyinplace=yes arguments=(("al_docid", number)) )
+text(band=header alignment="0" text="Paid Documents" border="0" color="0" x="37" y="16" height="60" width="425" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="338" y="4" height="60" width="55" format="[general]" html.valueishtml="0"  name=paid_status_code visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="5" y="4" height="60" width="329" format="[general]" html.valueishtml="0"  name=doc_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="407" y="4" height="56" width="87" format="[general]" html.valueishtml="0"  name=paid_status_explanation_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="517" y="4" height="60" width="27" format="[general]" html.valueishtml="0"  name=payment_zeroed_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

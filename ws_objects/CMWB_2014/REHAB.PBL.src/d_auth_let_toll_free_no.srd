@@ -1,0 +1,11 @@
+﻿$PBExportHeader$d_auth_let_toll_free_no.srd
+$PBExportComments$gets & stores toll_free_phone_no to be passed to auto. authorization letter
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(14) updatewhereclause=yes name=toll_free_telephone_no dbname="Admin_Region.toll_free_telephone_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Admin_Region~" )  TABLE(NAME=~"User_Profile~" ) COLUMN(NAME=~"Admin_Region.toll_free_telephone_no~")    JOIN (LEFT=~"Admin_Region.admin_region_code~"    OP =~"=~"RIGHT=~"User_Profile.default_admin_region_code~" )WHERE(    EXP1 =~"User_Profile.user_id~"   OP =~"=~"    EXP2 =~":user_id~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"User_Profile.active_flag~"   OP =~"=~"    EXP2 =~"'Y'~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"Admin_Region.active_flag~"   OP =~"=~"    EXP2 =~"'Y'~" ) ) ARG(NAME = ~"user_id~" TYPE = string) " arguments=(("user_id", string)) )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="33554432" x="1" y="8" height="77" width="462"  name=toll_free_telephone_no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

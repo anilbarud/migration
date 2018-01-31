@@ -1,0 +1,22 @@
+﻿$PBExportHeader$d_rxcov_pending_ecoverage.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=184 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ retrieve="  SELECT ACCIDENT.claim_no
+    FROM ACCIDENT  
+   WHERE ACCIDENT.claim_no = :ar_claim_no
+	AND   ACCIDENT.nature_of_injury_code IS NOT NULL" arguments=(("ar_claim_no", number)) )
+line(band=header x1="9" y1="168" x2="3186" y2="168"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Eligibility" border="0" color="33554432" x="14" y="8" height="64" width="283" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Start Date" border="0" color="33554432" x="14" y="92" height="64" width="347" html.valueishtml="0"  name=t_eligibility_start visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="End Date" border="0" color="33554432" x="425" y="92" height="64" width="315" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Comment" border="0" color="33554432" x="850" y="96" height="64" width="517" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="" border="0" color="33554432" x="14" y="8" height="64" width="384" html.valueishtml="0"  name=st_eligibility_start_date visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="" border="0" color="33554432" x="425" y="8" height="64" width="384" html.valueishtml="0"  name=st_eligibility_end_date visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Pending " border="0" color="33554432" x="850" y="8" height="64" width="384" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

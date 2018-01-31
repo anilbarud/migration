@@ -1,0 +1,37 @@
+﻿$PBExportHeader$d_implementation_dates.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(80) updatewhereclause=yes name=application_name dbname="application_name" )
+ column=(type=char(100) updatewhereclause=yes name=parameter_desc_e dbname="parameter_desc_e" )
+ column=(type=datetime updatewhereclause=yes name=implementation_date dbname="implementation_date" )
+ column=(type=datetime updatewhereclause=yes name=effective_date dbname="effective_date" )
+ retrieve="SELECT application_name,
+       parameter_desc_e,
+       implementation_date,
+       effective_date
+FROM   Effective_Parameter
+WHERE  application_name = :as_application_name
+" arguments=(("as_application_name", string)) )
+text(band=header alignment="2" text="Application Name" border="0" color="33554432" x="14" y="8" height="56" width="1129" html.valueishtml="0"  name=application_name_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="68" width="1129" format="[general]" html.valueishtml="0"  name=application_name visible="1" edit.limit=80 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Parameter Desc E" border="0" color="33554432" x="1157" y="8" height="56" width="2309" html.valueishtml="0"  name=parameter_desc_e_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Implementation Date" border="0" color="33554432" x="3479" y="8" height="56" width="521" html.valueishtml="0"  name=implementation_date_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Effective Date" border="0" color="33554432" x="4009" y="8" height="56" width="475" html.valueishtml="0"  name=effective_date_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1157" y="8" height="68" width="2309" format="[general]" html.valueishtml="0"  name=parameter_desc_e visible="1" edit.limit=100 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="3479" y="8" height="68" width="521" format="[shortdate] [time]" html.valueishtml="0"  name=implementation_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="33554432" x="4014" y="8" height="68" width="471" html.valueishtml="0"  name=effective_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,552 @@
+﻿$PBExportHeader$m_annuity.srm
+forward
+global type m_annuity from menu
+end type
+type m_file from menu within m_annuity
+end type
+type m_print from menu within m_file
+end type
+type m_printsetup from menu within m_file
+end type
+type m_report from menu within m_file
+end type
+type m_close from menu within m_file
+end type
+type m_file from menu within m_annuity
+m_print m_print
+m_printsetup m_printsetup
+m_report m_report
+m_close m_close
+end type
+type m_docmanagement from menu within m_annuity
+end type
+type m_doclist from menu within m_docmanagement
+end type
+type m_docmanagement from menu within m_annuity
+m_doclist m_doclist
+end type
+type m_eventlog from menu within m_annuity
+end type
+type m_eventlog0 from menu within m_eventlog
+end type
+type m_eventlog from menu within m_annuity
+m_eventlog0 m_eventlog0
+end type
+global type m_annuity from menu
+m_file m_file
+m_docmanagement m_docmanagement
+m_eventlog m_eventlog
+end type
+end forward
+
+global type m_annuity from menu
+m_file m_file
+m_docmanagement m_docmanagement
+m_eventlog m_eventlog
+end type
+global m_annuity m_annuity
+
+type variables
+
+end variables
+
+forward prototypes
+public subroutine mf_open_doclist (window aw_window)
+public subroutine mf_open_event_log (window aw_window)
+end prototypes
+
+public subroutine mf_open_doclist (window aw_window);INTEGER                 li_rtn
+LONG							ll_claim_no, ll_individual_no
+STRING						ls_claim_role_code, ls_open_window_name, ls_module_code, ls_message
+S_WINDOW_MESSAGE			lstr_message
+WINDOW						lw_to_open
+N_COMMON_ANNUITY        lnv_common_annuity
+ULONG                   lul_handle
+
+
+ll_claim_no = aw_window.dynamic function wf_get_claim_no()
+
+IF ll_claim_no = -1 THEN
+	// problem
+	RETURN
+END IF
+
+ll_individual_no = aw_window.dynamic function wf_get_individual_no()
+ls_claim_role_code = aw_window.dynamic function wf_get_claim_role_code()
+ls_module_code = aw_window.dynamic function wf_get_module_code()
+
+lnv_common_annuity = Create n_common_annuity
+li_rtn = lnv_common_annuity.nf_check_individual_exists(ll_individual_no)
+// if no individual, then do not open module.
+IF li_rtn = 0 THEN
+	ls_message = 'The individual number that you are working on no longer exists.'&
+				+'~r~nThe individual may have been merged. The document list will not be opened.'
+	IF aw_window.ClassName() = 'w_confirm_annuity_eligibility' THEN
+		IF ls_claim_role_code = 'C' THEN
+			ls_message = ls_message + '~r~nThe "All Injured Workers" list will be retrieved.'
+			aw_window.post dynamic function wf_retrieve_all_injured_workers()
+		ELSEIF ls_claim_role_code = 'SS' THEN
+			ls_message = ls_message + '~r~nThe "All Surviving Spouses" list will be retrieved.'
+			aw_window.post dynamic function wf_retrieve_all_surviving_spouses()
+		END IF		
+	ELSEIF aw_window.ClassName() = 'w_maintain_benefit_entitlement' THEN
+		ls_message = ls_message + '~r~nPlease close this module and the Confirm Annuity Eligibility module (if it is open).'
+	END IF
+	MessageBox('Individual Not Found',ls_message,Exclamation!)
+	RETURN
+END IF
+
+li_rtn = lnv_common_annuity.nf_check_for_open_window('w_individual_doclist','Individual Document List',lul_handle)
+IF li_rtn = 1 THEN
+	BringWindowToTop(lul_handle)
+	RETURN
+END IF
+
+SELECT	open_window_name
+INTO		:ls_open_window_name
+FROM		Checklist_Step_Type
+WHERE	checklist_step_type_code = '005'
+USING SQLCA;
+SQLCA.nf_handle_error('m_annuity_eligibility', 'embedded sql', 'select open_window_name...')
+
+// open - individual document list
+lstr_message.as_stringparm[1] = ls_claim_role_code
+lstr_message.as_stringparm[2] = ls_module_code
+lstr_message.as_stringparm[3] = 'Y'		//imaged_document_flag
+
+lstr_message.al_doubleparm[1] = ll_claim_no
+lstr_message.al_doubleparm[2] = ll_individual_no
+
+OpenWithParm(lw_to_open,lstr_message,ls_open_window_name)
+
+end subroutine
+
+public subroutine mf_open_event_log (window aw_window);DATE								ldt_null
+INTEGER                    li_rtn
+LONG								ll_individual_no
+s_window_message		      lstr_message
+STRING							ls_claim_role_code, ls_open_window_name, ls_message
+window							lw_to_open
+N_COMMON_ANNUITY           lnv_common_annuity
+ULONG                      lul_handle
+
+SetNull(ldt_null)
+
+ll_individual_no = aw_window.dynamic function wf_get_individual_no()
+IF ll_individual_no = 0 THEN
+	MessageBox('No Individual','You must have an individual selected in order to open the event log.',Exclamation!)
+	RETURN
+END IF
+
+ls_claim_role_code = aw_window.dynamic function wf_get_claim_role_code()
+
+lnv_common_annuity = Create n_common_annuity
+li_rtn = lnv_common_annuity.nf_check_individual_exists(ll_individual_no)
+// if no individual, then do not open module.
+IF li_rtn = 0 THEN
+	ls_message = 'The individual number that you are working on no longer exists.'&
+				+'~r~nThe individual may have been merged. The event log will not be opened.'
+	IF aw_window.ClassName() = 'w_confirm_annuity_eligibility' THEN
+		IF ls_claim_role_code = 'C' THEN
+			ls_message = ls_message + '~r~nThe "All Injured Workers" list will be retrieved.'
+			aw_window.post dynamic function wf_retrieve_all_injured_workers()
+		ELSEIF ls_claim_role_code = 'SS' THEN
+			ls_message = ls_message + '~r~nThe "All Surviving Spouses" list will be retrieved.'
+			aw_window.post dynamic function wf_retrieve_all_surviving_spouses()
+		END IF		
+	ELSEIF aw_window.ClassName() = 'w_maintain_benefit_entitlement' THEN
+		ls_message = ls_message + '~r~nPlease close this module and the Confirm Annuity Eligibility module (if it is open).'
+	END IF
+	MessageBox('Individual Not Found',ls_message,Exclamation!)
+	RETURN
+END IF
+
+
+// check that window is not already open
+li_rtn = lnv_common_annuity.nf_check_for_open_window('w_select_claims','Select Claim for Event Log',lul_handle)
+IF li_rtn = 1 THEN
+	BringWindowToTop(lul_handle)
+	RETURN
+END IF
+
+
+// open - select claims for event log - request merge individuals
+lstr_message.al_doubleparm[1] = 0 // claim_no - you will select this
+lstr_message.al_doubleparm[2] = ll_individual_no
+
+lstr_message.adt_dateparm[1] = ldt_null
+
+lstr_message.as_StringParm[1] = ls_claim_role_code
+lstr_message.as_StringParm[2] = ''
+lstr_message.as_StringParm[3] = ''
+lstr_message.as_StringParm[4] = ''
+lstr_message.as_StringParm[5] = ''
+lstr_message.as_StringParm[6] = ''
+lstr_message.as_StringParm[7] = 'Y' // allow parameter change
+lstr_message.as_StringParm[8] = 'N' // add new event
+
+
+SELECT	open_window_name
+INTO		:ls_open_window_name
+FROM		Checklist_Step_Type
+WHERE	checklist_step_type_code = '014'
+USING SQLCA;
+SQLCA.nf_handle_error('m_annuity_eligibility', 'embedded sql', 'select open_window_name...')
+
+OpenWithParm(lw_to_open,lstr_message,ls_open_window_name)
+end subroutine
+
+on m_annuity.create
+m_annuity=this
+call super::create
+this.text = "m_confirm_annuity_eligibility"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_file=create m_file
+this.m_docmanagement=create m_docmanagement
+this.m_eventlog=create m_eventlog
+this.Item[UpperBound(this.Item)+1]=this.m_file
+this.Item[UpperBound(this.Item)+1]=this.m_docmanagement
+this.Item[UpperBound(this.Item)+1]=this.m_eventlog
+end on
+
+on m_annuity.destroy
+call super::destroy
+destroy(this.m_file)
+destroy(this.m_docmanagement)
+destroy(this.m_eventlog)
+end on
+
+type m_file from menu within m_annuity
+m_print m_print
+m_printsetup m_printsetup
+m_report m_report
+m_close m_close
+end type
+
+on m_file.create
+call super::create
+this.text = "&File"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_print=create m_print
+this.m_printsetup=create m_printsetup
+this.m_report=create m_report
+this.m_close=create m_close
+this.Item[UpperBound(this.Item)+1]=this.m_print
+this.Item[UpperBound(this.Item)+1]=this.m_printsetup
+this.Item[UpperBound(this.Item)+1]=this.m_report
+this.Item[UpperBound(this.Item)+1]=this.m_close
+end on
+
+on m_file.destroy
+call super::destroy
+destroy(this.m_print)
+destroy(this.m_printsetup)
+destroy(this.m_report)
+destroy(this.m_close)
+end on
+
+type m_print from menu within m_file
+end type
+
+on m_print.create
+call super::create
+this.text = "&Print"
+this.toolbaritemname = "print!"
+this.toolbaritemtext = "Print"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+event clicked;window		lw_window
+menu			lm_menu
+
+lm_menu = parent
+lw_window = lm_menu.ParentWindow
+lw_window.dynamic wf_print()
+
+
+end event
+
+type m_printsetup from menu within m_file
+end type
+
+on m_printsetup.create
+call super::create
+this.text = "Print &Setup"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_printsetup.destroy
+call super::destroy
+end on
+
+event clicked;PrintSetup ( )
+end event
+
+type m_report from menu within m_file
+end type
+
+on m_report.create
+call super::create
+this.text = "&Report"
+this.toolbaritemname = "report!"
+this.toolbaritemtext = "Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_report.destroy
+call super::destroy
+end on
+
+event clicked;window		lw_window
+menu			lm_menu
+
+lm_menu = parent
+lw_window = lm_menu.ParentWindow
+lw_window.dynamic wf_report()
+
+
+end event
+
+type m_close from menu within m_file
+end type
+
+on m_close.create
+call super::create
+this.text = "&Close"
+this.toolbaritemname = "close!"
+this.toolbaritemtext = "Close"
+this.toolbaritemorder = 99
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_close.destroy
+call super::destroy
+end on
+
+event clicked;window lw_window
+menu lm_menu
+
+lm_menu = THIS.GetParent().GetParent()
+
+lw_window = lm_menu.ParentWindow
+
+SetPointer(HourGlass!)
+Close (lw_window)
+
+end event
+
+type m_docmanagement from menu within m_annuity
+m_doclist m_doclist
+end type
+
+on m_docmanagement.create
+call super::create
+this.text = "&Doc Management"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_doclist=create m_doclist
+this.Item[UpperBound(this.Item)+1]=this.m_doclist
+end on
+
+on m_docmanagement.destroy
+call super::destroy
+destroy(this.m_doclist)
+end on
+
+type m_doclist from menu within m_docmanagement
+end type
+
+on m_doclist.create
+call super::create
+this.text = "Doc &List"
+this.toolbaritemname = "doc_16_h.gif"
+this.toolbaritemtext = "Doc List"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_doclist.destroy
+call super::destroy
+end on
+
+event clicked;mf_open_doclist(PARENTWINDOW)
+
+end event
+
+type m_eventlog from menu within m_annuity
+m_eventlog0 m_eventlog0
+end type
+
+on m_eventlog.create
+call super::create
+this.text = "&Event Log"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_eventlog0=create m_eventlog0
+this.Item[UpperBound(this.Item)+1]=this.m_eventlog0
+end on
+
+on m_eventlog.destroy
+call super::destroy
+destroy(this.m_eventlog0)
+end on
+
+type m_eventlog0 from menu within m_eventlog
+end type
+
+event clicked;mf_open_event_log(PARENTWINDOW)
+end event
+
+on m_eventlog0.create
+call super::create
+this.text = "&Event Log"
+this.toolbaritemname = "dbadmin!"
+this.toolbaritemtext = "Event Log"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_eventlog0.destroy
+call super::destroy
+end on
+

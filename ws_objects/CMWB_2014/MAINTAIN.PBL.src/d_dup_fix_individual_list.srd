@@ -1,0 +1,95 @@
+﻿$PBExportHeader$d_dup_fix_individual_list.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=180 color="28817335" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=212 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=individual_no dbname="INDIVIDUAL.individual_no" )
+ column=(type=long updatewhereclause=yes name=individual_sin_no dbname="INDIVIDUAL.sin_no" )
+ column=(type=long updatewhereclause=yes name=individual_medicare_no dbname="INDIVIDUAL.medicare_no" )
+ column=(type=datetime updatewhereclause=yes name=individual_birth_date dbname="INDIVIDUAL.birth_date" )
+ column=(type=datetime updatewhereclause=yes name=individual_death_date dbname="INDIVIDUAL.death_date" )
+ column=(type=char(30) updatewhereclause=yes name=individual_address_line1 dbname="INDIVIDUAL.address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=individual_address_line2 dbname="INDIVIDUAL.address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=individual_city dbname="INDIVIDUAL.city" )
+ column=(type=char(2) updatewhereclause=yes name=individual_prov_state_code dbname="INDIVIDUAL.prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=individual_country_code dbname="INDIVIDUAL.country_code" )
+ column=(type=char(10) updatewhereclause=yes name=individual_postal_code dbname="INDIVIDUAL.postal_code" )
+ column=(type=char(10) updatewhereclause=yes name=individual_telephone_no dbname="INDIVIDUAL.telephone_no" )
+ column=(type=char(3) updatewhereclause=yes name=individual_bank_no dbname="INDIVIDUAL.bank_no" )
+ column=(type=char(5) updatewhereclause=yes name=individual_bank_transit_no dbname="INDIVIDUAL.bank_transit_no" )
+ column=(type=char(18) updatewhereclause=yes name=individual_bank_account_no dbname="INDIVIDUAL.bank_account_no" )
+ column=(type=char(1) updatewhereclause=yes name=individual_history_flag dbname="INDIVIDUAL.history_flag" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=char(1) updatewhereclause=yes name=selected_individual dbname="selected_individual" initial="N" values="	Y/	N" )
+ column=(type=char(1) updatewhereclause=yes name=default_individual dbname="default_individual" values="	Y/	N" )
+ column=(type=datetime updatewhereclause=yes name=modify_date dbname="INDIVIDUAL.modify_date" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="INDIVIDUAL.create_date" )
+ column=(type=char(10) updatewhereclause=yes name=individual_cellphone_no dbname="INDIVIDUAL.cellphone_no" )
+ column=(type=char(10) updatewhereclause=yes name=individual_pager_no dbname="INDIVIDUAL.pager_no" )
+ column=(type=char(1) updatewhereclause=yes name=individual_caution_flag dbname="INDIVIDUAL.caution_flag" )
+ column=(type=char(1) updatewhereclause=yes name=sex dbname="INDIVIDUAL.sex" )
+ column=(type=char(1) updatewhereclause=yes name=court_order_flag dbname="INDIVIDUAL.court_order_flag" )
+ retrieve="SELECT  INDIVIDUAL.individual_no ,
+           INDIVIDUAL.sin_no ,
+           INDIVIDUAL.medicare_no ,
+           INDIVIDUAL.birth_date ,
+           INDIVIDUAL.death_date ,
+           INDIVIDUAL.address_line1 ,
+           INDIVIDUAL.address_line2 ,
+           INDIVIDUAL.city ,
+           INDIVIDUAL.prov_state_code ,
+           INDIVIDUAL.country_code ,
+           INDIVIDUAL.postal_code ,
+           INDIVIDUAL.telephone_no ,
+           INDIVIDUAL.bank_no ,
+           INDIVIDUAL.bank_transit_no ,
+           INDIVIDUAL.bank_account_no ,
+           INDIVIDUAL.history_flag ,
+           INDIVIDUAL.last_name ,
+           INDIVIDUAL.given_names ,
+           '' selected_individual,
+			  '' default_individual,
+           INDIVIDUAL.modify_date ,
+           INDIVIDUAL.create_date ,
+           INDIVIDUAL.cellphone_no ,
+           INDIVIDUAL.pager_no ,
+           INDIVIDUAL.caution_flag,
+			  INDIVIDUAL.sex,
+           INDIVIDUAL.court_order_flag
+        FROM INDIVIDUAL ,
+           INDIVIDUAL_NAME     
+        WHERE ( INDIVIDUAL.individual_no = INDIVIDUAL_NAME.individual_no ) and          ( ( INDIVIDUAL_NAME.name_type_code = 'M' ) )  " )
+text(band=header alignment="0" text="MG" border="0" color="0" x="9" y="116" height="60" width="96" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="DF" border="0" color="0" x="137" y="116" height="60" width="96" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Birth Date" border="0" color="0" x="265" y="116" height="60" width="256" html.valueishtml="0"  name=individual_birth_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Individual No" border="0" color="0" x="265" y="60" height="60" width="325" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Death Date" border="0" color="0" x="640" y="116" height="60" width="283" html.valueishtml="0"  name=individual_death_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="/" border="0" color="0" x="562" y="116" height="60" width="27" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Name" border="0" color="0" x="265" y="8" height="60" width="151" html.valueishtml="0"  name=individual_last_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address" border="0" color="0" x="1221" y="8" height="60" width="219" html.valueishtml="0"  name=individual_telephone_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Medicare No" border="0" color="0" x="1801" y="60" height="60" width="325" html.valueishtml="0"  name=individual_medicare_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Banking Information" border="0" color="0" x="1801" y="116" height="60" width="521" html.valueishtml="0"  name=individual_bank_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="SIN" border="0" color="0" x="2235" y="56" height="52" width="87" html.valueishtml="0"  name=individual_sin_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="/" border="0" color="0" x="2167" y="60" height="60" width="27" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="0" y1="204" x2="2807" y2="204"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="0" tabsequence=10 border="0" color="16711680" x="18" y="32" height="88" width="105" format="[general]" html.valueishtml="0"  name=selected_individual visible="1" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=20 alignment="0" tabsequence=20 border="0" color="0" x="146" y="32" height="88" width="101" format="[general]" html.valueishtml="0"  name=default_individual visible="1" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Caution" border="0" color="16711680" x="14" y="136" height="60" width="224" html.valueishtml="0"  name=t_6 visible="1~tif( individual_caution_flag = 'Y',1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" last_name + ' ' +  given_names "border="0" color="0" x="265" y="8" height="60" width="731" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="265" y="72" height="60" width="261" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="IF( individual_history_flag = 'Y','H','')"border="0" color="0" x="599" y="72" height="60" width="64" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="265" y="136" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=individual_birth_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="640" y="136" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=individual_death_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1143" y="136" height="60" width="229" format="[general]" html.valueishtml="0"  name=individual_country_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1403" y="136" height="60" width="274" format="[general]" html.valueishtml="0"  name=individual_postal_code visible="1" edit.limit=9 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1019" y="72" height="60" width="713" format="[general]" html.valueishtml="0"  name=individual_city visible="1" edit.limit=25 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="1019" y="136" height="60" width="110" format="[general]" html.valueishtml="0"  name=individual_prov_state_code visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" individual_address_line1 + ' ' +  individual_address_line2 "border="0" color="0" x="1019" y="8" height="60" width="1664" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1806" y="72" height="60" width="343" format="[general]" html.valueishtml="0"  name=individual_medicare_no visible="1" editmask.mask="000-000-000" editmask.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="2235" y="72" height="60" width="343" format="[general]" html.valueishtml="0"  name=individual_sin_no visible="1" editmask.mask="000-000-000" editmask.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" individual_bank_no + '-' +  individual_bank_transit_no + '-' +  individual_bank_account_no "border="0" color="0" x="1806" y="136" height="60" width="841" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

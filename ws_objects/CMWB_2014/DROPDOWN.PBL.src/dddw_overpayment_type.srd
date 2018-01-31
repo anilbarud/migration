@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dddw_overpayment_type.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=overpayment_type_code dbname="Overpayment_Type.overpayment_type_code" )
+ column=(type=char(15) updatewhereclause=yes name=overpayment_type_desc dbname="Overpayment_Type.overpayment_type_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Overpayment_Type~" ) COLUMN(NAME=~"Overpayment_Type.overpayment_type_code~") COLUMN(NAME=~"Overpayment_Type.overpayment_type_desc~")) " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="4" height="77" width="609" format="[general]"  name=overpayment_type_desc edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

@@ -1,0 +1,15 @@
+﻿$PBExportHeader$dddw_nature_of_injury_codes_all.srd
+$PBExportComments$Select of all ACTIVE nature_of_injury_code from Nature_Of_Injury.
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 107 print.margin.right = 107 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=64 color="536870912" )
+table(column=(type=char(5) update=yes updatewhereclause=yes name=nature_of_injury_code dbname="nature_of_injury_code" )
+ column=(type=char(86) updatewhereclause=yes name=nature_of_injury_code_desc dbname="nature_of_injury_code_desc" )
+ retrieve="SELECT Nature_Of_Injury.nature_of_injury_code, 
+Nature_Of_Injury.nature_of_injury_code_desc 
+FROM Nature_Of_Injury"  sort="nature_of_injury_code A " )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="0~tif(active_flag = ~"N~", 8388608 ,0)" x="5" y="4" height="56" width="2395" format="[general]" html.valueishtml="0"  name=nature_of_injury_code_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,86 @@
+﻿$PBExportHeader$d_issued_but_not_transmitted.srd
+$PBExportComments$Report of cheques issued but not transmitted
+release 5;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=493 color="536870912" )
+summary(height=493 color="536870912" )
+footer(height=5 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=cheque_header_cheque_no dbname="CHEQUE_HEADER.cheque_no" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_cheque_date dbname="CHEQUE_HEADER.cheque_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=cheque_header_cheque_amount dbname="CHEQUE_HEADER.cheque_amount" )
+ column=(type=char(20) updatewhereclause=yes name=cheque_type_cheque_type_desc dbname="Cheque_Type.cheque_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=name_on_cheque dbname="CHEQUE_HEADER.name_on_cheque" )
+ column=(type=decimal(4) updatewhereclause=yes name=reconciled_amount dbname="CHEQUE_HEADER.reconciled_amount" )
+ column=(type=char(40) updatewhereclause=yes name=reconciled_reconciled_desc dbname="Reconciled.reconciled_desc" )
+ column=(type=datetime updatewhereclause=yes name=cheque_header_reconciled_date dbname="CHEQUE_HEADER.reconciled_date" )
+ column=(type=char(3) updatewhereclause=yes name=cheque_type_code dbname="CHEQUE_HEADER.cheque_type_code" )
+ retrieve="  SELECT CHEQUE_HEADER.cheque_no,   
+         CHEQUE_HEADER.cheque_date,   
+         CHEQUE_HEADER.cheque_amount,   
+         Cheque_Type.cheque_type_desc,   
+			CHEQUE_HEADER.name_on_cheque,
+			CHEQUE_HEADER.reconciled_amount, 
+			Reconciled.reconciled_desc,
+			CHEQUE_HEADER.reconciled_date,
+			CHEQUE_HEADER.cheque_type_code
+    FROM CHEQUE_HEADER,   
+         Cheque_Type,   
+			Reconciled 
+   WHERE ( Cheque_Type.cheque_type_code = CHEQUE_HEADER.cheque_type_code ) and 
+			( CHEQUE_HEADER.reconciled_code = Reconciled.reconciled_code) and
+			( CHEQUE_HEADER.transmit_date is NULL) and
+			( CHEQUE_HEADER.reconciled_code = :as_reconciliation_code) and
+			( CHEQUE_HEADER.cheque_date >= :adt_date_from ) and
+			( CHEQUE_HEADER.cheque_date < DATEADD(day,1,:adt_date_to )) 
+ORDER BY CHEQUE_HEADER.cheque_type_code,
+         CHEQUE_HEADER.cheque_no
+" arguments=(("adt_date_from", date),("adt_date_to", date),("as_reconciliation_code", string)) )
+group(level=1 header.height=381 trailer.height=393 by=("cheque_type_cheque_type_desc" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="1" y="4" height="469" width="4380" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+line(band=header x1="10" y1="452" x2="4362" y2="452" pen.style="0" pen.width="10" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:"border="0" color="0" x="51" y="56" height="61" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="449" y="56" height="77" width="398" format="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3754" y="48" height="77" width="549" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="BANK RECONCILIATION 
+ISSUED BUT NOT YET TRANSMITTED"border="0" color="0" x="1363" y="28" height="201" width="1738"  font.face="Arial" font.height="-16" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="'Cheques issued but not transmitted for '  + String(adt_date_from,~"yyyy-mm-dd~")  + '  to  ' + String(adt_date_to,~"yyyy-mm-dd~") "border="0" color="33554432" x="947" y="304" height="77" width="2574" format="[general]"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=4 alignment="0" tabsequence=32766 border="0" color="0" x="439" y="24" height="61" width="526" format="[general]"  name=cheque_type_cheque_type_desc edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Cheque Type:"border="0" color="0" x="46" y="20" height="61" width="348"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Cheque
+Number"border="0" color="0" x="69" y="148" height="129" width="229"  name=cheque_header_cheque_no_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.1 x1="46" y1="296" x2="4398" y2="296" pen.style="0" pen.width="10" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header.1 alignment="2" text="Cheque
+Recipient"border="0" color="0" x="339" y="152" height="129" width="275"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Issue
+Date"border="0" color="0" x="1495" y="148" height="129" width="302"  name=cheque_header_cheque_date_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Cheque
+ Amount"border="0" color="0" x="1829" y="148" height="129" width="330"  name=cheque_header_cheque_amount_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Reconciled
+ Amount"border="0" color="0" x="2204" y="148" height="129" width="325"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Difference"border="0" color="0" x="2574" y="212" height="65" width="298"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Reconciled
+Status"border="0" color="0" x="2913" y="148" height="129" width="325"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Reconciled
+Date"border="0" color="0" x="3374" y="148" height="129" width="325"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="65" y="12" height="61" width="229" format="[general]"  name=cheque_header_cheque_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="343" y="12" height="61" width="1121" format="[general]"  name=name_on_cheque edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1491" y="12" height="61" width="302" format="yyyy-mm-dd"  name=cheque_header_cheque_date edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1825" y="12" height="61" width="330" format="$#,##0.00;($#,##0.00)"  name=cheque_header_cheque_amount edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2199" y="12" height="61" width="330" format="$#,##0.00;($#,##0.00)"  name=reconciled_amount edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" reconciled_amount - cheque_header_cheque_amount "border="0" color="0" x="2570" y="12" height="61" width="298" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2908" y="12" height="61" width="417" format="[general]"  name=reconciled_reconciled_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="3374" y="12" height="61" width="302" format="yyyy-mm-dd"  name=cheque_header_reconciled_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="1" text="Total Number of Cheques for Cheque type:"border="0" color="0" x="284" y="80" height="61" width="1121"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+compute(band=trailer.1 alignment="1" expression="count(  cheque_header_cheque_no  for group 1 )"border="0" color="0" x="1623" y="80" height="61" width="225" format="[General]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="1" text="Total Issued Amount for Cheque type:"border="0" color="0" x="284" y="152" height="61" width="988"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+compute(band=trailer.1 alignment="1" expression="sum(   cheque_header_cheque_amount  for group 1 )"border="0" color="0" x="1491" y="152" height="61" width="357" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="1" text="Total Reconciled Amount for Cheque type:"border="0" color="0" x="284" y="232" height="61" width="1107"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+compute(band=trailer.1 alignment="1" expression="sum(   reconciled_amount   for group 1 )"border="0" color="0" x="1491" y="232" height="61" width="357" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="2" text="End of Report"border="0" color="0" x="1829" y="396" height="77" width="627"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=summary alignment="1" text="Total Number of Cheques:"border="0" color="0" x="55" y="108" height="61" width="686"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+text(band=summary alignment="1" text="Total Issued Amount:"border="0" color="0" x="55" y="180" height="61" width="554"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+text(band=summary alignment="1" text="Total Reconciled Amount:"border="0" color="0" x="55" y="260" height="61" width="673"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="count(  cheque_header_cheque_no  for all )"border="0" color="0" x="951" y="108" height="61" width="225" format="[General]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(   cheque_header_cheque_amount  for all )"border="0" color="0" x="819" y="180" height="61" width="357" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(   reconciled_amount   for all )"border="0" color="0" x="819" y="260" height="61" width="357" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

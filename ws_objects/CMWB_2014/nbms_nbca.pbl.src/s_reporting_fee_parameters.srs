@@ -1,0 +1,14 @@
+﻿$PBExportHeader$s_reporting_fee_parameters.srs
+$PBExportComments$Used for passing manually identified doc's eligible for reporting fees includes claim and doc_id
+global type s_reporting_fee_parameters from structure
+	long		claim_no
+	long		doc_id
+	long		provider_no
+	string		provider_name
+	string		provider_type
+	string		provider_sub_type
+	datetime		date_on_document
+	string		claim_admin_region
+	string		mode
+end type
+

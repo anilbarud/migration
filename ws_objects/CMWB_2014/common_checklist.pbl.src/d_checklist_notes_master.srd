@@ -1,0 +1,52 @@
+﻿$PBExportHeader$d_checklist_notes_master.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=checklist_no dbname="checklist_no" )
+ column=(type=datetime updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(256) updatewhereclause=yes name=checklist_comment dbname="checklist_comment" )
+ column=(type=char(256) updatewhereclause=yes name=cancelled_comment dbname="cancelled_comment" )
+ column=(type=char(1) updatewhereclause=yes name=checklist_status_code dbname="checklist_status_code" )
+ column=(type=char(60) updatewhereclause=yes name=checklist_type_desc dbname="checklist_type_desc" )
+ column=(type=char(25) updatewhereclause=yes name=checklist_status_desc dbname="checklist_status_desc" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ retrieve="Select CHECKLIST.checklist_no,
+       CHECKLIST.concluded_date,
+       CHECKLIST.checklist_comment,
+       CHECKLIST.cancelled_comment,
+       CHECKLIST.checklist_status_code,
+       Checklist_Type.checklist_type_desc,
+       Checklist_Status.checklist_status_desc,
+       User_Profile.user_last_name,
+       User_Profile.user_first_name
+From   CHECKLIST
+INNER JOIN Checklist_Type ON CHECKLIST.checklist_type_code = Checklist_Type.checklist_type_code
+INNER JOIN Checklist_Status ON CHECKLIST.checklist_status_code = Checklist_Status.checklist_status_code
+LEFT OUTER JOIN User_Profile ON CHECKLIST.concluded_by_user_id = User_Profile.user_id
+WHERE CHECKLIST.checklist_no = :ar_checklist_no" arguments=(("ar_checklist_no", number)) )
+text(band=header alignment="0" text="" border="6" color="33554432" x="14" y="12" height="56" width="69" html.valueishtml="0"  name=t_4  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Checklist" border="6" color="33554432" x="96" y="12" height="56" width="1545" html.valueishtml="0"  name=checklist_step_desc_t  tag="Checklist Number" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Status" border="6" color="33554432" x="1659" y="12" height="56" width="430" html.valueishtml="0"  name=t_3  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Concluded" border="6" color="33554432" x="2107" y="12" height="56" width="393" html.valueishtml="0"  name=t_2  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="By" border="6" color="33554432" x="2519" y="12" height="56" width="1001" html.valueishtml="0"  name=t_1  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+bitmap(band=detail filename="flag_red_16_h.gif" x="9" y="4" height="64" width="73" border="0"  name=p_comment visible="1~tif(  (IsNull(checklist_comment) OR checklist_comment = '' ) and (IsNull( cancelled_comment) OR cancelled_comment = '') ,0,1 )" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="96" y="4" height="64" width="293" format="[general]" html.valueishtml="0"  name=checklist_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=30 border="0" color="33554432" x="1659" y="4" height="60" width="430" format="[general]" html.valueishtml="0"  name=checklist_status_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=40 border="0" color="33554432" x="2107" y="4" height="60" width="389" format="YYYY-MM-DD" html.valueishtml="0"  name=concluded_date visible="1" editmask.mask="YYYY-MM-DD" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=20 border="0" color="33554432" x="402" y="4" height="64" width="1243" format="[general]" html.valueishtml="0"  name=checklist_type_desc visible="1" edit.limit=60 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( user_first_name )+' '+Trim( user_last_name )"border="0" color="33554432" x="2514" y="4" height="56" width="1006" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

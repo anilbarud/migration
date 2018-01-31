@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_display_active_admin_regions.srd
+$PBExportComments$Displays list of active admin regions. Uses dddw_admin_region_code.
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=char(3) update=yes key=yes name=admin_region_code dbname="Admin_Region.admin_region_code" )
+ column=(type=char(20) update=yes name=admin_region_desc dbname="Admin_Region.admin_region_desc" )
+ column=(type=char(1) update=yes name=active_flag dbname="Admin_Region.active_flag" )
+ retrieve="PBSELECT(TABLE(NAME=~"Admin_Region~") COLUMN(NAME=~"Admin_Region.admin_region_code~")COLUMN(NAME=~"Admin_Region.admin_region_desc~")COLUMN(NAME=~"Admin_Region.active_flag~"))" update="Admin_Region" updatewhere=1 updatekeyinplace=no )
+text(band=detail alignment="0" text="Region:"border="0" color="0" x="10" y="8" height="61" width="193"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="238" y="8" height="61" width="750" format="[general]"  name=admin_region_code dddw.name=dddw_admin_region dddw.displaycolumn=admin_region_desc dddw.datacolumn=admin_region_code dddw.percentwidth=100 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

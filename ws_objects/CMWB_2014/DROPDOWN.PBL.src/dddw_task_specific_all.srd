@@ -1,0 +1,15 @@
+﻿$PBExportHeader$dddw_task_specific_all.srd
+$PBExportComments$all task specific types  (both active & inactive)
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="Task_Specific.task_specific_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_specific_desc dbname="Task_Specific.task_specific_desc" )
+ column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="Task_Specific.task_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="Task_Specific.task_sub_type_code" )
+ column=(type=char(8) updatewhereclause=yes name=task_and_sub_and_specific dbname="task_and_sub_and_specific" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Task_Specific~" ) COLUMN(NAME=~"Task_Specific.task_specific_code~") COLUMN(NAME=~"Task_Specific.task_specific_desc~") COLUMN(NAME=~"Task_Specific.task_type_code~") COLUMN(NAME=~"Task_Specific.task_sub_type_code~") COMPUTE(NAME=~"task_type_code + task_sub_type_code + task_specific_code 'task_and_sub_and_specific'~")) ORDER(NAME=~"Task_Specific.task_type_code~" ASC=yes )  ORDER(NAME=~"Task_Specific.task_sub_type_code~" ASC=yes )  ORDER(NAME=~"Task_Specific.task_specific_desc~" ASC=yes ) " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="4" height="61" width="791" format="[general]"  name=task_specific_desc edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

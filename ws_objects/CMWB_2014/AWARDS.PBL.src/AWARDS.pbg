@@ -1,0 +1,12 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "AWARDS.PBL" "";
+@end;
+@begin Objects 
+ "d_award_details.srd" "AWARDS.PBL";
+ "d_award_list.srd" "AWARDS.PBL";
+ "d_award_recipient.srd" "AWARDS.PBL";
+ "n_awards.sru" "AWARDS.PBL";
+ "w_award_message.srw" "AWARDS.PBL";
+ "w_periodic_award.srw" "AWARDS.PBL";
+@end;

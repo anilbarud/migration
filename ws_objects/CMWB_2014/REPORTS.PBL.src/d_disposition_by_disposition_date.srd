@@ -1,0 +1,113 @@
+﻿$PBExportHeader$d_disposition_by_disposition_date.srd
+$PBExportComments$Similar to d_disposition - date range is for disposition code entry date instead - Created for PR1458
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 2 print.margin.left = 97 print.margin.right = 97 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=412 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=84 color="-1" )
+table(column=(type=long updatewhereclause=yes name=opening_claim_no dbname="OPENING.claim_no" )
+ column=(type=datetime updatewhereclause=yes name=opening_accident_recurrence_date dbname="OPENING.accident_recurrence_date" )
+ column=(type=datetime updatewhereclause=yes name=opening_benefit_start_date dbname="OPENING.benefit_start_date" )
+ column=(type=datetime updatewhereclause=yes name=opening_benefit_end_date dbname="OPENING.benefit_end_date" )
+ column=(type=char(1) updatewhereclause=yes name=opening_receiving_ltd_code dbname="OPENING.receiving_ltd_code" )
+ column=(type=char(1) updatewhereclause=yes name=opening_claimant_working_flag dbname="OPENING.claimant_working_flag" )
+ column=(type=char(1) updatewhereclause=yes name=opening_work_restriction_flag dbname="OPENING.work_restriction_flag" )
+ column=(type=char(40) updatewhereclause=yes name=claim_disposition_type_claim_disposition dbname="Claim_Disposition_Type.claim_disposition_desc" )
+ column=(type=char(1) updatewhereclause=yes name=claim_case_managed_flag dbname="CLAIM.case_managed_flag" )
+ column=(type=char(20) updatewhereclause=yes name=user_profile_user_last_name dbname="User_Profile.user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_profile_user_first_name dbname="User_Profile.user_first_name" )
+ column=(type=char(3) updatewhereclause=yes name=opening_claim_disposition_code dbname="OPENING.claim_disposition_code" )
+ column=(type=char(3) updatewhereclause=yes name=claim_admin_region_code dbname="CLAIM.admin_region_code" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=char(16) updatewhereclause=yes name=claim_claim_manager_user_id dbname="CLAIM.claim_manager_user_id" )
+ column=(type=datetime updatewhereclause=yes dbname="OPENING.disposition_code_entry_date" )
+ retrieve="  SELECT OPENING.claim_no,   
+         OPENING.accident_recurrence_date,   
+         OPENING.benefit_start_date,   
+         OPENING.benefit_end_date,   
+         OPENING.receiving_ltd_code,   
+         OPENING.claimant_working_flag, 
+         OPENING.work_restriction_flag,  
+         Claim_Disposition_Type.claim_disposition_desc,   
+         CLAIM.case_managed_flag,   
+         User_Profile.user_last_name,   
+         User_Profile.user_first_name,   
+         OPENING.claim_disposition_code,   
+         CLAIM.admin_region_code,   
+         INDIVIDUAL.last_name,   
+         INDIVIDUAL.given_names,   
+         CLAIM.claim_manager_user_id,  
+         OPENING.disposition_code_entry_date
+    FROM CLAIM,   
+         Claim_Disposition_Type,   
+         OPENING,   
+         User_Profile,   
+         INDIVIDUAL  
+   WHERE ( Claim_Disposition_Type.claim_disposition_code = OPENING.claim_disposition_code ) and  
+         ( OPENING.claim_no = CLAIM.claim_no ) and  
+         ( INDIVIDUAL.individual_no = CLAIM.individual_no ) and  
+         ( User_Profile.user_id = CLAIM.claim_manager_user_id ) and  
+         ( ( OPENING.disposition_code_entry_date >= :adt_start_date ) AND  
+         ( OPENING.disposition_code_entry_date < :adt_end_date ) )   
+ORDER BY CLAIM.admin_region_code ASC,   
+         CLAIM.claim_manager_user_id ASC,   
+         Claim_Disposition_Type.claim_disposition_desc ASC,   
+         OPENING.claim_no ASC   
+" arguments=(("adt_start_date", datetime),("adt_end_date", datetime)) )
+group(level=1 header.height=84 trailer.height=0 by=("claim_admin_region_code" ) header.color="-1" trailer.color="-1" )
+group(level=2 header.height=84 trailer.height=244 by=("user_profile_user_last_name" , "user_profile_user_first_name" ) header.color="-1" trailer.color="536870912" )
+group(level=3 header.height=76 trailer.height=0 by=("opening_claim_disposition_code" ) header.color="-1" trailer.color="-1" )
+rectangle(band=header x="14" y="4" height="224" width="3497" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Claim Dispositions by Date Entered"border="0" color="0" x="1225" y="28" height="76" width="1257"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="192" x2="3474" y2="192" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:"border="0" color="0" x="50" y="28" height="60" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="60" width="599" format="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters: Dispositions entered from "border="0" color="0" x="50" y="108" height="60" width="1239"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="String( adt_start_date ,~"yyyy-mm-dd~") + ~" to ~" + String( RelativeDate(adt_end_date, -1) ,~"yyyy-mm-dd~")"border="0" color="0" x="1294" y="108" height="60" width="823" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Claim No"border="0" color="33554432" x="306" y="332" height="56" width="219"  name=claim_no_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Name"border="0" color="33554432" x="553" y="332" height="56" width="142"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2939" y="28" height="76" width="549" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="396" x2="3497" y2="396" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Recurrence Date"border="0" color="33554432" x="1138" y="332" height="56" width="416"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Accident/ "border="0" color="33554432" x="1221" y="268" height="56" width="247"  name=occurrence_date_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Disablement Period"border="0" color="33554432" x="1614" y="332" height="56" width="494"  name=disablement_start_date_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Working"border="0" color="33554432" x="2953" y="332" height="56" width="229"  name=claimant_working_flag_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Restriction"border="0" color="33554432" x="3227" y="332" height="56" width="265"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Work"border="0" color="33554432" x="3282" y="268" height="56" width="155"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Entered Date"border="0" color="0" x="2208" y="328" height="56" width="338"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Disposition"border="0" color="0" x="2231" y="268" height="56" width="288"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="LTD"border="0" color="33554432" x="2706" y="332" height="56" width="96"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Receiving"border="0" color="33554432" x="2633" y="268" height="56" width="238"  name=receiving_ltd_flag_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Region: "border="0" color="33554432" x="50" y="16" height="60" width="206"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=13 alignment="0" tabsequence=32766 border="0" color="0" x="261" y="16" height="60" width="338" format="[general]"  name=claim_admin_region_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header.2 alignment="0" text="Case Manager: "border="0" color="0" x="50" y="12" height="60" width="402"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header.2 alignment="0" expression="Trim( user_profile_user_first_name ) + ~" ~" + Trim( user_profile_user_last_name )"border="0" color="0" x="457" y="12" height="60" width="850" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.3 alignment="0" text="Disposition: "border="0" color="0" x="114" y="12" height="56" width="311"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.3 id=8 alignment="0" tabsequence=32766 border="0" color="0" x="430" y="12" height="56" width="1120" format="[general]"  name=claim_disposition_type_claim_disposition edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="215" y="8" height="60" width="219" format="[general]"  name=opening_claim_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="Trim( individual_given_names ) + ~" ~" + Trim( individual_last_name )"border="0" color="0" x="448" y="8" height="60" width="672" format="[GENERAL]"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="1134" y="8" height="60" width="421" format="yyyy-mm-dd"  name=opening_accident_recurrence_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="String( opening_benefit_start_date ,~"yyyy-mm-dd~") + ~" to ~" + String( opening_benefit_end_date ,~"yyyy-mm-dd~")"border="0" color="0" x="1568" y="8" height="60" width="585" format="[GENERAL]"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="if(  opening_claimant_working_flag = 'I', 'Inapplicable', if(  opening_claimant_working_flag = 'Y', 'Yes',if(  opening_claimant_working_flag = 'N', 'No', '' ) ) )"border="0" color="0" x="2921" y="8" height="60" width="288" format="[GENERAL]"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="if( opening_work_restriction_flag = 'I', 'Inapplicable', if(  opening_work_restriction_flag = 'Y', 'Yes',if(  opening_work_restriction_flag = 'N', 'No', '' ) ) )"border="0" color="0" x="3223" y="8" height="60" width="270" format="[general]"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=17 alignment="2" tabsequence=32766 border="0" color="0" x="2167" y="8" height="60" width="421" format="yyyy-mm-dd" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="if( opening_receiving_ltd_code = 'I','Inapplicable',if(  opening_receiving_ltd_code = 'Z', 'Zero', if(  opening_receiving_ltd_code = 'F', 'Full', if(  opening_receiving_ltd_code = 'P', 'Partial', '' ) ) ))"border="0" color="0" x="2601" y="8" height="60" width="302" format="[GENERAL]"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.2 alignment="0" text="Sub Totals for this Case Manager: "border="0" color="33554432" x="594" y="36" height="60" width="887"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.2 alignment="0" text="Total Number of Claims:"border="0" color="33554432" x="1710" y="36" height="56" width="603"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.2 alignment="1" expression="count(  opening_claim_no  for group 2 )"border="0" color="33554432" x="2446" y="36" height="56" width="224" format="#,##0"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.2 alignment="0" text="Percent working:"border="0" color="33554432" x="1710" y="96" height="56" width="434"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.2 alignment="1" expression="sum(If (   opening_claimant_working_flag  = ~"Y~", 1, 0) for group 2) / count( opening_claim_no  for group 2)"border="0" color="33554432" x="2446" y="96" height="56" width="224" format="0%"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.2 alignment="0" text="Percent Receiving LTD:"border="0" color="33554432" x="1710" y="156" height="56" width="576"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.2 alignment="1" expression="sum(If ( opening_receiving_ltd_code   = ~"F~", 1, if( opening_receiving_ltd_code   = ~"P~", 1, 0 )) for group 2) / count( opening_claim_no  for group 2)"border="0" color="33554432" x="2446" y="156" height="56" width="224" format="0%"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Total Number of Claims:"border="0" color="33554432" x="1714" y="1544" height="56" width="603"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="count(  opening_claim_no  for all )"border="0" color="33554432" x="2450" y="1544" height="56" width="224" format="#,##0"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Percent working:"border="0" color="33554432" x="1714" y="1604" height="56" width="434"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(If (   opening_claimant_working_flag  = ~"Y~", 1, 0) for all) / count( opening_claim_no  for all)"border="0" color="33554432" x="2450" y="1604" height="56" width="224" format="0%"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Percent Receiving LTD:"border="0" color="33554432" x="1714" y="1664" height="56" width="576"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(If ( opening_receiving_ltd_code   = ~"F~", 1, if( opening_receiving_ltd_code   = ~"P~", 1, 0 )) for all) / count( opening_claim_no  for all)"border="0" color="33554432" x="2450" y="1664" height="56" width="224" format="0%"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="50" y1="1508" x2="3401" y2="1508" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=summary x1="50" y1="1744" x2="3401" y2="1744" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=summary alignment="0" text="Totals for this Report: "border="0" color="33554432" x="599" y="1544" height="60" width="571"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

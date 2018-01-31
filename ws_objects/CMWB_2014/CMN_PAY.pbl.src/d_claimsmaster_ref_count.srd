@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_claimsmaster_ref_count.srd
+$PBExportComments$Retrieves a list of claim numbers on the claimsmaster folders which have a specified docid number
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=89 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=189 color="536870912" )
+table(column=(type=number name=claimsmaster_claim dbname="CLAIM_MASTER.claim_no" )
+ column=(type=number name=claimsmaster_folderid dbname="CLAIM_MASTER.folderid" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"REF~" ) TABLE(NAME=~"CLAIM_MASTER~" ) COLUMN(NAME=~"CLAIM_MASTER.claim_no~") COLUMN(NAME=~"CLAIM_MASTER.folderid~") JOIN (LEFT=~"CLAIM_MASTER.folderid~" OP =~"=~"RIGHT=~"REF.docfldid~" )WHERE( EXP1 =~"REF.docid~" OP =~"=~" EXP2 =~":vll_docid~" LOGIC =~"and~" ) WHERE( EXP1 =~"REF.doccatid~" OP =~"=~" EXP2 =~"2~" ) ) ARG(NAME = ~"vll_docid~" TYPE = number) " arguments=(("vll_docid", number)) )
+text(band=header alignment="0" text="d_claimsmaster_ref_count"border="0" color="0" x="42" y="8" height="61" width="709"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+line(band=header x1="23" y1="80" x2="787" y2="80" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="79741120" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="316" y="96" height="77" width="330" format="[general]"  name=claimsmaster_folderid edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Claim:"border="0" color="0" x="42" y="4" height="61" width="161"  name=claimsmaster_claim_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Folderid:"border="0" color="0" x="42" y="96" height="61" width="220"  name=claimsmaster_folderid_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="316" y="12" height="57" width="366" format="[general]"  name=claimsmaster_claim edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

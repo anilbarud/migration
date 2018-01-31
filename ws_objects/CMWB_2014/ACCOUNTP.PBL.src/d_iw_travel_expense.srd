@@ -1,0 +1,44 @@
+﻿$PBExportHeader$d_iw_travel_expense.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=iw_travel_expense_no dbname="IW_TRAVEL_EXPENSE.iw_travel_expense_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="IW_TRAVEL_EXPENSE.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="IW_TRAVEL_EXPENSE.payment_no" )
+ column=(type=long update=yes updatewhereclause=yes name=rehab_invoice_no dbname="IW_TRAVEL_EXPENSE.rehab_invoice_no" )
+ column=(type=long update=yes updatewhereclause=yes name=line_no dbname="IW_TRAVEL_EXPENSE.line_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=reimbursement_date dbname="IW_TRAVEL_EXPENSE.reimbursement_date" )
+ retrieve="  SELECT dbo.IW_TRAVEL_EXPENSE.iw_travel_expense_no,   
+         dbo.IW_TRAVEL_EXPENSE.claim_no,   
+         dbo.IW_TRAVEL_EXPENSE.payment_no,   
+         dbo.IW_TRAVEL_EXPENSE.rehab_invoice_no,   
+         dbo.IW_TRAVEL_EXPENSE.line_no,   
+         dbo.IW_TRAVEL_EXPENSE.reimbursement_date  
+    FROM dbo.IW_TRAVEL_EXPENSE   
+" update="dbo.IW_TRAVEL_EXPENSE" updatewhere=2 updatekeyinplace=yes )
+text(band=header alignment="2" text="Iw Travel Expense No" border="0" color="33554432" x="5" y="4" height="64" width="631" html.valueishtml="0"  name=iw_travel_expense_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="640" y="4" height="64" width="329" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment No" border="0" color="33554432" x="974" y="4" height="64" width="352" html.valueishtml="0"  name=payment_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Rehab Invoice No" border="0" color="33554432" x="1330" y="4" height="64" width="512" html.valueishtml="0"  name=rehab_invoice_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Line No" border="0" color="33554432" x="1847" y="4" height="64" width="329" html.valueishtml="0"  name=line_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Reimbursement Date" border="0" color="33554432" x="2185" y="4" height="64" width="608" html.valueishtml="0"  name=reimbursement_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=iw_travel_expense_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="640" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="33554432" x="974" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="33554432" x="1330" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=rehab_invoice_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=50 border="0" color="33554432" x="1847" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=line_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="33554432" x="2185" y="4" height="76" width="599" format="[shortdate] [time]" html.valueishtml="0"  name=reimbursement_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

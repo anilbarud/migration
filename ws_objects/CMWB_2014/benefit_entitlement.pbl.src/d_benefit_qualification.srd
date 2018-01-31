@@ -1,0 +1,142 @@
+﻿$PBExportHeader$d_benefit_qualification.srd
+$PBExportComments$used in the benefit_entitlement qualification tab
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="16777215~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long update=yes updatewhereclause=yes name=benefit_entitlement_no dbname="benefit_entitlement_no" )
+ column=(type=long update=yes updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=annuity_eligibility_no dbname="annuity_eligibility_no" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=benefit_entitlement_from_date dbname="benefit_entitlement_from_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=benefit_entitlement_to_date dbname="benefit_entitlement_to_date" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_months dbname="benefit_entitlement_number_of_months" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_weeks dbname="benefit_entitlement_number_of_weeks" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_days dbname="benefit_entitlement_number_of_days" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=number_of_hours dbname="benefit_entitlement_number_of_hours" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=benefit_entitlement_amount dbname="benefit_entitlement_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=award_amount dbname="award_amount" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=award_freq_code dbname="award_freq_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_award_amount dbname="total_award_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=three_day_withhold_deduction_amount dbname="three_day_withhold_deduction_amount" )
+ column=(type=char(1) updatewhereclause=yes name=deleted_flag dbname="deleted_flag" )
+ column=(type=datetime updatewhereclause=yes name=deleted_date dbname="deleted_date" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ column=(type=datetime updatewhereclause=yes name=annuity_start_date dbname="annuity_start_date" )
+ column=(type=datetime updatewhereclause=yes name=annuity_end_date dbname="annuity_end_date" )
+ column=(type=datetime updatewhereclause=yes name=confirmed_date dbname="confirmed_date" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_eligibility_status_code dbname="annuity_eligibility_status_code" )
+ column=(type=char(3) updatewhereclause=yes name=benefit_option_code dbname="benefit_option_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=annuity_set_aside_percent dbname="annuity_set_aside_percent" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ retrieve="SELECT	a.benefit_entitlement_no,
+			a.annuity_account_no,   
+			d.annuity_eligibility_no,   
+			a.opening_no,   
+			a.claim_no,   
+			a.benefit_calculation_no,     
+			b.effective_from_date ,
+			a.benefit_entitlement_from_date,   
+			a.benefit_entitlement_to_date,   
+			a.benefit_entitlement_number_of_months,   
+			a.benefit_entitlement_number_of_weeks,   
+			a.benefit_entitlement_number_of_days,   
+			a.benefit_entitlement_number_of_hours,   
+			a.benefit_entitlement_amount  ,
+			a.award_amount,
+			a. payment_type_code,
+			a.payment_sub_type_code,
+			a.award_freq_code, 
+			a.total_award_amount , 
+			a.three_day_withhold_deduction_amount,
+			a. deleted_flag, 
+			a.deleted_date,
+			a.active_flag,
+			c.annuity_start_date,
+			c.annuity_end_date,
+			c.confirmed_date,
+			c.annuity_eligibility_status_code,
+			c.benefit_option_code,
+			c.annuity_set_aside_percent,
+			c.create_date
+FROM BENEFIT_ENTITLEMENT a 
+INNER JOIN ANNUITY_ELIGIBILITY_BENEFIT_ENTITLEMENT_XREF d  on a.benefit_entitlement_no = d.benefit_entitlement_no AND a.annuity_account_no = d.annuity_account_no
+INNER JOIN ANNUITY_ELIGIBILITY c ON d.annuity_eligibility_no = c.annuity_eligibility_no
+LEFT JOIN BENEFIT_CALCULATION b ON a.benefit_calculation_no = b.benefit_calculation_no AND a.claim_no = b.claim_no 
+WHERE a.annuity_account_no = :al_annuity_account_no 
+
+" arguments=(("al_annuity_account_no", number))  sort="annuity_eligibility_no D benefit_entitlement_from_date A benefit_entitlement_to_date A " )
+group(level=1 header.height=108 trailer.height=0 by=("annuity_eligibility_no" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="A/E # " border="6" color="33554432" x="18" y="16" height="64" width="325" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pay Type" border="6" color="33554432" x="2967" y="16" height="64" width="279" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Period" border="6" color="33554432" x="3264" y="16" height="64" width="704" html.valueishtml="0"  name=benefit_entitlement_from_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Days" border="6" color="33554432" x="3986" y="16" height="64" width="165" html.valueishtml="0"  name=benefit_entitlement_number_of_days_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Hours" border="6" color="33554432" x="4169" y="16" height="64" width="187" html.valueishtml="0"  name=benefit_entitlement_number_of_hours_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Weeks" border="6" color="33554432" x="4375" y="16" height="64" width="210" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Months" border="6" color="33554432" x="4603" y="16" height="64" width="224" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Award" border="6" color="33554432" x="4846" y="16" height="64" width="453" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Freq" border="6" color="33554432" x="5317" y="16" height="64" width="151" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="3 Day" border="6" color="33554432" x="5486" y="16" height="64" width="379" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Total Award" border="6" color="33554432" x="5883" y="16" height="64" width="393" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Benefit Amount" border="6" color="33554432" x="6295" y="16" height="64" width="457" html.valueishtml="0"  name=benefit_entitlement_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Effective" border="6" color="33554432" x="2578" y="16" height="64" width="370" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Claim" border="6" color="33554432" x="361" y="16" height="64" width="261" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Opening" border="6" color="33554432" x="640" y="16" height="64" width="507" html.valueishtml="0"  name=opening_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Benefit" border="6" color="33554432" x="1166" y="16" height="64" width="1394" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Deleted" border="6" color="33554432" x="6770" y="16" height="64" width="229" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Deleted date" border="6" color="33554432" x="7017" y="16" height="64" width="384" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Active" border="6" color="33554432" x="7419" y="16" height="64" width="183" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+line(band=header.1 x1="9" y1="92" x2="5298" y2="92"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=header.1 id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="16" height="64" width="325" format="[general]" html.valueishtml="0"  name=annuity_eligibility_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=header.1 id=27 alignment="0" tabsequence=32766 border="0" color="33554432" x="722" y="16" height="64" width="347" format="[general]" html.valueishtml="0"  name=annuity_eligibility_status_code visible="1" dddw.name=dddw_annuity_eligibility_status dddw.displaycolumn=annuity_eligibility_status_desc dddw.datacolumn=annuity_eligibility_status_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="1" text="A/E Status:" border="0" color="33554432" x="384" y="16" height="64" width="311" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="1" text="A/E Start/End:" border="0" color="33554432" x="1157" y="16" height="64" width="402" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="2" text="to" border="0" color="33554432" x="1906" y="16" height="64" width="69" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=header.1 id=24 alignment="0" tabsequence=32766 border="0" color="33554432" x="1582" y="16" height="64" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=annuity_start_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=header.1 id=25 alignment="0" tabsequence=32766 border="0" color="33554432" x="2016" y="16" height="64" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=annuity_end_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="Confirmed:" border="0" color="33554432" x="2523" y="16" height="64" width="288" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=header.1 id=26 alignment="0" tabsequence=32766 border="0" color="33554432" x="2834" y="16" height="64" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=confirmed_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=header.1 id=30 alignment="0" tabsequence=32766 border="0" color="33554432" x="3493" y="16" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1~tif( IsNull(confirmed_date),1, If(string(confirmed_date,'yyyy-mm-dd') = '1900-01-01',1, 0))" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="Created:" border="0" color="33554432" x="3250" y="16" height="64" width="224" html.valueishtml="0"  name=t_21 visible="1~tif( IsNull(confirmed_date),1, If(string(confirmed_date,'yyyy-mm-dd') = '1900-01-01',1, 0))"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="A/E Pct:" border="0" color="33554432" x="3913" y="16" height="64" width="229" html.valueishtml="0"  name=t_18 visible="1"  slideleft=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+compute(band=header.1 alignment="0" expression=" annuity_set_aside_percent /100"border="0" color="33554432" x="4151" y="16" height="64" width="119" format="0%" html.valueishtml="0"  name=c_annuity_percentage visible="1"  slideleft=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="1" text="Benefit Option:" border="0" color="33554432" x="4411" y="16" height="64" width="398" html.valueishtml="0"  name=t_19 visible="1"  slideleft=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=header.1 id=28 alignment="0" tabsequence=32766 border="0" color="33554432" x="4823" y="16" height="64" width="197" format="[general]" html.valueishtml="0"  name=benefit_option_code visible="1"  slideleft=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=detail id=16 alignment="2" tabsequence=32766 border="0" color="33554432" x="2958" y="4" height="64" width="279" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="3255" y="4" height="64" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_entitlement_from_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="3653" y="4" height="64" width="302" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_entitlement_to_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="To" border="0" color="33554432" x="3570" y="4" height="64" width="73" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="3977" y="4" height="64" width="165" format="[general]" html.valueishtml="0"  name=number_of_days visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="33554432" x="4160" y="4" height="64" width="187" format="[general]" html.valueishtml="0"  name=number_of_hours visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="4366" y="4" height="64" width="210" format="[general]" html.valueishtml="0"  name=number_of_weeks visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="4594" y="4" height="64" width="224" format="[general]" html.valueishtml="0"  name=number_of_months visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="1" tabsequence=32766 border="0" color="33554432" x="4837" y="4" height="64" width="453" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=award_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="2" tabsequence=32766 border="0" color="33554432" x="5307" y="4" height="64" width="151" format="[general]" html.valueishtml="0"  name=award_freq_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=20 alignment="1" tabsequence=32766 border="0" color="33554432" x="5477" y="4" height="64" width="379" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=three_day_withhold_deduction_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="1" tabsequence=32766 border="0" color="33554432" x="5874" y="4" height="64" width="393" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=total_award_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="33554432" x="6286" y="4" height="64" width="457" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=benefit_entitlement_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=21 alignment="2" tabsequence=32766 border="0" color="33554432" x="6761" y="4" height="64" width="229" format="[general]" html.valueishtml="0"  name=deleted_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="33554432" x="7008" y="4" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=deleted_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="2569" y="4" height="64" width="370" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=23 alignment="2" tabsequence=32766 border="0" color="33554432" x="7410" y="4" height="64" width="183" format="[general]" html.valueishtml="0"  name=active_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="361" y="4" height="64" width="261" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="640" y="4" height="64" width="507" format="[general]" html.valueishtml="0"  name=opening_no visible="1" dddw.name=dddw_openings_list_ann dddw.displaycolumn=display dddw.datacolumn=opening_no dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1166" y="4" height="64" width="1381" format="[general]" html.valueishtml="0"  name=benefit_calculation_no visible="1" dddw.name=dddw_ben_calcs_for_annuities dddw.displaycolumn=drop_value dddw.datacolumn=benefit_calculation_no dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

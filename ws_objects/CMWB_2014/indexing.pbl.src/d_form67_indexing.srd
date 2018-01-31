@@ -1,0 +1,39 @@
+﻿$PBExportHeader$d_form67_indexing.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=67 color="536870912" )
+table(column=(type=datetime updatewhereclause=yes name=form67_submit_datetime dbname="form67_submit_datetime" )
+ column=(type=datetime updatewhereclause=yes name=form67_resubmit_datetime dbname="form67_resubmit_datetime" )
+ column=(type=datetime updatewhereclause=yes name=snb_export_datetime dbname="snb_export_datetime" )
+ column=(type=char(1) updatewhereclause=yes name=contact_language_code dbname="contact_language_code" )
+ retrieve="SELECT IFI.form67_submit_datetime,   
+       IFI.form67_resubmit_datetime,   
+       IFIH.snb_export_datetime, 
+       IFI.contact_language_code  
+  FROM I009_FORM67_IMPORT IFI,   
+       I009_FORM67_IMPORT_HISTORY IFIH 
+ WHERE IFI.import_no = IFIH.import_no 
+   AND IFI.docid = :an_docid 
+" arguments=(("an_docid", number)) )
+text(band=header alignment="0" text="Form67 Submit Datetime" border="4" color="33554432" x="11" y="13" height="58" width="647" html.valueishtml="0"  name=i009_form67_import_form67_submit_datetime_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="69" y="3" height="58" width="530" format="[shortdate] [time]" html.valueishtml="0"  name=form67_submit_datetime visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="775" y="3" height="58" width="530" format="[shortdate] [time]" html.valueishtml="0"  name=form67_resubmit_datetime visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1434" y="3" height="58" width="527" format="[shortdate] [time]" html.valueishtml="0"  name=snb_export_datetime visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Form67 Resubmit Datetime" border="4" color="33554432" x="684" y="13" height="58" width="713" html.valueishtml="0"  name=i009_form67_import_form67_resubmit_datetime_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Snb Export Datetime" border="4" color="33554432" x="1423" y="13" height="58" width="549" html.valueishtml="0"  name=i009_form67_import_history_snb_export_datetime_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Contact Language Code" border="4" color="33554432" x="1997" y="13" height="58" width="625" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="33554432" x="2066" y="3" height="54" width="486" html.valueishtml="0"  name=contact_language_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

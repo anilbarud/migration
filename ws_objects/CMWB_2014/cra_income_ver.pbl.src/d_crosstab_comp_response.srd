@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_crosstab_comp_response.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=4 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no  crosstab.dynamic = yes grid.lines=1 grid.columnmove=no selected.mouse=no )
+header[1](height=0 color="536870912" )
+header[2](height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=char(20) updatewhereclause=yes name=cra_txn_sub_code dbname="cra_txn_sub_code" )
+ column=(type=char(20) updatewhereclause=yes name=cra_txn_sub_desc dbname="cra_txn_sub_desc" )
+ column=(type=decimal(0) updatewhereclause=yes name=cra_line_amount dbname="cra_line_amount" )
+ retrieve="  SELECT  a.cra_txn_sub_desc ,           
+b.import_no ,           
+b.record_no ,           
+b.iv_request_no ,           
+b.cra_txn_code ,          
+b.sin_no ,           
+b.tax_year ,           
+b.cra_txn_sub_code ,           
+b.cra_line_amount 
+FROM Iv_Cra_Txn_Sub a,           
+v_I015_IV_RESPONSE_TAX_LINE_WHSCC b, 
+IV_REQUEST c
+WHERE (( a.cra_txn_sub_code = b.cra_txn_sub_code )
+AND   ( b.iv_request_no = c.iv_request_no)
+AND   ( b.import_no = c.i015_import_no)
+AND   ( c.iv_request_no = :al_request_no) )  " arguments=(("al_request_no", number))  sort="cra_txn_sub_code A cra_txn_sub_desc A " )
+text(band=header[1] alignment="0" text=" " border="0" color="33554432" x="9" y="4" height="64" width="210" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="1" text="@tax_year" border="4" color="33554432" x="1371" y="4" height="72" width="361" html.valueishtml="0"  name=cra_line_amount_t visible="1"  font.face="Arial" font.height="-11" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="76" width="210" format="[general]" html.valueishtml="0"  name=cra_txn_sub_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="229" y="4" height="76" width="1134" format="[general]" html.valueishtml="0"  name=cra_txn_sub_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="1376" y="4" height="76" width="357" format="[general]" html.valueishtml="0"  name=cra_line_amount visible="1" editmask.mask="$###,###.00" editmask.focusrectangle=no crosstab.repeat=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="0" y1="60" x2="3799" y2="60"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="67108864"  background.mode="2" background.color="268435456" )
+ crosstab(band = foreground  crosstabonly = yes 
+ columns = "tax_year" rows = "cra_txn_sub_code, cra_txn_sub_desc" values = "cra_line_amount" sourcenames = "cra_txn_sub_desc, import_no, record_no, iv_request_no, cra_txn_code, sin_no, tax_year, cra_txn_sub_code, cra_line_amount")
+sparse(names="cra_txn_sub_code")htmltable(border="0" cellpadding="1" cellspacing="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,16 @@
+﻿$PBExportHeader$d_reviewed_document.srd
+$PBExportComments$REVIEWED_DOCUMENTS Retrieve - Used to display who and when a document was reviewed.
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=89 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(8) update=yes name=reviewed_by_user_id dbname="REVIEWED_DOCUMENTS.reviewed_by_user_id" )
+ column=(type=datetime update=yes name=reviewed_date dbname="REVIEWED_DOCUMENTS.reviewed_date" )
+ retrieve="SELECT REVIEWED_DOCUMENTS.reviewed_by_user_id, REVIEWED_DOCUMENTS.reviewed_date FROM REVIEWED_DOCUMENTS WHERE REVIEWED_DOCUMENTS.docid = :ll_docid " arguments=(("ll_docid", number)) )
+line(band=header x1="1" y1="84" x2="1025" y2="84" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Reviewed By"border="0" color="0" x="14" y="12" height="61" width="330"  name=reviewed_by_user_id_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Reviewed Date"border="0" color="0" x="435" y="12" height="61" width="385"  name=reviewed_date_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="61" width="375" format="[general]"  name=reviewed_by_user_id edit.limit=8 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="435" y="4" height="61" width="385" format="yyyy-mm-dd"  name=reviewed_date edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

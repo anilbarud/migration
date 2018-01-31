@@ -1,0 +1,58 @@
+﻿$PBExportHeader$d_travel_expenses_scheduled.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=datetime updatewhereclause=yes name=service_date dbname="service_date" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=char(40) updatewhereclause=yes name=name dbname="name" )
+ column=(type=long updatewhereclause=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ column=(type=long updatewhereclause=yes name=line_no dbname="line_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=travel dbname="travel" values="	1/	0" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ retrieve="Select   a.service_date,
+           c.billable_item_desc_e,
+           e.name,
+           a.rehab_invoice_no,
+           a.line_no,
+           a.claim_no,
+           'travel' = CASE
+                      WHEN f.payment_no = :al_payment_no THEN 1
+                      ELSE 0
+                      END,
+          f.payment_no,
+          b.billable_item_no
+From     REHAB_INVOICE_LINE_ITEM a 
+JOIN     Billable_Item_Rehab_Task_Xref b on a.billable_xref_no = b.billable_xref_no
+JOIN     Billable_Item c on b.billable_item_no = c.billable_item_no
+JOIN     REHAB_INVOICE d on a.rehab_invoice_no = d.rehab_invoice_no
+JOIN     PROVIDER e on d.provider_no = e.provider_no and d.provider_type_code = e.provider_type_code
+LEFT JOIN IW_TRAVEL_EXPENSE f on f.claim_no = a.claim_no and f.rehab_invoice_no = a.rehab_invoice_no and f.line_no = a.line_no
+Where    a.claim_no =  :al_claim_no
+And      b.billable_item_no IN (172,173, 256)
+And      (f.iw_travel_expense_no > 0 OR f.payment_no = 1)
+And      NOT EXISTS (Select g.payment_no From APPLIED_CLAIM_TXN g Where g.payment_no = f.payment_no)
+Order By a.service_date DESC" arguments=(("al_claim_no", number),("al_payment_no", number)) )
+text(band=header alignment="0" text="Service Date" border="6" color="33554432" x="9" y="12" height="56" width="320" html.valueishtml="0"  name=service_date_t  tag="Service Date" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Service" border="6" color="33554432" x="347" y="12" height="56" width="946" html.valueishtml="0"  name=t_1  tag="Service" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Payment No" border="6" color="33554432" x="2670" y="12" height="56" width="439" html.valueishtml="0"  name=t_4  tag="Payment No" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Clinic" border="6" color="33554432" x="1312" y="12" height="56" width="1339" html.valueishtml="0"  name=t_2  tag="Clinic" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="4" height="64" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=service_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="347" y="4" height="64" width="951" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="2670" y="4" height="64" width="430" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1317" y="4" height="64" width="1330" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

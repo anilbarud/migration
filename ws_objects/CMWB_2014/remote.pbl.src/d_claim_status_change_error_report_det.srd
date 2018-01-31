@@ -1,0 +1,28 @@
+﻿$PBExportHeader$d_claim_status_change_error_report_det.srd
+$PBExportComments$Details for claim status change error report
+release 6;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_status_process_exception_claim_no dbname="claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=claim_status_process_exception_claim_sta dbname="claim_status_process_code" )
+ column=(type=char(50) updatewhereclause=yes name=claim_status_process_claim_status_proces dbname="claim_status_process_desc" )
+ column=(type=char(3) updatewhereclause=yes name=claim_status_process_exception_claim_sta_1 dbname="claim_status_exception_code" )
+ column=(type=char(50) updatewhereclause=yes name=claim_status_exception_claim_status_exce dbname="claim_status_exception_desc" )
+ retrieve="  SELECT CLAIM_STATUS_PROCESS_EXCEPTION.claim_no,   
+         CLAIM_STATUS_PROCESS_EXCEPTION.claim_status_process_code,   
+         Claim_Status_Process.claim_status_process_desc,   
+         CLAIM_STATUS_PROCESS_EXCEPTION.claim_status_exception_code,   
+         Claim_Status_Exception.claim_status_exception_desc   
+FROM  Claim_Status_Exception 
+    RIGHT OUTER JOIN  CLAIM_STATUS_PROCESS_EXCEPTION  ON CLAIM_STATUS_PROCESS_EXCEPTION.claim_status_exception_code = Claim_Status_Exception.claim_status_exception_code
+    LEFT OUTER JOIN  Claim_Status_Process  ON CLAIM_STATUS_PROCESS_EXCEPTION.claim_status_process_code = Claim_Status_Process.claim_status_process_code
+ WHERE CLAIM_STATUS_PROCESS_EXCEPTION.claim_no = :al_claim_no
+ORDER BY 2, 4  
+" arguments=(("al_claim_no", number))  sort="sort_name_age A claim_status_process_exception_claim_no A " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="60" width="110" format="[general]"  name=claim_status_process_exception_claim_sta edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="155" y="4" height="60" width="910" format="[general]"  name=claim_status_process_claim_status_proces edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1120" y="4" height="60" width="110" format="[general]"  name=claim_status_process_exception_claim_sta_1 edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1262" y="4" height="60" width="1431" format="[general]"  name=claim_status_exception_claim_status_exce edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

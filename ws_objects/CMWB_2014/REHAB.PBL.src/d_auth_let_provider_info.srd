@@ -1,0 +1,28 @@
+﻿$PBExportHeader$d_auth_let_provider_info.srd
+$PBExportComments$retrieves & holds provider address data to beused for  auto. authorization letters
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=449 color="536870912" )
+table(column=(type=char(30) updatewhereclause=yes name=name dbname="PROVIDER.name" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="PROVIDER.address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="PROVIDER.address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="PROVIDER.city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="PROVIDER.prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=country_code dbname="PROVIDER.country_code" )
+ column=(type=char(9) updatewhereclause=yes name=postal_code dbname="PROVIDER.postal_code" )
+ column=(type=char(30) updatewhereclause=yes name=contact_name dbname="PROVIDER.contact_name" )
+ column=(type=char(1) updatewhereclause=yes name=provider_active_flag dbname="PROVIDER.active_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"PROVIDER~" )  TABLE(NAME=~"REHAB_TASK~" ) COLUMN(NAME=~"PROVIDER.name~") COLUMN(NAME=~"PROVIDER.address_line1~") COLUMN(NAME=~"PROVIDER.address_line2~") COLUMN(NAME=~"PROVIDER.city~") COLUMN(NAME=~"PROVIDER.prov_state_code~") COLUMN(NAME=~"PROVIDER.country_code~") COLUMN(NAME=~"PROVIDER.postal_code~") COLUMN(NAME=~"PROVIDER.contact_name~") COLUMN(NAME=~"PROVIDER.active_flag~")    JOIN (LEFT=~"PROVIDER.provider_no~"    OP =~"=~"RIGHT=~"REHAB_TASK.provider_no~" )WHERE(    EXP1 =~"REHAB_TASK.claim_no~"   OP =~"=~"    EXP2 =~":claim_no~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"REHAB_TASK.task_no~"   OP =~"=~"    EXP2 =~":task_no~" ) ) ARG(NAME = ~"claim_no~" TYPE = number)  ARG(NAME = ~"task_no~" TYPE = number) " arguments=(("claim_no", number),("task_no", number)) )
+text(band=header alignment="2" text="Provider
+Contact Name"border="0" color="0" x="4517" y="4" height="129" width="851"  name=provider_contact_name_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Provider
+Active Flag"border="0" color="0" x="5377" y="4" height="129" width="325"  name=provider_active_flag_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="4343" y="4" height="77" width="55" format="[general]"  name=provider_active_flag edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="184" height="77" width="851" format="[general]"  name=address_line1 edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="272" height="77" width="851" format="[general]"  name=address_line2 edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" city  + ~", ~" + prov_state_code  +  ~", ~" + country_code  + ~"  ~" + postal_code "border="0" color="0" x="23" y="360" height="77" width="924"  name=address_line3  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="96" height="77" width="522" format="[general]"  name=name edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="8" height="77" width="595" format="[general]"  name=contact_name edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

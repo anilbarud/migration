@@ -1,0 +1,16 @@
+﻿$PBExportHeader$dddw_payment_method_codes_acct.srd
+$PBExportComments$Valid payment method codes
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=68 color="536870912" )
+table(column=(type=char(1) update=yes updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=payment_method_desc dbname="payment_method_desc" )
+ retrieve="SELECT  a.payment_method_code , a.payment_method_desc 
+ FROM Payment_Method a  
+where a.payment_method_code <> ~"R~" " )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="9" y="4" height="64" width="110" format="[general]" html.valueishtml="0"  name=payment_method_code visible="1" edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="137" y="4" height="64" width="1275" format="[general]" html.valueishtml="0"  name=payment_method_desc visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

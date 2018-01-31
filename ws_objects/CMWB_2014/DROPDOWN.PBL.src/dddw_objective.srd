@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_objective.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(40) update=yes updatewhereclause=yes name=objective_desc dbname="Objective.objective_desc" )
+ column=(type=char(2) update=yes updatewhereclause=yes key=yes name=objective_code dbname="Objective.objective_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Objective~" ) COLUMN(NAME=~"Objective.objective_desc~") COLUMN(NAME=~"Objective.objective_code~")) ORDER(NAME=~"Objective.objective_desc~" ASC=yes ) " update="Objective" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="5" y="4" height="77" width="2172" format="[general]"  name=objective_desc edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="2355" y="4" height="77" width="83" format="[general]"  name=objective_code edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

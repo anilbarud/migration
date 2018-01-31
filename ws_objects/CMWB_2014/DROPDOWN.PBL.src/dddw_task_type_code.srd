@@ -1,0 +1,24 @@
+﻿$PBExportHeader$dddw_task_type_code.srd
+$PBExportComments$List of all Task Types (selects active flag so that inactive can be filtered out)
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_type_desc dbname="task_type_desc" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="SELECT a.task_type_code ,
+           a.task_type_desc ,
+           a.active_flag     
+ FROM Task_Type a,
+		Task_Specific b
+WHERE a.task_type_code = b.task_type_code
+			and b.task_entry_flag = 'Y' 
+group by  a.task_type_code ,
+           a.task_type_desc ,
+           a.active_flag
+ORDER BY a.task_type_desc          ASC  " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="14" y="4" height="64" width="805" format="[general]" html.valueishtml="0"  name=task_type_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

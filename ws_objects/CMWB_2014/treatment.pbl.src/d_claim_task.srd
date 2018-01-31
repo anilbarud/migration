@@ -1,0 +1,74 @@
+﻿$PBExportHeader$d_claim_task.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=228 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" height.autosize=yes )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=task_sub_type_code dbname="task_sub_type_code" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=rehab_service_code dbname="rehab_service_code" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ column=(type=long update=yes updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(40) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(50) updatewhereclause=yes name=rehab_service_desc_e dbname="rehab_service_desc_e" )
+ column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(10) updatewhereclause=yes name=telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=discharge_date dbname="discharge_date" )
+ retrieve="SELECT a.claim_no,   
+       a.task_no,   
+       a.task_type_code,   
+       a.task_sub_type_code,   
+       a.rehab_service_code,   
+       a.rehab_program_code,   
+       a.provider_no,  
+       b.name,
+       c.rehab_service_desc_e,
+       d.rehab_program_desc_e,
+       b.address_line1, 
+	   b.city, 
+       b.prov_state_code,
+       b.telephone_no,
+       ' ' as discharge_date
+FROM  REHAB_TASK a
+JOIN  PROVIDER b on a.provider_no = b.provider_no and a.provider_type_code = b.provider_type_code
+JOIN   Rehab_Service c on a.rehab_service_code = c.rehab_service_code
+JOIN   Rehab_Program d on a.rehab_program_code = d.rehab_program_code
+WHERE a.claim_no = :ar_claim_no
+AND   a.rehab_conversion_code <> 'A'
+AND     b.provider_type_code = 'M'
+AND    a.rehab_service_code = 'S022'
+Group By a.claim_no, a.task_no, a.task_type_code, a.task_sub_type_code, a.rehab_service_code, a.rehab_program_code,a.provider_no, b.name,
+       c.rehab_service_desc_e,d.rehab_program_desc_e, b.address_line1, b.city, b.prov_state_code, b.telephone_no
+Order By task_no DESC
+
+" arguments=(("ar_claim_no", number)) )
+text(band=header alignment="2" text="Task Type Code" border="0" color="33554432" x="2999" y="76" height="64" width="462" html.valueishtml="0"  name=task_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Task Sub Type Code" border="0" color="33554432" x="3515" y="92" height="64" width="594" html.valueishtml="0"  name=task_sub_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Provider" border="6" color="33554432" x="0" y="8" height="56" width="311" html.valueishtml="0"  name=comment_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Name" border="6" color="33554432" x="329" y="8" height="56" width="1289" html.valueishtml="0"  name=t_1  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Program / Task No" border="6" color="33554432" x="1637" y="8" height="60" width="1454" html.valueishtml="0"  name=t_2  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="18" y="4" height="64" width="288" format="[general]" html.valueishtml="0"  name=provider_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="2574" y="84" height="60" width="539" format="[general]" html.valueishtml="0"  name=telephone_no visible="1" editmask.mask="(###) ###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim(  city )+~", ~"+Trim( prov_state_code )"border="0" color="33554432" x="1632" y="84" height="60" width="928" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( rehab_program_desc_e ) + ~" / ~" +  task_no "border="0" color="33554432" x="1632" y="8" height="60" width="1477" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="325" y="8" height="64" width="1298" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="325" y="84" height="60" width="1298" format="[general]" html.valueishtml="0"  name=address_line1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="325" y="160" height="60" width="462" format="[general]" html.valueishtml="0"  name=discharge_date visible="1"  slideup=allabove height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="D/C" border="0" color="255" x="155" y="160" height="60" width="101" html.valueishtml="0"  name=t_3 visible="1~tif( discharge_date > '1900-01-01',1,0)"  slideup=allabove  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

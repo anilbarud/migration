@@ -1,0 +1,8 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "view_cmn.pbl" "";
+@end;
+@begin Objects 
+ "d_document_type.srd" "view_cmn.pbl";
+ "u_image_append.sru" "view_cmn.pbl";
+@end;

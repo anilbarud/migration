@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_admin_regions_for_report.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=389 color="536870912" )
+table(column=(type=char(3) name=admin_region_code dbname="admin_region_code" )
+ )
+rectangle(band=detail x="10" y="36" height="341" width="1418" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="2" background.color="0" )
+rectangle(band=detail x="14" y="40" height="341" width="1418" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=detail alignment="0" text="Regions"border="0" color="0" x="51" y="4" height="61" width="211"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="55" y="92" height="69" width="942" format="[general]"  name=admin_region_code dddw.name=dddw_admin_region dddw.displaycolumn=admin_region_desc dddw.datacolumn=admin_region_code dddw.percentwidth=100 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Note: No selection will produce report for all regions"border="0" color="0" x="60" y="288" height="61" width="1340"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

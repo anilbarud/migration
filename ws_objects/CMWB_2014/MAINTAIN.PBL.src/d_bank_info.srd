@@ -1,0 +1,45 @@
+﻿$PBExportHeader$d_bank_info.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=240 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=bank_info_no dbname="bank_info_no" )
+ column=(type=long update=yes updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=bank_no dbname="bank_no" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=bank_transit_no dbname="bank_transit_no" )
+ column=(type=char(18) update=yes updatewhereclause=yes name=bank_account_no dbname="bank_account_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=bank_info_purpose_code dbname="bank_info_purpose_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=recipient_sub_type_code dbname="recipient_sub_type_code" )
+ retrieve="
+SELECT   BANK_INFO.bank_info_no,
+         BANK_INFO.recipient_no,   
+         BANK_INFO.bank_no,   
+         BANK_INFO.bank_transit_no,   
+         BANK_INFO.bank_account_no,   
+         BANK_INFO.recipient_type_code,
+		BANK_INFO.bank_info_purpose_code, 
+		BANK_INFO.recipient_sub_type_code
+    FROM BANK_INFO
+   WHERE ( BANK_INFO.recipient_no = :al_recipient_no) and
+		 ( BANK_INFO.recipient_type_code = :as_recipient_type_code) and
+		 ( BANK_INFO.recipient_sub_type_code = :as_recipient_sub_type_code)" update="BANK_INFO" updatewhere=2 updatekeyinplace=yes arguments=(("al_recipient_no", number),("as_recipient_type_code", string),("as_recipient_sub_type_code", string)) )
+text(band=detail alignment="0" text="Bank No:" border="0" color="33554432" x="9" y="20" height="56" width="521" html.valueishtml="0"  name=bank_no_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Bank Transit No:" border="0" color="33554432" x="9" y="92" height="56" width="521" html.valueishtml="0"  name=bank_transit_no_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Bank Account No:" border="0" color="33554432" x="9" y="164" height="56" width="521" html.valueishtml="0"  name=bank_account_no_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=70 border="5" color="33554432" x="558" y="164" height="52" width="562" format="[general]" html.valueishtml="0"  name=bank_account_no visible="1" edit.limit=18 edit.case=upper edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=60 border="5" color="33554432" x="558" y="92" height="52" width="562" format="[General]" html.valueishtml="0"  name=bank_transit_no visible="1" editmask.mask="#####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=50 border="5" color="33554432" x="558" y="20" height="52" width="562" format="[General]" html.valueishtml="0"  name=bank_no visible="1" editmask.mask="###" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

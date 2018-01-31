@@ -1,0 +1,84 @@
+﻿$PBExportHeader$ds_non_whscc_recipients.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes key=yes name=annuity_payout_recipient_no dbname="annuity_payout_recipient_no" )
+ column=(type=char(1) updatewhereclause=yes key=yes name=annuity_payout_recipient_type_code dbname="annuity_payout_recipient_type_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=name_on_cheque dbname="name_on_cheque" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=address_line3 dbname="address_line3" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=address_line4 dbname="address_line4" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=address_line5 dbname="address_line5" )
+ column=(type=char(1) updatewhereclause=yes name=new_name_on_cheque dbname="new_name_on_cheque" )
+ column=(type=char(1) updatewhereclause=yes name=new_address_line1 dbname="new_address_line1" )
+ column=(type=char(1) updatewhereclause=yes name=new_address_line2 dbname="new_address_line2" )
+ column=(type=char(1) updatewhereclause=yes name=new_address_line3 dbname="new_address_line3" )
+ column=(type=char(1) updatewhereclause=yes name=new_address_line4 dbname="new_address_line4" )
+ column=(type=char(1) updatewhereclause=yes name=new_address_line5 dbname="new_address_line5" )
+ retrieve="SELECT annuity_payout_no,
+       annuity_payout_recipient_no,
+       annuity_payout_recipient_type_code,
+       name_on_cheque,
+       address_line1,
+       address_line2,
+       address_line3,
+       address_line4,
+       address_line5,
+       '' as new_name_on_cheque,
+       '' as new_address_line1,
+       '' as new_address_line2,
+       '' as new_address_line3,
+       '' as new_address_line4,
+       '' as new_address_line5
+FROM   ANNUITY_PAYOUT_RECIPIENT
+WHERE  NOT (  annuity_payout_recipient_no        = 7
+          and annuity_payout_recipient_type_code = 'O' )
+AND    annuity_payout_no = :al_annuity_payout_no
+ORDER BY annuity_payout_recipient_no,
+         annuity_payout_recipient_type_code" update="ANNUITY_PAYOUT_RECIPIENT" updatewhere=1 updatekeyinplace=yes arguments=(("al_annuity_payout_no", number)) )
+text(band=header alignment="2" text="Annuity Payout No" border="0" color="33554432" x="9" y="8" height="64" width="681" html.valueishtml="0"  name=annuity_payout_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Payout Recipient No" border="0" color="33554432" x="709" y="8" height="64" width="933" html.valueishtml="0"  name=annuity_payout_recipient_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Payout Recipient Type Code" border="0" color="33554432" x="1655" y="8" height="64" width="1207" html.valueishtml="0"  name=annuity_payout_recipient_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Name On Cheque" border="0" color="33554432" x="2875" y="8" height="64" width="1125" html.valueishtml="0"  name=name_on_cheque_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address Line1" border="0" color="33554432" x="4014" y="8" height="64" width="882" html.valueishtml="0"  name=address_line1_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address Line2" border="0" color="33554432" x="4910" y="8" height="64" width="626" html.valueishtml="0"  name=address_line2_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address Line3" border="0" color="33554432" x="5550" y="8" height="64" width="663" html.valueishtml="0"  name=address_line3_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address Line4" border="0" color="33554432" x="6226" y="8" height="64" width="517" html.valueishtml="0"  name=address_line4_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address Line5" border="0" color="33554432" x="6921" y="8" height="64" width="553" html.valueishtml="0"  name=address_line5_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="9" y="8" height="76" width="681" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="699" y="8" height="76" width="933" format="[general]" html.valueishtml="0"  name=annuity_payout_recipient_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="1641" y="8" height="76" width="1207" format="[general]" html.valueishtml="0"  name=annuity_payout_recipient_type_code visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="0" color="33554432" x="2857" y="8" height="76" width="1125" format="[general]" html.valueishtml="0"  name=name_on_cheque visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="33554432" x="3991" y="8" height="76" width="882" format="[general]" html.valueishtml="0"  name=address_line1 visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="33554432" x="4882" y="8" height="76" width="626" format="[general]" html.valueishtml="0"  name=address_line2 visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=70 border="0" color="33554432" x="5518" y="8" height="76" width="663" format="[general]" html.valueishtml="0"  name=address_line3 visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=80 border="0" color="33554432" x="6190" y="8" height="76" width="517" format="[general]" html.valueishtml="0"  name=address_line4 visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=90 border="0" color="33554432" x="6715" y="8" height="76" width="553" format="[general]" html.valueishtml="0"  name=address_line5 visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=100 border="0" color="33554432" x="7282" y="0" height="64" width="18" html.valueishtml="0"  name=new_name_on_cheque visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="New Name On Cheque" border="0" color="33554432" x="7278" y="4" height="76" width="23" html.valueishtml="0"  name=new_name_on_cheque_t visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=11 alignment="0" tabsequence=110 border="0" color="33554432" x="7314" y="0" height="64" width="18" html.valueishtml="0"  name=new_address_line1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="New Address Line1" border="0" color="33554432" x="7310" y="4" height="76" width="23" html.valueishtml="0"  name=new_address_line1_t visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=12 alignment="0" tabsequence=120 border="0" color="33554432" x="7346" y="0" height="64" width="18" html.valueishtml="0"  name=new_address_line2 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="New Address Line2" border="0" color="33554432" x="7342" y="4" height="76" width="23" html.valueishtml="0"  name=new_address_line2_t visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=13 alignment="0" tabsequence=130 border="0" color="33554432" x="7378" y="0" height="64" width="18" html.valueishtml="0"  name=new_address_line3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="New Address Line3" border="0" color="33554432" x="7374" y="4" height="76" width="23" html.valueishtml="0"  name=new_address_line3_t visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=14 alignment="0" tabsequence=140 border="0" color="33554432" x="7410" y="0" height="64" width="18" html.valueishtml="0"  name=new_address_line4 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="New Address Line4" border="0" color="33554432" x="7406" y="4" height="76" width="23" html.valueishtml="0"  name=new_address_line4_t visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=15 alignment="0" tabsequence=150 border="0" color="33554432" x="7442" y="0" height="64" width="18" html.valueishtml="0"  name=new_address_line5 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="New Address Line5" border="0" color="33554432" x="7438" y="4" height="76" width="23" html.valueishtml="0"  name=new_address_line5_t visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

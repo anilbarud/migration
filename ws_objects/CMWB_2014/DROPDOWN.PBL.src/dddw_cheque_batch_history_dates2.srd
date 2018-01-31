@@ -1,0 +1,16 @@
+﻿$PBExportHeader$dddw_cheque_batch_history_dates2.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=datetime updatewhereclause=yes name=processed_date dbname="CHEQUE_BATCH_HISTORY.processed_date" )
+ column=(type=long updatewhereclause=yes name=cheque_batch_no dbname="CHEQUE_BATCH_HISTORY.cheque_batch_no" )
+ retrieve="  SELECT DISTINCT processed_date, cheque_batch_no
+    FROM CHEQUE_BATCH_HISTORY 
+GROUP BY processed_date, cheque_batch_no  
+ORDER BY processed_date DESC, cheque_batch_no DESC
+" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="8" height="61" width="526" format="YYYY-MM-DD HH:MM:SS"  name=processed_date editmask.mask="YYYY-MM-DD HH:MM:SS" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="778" y="8" height="61" width="179" format="[general]"  name=cheque_batch_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

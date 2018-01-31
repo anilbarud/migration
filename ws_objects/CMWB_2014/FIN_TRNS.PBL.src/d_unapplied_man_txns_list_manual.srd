@@ -1,0 +1,104 @@
+﻿$PBExportHeader$d_unapplied_man_txns_list_manual.srd
+$PBExportComments$List of all unapplied (unposted) manual cost of claims txns.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=140 color="10789024" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=payment_payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=payment_claim_no dbname="claim_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_payment_type_code dbname="payment_type_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=payment_paid_days_lost dbname="paid_days_lost" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_to_date dbname="paid_to_date" )
+ column=(type=long updatewhereclause=yes name=txn_no dbname="txn_no" )
+ column=(type=char(1) updatewhereclause=yes name=unapplied_claim_txn_txn_type_code dbname="txn_type_code" )
+ column=(type=long updatewhereclause=yes name=unapplied_claim_txn_recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=unapplied_claim_txn_recipient_type_code dbname="recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=unapplied_claim_txn_coc_period dbname="coc_period" )
+ column=(type=long updatewhereclause=yes name=unapplied_claim_txn_cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=unapplied_claim_txn_cost_alloc_operation dbname="cost_alloc_operation_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=unapplied_claim_txn_txn_amount dbname="txn_amount" )
+ column=(type=datetime updatewhereclause=yes name=unapplied_claim_txn_scheduled_processing dbname="scheduled_processing_date" )
+ column=(type=char(40) updatewhereclause=yes name=unapplied_claim_txn_explanation dbname="explanation" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="given_names" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=txn_unit_of_work_no dbname="txn_unit_of_work_no" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(10) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(10) updatewhereclause=yes name=country dbname="country" )
+ retrieve="SELECT P.payment_no,
+       P.claim_no,
+       P.payment_type_code,
+       P.paid_days_lost,
+       P.paid_from_date,
+       P.paid_to_date,
+       UCT.txn_no,
+       UCT.txn_type_code, 
+       UCT.recipient_no,
+       UCT.recipient_type_code,
+       UCT.coc_period,
+       COCA.cost_alloc_no,
+       COCA.cost_alloc_operation_no,
+       UCT.txn_amount,
+       UCT.scheduled_processing_date,
+       UCT.explanation,
+       I.last_name,
+       I.given_names,
+       UCT.cheque_no,
+       P.payment_sub_type_code,
+       UCT.txn_unit_of_work_no,
+       UCT.address_line1,
+       UCT.address_line2,
+       UCT.city,
+       UCT.prov_state_code,
+       UCT.postal_code,
+       UCT.country
+
+FROM                PAYMENT                      P
+INNER JOIN          UNAPPLIED_CLAIM_TXN  UCT  ON P.payment_no     = UCT.payment_no
+LEFT OUTER JOIN COST_OF_CLAIMS_ALLOCATED COCA ON UCT.txn_no       = COCA.txn_no
+INNER JOIN          INDIVIDUAL     I          ON UCT.recipient_no = I.individual_no 
+WHERE   UCT.txn_type_code       = '8'
+AND     UCT.recipient_type_code = 'I'
+AND     UCT.batch_no            = 0
+AND     UCT.txn_unit_of_work_no = 0
+              
+ORDER BY P.claim_no, P.payment_no" )
+line(band=header x1="0" y1="136" x2="3168" y2="136"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim" border="0" color="0" x="50" y="68" height="60" width="146" html.valueishtml="0"  name=payment_claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Recipient" border="0" color="0" x="279" y="68" height="60" width="270" html.valueishtml="0"  name=unapplied_claim_txn_recipient_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Pymnt
+Type" border="0" color="0" x="1573" y="8" height="120" width="183" html.valueishtml="0"  name=payment_payment_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cost Alloc" border="0" color="0" x="1833" y="68" height="60" width="270" html.valueishtml="0"  name=unapplied_claim_txn_cost_alloc_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Posting
+Period" border="0" color="0" x="2176" y="8" height="120" width="197" html.valueishtml="0"  name=unapplied_claim_txn_coc_period_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Amount" border="0" color="0" x="2519" y="68" height="60" width="201" html.valueishtml="0"  name=unapplied_claim_txn_txn_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cheque
+No." border="0" color="0" x="2770" y="8" height="120" width="201" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="4" height="60" width="229" format="[general]" html.valueishtml="0"  name=payment_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="279" y="4" height="60" width="201" format="[general]" html.valueishtml="0"  name=unapplied_claim_txn_recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim(individual_given_names) + ~" ~" + Trim(individual_last_name)"border="0" color="0" x="507" y="4" height="60" width="1047" format="[general]" html.valueishtml="0"  name=claim_name visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" Trim(payment_payment_type_code) + ~"/~"+Trim( payment_sub_type_code )"border="0" color="0" x="1573" y="4" height="60" width="183" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="1774" y="4" height="60" width="201" format="[general]" html.valueishtml="0"  name=unapplied_claim_txn_cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="0" x="1989" y="4" height="60" width="165" format="[general]" html.valueishtml="0"  name=unapplied_claim_txn_cost_alloc_operation visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="2" tabsequence=32766 border="0" color="0" x="2171" y="4" height="60" width="201" format="####-##;'';'';''" html.valueishtml="0"  name=unapplied_claim_txn_coc_period visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="0" x="2395" y="4" height="60" width="352" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=unapplied_claim_txn_txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="2775" y="4" height="60" width="233" format="[general]" html.valueishtml="0"  name=cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

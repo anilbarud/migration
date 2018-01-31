@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_claims_for_individual.srd
+$PBExportComments$a list of claims that the individual play a role on - used for transferring changed to old system
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=long update=yes updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_operation_no dbname="cost_alloc_operation_no" )
+ retrieve="SELECT  claim_no, accident_date, cost_alloc_no, cost_alloc_operation_no
+  FROM CLAIM      
+ WHERE (individual_no in( :al_individual_no ) or claim_no = :al_claim_no)
+   and cost_alloc_no <> 0
+   and accident_date >= '2005-01-01'" update="CLAIM" updatewhere=0 updatekeyinplace=yes arguments=(("al_individual_no", numberlist),("al_claim_no", number)) )
+text(band=header alignment="2" text="Claim No" border="0" color="0" x="46" y="4" height="60" width="229" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="5" y="4" height="56" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="334" y="0" height="60" width="439" format="[shortdate] [time]" html.valueishtml="0"  name=accident_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="773" y="0" height="60" width="69" format="[general]" html.valueishtml="0"  name=cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="841" y="0" height="60" width="73" format="[general]" html.valueishtml="0"  name=cost_alloc_operation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,178 @@
+﻿$PBExportHeader$d_annuity_payout_recipient_report.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 92 print.margin.right = 92 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=100 color="536870912" )
+summary(height=112 color="536870912" )
+footer(height=80 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_recipient_no dbname="annuity_payout_recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_payout_recipient_type_code dbname="annuity_payout_recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=char(40) updatewhereclause=yes name=name_on_cheque dbname="name_on_cheque" )
+ column=(type=char(40) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(40) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(40) updatewhereclause=yes name=address_line3 dbname="address_line3" )
+ column=(type=char(40) updatewhereclause=yes name=address_line4 dbname="address_line4" )
+ column=(type=char(40) updatewhereclause=yes name=address_line5 dbname="address_line5" )
+ column=(type=char(40) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=decimal(2) updatewhereclause=yes name=net_annuity_payout_amount dbname="net_annuity_payout_amount" )
+ column=(type=char(41) updatewhereclause=yes name=payout_recipient_name dbname="payout_recipient_name" )
+ column=(type=long updatewhereclause=yes name=bh_recipient_no dbname="bh_recipient_no" )
+ column=(type=char(84) updatewhereclause=yes name=bh_recipient_desc dbname="bh_recipient_desc" )
+ column=(type=char(30) updatewhereclause=yes name=annuity_role_desc_e dbname="annuity_role_desc_e" )
+ column=(type=char(41) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=decimal(2) updatewhereclause=yes name=payment_amount dbname="payment_amount" )
+ retrieve="SELECT a.annuity_payout_no,
+       a.annuity_payout_recipient_no,
+       a.annuity_payout_recipient_type_code,
+       a.annuity_account_no,
+       a.cheque_no,
+       a.name_on_cheque,
+       a.address_line1,
+       a.address_line2,
+       a.address_line3,
+       a.address_line4,
+       a.address_line5,
+       a.comment,
+       a.net_annuity_payout_amount,
+       b.given_names + ' ' + b.last_name AS 'payout_recipient_name',
+       c.recipient_no AS 'bh_recipient_no',
+       e.given_names + ' ' + e.last_name + ' - ' + h.claim_role_desc AS 'bh_recipient_desc',
+       f.annuity_role_desc_e,
+       f.recipient_name,
+       f.payment_amount
+FROM   ANNUITY_PAYOUT_RECIPIENT   a
+JOIN   INDIVIDUAL                 b ON a.annuity_payout_recipient_no = b.individual_no
+JOIN   ANNUITY_PAYOUT_PARTICIPANT c ON a.annuity_payout_no = c.annuity_payout_no
+JOIN   Annuity_Role               d ON c.annuity_role_code = d.annuity_role_code
+JOIN   INDIVIDUAL                 e ON c.recipient_no = e.individual_no
+JOIN ( SELECT SUM(a.payment_amount)*-1       AS 'payment_amount',
+              a.recipient_no,
+              a.annuity_payout_recipient_no,
+              a.annuity_payout_recipient_type_code,
+              b.given_names +' '+ b.last_name       AS 'recipient_name',
+              d.annuity_role_desc_e
+       FROM   ANNUITY_PAYOUT_TXN_DETAIL  a
+       JOIN   INDIVIDUAL                 b ON a.recipient_no = b.individual_no
+       JOIN   ANNUITY_PAYOUT_PARTICIPANT c ON a.recipient_no        = c.recipient_no
+                                          AND a.recipient_type_code = c.recipient_type_code
+                                          AND a.annuity_payout_no   = c.annuity_payout_no
+       JOIN   Annuity_Role               d ON c.annuity_role_code = d.annuity_role_code
+       WHERE  a.annuity_payout_no = :al_annuity_payout_no
+       GROUP BY a.recipient_no,
+                a.annuity_payout_recipient_no,
+                a.annuity_payout_recipient_type_code,
+                b.given_names +' '+ b.last_name,
+                d.annuity_role_desc_e) f ON f.annuity_payout_recipient_no        = a.annuity_payout_recipient_no
+                                        AND f.annuity_payout_recipient_type_code = a.annuity_payout_recipient_type_code
+JOIN   ANNUITY_ACCOUNT                 g ON a.annuity_account_no = g.annuity_account_no
+JOIN   Claim_Role                      h ON g.claim_role_code = h.claim_role_code
+WHERE  a.annuity_payout_recipient_type_code = 'I'
+AND    d.annuity_eligibility_flag           = 'Y'
+AND    d.annuity_entitlement_flag           = 'Y'
+AND    a.annuity_payout_no                  = :al_annuity_payout_no
+UNION ALL
+SELECT a.annuity_payout_no,
+       a.annuity_payout_recipient_no,
+       a.annuity_payout_recipient_type_code,
+       a.annuity_account_no,
+       a.cheque_no,
+       a.name_on_cheque,
+       a.address_line1,
+       a.address_line2,
+       a.address_line3,
+       a.address_line4,
+       a.address_line5,
+       a.comment,
+       a.net_annuity_payout_amount,
+       b.name AS 'payout_recipient_name',
+       c.recipient_no AS 'bh_recipient_no',
+       e.given_names + ' ' + e.last_name + ' - ' + h.claim_role_desc AS 'bh_recipient_desc',
+       f.annuity_role_desc_e,
+       f.recipient_name,
+       f.payment_amount
+FROM   ANNUITY_PAYOUT_RECIPIENT   a
+JOIN   PROVIDER                   b ON a.annuity_payout_recipient_no = b.provider_no
+JOIN   ANNUITY_PAYOUT_PARTICIPANT c ON a.annuity_payout_no = c.annuity_payout_no
+JOIN   Annuity_Role               d ON c.annuity_role_code = d.annuity_role_code
+JOIN   INDIVIDUAL                 e ON c.recipient_no = e.individual_no
+JOIN ( SELECT SUM(a.payment_amount)*-1       AS 'payment_amount',
+              a.recipient_no,
+              a.annuity_payout_recipient_no,
+              a.annuity_payout_recipient_type_code,
+              b.given_names +' '+ b.last_name       AS 'recipient_name',
+              d.annuity_role_desc_e
+       FROM   ANNUITY_PAYOUT_TXN_DETAIL  a
+       JOIN   INDIVIDUAL                 b ON a.recipient_no = b.individual_no
+       JOIN   ANNUITY_PAYOUT_PARTICIPANT c ON a.recipient_no        = c.recipient_no
+                                          AND a.recipient_type_code = c.recipient_type_code
+                                          AND a.annuity_payout_no   = c.annuity_payout_no
+       JOIN   Annuity_Role               d ON c.annuity_role_code = d.annuity_role_code
+       WHERE  a.annuity_payout_no = :al_annuity_payout_no
+       GROUP BY a.recipient_no,
+                a.annuity_payout_recipient_no,
+                a.annuity_payout_recipient_type_code,
+                b.given_names +' '+ b.last_name, 
+                d.annuity_role_desc_e) f ON f.annuity_payout_recipient_no        = a.annuity_payout_recipient_no
+                                        AND f.annuity_payout_recipient_type_code = a.annuity_payout_recipient_type_code
+JOIN   ANNUITY_ACCOUNT            g ON a.annuity_account_no = g.annuity_account_no
+JOIN   Claim_Role                 h ON g.claim_role_code = h.claim_role_code
+WHERE  a.annuity_payout_recipient_type_code = 'O'
+AND    d.annuity_eligibility_flag           = 'Y'
+AND    d.annuity_entitlement_flag           = 'Y'
+AND    a.annuity_payout_no                  = :al_annuity_payout_no
+ORDER BY a.annuity_payout_recipient_no" arguments=(("al_annuity_payout_no", number)) )
+group(level=1 header.height=80 trailer.height=0 by=("annuity_payout_no" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=528 trailer.height=136 by=("name_on_cheque" ) header.suppress=yes header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="Payout Recipient Name - Type" border="0" color="33554432" x="329" y="20" height="64" width="878" html.valueishtml="0"  name=payout_recipient_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Payment Amount" border="0" color="33554432" x="3808" y="20" height="64" width="503" html.valueishtml="0"  name=payment_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+rectangle(band=header x="0" y="4" height="16" width="4352"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+rectangle(band=header x="0" y="88" height="16" width="4352"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="1" text="Annuity Payout No:" border="0" color="33554432" x="256" y="8" height="64" width="553" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="823" y="8" height="64" width="219" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+groupbox(band=header.2 text=""border="5" color="33554432" x="1787" y="116" height="380" width="2194"  name=gb_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header.2 alignment="0" expression="IF(annuity_payout_recipient_type_code = 'I', payout_recipient_name + ' - INDIVIDUAL', payout_recipient_name + ' - OTHER PAYEE' )"border="0" color="33554432" x="247" y="36" height="64" width="1385" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Payable To:" border="0" color="33554432" x="1701" y="36" height="64" width="366" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2094" y="36" height="64" width="1659" format="[general]" html.valueishtml="0"  name=name_on_cheque visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="3287" y="132" height="60" width="288" format="[general]" html.valueishtml="0"  name=cheque_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=12 alignment="0" tabsequence=60 border="0" color="33554432" x="3287" y="276" height="196" width="654" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Comment:" border="0" color="33554432" x="2958" y="276" height="60" width="306" html.valueishtml="0"  name=comment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="1" text="Cheque No:" border="0" color="33554432" x="2958" y="132" height="60" width="306" html.valueishtml="0"  name=cheque_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="1" text="Address:" border="0" color="33554432" x="1824" y="132" height="60" width="242" html.valueishtml="0"  name=address_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=7 alignment="0" tabsequence=10 border="0" color="33554432" x="2094" y="132" height="60" width="800" format="[general]" html.valueishtml="0"  name=address_line1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=8 alignment="0" tabsequence=20 border="0" color="33554432" x="2094" y="204" height="60" width="800" format="[general]" html.valueishtml="0"  name=address_line2 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=9 alignment="0" tabsequence=30 border="0" color="33554432" x="2094" y="276" height="60" width="800" format="[general]" html.valueishtml="0"  name=address_line3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=10 alignment="0" tabsequence=40 border="0" color="33554432" x="2094" y="348" height="60" width="800" format="[general]" html.valueishtml="0"  name=address_line4 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=11 alignment="0" tabsequence=50 border="0" color="33554432" x="2094" y="420" height="60" width="800" format="[general]" html.valueishtml="0"  name=address_line5 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=13 alignment="1" tabsequence=70 border="0" color="33554432" x="3995" y="36" height="64" width="347" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=net_annuity_payout_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header.2 x1="1467" y1="520" x2="4361" y2="520"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="759" y="16" height="64" width="1106" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="2007" y="16" height="64" width="1659" format="[general]" html.valueishtml="0"  name=annuity_role_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="1" tabsequence=32766 border="0" color="33554432" x="3922" y="16" height="64" width="421" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=payment_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=trailer.2 x1="3922" y1="8" x2="4343" y2="8"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.2 alignment="1" expression="sum(payment_amount for group 2)"border="0" color="33554432" x="3922" y="28" height="64" width="421" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.2 alignment="0" text="Total Payment Amount for Recipient for Payout:" border="0" color="33554432" x="2473" y="28" height="64" width="1385" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+rectangle(band=trailer.2 x="0" y="104" height="16" width="4361"  name=r_3 visible="1" brush.hatch="6" brush.color="16777215~trgb(220,220,220)" pen.style="5" pen.width="5" pen.color="16777215"  background.mode="2" background.color="33554432" )
+line(band=summary x1="3922" y1="4" x2="4343" y2="4"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=summary alignment="1" expression="sum(payment_amount for group 1)"border="0" color="33554432" x="3922" y="28" height="64" width="421" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="3922" y1="104" x2="4343" y2="104"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=summary alignment="0" text="Total Payment Amount for Payout:" border="0" color="33554432" x="2862" y="28" height="64" width="997" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="1" text="Annuity Account No:" border="0" color="33554432" x="55" y="12" height="64" width="585" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2633" y="12" height="64" width="402" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="3058" y="12" height="64" width="215" format="[general]" html.valueishtml="0"  name=bh_recipient_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=footer id=16 alignment="0" tabsequence=32766 border="0" color="33554432" x="1125" y="12" height="64" width="1362" format="[general]" html.valueishtml="0"  name=bh_recipient_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="0" y1="4" x2="4361" y2="4"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=footer id=4 alignment="0" tabsequence=80 border="0" color="33554432" x="654" y="12" height="64" width="210" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

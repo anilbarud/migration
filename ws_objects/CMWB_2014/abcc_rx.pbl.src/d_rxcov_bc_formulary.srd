@@ -1,0 +1,60 @@
+﻿$PBExportHeader$d_rxcov_bc_formulary.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=192 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=formulary_record_no dbname="formulary_record_no" )
+ column=(type=char(5) updatewhereclause=yes name=formulary_code dbname="formulary_code" )
+ column=(type=datetime updatewhereclause=yes name=formulary_start_date dbname="formulary_start_date" )
+ column=(type=datetime updatewhereclause=yes name=formulary_end_date dbname="formulary_end_date" )
+ column=(type=char(120) updatewhereclause=yes name=formulary_desc dbname="formulary_desc" )
+ retrieve="SELECT x.formulary_record_no,
+       x.formulary_code,
+       x.formulary_start_date,
+       x.formulary_end_date,
+       f.formulary_desc
+ From  CLAIM_FORMULARY x, 
+       Formulary f
+Where  x.claim_no = :ar_claim_no
+  And  x.formulary_code = f.formulary_code
+  And  export_no <> 0
+UNION
+Select x.formulary_record_no,
+       x.formulary_code,
+       x.formulary_start_date,
+       x.formulary_end_date,
+       f.formulary_desc
+  From CLAIM_FORMULARY_HISTORY x,
+       Formulary f
+ WHere x.claim_no = :ar_claim_no
+  And  x.formulary_code = f.formulary_code
+  And  x.formulary_history_no = (Select MAX(formulary_history_no)
+                                 From CLAIM_FORMULARY_HISTORY
+		                 Where claim_no = x.claim_no	
+		                 And formulary_record_no = x.formulary_record_no
+				 And export_no =(Select MAX(export_no)
+		                                 From CLAIM_FORMULARY_HISTORY
+		                                 Where claim_no = x.claim_no	
+		                                 And formulary_record_no = x.formulary_record_no
+						 And export_no <> 0))
+ AND NOT EXISTS (Select b.formulary_record_no
+		              From CLAIM_FORMULARY b
+		             Where b.claim_no = :ar_claim_no
+		               And export_no <> 0
+		               And b.formulary_record_no = x.formulary_record_no)	
+Order By x.formulary_start_date, x.formulary_end_date" arguments=(("ar_claim_no", number)) )
+line(band=header x1="14" y1="180" x2="2999" y2="180"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="End Date" border="0" color="33554432" x="425" y="96" height="64" width="274" html.valueishtml="0"  name=claim_formulary_formulary_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Code" border="0" color="33554432" x="850" y="96" height="64" width="155" html.valueishtml="0"  name=claim_formulary_formulary_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Desc" border="0" color="33554432" x="1083" y="96" height="64" width="146" html.valueishtml="0"  name=formulary_formulary_desc_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Start Date" border="0" color="33554432" x="14" y="96" height="64" width="293" html.valueishtml="0"  name=claim_formulary_formulary_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Formulary " border="0" color="33554432" x="14" y="16" height="64" width="315" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="IF( IsNULL ( formulary_end_date), ~"Open-Ended~" , STRING(DATE( formulary_end_date  ),~"yyyy-mm-dd~"))"border="0" color="33554432" x="425" y="8" height="64" width="384" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="850" y="8" height="64" width="192" format="[general]" html.valueishtml="0"  name=formulary_code visible="1" edit.limit=5 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1070" y="12" height="64" width="1929" format="[general]" html.valueishtml="0"  name=formulary_desc visible="1" edit.limit=120 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=formulary_start_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="2999" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=formulary_record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

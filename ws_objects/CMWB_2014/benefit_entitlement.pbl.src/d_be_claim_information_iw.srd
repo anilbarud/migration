@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_be_claim_information_iw.srd
+$PBExportComments$Injured worker
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=88 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ column=(type=datetime updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ retrieve="select a.claim_no, isnull(sum(x.sum_pymt),0.00), a.accident_date,
+       a.claim_status_type_code, a.claim_status_code 
+from CLAIM a
+join CLAIM_PARTICIPANT		  b on a.claim_no 			= b.claim_no 
+left join ( select sum(c.net_payment_amount) 'sum_pymt' , c.claim_no from PAYMENT	  c 
+            join Payment_Type		  d on d.payment_type_code 	= c.payment_type_code and d.annuity_flag = 'Y'
+         join Payment_Combination e on e.payment_type_code 	= d.payment_type_code
+          join Claim_Role_Opening_Type_Xref f on e.opening_type_code 	= f.opening_type_code
+		where f.claim_role_code			= :as_claim_role_code
+		and	f.annuity_eligibility_flag	= 'Y'
+          group by c.claim_no ) x on a.claim_no          	= x.claim_no
+WHERE b.individual_no 			= :al_individual_no
+and b.claim_role_code           = :as_claim_role_code
+GROUP BY a.claim_no, a.accident_date, a.claim_status_type_code, a.claim_status_code
+" arguments=(("al_individual_no", number),("as_claim_role_code", string)) )
+text(band=header alignment="1" text="Claim No" border="6" color="33554432" x="18" y="12" height="64" width="288" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="1" text="Accident Date" border="6" color="33554432" x="325" y="12" height="64" width="411" html.valueishtml="0"  name=accident_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Claim Status" border="6" color="33554432" x="754" y="12" height="64" width="498" html.valueishtml="0"  name=claim_status_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Total Net Amount" border="6" color="33554432" x="1943" y="12" height="64" width="507" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Claim Status Type" border="6" color="33554432" x="1271" y="12" height="64" width="654" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="18" y="8" height="68" width="288" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="325" y="8" height="68" width="411" format="yyyy-mm-dd" html.valueishtml="0"  name=accident_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="750" y="8" height="64" width="507" format="[general]" html.valueishtml="0"  name=claim_status_code visible="1" dddw.name=dddw_claim_status dddw.displaycolumn=claim_status_desc dddw.datacolumn=claim_status_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="1947" y="8" height="68" width="507" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_0002 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1271" y="8" height="68" width="654" format="[general]" html.valueishtml="0"  name=claim_status_type_code visible="1" dddw.name=dddw_claim_status_type dddw.displaycolumn=claim_status_type_desc dddw.datacolumn=claim_status_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,24 @@
+﻿$PBExportHeader$f_clean_string_3.srf
+global type f_clean_string_3 from function_object
+end type
+
+forward prototypes
+global function string f_clean_string_3 (string as_dirty_string)
+end prototypes
+
+global function string f_clean_string_3 (string as_dirty_string);
+STRING		ls_clean_string
+
+// uses user defined database function udf_Clean_String_3 to remove unwanted characters from a string argument & return the result
+SELECT	TOP 1 Convert(varchar(8000),dbo.udf_Clean_String_3(:as_dirty_string))
+INTO		:ls_clean_string
+FROM		sysobjects
+USING SQLCA;
+SQLCA.nf_handle_error("","f_clean_string_1","SELECT TOP 1 dbo.udf_Clean_String_3...")
+
+
+
+RETURN ls_clean_string
+
+end function
+

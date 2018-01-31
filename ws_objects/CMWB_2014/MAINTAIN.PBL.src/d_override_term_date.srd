@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_override_term_date.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=256 color="536870912"  height.autosize=yes)
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=record_no dbname="record_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=eligibility_end_date dbname="eligibility_end_date" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=comment dbname="comment" )
+ retrieve="SELECT claim_no, 
+       record_no, 
+       eligibility_end_date, 
+       comment 
+  FROM X001_OVERRIDE_ELIGIBILITY  
+ WHERE claim_no = :an_claim_no 
+   AND record_no = 0 
+" update="X001_OVERRIDE_ELIGIBILITY" updatewhere=0 updatekeyinplace=yes arguments=(("an_claim_no", number)) )
+text(band=detail alignment="0" text="OverrideTermination Date:" border="0" color="33554432" x="32" y="36" height="60" width="686" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Comment:" border="0" color="33554432" x="453" y="156" height="60" width="265" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="5" color="33554432" x="745" y="156" height="80" width="2098" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=100 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="2" tabsequence=10 border="5" color="33554432" x="745" y="36" height="80" width="366" format="[shortdate] [time]" html.valueishtml="0"  name=eligibility_end_date visible="1" editmask.mask="yyyy-mm-dd" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

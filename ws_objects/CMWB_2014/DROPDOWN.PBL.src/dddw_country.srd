@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dddw_country.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=85 color="536870912" )
+table(column=(type=char(5) key=yes name=location_code dbname="Location.location_code" )
+ column=(type=char(30) name=location_desc1 dbname="Location.location_desc1" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Location~" ) COLUMN(NAME=~"Location.location_code~") COLUMN(NAME=~"Location.location_desc1~")WHERE( EXP1 =~"Location.location_type_code~" OP =~"=~" EXP2 =~"'C'~" LOGIC =~"and~" ) WHERE( EXP1 =~"Location.active_flag~" OP =~"=~" EXP2 =~"'Y'~" LOGIC =~"and~" ) WHERE( EXP1 =~"Location.location_code~" OP =~"<>~" EXP2 =~"''~" ) ) " update="Location" updatewhere=1 updatekeyinplace=no  sort="location_desc1 A " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="12" height="57" width="1029" format="[general]"  name=location_desc1 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

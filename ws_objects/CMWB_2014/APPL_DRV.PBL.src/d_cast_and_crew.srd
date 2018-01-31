@@ -1,0 +1,13 @@
+﻿$PBExportHeader$d_cast_and_crew.srd
+$PBExportComments$Help About - Display names of development staff
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=209 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(30) name=cast_member_name dbname="cast_member_name" )
+ )
+text(band=header alignment="2" text="The Cast and Crew"border="0" color="0" x="23" y="40" height="65" width="549"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Led By:"border="0" color="0" x="23" y="116" height="61" width="549"  name=st_role  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="2" tabsequence=10 border="0" color="16711680" x="23" y="4" height="77" width="549" format="[general]"  name=cast_member_name edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )

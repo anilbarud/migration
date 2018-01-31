@@ -1,0 +1,31 @@
+﻿$PBExportHeader$d_mr_rehab_program.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ retrieve="  SELECT rehab_program_desc_e,   rehab_program_code  
+    FROM rehab_program   
+WHERE rehab_program_desc_e <> ''
+"  sort="rehab_program_desc_e A " )
+text(band=header alignment="0" text="Rehab Program" border="0" color="33554432" x="32" y="12" height="76" width="503" html.valueishtml="0"  name=t_tab_name visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Rehab_Program" border="0" color="33554432" x="347" y="8" height="76" width="521" html.valueishtml="0"  name=t_table_name visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="rehab_program_code" border="0" color="33554432" x="681" y="12" height="76" width="695" html.valueishtml="0"  name=t_key_column visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="N" border="0" color="33554432" x="1399" y="80" height="76" width="119" html.valueishtml="0"  name=t_special visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="56" width="841" format="[general]" html.valueishtml="0"  name=rehab_program_desc_e visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" rehab_program_code "border="0" color="33554432" x="325" y="232" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=item_key visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+compute(band=detail alignment="0" expression=" rehab_program_desc_e "border="0" color="33554432" x="1061" y="188" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=item_to_keep visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

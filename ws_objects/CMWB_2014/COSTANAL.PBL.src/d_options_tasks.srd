@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_options_tasks.srd
+$PBExportComments$SELECT from COST_ANALYSIS_OPTION_TASK for a given claim_no, cost_no, option_no, and task_no. Updates COST_ANALYSIS_OPTION_TASK.
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=1 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no grid.lines=0 )
+header(height=77 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=73 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="COST_ANALYSIS_OPTION_TASK.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=cost_no dbname="COST_ANALYSIS_OPTION_TASK.cost_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=option_no dbname="COST_ANALYSIS_OPTION_TASK.option_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=task_no dbname="COST_ANALYSIS_OPTION_TASK.task_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=task_type_code dbname="COST_ANALYSIS_OPTION_TASK.task_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=task_sub_type_code dbname="COST_ANALYSIS_OPTION_TASK.task_sub_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=task_specific_code dbname="COST_ANALYSIS_OPTION_TASK.task_specific_code" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=task_amount dbname="COST_ANALYSIS_OPTION_TASK.task_amount" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=comment dbname="COST_ANALYSIS_OPTION_TASK.comment" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="COST_ANALYSIS_OPTION_TASK.timestamp" )
+ column=(type=char(1) updatewhereclause=yes name=delete_flag dbname="delete_flag" values="	1/	0" )
+ retrieve="  SELECT COST_ANALYSIS_OPTION_TASK.claim_no,   
+         COST_ANALYSIS_OPTION_TASK.cost_no,   
+         COST_ANALYSIS_OPTION_TASK.option_no,   
+         COST_ANALYSIS_OPTION_TASK.task_no,   
+         COST_ANALYSIS_OPTION_TASK.task_type_code,   
+         COST_ANALYSIS_OPTION_TASK.task_sub_type_code,   
+         COST_ANALYSIS_OPTION_TASK.task_specific_code,   
+         COST_ANALYSIS_OPTION_TASK.task_amount,   
+         COST_ANALYSIS_OPTION_TASK.comment,   
+         COST_ANALYSIS_OPTION_TASK.timestamp,
+			~"~" delete_flag  
+    FROM COST_ANALYSIS_OPTION_TASK  
+   WHERE ( COST_ANALYSIS_OPTION_TASK.claim_no = :al_claimno ) AND  
+         ( COST_ANALYSIS_OPTION_TASK.cost_no = :al_costno ) AND  
+         ( COST_ANALYSIS_OPTION_TASK.option_no = :al_optionno )    
+" update="COST_ANALYSIS_OPTION_TASK" updatewhere=0 updatekeyinplace=yes arguments=(("al_claimno", number),("al_costno", number),("al_optionno", number)) )
+text(band=header alignment="0" text="Type"border="0" color="0" x="10" y="8" height="61" width="215"  name=task_type_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Sub Type"border="0" color="0" x="234" y="8" height="61" width="234"  name=task_sub_type_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Specific"border="0" color="0" x="476" y="8" height="61" width="215"  name=task_specific_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Amount"border="0" color="0" x="700" y="8" height="61" width="307"  name=task_amount_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Comment"border="0" color="33554432" x="1015" y="8" height="61" width="1015"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Running Total"border="0" color="0" x="2039" y="8" height="61" width="357"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Del"border="0" color="33554432" x="2405" y="8" height="61" width="74"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=10 border="5" color="0" x="10" y="4" height="61" width="215" format="[general]"  name=task_type_code dddw.name=dddw_options_task_type dddw.displaycolumn=task_type_desc dddw.datacolumn=task_type_code dddw.percentwidth=600 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=20 border="5" color="0" x="234" y="4" height="61" width="234" format="[general]"  name=task_sub_type_code dddw.name=dddw_options_task_sub_type dddw.displaycolumn=task_sub_type_desc dddw.datacolumn=task_sub_type_code dddw.percentwidth=600 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=30 border="5" color="0" x="476" y="4" height="61" width="215" format="[general]"  name=task_specific_code dddw.name=dddw_options_task_specific dddw.displaycolumn=task_specific_desc dddw.datacolumn=task_specific_code dddw.percentwidth=600 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="1" tabsequence=40 border="5" color="0" x="700" y="4" height="61" width="307" format="$#,##0.00;($#,##0.00)"  name=task_amount editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="1" expression="cumulativeSum(  task_amount  for all )"border="5" color="0" x="2039" y="4" height="61" width="357" format="$#,##0.00;($#,##0.00)"  name=tasks_total  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=50 border="5" color="0" x="1015" y="4" height="61" width="1015" format="[general]"  name=comment edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=60 border="5" color="0" x="2405" y="4" height="61" width="74" format="[general]"  name=delete_flag checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

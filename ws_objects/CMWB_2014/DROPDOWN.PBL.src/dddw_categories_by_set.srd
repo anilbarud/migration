@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_categories_by_set.srd
+$PBExportComments$Lists categories by setid
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=72 color="-1" )
+table(column=(type=number updatewhereclause=yes name=setid dbname="CAT.setid" )
+ column=(type=number updatewhereclause=yes name=catid dbname="CAT.catid" )
+ column=(type=char(32) updatewhereclause=yes name=catname dbname="CAT.catname" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CAT~" ) COLUMN(NAME=~"CAT.setid~") COLUMN(NAME=~"CAT.catid~") COLUMN(NAME=~"CAT.catname~")WHERE( EXP1 =~"CAT.setid~" OP =~"=~" EXP2 =~":val_setid~" ) ) ARG(NAME = ~"val_setid~" TYPE = number) " arguments=(("val_setid", number))  sort="catname A " )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="0" x="9" y="4" height="64" width="745" format="[general]"  name=catname edit.limit=32 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

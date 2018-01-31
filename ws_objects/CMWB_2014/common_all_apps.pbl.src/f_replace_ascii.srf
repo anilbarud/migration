@@ -1,0 +1,24 @@
+﻿$PBExportHeader$f_replace_ascii.srf
+global type f_replace_ascii from function_object
+end type
+
+forward prototypes
+global function string f_replace_ascii (string mystring, string myreplacement)
+end prototypes
+
+global function string f_replace_ascii (string mystring, string myreplacement);long ll_len, ll_start
+
+
+ll_len = LEN(mystring)
+
+FOR ll_start = 1 to ll_len
+
+	IF AscA(Mid(mystring,ll_start,1)) = 13 OR AscA(Mid(mystring,ll_start,1)) = 10 OR AscA(Mid(mystring,ll_start,1)) = 91 THEN
+		mystring = Replace(mystring,ll_start,1,myreplacement)
+	END IF
+	
+NEXT
+
+Return mystring
+end function
+

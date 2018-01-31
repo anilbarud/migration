@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_categories_by_set.srd
+$PBExportComments$Displays categories qualified by setid
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=89 color="27304096" )
+summary(height=1 color="-1" )
+footer(height=85 color="27304096" )
+detail(height=81 color="-1" )
+table(column=(type=number name=setid dbname="CAT.setid" )
+ column=(type=number name=catid dbname="CAT.catid" )
+ column=(type=char(32) name=catname dbname="CAT.catname" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CAT~" ) COLUMN(NAME=~"CAT.setid~") COLUMN(NAME=~"CAT.catid~") COLUMN(NAME=~"CAT.catname~")WHERE( EXP1 =~"CAT.setid~" OP =~"=~" EXP2 =~":al_setid~" ) ) ORDER(NAME=~"CAT.catname~" ASC=yes ) ARG(NAME = ~"al_setid~" TYPE = number) " arguments=(("al_setid", number)) )
+text(band=header alignment="0" text="Category/Bucket"border="0" color="0" x="14" y="12" height="61" width="430"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="5" y1="80" x2="2076" y2="80" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="69" width="906" format="[general]"  name=catname edit.limit=32 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="1" y1="4" x2="2039" y2="4" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Category Count :"border="0" color="0" x="10" y="16" height="61" width="426"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count(  setid  for all )"border="0" color="0" x="490" y="16" height="61" width="225" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

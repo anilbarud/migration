@@ -1,0 +1,52 @@
+﻿$PBExportHeader$d_employer_list.srd
+$PBExportComments$List all employers for a specific criteria
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 107 print.margin.right = 107 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=61 color="-1" )
+summary(height=21 color="-1" )
+footer(height=1 color="-1" )
+detail(height=93 color="-1" )
+table(column=(type=char(60) updatewhereclause=yes name=employer_name dbname="EMPLOYER_NAME.employer_name" )
+ column=(type=char(1) updatewhereclause=yes name=contact_name dbname="compute_0002" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="EMPLOYER_ADDRESS.address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="EMPLOYER_ADDRESS.address_line2" )
+ column=(type=char(30) updatewhereclause=yes name=address_line3 dbname="EMPLOYER_ADDRESS.address_line3" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="EMPLOYER_ADDRESS.city" )
+ column=(type=char(2) updatewhereclause=yes name=employer_address_province dbname="EMPLOYER_ADDRESS.prov_state_code" )
+ column=(type=char(10) updatewhereclause=yes name=employer_address_postal_code dbname="EMPLOYER_ADDRESS.postal_code" )
+ column=(type=long updatewhereclause=yes name=employer_address_employer_no dbname="EMPLOYER_ADDRESS.employer_no" )
+ column=(type=char(1) updatewhereclause=yes name=ccardfile dbname="cardfile" )
+ column=(type=char(4) updatewhereclause=yes name=compute_0011 dbname="compute_0011" )
+ retrieve="  SELECT EMPLOYER_NAME.employer_name,   
+         ~" ~",   
+         EMPLOYER_ADDRESS.address_line1,   
+         EMPLOYER_ADDRESS.address_line2,   
+         EMPLOYER_ADDRESS.address_line3,   
+         EMPLOYER_ADDRESS.city,   
+         EMPLOYER_ADDRESS.prov_state_code,   
+         EMPLOYER_ADDRESS.postal_code,   
+         EMPLOYER_ADDRESS.employer_no,   
+         cardfile='N',   
+         EMPLOYER_NAME.employer_name_type_code+~"   ~"  
+    FROM EMPLOYER_ADDRESS,   
+         EMPLOYER_NAME  
+   WHERE ( EMPLOYER_ADDRESS.employer_no = EMPLOYER_NAME.employer_no ) and  
+         ( ( EMPLOYER_NAME.employer_name like :name ) AND  
+         ( EMPLOYER_ADDRESS.city like :city ) AND  
+         ( EMPLOYER_ADDRESS.employer_no >= 50000 ) AND  
+         ( EMPLOYER_NAME.employer_name_type_code = 'L' ) ) and
+			( EMPLOYER_ADDRESS.address_type_code = 'BA' ) 
+" arguments=(("name", string),("city", string))  sort="city A " )
+text(band=header alignment="0" text="Name"border="0" color="33554432" x="110" y="0" height="61" width="151"  name=name_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Address"border="0" color="33554432" x="805" y="0" height="61" width="220"  name=address_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="City"border="0" color="33554432" x="1605" y="4" height="61" width="97"  name=city_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Postal Code"border="0" color="33554432" x="2122" y="0" height="61" width="311"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Province"border="0" color="33554432" x="2497" y="0" height="61" width="229"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if(  ccardfile   ='N',' ','*') "border="0" color="33554432" x="19" y="20" height="65" width="110" format="[GENERAL]"  name=cardfile  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Contact/Other Name"border="0" color="33554432" x="2849" y="0" height="61" width="526"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="106" y="20" height="65" width="700" format="[general]"  name=employer_name edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="if (address_line1 = ~" ~", (if (address_line2 = ~" ~",  address_line3,  address_line2)),  address_line1)"border="0" color="33554432" x="805" y="20" height="65" width="778" format="[GENERAL]"  name=address  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1601" y="20" height="65" width="462" format="[general]"  name=city edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="2113" y="20" height="65" width="316" format="[general]"  name=postal_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="2501" y="20" height="61" width="55" format="[general]"  name=employer_address_province edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="33554432" x="2849" y="20" height="61" width="394"  name=contact_name  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

@@ -1,0 +1,12 @@
+﻿$PBExportHeader$d_total_claims_created.srd
+$PBExportComments$Status tracking - Sub Report for status tracking
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=77 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=computed_nmbr_of_claims dbname="compute_0001" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CLAIM~" )  TABLE(NAME=~"CLAIM_STATUS_CHANGE~" ) COMPUTE(NAME=~"count(*)~")    JOIN (LEFT=~"CLAIM.claim_no~"    OP =~"=~"RIGHT=~"CLAIM_STATUS_CHANGE.claim_no~" )WHERE(    EXP1 =~"CLAIM_STATUS_CHANGE.create_date~"   OP =~">=~"    EXP2 =~":adt_start_date~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"CLAIM_STATUS_CHANGE.create_date~"   OP =~"<~"    EXP2 =~":adt_end_date~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"CLAIM.admin_region_code~"   OP =~"=~"    EXP2 =~":as_admin_region_code~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"CLAIM_STATUS_CHANGE.new_claim_status_code~"   OP =~"=~"    EXP2 =~"'P'~" ) ) ARG(NAME = ~"adt_start_date~" TYPE = datetime)  ARG(NAME = ~"adt_end_date~" TYPE = datetime)  ARG(NAME = ~"as_admin_region_code~" TYPE = string) " arguments=(("adt_start_date", datetime),("adt_end_date", datetime),("as_admin_region_code", string)) )
+text(band=detail alignment="0" text="Total Number of Claims Created during reporting period:"border="0" color="0" x="14" y="4" height="61" width="1445"  name=cnmbr_claims_created_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="1761" y="4" height="65" width="673" format="#,##0"  name=computed_nmbr_of_claims edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

@@ -1,0 +1,51 @@
+﻿$PBExportHeader$d_eligibility_main.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=datetime update=yes updatewhereclause=yes name=eligibility_start_date dbname="eligibility_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=eligibility_end_date dbname="eligibility_end_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=registration_date dbname="registration_date" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=eligibility_record_no dbname="eligibility_record_no" )
+ column=(type=long update=yes updatewhereclause=yes name=export_no dbname="export_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=manual_entry_flag dbname="manual_entry_flag" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=export_user_id dbname="export_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=export_date dbname="export_date" )
+ retrieve="  SELECT a.eligibility_start_date, a.eligibility_end_date, b.claim_status_code, 
+         b.claim_status_type_code, c.registration_date,    a.eligibility_record_no, 
+         a.export_no,              a.claim_no,             a.comment, 
+         a.manual_entry_flag,      a.export_user_id,       a.export_date
+    FROM CLAIM_ELIGIBILITY a, CLAIM b, X001_REGISTRATION c
+   WHERE a.claim_no = :al_claim_no
+     AND a.claim_no = b.claim_no   
+     AND a.claim_no = c.claim_no
+" update="CLAIM_ELIGIBILITY" updatewhere=2 updatekeyinplace=yes arguments=(("al_claim_no", number))  sort="eligibility_record_no A " )
+text(band=header alignment="0" text="" border="6" color="33554432" x="14" y="8" height="52" width="69" html.valueishtml="0"  name=t_1  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Claim Eligibility Period" border="6" color="33554432" x="105" y="8" height="52" width="704" html.valueishtml="0"  name=type_code_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Comment" border="6" color="33554432" x="832" y="8" height="52" width="1682" html.valueishtml="0"  name=comment_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Record No" border="6" color="33554432" x="2533" y="8" height="52" width="283" html.valueishtml="0"  name=record_no_t  tag="Claim Eligibility Period" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+bitmap(band=detail filename="plus_blue_16_h.gif" x="9" y="0" height="64" width="73" border="0"  name=p_2 visible="1~tIF(f_is_exported(1, claim_no,eligibility_record_no) and export_no  > 0,1,0) " )
+bitmap(band=detail filename="minus_blue_16_h.gif" x="9" y="0" height="64" width="73" border="0"  name=p_1 visible="1~tIF(f_is_exported(1, claim_no,eligibility_record_no) and export_no  = 0,1,0) " )
+bitmap(band=detail filename="plus_blue_16_d.gif" x="9" y="0" height="64" width="73" border="0"  name=p_3 visible="1~tIF(not f_is_exported(1, claim_no,eligibility_record_no),1,0) " )
+column(band=detail id=1 alignment="2" tabsequence=10 border="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),5,0)" color="0" x="91" y="4" height="56" width="306" format="yyyy-mm-dd" html.valueishtml="0" protect="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),0,1)"  name=eligibility_start_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),rgb(255,255,255),rgb(255,255,255))" )
+text(band=detail alignment="0" text="To" border="0" color="33554432" x="416" y="4" height="56" width="69" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="2" tabsequence=20 border="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),5,0)" color="0" x="498" y="4" height="56" width="306" format="yyyy-mm-dd" html.valueishtml="0" protect="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),0,1)"  name=eligibility_end_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),rgb(255,255,255),rgb(255,255,255))" )
+column(band=detail id=9 alignment="0" tabsequence=30 border="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04'))or isrownew(),5,0)" color="0" x="832" y="4" height="56" width="1691" format="[general]" html.valueishtml="0" protect="0~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),0,1)"  name=comment visible="1" edit.limit=100 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF (claim_status_code = ~"A~" OR  (claim_status_code = ~"F~" and  claim_status_type_code in ('01','02','03','04')) or isrownew(),rgb(255,255,255),rgb(255,255,255))" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="2542" y="4" height="56" width="274" format="[general]" html.valueishtml="0"  name=eligibility_record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

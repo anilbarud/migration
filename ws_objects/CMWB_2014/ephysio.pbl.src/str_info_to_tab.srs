@@ -1,0 +1,10 @@
+﻿$PBExportHeader$str_info_to_tab.srs
+global type str_info_to_tab from structure
+	string		tab_text
+	long		task_no
+	long		provider_no
+	string		provider_type
+	date		planned_start_date
+	long		claim_no
+end type
+

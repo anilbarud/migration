@@ -1,0 +1,152 @@
+﻿$PBExportHeader$m_benefit_action.srm
+$PBExportComments$used for right click on payment DW to associate all awards
+forward
+global type m_benefit_action from menu
+end type
+type m_action from menu within m_benefit_action
+end type
+type m_selectaward from menu within m_action
+end type
+type m_print from menu within m_action
+end type
+type m_action from menu within m_benefit_action
+m_selectaward m_selectaward
+m_print m_print
+end type
+global type m_benefit_action from menu
+m_action m_action
+end type
+end forward
+
+global type m_benefit_action from menu
+m_action m_action
+end type
+global m_benefit_action m_benefit_action
+
+on m_benefit_action.create
+m_benefit_action=this
+call super::create
+this.text = "m_benefit_action"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_action=create m_action
+this.Item[UpperBound(this.Item)+1]=this.m_action
+end on
+
+on m_benefit_action.destroy
+call super::destroy
+destroy(this.m_action)
+end on
+
+type m_action from menu within m_benefit_action
+m_selectaward m_selectaward
+m_print m_print
+end type
+
+on m_action.create
+call super::create
+this.text = "Action"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_selectaward=create m_selectaward
+this.m_print=create m_print
+this.Item[UpperBound(this.Item)+1]=this.m_selectaward
+this.Item[UpperBound(this.Item)+1]=this.m_print
+end on
+
+on m_action.destroy
+call super::destroy
+destroy(this.m_selectaward)
+destroy(this.m_print)
+end on
+
+type m_selectaward from menu within m_action
+event clicked ( )
+end type
+
+event clicked;ParentWindow.dynamic wf_select_associated_payments(0,1)
+end event
+
+on m_selectaward.create
+call super::create
+this.text = "&Select All Associated Payments"
+this.microhelp = "Select All Associated Payments"
+this.toolbaritemname = "insert5!"
+this.toolbaritemtext = "New"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_selectaward.destroy
+call super::destroy
+end on
+
+type m_print from menu within m_action
+end type
+
+event clicked;ParentWindow.dynamic wf_print_payments()
+end event
+
+on m_print.create
+call super::create
+this.text = "&Print"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+

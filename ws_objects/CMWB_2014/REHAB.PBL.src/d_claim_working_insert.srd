@@ -1,0 +1,34 @@
+﻿$PBExportHeader$d_claim_working_insert.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=folderid dbname="CLAIM_WORKING.folderid" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="CLAIM_WORKING.claim_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=action_code dbname="CLAIM_WORKING.action_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=action_date dbname="CLAIM_WORKING.action_date" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=action_note dbname="CLAIM_WORKING.action_note" )
+ column=(type=long updatewhereclause=yes name=catid dbname="catid" )
+ retrieve="  SELECT dbo.CLAIM_WORKING.folderid,   
+         dbo.CLAIM_WORKING.claim_no,   
+         dbo.CLAIM_WORKING.action_code,   
+         dbo.CLAIM_WORKING.action_date,   
+         dbo.CLAIM_WORKING.action_note ,
+			catid = 0 
+    FROM dbo.CLAIM_WORKING   
+" update="dbo.CLAIM_WORKING" updatewhere=1 updatekeyinplace=yes )
+text(band=header alignment="2" text="Folderid" border="0" color="33554432" x="5" y="4" height="64" width="329" html.valueishtml="0"  name=folderid_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="338" y="4" height="64" width="329" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Action Code" border="0" color="33554432" x="672" y="4" height="64" width="352" html.valueishtml="0"  name=action_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Action Date" border="0" color="33554432" x="1029" y="4" height="64" width="603" html.valueishtml="0"  name=action_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Action Note" border="0" color="33554432" x="1637" y="4" height="64" width="576" html.valueishtml="0"  name=action_note_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=folderid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="338" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="672" y="4" height="76" width="82" format="[general]" html.valueishtml="0"  name=action_code visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="0" color="33554432" x="1029" y="4" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=action_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="33554432" x="1637" y="4" height="76" width="576" format="[general]" html.valueishtml="0"  name=action_note visible="1" edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=0 border="0" color="33554432" x="2213" y="0" height="64" width="82" html.valueishtml="0"  name=catid visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

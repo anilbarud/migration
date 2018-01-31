@@ -1,0 +1,87 @@
+﻿$PBExportHeader$d_pension_anniversary_report.srd
+$PBExportComments$DW to produce the Pen. Ann. Report. Lists all pension claims (with part) where the claimant is alive and is <= 65 and whose accident month and day fall within user spec. date range.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=405 color="536870912" )
+summary(height=109 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_participant_claim_no dbname="CLAIM_PARTICIPANT.claim_no" )
+ column=(type=char(2) updatewhereclause=yes name=claim_participant_claim_role_code dbname="CLAIM_PARTICIPANT.claim_role_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_participant_dependent_flag dbname="CLAIM_PARTICIPANT.dependent_flag" )
+ column=(type=char(3) updatewhereclause=yes name=claim_participant_dependent_reason_code dbname="CLAIM_PARTICIPANT.dependent_reason_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_participant_pen_survivor_eligibili dbname="CLAIM_PARTICIPANT.pen_survivor_eligibility_flag" )
+ column=(type=datetime updatewhereclause=yes name=individual_birth_date dbname="INDIVIDUAL.birth_date" )
+ column=(type=datetime updatewhereclause=yes name=individual_death_date dbname="INDIVIDUAL.death_date" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=datetime updatewhereclause=yes name=claim_accident_date dbname="CLAIM.accident_date" )
+ column=(type=char(3) updatewhereclause=yes name=claim_legislation_code dbname="CLAIM.legislation_code" )
+ retrieve="SELECT CP.claim_no,
+       CP.claim_role_code,
+       CP.dependent_flag,
+       CP.dependent_reason_code,
+       CP.pen_survivor_eligibility_flag,
+       I.birth_date,
+       I.death_date,
+       I.last_name,
+       I.given_names,
+       C.accident_date,
+       C.legislation_code
+  FROM CLAIM_PARTICIPANT CP,
+       INDIVIDUAL I,
+       OPENING O,
+       CLAIM C 
+ WHERE CP.individual_no = I.individual_no 
+   AND (CP.dependent_flag = 'Y' OR CP.pen_survivor_eligibility_flag = 'Y') 
+   AND O.claim_no = CP.claim_no 
+   AND O.opening_type_code = 'PEN'  
+   AND (O.benefit_end_date >= :adt_from_date OR O.benefit_end_date IS NULL) 
+   AND C.claim_no = CP.claim_no 
+   AND ((datepart(month, C.accident_date) * 100) + datePart(day, C.accident_date)) >= :an_start_month_day  
+   AND ((datepart(month, C.accident_date) * 100) + datePart(day, C.accident_date)) <= :an_end_month_day 
+   AND EXISTS (SELECT * 
+                 FROM INDIVIDUAL I2 
+                where I2.individual_no = C.individual_no 
+                  AND I2.birth_date >= :adt_earliest_birth_date 
+                  AND I2.death_date IS NULL) 
+   ORDER BY C.legislation_code, CP.claim_no
+ " arguments=(("adt_earliest_birth_date", datetime),("adt_from_date", datetime),("an_start_month_day", number),("an_end_month_day", number),("as_title", string)) )
+group(level=1 header.height=1 trailer.height=1 by=("claim_legislation_code" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="14" y="4" height="197" width="3429" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Pension Anniversary Report"border="0" color="0" x="1239" y="28" height="77" width="983"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="77" width="549" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="10" y1="368" x2="3425" y2="368" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:"border="0" color="0" x="51" y="28" height="61" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Claim"border="0" color="0" x="133" y="296" height="61" width="147"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Name"border="0" color="0" x="334" y="296" height="61" width="151"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Birth
+Date"border="0" color="0" x="3196" y="236" height="121" width="124"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Accident
+Date"border="0" color="0" x="2780" y="236" height="121" width="229"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Claim
+Role"border="0" color="0" x="1349" y="236" height="121" width="147"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Dependent
+Reason"border="0" color="0" x="2090" y="236" height="121" width="279"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Legislation
+Code"border="0" color="0" x="2410" y="236" height="121" width="284"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Pen/Surv
+Eligibility"border="0" color="0" x="1523" y="236" height="121" width="234"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Dependent"border="0" color="0" x="1783" y="296" height="61" width="279"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="595" y="28" height="61" width="398" format="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:"border="0" color="0" x="51" y="108" height="61" width="522"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression=" as_title "border="0" color="0" x="595" y="108" height="61" width="2826" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="23" y="4" height="61" width="257" format="[general]"  name=claim_participant_claim_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( individual_given_names ) + ~" ~" + Trim( individual_last_name )"border="0" color="0" x="330" y="4" height="61" width="906" format="[GENERAL]"  name=computed_name  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="2739" y="4" height="61" width="311" format="yyyy-mm-dd"  name=claim_accident_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2177" y="4" height="61" width="110" format="[general]"  name=claim_participant_dependent_reason_code edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="2" tabsequence=32766 border="0" color="0" x="2451" y="4" height="57" width="202" format="[general]"  name=claim_legislation_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1372" y="4" height="61" width="124" format="[general]"  name=claim_participant_claim_role_code edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="If( claim_participant_pen_survivor_eligibili = 'Y','Y','')"border="0" color="0" x="1523" y="4" height="61" width="234" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="If(  claim_participant_dependent_flag = 'Y','Y','')"border="0" color="0" x="1783" y="4" height="61" width="279" format="[GENERAL]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="3105" y="4" height="61" width="311" format="yyyy-mm-dd"  name=individual_birth_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="2277" y1="12" x2="3415" y2="8" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+compute(band=summary alignment="0" expression="count(  claim_participant_claim_no  for all )"border="0" color="0" x="3027" y="32" height="61" width="389" format="#,###,##0"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="2" text="Records Found:"border="0" color="0" x="2579" y="32" height="61" width="403"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+
+sparse(names="claim_participant_claim_no")

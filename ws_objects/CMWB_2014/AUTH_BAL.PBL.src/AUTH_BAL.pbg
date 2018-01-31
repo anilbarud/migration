@@ -1,0 +1,18 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "AUTH_BAL.PBL" "";
+@end;
+@begin Objects 
+ "d_annuities_to_authorize.srd" "AUTH_BAL.PBL";
+ "d_annuities_to_unauthorize.srd" "AUTH_BAL.PBL";
+ "d_authorize_annuities_details.srd" "AUTH_BAL.PBL";
+ "d_authorize_awards_details.srd" "AUTH_BAL.PBL";
+ "d_authorize_details.srd" "AUTH_BAL.PBL";
+ "d_awards_to_authorize.srd" "AUTH_BAL.PBL";
+ "d_awards_to_unauthorize.srd" "AUTH_BAL.PBL";
+ "d_payments_to_authorize.srd" "AUTH_BAL.PBL";
+ "d_payments_to_authorize_group.srd" "AUTH_BAL.PBL";
+ "d_payments_to_unauthorize.srd" "AUTH_BAL.PBL";
+ "d_select_admin_region.srd" "AUTH_BAL.PBL";
+ "w_authorizations.srw" "AUTH_BAL.PBL";
+@end;

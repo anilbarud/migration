@@ -1,0 +1,20 @@
+﻿$PBExportHeader$f_host_name.srf
+global type f_host_name from function_object
+end type
+
+forward prototypes
+global function string f_host_name ()
+end prototypes
+
+global function string f_host_name ();String ls_hostname, ls_key, ls_value
+Long   ll_keyretval
+
+ls_hostname = ""
+
+ls_key = "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName"
+ls_value = "ComputerName"
+ll_keyretval = RegistryGet(ls_key, ls_value, ls_hostname)
+
+RETURN ls_hostname
+end function
+

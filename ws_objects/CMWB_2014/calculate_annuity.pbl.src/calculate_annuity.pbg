@@ -1,0 +1,31 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "calculate_annuity.pbl" "";
+@end;
+@begin Objects 
+ "d_account_info_for_treeview.srd" "calculate_annuity.pbl";
+ "d_account_info_for_treeview_comp.srd" "calculate_annuity.pbl";
+ "d_annuity_account_header_comp.srd" "calculate_annuity.pbl";
+ "d_annuity_account_header_tv.srd" "calculate_annuity.pbl";
+ "d_annuity_account_summary_comp.srd" "calculate_annuity.pbl";
+ "d_annuity_calc_account_detail_return.srd" "calculate_annuity.pbl";
+ "d_annuity_calc_claim_detail_return.srd" "calculate_annuity.pbl";
+ "d_annuity_claim_comp.srd" "calculate_annuity.pbl";
+ "d_be_calculate_by_account.srd" "calculate_annuity.pbl";
+ "d_calc_dates_select.srd" "calculate_annuity.pbl";
+ "d_calc_reason_select.srd" "calculate_annuity.pbl";
+ "d_calculate_annuity_dates.srd" "calculate_annuity.pbl";
+ "d_calculate_eligibility_info.srd" "calculate_annuity.pbl";
+ "d_dummy_group_for_page_break.srd" "calculate_annuity.pbl";
+ "d_entitlement_worker_info_calculate.srd" "calculate_annuity.pbl";
+ "d_sub_ledger_adjustments_by_account.srd" "calculate_annuity.pbl";
+ "d_sub_ledger_adjustments_by_claim.srd" "calculate_annuity.pbl";
+ "dddw_annuity_account_dates.srd" "calculate_annuity.pbl";
+ "dddw_annuity_calc_reason.srd" "calculate_annuity.pbl";
+ "s_calc_reason_data.srs" "calculate_annuity.pbl";
+ "n_calc_annuity.sru" "calculate_annuity.pbl";
+ "w_annuity_account_report_viewer.srw" "calculate_annuity.pbl";
+ "w_calc_annuity.srw" "calculate_annuity.pbl";
+ "w_injured_worker_or_ss_calculate.srw" "calculate_annuity.pbl";
+ "w_select_calc_reason_response.srw" "calculate_annuity.pbl";
+@end;

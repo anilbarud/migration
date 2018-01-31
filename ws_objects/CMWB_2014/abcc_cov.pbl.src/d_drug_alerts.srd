@@ -1,0 +1,62 @@
+﻿$PBExportHeader$d_drug_alerts.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=60 color="16777215" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="16777215" )
+table(column=(type=char(1) update=yes updatewhereclause=yes name=drug_alert_type_code dbname="drug_alert_type_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=effective_date dbname="effective_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=terminated_date dbname="terminated_date" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=alert_comment dbname="alert_comment" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=terminated_user_id dbname="terminated_user_id" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=terminated_comment dbname="terminated_comment" )
+ column=(type=datetime update=yes updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=long update=yes updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=drug_alert_no dbname="drug_alert_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ retrieve="  SELECT drug_alert_type_code,   
+        effective_date,   
+        terminated_date,   
+        alert_comment,   
+         terminated_user_id,   
+      terminated_comment,   
+        DRUG_ALERT.create_date,   
+         DRUG_ALERT.create_user_id,   
+        DRUG_ALERT.individual_no,   
+         drug_alert_no,
+         claim_no
+    FROM CLAIM,   
+        DRUG_ALERT  
+   WHERE (CLAIM.individual_no =DRUG_ALERT.individual_no ) and  
+         ( ( claim_no = :al_claim_no ) )    " update="DRUG_ALERT" updatewhere=1 updatekeyinplace=no arguments=(("al_claim_no", number)) )
+bitmap(band=header filename="delete_x_16_h.gif" x="5" y="0" height="52" width="64" border="6"  name=p_1 visible="1" )
+text(band=header alignment="0" text="Alert No." border="6" color="33554432" x="91" y="0" height="56" width="233" html.valueishtml="0"  name=drug_alert_no_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Effective Date" border="6" color="33554432" x="773" y="0" height="56" width="411" html.valueishtml="0"  name=effective_date_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Termination Date" border="6" color="33554432" x="1202" y="0" height="56" width="448" html.valueishtml="0"  name=terminated_date_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Alert Comments" border="6" color="33554432" x="1669" y="0" height="56" width="1275" html.valueishtml="0"  name=alert_comment_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Created By" border="6" color="33554432" x="2962" y="0" height="56" width="370" html.valueishtml="0"  name=create_user_id_ visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Termination Comments" border="6" color="33554432" x="3351" y="0" height="56" width="1275" html.valueishtml="0"  name=terminated_comment_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Terminated By" border="6" color="33554432" x="4645" y="0" height="56" width="389" html.valueishtml="0"  name=terminated_user_id_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Alert Type" border="6" color="33554432" x="343" y="0" height="56" width="411" html.valueishtml="0"  name=drug_alert_type_code_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=detail text="" filename="delete_x_16_h.gif~tIF(NOT IsNull( terminated_date ), 'delete_x_16_h.gif', ~"~")" enabled=yes action="0" border="0" color="33554432" x="0" y="0" height="64" width="87" vtextalign="0" htextalign="0"  name=b_1 visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="33554432" x="96" y="4" height="56" width="229" format="[general]" html.valueishtml="0"  name=drug_alert_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="33554432" x="773" y="4" height="56" width="411" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd" edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="1193" y="4" height="56" width="448" format="yyyy-mm-dd" html.valueishtml="0"  name=terminated_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd" edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="0~tIF( isRowModified(), IF(NOT IsNull(effective_date ),5,0),0)" color="33554432" x="1669" y="4" height="56" width="1275" format="[general]" html.valueishtml="0" protect="0~tIF( isRowModified(), IF(NOT IsNull( effective_date ),0, 1),1)"  name=alert_comment visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="33554432" x="2962" y="4" height="56" width="370" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=6 alignment="0" tabsequence=30 border="0~tIF( isRowModified(), IF(NOT IsNull( terminated_date ),5,0),0)" color="33554432" x="3351" y="4" height="56" width="1275" format="[general]" html.valueishtml="0" protect="0~tIF( isRowModified(), IF(NOT IsNull( terminated_date ),0, 1),1)"  name=terminated_comment visible="1" edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="33554432" x="4645" y="4" height="56" width="389" format="[general]" html.valueishtml="0"  name=terminated_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0~tIF( isRowModified(), IF(NOT IsNull( effective_date ),5,0),0)" color="33554432" x="343" y="4" height="56" width="411" format="[general]" html.valueishtml="0" protect="0~tIF( isRowModified(), IF(NOT IsNull( effective_date ),0, 1),1)"  name=drug_alert_type_code visible="1" dddw.name=dddw_drug_alert dddw.displaycolumn=drug_alert_type_desc dddw.datacolumn=drug_alert_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

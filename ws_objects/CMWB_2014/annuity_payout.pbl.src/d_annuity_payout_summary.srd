@@ -1,0 +1,83 @@
+﻿$PBExportHeader$d_annuity_payout_summary.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=8 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 92 print.margin.right = 92 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=yes )
+header(height=200 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=88 color="536870912" )
+detail(height=108 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_annuity_benefit_amount dbname="total_annuity_benefit_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=previous_annuity_payout_amount dbname="previous_annuity_payout_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=sub_total_annuity_payout_amount dbname="sub_total_annuity_payout_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=overpayment_recovery_amount dbname="overpayment_recovery_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=net_annuity_payout_amount dbname="net_annuity_payout_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=writeoff_amount dbname="writeoff_amount" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=char(84) updatewhereclause=yes name=bh_recipient_desc dbname="bh_recipient_desc" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ retrieve="SELECT b.claim_no,
+       b.annuity_payout_no,
+       b.annuity_account_no,
+       b.total_annuity_benefit_amount,
+       b.previous_annuity_payout_amount,
+       b.sub_total_annuity_payout_amount,
+       b.overpayment_recovery_amount,
+       b.net_annuity_payout_amount,
+       b.writeoff_amount,
+       c.annuity_account_no,
+       d.given_names + ' ' + d.last_name + ' - ' + e.claim_role_desc AS 'bh_recipient_desc',
+       d.individual_no
+FROM   ANNUITY_PAYOUT               a
+JOIN   ANNUITY_PAYOUT_CLAIM_SUMMARY b ON a.annuity_payout_no = b.annuity_payout_no
+JOIN   ANNUITY_ACCOUNT              c ON b.annuity_account_no = c.annuity_account_no
+JOIN   INDIVIDUAL                   d ON c.individual_no = d.individual_no
+JOIN   Claim_Role                   e ON c.claim_role_code = e.claim_role_code
+WHERE  a.annuity_payout_no = :al_annuity_payout_no
+" arguments=(("al_annuity_payout_no", number)) )
+group(level=1 header.height=152 trailer.height=136 by=("annuity_payout_no" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="0" y="184" height="16" width="4302"  name=r_2 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+rectangle(band=header x="0" y="4" height="16" width="4302"  name=r_1 visible="1" brush.hatch="6" brush.color="0" pen.style="5" pen.width="9" pen.color="553648127"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Total Annuity Benefit Amount" border="0" color="33554432" x="800" y="24" height="136" width="507" html.valueishtml="0"  name=total_annuity_benefit_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Previous Annuity Payout Amount" border="0" color="33554432" x="1358" y="20" height="136" width="507" html.valueishtml="0"  name=previous_annuity_payout_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Sub Total Annuity Payout Amount" border="0" color="33554432" x="1893" y="24" height="136" width="576" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Overpayment Recovery Amount" border="0" color="33554432" x="2491" y="24" height="136" width="571" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Net Annuity Payout Amount" border="0" color="33554432" x="3086" y="24" height="136" width="494" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Write-off Amount" border="0" color="33554432" x="3689" y="24" height="136" width="302" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Annuity Payout No:" border="0" color="33554432" x="23" y="52" height="60" width="480" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="521" y="52" height="60" width="274" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="512" y="20" height="60" width="242" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Claim No:" border="0" color="33554432" x="233" y="20" height="60" width="242" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="882" y="20" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=total_annuity_benefit_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1422" y="20" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=previous_annuity_payout_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="1952" y="20" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=sub_total_annuity_payout_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2606" y="20" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=overpayment_recovery_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="3168" y="20" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=net_annuity_payout_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="3689" y="20" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=writeoff_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.1 alignment="0" text="Totals:" border="0" color="33554432" x="507" y="24" height="60" width="174" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(total_annuity_benefit_amount for group 1)"border="0" color="33554432" x="882" y="24" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="0" expression="sum(previous_annuity_payout_amount for group 1)"border="0" color="33554432" x="1422" y="24" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(sub_total_annuity_payout_amount for group 1)"border="0" color="33554432" x="1952" y="24" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(overpayment_recovery_amount for group 1)"border="0" color="33554432" x="2606" y="24" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(net_annuity_payout_amount for group 1)"border="0" color="33554432" x="3168" y="24" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=trailer.1 alignment="1" expression="sum(writeoff_amount for group 1)"border="0" color="33554432" x="3689" y="24" height="60" width="343" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="0" y1="0" x2="4302" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=footer id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1029" y="12" height="60" width="1691" format="[general]" html.valueishtml="0"  name=bh_recipient_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="Annuity Account No:" border="0" color="33554432" x="37" y="12" height="64" width="585" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="640" y="12" height="64" width="215" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2917" y="12" height="64" width="402" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2917" y="12" height="64" width="402" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2917" y="12" height="64" width="402" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=footer id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="3346" y="12" height="64" width="389" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_admin_region.srd
+$PBExportComments$Common - Drop Down Data Window to display the admin region description from the Admin_Region table
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(3) update=yes key=yes name=admin_region_code dbname="Admin_Region.admin_region_code" )
+ column=(type=char(20) update=yes name=admin_region_desc dbname="Admin_Region.admin_region_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Admin_Region~" ) COLUMN(NAME=~"Admin_Region.admin_region_code~") COLUMN(NAME=~"Admin_Region.admin_region_desc~")WHERE( EXP1 =~"Admin_Region.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="Admin_Region" updatewhere=1 updatekeyinplace=no  sort="admin_region_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="10" y="4" height="65" width="910" format="[general]"  name=admin_region_desc edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

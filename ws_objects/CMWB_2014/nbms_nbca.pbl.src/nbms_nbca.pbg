@@ -1,0 +1,32 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "nbms_nbca.pbl" "";
+@end;
+@begin Objects 
+ "d_create_reporting_fee_payments.srd" "nbms_nbca.pbl";
+ "d_eligible_report_fee_payments.srd" "nbms_nbca.pbl";
+ "d_eligible_report_fee_retrieve.srd" "nbms_nbca.pbl";
+ "d_identify_reports_used.srd" "nbms_nbca.pbl";
+ "d_issue_reporting_fee.srd" "nbms_nbca.pbl";
+ "d_maintain_reporting_fees.srd" "nbms_nbca.pbl";
+ "d_med_payment.srd" "nbms_nbca.pbl";
+ "d_med_payment_document.srd" "nbms_nbca.pbl";
+ "d_med_unapplied_claim.srd" "nbms_nbca.pbl";
+ "d_payment_document_find.srd" "nbms_nbca.pbl";
+ "d_reporting_fee_combo.srd" "nbms_nbca.pbl";
+ "d_reporting_fee_totals.srd" "nbms_nbca.pbl";
+ "d_select_document_crieteria.srd" "nbms_nbca.pbl";
+ "dddw_generated_method.srd" "nbms_nbca.pbl";
+ "dddw_reporting_fee_eligibility.srd" "nbms_nbca.pbl";
+ "dddw_reporting_fee_type.srd" "nbms_nbca.pbl";
+ "ds_payment_document.srd" "nbms_nbca.pbl";
+ "f_return_approved_count.srf" "nbms_nbca.pbl";
+ "gstr_report_fee_documents.srs" "nbms_nbca.pbl";
+ "s_reporting_fee_parameters.srs" "nbms_nbca.pbl";
+ "w_create_reporting_fee_payments.srw" "nbms_nbca.pbl";
+ "w_filter_document_list.srw" "nbms_nbca.pbl";
+ "w_identify_reports_used.srw" "nbms_nbca.pbl";
+ "w_issue_reporting_fee.srw" "nbms_nbca.pbl";
+ "w_issue_reporting_fee_lite.srw" "nbms_nbca.pbl";
+ "w_maintain_reporting_fees.srw" "nbms_nbca.pbl";
+@end;

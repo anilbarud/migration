@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_claim_action_codes.srd
+$PBExportComments$Lists action codes for workfolders
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=char(3) update=yes key=yes name=action_code dbname="Claim_Action_Code.action_code" )
+ column=(type=char(40) update=yes name=action_desc dbname="Claim_Action_Code.action_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Claim_Action_Code~" ) COLUMN(NAME=~"Claim_Action_Code.action_code~") COLUMN(NAME=~"Claim_Action_Code.action_desc~")WHERE( EXP1 =~"Claim_Action_Code.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="Claim_Action_Code" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="1157" y="4" height="69" width="110" format="[general]"  name=action_code edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="14" y="4" height="69" width="1125" format="[general]"  name=action_desc edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

@@ -1,0 +1,121 @@
+﻿$PBExportHeader$d_response_request_match_yr.srd
+release 10.5;
+datawindow(units=0 timer_interval=60000 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=600 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=204 color="536870912" )
+detail(height=68 color="536870912~tif(mod(getrow()-1,2) = 0,16510444,16777215)" )
+table(column=(type=char(60) updatewhereclause=yes name=cra_txn_sub_desc dbname="cra_txn_sub_desc" )
+ column=(type=char(4) updatewhereclause=yes name=v_i015_iv_response_tax_line_cra_txn_sub_code dbname="cra_txn_sub_code" )
+ column=(type=char(4) updatewhereclause=yes name=v_i015_iv_response_tax_line_cra_txn_code dbname="cra_txn_code" )
+ column=(type=char(4) updatewhereclause=yes name=cra_txn_sub_code dbname="cra_txn_sub_code" )
+ column=(type=decimal(0) updatewhereclause=yes name=v_i015_iv_response_tax_line_cra_line_amount dbname="cra_line_amount" )
+ column=(type=char(30) updatewhereclause=yes name=street_address dbname="street_address" )
+ column=(type=char(28) updatewhereclause=yes name=v_i015_iv_response_location_city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=cra_province_location_code dbname="cra_province_location_code" )
+ column=(type=char(7) updatewhereclause=yes name=v_i015_iv_response_location_postal_code dbname="postal_code" )
+ column=(type=char(30) updatewhereclause=yes name=surname dbname="surname" )
+ column=(type=char(30) updatewhereclause=yes name=v_i015_iv_response_identification_given_names dbname="given_names" )
+ column=(type=datetime updatewhereclause=yes name=v_i015_iv_response_identification_birth_date dbname="birth_date" )
+ column=(type=long updatewhereclause=yes name=v_i015_iv_response_identification_sin_no dbname="sin_no" )
+ column=(type=char(1) updatewhereclause=yes name=cra_marital_status_code dbname="cra_marital_status_code" )
+ column=(type=char(20) updatewhereclause=yes name=cra_marital_status_desc dbname="cra_marital_status_desc" )
+ column=(type=char(1) updatewhereclause=yes name=cra_t1_assessment_code dbname="cra_t1_assessment_code" )
+ column=(type=long updatewhereclause=yes name=v_i015_iv_response_response_iv_request_no dbname="iv_request_no" )
+ column=(type=long updatewhereclause=yes name=v_i015_iv_response_response_sin_no dbname="sin_no" )
+ column=(type=decimal(0) updatewhereclause=yes name=v_i015_iv_response_identification_tax_year dbname="tax_year" )
+ column=(type=char(30) updatewhereclause=yes name=cra_province_residence_desc dbname="cra_province_residence_desc" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ retrieve="  SELECT Iv_Cra_Txn_Sub.cra_txn_sub_desc,   
+         Iv_Cra_Txn_Sub.cra_txn_sub_code,   
+         v_I015_IV_RESPONSE_TAX_LINE_WHSCC.cra_txn_code,   
+         v_I015_IV_RESPONSE_TAX_LINE_WHSCC.cra_txn_sub_code,   
+         v_I015_IV_RESPONSE_TAX_LINE_WHSCC.cra_line_amount, 
+         v_I015_IV_RESPONSE_LOCATION_WHSCC.street_address,   
+         v_I015_IV_RESPONSE_LOCATION_WHSCC.city,   
+         v_I015_IV_RESPONSE_LOCATION_WHSCC.cra_province_location_code,   
+         v_I015_IV_RESPONSE_LOCATION_WHSCC.postal_code,   
+         v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.surname,   
+         v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.given_names,   
+         v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.birth_date,   
+         v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.sin_no,   
+         v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.cra_marital_status_code,   
+         Iv_Cra_Marital_Status.cra_marital_status_desc,
+         v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.cra_t1_assessment_code,   
+         v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no,   
+         v_I015_IV_RESPONSE_RESPONSE_WHSCC.sin_no,   
+         v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year,
+         Iv_Cra_Province_Residence.cra_province_residence_desc,
+	    CLAIM.claim_no
+FROM     v_I015_IV_RESPONSE_RESPONSE_WHSCC
+JOIN     v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC  ON (v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.import_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no
+											AND v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.iv_request_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no
+                                            AND v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.tax_year = v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year)
+JOIN     v_I015_IV_RESPONSE_LOCATION_WHSCC        ON (v_I015_IV_RESPONSE_LOCATION_WHSCC.import_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no
+											AND v_I015_IV_RESPONSE_LOCATION_WHSCC.iv_request_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no
+                                            AND v_I015_IV_RESPONSE_LOCATION_WHSCC.tax_year = v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year)
+JOIN     v_I015_IV_RESPONSE_TAX_LINE_WHSCC        ON (v_I015_IV_RESPONSE_TAX_LINE_WHSCC.import_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no
+											AND v_I015_IV_RESPONSE_TAX_LINE_WHSCC.iv_request_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no
+                                            AND v_I015_IV_RESPONSE_TAX_LINE_WHSCC.tax_year = v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year)
+JOIN     v_I015_IV_RESPONSE_PROVINCE_RESIDENCE_WHSCC ON (v_I015_IV_RESPONSE_PROVINCE_RESIDENCE_WHSCC.import_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no
+											AND v_I015_IV_RESPONSE_PROVINCE_RESIDENCE_WHSCC.iv_request_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no
+                                            AND v_I015_IV_RESPONSE_PROVINCE_RESIDENCE_WHSCC.tax_year = v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year)
+LEFT OUTER JOIN v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC  ON (v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.import_no = v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no
+											AND v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.tax_year = v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year
+                                                       AND v_I015_IV_RESPONSE_NO_DATA_RECORD_WHSCC.error_flag = 'N')
+JOIN     Iv_Cra_Txn_Sub                ON (v_I015_IV_RESPONSE_TAX_LINE_WHSCC.cra_txn_sub_code = Iv_Cra_Txn_Sub.cra_txn_sub_code)
+JOIN     Iv_Cra_Marital_Status                 ON (v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.cra_marital_status_code = Iv_Cra_Marital_Status.cra_marital_status_code)
+JOIN     Iv_Cra_Province_Residence     ON (v_I015_IV_RESPONSE_PROVINCE_RESIDENCE_WHSCC.cra_province_residence_code  = Iv_Cra_Province_Residence.cra_province_residence_code)
+JOIN     INDIVIDUAL ON v_I015_IV_RESPONSE_RESPONSE_WHSCC.sin_no = INDIVIDUAL.sin_no
+JOIN     CLAIM ON CLAIM.individual_no = INDIVIDUAL.individual_no
+JOIN     IV_REQUEST ON v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no = IV_REQUEST.iv_request_no 
+				AND v_I015_IV_RESPONSE_RESPONSE_WHSCC.import_no = IV_REQUEST.i015_import_no 
+                   AND CLAIM.claim_no = IV_REQUEST.claim_no
+WHERE  v_I015_IV_RESPONSE_RESPONSE_WHSCC.iv_request_no = :al_request_no AND  
+       v_I015_IV_RESPONSE_RESPONSE_WHSCC.tax_year      = :al_tax_year AND
+       v_I015_IV_RESPONSE_RESPONSE_WHSCC.cra_match_status_code = '01'  AND
+v_I015_IV_RESPONSE_RESPONSE_WHSCC.error_flag ='N' AND
+v_I015_IV_RESPONSE_IDENTIFICATION_WHSCC.error_flag ='N' AND
+v_I015_IV_RESPONSE_LOCATION_WHSCC.error_flag ='N' AND
+ v_I015_IV_RESPONSE_TAX_LINE_WHSCC.error_flag ='N' AND
+ v_I015_IV_RESPONSE_PROVINCE_RESIDENCE_WHSCC.error_flag ='N' " arguments=(("al_request_no", number),("al_tax_year", number))  sort="v_i015_iv_response_tax_line_cra_txn_sub_code A " )
+rectangle(band=header x="5" y="0" height="220" width="3401"  name=r_2 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Income Tax Return Information" border="0" color="33554432" x="1143" y="44" height="96" width="1312" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2789" y="60" height="60" width="549" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="60" height="52" width="334" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="411" y="60" height="60" width="398" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="37" y1="176" x2="3369" y2="176"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="16777215" )
+rectangle(band=header x="41" y="300" height="168" width="3314"  name=r_1 visible="1" brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="67108864"  background.mode="2" background.color="33554432" )
+compute(band=header alignment="0" expression="v_i015_iv_response_location_city + ', ' +    cra_province_location_code + ' ' +  v_i015_iv_response_location_postal_code "border="0" color="33554432" x="114" y="384" height="64" width="1038" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="114" y="320" height="64" width="873" format="[general]" html.valueishtml="0"  name=street_address visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="41" y1="580" x2="3355" y2="580"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Amount Processed" border="0" color="33554432" x="2848" y="504" height="56" width="503" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Description" border="0" color="33554432" x="366" y="504" height="56" width="297" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tax Line" border="0" color="33554432" x="59" y="504" height="56" width="366" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=19 alignment="1" tabsequence=32766 border="0" color="33554432" x="1591" y="232" height="56" width="174" format="[general]" html.valueishtml="0"  name=v_i015_iv_response_identification_tax_year visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="D.O.B.:" border="0" color="33554432" x="1253" y="384" height="64" width="192" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="S.I.N.:" border="0" color="33554432" x="1253" y="320" height="64" width="174" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Prov. of Residence: " border="0" color="33554432" x="2002" y="320" height="64" width="503" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Marital Status:" border="0" color="33554432" x="2002" y="384" height="64" width="416" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="2574" y="320" height="64" width="741" format="[general]" html.valueishtml="0"  name=cra_province_residence_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="2574" y="384" height="64" width="302" format="[general]" html.valueishtml="0"  name=cra_marital_status_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=13 alignment="1" tabsequence=32766 border="0" color="33554432" x="1467" y="320" height="64" width="361" format="###-###-###" html.valueishtml="0"  name=v_i015_iv_response_identification_sin_no visible="1" edit.limit=9 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="1467" y="384" height="64" width="361" format="YYYY-MM-DD" html.valueishtml="0"  name=v_i015_iv_response_identification_birth_date visible="1" edit.limit=8 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address Information Received from CRA for Tax Year:" border="0" color="33554432" x="55" y="232" height="56" width="1504" html.valueishtml="0"  name=t_12 visible="1"  font.face="Tahoma" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="1" expression="'Claim # ' +  claim_no +  ', ' +  v_i015_iv_response_identification_given_names + ' '  + surname "border="0" color="33554432" x="1856" y="240" height="52" width="1499" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2926" y="4" height="52" width="425" format="$###,###.##" html.valueishtml="0"  name=v_i015_iv_response_tax_line_cra_line_amount visible="1" editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="379" y="8" height="52" width="2085" format="[general]" html.valueishtml="0"  name=cra_txn_sub_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="55" y="8" height="52" width="219" format="[general]" html.valueishtml="0"  name=v_i015_iv_response_tax_line_cra_txn_sub_code visible="1" edit.limit=4 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="2" text="*This document is intended  only for internal use by WorkSafeNB and is not to be released or used for any other purpose" border="0" color="33554432" x="18" y="40" height="156" width="3333" html.valueishtml="0"  name=t_13 visible="1"  font.face="Tahoma" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+text(band=foreground alignment="2" text="              DO NOT SCAN" border="0" color="134217728" x="361" y="1576" height="200" width="2953" html.valueishtml="0"  name=t_scan visible="0"  font.face="Bookman Old Style" font.height="-32" font.weight="700"  font.family="1" font.pitch="2" font.charset="0"font.escapement="0~t360"  background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

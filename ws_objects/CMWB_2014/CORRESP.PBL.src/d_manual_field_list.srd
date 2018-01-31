@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_manual_field_list.srd
+$PBExportComments$Lists all manual fields for a specific template
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=137 color="-1" )
+table(column=(type=char(40) name=template_field_id dbname="TEMPLATE_FIELD.template_field_id" )
+ column=(type=char(40) name=template_field_desc dbname="TEMPLATE_FIELD.template_field_desc" )
+ column=(type=char(1) name=access_code dbname="TEMPLATE_FIELD.access_code" )
+ column=(type=number name=template_field_xref_template_field_seq_n dbname="TEMPLATE_FIELD_XREF.template_field_seq_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"TEMPLATE_FIELD~" ) TABLE(NAME=~"TEMPLATE_FIELD_XREF~" ) COLUMN(NAME=~"TEMPLATE_FIELD.template_field_id~") COLUMN(NAME=~"TEMPLATE_FIELD.template_field_desc~") COLUMN(NAME=~"TEMPLATE_FIELD.access_code~") COLUMN(NAME=~"TEMPLATE_FIELD_XREF.template_field_seq_no~") JOIN (LEFT=~"TEMPLATE_FIELD.template_field_id~" OP =~"=~"RIGHT=~"TEMPLATE_FIELD_XREF.template_field_id~" )WHERE( EXP1 =~"TEMPLATE_FIELD_XREF.template_code~" OP =~"=~" EXP2 =~":template_code~" LOGIC =~"and~" ) WHERE( EXP1 =~"TEMPLATE_FIELD.access_code~" OP =~"=~" EXP2 =~"'m'~" LOGIC =~"and~" ) WHERE( EXP1 =~"TEMPLATE_FIELD_XREF.template_version_no~" OP =~"=~" EXP2 =~":version_no~" ) ) ORDER(NAME=~"TEMPLATE_FIELD_XREF.template_field_seq_no~" ASC=yes ) ARG(NAME = ~"template_code~" TYPE = string) ARG(NAME = ~"version_no~" TYPE = string) " arguments=(("template_code", string),("version_no", string)) )
+text(band=header alignment="0" text="Template Field Id"border="0" color="33554432" x="19" y="4" height="85" width="558"  name=template_field_id_t  font.face="Arial" font.height="-11" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Template Field Value"border="0" color="33554432" x="1326" y="8" height="85" width="677"  name=template_field_desc_t  font.face="Arial" font.height="-11" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="20" height="101" width="1477" format="[general]"  name=template_field_id edit.limit=0 edit.case=any edit.autoselect=yes  font.face="LinePrinter" font.height="-10" font.weight="700"  font.family="1" font.pitch="1" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1774" y="36" height="77" width="1477" format="[general]"  name=template_field_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="LinePrinter" font.height="-10" font.weight="700"  font.family="1" font.pitch="1" font.charset="0" background.mode="1" background.color="553648127" )

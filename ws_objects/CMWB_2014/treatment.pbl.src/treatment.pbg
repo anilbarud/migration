@@ -1,0 +1,14 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "treatment.pbl" "";
+@end;
+@begin Objects 
+ "d_claim_task.srd" "treatment.pbl";
+ "d_invoice_details.srd" "treatment.pbl";
+ "d_pa_score.srd" "treatment.pbl";
+ "d_treatement_foq_info.srd" "treatment.pbl";
+ "d_treatment_details.srd" "treatment.pbl";
+ "d_treatment_missed_appointments.srd" "treatment.pbl";
+ "n_treatment.sru" "treatment.pbl";
+ "w_treatment.srw" "treatment.pbl";
+@end;

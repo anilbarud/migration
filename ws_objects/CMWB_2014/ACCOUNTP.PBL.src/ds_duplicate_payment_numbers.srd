@@ -1,0 +1,18 @@
+﻿$PBExportHeader$ds_duplicate_payment_numbers.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=payment_no dbname="PAYMENT.payment_no" )
+ retrieve="  SELECT PAYMENT.payment_no  
+    FROM PAYMENT 
+	WHERE claim_no = :arg_claim_no and
+				payment_type_code = :arg_payment_type_code and	
+				total_payment_amount = :arg_total_payment and 
+				((paid_from_date <= :arg_paid_from_date and :arg_paid_from_date < dateadd(day,1,paid_to_date)) or 
+				(paid_from_date <= :arg_paid_to_date and :arg_paid_to_date < dateadd(day,1,paid_to_date)) or	
+				(:arg_paid_from_date <= paid_from_date and paid_to_date <= :arg_paid_to_date))  
+" arguments=(("arg_claim_no", number),("arg_payment_type_code", string),("arg_total_payment", number),("arg_paid_from_date", date),("arg_paid_to_date", date)) )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="5" y="4" height="76" width="329" format="[general]"  name=payment_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

@@ -1,0 +1,39 @@
+﻿$PBExportHeader$f_return_approved_count.srf
+global type f_return_approved_count from function_object
+end type
+
+forward prototypes
+global function integer f_return_approved_count ()
+end prototypes
+
+global function integer f_return_approved_count ();/* function used for the NBMS project P10127 
+   this is used in the window w_create_reporting_fee_payments
+	to grab the following
+	"On the bottom of the report, identify the number of documents
+	that are marked as approved, but the claim's status is not 
+	rejected - disallowed or Rejected - No Claim
+	
+	RETURNS - the number of records found
+	
+*/
+
+INTEGER li_count
+
+SELECT count(a.claim_no) 
+  INTO :li_count
+  FROM ELIGIBLE_REPORT_FEE_DOCUMENTS a,   
+       CLAIM b
+ WHERE  a.claim_no                       = b.claim_no               and 
+        b.claim_status_type_code         NOT IN ("07","09")         and
+        a.reporting_fee_eligibility_code iN( "APP","APR")   ;  
+		  
+		  
+IF isnull(li_count) THEN
+	li_count = 0
+END IF
+			
+SQLCA.nf_handle_error("Embedded SQL: SELECT count(a.claim_no) ","global function","f_return_approved_count")
+		
+RETURN li_count
+end function
+

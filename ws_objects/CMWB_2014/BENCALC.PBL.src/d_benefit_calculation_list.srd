@@ -1,0 +1,66 @@
+﻿$PBExportHeader$d_benefit_calculation_list.srd
+$PBExportComments$Maintain Benefit Calculation - Datawindow used to display a list of benefit calculations for a specified claim and occurrence number.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="28027307" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" )
+ column=(type=decimal(4) updatewhereclause=yes name=award_amount dbname="award_amount" )
+ column=(type=char(1) updatewhereclause=yes name=award_freq_code dbname="award_freq_code" values="Weekly	W/Monthly	M/" )
+ column=(type=char(40) updatewhereclause=yes name=calculation_note dbname="calculation_note" )
+ column=(type=char(1) updatewhereclause=yes name=transitional_claim_flag dbname="transitional_claim_flag" )
+ column=(type=char(1) updatewhereclause=yes name=top_up_flag dbname="top_up_flag" )
+ column=(type=long updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=calculation_type_code dbname="calculation_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=preacc_gross_pay dbname="preacc_gross_pay" )
+ column=(type=char(3) updatewhereclause=yes name=calculation_reason_code dbname="calculation_reason_code" )
+ column=(type=char(1) updatewhereclause=yes name=rtw_incentive_flag dbname="rtw_incentive_flag" )
+ retrieve="SELECT	benefit_level_percentage,
+			award_amount,
+			award_freq_code,
+			calculation_note,
+			transitional_claim_flag,
+			top_up_flag,
+			benefit_calculation_no,
+			effective_from_date,
+			claim_no,
+			calculation_type_code,
+			preacc_gross_pay,
+			calculation_reason_code,
+			rtw_incentive_flag
+FROM		BENEFIT_CALCULATION
+WHERE	claim_no		= :al_claim_no
+AND		opening_no	= :al_opening_no " arguments=(("al_claim_no", number),("al_opening_no", number))  sort="benefit_calculation_no A " )
+text(band=header alignment="0" text="No" border="0" color="0" x="23" y="8" height="60" width="69" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="0" y1="84" x2="3026" y2="84"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="4" height="60" width="133" format="000" html.valueishtml="0"  name=benefit_calculation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="33554432" x="192" y="4" height="60" width="334" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Effective Dt" border="0" color="33554432" x="178" y="8" height="60" width="357" html.valueishtml="0"  name=effective_from_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="590" y="4" height="60" width="210" format="[general]" html.valueishtml="0"  name=award_freq_code visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Freq" border="0" color="33554432" x="603" y="8" height="60" width="183" html.valueishtml="0"  name=earning_frequency_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="0" x="864" y="4" height="60" width="87" format="[general]" html.valueishtml="0"  name=calculation_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Type" border="0" color="0" x="846" y="8" height="60" width="123" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1029" y="4" height="60" width="439" format="[general]" html.valueishtml="0"  name=calculation_reason_code visible="1" dddw.name=dddw_calculation_reasons dddw.displaycolumn=calculation_reason_desc dddw.datacolumn=calculation_reason_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Reason" border="0" color="33554432" x="1042" y="8" height="60" width="197" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="1527" y="4" height="60" width="160" format="0%" html.valueishtml="0"  name=benefit_level_percentage visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Level" border="0" color="33554432" x="1522" y="8" height="60" width="137" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="1728" y="4" height="60" width="288" format="$#,##0.00" html.valueishtml="0"  name=preacc_gross_pay visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Gross" border="0" color="33554432" x="1842" y="8" height="60" width="155" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="2048" y="4" height="60" width="302" format="$#,##0.00" html.valueishtml="0"  name=award_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Award" border="0" color="33554432" x="2176" y="8" height="60" width="169" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="RTI" border="0" color="33554432" x="2405" y="4" height="60" width="101" html.valueishtml="0"  name=t_rtw visible="1~tIF (rtw_incentive_flag= 'Y', 1, 0 )"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

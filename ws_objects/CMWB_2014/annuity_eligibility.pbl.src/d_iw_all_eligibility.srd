@@ -1,0 +1,87 @@
+﻿$PBExportHeader$d_iw_all_eligibility.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=124 color="134217752" )
+detail(height=80 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long updatewhereclause=yes name=sin_no dbname="sin_no" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(42) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(44) updatewhereclause=yes name=step_completed dbname="step completed" )
+ column=(type=datetime updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=checklist_no dbname="checklist_no" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=char(3) updatewhereclause=yes name=checklist_step_type_code dbname="checklist_step_type_code" )
+ retrieve="SELECT	a.claim_no ,
+         f.individual_no ,
+			f.sin_no ,
+			f.given_names,
+			f.last_name,
+			f.last_name +', '+ f.given_names 'name',
+			Convert(char(2),e.checklist_step_no) + ') ' + g.checklist_step_type_desc 'step completed' ,
+			e.concluded_date,
+			a.annuity_account_no,
+			d.checklist_no,
+			d.create_date,
+         e.concluded_by_user_id,
+         e.checklist_step_type_code
+FROM		ANNUITY_ACCOUNT a
+JOIN		CHECKLIST_SUBSCRIBER b ON a.checklist_subscriber_no = b.checklist_subscriber_no
+JOIN		SUBSCRIBER_CHECKLIST_XREF c ON b.checklist_subscriber_no = c.checklist_subscriber_no
+JOIN		CHECKLIST d ON c.checklist_no = d.checklist_no
+JOIN		CHECKLIST_STEP e ON d.checklist_no = e.checklist_no
+JOIN		INDIVIDUAL f ON a.individual_no = f.individual_no
+JOIN		Checklist_Step_Type g ON e.checklist_step_type_code = g.checklist_step_type_code
+JOIN		Location          h ON f.location_code = h.location_code
+                                  AND f.location_type_code = h.location_type_code
+WHERE	a.claim_role_code = 'C'
+AND		b.checklist_subscriber_type_code = 'ANN'
+AND	 	d.concluded_date IS NULL
+AND		d.checklist_type_code = :as_checklist_type_code
+AND		h.default_admin_region_code = :as_admin_region_code
+AND		e.checklist_step_no = (	SELECT	Max(checklist_step_no)
+											FROM		ANNUITY_ACCOUNT aa
+											JOIN		CHECKLIST_SUBSCRIBER bb ON aa.checklist_subscriber_no = bb.checklist_subscriber_no
+											JOIN		SUBSCRIBER_CHECKLIST_XREF cc ON bb.checklist_subscriber_no = cc.checklist_subscriber_no
+											JOIN		CHECKLIST dd ON cc.checklist_no = dd.checklist_no
+											JOIN		CHECKLIST_STEP ee ON dd.checklist_no = ee.checklist_no
+											WHERE	aa.individual_no = a.individual_no
+											AND		aa.annuity_account_no = a.annuity_account_no
+											AND		bb.checklist_subscriber_type_code = 'ANN'
+											AND		dd.checklist_no = d.checklist_no
+											AND		ee.concluded_date IS NOT NULL)
+order by Convert(varchar(10),d.create_date,121), 7 DESC, f.last_name, f.given_names" arguments=(("as_admin_region_code", string),("as_checklist_type_code", string)) )
+text(band=header alignment="0" text="Individual" border="6" color="33554432" x="32" y="8" height="60" width="393" html.valueishtml="0"  name=individual_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="SIN" border="6" color="33554432" x="443" y="8" height="60" width="425" html.valueishtml="0"  name=sin_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Name" border="6" color="33554432" x="887" y="8" height="60" width="1157" html.valueishtml="0"  name=name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Step Completed" border="6" color="33554432" x="2473" y="8" height="60" width="910" html.valueishtml="0"  name=step_completed_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="List Created" border="6" color="33554432" x="2062" y="8" height="60" width="393" html.valueishtml="0"  name=create_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Date" border="6" color="33554432" x="3401" y="8" height="60" width="393" html.valueishtml="0"  name=concluded_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="By" border="6" color="33554432" x="3813" y="8" height="60" width="357" html.valueishtml="0"  name=concluded_by_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="2" tabsequence=10 border="0" color="33554432" x="32" y="12" height="64" width="393" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=20 border="0" color="33554432" x="443" y="12" height="64" width="425" format="###-###-###" html.valueishtml="0"  name=sin_no visible="1" edit.limit=0 edit.case=any edit.format="###-###-###" edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=30 border="0" color="33554432" x="887" y="12" height="64" width="1157" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=50 border="0" color="33554432" x="2473" y="12" height="64" width="910" format="[general]" html.valueishtml="0"  name=step_completed visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=40 border="0" color="33554432" x="2062" y="8" height="64" width="393" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=60 border="0" color="33554432" x="3401" y="12" height="64" width="393" format="yyyy-mm-dd" html.valueishtml="0"  name=concluded_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=70 border="0" color="33554432" x="3813" y="12" height="64" width="357" format="[general]" html.valueishtml="0"  name=concluded_by_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="count(individual_no for all)"border="0" color="33554432" x="1326" y="28" height="64" width="393" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="2" text="Count of Injured Workers: " border="0" color="33554432" x="594" y="28" height="64" width="677" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="0" y1="0" x2="4169" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

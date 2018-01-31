@@ -1,0 +1,50 @@
+﻿$PBExportHeader$d_checklist_master.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=checklist_no dbname="checklist_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=checklist_status_code dbname="checklist_status_code" )
+ column=(type=char(5) updatewhereclause=yes name=checklist_type_code dbname="checklist_type_code" )
+ column=(type=char(256) update=yes updatewhereclause=yes name=checklist_comment dbname="checklist_comment" )
+ column=(type=char(256) update=yes updatewhereclause=yes name=cancelled_comment dbname="cancelled_comment" )
+ column=(type=char(60) updatewhereclause=yes name=checklist_type_desc dbname="checklist_type_desc" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ retrieve="Select a.checklist_no,
+       a.concluded_date,
+       a.concluded_by_user_id,
+       a.checklist_status_code,
+       a.checklist_type_code,
+       a.checklist_comment,
+       a.cancelled_comment,
+       b.checklist_type_desc,
+       c.user_last_name,
+       c.user_first_name
+From   CHECKLIST a
+INNER JOIN Checklist_Type b ON a.checklist_type_code = b.checklist_type_code
+LEFT  OUTER JOIN User_Profile c ON a.concluded_by_user_id = c.user_id
+WHERE  a.checklist_no = :ar_checklist_no" update="CHECKLIST" updatewhere=0 updatekeyinplace=yes arguments=(("ar_checklist_no", number)) )
+text(band=header alignment="0" text="Checklist" border="6" color="33554432" x="9" y="12" height="56" width="1545" html.valueishtml="0"  name=checklist_no_t  tag="Checklist Number" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Status" border="6" color="33554432" x="1577" y="12" height="56" width="430" html.valueishtml="0"  name=t_3  tag="Checklist Status" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Concluded" border="6" color="33554432" x="2025" y="12" height="56" width="430" html.valueishtml="0"  name=concluded_date_t  tag="Concluded Date" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="By" border="6" color="33554432" x="2473" y="12" height="56" width="1056" html.valueishtml="0"  name=concluded_by_t  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="33554432" x="1573" y="4" height="60" width="430" format="[general]" html.valueishtml="0" protect="0~tif(  checklist_status_code = 'XA' OR checklist_status_code = 'XM' OR checklist_status_code = 'CA' , 1, 0 )"  name=checklist_status_code visible="1" dddw.name=dddw_checklist_status dddw.displaycolumn=checklist_status_desc dddw.datacolumn=checklist_status_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="64" width="256" format="[general]" html.valueishtml="0"  name=checklist_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="279" y="4" height="64" width="1275" format="[general]" html.valueishtml="0"  name=checklist_type_desc visible="1" edit.limit=60 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="2025" y="8" height="56" width="434" format="YYYY-MM-DD" html.valueishtml="0"  name=concluded_date visible="1" editmask.mask="YYYY-MM-DD" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( user_first_name )+~" ~"+Trim( user_last_name )"border="0" color="33554432" x="2487" y="8" height="56" width="1056" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

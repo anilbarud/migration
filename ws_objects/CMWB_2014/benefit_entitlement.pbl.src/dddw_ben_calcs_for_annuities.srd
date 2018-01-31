@@ -1,0 +1,46 @@
+﻿$PBExportHeader$dddw_ben_calcs_for_annuities.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" )
+ column=(type=decimal(4) updatewhereclause=yes name=award_amount dbname="award_amount" )
+ column=(type=long updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=char(40) updatewhereclause=yes name=calculation_note dbname="calculation_note" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(1) updatewhereclause=yes name=rtw_incentive_flag dbname="rtw_incentive_flag" )
+ retrieve=" SELECT BENEFIT_CALCULATION.benefit_calculation_no,   
+        BENEFIT_CALCULATION.effective_from_date,   
+        BENEFIT_CALCULATION.benefit_level_percentage,   
+        BENEFIT_CALCULATION.award_amount,   
+        BENEFIT_CALCULATION.opening_no,
+        BENEFIT_CALCULATION.calculation_note,
+        BENEFIT_CALCULATION.claim_no,
+       BENEFIT_CALCULATION.rtw_incentive_flag
+   FROM BENEFIT_CALCULATION, OPENING
+  WHERE BENEFIT_CALCULATION.claim_no = OPENING.claim_no
+    AND BENEFIT_CALCULATION.opening_no = OPENING.opening_no
+	 AND BENEFIT_CALCULATION.claim_no in ( :al_claimno)
+UNION
+ SELECT  0 , '1900-01-01' , 0.00, 0.00,0,' ',0,' '   " arguments=(("al_claimno", numberlist))  sort="benefit_calculation_no A " )
+compute(band=detail alignment="0" expression="IF(benefit_calculation_no > 0 , 
+IF( calculation_note <> '', String( benefit_calculation_no ) + '  ' + String( award_amount,'$###,###.00' ) + '  Effective from ' + String(  effective_from_date,'YYYY-MM-DD' ) + ' at ' + String( benefit_level_percentage,'###.00 %' ) + ' - ' +  calculation_note , String( benefit_calculation_no ) + '  ' + String( award_amount,'$###,###.00' ) + '  Effective from ' + String(  effective_from_date,'YYYY-MM-DD' ) + ' at ' + String( benefit_level_percentage,'###.00 %' ))
+, '0   $0.00 Effective from 0000-00-00  at 0% ')"border="0" color="0" x="9" y="8" height="60" width="3438" format="[general]" html.valueishtml="0"  name=drop_value visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="If (benefit_calculation_no = 0,~"N/A~",string(award_amount,~"$#,##0.00~") + '     '+ String( benefit_calculation_no,'###' ))"border="0" color="0" x="1042" y="92" height="60" width="224" format="[general]" html.valueishtml="0"  name=display_value visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="1669" y="88" height="76" width="297" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="1563" y="84" height="64" width="27" format="[general]" html.valueishtml="0"  name=rtw_incentive_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

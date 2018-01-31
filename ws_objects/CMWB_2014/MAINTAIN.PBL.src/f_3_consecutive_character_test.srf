@@ -1,0 +1,44 @@
+﻿$PBExportHeader$f_3_consecutive_character_test.srf
+global type f_3_consecutive_character_test from function_object
+end type
+
+forward prototypes
+global function boolean f_3_consecutive_character_test (string as_string)
+end prototypes
+
+global function boolean f_3_consecutive_character_test (string as_string);
+as_string = UPPER(as_string)
+
+IF   MATCH(as_string,'AAA') &
+OR  MATCH(as_string,'BBB') &
+OR  MATCH(as_string,'CCC') &
+OR  MATCH(as_string,'DDD') &
+OR  MATCH(as_string,'EEE') &
+OR  MATCH(as_string,'FFF') &
+OR  MATCH(as_string,'GGG') &
+OR  MATCH(as_string,'HHH') &
+OR  MATCH(as_string,'III') &
+OR  MATCH(as_string,'JJJ') &
+OR  MATCH(as_string,'KKK') &
+OR  MATCH(as_string,'LLL') &
+OR  MATCH(as_string,'MMM') &
+OR  MATCH(as_string,'NNN') &
+OR  MATCH(as_string,'OOO') &
+OR  MATCH(as_string,'PPP') &
+OR  MATCH(as_string,'QQQ') &
+OR  MATCH(as_string,'RRR') &
+OR  MATCH(as_string,'SSS') &
+OR  MATCH(as_string,'TTT') &
+OR  MATCH(as_string,'UUU') &
+OR  MATCH(as_string,'VVV') &
+OR  MATCH(as_string,'WWW') &
+OR  MATCH(as_string,'XXX') &
+OR  MATCH(as_string,'YYY') &
+OR  MATCH(as_string,'ZZZ') &
+THEN
+	RETURN TRUE
+END IF
+
+return false
+end function
+

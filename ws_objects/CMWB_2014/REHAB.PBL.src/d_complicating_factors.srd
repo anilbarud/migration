@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_complicating_factors.srd
+$PBExportComments$Add a new complicating factor
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=84 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="COMPLICATING_FACTORS.claim_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes key=yes name=complicating_factor_code dbname="COMPLICATING_FACTORS.complicating_factor_code" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="COMPLICATING_FACTORS.timestamp" )
+ retrieve="  SELECT COMPLICATING_FACTORS.claim_no,   
+         COMPLICATING_FACTORS.complicating_factor_code,   
+         COMPLICATING_FACTORS.timestamp  
+    FROM COMPLICATING_FACTORS  
+  " update="COMPLICATING_FACTORS" updatewhere=0 updatekeyinplace=yes )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="27" y="8" height="68" width="928" format="[general]" html.valueishtml="0"  name=complicating_factor_code visible="1" dddw.name=dddw_complicating_factors dddw.displaycolumn=complicating_factor_desc dddw.datacolumn=complicating_factor_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

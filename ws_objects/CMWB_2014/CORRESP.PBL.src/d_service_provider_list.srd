@@ -1,0 +1,48 @@
+﻿$PBExportHeader$d_service_provider_list.srd
+$PBExportComments$List all service providers for a specific criteria
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 107 print.margin.right = 107 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=81 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=89 color="-1" )
+table(column=(type=char(30) updatewhereclause=yes name=name dbname="PROVIDER.name" )
+ column=(type=char(30) updatewhereclause=yes name=contact_name dbname="PROVIDER.contact_name" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="PROVIDER.address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="PROVIDER.address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="PROVIDER.city" )
+ column=(type=char(6) updatewhereclause=yes name=prov_state_code dbname="compute_0006" )
+ column=(type=char(10) updatewhereclause=yes name=postal_code dbname="compute_0007" )
+ column=(type=long updatewhereclause=yes name=provider_no dbname="PROVIDER.provider_no" )
+ column=(type=char(3) updatewhereclause=yes name=provider_type_code dbname="compute_0009" )
+ column=(type=char(1) updatewhereclause=yes name=cardfile dbname="cardfile" )
+ column=(type=char(2) updatewhereclause=yes name=provider_sub_type_code dbname="PROVIDER.provider_sub_type_code" )
+ retrieve="  SELECT PROVIDER.name,   
+         PROVIDER.contact_name,   
+         PROVIDER.address_line1,   
+         PROVIDER.address_line2,   
+         PROVIDER.city,   
+         PROVIDER.prov_state_code+~"    ~",   
+         PROVIDER.postal_code+~" ~",   
+         PROVIDER.provider_no,   
+         PROVIDER.provider_type_code+~"  ~",   
+         cardfile='N'  ,   
+         PROVIDER.provider_sub_type_code  
+    FROM PROVIDER  
+   WHERE ( PROVIDER.name like :name ) AND  
+         (PROVIDER.city like :city ) AND  
+         ( PROVIDER.active_flag = 'Y' )    
+" arguments=(("name", string),("city", string))  sort="name A city A " )
+text(band=header alignment="0" text="Name"border="0" color="33554432" x="74" y="4" height="65" width="151"  name=name_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Address"border="0" color="33554432" x="837" y="8" height="65" width="220"  name=address_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Contact/Other Name"border="0" color="33554432" x="3068" y="4" height="65" width="526"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="City"border="0" color="33554432" x="1770" y="0" height="65" width="97"  name=city_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Postal Code"border="0" color="33554432" x="2391" y="4" height="65" width="311"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Province"border="0" color="33554432" x="2757" y="8" height="65" width="229"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="74" y="12" height="57" width="727" format="[general]"  name=name edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression=" if (address_line1 = ~" ~", (if (address_line2 = ~" ~",  address_line1,  address_line2)),address_line1) "border="0" color="33554432" x="837" y="12" height="57" width="869" format="[GENERAL]"  name=address  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="if( cardfile = 'N', ' ', '*')"border="0" color="33554432" x="19" y="12" height="57" width="60" format="[GENERAL]"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="3068" y="12" height="57" width="897" format="[general]"  name=contact_name edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1770" y="12" height="61" width="581" format="[general]"  name=city edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="2391" y="8" height="57" width="279" format="[general]"  name=postal_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2757" y="8" height="57" width="197" format="[general]"  name=prov_state_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

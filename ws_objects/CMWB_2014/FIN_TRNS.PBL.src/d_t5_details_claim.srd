@@ -1,0 +1,114 @@
+﻿$PBExportHeader$d_t5_details_claim.srd
+$PBExportComments$Has its own select.  Not SP based.  Use in w_t5_trustees.
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=252 color="10789024" )
+summary(height=0 color="67108864" )
+footer(height=84 color="10789024" )
+detail(height=68 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=txn_no dbname="txn_no" )
+ column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(40) updatewhereclause=yes name=payment_type_desc dbname="payment_type_desc" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=char(24) updatewhereclause=yes name=paid_from_to dbname="paid_from_to" )
+ retrieve="SELECT APPLIED_CLAIM_TXN.claim_no, 
+       APPLIED_CLAIM_TXN.txn_no, 
+       APPLIED_CLAIM_TXN.payment_no, 
+       Payment_Type.payment_type_desc, 
+       APPLIED_CLAIM_TXN.txn_amount * ISNULL((SELECT -1 FROM PAYMENT
+                                              WHERE PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no
+                                              AND PAYMENT.payment_type_code = '97'
+                                              AND APPLIED_CLAIM_TXN.txn_type_code = '8' 
+                                              AND (APPLIED_CLAIM_TXN.txn_amount * -1.00) < 7231.00
+                                              AND PAYMENT.payment_sub_type_code IN ('CM', 'DM')), 1) 'txn_amount',
+       CONVERT(CHAR(10), PAYMENT.paid_from_date, 111) + ' to ' + CONVERT(CHAR(10), PAYMENT.paid_to_date, 111) 'paid_from_to'
+FROM APPLIED_CLAIM_TXN, PAYMENT, Payment_Type  
+WHERE PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no 
+AND Payment_Type.payment_type_code = PAYMENT.payment_type_code 
+AND APPLIED_CLAIM_TXN.recipient_no = :an_recipient_no 
+AND APPLIED_CLAIM_TXN.claim_no = :an_claim_no 
+AND APPLIED_CLAIM_TXN.create_date >= :adtm_start_date 
+AND APPLIED_CLAIM_TXN.create_date < :adtm_end_date  
+AND Payment_Type.benefit_category_code <> 'MA' 
+AND PAYMENT.payment_type_code NOT IN ('07', '09', '10', 'TA') 
+AND (APPLIED_CLAIM_TXN.txn_type_code <> '4' 
+     AND NOT(APPLIED_CLAIM_TXN.txn_type_code = 'J' and APPLIED_CLAIM_TXN.txn_sub_type_code = '5'))
+AND ( PAYMENT.payment_type_code <> '97' OR ( PAYMENT.payment_type_code = '97' 
+                                             AND APPLIED_CLAIM_TXN.txn_type_code = '8' 
+                                             AND PAYMENT.payment_sub_type_code IN ('CM', 'DM')
+                                             AND (APPLIED_CLAIM_TXN.txn_amount * -1.00) < 7231.00))  
+AND APPLIED_CLAIM_TXN.recipient_type_code = 'I' 
+AND APPLIED_CLAIM_TXN.txn_no <> 1344592  /* Fix for Trustee problem re. Y2K prepayment */
+UNION ALL 
+SELECT APPLIED_CLAIM_TXN.claim_no, 
+       APPLIED_CLAIM_TXN.txn_no, 
+       APPLIED_CLAIM_TXN.payment_no, 
+       Payment_Type.payment_type_desc, 
+       APPLIED_CLAIM_TXN.txn_amount * ISNULL((SELECT -1 FROM PAYMENT
+                                              WHERE PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no
+                                              AND PAYMENT.payment_type_code = '97'
+                                              AND APPLIED_CLAIM_TXN.txn_type_code = '8' 
+                                              AND (APPLIED_CLAIM_TXN.txn_amount * -1.00) < 7231.00
+                                              AND PAYMENT.payment_sub_type_code IN ('CM', 'DM')), 1) 'txn_amount',
+       CONVERT(CHAR(10), PAYMENT.paid_from_date, 111) + ' to ' + CONVERT(CHAR(10), PAYMENT.paid_to_date, 111) 'paid_from_to'
+FROM APPLIED_CLAIM_TXN, PAYMENT, Payment_Type, CLAIM  
+WHERE PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no 
+AND Payment_Type.payment_type_code = PAYMENT.payment_type_code 
+AND APPLIED_CLAIM_TXN.claim_no = CLAIM.claim_no 
+AND CLAIM.individual_no = :an_recipient_no 
+AND APPLIED_CLAIM_TXN.claim_no = :an_claim_no 
+AND APPLIED_CLAIM_TXN.create_date >= :adtm_start_date 
+AND APPLIED_CLAIM_TXN.create_date < :adtm_end_date  
+AND Payment_Type.benefit_category_code <> 'MA' 
+AND PAYMENT.payment_type_code NOT IN ('07', '09', '10', 'TA') 
+AND (APPLIED_CLAIM_TXN.txn_type_code <> '4' 
+     AND NOT(APPLIED_CLAIM_TXN.txn_type_code = 'J' and APPLIED_CLAIM_TXN.txn_sub_type_code = '5'))
+AND ( PAYMENT.payment_type_code <> '97' OR ( PAYMENT.payment_type_code = '97' 
+                                             AND APPLIED_CLAIM_TXN.txn_type_code = '8' 
+                                             AND PAYMENT.payment_sub_type_code IN ('CM', 'DM')
+                                             AND (APPLIED_CLAIM_TXN.txn_amount * -1.00) < 7231.00))  
+AND ((APPLIED_CLAIM_TXN.recipient_type_code = 'V' AND PAYMENT.payment_type_code = '08')
+OR  (APPLIED_CLAIM_TXN.recipient_type_code = 'O'))
+UNION ALL /* Fix for Trustee problem re. Y2K prepayment */
+SELECT APPLIED_CLAIM_TXN.claim_no, 
+       APPLIED_CLAIM_TXN.txn_no, 
+       APPLIED_CLAIM_TXN.payment_no, 
+       Payment_Type.payment_type_desc, 
+       APPLIED_CLAIM_TXN.txn_amount,
+       CONVERT(CHAR(10), PAYMENT.paid_from_date, 111) + ' to ' + CONVERT(CHAR(10), PAYMENT.paid_to_date, 111) 'paid_from_to' 
+FROM APPLIED_CLAIM_TXN, PAYMENT, Payment_Type  
+WHERE PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no 
+AND APPLIED_CLAIM_TXN.claim_no = :an_claim_no  
+AND Payment_Type.payment_type_code = PAYMENT.payment_type_code 
+AND DATEPART(YY, :adtm_start_date ) = 2000 /* Only for 2000 */
+AND :an_recipient_no = 134486
+AND APPLIED_CLAIM_TXN.txn_no = 1344592
+
+ORDER BY APPLIED_CLAIM_TXN.claim_no, paid_from_to 
+
+" arguments=(("an_recipient_no", number),("an_claim_no", number),("adtm_start_date", datetime),("adtm_end_date", datetime)) )
+text(band=header alignment="0" text="Recipient No:" border="0" color="0" x="23" y="4" height="60" width="338" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="an_recipient_no"border="0" color="0" x="407" y="8" height="60" width="302" format="[general]" html.valueishtml="0"  name=recip_no visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Claim No." border="4" color="0" x="9" y="184" height="60" width="256" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Txn No." border="4" color="0" x="279" y="184" height="60" width="256" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Payment
+No." border="4" color="0" x="549" y="124" height="120" width="256" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Payment Type" border="4" color="0" x="818" y="184" height="60" width="937" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Amount" border="4" color="0" x="1769" y="184" height="60" width="407" html.valueishtml="0"  name=txn_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Payment Period" border="4" color="0" x="2190" y="184" height="60" width="658" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2066" y="8" height="56" width="558" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="1792" y="68" height="56" width="832" format="mmmm dd, YYYY" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="4" height="60" width="256" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="279" y="4" height="60" width="256" format="[general]" html.valueishtml="0"  name=txn_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="549" y="4" height="60" width="256" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="818" y="4" height="60" width="937" format="[general]" html.valueishtml="0"  name=payment_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0" x="1769" y="4" height="60" width="407" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2190" y="4" height="60" width="658" format="[general]" html.valueishtml="0"  name=paid_from_to visible="1~tIf( paid_from_to = ' to ', 0, 1)" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="# Transactions:" border="0" color="0" x="9" y="20" height="60" width="402" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count(  txn_no  for all )"border="0" color="0" x="434" y="20" height="60" width="329" format="[general]" html.valueishtml="0"  name=num_rows visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="0" y1="8" x2="2199" y2="8"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Total:" border="0" color="0" x="1472" y="20" height="60" width="142" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="sum(  txn_amount  for all )"border="0" color="0" x="1637" y="20" height="60" width="539" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=sum_txn_amount visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

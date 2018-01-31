@@ -1,0 +1,159 @@
+﻿$PBExportHeader$d_basic_claim_formulary.srd
+$PBExportComments$Claim Retrieve - Display Basic Claim Information
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=376 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=duplicate_of_claim_no dbname="duplicate_of_claim_no" )
+ column=(type=char(1) updatewhereclause=yes name=imaged_flag dbname="imaged_flag" )
+ column=(type=datetime updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=long updatewhereclause=yes name=claim_accident_employer_no dbname="accident_employer_no" )
+ column=(type=long updatewhereclause=yes name=claim_accident_employer_operation_no dbname="accident_employer_operation_no" )
+ column=(type=char(3) updatewhereclause=yes name=administering_act_code dbname="administering_act_code" )
+ column=(type=long updatewhereclause=yes name=rejected_wca_claim_no dbname="rejected_wca_claim_no" )
+ column=(type=long updatewhereclause=yes name=sin_no dbname="sin_no" )
+ column=(type=long updatewhereclause=yes name=medicare_no dbname="medicare_no" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=char(10) updatewhereclause=yes name=telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=individual_history_flag dbname="history_flag" )
+ column=(type=char(60) updatewhereclause=yes name=employer_legal_name dbname="employer_legal_name" )
+ column=(type=char(10) updatewhereclause=yes name=employer_address_telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=language_code dbname="language_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_history_flag dbname="history_flag" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(16) updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(5) updatewhereclause=yes name=part_of_body_code dbname="part_of_body_code" )
+ column=(type=char(1) updatewhereclause=yes name=receiving_salary_flag dbname="receiving_salary_flag" )
+ column=(type=char(1) updatewhereclause=yes name=case_managed_flag dbname="case_managed_flag" )
+ column=(type=char(1) updatewhereclause=yes name=sex dbname="sex" )
+ column=(type=datetime updatewhereclause=yes name=individual_death_date dbname="death_date" )
+ column=(type=char(1) updatewhereclause=yes name=individual_caution_flag dbname="caution_flag" )
+ column=(type=char(5) updatewhereclause=yes name=accident_nature_of_injury_code dbname="nature_of_injury_code" )
+ column=(type=char(55) updatewhereclause=yes name=phone dbname="phone" )
+ column=(type=char(10) updatewhereclause=yes name=individual_cellphone_no dbname="cellphone_no" )
+ column=(type=char(10) updatewhereclause=yes name=individual_pager_no dbname="pager_no" )
+ column=(type=long updatewhereclause=yes name=x001_registration_claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=other_claims dbname="other_claims" )
+ column=(type=char(36) updatewhereclause=yes name=opening_information dbname="opening_information" )
+ column=(type=long updatewhereclause=yes name=compute_0038 dbname="compute_0038" )
+ retrieve="SELECT CLAIM.claim_no, 
+       CLAIM.duplicate_of_claim_no,   
+       CLAIM.imaged_flag,
+       CLAIM.accident_date,   
+       CLAIM.accident_employer_no,
+       CLAIM.accident_employer_operation_no, 
+       CLAIM.administering_act_code, 
+       CLAIM.rejected_wca_claim_no, 
+       INDIVIDUAL.sin_no, 
+       INDIVIDUAL.medicare_no,   
+       INDIVIDUAL.birth_date, 
+       INDIVIDUAL.telephone_no,   
+       INDIVIDUAL.history_flag, 
+       EMPLOYER.employer_legal_name,   
+       EMPLOYER_ADDRESS.telephone_no, 
+       INDIVIDUAL.language_code,   
+       CLAIM.history_flag, 
+       CLAIM.claim_status_code,   
+       CLAIM.claim_status_type_code, 
+       CLAIM.admin_region_code,   
+       CLAIM.claim_manager_user_id, 
+       INDIVIDUAL.individual_no,   
+       INDIVIDUAL.last_name,   
+       INDIVIDUAL.given_names,   
+       CLAIM.part_of_body_code,   
+       CLAIM.receiving_salary_flag,   
+       CLAIM.case_managed_flag,   
+       INDIVIDUAL.sex,   
+       INDIVIDUAL.death_date,
+       INDIVIDUAL.caution_flag,
+       ACCIDENT.nature_of_injury_code,
+       '                                                       ' phone,
+       INDIVIDUAL.cellphone_no,
+       INDIVIDUAL.pager_no,
+       X001_REGISTRATION.claim_no, 
+       (SELECT COUNT(*) FROM CLAIM c1 WHERE c1.claim_no <> CLAIM.claim_no AND c1.individual_no = CLAIM.individual_no AND c1.claim_status_code = 'A' ) AS other_claims, 
+       opening_information = CASE claim_status_code 
+                             WHEN 'A' THEN (SELECT '/' + a.opening_type_code 
+                                              FROM OPENING a ,CLAIM b 
+                                             WHERE a.claim_no = b.claim_no 
+                                               AND a.claim_no = :claim_no 
+                                               AND a.opening_no = (SELECT max(b.opening_no) 
+                                                                     FROM OPENING b 
+                                                                    WHERE b.claim_no = a.claim_no 
+                                                                      and b.benefit_end_date IS NULL )) 
+                             WHEN 'F' THEN (SELECT claim_status_type_desc 
+                                              FROM Claim_Status_Type,CLAIM 
+                                             WHERE Claim_Status_Type.claim_status_type_code = CLAIM.claim_status_type_code 
+                                               AND CLAIM.claim_no = :claim_no) + '/' + (SELECT CONVERT(CHAR(10), a.create_date ,121) 
+                                                                                          FROM CLAIM_STATUS_CHANGE a 
+                                                                                         WHERE a.claim_no = :claim_no 
+                                                                                           AND seq_no = (SELECT MAX(b.seq_no) 
+                                                                                                           FROM CLAIM_STATUS_CHANGE b
+                                                                                                          WHERE a.claim_no = b.claim_no 
+                                                                                                            AND b.new_claim_status_code = 'F')) 
+                             ELSE ''
+                             END, 
+       (SELECT COUNT(*) FROM DRUG_ALERT WHERE INDIVIDUAL.individual_no = DRUG_ALERT.individual_no AND DRUG_ALERT.terminated_date IS NULL AND getdate() >= DRUG_ALERT.effective_date) 
+  FROM CLAIM INNER JOIN INDIVIDUAL ON CLAIM.individual_no = INDIVIDUAL.individual_no 
+        LEFT OUTER JOIN EMPLOYER ON CLAIM.accident_employer_no = EMPLOYER.employer_no 
+        LEFT OUTER JOIN EMPLOYER_ADDRESS ON CLAIM.accident_employer_no = EMPLOYER_ADDRESS.employer_no AND EMPLOYER_ADDRESS.operation_no = 0 AND EMPLOYER_ADDRESS.address_type_code = 'BA' 
+                   JOIN ACCIDENT ON CLAIM.claim_no = ACCIDENT.claim_no 
+        LEFT OUTER JOIN X001_REGISTRATION ON CLAIM.claim_no = X001_REGISTRATION.claim_no 
+ WHERE CLAIM.claim_no = :claim_no
+" arguments=(("claim_no", number)) )
+text(band=detail alignment="0" text="Other Claims" border="0" color="16711680" x="2245" y="0" height="52" width="384" html.valueishtml="0"  name=t_1 visible="1~tif(  other_claims <> 0, 1, 0 )"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="0" text="Assigned To:" border="0" color="0" x="1074" y="0" height="60" width="338" html.valueishtml="0"  name=claim_claim_manager_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="If  (claim_manager_user_id <> ~"        ~", claim_manager_user_id + ~" (~" + Trim(admin_region_code) + ~")~",Trim(admin_region_code)) "border="0" color="0" x="1435" y="0" height="52" width="402" format="[GENERAL]" html.valueishtml="0"  name=computed_assigned_to visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression="if(  individual_history_flag = 'Y', ~"History Claim~", if(  claim_history_flag = 'Y', ~"History Claim~", ~"~" ) )"border="0" color="16711680" x="1861" y="0" height="52" width="366" format="[GENERAL]" html.valueishtml="0"  name=computed_history_indicator visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Status:" border="0" color="0" x="1079" y="56" height="60" width="206" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="0" x="1440" y="56" height="52" width="425" format="[general]" html.valueishtml="0"  name=claim_status_code visible="1" dddw.name=dddw_claim_status dddw.displaycolumn=claim_status_desc dddw.datacolumn=claim_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if(Trim(claim_status_type_code) > '' and claim_status_code  not in ('A','F'), '/', '' )"border="0" color="0" x="1879" y="56" height="52" width="37" format="[GENERAL]" html.valueishtml="0"  name=computed_dash visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="1934" y="56" height="52" width="677" format="[general]" html.valueishtml="0"  name=claim_status_type_code visible="1~tif(trim (opening_information) > ~"~",0,1) " dddw.name=dddw_claim_status_type dddw.displaycolumn=claim_status_type_desc dddw.datacolumn=claim_status_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Part of Body:" border="0" color="0" x="1079" y="112" height="60" width="329" html.valueishtml="0"  name=claim_part_of_body_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="0" x="1440" y="112" height="52" width="1170" format="[general]" html.valueishtml="0"  name=part_of_body_code visible="1" dddw.name=dddw_part_of_body dddw.displaycolumn=part_of_body_desc dddw.datacolumn=part_of_body_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Nature of Inj:" border="0" color="0" x="1079" y="164" height="60" width="325" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Employer:" border="0" color="0" x="1079" y="220" height="60" width="302" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="0" x="1440" y="168" height="56" width="1170" format="[general]" html.valueishtml="0"  name=accident_nature_of_injury_code visible="1" dddw.name=dddw_nature_of_injury_codes_all dddw.displaycolumn=nature_of_injury_code_desc dddw.datacolumn=nature_of_injury_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Emp Phone:" border="0" color="0" x="1079" y="276" height="60" width="311" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="1440" y="276" height="52" width="439" format="~tIf (employer_address_telephone_no > ~"          ~",'(@@@)@@@-@@@@','')" html.valueishtml="0"  name=employer_address_telephone_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="1" expression=" if(  duplicate_of_claim_no > 0 , ~"Duplicate of Claim: ~" + Trim(String (duplicate_of_claim_no)) , ~"~" ) "border="0" color="16711680" x="1902" y="280" height="52" width="709" format="[GENERAL]" html.valueishtml="0"  name=computed_related_claim visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=37 alignment="0" tabsequence=32766 border="0" color="0" x="1673" y="56" height="52" width="1230" format="[general]" html.valueishtml="0"  name=opening_information visible="1~tif( claim_status_code  in ('A','F'),1,0 )" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+bitmap(band=detail filename="plus_blue_24_h.gif" x="823" y="16" height="96" width="110" border="0"  name=p_1 visible="1~tif( IsNull(x001_registration_claim_no) OR  x001_registration_claim_no <= 0, 0, 1)" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="1440" y="224" height="52" width="1170" format="[general]" html.valueishtml="0"  name=employer_legal_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Accident:" border="0" color="0" x="32" y="4" height="60" width="265" html.valueishtml="0"  name=claim_accident_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="SIN:" border="0" color="0" x="32" y="68" height="64" width="101" html.valueishtml="0"  name=individual_sin_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Birth Date:" border="0" color="0" x="32" y="132" height="64" width="270" html.valueishtml="0"  name=individual_birth_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Medicare:" border="0" color="0" x="32" y="196" height="64" width="256" html.valueishtml="0"  name=individual_medicare_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="320" y="4" height="64" width="416" format="yyyy-mm-dd;' '" html.valueishtml="0"  name=accident_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="320" y="68" height="64" width="416" format="###-###-###;' ';' '" html.valueishtml="0"  name=sin_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="320" y="132" height="64" width="416" format="yyyy-mm-dd;' '" html.valueishtml="0"  name=birth_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="320" y="196" height="64" width="416" format="###-###-###;' ';' '" html.valueishtml="0"  name=medicare_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=10 border="0" color="0" x="320" y="268" height="60" width="672" format="[general]" html.valueishtml="0"  name=phone visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Contact #:" border="0" color="0" x="32" y="264" height="60" width="261" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="!" border="0" color="255" x="937" y="4" height="112" width="50" html.valueishtml="0"  name=t_7 visible="1~tIF(drug_alert_count >0, 1, 0)"  font.face="Book Antiqua" font.height="-20" font.weight="700"  font.family="1" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=summary id=34 alignment="0" tabsequence=32766 border="0" color="0" x="2624" y="324" height="60" width="768" format="[general]" html.valueishtml="0"  name=individual_pager_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=summary id=27 alignment="0" tabsequence=32766 border="0" color="0" x="1504" y="24" height="56" width="713" format="[general]" html.valueishtml="0"  name=claim_case_managed_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=summary id=29 alignment="0" tabsequence=32766 border="0" color="0" x="1047" y="96" height="60" width="512" format="[shortdate] [time]" html.valueishtml="0"  name=individual_death_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=summary id=28 alignment="0" tabsequence=32766 border="0" color="0" x="2021" y="104" height="60" width="631" format="[general]" html.valueishtml="0"  name=sex visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=summary id=14 alignment="0" tabsequence=32766 border="0" color="0" x="448" y="224" height="60" width="1682" format="[general]" html.valueishtml="0"  name=employer_employer_legal_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=summary id=30 alignment="0" tabsequence=32766 border="0" color="0" x="1522" y="332" height="60" width="786" format="[general]" html.valueishtml="0"  name=individual_caution_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=summary id=33 alignment="0" tabsequence=32766 border="0" color="0" x="306" y="384" height="60" width="672" format="[general]" html.valueishtml="0"  name=individual_cellphone_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

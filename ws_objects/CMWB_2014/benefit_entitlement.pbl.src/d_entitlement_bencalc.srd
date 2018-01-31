@@ -1,0 +1,66 @@
+﻿$PBExportHeader$d_entitlement_bencalc.srd
+$PBExportComments$bencalc portion (detail) of maintain entitlement benefit
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=84 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=char(1) updatewhereclause=yes name=award_freq_code dbname="award_freq_code" )
+ column=(type=char(3) updatewhereclause=yes name=calculation_type_code dbname="calculation_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=calculation_reason_code dbname="calculation_reason_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" )
+ column=(type=decimal(4) updatewhereclause=yes name=award_amount dbname="award_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=preacc_gross_pay dbname="preacc_gross_pay" )
+ column=(type=decimal(2) updatewhereclause=yes name=preacc_work_days_per_week dbname="preacc_work_days_per_week" )
+ column=(type=decimal(2) updatewhereclause=yes name=preacc_work_hours_per_day dbname="preacc_work_hours_per_day" )
+ column=(type=char(40) updatewhereclause=yes name=calculation_note dbname="calculation_note" )
+ retrieve="SELECT benefit_calculation_no,   
+       effective_from_date,   
+       award_freq_code,   
+       calculation_type_code,   
+       calculation_reason_code,   
+       benefit_level_percentage,   
+       award_amount,   
+       preacc_gross_pay,   
+       preacc_work_days_per_week,   
+       preacc_work_hours_per_day,
+       calculation_note
+FROM   BENEFIT_CALCULATION  
+WHERE  opening_no = :al_opening_no
+AND    claim_no   = :al_claim_no
+" arguments=(("al_opening_no", number),("al_claim_no", number))  sort="effective_from_date A " )
+text(band=header alignment="0" text="BenCalc" border="6" color="33554432" x="5" y="4" height="64" width="247" html.valueishtml="0"  name=benefit_calculation_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Effective Date" border="6" color="33554432" x="270" y="4" height="64" width="411" html.valueishtml="0"  name=effective_from_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Freq" border="6" color="33554432" x="699" y="4" height="64" width="151" html.valueishtml="0"  name=award_freq_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Type" border="6" color="33554432" x="869" y="4" height="64" width="160" html.valueishtml="0"  name=calculation_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Reason" border="6" color="33554432" x="1047" y="4" height="64" width="549" html.valueishtml="0"  name=calculation_reason_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Level" border="6" color="33554432" x="1614" y="4" height="64" width="325" html.valueishtml="0"  name=benefit_level_percentage_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Gross" border="6" color="33554432" x="1957" y="4" height="64" width="343" html.valueishtml="0"  name=preacc_gross_pay_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Award Amount" border="6" color="33554432" x="2318" y="4" height="64" width="430" html.valueishtml="0"  name=award_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="64" width="247" format="[general]" html.valueishtml="0"  name=benefit_calculation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="270" y="4" height="64" width="411" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="869" y="4" height="64" width="160" format="[general]" html.valueishtml="0"  name=calculation_type_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="699" y="4" height="64" width="151" format="[general]" html.valueishtml="0"  name=award_freq_code visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1047" y="4" height="64" width="549" format="[general]" html.valueishtml="0"  name=calculation_reason_code visible="1" dddw.name=dddw_calculation_reasons dddw.displaycolumn=calculation_reason_desc dddw.datacolumn=calculation_reason_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="1614" y="4" height="64" width="325" format="[general]" html.valueishtml="0"  name=benefit_level_percentage visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="1957" y="4" height="64" width="343" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=preacc_gross_pay visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2318" y="4" height="64" width="430" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=award_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="2766" y="4" height="64" width="187" format="[general]" html.valueishtml="0"  name=preacc_work_days_per_week visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="3099" y="4" height="64" width="187" format="[general]" html.valueishtml="0"  name=preacc_work_hours_per_day visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=0 border="0" color="33554432" x="3305" y="4" height="64" width="1079" html.valueishtml="0"  name=calculation_note visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Work Days/Hours" border="6" color="33554432" x="2766" y="4" height="64" width="512" html.valueishtml="0"  name=preacc_work_days_per_week_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Note" border="6" color="33554432" x="3296" y="4" height="64" width="1047" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,119 @@
+﻿$PBExportHeader$d_task_maintain.srd
+$PBExportComments$the main dw for entering/udating tasks
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=908 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=task_no dbname="task_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=task_sub_type_code dbname="task_sub_type_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=task_specific_code dbname="task_specific_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=task_success_code dbname="task_success_code" values="Successful	Y/Not Successful	N/Not Yet Determined	X/" )
+ column=(type=long update=yes updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=provider_type_code dbname="provider_type_code" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=responsible_user_id dbname="responsible_user_id" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=datetime update=yes updatewhereclause=yes name=planned_start_date dbname="planned_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=planned_completion_date dbname="planned_completion_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=actual_start_date dbname="actual_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=actual_completion_date dbname="actual_completion_date" )
+ column=(type=char(1) updatewhereclause=yes name=success_code_required dbname="success_code_required" )
+ column=(type=char(1) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(1) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(1) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(1) updatewhereclause=yes name=country dbname="country" )
+ column=(type=char(1) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(1) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(1) updatewhereclause=yes name=name dbname="name" )
+ column=(type=long updatewhereclause=yes name=amount dbname="amount" )
+ column=(type=long updatewhereclause=yes name=qty dbname="qty" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=expedited_service_flag dbname="expedited_service_flag" values="Yes	Y/No	N/" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=rehab_service_code dbname="rehab_service_code" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ column=(type=char(110) updatewhereclause=yes name=rehab_service_program_display dbname="rehab_service_program_display" )
+ column=(type=char(110) updatewhereclause=yes name=task_xref_display dbname="task_xref_display" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=auto_created_flag dbname="auto_created_flag" )
+ column=(type=char(1) updatewhereclause=yes name=telephone_no dbname="telephone_no" )
+ retrieve="  SELECT a.claim_no,   
+         a.task_no,   
+         a.task_type_code,   
+         a.task_sub_type_code,   
+         a.task_specific_code,   
+         a.task_status_code,   
+         a.task_success_code,   
+         a.provider_no,   
+         a.provider_type_code,   
+         a.responsible_user_id,   
+         a.comment,   
+         a.planned_start_date,
+         a.planned_completion_date,   
+         a.actual_start_date,   
+         a.actual_completion_date,   
+         b.success_code_required,   
+         ' ' address_line1,   
+         ' ' address_line2,   
+         ' '  city,   
+         ' ' country,   
+         ' ' postal_code,   
+         ' ' prov_state_code,   
+         ' ' name,
+			0 amount,
+			0 qty  ,
+           a.expedited_service_flag,
+           a.rehab_service_code,
+           a.rehab_program_code,
+           '                                                                                                              ' rehab_service_program_display,
+			'                                                                                                              ' task_xref_display,
+           a.auto_created_flag,
+           ' ' telephone_no
+    FROM	REHAB_TASK a JOIN  Task_Type b on a.task_type_code	= b.task_type_code  
+	where	a.claim_no			= :claim_no  
+	AND		a.task_no			= :task_no  
+" update="REHAB_TASK" updatewhere=1 updatekeyinplace=yes arguments=(("claim_no", number),("task_no", number)) )
+groupbox(band=detail text=""border="2" color="0" x="9" y="12" height="260" width="2565"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Comment:" border="0" color="0" x="23" y="200" height="56" width="265" html.valueishtml="0"  name=comment_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Task:" border="0" color="0" x="23" y="116" height="60" width="261" html.valueishtml="0"  name=task_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Rehab Service - Program:" border="0" color="0" x="23" y="32" height="60" width="663" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+groupbox(band=detail text="Status"border="2" color="0" x="9" y="296" height="356" width="2560"  name=gb_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Planned Start:" border="0" color="0" x="23" y="428" height="60" width="366" html.valueishtml="0"  name=planned_start_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=110 border="0" color="0" x="1966" y="340" height="216" width="585" format="" html.valueishtml="0"  name=task_success_code visible="1" radiobuttons.columns=1 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Expedited Service:" border="0" color="0" x="23" y="352" height="60" width="480" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="No:" border="0" color="0" x="23" y="816" height="56" width="87" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+groupbox(band=detail text="Service Provider"border="2" color="0" x="9" y="676" height="220" width="2560"  name=gb_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Provider Type:" border="0" color="0" x="23" y="744" height="56" width="375" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=detail text="?" enabled=yes action="0" border="0" color="33554432" x="919" y="808" height="72" width="82" vtextalign="0" htextalign="0"  name=b_search_provider2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=9 alignment="0" tabsequence=120 border="5" color="0" x="425" y="744" height="56" width="654" format="[general]" html.valueishtml="0"  name=provider_type_code visible="1" dddw.name=dddw_provider_type dddw.displaycolumn=provider_type_desc dddw.datacolumn=provider_type_code dddw.percentwidth=140 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=130 border="5" color="0" x="425" y="820" height="56" width="475" format="########" html.valueishtml="0"  name=provider_no visible="1" editmask.mask="########" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="0" x="1106" y="744" height="56" width="1445" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="Trim(city) + ' - ' + Trim(telephone_no )"border="0" color="0" x="1106" y="820" height="56" width="1445" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=29 alignment="0" tabsequence=10 border="5" color="0" x="709" y="32" height="60" width="1847" format="[general]" html.valueishtml="0" protect="0~tif( isnull( claim_no ),0,1)"  name=rehab_service_program_display visible="1" dddw.name=dddw_rehab_service_program_xref dddw.displaycolumn=rehab_service_program_computed dddw.datacolumn=rehab_service_program_computed dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=50 border="5" color="0" x="1298" y="348" height="56" width="631" format="[general]" html.valueishtml="0"  name=task_status_code visible="1" dddw.name=dddw_task_status dddw.displaycolumn=task_status_desc dddw.datacolumn=task_status_code dddw.percentwidth=100 dddw.lines=4 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Actual Closed:" border="0" color="0" x="1088" y="504" height="60" width="370" html.valueishtml="0"  name=actual_completion_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Responsibility:" border="0" color="0" x="1088" y="576" height="60" width="375" html.valueishtml="0"  name=responsible_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Actual Start:" border="0" color="0" x="1088" y="428" height="60" width="320" html.valueishtml="0"  name=actual_start_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Status:" border="0" color="0" x="1088" y="348" height="56" width="183" html.valueishtml="0"  name=task_status_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=100 border="5" color="0" x="1495" y="580" height="56" width="713" format="[general]" html.valueishtml="0"  name=responsible_user_id visible="1" dddw.name=dddw_task_responsible_user_active dddw.displaycolumn=computed_user_full_name dddw.datacolumn=user_id dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="AUTO" border="0" color="255" x="2318" y="576" height="64" width="238" html.valueishtml="0"  name=t_1 visible="1~tif( auto_created_flag = 'Y',1,0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Planned Completion:" border="0" color="0" x="23" y="504" height="56" width="530" html.valueishtml="0"  name=planned_completion_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=30 border="5" color="0" x="311" y="200" height="56" width="2249" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.hscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=30 alignment="0" tabsequence=20 border="5" color="0" x="311" y="116" height="60" width="2249" format="[general]" html.valueishtml="0" protect="0~tif( isnull( claim_no ),0,1)"  name=task_xref_display visible="1" dddw.name=dddw_service_program_task_xref dddw.displaycolumn=rehab_task_sub_specific_computed dddw.datacolumn=rehab_task_sub_specific_computed dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=80 border="5" color="0" x="594" y="504" height="56" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=planned_completion_date visible="1" editmask.ddcalendar=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=26 alignment="0" tabsequence=40 border="0" color="0" x="603" y="352" height="60" width="384" format="[general]" html.valueishtml="0"  name=expedited_service_flag visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=60 border="5" color="0" x="594" y="428" height="56" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=planned_start_date visible="1" editmask.ddcalendar=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="0" tabsequence=70 border="5" color="0" x="1495" y="428" height="56" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=actual_start_date visible="1" editmask.ddcalendar=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=90 border="5" color="0" x="1495" y="504" height="56" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=actual_completion_date visible="1" editmask.ddcalendar=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

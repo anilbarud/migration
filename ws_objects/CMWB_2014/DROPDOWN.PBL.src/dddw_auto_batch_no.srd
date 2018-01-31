@@ -1,0 +1,36 @@
+﻿$PBExportHeader$dddw_auto_batch_no.srd
+$PBExportComments$Drop Down Data Windows of all TXN_BATCH_CONTROL rows
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=96 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=batch_no dbname="batch_no" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ retrieve="SELECT  a.batch_no ,
+           a.processed_date ,
+           a.admin_region_code
+FROM TXN_BATCH_CONTROL a
+WHERE a.processed_date is not null
+AND  ( EXISTS ( SELECT * FROM BATCHED_PAYMENT b WHERE b.batch_no = a.batch_no )
+   OR  EXISTS ( SELECT * FROM BATCHED_PERIODIC_AWARD c WHERE c.batch_no = a.batch_no ) )
+ORDER BY a.batch_no DESC"  sort="processed_date D " )
+text(band=header alignment="2" text="Batch No:" border="4" color="33554432" x="18" y="12" height="60" width="279" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="18" y="8" height="60" width="283" format="[general]" html.valueishtml="0"  name=batch_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Processed Date:" border="4" color="33554432" x="389" y="12" height="60" width="626" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="389" y="4" height="60" width="626" format="yyyy-mm-dd h:mm:ss am/pm" html.valueishtml="0"  name=processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Admin Region" border="4" color="33554432" x="1115" y="12" height="60" width="361" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1115" y="4" height="60" width="261" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

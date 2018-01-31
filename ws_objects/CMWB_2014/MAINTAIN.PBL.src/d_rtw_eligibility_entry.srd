@@ -1,0 +1,41 @@
+﻿$PBExportHeader$d_rtw_eligibility_entry.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=134217750 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=192 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=rtw_incentive_no dbname="rtw_incentive_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=tier_no dbname="tier_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=rtw_incentive_type_code dbname="rtw_incentive_type_code" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=avg_monthly_employment_income_amt dbname="avg_monthly_employment_income_amt" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=payment_eligibility_flag dbname="payment_eligibility_flag" )
+ retrieve="  SELECT RTW_INCENTIVE_PAYMENT_ELIGIBILITY.claim_no,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.rtw_incentive_no,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.tier_no,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.rtw_incentive_type_code,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.avg_monthly_employment_income_amt,  
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.payment_eligibility_flag
+    FROM  RTW_INCENTIVE_PAYMENT_ELIGIBILITY
+ WHERE   RTW_INCENTIVE_PAYMENT_ELIGIBILITY.claim_no = :ar_claim_no
+      AND  RTW_INCENTIVE_PAYMENT_ELIGIBILITY.rtw_incentive_no = :ar_qual_no
+      AND  RTW_INCENTIVE_PAYMENT_ELIGIBILITY.tier_no = :ar_tier_no
+" update="RTW_INCENTIVE_PAYMENT_ELIGIBILITY" updatewhere=1 updatekeyinplace=yes arguments=(("ar_claim_no", number),("ar_qual_no", number),("ar_tier_no", number)) )
+text(band=detail alignment="0" text="Tier No" border="0" color="33554432" x="27" y="16" height="64" width="265" html.valueishtml="0"  name=tier_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Avg Emp Income" border="0" color="33554432" x="462" y="16" height="64" width="517" html.valueishtml="0"  name=avg_monthly_employment_income_amt_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=10 border="5" color="33554432" x="27" y="96" height="76" width="265" format="[general]" html.valueishtml="0"  name=tier_no visible="1" dddw.name=dddw_tier dddw.displaycolumn=tier_no dddw.datacolumn=tier_no dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.autoretrieve=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="1" tabsequence=20 border="5" color="33554432" x="462" y="96" height="76" width="617" format="$###,##0.00" html.valueishtml="0"  name=avg_monthly_employment_income_amt visible="1" editmask.mask="$###,##0.00" editmask.focusrectangle=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="/Month" border="0" color="33554432" x="1093" y="96" height="76" width="210" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="439" y="508" height="76" width="32" format="[general]" html.valueishtml="0"  name=payment_eligibility_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

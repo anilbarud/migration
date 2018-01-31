@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_form67_document_errors.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=436 color="536870912" )
+summary(height=0 color="536870912" height.autosize=yes )
+footer(height=0 color="536870912" height.autosize=yes )
+detail(height=160 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=import_no dbname="import_no" )
+ column=(type=long update=yes updatewhereclause=yes name=record_no dbname="record_no" )
+ column=(type=ulong update=yes updatewhereclause=yes name=error_line_no dbname="error_line_no" )
+ column=(type=long updatewhereclause=yes name=docid dbname="docid" )
+ column=(type=char(200) update=yes updatewhereclause=yes name=error_detail dbname="error_detail" )
+ column=(type=char(40) updatewhereclause=yes name=operation_name dbname="operation_name" )
+ column=(type=char(60) updatewhereclause=yes name=employer_legal_name dbname="employer_legal_name" )
+ column=(type=char(30) updatewhereclause=yes name=worker_last_name dbname="worker_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=worker_first_name dbname="worker_first_name" )
+ retrieve="SELECT a.import_no, a.record_no, a.error_line_no, b.docid, a.error_detail, c.operation_name, d.employer_legal_name, b.worker_last_name, b.worker_first_name 
+FROM I009_FORM67_IMPORT_ERROR a 
+     INNER JOIN I009_FORM67_IMPORT b  ON b.import_no = a.import_no and b.record_no = a.record_no
+     INNER JOIN OPERATION c ON b.employer_no = c.employer_no  and b.operation_no = c.operation_no
+     INNER JOIN EMPLOYER d ON b.employer_no = d.employer_no 
+WHERE b.docid = :an_docid 
+ ORDER BY a.import_no, a.record_no, a.error_line_no 
+" arguments=(("an_docid", number)) )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="320" y="12" height="60" width="347" format="[general]" html.valueishtml="0"  name=import_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Record No:" border="0" color="33554432" x="855" y="12" height="60" width="311" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=2 alignment="0" tabsequence=30 border="0" color="33554432" x="1179" y="12" height="60" width="352" format="[general]" html.valueishtml="0"  name=record_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="466" y="164" height="60" width="1769" format="[general]" html.valueishtml="0"  name=operation_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="608" y="88" height="60" width="1623" format="[general]" html.valueishtml="0"  name=employer_legal_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Import No:" border="0" color="33554432" x="18" y="12" height="60" width="279" html.valueishtml="0"  name=import_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="210" y="8" height="144" width="2286" format="[general]" html.valueishtml="0"  name=error_detail visible="1" height.autosize=yes edit.limit=200 edit.case=any edit.autoselect=yes edit.autovscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="9" y="8" height="56" width="110" format="[general]" html.valueishtml="0"  name=error_line_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Error #" border="4" color="33554432" x="9" y="368" height="60" width="183" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Error Details" border="4" color="33554432" x="210" y="368" height="60" width="2286" html.valueishtml="0"  name=error_detail_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Employer Legal Name:" border="0" color="33554432" x="18" y="88" height="60" width="576" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Operation Name:" border="0" color="33554432" x="18" y="164" height="60" width="434" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Worker Name:" border="0" color="33554432" x="18" y="240" height="60" width="379" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression=" worker_first_name + ' ' +  worker_last_name "border="0" color="33554432" x="411" y="240" height="60" width="1111" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,44 @@
+﻿$PBExportHeader$d_list_recipients.srd
+$PBExportComments$List all recipients for a specific correspondence
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=77 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="CORRESPONDENCE_RECIPIENT.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=correspond_no dbname="CORRESPONDENCE_RECIPIENT.correspond_no" )
+ column=(type=long update=yes updatewhereclause=yes name=correspond_recipient_id dbname="CORRESPONDENCE_RECIPIENT.correspond_recipient_id" )
+ column=(type=long updatewhereclause=yes name=recipient_list_recipient_no dbname="RECIPIENT_LIST.recipient_no" )
+ column=(type=char(40) updatewhereclause=yes name=recipient_list_claim_recipie dbname="RECIPIENT_LIST.claim_recipient_label" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_list_default_addre dbname="RECIPIENT_LIST.default_address_flag" values="Letter	Y/Letter	N" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_list_address_locat dbname="RECIPIENT_LIST.address_location_code" )
+ column=(type=char(1) updatewhereclause=yes name=correspondence_recipient_addressee_role_ dbname="CORRESPONDENCE_RECIPIENT.addressee_role_code" )
+ column=(type=char(1) updatewhereclause=yes name=correspond_recipient_subtyp_cd dbname="RECIPIENT_LIST.correspond_recipient_subtyp_cd" )
+ column=(type=char(4) updatewhereclause=yes name=correspond_recipient_type_code dbname="RECIPIENT_LIST.correspond_recipient_type_cd" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_list_card_file_flag dbname="RECIPIENT_LIST.card_file_flag" )
+ column=(type=char(1) updatewhereclause=yes name=select_flag dbname="Select_flag" values="	Y/	N" )
+ retrieve="SELECT CR.claim_no, 
+       CR.correspond_no,
+       CR.correspond_recipient_id,
+       RL.recipient_no, 
+       RL.claim_recipient_label,
+       RL.default_address_flag, 
+       RL.address_location_code, 
+       CR.addressee_role_code, 
+       RL.correspond_recipient_subtyp_cd, 
+       RL.correspond_recipient_type_cd, 
+       RL.card_file_flag,	
+       ~"Select_flag~" = ~"Y~"	 
+  FROM CORRESPONDENCE_RECIPIENT CR, 
+       RECIPIENT_LIST RL 
+ WHERE CR.claim_no = RL.claim_no 
+   AND CR.correspond_recipient_id = RL.correspond_recipient_id 
+   AND CR.claim_no = :claim_no 
+   AND CR.correspond_no = :correspond_no " arguments=(("claim_no", number),("correspond_no", number))  sort="correspondence_recipient_addressee_role_ A recipient_list_claim_recipie A " )
+group(level=1 header.height=1 trailer.height=1 by=("correspondence_recipient_addressee_role_" , "cf_recipient_type" ) header.color="-1" trailer.color="-1"  sort="count(cf_recipient_type for group 1) A " )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="252" y="8" height="61" width="778" format="[general]"  name=recipient_list_claim_recipie edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="if( first(  correspondence_recipient_addressee_role_  for group 1 Distinct)='A',~"To:~", if (first(  correspondence_recipient_addressee_role_  for group 1 Distinct)='C', ~"Cc:~",~" ~" )) "border="0" color="33554432" x="1" y="8" height="61" width="225" format="[general]"  name=cf_recipient_type  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=12 alignment="0" tabsequence=10 border="0" color="0" x="1052" y="12" height="57" width="106" format="[general]"  name=select_flag checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+
+sparse(names="cf_recipient_type")

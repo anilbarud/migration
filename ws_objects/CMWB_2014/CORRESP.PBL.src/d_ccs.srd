@@ -1,0 +1,13 @@
+﻿$PBExportHeader$d_ccs.srd
+$PBExportComments$List all recipients that are carbon copies for a specific piece of generated correspondence
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=73 color="-1" )
+table(column=(type=char(40) name=claim_recipient_label dbname="RECIPIENT_LIST.claim_recipient_label" )
+ column=(type=number name=correspond_recipient_id dbname="RECIPIENT_LIST.correspond_recipient_id" )
+ column=(type=char(4) name=correspond_recipient_type_cd dbname="RECIPIENT_LIST.correspond_recipient_type_cd" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"RECIPIENT_LIST~" ) TABLE(NAME=~"CORRESPONDENCE_RECIPIENT~" ) COLUMN(NAME=~"RECIPIENT_LIST.claim_recipient_label~") COLUMN(NAME=~"RECIPIENT_LIST.correspond_recipient_id~") COLUMN(NAME=~"RECIPIENT_LIST.correspond_recipient_type_cd~") JOIN (LEFT=~"RECIPIENT_LIST.claim_no~" OP =~"=~"RIGHT=~"CORRESPONDENCE_RECIPIENT.claim_no~" ) JOIN (LEFT=~"RECIPIENT_LIST.correspond_recipient_id~" OP =~"=~"RIGHT=~"CORRESPONDENCE_RECIPIENT.correspond_recipient_id~" )WHERE( EXP1 =~"CORRESPONDENCE_RECIPIENT.claim_no~" OP =~"=~" EXP2 =~":claim_no~" LOGIC =~"and~" ) WHERE( EXP1 =~"CORRESPONDENCE_RECIPIENT.correspond_no~" OP =~"=~" EXP2 =~":corr_no~" LOGIC =~"and~" ) WHERE( EXP1 =~"CORRESPONDENCE_RECIPIENT.addressee_role_code~" OP =~"=~" EXP2 =~"'C'~" ) ) ARG(NAME = ~"claim_no~" TYPE = number) ARG(NAME = ~"corr_no~" TYPE = number) " arguments=(("claim_no", number),("corr_no", number))  sort="claim_recipient_label A " )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="8" height="61" width="1276" format="[general]"  name=claim_recipient_label edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

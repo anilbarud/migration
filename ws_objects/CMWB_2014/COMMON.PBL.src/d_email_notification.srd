@@ -1,0 +1,43 @@
+﻿$PBExportHeader$d_email_notification.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=char(80) updatewhereclause=yes key=yes name=application dbname="Email_Notification.application" dbalias=".application" )
+ column=(type=char(3) updatewhereclause=yes key=yes name=module_code dbname="Email_Notification.module_code" dbalias=".module_code" )
+ column=(type=char(8) updatewhereclause=yes key=yes name=template_code dbname="Email_Notification.template_code" dbalias=".template_code" )
+ column=(type=char(3) updatewhereclause=yes key=yes name=email_reason_code dbname="Email_Notification.email_reason_code" dbalias=".email_reason_code" )
+ column=(type=char(80) update=yes updatewhereclause=yes key=yes name=email_address dbname="Email_Notification.email_address" dbalias=".email_address" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=active_flag dbname="Email_Notification.active_flag" dbalias=".active_flag" )
+ retrieve="  SELECT dbo.Email_Notification.application,   
+         dbo.Email_Notification.module_code,   
+         dbo.Email_Notification.template_code,   
+         dbo.Email_Notification.email_reason_code,   
+         dbo.Email_Notification.email_address,   
+         dbo.Email_Notification.active_flag  
+    FROM dbo.Email_Notification  
+   WHERE  ( dbo.Email_Notification.application = :as_application_code) AND  
+         ( dbo.Email_Notification.module_code = :ai_module_code) AND  
+         ( dbo.Email_Notification.template_code = :as_template_code ) AND  
+         ( dbo.Email_Notification.email_reason_code = :ai_reason_code ) AND  
+        ( dbo.Email_Notification.active_flag = 'Y' )    
+" update="dbo.Email_Notification" updatewhere=0 updatekeyinplace=no arguments=(("as_application_code", string),("ai_module_code", number),("as_template_code", string),("ai_reason_code", number)) )
+text(band=header alignment="2" text="Email Address" border="0" color="33554432" x="5" y="8" height="64" width="2222" html.valueishtml="0"  name=email_address_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=60 border="0" color="33554432" x="5" y="8" height="76" width="2222" format="[general]" html.valueishtml="0"  name=email_address visible="1" edit.limit=80 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=70 border="0" color="33554432" x="2226" y="0" height="64" width="2162" format="[general]" html.valueishtml="0"  name=application visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=80 border="0" color="33554432" x="4389" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=module_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=90 border="0" color="33554432" x="4471" y="0" height="64" width="219" format="[general]" html.valueishtml="0"  name=template_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=100 border="0" color="33554432" x="4690" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=email_reason_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,19 @@
+﻿$PBExportHeader$d_indexing_incoming_correspondence.srd
+$PBExportComments$Used to get record incoming correspondence event
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=233 color="536870912" )
+table(column=(type=number update=yes name=doc_id dbname="CORRESP_EVENT_DETAIL.doc_id" )
+ column=(type=number update=yes name=claim_no dbname="CORRESP_EVENT_DETAIL.claim_no" )
+ column=(type=number update=yes key=yes name=event_no dbname="CORRESP_EVENT_DETAIL.event_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CORRESP_EVENT_DETAIL~" ) COLUMN(NAME=~"CORRESP_EVENT_DETAIL.doc_id~") COLUMN(NAME=~"CORRESP_EVENT_DETAIL.claim_no~") COLUMN(NAME=~"CORRESP_EVENT_DETAIL.event_no~")WHERE( EXP1 =~"CORRESP_EVENT_DETAIL.event_no~" OP =~"=~" EXP2 =~":al_docid~" ) ) ARG(NAME = ~"al_docid~" TYPE = number) " update="CORRESP_EVENT_DETAIL" updatewhere=1 updatekeyinplace=no arguments=(("al_docid", number)) )
+text(band=detail alignment="1" text="Doc Id:"border="0" color="0" x="37" y="4" height="65" width="284"  name=doc_id_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="339" y="4" height="65" width="330" format="[general]"  name=doc_id edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Claim No:"border="0" color="0" x="37" y="80" height="65" width="284"  name=claim_no_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="0" x="339" y="80" height="65" width="330" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Event No:"border="0" color="0" x="37" y="160" height="65" width="284"  name=event_no_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="0" x="339" y="160" height="65" width="330" format="[general]"  name=event_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="CORRESP_EVENT_DETAIL"border="0" color="0" x="23" y="8" height="61" width="673"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

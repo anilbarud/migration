@@ -1,0 +1,50 @@
+﻿$PBExportHeader$d_txn_unit_of_work_status.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=84 color="12632256" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=txn_unit_of_work_no dbname="txn_unit_of_work_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=ready_to_process_flag dbname="ready_to_process_flag" values="Ready to Process	Y/Ready to Process	N" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="timestamp" )
+ column=(type=char(2) updatewhereclause=yes name=work_group_code dbname="work_group_code" )
+ retrieve="SELECT a.txn_unit_of_work_no,
+       a.ready_to_process_flag,
+       a.create_date,
+       a.create_user_id,
+       a.timestamp,
+       a.work_group_code
+FROM   TXN_UNIT_OF_WORK a 
+WHERE  a.work_group_code = :as_work_group_code
+AND EXISTS ( SELECT *
+             FROM   UNAPPLIED_CLAIM_TXN b
+             JOIN   Txn_Type_Combination c ON b.txn_type_code     = c.txn_type_code
+                                          AND b.txn_sub_type_code = c.txn_sub_type_code
+             WHERE  a.txn_unit_of_work_no         = b.txn_unit_of_work_no
+             AND    c.claim_cost_maintenance_flag = 'Y' )
+
+" update="TXN_UNIT_OF_WORK" updatewhere=1 updatekeyinplace=yes arguments=(("as_work_group_code", string)) )
+text(band=header alignment="0" text="Unit of Work" border="0" color="33554432" x="5" y="8" height="64" width="430" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Status" border="0" color="33554432" x="462" y="8" height="64" width="430" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Create Date" border="0" color="33554432" x="1106" y="8" height="64" width="389" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Create By" border="0" color="33554432" x="1522" y="8" height="64" width="389" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Work Group" border="0" color="33554432" x="1961" y="12" height="64" width="389" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="9" y="0" height="76" width="329" format="[general]" html.valueishtml="0"  name=txn_unit_of_work_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="33554432" x="453" y="8" height="76" width="690" format="[general]" html.valueishtml="0"  name=ready_to_process_flag visible="1" checkbox.text="Ready to Process" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1106" y="4" height="64" width="347" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2016" y="4" height="64" width="183" format="[general]" html.valueishtml="0"  name=work_group_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1522" y="4" height="64" width="434" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

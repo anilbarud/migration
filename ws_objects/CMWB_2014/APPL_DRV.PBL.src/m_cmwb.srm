@@ -1,0 +1,6045 @@
+﻿$PBExportHeader$m_cmwb.srm
+$PBExportComments$Application Driver - This menu is used for worksheets.  It has the "Tools" menu item added.
+forward
+global type m_cmwb from m_ancestor
+end type
+type m_directdepositchequere-issue from menu within m_finance
+end type
+type m_finance from m_ancestor`m_finance within m_cmwb
+m_directdepositchequere-issue m_directdepositchequere-issue
+end type
+type m_tools from menu within m_cmwb
+end type
+type m_paymentinquiry from menu within m_tools
+end type
+type m_correspondence from menu within m_tools
+end type
+type m_rxcoverage from menu within m_tools
+end type
+type m_eventlog from menu within m_tools
+end type
+type m_benefits from menu within m_tools
+end type
+type m_benefitsreadonly from menu within m_tools
+end type
+type m_paymentmaintenance from menu within m_tools
+end type
+type m_claimmaintenance from menu within m_tools
+end type
+type m_claimreadonly from menu within m_tools
+end type
+type m_individualmaintenance from menu within m_tools
+end type
+type m_individualreadonly from menu within m_tools
+end type
+type m_documentarchiving from menu within m_tools
+end type
+type m_nicorrespondencemaint from menu within m_tools
+end type
+type m_nifilesloggedoutmaint from menu within m_tools
+end type
+type m_documentimport from menu within m_tools
+end type
+type m_overpayments from menu within m_tools
+end type
+type m_awards from menu within m_tools
+end type
+type m_awardsreadonly from menu within m_tools
+end type
+type m_-1 from menu within m_tools
+end type
+type m_senddocuments from menu within m_tools
+end type
+type m_viewdocuments from menu within m_tools
+end type
+type m_highlightdocuments from menu within m_tools
+end type
+type m_printdocumentsmaxof5 from menu within m_tools
+end type
+type m_printdocuments from menu within m_tools
+end type
+type m_-2 from menu within m_tools
+end type
+type m_inbasket from menu within m_tools
+end type
+type m_inbasketold from menu within m_tools
+end type
+type m_accountpayment from menu within m_tools
+end type
+type m_accidentstatistics from menu within m_tools
+end type
+type m_documentindexing from menu within m_tools
+end type
+type m_documentsearch from menu within m_tools
+end type
+type m_managereportingfees from menu within m_tools
+end type
+type m_maintainreportingfees from menu within m_managereportingfees
+end type
+type m_issuereportingfees from menu within m_managereportingfees
+end type
+type m_managereportingfees from menu within m_tools
+m_maintainreportingfees m_maintainreportingfees
+m_issuereportingfees m_issuereportingfees
+end type
+type m_abcc_tools from menu within m_tools
+end type
+type m_excludedclaimmaintenance from menu within m_abcc_tools
+end type
+type m_maintainformulary from menu within m_abcc_tools
+end type
+type m_maintainformularyreadonly from menu within m_abcc_tools
+end type
+type m_abcc_tools from menu within m_tools
+m_excludedclaimmaintenance m_excludedclaimmaintenance
+m_maintainformulary m_maintainformulary
+m_maintainformularyreadonly m_maintainformularyreadonly
+end type
+type m_convertmanualtransaction from menu within m_tools
+end type
+type m_maintaincrarequests from menu within m_tools
+end type
+type m_maintainbankinformation from menu within m_tools
+end type
+type m_form67webaccess from menu within m_tools
+end type
+type m_tools from menu within m_cmwb
+m_paymentinquiry m_paymentinquiry
+m_correspondence m_correspondence
+m_rxcoverage m_rxcoverage
+m_eventlog m_eventlog
+m_benefits m_benefits
+m_benefitsreadonly m_benefitsreadonly
+m_paymentmaintenance m_paymentmaintenance
+m_claimmaintenance m_claimmaintenance
+m_claimreadonly m_claimreadonly
+m_individualmaintenance m_individualmaintenance
+m_individualreadonly m_individualreadonly
+m_documentarchiving m_documentarchiving
+m_nicorrespondencemaint m_nicorrespondencemaint
+m_nifilesloggedoutmaint m_nifilesloggedoutmaint
+m_documentimport m_documentimport
+m_overpayments m_overpayments
+m_awards m_awards
+m_awardsreadonly m_awardsreadonly
+m_-1 m_-1
+m_senddocuments m_senddocuments
+m_viewdocuments m_viewdocuments
+m_highlightdocuments m_highlightdocuments
+m_printdocumentsmaxof5 m_printdocumentsmaxof5
+m_printdocuments m_printdocuments
+m_-2 m_-2
+m_inbasket m_inbasket
+m_inbasketold m_inbasketold
+m_accountpayment m_accountpayment
+m_accidentstatistics m_accidentstatistics
+m_documentindexing m_documentindexing
+m_documentsearch m_documentsearch
+m_managereportingfees m_managereportingfees
+m_abcc_tools m_abcc_tools
+m_convertmanualtransaction m_convertmanualtransaction
+m_maintaincrarequests m_maintaincrarequests
+m_maintainbankinformation m_maintainbankinformation
+m_form67webaccess m_form67webaccess
+end type
+type m_annuities from menu within m_cmwb
+end type
+type m_confirmannuityeligibility from menu within m_annuities
+end type
+type m_maintainbenefitentitlement from menu within m_annuities
+end type
+type m_prepareannuitypayout from menu within m_annuities
+end type
+type m_annuitycalculationinquiry from menu within m_annuities
+end type
+type m_annuitypayoutinquiry from menu within m_annuities
+end type
+type m_managementreports from menu within m_annuities
+end type
+type m_annuityworkinprogressreport from menu within m_managementreports
+end type
+type m_annuityworkcompletedreport from menu within m_managementreports
+end type
+type m_approachingannuityenddatereport from menu within m_managementreports
+end type
+type m_managementreports from menu within m_annuities
+m_annuityworkinprogressreport m_annuityworkinprogressreport
+m_annuityworkcompletedreport m_annuityworkcompletedreport
+m_approachingannuityenddatereport m_approachingannuityenddatereport
+end type
+type m_annuities from menu within m_cmwb
+m_confirmannuityeligibility m_confirmannuityeligibility
+m_maintainbenefitentitlement m_maintainbenefitentitlement
+m_prepareannuitypayout m_prepareannuitypayout
+m_annuitycalculationinquiry m_annuitycalculationinquiry
+m_annuitypayoutinquiry m_annuitypayoutinquiry
+m_managementreports m_managementreports
+end type
+type m_rehab from menu within m_cmwb
+end type
+type m_costanalysis from menu within m_rehab
+end type
+type m_rehabplan from menu within m_rehab
+end type
+type m_rehabplanreadonly from menu within m_rehab
+end type
+type m_treatment from menu within m_rehab
+end type
+type m_actionlist from menu within m_rehab
+end type
+type m_managementreports0 from menu within m_rehab
+end type
+type m_physio_programs from menu within m_rehab
+end type
+type m_rehab from menu within m_cmwb
+m_costanalysis m_costanalysis
+m_rehabplan m_rehabplan
+m_rehabplanreadonly m_rehabplanreadonly
+m_treatment m_treatment
+m_actionlist m_actionlist
+m_managementreports0 m_managementreports0
+m_physio_programs m_physio_programs
+end type
+global type m_cmwb from m_ancestor
+m_tools m_tools
+m_annuities m_annuities
+m_rehab m_rehab
+end type
+end forward
+
+global type m_cmwb from m_ancestor
+m_tools m_tools
+m_annuities m_annuities
+m_rehab m_rehab
+end type
+global m_cmwb m_cmwb
+
+type variables
+u_dw_document_path viu_dw_document_path
+
+
+end variables
+
+forward prototypes
+public function boolean mf_can_rehab_open ()
+public function integer mf_can_exclude_open (long al_claim_no, ref string as_flag)
+public subroutine mf_open_window (string window_to_open)
+public function integer mf_can_rx_coverage_open (long al_claim_no)
+public function integer mf_can_cra_requests_open (long al_claim_no)
+public function integer mf_open_annuity_inquiry (string as_window_to_open)
+public subroutine mf_open_multi_module (string as_window_to_open)
+public subroutine mf_open_rehab (string as_mode)
+end prototypes
+
+public function boolean mf_can_rehab_open ();/*	This function is used to determine if there are any Work Sheet's opened. If so, then
+	how many. Only 1 can be opened when a Rehab Sheet is opened.
+*/
+	W_SHEET	lw_activesheet
+	LONG		ll_claimno, ll_rows
+
+
+/*	Determine if the sheet has a claim opened.
+*/
+	lw_activesheet = w_frame.GetActiveSheet()
+	ll_rows = lw_activesheet.dw_basic_claim.RowCount()
+	IF ll_rows > 0 THEN
+		ll_claimno = lw_activesheet.dw_basic_claim.GetItemNumber(1,'claim_no')
+		IF ll_claimno = 0 THEN
+			MessageBox("Rehab Plan / Work Sheet Error","Can not open a Rehab Plan when the active Work Sheet does not contain an opened claim.")
+			RETURN FALSE
+		END IF
+	ELSE
+		MessageBox("Rehab Plan / Work Sheet Error","Can not open a Rehab Plan when the active Work Sheet does not contain an opened claim.")		
+		RETURN FALSE
+	END IF
+	
+	RETURN TRUE
+
+end function
+
+public function integer mf_can_exclude_open (long al_claim_no, ref string as_flag);LONG    ll_count_ex, ll_count_reg
+INTEGER li_rtn
+STRING  ls_status, ls_status_type, ls_status_desc, ls_status_type_desc
+STRING ls_nature_of_injury_code
+
+SELECT   excluded_flag, Count(claim_no)
+INTO     :as_flag, :ll_count_ex
+FROM     X001_EXCLUDED_CLAIM
+WHERE    claim_no = :al_claim_no
+GROUP BY excluded_flag
+USING  SQLCA;
+
+li_rtn = SQLCA.nf_handle_error('m_cmwb', '', 'mf_can_exclude_open - SELECT excluded_flag')
+
+IF ll_count_ex > 0 THEN	
+	
+	SELECT Count(claim_no)
+	INTO   :ll_count_reg
+	FROM   X001_REGISTRATION
+	WHERE  claim_no = :al_claim_no
+	USING  SQLCA;
+	
+	li_rtn = SQLCA.nf_handle_error('m_cmwb', '', 'mf_can_exclude_open - SELECT count(claim_no)')
+	
+	IF ll_count_reg > 0 THEN
+		MessageBox('Cannot Open','The Exclude Claim Maintenance module cannot be opened.' &
+		         + '~r~nThe claim has already been registered for drug coverage.',information!)
+		RETURN -1
+	ELSE
+		SELECT a.claim_status_code, 
+		            a.claim_status_type_code, 
+				   b.claim_status_desc, 
+				   c.claim_status_type_desc
+		INTO   :ls_status, 
+		          :ls_status_type,
+				 :ls_status_desc,
+				 :ls_status_type_desc
+        FROM CLAIM a 
+                  INNER JOIN Claim_Status b  ON a.claim_status_code = b.claim_status_code
+                  LEFT OUTER JOIN Claim_Status_Type c  ON a.claim_status_code = c.claim_status_code and a.claim_status_type_code = c.claim_status_type_code
+        WHERE a.claim_no = :al_claim_no
+		USING  SQLCA;
+		
+		li_rtn = SQLCA.nf_handle_error('m_cmwb', '', 'mf_can_exclude_open - SELECT count(claim_no)')
+		
+		/* added NOI SQL element to satisfy Maintain Excluded Claim BR 1.10 since this BR is no longer being checked by 
+			f_derive_termination_date_coverage function (function not being called anymore)
+		*/
+		SELECT nature_of_injury_code 
+  		INTO :ls_nature_of_injury_code
+  		FROM ACCIDENT 
+ 		WHERE claim_no = :al_claim_no
+		USING SQLCA;
+		
+		li_rtn = SQLCA.nf_handle_error("m_cmwb", '', "mf_can_exclude_open - SELECT nature_of_injury_code FROM ACCIDENT")
+		
+		IF ls_status = 'A' OR (ls_status = 'F' AND (ls_status_type = '01' OR ls_status_type = '02' OR &
+		   + ls_status_type = '03' OR (ls_status_type = '04' AND ls_nature_of_injury_code <> ""))) THEN  //added Nature of Injury, phase 2 Sept 29/2005
+		ELSE
+			IF NOT IsNull(ls_status_type_desc) THEN 
+				ls_status_desc = ls_status_desc + '/' + ls_status_type_desc
+			END IF
+			IF ls_status_type = '04' AND ls_nature_of_injury_code = "" THEN
+				ls_status_desc = ls_status_desc + "/Nature of Injury not coded"
+			END IF
+			MessageBox('Cannot Open','The claim is not eligible for drug coverage due to Claim Status.' &
+			         + '~r~nClaim is currently ' + ls_status_desc)
+			RETURN -1
+		END IF
+	END IF
+ELSE
+	MessageBox('Cannot Open','The Exclude Claim Maintenance module cannot be opened.' &
+		      + '~r~nThe claim is not excluded from drug coverage.',information!)
+	RETURN -1
+END IF
+
+RETURN 0
+end function
+
+public subroutine mf_open_window (string window_to_open);/*-------------------------------------------------------------------------*/
+/*  This function validates that the requested window can be opened, then  */
+/*  opens or shows it.                                                     */
+/*-------------------------------------------------------------------------*/
+
+DATE							ldt_accident_date
+INTEGER						li_rtn
+LONG							ll_claim_no, ll_rtn, ll_individual_no, ll_sheet_handle
+W_SHEET						lw_active_sheet
+s_window_message			lstr_window_message
+STRING						ls_flag, ls_coverage, ls_last_name, ls_given_names, ls_claim_role_code
+STRING						ls_event_category_code, ls_event_type_code, ls_event_specific_code, ls_allow_parameter_change, ls_add_new_event
+n_common_annuity        lnv_common_annuity
+
+/*-------------------------------------------------------------------------*/
+/*  Check to see if we actually have an active sheet.                      */
+/*-------------------------------------------------------------------------*/
+
+	lw_active_sheet = w_frame.GetActiveSheet()
+	IF not IsValid(lw_active_sheet) THEN
+		Return
+	END If
+
+/*-------------------------------------------------------------------------*/
+/*  Verify that the requested window can be opened, then open it.          */
+/*  Note: We are passing in the menu name for simplicity.                  */
+/*-------------------------------------------------------------------------*/
+
+SetPointer(HourGlass!)
+CHOOSE CASE window_to_open
+		
+	CASE "m_maintainformulary"
+
+		IF IsValid (lw_active_sheet.iw_maintain_formulary) THEN
+			lw_active_sheet.iw_maintain_formulary.Show()
+		ELSE
+			lstr_window_message.as_mode = "UPDATE"
+			lstr_window_message.al_doubleparm[1] = 0
+			OpenWithParm (lw_active_sheet.iw_maintain_formulary,lstr_window_message,lw_active_sheet)
+		END IF
+
+/*************************
+	  Rx Maintenance Read Only
+ *************************
+*/
+
+	CASE "m_maintainformularyreadonly"
+	
+	// Call the function to open the Rx Maintenance module in read-only mode.
+
+		IF IsValid (lw_active_sheet.iw_maintain_formulary) THEN
+			lw_active_sheet.iw_maintain_formulary.Show()
+		ELSE
+			lstr_window_message.as_mode = "READ"
+			lstr_window_message.al_doubleparm[1] = 0
+			OpenWithParm (lw_active_sheet.iw_maintain_formulary,lstr_window_message,lw_active_sheet)
+		END IF
+		
+		
+/*************************
+	  Cost Analysis
+ *************************
+*/
+	CASE "m_costanalysis"
+
+		IF IsValid (lw_active_sheet.iw_cost_analysis) THEN
+			lw_active_sheet.iw_cost_analysis.Show()
+		ELSE
+			Open (lw_active_sheet.iw_cost_analysis,lw_active_sheet)
+		END IF
+
+/**********************
+	Payment Inquiry  
+ **********************
+*/
+	CASE "m_paymentinquiry"
+
+		IF IsValid (lw_active_sheet.iw_payment_inquiry) THEN
+			lw_active_sheet.iw_payment_inquiry.Show()
+		ELSE
+			Open (lw_active_sheet.iw_payment_inquiry,lw_active_sheet)
+		END IF
+
+
+/**********************
+	Annuity Inquiry  
+ **********************
+*/
+	CASE "m_annuityinquiry"
+		lnv_common_annuity = Create n_common_annuity
+		li_rtn = lnv_common_annuity.nf_check_for_open_window('w_calc_annuity', 'Calculate Annuity')
+		IF li_rtn = 1 THEN
+			RETURN
+		END IF
+
+		IF mf_open_annuity_inquiry('w_calc_annuity') = -1 THEN RETURN 
+
+
+/**********************
+	Annuity Payout Inquiry  
+ **********************
+*/
+	CASE "m_annuitypayoutinquiry"
+		lnv_common_annuity = Create n_common_annuity
+		li_rtn = lnv_common_annuity.nf_check_for_open_window('w_prepare_annuity_account', 'Prepare Annuity for Payout')
+		IF li_rtn = 1 THEN
+			RETURN
+		END IF
+		
+		IF mf_open_annuity_inquiry('w_annuity_payout_inquiry') = -1 THEN RETURN
+
+
+/**********************
+		Correspondence  
+ **********************
+*/
+	CASE "m_correspondence"
+		
+		IF IsValid(lw_active_sheet.iw_correspond) THEN
+			lw_active_sheet.iw_correspond.Show()
+		ELSE
+			IF vgs_corresp_Running = "Y" THEN
+				MessageBox("Correspondence","Correspondence is already Running on the first WorkSheet." + &
+				"~r~nPlease complete before proceding.",Information!)
+			ELSE
+				Open (lw_active_sheet.iw_correspond,lw_active_sheet)
+			END IF
+		END IF
+
+
+/*********************
+	  Event Log
+ *********************
+*/
+	CASE "m_eventlog"
+
+		// Open Maintain Claim Events window passing the basic claim information structure as a parameter
+		ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+		ll_individual_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"individual_no")
+		ldt_accident_date = Date(lw_active_sheet.dw_basic_claim.GetItemDateTime(1,"accident_date"))
+		ls_claim_role_code = 'C'
+		ls_last_name = lw_active_sheet.dw_basic_claim.GetItemString(1,"last_name")
+		ls_given_names = lw_active_sheet.dw_basic_claim.GetItemString(1,"given_names")
+		ls_event_category_code = 'C'
+		ls_event_type_code = ''
+		ls_event_specific_code = ''
+		ls_allow_parameter_change = 'Y'
+		ls_add_new_event = 'N'
+				
+		lstr_window_message.al_doubleparm[1]       = ll_claim_no
+		lstr_window_message.al_doubleparm[2]       = ll_individual_no
+		lstr_window_message.al_doubleparm[3]       = 0  // used in event response window to assist in finding specific event (not used here)
+		
+		lstr_window_message.adt_dateparm[1]        = ldt_accident_date
+		
+		lstr_window_message.as_stringparm[1]       = ls_claim_role_code
+		lstr_window_message.as_stringparm[2]       = ls_last_name
+		lstr_window_message.as_stringparm[3]       = ls_given_names
+		lstr_window_message.as_stringparm[4]       = ls_event_category_code
+		lstr_window_message.as_stringparm[5]       = ls_event_type_code
+		lstr_window_message.as_stringparm[6]       = ls_event_specific_code
+		lstr_window_message.as_stringparm[7]       = ls_allow_parameter_change
+		lstr_window_message.as_stringparm[8]       = ls_add_new_event
+		lstr_window_message.as_stringparm[9]       = ''
+		lstr_window_message.as_stringparm[10]      = ''
+		lstr_window_message.as_stringparm[11]      = ''
+		
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+				
+		IF IsValid (lw_active_sheet.iw_event_log) THEN
+			lw_active_sheet.iw_event_log.Show()
+		ELSE
+			OpenWithParm (lw_active_sheet.iw_event_log,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+/**************************
+	  Benefit Calculation
+ **************************
+*/
+	CASE "m_benefits"
+	
+		// Open Benefit Calculation window passing the the benefit calculation parameters as a parameter.
+		// An empty structure has to be passed because the benefit windows call each other passing 
+		// the structure back and forth.
+
+		IF IsValid (lw_active_sheet.iw_benefits) THEN
+			lw_active_sheet.iw_benefits.Show()
+		ELSEIF IsValid (lw_active_sheet.iw_calculation_details) THEN
+			lw_active_sheet.iw_calculation_details.Show()
+		ELSE
+			lstr_window_message.as_mode = "UPDATE"
+			OpenWithParm (lw_active_sheet.iw_benefits,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+/*************************************
+	  Benefit Calculation - Read Only
+ *************************************
+*/
+	CASE "m_benefitsreadonly"
+
+		// Open Benefit Calculation window passing the the benefit calculation parameters as a parameter.
+		// An empty structure has to be passed because the benefit windows call each other passing 
+		// the structure back and forth. Call the function to open the benefit calculation in read-only mode.
+
+		IF IsValid (lw_active_sheet.iw_benefits) THEN
+			lw_active_sheet.iw_benefits.Show()
+		ELSEIF IsValid (lw_active_sheet.iw_calculation_details) THEN
+			lw_active_sheet.iw_calculation_details.Show()
+		ELSE
+			lstr_window_message.as_mode = "READ"
+			OpenWithParm (lw_active_sheet.iw_benefits,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+
+
+/*************************
+	  Payment Maintenace 
+ *************************
+*/
+	CASE "m_paymentmaintenance"
+
+		IF IsValid (lw_active_sheet.iw_payments) THEN
+			lw_active_sheet.iw_payments.Show()
+		ELSE
+			Open (lw_active_sheet.iw_payments,lw_active_sheet)
+		END IF
+
+/*************************
+	  Awards
+ *************************
+*/
+	CASE "m_awards"
+
+		IF IsValid (lw_active_sheet.iw_awards) THEN
+			lw_active_sheet.iw_awards.Show()
+		ELSE
+			OpenWithParm (lw_active_sheet.iw_awards,lstr_window_message,lw_active_sheet)
+		END IF
+
+/*************************
+	  Awards Read Only
+ *************************
+*/
+
+	CASE "m_awardsreadonly"
+	
+	// Call the function to open the Award Maintenance module in read-only mode.
+
+		IF IsValid (lw_active_sheet.iw_awards) THEN
+			lw_active_sheet.iw_awards.Show()
+		ELSE
+			lstr_window_message.as_mode = "READ"
+			OpenWithParm (lw_active_sheet.iw_awards,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+
+/***************
+	overpayments
+****************/
+
+	CASE "m_overpayments"
+
+		IF IsValid (lw_active_sheet.iw_overpayments) THEN
+			lw_active_sheet.iw_overpayments.Show()
+		ELSE
+			Open (lw_active_sheet.iw_overpayments,lw_active_sheet)
+		END IF
+
+
+/*************************
+	  Claim Maintenace 
+ *************************
+*/
+	CASE "m_claimmaintenance"
+		
+		IF IsValid (lw_active_sheet.iw_claim) THEN
+			lw_active_sheet.iw_claim.Show()
+		ELSE
+			lstr_window_message.as_mode = "UPDATE"
+			OpenWithParm (lw_active_sheet.iw_claim,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+/*************************
+	  Claim - Read Only 
+ *************************
+*/
+	CASE "m_claimreadonly"
+	
+	// Call the function to open the Claim Maintenance module in read-only mode.
+
+		IF IsValid (lw_active_sheet.iw_claim) THEN
+			lw_active_sheet.iw_claim.Show()
+		ELSE
+			lstr_window_message.as_mode = "READ"
+			OpenWithParm (lw_active_sheet.iw_claim,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+/*************************
+	 Individual Maintenace 
+ *************************
+*/
+	CASE "m_individualmaintenance"
+
+		IF IsValid (lw_active_sheet.iw_individual) THEN
+			lw_active_sheet.iw_individual.Show()
+		ELSE
+			lstr_window_message.as_mode = "UPDATE"
+			OpenWithParm (lw_active_sheet.iw_individual,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+/*************************
+	 Individual - Read Only
+ *************************
+*/
+	CASE "m_individualreadonly"
+		
+	// Call the function to open the Individual Maintenance module in read-only mode.
+
+		IF IsValid (lw_active_sheet.iw_individual) THEN
+			lw_active_sheet.iw_individual.Show()
+		ELSE
+			lstr_window_message.as_mode = "READ"
+			OpenWithParm (lw_active_sheet.iw_individual,lstr_window_message,lw_active_sheet)
+		END IF
+
+
+/*************************
+	  Document Archiving 
+ *************************
+*/
+	CASE "m_documentarchiving"
+
+		IF IsValid (lw_active_sheet.iw_document_archive) THEN
+			lw_active_sheet.iw_document_archive.Show()
+		ELSE
+			Open (lw_active_sheet.iw_document_archive,lw_active_sheet)
+		END IF
+
+
+/*************************
+	  In-Basket
+ *************************
+*/
+	CASE "m_inbasket"
+
+		IF IsValid (lw_active_sheet.iw_InBasket) THEN
+			lw_active_sheet.iw_inBasket.Show()
+		ELSE
+			mf_open_multi_module('inbasket')		
+		END IF
+		
+	CASE "m_inbasket_old"
+
+		IF IsValid (lw_active_sheet.iw_InBasket) THEN
+			lw_active_sheet.iw_inBasket.Show()
+		ELSE
+			mf_open_multi_module('inbasket_old')
+		END IF
+
+/*************************
+	  Account Payment 
+ *************************
+*/
+	CASE "m_accountpayment"
+
+		IF IsValid (lw_active_sheet.iw_Account_Payment) THEN
+			lw_active_sheet.iw_Account_Payment.Show()
+		ELSE
+			mf_open_multi_module('account')
+		END IF
+
+
+
+/*************************
+	  Accident Statistics
+ *************************
+*/
+	CASE "m_accidentstatistics"
+
+		//	Open the Accident Statistics window only if nothing else is open.
+		// Do not access accident statistics unless you are in claim number or stats not coded search types
+		// and a claim has been selected.
+
+		IF IsValid (lw_active_sheet.iw_Accidents) THEN
+			lw_active_sheet.iw_Accidents.Show()
+		ELSE
+			IF not lw_active_sheet.uo_claim_search.is_searchType = "d_claim_number_search" and &
+				not lw_active_sheet.uo_claim_search.is_searchType = "d_stats_not_coded" THEN
+				MessageBox("Accident Statistics","You can only access Accident Statistics through Claim Number or Stats Not Coded search options!",Exclamation!)
+			ELSEIF  lw_active_sheet.uo_claim_search.is_searchType = "d_claim_number_search" THEN
+				ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+				IF not IsNull(ll_claim_no) and ll_claim_no > 0 THEN
+					Open (lw_active_sheet.iw_Accidents,lw_active_sheet)
+				ELSE
+					MessageBox("Accident Statistics","You must select a claim before you can access Accident Statistics!",Exclamation!)
+				END IF
+			ELSE
+				IF lw_active_sheet.uo_claim_search.dw_search_list.RowCount() > 0 THEN
+					Open (lw_active_sheet.iw_Accidents,lw_active_sheet)
+				ELSE
+					MessageBox("Accident Statistics","There are no claims in the search list!",Exclamation!)
+				END IF
+			END IF
+		END IF
+
+
+/*************************
+	  Document Import
+ *************************
+*/
+	CASE "m_documentimport"
+
+		IF IsValid (lw_active_sheet.iw_document_import) THEN
+			lw_active_sheet.iw_document_import.Show()
+		ELSE
+			Open (lw_active_sheet.iw_document_import,lw_active_sheet)
+		END IF
+
+/*************************
+	  Document Search
+ *************************
+*/
+	CASE "m_documentsearch"
+
+		IF IsValid (lw_active_sheet.iw_Accidents) THEN
+			lw_active_sheet.iw_Accidents.Show()
+		ELSE
+			mf_open_multi_module('document')
+		END IF
+
+/*************************
+	  Document Indexing 
+ *************************
+*/
+	CASE "m_documentindexing"
+
+		// Open Document Indexing only IF nothing ELSE is open 
+
+		IF IsValid (lw_active_sheet.iw_document_indexing) THEN
+		   lw_active_sheet.iw_document_indexing.Show()
+		ELSE			
+			mf_open_multi_module('index')
+		END IF
+
+/*******************************************
+	  Correspondence for Non Imaged Claims
+ *******************************************
+*/
+	CASE "m_nicorrespondencemaint"
+
+		IF IsValid(lw_active_sheet.iw_ni_correspondence) THEN
+			lw_active_sheet.iw_ni_correspondence.Show()
+		ELSE
+			Open(lw_active_sheet.iw_ni_correspondence,lw_active_sheet)
+		END IF
+     
+/**********************************
+	  Non Imaged Files Logged Out
+ **********************************
+*/
+	CASE "m_nifilesloggedoutmaint"
+
+
+			
+		IF IsValid(lw_active_sheet.iw_ni_files_logged_out) THEN
+			lw_active_sheet.iw_ni_files_logged_out.Show()
+		ELSE
+			Open (lw_active_sheet.iw_ni_files_logged_out,lw_active_sheet)
+		END IF
+		
+/**********************************
+	  Maintain Reporting Fees
+ **********************************
+*/
+	CASE "m_maintainreportingfee"
+	
+		IF IsValid(lw_active_sheet.iw_reporting_fees) THEN
+			lw_active_sheet.iw_reporting_fees.Show()
+		ELSE
+			mf_open_multi_module('report_fee')			
+		END IF
+		
+/*************************
+	  Account Payment 
+ *************************
+*/
+	CASE "m_actionlist"
+
+		// Open Medical Aid Payment window only if nothing else is open 
+
+		IF IsValid (lw_active_sheet.iw_Action_List) THEN
+		   lw_active_sheet.iw_Action_list.Show()
+		ELSE
+			  Open (lw_active_sheet.iw_Action_List,lw_active_sheet)
+		END IF
+
+/********************************
+	 Excluded Claim Maintenance
+ ********************************
+*/
+	CASE "m_excludedclaimmaintenance"
+		
+		IF IsValid (lw_active_sheet.iw_excluded_flag) THEN
+		   lw_active_sheet.iw_excluded_flag.Show()
+		ELSE
+			IF lw_active_sheet.dw_basic_claim.RowCount() > 0 THEN
+				ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+							
+				IF NOT IsNull(ll_claim_no) and ll_claim_no > 0 THEN
+					IF mf_can_exclude_open(ll_claim_no,ls_flag) < 0 THEN
+						RETURN 
+					END IF
+					lstr_window_message.as_stringparm[1] = ls_flag
+					OpenWithParm(lw_active_sheet.iw_excluded_flag,lstr_window_message,lw_active_sheet)
+				ELSE
+					MessageBox("Excluded Claim Maintenance","You must select a claim before you can access Excluded Claim Maintenance!",Exclamation!)
+				END IF		
+			ELSE
+				MessageBox("Excluded Claim Maintenance","There are no claims in the search list!",Exclamation!)
+			END IF
+		END IF
+/*************************
+	  Rx Coverage 
+ *************************
+*/
+	CASE "m_rxcoverage"
+	
+      IF IsValid (lw_active_sheet.iw_rx_coverage) THEN
+		   lw_active_sheet.iw_rx_coverage.Show()
+		ELSE
+			IF lw_active_sheet.dw_basic_claim.RowCount() > 0 THEN
+				ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+							
+				IF NOT IsNull(ll_claim_no) and ll_claim_no > 0 THEN
+					
+					ll_rtn = mf_can_rx_coverage_open(ll_claim_no)
+					IF ll_rtn < 0 THEN
+						RETURN 
+					ELSEIF ll_rtn = 0 THEN
+						ls_coverage = 'registered'
+					ELSE
+						ls_coverage = 'pending'
+					END IF
+					lstr_window_message.as_stringparm[1] = ls_coverage
+					OpenWithParm(lw_active_sheet.iw_rx_coverage,lstr_window_message,lw_active_sheet)
+				ELSE
+					MessageBox("Rx Coverage","You must select a claim before you can access the Rx Coverage Module!",Exclamation!)
+				END IF		
+			ELSE
+				MessageBox("Rx Coverage","There are no claims in the search list!",Exclamation!)
+			END IF
+		END IF
+
+/*************************
+	  Physio Treatment
+ *************************
+*/
+	CASE "m_treatment"
+		
+		IF lw_active_sheet.dw_basic_claim.RowCount() > 0 THEN
+			ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+						
+			IF NOT IsNull(ll_claim_no) and ll_claim_no > 0 THEN
+				OpenWithParm(lw_active_sheet.iw_treatment,lstr_window_message,lw_active_sheet)
+			ELSE
+				MessageBox("Physio Treament","You must select a claim before you can access the Treatment Module!",Exclamation!)
+			END IF		
+		ELSE
+			MessageBox("Physio Treatment","There are no claims in the search list!",Exclamation!)
+		END IF
+
+/*************************
+	  Maintain CRA Requests 
+ *************************
+*/
+	CASE "m_maintaincrarequests"
+
+		IF IsValid (lw_active_sheet.iw_income_requests) THEN
+			lw_active_sheet.iw_income_requests.Show()
+		ELSE
+			IF lw_active_sheet.dw_basic_claim.RowCount() > 0 THEN				
+				ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+				
+				IF IsNull(ll_claim_no) OR ll_claim_no = 0 THEN
+					MessageBox("Maintain CRA Requests","You must select a claim before you can access the Maintain CRA Requests module",Exclamation!)
+				ELSE 
+					IF mf_can_cra_requests_open(ll_claim_no) >= 0 THEN
+						lstr_window_message.as_stringparm[1] = 'OPEN'
+						OpenWithParm (lw_active_sheet.iw_income_requests,lstr_window_message,lw_active_sheet)
+					END IF
+				END IF						
+			ELSE
+				MessageBox("Maintain CRA Requests","There are no claims in the search list!",Exclamation!)
+			END IF
+		END IF
+		
+/*********************************
+	  Maintain Bank Information
+ *********************************
+*/
+	CASE "m_maintainbankinformation"
+
+		IF IsValid (lw_active_sheet.iw_maintain_bank_information) THEN
+			lw_active_sheet.iw_maintain_bank_information.Show()
+		ELSE
+			lstr_window_message.al_doubleparm[1] = 0
+			lstr_window_message.al_doubleparm[2] = 0
+			lstr_window_message.al_doubleparm[3] = 0
+			lstr_window_message.as_stringparm[1] = 'M'
+			lstr_window_message.as_stringparm[2] = ''
+			lstr_window_message.as_stringparm[3] = ''
+			lstr_window_message.as_stringparm[4] = ''
+			lstr_window_message.as_stringparm[5] = ''
+			lstr_window_message.as_stringparm[6] = ''			
+		
+		  	OpenwithParm (lw_active_sheet.iw_maintain_bank_information,lstr_window_message,lw_active_sheet)
+		END IF
+		
+/***********************************
+	 Re-issue Chq/Direct Deposit
+ ***********************************
+*/
+	CASE "m_directdepositchequere-issue"
+
+		IF IsValid (lw_active_sheet.iw_reissue) THEN
+			lw_active_sheet.iw_reissue.Show()
+		ELSE
+		 	Open (lw_active_sheet.iw_reissue,lw_active_sheet)
+		END IF
+		
+	CASE "m_management_reports"
+		
+		IF IsValid (lw_active_sheet.iw_management_reports) THEN
+			lw_active_sheet.iw_management_reports.Show()
+		ELSE
+			
+			OpenWithParm(lw_active_sheet.iw_management_reports, lstr_window_message, lw_active_sheet)
+		END IF
+		
+	CASE "m_physio_programs"
+		
+		IF IsValid (lw_active_sheet.iw_maintain_provider_therapist) THEN
+			lw_active_sheet.iw_maintain_provider_therapist.Show()
+		ELSE
+			OpenSheet(lw_active_sheet.iw_maintain_provider_therapist,ParentWindow,0,Layered!)
+		END IF
+		
+	CASE "m_webform67access"
+		IF IsValid (lw_active_sheet.iw_form67_web_access) THEN
+			lw_active_sheet.iw_form67_web_access.Show()
+		ELSE
+			OpenSheet(lw_active_sheet.iw_form67_web_access,ParentWindow,0,Layered!)
+		END IF	
+		
+CASE ELSE
+		MessageBox("Invalid option","Could not locate menu choice " + window_to_open + " in mf_open_window for m_cmwb.")
+End Choose
+
+/*-------------------------------------------------------------------------*/
+/*  If the document window is large, make it small before opening          */
+/*  a module window, or bringing the selected module to the front.                          */
+/*-------------------------------------------------------------------------*/
+
+	IF lw_active_sheet.dw_documents.Height > 500 THEN
+		
+		/* T023109 - R.S. adding this line to force the picture to be 'restore', so when the p_maximize button is triggered (below), the correct branch 
+		//  of the button code will run. ( the document list might be bigger than 500 because of the new splitter bar being moved by user, 
+		//   not because the maximize button had been previously clicked, so we will will trick it to believe the document list had been maximized)
+		*/
+		lw_active_sheet.p_maximize.picturename = "restore.bmp"      	
+		lw_active_sheet.p_maximize.triggerevent(Clicked!)
+	END IF
+
+Return
+
+/*
+**************************************************************************
+	Modification History
+
+	Developer:		Jacqui Phinney
+	Project:			CIS Replacement P1604-19
+	Description:	Remove references to the Occurrence window which is now
+						part of the Opening in the Individual maintenance module
+
+**************************************************************************
+*/
+
+end subroutine
+
+public function integer mf_can_rx_coverage_open (long al_claim_no);STRING	as_claim_status_code, as_claim_status_type
+BOOLEAN	lb_return
+N_BR_BLUECROSS	 lnv_bc
+
+lnv_bc = Create n_br_bluecross
+
+// The claim is already eligible continue
+IF lnv_bc.uf_claim_is_eligible(al_claim_no) = TRUE THEN RETURN 0
+
+
+lb_return = lnv_bc.uf_check_if_excluded_claim(al_claim_no)
+IF lb_return = TRUE THEN
+	MessageBox('Cannot Open','This claim is Excluded from Rx Coverage.',Exclamation!,OK!)
+	Return -1
+END IF	
+
+
+// If the claim is not registered and is eligible display the effective dates.
+lb_return = lnv_bc.uf_check_for_eligibility(al_claim_no,as_claim_status_code, as_claim_status_type)
+IF lb_return = FALSE THEN
+	MessageBox('Cannot Open','This claim is Not Eligible to be registered at this time.',Exclamation!,OK!)
+	Return -1
+ELSE
+	RETURN 1
+END IF
+
+RETURN 0
+end function
+
+public function integer mf_can_cra_requests_open (long al_claim_no);STRING ls_claim_status, ls_sin
+DATETIME ldtm_dob
+LONG ll_catids
+
+SELECT claim_status_code
+INTO    :ls_claim_status
+FROM   CLAIM
+WHERE claim_no = :al_claim_no
+USING  SQLCA;
+
+IF  SQLCA.nf_handle_error('m_cmwb', '', 'mf_can_cra_requests_open') < 0 THEN
+	RETURN -1
+END IF
+
+//Claim must be Active
+IF ls_claim_status <> 'A' AND ls_claim_status <> 'F' THEN
+	MessageBox('Maintain CRA Requests','The selected claim must have a status of Active or Finalled to have requests maintained.',Information!)
+	RETURN -1
+END IF
+
+SELECT  birth_date, sin_no
+INTO     :ldtm_dob, :ls_sin
+FROM    CLAIM a, INDIVIDUAL b
+WHERE  a.individual_no = b.individual_no
+AND         a.claim_no = :al_claim_no
+USING   SQLCA;
+
+IF SQLCA.nf_handle_error("m_cmwb","mf_can_cra_requests_open", "SELECT birth_date, sin_no") < 0 THEN
+	RETURN -1
+END IF
+
+//SIN is required
+IF IsNull(ls_sin) OR ls_sin = ''  OR LONG(ls_sin) = 0 THEN
+	MessageBox('Invalid SIN','The S.I.N. is required to make a match at CRA. Please enter a S.I.N. for the Individual and try again.',Information!)
+	RETURN -1 
+END IF
+
+//DOB is required
+IF IsNull(ldtm_dob) THEN
+	MessageBox('Invalid Date of Birth','The Date of Birth is required to make a match at CRA. Please enter a Date of Birth for the Individual and try again.', Information!)
+	RETURN -1
+END IF
+
+//User must have the default bucket assigned to them
+SELECT Count(*)
+INTO        :ll_catids
+FROM      CAT,
+                  User_Category_Xref
+WHERE   catid = category_id_nmbr
+AND          user_name_text  = :vgst_user_profile.user_id
+USING     SQLCA;
+
+IF SQLCA.nf_handle_error("m_cmwb","mf_can_cra_requests_open", "SELECT Count(*)") < 0 THEN
+	RETURN -1
+END IF
+
+IF ll_catids = 0 THEN
+	MessageBox('Inbasket','You do not have any buckets assigned to your profile.  This is required for you to receive notification when a Response is received.  ~r~nThe default bucket, CRA Response Notification, can be added through the Maintain In/Out Buckets module.')
+	RETURN -1
+END IF
+
+RETURN 0
+end function
+
+public function integer mf_open_annuity_inquiry (string as_window_to_open);/*
+You must be on a claim of the injured worker on which you wish to inquire. 
+When the module is opened, 
+
+(MODE 1)
+if there is only an injured worker associated with the claim 
+(i.e. no surviving spouse with an annuity account for that claim), the module will open for that injured worker.
+
+(MODE 2)
+If there is only a surviving spouse for the claim with an annuity account, the module will open for that surviving spouse. 
+
+(MODE 3)
+If there are both an injured worker with an annuity account and a surviving spouse with an annuity account for that claim,
+a message is displayed with the claim role requesting you to select which account you want to view.
+
+(MODE 3- A)
+If the injured worker is selected and s/he is also a surviving spouse on a different claim, a message is displayed listing the claim (s).
+
+(MODE 3 - B)
+If the surviving spouse is selected and s/he also has an annuity account as an injured worker on other claims, 
+a messge is displayed listing the claim(s).
+
+If there are no annuity benefit calculations for the annuity account selected, a message is displayed informing you of such 
+and the module is not opened.
+
+The Annuity Inquiry module can be opened in conjunction with any other module on the workbench IS THIS TRUE? 
+Maybe restrictions with other annuity screens, but no restrictions with any other workbench screen.
+
+*/
+INTEGER					li_count, li_message_rtn, li_check,li_count_ss,li_count_iw, li_mode, li_annuity_calc_count
+LONG						ll_claim_no, ll_individual_no, ll_ss_individual_no, ll_sin_no, ll_annuity_account_no
+STRING					ls_annuity_eligibility_run_option_code, ls_claim_role_code, ls_annuity_admin_region_code
+DATETIME				ldtm_NULL_date
+n_common_annuity     lnv_common_annuity
+w_sheet					lw_active_sheet
+s_window_message	lstr_message, lstr_ss_message
+
+
+SetPointer(HourGlass!)
+	
+lw_active_sheet 	= w_frame.GetActiveSheet()
+ll_claim_no 			= lw_active_sheet.dw_basic_claim.GetItemNumber(1,'claim_no')
+ll_individual_no 	= lw_active_sheet.dw_basic_claim.GetItemNumber(1,'individual_no')
+	
+IF IsNull(ll_claim_no) 			THEN ll_claim_no 			= 0
+IF IsNull(ll_individual_no) 	THEN ll_individual_no 	= 0
+
+/* make sure there is a valid claim_no */
+IF ISNULL(ll_claim_no) OR ll_claim_no <= 0 THEN 
+	messagebox('Annuity Inquiry','You must select a valid Claim number in order to determine the correct Annuity Account',information!)
+	RETURN -1
+END IF
+
+/* grab some basic information */
+SELECT	a.individual_no
+INTO		:ll_ss_individual_no
+FROM		CLAIM_PARTICIPANT a
+	join    ANNUITY_ACCOUNT  b on a.claim_no = b.claim_no
+		and  a.claim_role_code  	= b.claim_role_code 
+WHERE	a.claim_role_code    	= 'SS'
+AND		a.claim_no 				= :ll_claim_no
+USING 	SQLCA;
+SQLCA.nf_handle_error('m_cmwb.m_annuities.m_annuity_inquiry', 'mf_open_annuity_inquiry()', 'SELECT Count(*) FROM CLAIM_PARTICIPANT...(SS)')
+
+
+SELECT	Count(*)
+INTO		:li_count_iw
+FROM		CLAIM_PARTICIPANT a
+	join    ANNUITY_ACCOUNT  b 
+		on a.claim_role_code 	= b.claim_role_code 
+        	and a.individual_no 		= b.individual_no
+WHERE	a.claim_role_code    	= 'C'
+AND		a.individual_no 			= :ll_individual_no
+USING 	SQLCA;
+SQLCA.nf_handle_error('m_cmwb.m_annuities.m_annuity_inquiry', 'mf_open_annuity_inquiry()', 'SELECT Count(*) FROM CLAIM_PARTICIPANT...(C)')
+
+IF ISNULL(li_count_ss) OR li_count_ss < 0 THEN li_count_ss = 0
+IF ISNULL(ll_ss_individual_no) OR ll_ss_individual_no< 0 THEN ll_ss_individual_no = 0
+
+// If nothing then do nothing
+IF ll_ss_individual_no = 0 AND li_count_iw = 0 THEN 
+	MESSAGEBOX("No Account", "No Annuity Accounts were found for this individual.", INFORMATION!)
+	RETURN -1
+END IF
+
+lnv_common_annuity = create n_common_annuity
+
+IF li_count_iw > 0 THEN
+	IF ll_ss_individual_no > 0 THEN
+		OpenWithParm(w_injured_worker_or_ss_calculate,ll_claim_no)
+		lstr_message = Message.PowerObjectParm
+		IF lstr_message.as_stringparm[2] = 'cancel' THEN
+			RETURN -1
+		END IF
+		
+		
+		ll_annuity_account_no = lstr_message.al_doubleparm[1] 	
+		ll_claim_no 			 = lstr_message.al_doubleparm[4] 	
+		ll_individual_no 		 = lstr_message.al_doubleparm[5] 	
+		ls_claim_role_code    = lstr_message.as_stringparm[1] 		
+	ELSE
+		ll_annuity_account_no = lnv_common_annuity.nf_get_annuity_account(0,ll_individual_no)
+		ls_claim_role_code = 'C'
+	END IF
+ELSE
+	IF ll_ss_individual_no > 0 THEN
+		ll_individual_no = ll_ss_individual_no
+		ll_annuity_account_no = lnv_common_annuity.nf_get_annuity_account(ll_claim_no,ll_ss_individual_no)
+		ls_claim_role_code = 'SS'
+	ELSE
+		// if no records then msgbox above
+	END IF
+END IF
+
+
+
+// as_window_type will be 'w_calc_annuity' or 'w_prepare_annuity_account'
+
+IF as_window_to_open = 'w_calc_annuity' THEN
+	/* If there are no annuity benefit calculations for the annuity account selected, a message is displayed informing you of such 
+		and the module is not opened.
+	*/
+	SELECT COUNT(*)
+	INTO   :li_annuity_calc_count
+	FROM 	 ANNUITY_CALC_ACCOUNT_HEADER a
+	WHERE  EXISTS ( SELECT *
+	                FROM   ANNUITY_ACCOUNT	b
+						 WHERE  a.annuity_account_no = b.annuity_account_no
+						 AND    b.individual_no      = :ll_individual_no
+						 AND    b.claim_role_code    = :ls_claim_role_code )
+	USING	SQLCA;
+	SQLCA.nf_handle_error('m_cmwb.m_annuities.m_annuity_inquiry', 'mf_open_annuity_inquiry()', 'SELECT annuity_account_no...')
+	
+	IF ISNULL(li_annuity_calc_count) OR li_annuity_calc_count = 0 THEN 
+		messagebox('Annuity Account Information','No Annuity Account Calculation records have been created for this Individual',information!)
+		RETURN -1
+	END IF
+
+
+	/* window open requirements
+		il_annuity_account_no 				= lstr_message.al_doubleparm[1]
+		il_annuity_eligibility_no 				    = lstr_message.al_doubleparm[2]
+		il_payout_no		         			    = lstr_message.al_doubleparm[3]
+		li_annuity_set_aside_percent_no 	= lstr_message.al_doubleparm[4] //used from confirm screen
+		il_open_mode		         			= lstr_message.al_doubleparm[5] // used to open in calculate or no calculate (viewing) mode. 1 - calculate, 2 -  no calculate
+		idtm_annuity_start_date    			= lstr_message.adtm_datetimeparm[1]//used from confirm screen
+		idtm_annuity_end_date      			= lstr_message.adtm_datetimeparm[2]//used from confirm screen			
+	*/
+	setnull(ldtm_NULL_date)
+	
+	lstr_message.al_doubleparm[1] 		= ll_annuity_account_no
+	lstr_message.al_doubleparm[2] 		= 0
+	lstr_message.al_doubleparm[3] 		= 0
+	lstr_message.al_doubleparm[4] 		= 0.00
+	lstr_message.al_doubleparm[5] 		= 1
+	lstr_message.adtm_datetimeparm[1] = ldtm_NULL_date
+	lstr_message.adtm_datetimeparm[2] = ldtm_NULL_date
+	lstr_message.adtm_datetimeparm[3] = ldtm_NULL_date
+	
+	OpenWithParm(w_calc_annuity,lstr_message)
+	
+ELSEIF as_window_to_open = 'w_annuity_payout_inquiry' THEN
+	
+	SELECT COUNT(*)
+	INTO   :li_count
+	FROM   ANNUITY_PAYOUT
+	WHERE  annuity_account_no = :ll_annuity_account_no
+	USING SQLCA;
+	SQLCA.nf_handle_error('m_cmwb', 'mf_open_annuity_inquiry','SELECT COUNT(*) FROM ANNUITY_PAYOUT..')
+	
+	IF ISNULL(li_count) OR li_count <= 0 THEN 
+		messagebox('Annuity Account Information','No Annuity Payout records have been created for this Individual.',information!)
+		RETURN -1
+	END IF
+	
+	SELECT a.annuity_admin_region_code
+	INTO   :ls_annuity_admin_region_code
+	FROM   ANNUITY_PAYOUT     a
+	LEFT OUTER JOIN CHECKLIST c ON a.prepare_annuity_payout_checklist_no = c.checklist_no
+			                         AND c.checklist_status_code = 'IA'
+	LEFT OUTER JOIN CHECKLIST d ON a.confirm_annuity_payout_checklist_no  = d.checklist_no
+			                        AND d.checklist_status_code = 'IA'
+	WHERE  a.annuity_account_no = :ll_annuity_account_no
+	USING SQLCA;
+	SQLCA.nf_handle_error('m_cmwb', 'mf_open_annuity_inquiry','SELECT annuity_admin_region_code FROM ANNUITY_PAYOUT..')
+			
+	IF ll_ss_individual_no > 0 THEN
+		lstr_message.al_doubleparm[1]     = ll_claim_no         // claim_no
+	ELSE
+		lstr_message.al_doubleparm[1]     = 0                   // claim_no		
+	END IF 
+	
+	lstr_message.al_doubleparm[2]     = ll_individual_no  // individual_no
+	lstr_message.al_doubleparm[3]     = ll_annuity_account_no  // annuity_account_no
+	lstr_message.as_stringparm[1]     = ls_annuity_admin_region_code                // region
+	lstr_message.as_stringparm[2]     = 'inquiry'
+
+	OpenWithParm(w_prepare_annuity_account,lstr_message)
+END IF
+
+RETURN 1
+end function
+
+public subroutine mf_open_multi_module (string as_window_to_open);LONG                    ll_sheet_handle
+STRING                  ls_window_description, ls_msg
+S_WINDOW_MESSAGE        lstr_window_message
+W_SHEET						lw_active_sheet
+
+
+
+// this function opens the 6 modules that are potentially multi-claim
+
+
+w_frame.SetRedraw(FALSE)
+
+THIS.m_workbench.m_worksheet.triggerevent(CLICKED!)
+
+lw_active_sheet = w_frame.GetActiveSheet()
+IF NOT IsValid(lw_active_sheet) THEN
+	w_frame.SetRedraw(TRUE)
+	Return
+ELSE
+	ll_sheet_handle = Handle(lw_active_sheet)
+	IF ll_sheet_handle = gl_current_sheet_handle THEN
+		// ok
+	ELSE
+		CHOOSE CASE as_window_to_open
+			CASE 'inbasket'
+				ls_window_description = 'In-Basket'
+			CASE 'inbasket_old'
+				ls_window_description = 'In-Basket (OLD)'
+			CASE 'account'
+				ls_window_description = 'Account Payment'
+			CASE 'document'
+				ls_window_description = 'Document Search'
+			CASE 'index'
+				ls_window_description = 'Document Indexing'
+			CASE 'report_fee'
+				ls_window_description = 'Maintain Reporting Fee'				
+		END CHOOSE
+		
+		ls_msg = 'There was an error that prevented the ' + ls_window_description + ' module from being opened.' &
+		       + '~r~n~r~n' &
+		       + 'Please close WorkBench and try again.'
+				
+		MessageBox('Module Error',ls_msg,Exclamation!)
+		w_frame.SetRedraw(TRUE)
+		Return
+	END IF
+END IF
+
+
+CHOOSE CASE as_window_to_open
+	CASE 'inbasket'
+		// opened through menu, instead of through search screen
+		lstr_window_message.as_stringparm[1]       = 'MENU'
+		lstr_window_message.al_doubleparm[1]       = 0 // selected claim, only populated when opened through search list
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+		
+		OpenWithParm (lw_active_sheet.iw_inBasket, lstr_window_message, lw_active_sheet)
+		
+	CASE 'inbasket_old'
+		// opened through menu, instead of through search screen
+		lstr_window_message.as_stringparm[1]       = 'MENU'
+		lstr_window_message.al_doubleparm[1]       = 0 // selected claim, only populated when opened through search list
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+		
+		OpenWithParm (lw_active_sheet.iw_inBasket_old, lstr_window_message, lw_active_sheet)
+		
+	CASE 'account'
+		lstr_window_message.as_mode                = 'AcctPay'
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+		
+		OpenWithParm (lw_active_sheet.iw_Account_Payment, lstr_window_message, lw_active_sheet)
+		
+	CASE 'document'
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+		
+		OpenWithParm (lw_active_sheet.iw_document_search, lstr_window_message, lw_active_sheet)
+		
+	CASE 'index'		
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+		
+		OpenWithParm (lw_active_sheet.iw_document_indexing, lstr_window_message, lw_active_sheet)
+		
+	CASE 'report_fee'
+		lstr_window_message.apo_powerobjectparm[1] = lw_active_sheet
+		
+		OpenWithParm (lw_active_sheet.iw_reporting_fees, lstr_window_message, lw_active_sheet)
+		
+	CASE ELSE
+		
+END CHOOSE
+
+
+w_frame.SetRedraw(TRUE)
+end subroutine
+
+public subroutine mf_open_rehab (string as_mode);LONG              ll_handle
+S_WINDOW_MESSAGE  lstr_message
+w_sheet           lw_active_sheet
+w_rehab_sheet     lw_rehab_sheet
+
+
+
+lw_active_sheet = w_frame.GetActiveSheet()
+IF NOT IsValid(lw_active_sheet) THEN
+	RETURN
+ELSE
+	ll_handle = Handle(lw_active_sheet)
+END IF
+
+IF SQLCA.ServiceAvailable() AND ImageTrans.ServiceAvailable() THEN
+	SetPointer(HourGlass!)
+	IF mf_can_rehab_open() THEN
+		
+		lstr_message.as_mode = as_mode
+		lstr_message.awi_parent_window = w_frame.GetActiveSheet()
+		lstr_message.al_doubleparm[1] = ll_handle
+					
+		OpenSheetWithParm(w_rehab_sheet,lstr_message,w_frame,0,Layered!)
+	END IF
+ELSE
+	Beep(2)
+END IF 
+end subroutine
+
+on m_cmwb.create
+m_cmwb=this
+call super::create
+this.m_tools=create m_tools
+this.m_annuities=create m_annuities
+this.m_rehab=create m_rehab
+this.Item[UpperBound(this.Item)+1]=this.m_tools
+this.Item[UpperBound(this.Item)+1]=this.m_annuities
+this.Item[UpperBound(this.Item)+1]=this.m_rehab
+end on
+
+on m_cmwb.destroy
+call super::destroy
+destroy(this.m_tools)
+destroy(this.m_annuities)
+destroy(this.m_rehab)
+end on
+
+type m_workbench from m_ancestor`m_workbench within m_cmwb
+end type
+
+on m_workbench.create
+call super::create
+end on
+
+on m_workbench.destroy
+call super::destroy
+end on
+
+type m_worksheet from m_ancestor`m_worksheet within m_workbench
+end type
+
+event m_worksheet::clicked;/*	Note: Worksheets toolbar item is invisible.  This is because we don't always 
+	want to see the worksheet toolbar item.  For example, when a worksheet is open
+	it's more important to see options that pertain to the worksheet than it is to
+	have a button to open another worksheet.  If a descendant menu wants the worksheet
+	toolbar item, it can visible the toolbar item.
+
+	Declare an instance of the Case Management Work Bench sheet
+*/
+
+
+	W_SHEET	lw_sheet
+	
+	OpenSheet (lw_sheet,Parentwindow,0,Layered!)
+	
+	gl_current_sheet_handle = Handle(lw_sheet)
+end event
+
+on m_worksheet.create
+call super::create
+end on
+
+on m_worksheet.destroy
+call super::destroy
+end on
+
+type m_authorizations from m_ancestor`m_authorizations within m_workbench
+end type
+
+on m_authorizations.create
+call super::create
+this.visible = true
+end on
+
+on m_authorizations.destroy
+call super::destroy
+end on
+
+type m_authorizedpaymentsreport from m_ancestor`m_authorizedpaymentsreport within m_workbench
+end type
+
+on m_authorizedpaymentsreport.create
+call super::create
+end on
+
+on m_authorizedpaymentsreport.destroy
+call super::destroy
+end on
+
+type m_maintainprovider from m_ancestor`m_maintainprovider within m_workbench
+end type
+
+on m_maintainprovider.create
+call super::create
+this.visible = true
+end on
+
+on m_maintainprovider.destroy
+call super::destroy
+end on
+
+type m_providerinquiry from m_ancestor`m_providerinquiry within m_workbench
+end type
+
+on m_providerinquiry.create
+call super::create
+this.visible = true
+end on
+
+on m_providerinquiry.destroy
+call super::destroy
+end on
+
+type m_employerinquiry from m_ancestor`m_employerinquiry within m_workbench
+end type
+
+on m_employerinquiry.create
+call super::create
+end on
+
+on m_employerinquiry.destroy
+call super::destroy
+end on
+
+type m_costofclaimsreprint from m_ancestor`m_costofclaimsreprint within m_workbench
+end type
+
+on m_costofclaimsreprint.create
+call super::create
+this.visible = true
+end on
+
+on m_costofclaimsreprint.destroy
+call super::destroy
+end on
+
+type m_createreportingfeepayments from m_ancestor`m_createreportingfeepayments within m_workbench
+end type
+
+on m_createreportingfeepayments.create
+call super::create
+end on
+
+on m_createreportingfeepayments.destroy
+call super::destroy
+end on
+
+type m_print from m_ancestor`m_print within m_workbench
+end type
+
+on m_print.create
+call super::create
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_close from m_ancestor`m_close within m_workbench
+end type
+
+on m_close.create
+call super::create
+this.visible = true
+this.enabled = true
+this.toolbaritemvisible = true
+end on
+
+on m_close.destroy
+call super::destroy
+end on
+
+type m_printsetup from m_ancestor`m_printsetup within m_workbench
+end type
+
+on m_printsetup.create
+call super::create
+end on
+
+on m_printsetup.destroy
+call super::destroy
+end on
+
+type m_- from m_ancestor`m_- within m_workbench
+end type
+
+on m_-.create
+call super::create
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_exit from m_ancestor`m_exit within m_workbench
+end type
+
+on m_exit.create
+call super::create
+end on
+
+on m_exit.destroy
+call super::destroy
+end on
+
+type m_options from m_ancestor`m_options within m_cmwb
+end type
+
+on m_options.create
+call super::create
+end on
+
+on m_options.destroy
+call super::destroy
+end on
+
+type m_maintainusercategories from m_ancestor`m_maintainusercategories within m_options
+end type
+
+on m_maintainusercategories.create
+call super::create
+this.visible = true
+end on
+
+on m_maintainusercategories.destroy
+call super::destroy
+end on
+
+type m_maintaincardfile from m_ancestor`m_maintaincardfile within m_options
+end type
+
+on m_maintaincardfile.create
+call super::create
+this.visible = true
+this.text = "Maintain &Cardfile"
+this.microhelp = "Maintain Cardfile Information"
+end on
+
+on m_maintaincardfile.destroy
+call super::destroy
+end on
+
+type m_individualduplicationfix from m_ancestor`m_individualduplicationfix within m_options
+end type
+
+on m_individualduplicationfix.create
+call super::create
+this.visible = true
+end on
+
+on m_individualduplicationfix.destroy
+call super::destroy
+end on
+
+type m_remoteprintparameters from m_ancestor`m_remoteprintparameters within m_options
+end type
+
+on m_remoteprintparameters.create
+call super::create
+end on
+
+on m_remoteprintparameters.destroy
+call super::destroy
+end on
+
+type m_reports from m_ancestor`m_reports within m_cmwb
+end type
+
+on m_reports.create
+call super::create
+end on
+
+on m_reports.destroy
+call super::destroy
+end on
+
+type m_claimdisposition from m_ancestor`m_claimdisposition within m_reports
+end type
+
+on m_claimdisposition.create
+call super::create
+end on
+
+on m_claimdisposition.destroy
+call super::destroy
+end on
+
+type m_bybenefitenddate from m_ancestor`m_bybenefitenddate within m_claimdisposition
+end type
+
+on m_bybenefitenddate.create
+call super::create
+end on
+
+on m_bybenefitenddate.destroy
+call super::destroy
+end on
+
+type m_bydispositionentereddate from m_ancestor`m_bydispositionentereddate within m_claimdisposition
+end type
+
+on m_bydispositionentereddate.create
+call super::create
+end on
+
+on m_bydispositionentereddate.destroy
+call super::destroy
+end on
+
+type m_coupreports from m_ancestor`m_coupreports within m_reports
+end type
+
+on m_coupreports.create
+call super::create
+end on
+
+on m_coupreports.destroy
+call super::destroy
+end on
+
+type m_coupaging from m_ancestor`m_coupaging within m_coupreports
+end type
+
+on m_coupaging.create
+call super::create
+end on
+
+on m_coupaging.destroy
+call super::destroy
+end on
+
+type m_mailpackageerrorreport from m_ancestor`m_mailpackageerrorreport within m_coupreports
+end type
+
+on m_mailpackageerrorreport.create
+call super::create
+end on
+
+on m_mailpackageerrorreport.destroy
+call super::destroy
+end on
+
+type m_claimstatuschangeerrorreport from m_ancestor`m_claimstatuschangeerrorreport within m_coupreports
+end type
+
+on m_claimstatuschangeerrorreport.create
+call super::create
+end on
+
+on m_claimstatuschangeerrorreport.destroy
+call super::destroy
+end on
+
+type m_preadjclaimsinmaster from m_ancestor`m_preadjclaimsinmaster within m_coupreports
+end type
+
+on m_preadjclaimsinmaster.create
+call super::create
+end on
+
+on m_preadjclaimsinmaster.destroy
+call super::destroy
+end on
+
+type m_mailpackagestatisticsreport from m_ancestor`m_mailpackagestatisticsreport within m_coupreports
+end type
+
+on m_mailpackagestatisticsreport.create
+call super::create
+end on
+
+on m_mailpackagestatisticsreport.destroy
+call super::destroy
+end on
+
+type m_statustracking from m_ancestor`m_statustracking within m_reports
+end type
+
+on m_statustracking.create
+call super::create
+end on
+
+on m_statustracking.destroy
+call super::destroy
+end on
+
+type m_paymentreports from m_ancestor`m_paymentreports within m_reports
+end type
+
+on m_paymentreports.create
+call super::create
+end on
+
+on m_paymentreports.destroy
+call super::destroy
+end on
+
+type m_scheduledpayments from m_ancestor`m_scheduledpayments within m_paymentreports
+end type
+
+on m_scheduledpayments.create
+call super::create
+end on
+
+on m_scheduledpayments.destroy
+call super::destroy
+end on
+
+type m_ltdpayments from m_ancestor`m_ltdpayments within m_paymentreports
+end type
+
+on m_ltdpayments.create
+call super::create
+end on
+
+on m_ltdpayments.destroy
+call super::destroy
+end on
+
+type m_duplicatepaymentexceptionreport from m_ancestor`m_duplicatepaymentexceptionreport within m_paymentreports
+end type
+
+on m_duplicatepaymentexceptionreport.create
+call super::create
+this.text = "&Duplicate Payment Exception Report"
+end on
+
+on m_duplicatepaymentexceptionreport.destroy
+call super::destroy
+end on
+
+type m_unpaidaccounts from m_ancestor`m_unpaidaccounts within m_paymentreports
+end type
+
+on m_unpaidaccounts.create
+call super::create
+end on
+
+on m_unpaidaccounts.destroy
+call super::destroy
+end on
+
+type m_invoicelist from m_ancestor`m_invoicelist within m_paymentreports
+end type
+
+on m_invoicelist.create
+call super::create
+end on
+
+on m_invoicelist.destroy
+call super::destroy
+end on
+
+type m_awardsscheduledtobecompleted from m_ancestor`m_awardsscheduledtobecompleted within m_paymentreports
+end type
+
+on m_awardsscheduledtobecompleted.create
+call super::create
+end on
+
+on m_awardsscheduledtobecompleted.destroy
+call super::destroy
+end on
+
+type m_firstbenefitcheque from m_ancestor`m_firstbenefitcheque within m_paymentreports
+end type
+
+on m_firstbenefitcheque.create
+call super::create
+end on
+
+on m_firstbenefitcheque.destroy
+call super::destroy
+end on
+
+type m_periodicawardcontrol from m_ancestor`m_periodicawardcontrol within m_paymentreports
+end type
+
+on m_periodicawardcontrol.create
+call super::create
+end on
+
+on m_periodicawardcontrol.destroy
+call super::destroy
+end on
+
+type m_rejectedclaimswithpayments from m_ancestor`m_rejectedclaimswithpayments within m_paymentreports
+end type
+
+on m_rejectedclaimswithpayments.create
+call super::create
+end on
+
+on m_rejectedclaimswithpayments.destroy
+call super::destroy
+end on
+
+type m_ungroupedpaymentsforauthorizationreport from m_ancestor`m_ungroupedpaymentsforauthorizationreport within m_paymentreports
+end type
+
+on m_ungroupedpaymentsforauthorizationreport.create
+call super::create
+end on
+
+on m_ungroupedpaymentsforauthorizationreport.destroy
+call super::destroy
+end on
+
+type m_costallocatedtogroupreserve from m_ancestor`m_costallocatedtogroupreserve within m_reports
+end type
+
+on m_costallocatedtogroupreserve.create
+call super::create
+end on
+
+on m_costallocatedtogroupreserve.destroy
+call super::destroy
+end on
+
+type m_claimsadjudicated from m_ancestor`m_claimsadjudicated within m_reports
+end type
+
+on m_claimsadjudicated.create
+call super::create
+end on
+
+on m_claimsadjudicated.destroy
+call super::destroy
+end on
+
+type m_non-pension from m_ancestor`m_non-pension within m_claimsadjudicated
+end type
+
+on m_non-pension.create
+call super::create
+end on
+
+on m_non-pension.destroy
+call super::destroy
+end on
+
+type m_pension from m_ancestor`m_pension within m_claimsadjudicated
+end type
+
+on m_pension.create
+call super::create
+end on
+
+on m_pension.destroy
+call super::destroy
+end on
+
+type m_formofelectionadjudicatedclaims from m_ancestor`m_formofelectionadjudicatedclaims within m_reports
+end type
+
+on m_formofelectionadjudicatedclaims.create
+call super::create
+end on
+
+on m_formofelectionadjudicatedclaims.destroy
+call super::destroy
+end on
+
+type m_overduereports from m_ancestor`m_overduereports within m_reports
+end type
+
+on m_overduereports.create
+call super::create
+end on
+
+on m_overduereports.destroy
+call super::destroy
+end on
+
+type m_12weekreview from m_ancestor`m_12weekreview within m_overduereports
+end type
+
+on m_12weekreview.create
+call super::create
+end on
+
+on m_12weekreview.destroy
+call super::destroy
+end on
+
+type m_annualreview from m_ancestor`m_annualreview within m_overduereports
+end type
+
+on m_annualreview.create
+call super::create
+end on
+
+on m_annualreview.destroy
+call super::destroy
+end on
+
+type m_nonimagedfilesloggedout from m_ancestor`m_nonimagedfilesloggedout within m_reports
+end type
+
+on m_nonimagedfilesloggedout.create
+call super::create
+end on
+
+on m_nonimagedfilesloggedout.destroy
+call super::destroy
+end on
+
+type m_claimscreated from m_ancestor`m_claimscreated within m_reports
+end type
+
+on m_claimscreated.create
+call super::create
+end on
+
+on m_claimscreated.destroy
+call super::destroy
+end on
+
+type m_overpaymentsummaryreport from m_ancestor`m_overpaymentsummaryreport within m_reports
+end type
+
+on m_overpaymentsummaryreport.create
+call super::create
+end on
+
+on m_overpaymentsummaryreport.destroy
+call super::destroy
+end on
+
+type m_advancesummaryreport from m_ancestor`m_advancesummaryreport within m_reports
+end type
+
+on m_advancesummaryreport.create
+call super::create
+end on
+
+on m_advancesummaryreport.destroy
+call super::destroy
+end on
+
+type m_caseload from m_ancestor`m_caseload within m_reports
+end type
+
+on m_caseload.create
+call super::create
+end on
+
+on m_caseload.destroy
+call super::destroy
+end on
+
+type m_pensionreports from m_ancestor`m_pensionreports within m_reports
+end type
+
+on m_pensionreports.create
+call super::create
+end on
+
+on m_pensionreports.destroy
+call super::destroy
+end on
+
+type m_pensionanniversary from m_ancestor`m_pensionanniversary within m_pensionreports
+end type
+
+on m_pensionanniversary.create
+call super::create
+end on
+
+on m_pensionanniversary.destroy
+call super::destroy
+end on
+
+type m_survivorsanniversaryreport from m_ancestor`m_survivorsanniversaryreport within m_pensionreports
+end type
+
+on m_survivorsanniversaryreport.create
+call super::create
+end on
+
+on m_survivorsanniversaryreport.destroy
+call super::destroy
+end on
+
+type m_p81survivingspouseattaining65 from m_ancestor`m_p81survivingspouseattaining65 within m_pensionreports
+end type
+
+on m_p81survivingspouseattaining65.create
+call super::create
+end on
+
+on m_p81survivingspouseattaining65.destroy
+call super::destroy
+end on
+
+type m_3 from m_ancestor`m_3 within m_pensionreports
+end type
+
+on m_3.create
+call super::create
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+type m_dependentchildrenbybirthdate from m_ancestor`m_dependentchildrenbybirthdate within m_pensionreports
+end type
+
+on m_dependentchildrenbybirthdate.create
+call super::create
+end on
+
+on m_dependentchildrenbybirthdate.destroy
+call super::destroy
+end on
+
+type m_dependentchildrenover18 from m_ancestor`m_dependentchildrenover18 within m_pensionreports
+end type
+
+on m_dependentchildrenover18.create
+call super::create
+end on
+
+on m_dependentchildrenover18.destroy
+call super::destroy
+end on
+
+type m_claimaging from m_ancestor`m_claimaging within m_reports
+end type
+
+on m_claimaging.create
+call super::create
+end on
+
+on m_claimaging.destroy
+call super::destroy
+end on
+
+type m_adjudicationprofile from m_ancestor`m_adjudicationprofile within m_reports
+end type
+
+on m_adjudicationprofile.create
+call super::create
+end on
+
+on m_adjudicationprofile.destroy
+call super::destroy
+end on
+
+type m_rehabplans from m_ancestor`m_rehabplans within m_reports
+end type
+
+on m_rehabplans.create
+call super::create
+end on
+
+on m_rehabplans.destroy
+call super::destroy
+end on
+
+type m_tasklist from m_ancestor`m_tasklist within m_rehabplans
+end type
+
+on m_tasklist.create
+call super::create
+end on
+
+on m_tasklist.destroy
+call super::destroy
+end on
+
+type m_taskcompletion from m_ancestor`m_taskcompletion within m_rehabplans
+end type
+
+on m_taskcompletion.create
+call super::create
+end on
+
+on m_taskcompletion.destroy
+call super::destroy
+end on
+
+type m_taskauthorization from m_ancestor`m_taskauthorization within m_rehabplans
+end type
+
+on m_taskauthorization.create
+call super::create
+end on
+
+on m_taskauthorization.destroy
+call super::destroy
+end on
+
+type m_casemanagement from m_ancestor`m_casemanagement within m_reports
+end type
+
+on m_casemanagement.create
+call super::create
+end on
+
+on m_casemanagement.destroy
+call super::destroy
+end on
+
+type m_activecmwithmorethan70orlesst from m_ancestor`m_activecmwithmorethan70orlesst within m_casemanagement
+end type
+
+on m_activecmwithmorethan70orlesst.create
+call super::create
+end on
+
+on m_activecmwithmorethan70orlesst.destroy
+call super::destroy
+end on
+
+type m_activewithagegreaterthan50 from m_ancestor`m_activewithagegreaterthan50 within m_casemanagement
+end type
+
+on m_activewithagegreaterthan50.create
+call super::create
+end on
+
+on m_activewithagegreaterthan50.destroy
+call super::destroy
+end on
+
+type m_employerslatefilingf67s from m_ancestor`m_employerslatefilingf67s within m_reports
+end type
+
+on m_employerslatefilingf67s.create
+call super::create
+end on
+
+on m_employerslatefilingf67s.destroy
+call super::destroy
+end on
+
+type m_annuityreports from m_ancestor`m_annuityreports within m_reports
+end type
+
+on m_annuityreports.create
+call super::create
+end on
+
+on m_annuityreports.destroy
+call super::destroy
+end on
+
+type m_byclaim from m_ancestor`m_byclaim within m_annuityreports
+end type
+
+on m_byclaim.create
+call super::create
+end on
+
+on m_byclaim.destroy
+call super::destroy
+end on
+
+type m_summarizedtxns from m_ancestor`m_summarizedtxns within m_annuityreports
+end type
+
+on m_summarizedtxns.create
+call super::create
+end on
+
+on m_summarizedtxns.destroy
+call super::destroy
+end on
+
+type m_appliedinterestsummary from m_ancestor`m_appliedinterestsummary within m_annuityreports
+end type
+
+on m_appliedinterestsummary.create
+call super::create
+end on
+
+on m_appliedinterestsummary.destroy
+call super::destroy
+end on
+
+type m_costofclaimsstatements from m_ancestor`m_costofclaimsstatements within m_reports
+end type
+
+on m_costofclaimsstatements.create
+call super::create
+end on
+
+on m_costofclaimsstatements.destroy
+call super::destroy
+end on
+
+type m_paymentprocessingreports from m_ancestor`m_paymentprocessingreports within m_reports
+end type
+
+on m_paymentprocessingreports.create
+call super::create
+end on
+
+on m_paymentprocessingreports.destroy
+call super::destroy
+end on
+
+type m_paymentregisters from m_ancestor`m_paymentregisters within m_paymentprocessingreports
+end type
+
+on m_paymentregisters.create
+call super::create
+end on
+
+on m_paymentregisters.destroy
+call super::destroy
+end on
+
+type m_paymentawardauto-batchreport from m_ancestor`m_paymentawardauto-batchreport within m_paymentprocessingreports
+end type
+
+on m_paymentawardauto-batchreport.create
+call super::create
+end on
+
+on m_paymentawardauto-batchreport.destroy
+call super::destroy
+end on
+
+type m_paymentbalancing1 from m_ancestor`m_paymentbalancing1 within m_paymentprocessingreports
+end type
+
+on m_paymentbalancing1.create
+call super::create
+end on
+
+on m_paymentbalancing1.destroy
+call super::destroy
+end on
+
+type m_medicalaidvouchers from m_ancestor`m_medicalaidvouchers within m_paymentprocessingreports
+end type
+
+on m_medicalaidvouchers.create
+call super::create
+end on
+
+on m_medicalaidvouchers.destroy
+call super::destroy
+end on
+
+type m_processedbatchesbytype from m_ancestor`m_processedbatchesbytype within m_paymentprocessingreports
+end type
+
+on m_processedbatchesbytype.create
+call super::create
+end on
+
+on m_processedbatchesbytype.destroy
+call super::destroy
+end on
+
+type m_gltransactions from m_ancestor`m_gltransactions within m_paymentprocessingreports
+end type
+
+on m_gltransactions.create
+call super::create
+end on
+
+on m_gltransactions.destroy
+call super::destroy
+end on
+
+type m_directdepositvouchers from m_ancestor`m_directdepositvouchers within m_paymentprocessingreports
+end type
+
+on m_directdepositvouchers.create
+call super::create
+end on
+
+on m_directdepositvouchers.destroy
+call super::destroy
+end on
+
+type m_chequeinquiry from m_ancestor`m_chequeinquiry within m_reports
+end type
+
+on m_chequeinquiry.create
+call super::create
+end on
+
+on m_chequeinquiry.destroy
+call super::destroy
+end on
+
+type m_t5recipientdetails from m_ancestor`m_t5recipientdetails within m_reports
+end type
+
+on m_t5recipientdetails.create
+call super::create
+end on
+
+on m_t5recipientdetails.destroy
+call super::destroy
+end on
+
+type m_abandonedmedicalaidreport from m_ancestor`m_abandonedmedicalaidreport within m_reports
+end type
+
+on m_abandonedmedicalaidreport.create
+call super::create
+end on
+
+on m_abandonedmedicalaidreport.destroy
+call super::destroy
+end on
+
+type m_nbmsnbcapaymentsreport from m_ancestor`m_nbmsnbcapaymentsreport within m_reports
+end type
+
+on m_nbmsnbcapaymentsreport.create
+call super::create
+end on
+
+on m_nbmsnbcapaymentsreport.destroy
+call super::destroy
+end on
+
+type m_nbmsnbcaglpostings from m_ancestor`m_nbmsnbcaglpostings within m_reports
+end type
+
+on m_nbmsnbcaglpostings.create
+call super::create
+end on
+
+on m_nbmsnbcaglpostings.destroy
+call super::destroy
+end on
+
+type m_deleteddocuments from m_ancestor`m_deleteddocuments within m_reports
+end type
+
+on m_deleteddocuments.create
+call super::create
+end on
+
+on m_deleteddocuments.destroy
+call super::destroy
+end on
+
+type m_survivorsspecialpayment from m_ancestor`m_survivorsspecialpayment within m_reports
+end type
+
+on m_survivorsspecialpayment.create
+call super::create
+end on
+
+on m_survivorsspecialpayment.destroy
+call super::destroy
+end on
+
+type m_specialsurvpaidtodate from m_ancestor`m_specialsurvpaidtodate within m_survivorsspecialpayment
+end type
+
+on m_specialsurvpaidtodate.create
+call super::create
+end on
+
+on m_specialsurvpaidtodate.destroy
+call super::destroy
+end on
+
+type m_docidreferenceassociation from m_ancestor`m_docidreferenceassociation within m_reports
+end type
+
+on m_docidreferenceassociation.create
+call super::create
+end on
+
+on m_docidreferenceassociation.destroy
+call super::destroy
+end on
+
+type m_abcc from m_ancestor`m_abcc within m_reports
+end type
+
+on m_abcc.create
+call super::create
+end on
+
+on m_abcc.destroy
+call super::destroy
+end on
+
+type m_eligibilitydatareport from m_ancestor`m_eligibilitydatareport within m_abcc
+end type
+
+on m_eligibilitydatareport.create
+call super::create
+end on
+
+on m_eligibilitydatareport.destroy
+call super::destroy
+end on
+
+type m_eligibilityexporterrors from m_ancestor`m_eligibilityexporterrors within m_abcc
+end type
+
+on m_eligibilityexporterrors.create
+call super::create
+end on
+
+on m_eligibilityexporterrors.destroy
+call super::destroy
+end on
+
+type m_prescription_report from m_ancestor`m_prescription_report within m_abcc
+end type
+
+on m_prescription_report.create
+call super::create
+end on
+
+on m_prescription_report.destroy
+call super::destroy
+end on
+
+type m_dinreports from m_ancestor`m_dinreports within m_abcc
+event create ( )
+event destroy ( )
+end type
+
+on m_dinreports.create
+call super::create
+end on
+
+on m_dinreports.destroy
+call super::destroy
+end on
+
+type m_invoicereconciliationreport from m_ancestor`m_invoicereconciliationreport within m_abcc
+end type
+
+on m_invoicereconciliationreport.create
+call super::create
+end on
+
+on m_invoicereconciliationreport.destroy
+call super::destroy
+end on
+
+type m_converetedmanualtransactions from m_ancestor`m_converetedmanualtransactions within m_reports
+event create ( )
+event destroy ( )
+end type
+
+on m_converetedmanualtransactions.create
+call super::create
+end on
+
+on m_converetedmanualtransactions.destroy
+call super::destroy
+end on
+
+type m_open_awards_os_pymts from m_ancestor`m_open_awards_os_pymts within m_reports
+end type
+
+on m_open_awards_os_pymts.create
+call super::create
+end on
+
+on m_open_awards_os_pymts.destroy
+call super::destroy
+end on
+
+type m_form67information from m_ancestor`m_form67information within m_reports
+end type
+
+on m_form67information.create
+call super::create
+end on
+
+on m_form67information.destroy
+call super::destroy
+end on
+
+type m_claimsnotcodedreport from m_ancestor`m_claimsnotcodedreport within m_reports
+end type
+
+on m_claimsnotcodedreport.create
+call super::create
+end on
+
+on m_claimsnotcodedreport.destroy
+call super::destroy
+end on
+
+type m_t5reviewreports from m_ancestor`m_t5reviewreports within m_reports
+end type
+
+on m_t5reviewreports.create
+call super::create
+end on
+
+on m_t5reviewreports.destroy
+call super::destroy
+end on
+
+type m_window from m_ancestor`m_window within m_cmwb
+end type
+
+on m_window.create
+call super::create
+end on
+
+on m_window.destroy
+call super::destroy
+end on
+
+type m_cascade from m_ancestor`m_cascade within m_window
+end type
+
+on m_cascade.create
+call super::create
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_layered from m_ancestor`m_layered within m_window
+end type
+
+on m_layered.create
+call super::create
+end on
+
+on m_layered.destroy
+call super::destroy
+end on
+
+type m_tile from m_ancestor`m_tile within m_window
+end type
+
+on m_tile.create
+call super::create
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_help from m_ancestor`m_help within m_cmwb
+end type
+
+on m_help.create
+call super::create
+end on
+
+on m_help.destroy
+call super::destroy
+end on
+
+type m_contents from m_ancestor`m_contents within m_help
+end type
+
+on m_contents.create
+call super::create
+end on
+
+on m_contents.destroy
+call super::destroy
+end on
+
+type m_-z from m_ancestor`m_-z within m_help
+end type
+
+on m_-z.create
+call super::create
+end on
+
+on m_-z.destroy
+call super::destroy
+end on
+
+type m_aboutworkbench from m_ancestor`m_aboutworkbench within m_help
+end type
+
+on m_aboutworkbench.create
+call super::create
+end on
+
+on m_aboutworkbench.destroy
+call super::destroy
+end on
+
+type m_finance from m_ancestor`m_finance within m_cmwb
+m_directdepositchequere-issue m_directdepositchequere-issue
+end type
+
+on m_finance.create
+call super::create
+this.visible = true
+this.m_directdepositchequere-issue=create m_directdepositchequere-issue
+this.Item[UpperBound(this.Item)+1]=this.m_directdepositchequere-issue
+end on
+
+on m_finance.destroy
+call super::destroy
+destroy(this.m_directdepositchequere-issue)
+end on
+
+type m_addmanualtxns from m_ancestor`m_addmanualtxns within m_finance
+end type
+
+on m_addmanualtxns.create
+call super::create
+end on
+
+on m_addmanualtxns.destroy
+call super::destroy
+end on
+
+type m_maintainmanualtxns from m_ancestor`m_maintainmanualtxns within m_finance
+end type
+
+on m_maintainmanualtxns.create
+call super::create
+end on
+
+on m_maintainmanualtxns.destroy
+call super::destroy
+end on
+
+type m_cocsummarybyglaccount from m_ancestor`m_cocsummarybyglaccount within m_finance
+end type
+
+on m_cocsummarybyglaccount.create
+call super::create
+end on
+
+on m_cocsummarybyglaccount.destroy
+call super::destroy
+end on
+
+type m_closepreviousperiod from m_ancestor`m_closepreviousperiod within m_finance
+end type
+
+on m_closepreviousperiod.create
+call super::create
+end on
+
+on m_closepreviousperiod.destroy
+call super::destroy
+end on
+
+type m_1 from m_ancestor`m_1 within m_finance
+end type
+
+on m_1.create
+call super::create
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_maintainannuityinterest from m_ancestor`m_maintainannuityinterest within m_finance
+end type
+
+on m_maintainannuityinterest.create
+call super::create
+end on
+
+on m_maintainannuityinterest.destroy
+call super::destroy
+end on
+
+type m_bankreconciliation from m_ancestor`m_bankreconciliation within m_finance
+end type
+
+on m_bankreconciliation.create
+call super::create
+end on
+
+on m_bankreconciliation.destroy
+call super::destroy
+end on
+
+type m_maintenance from m_ancestor`m_maintenance within m_bankreconciliation
+end type
+
+on m_maintenance.create
+call super::create
+end on
+
+on m_maintenance.destroy
+call super::destroy
+end on
+
+type m_paymentverification from m_ancestor`m_paymentverification within m_bankreconciliation
+end type
+
+on m_paymentverification.create
+call super::create
+end on
+
+on m_paymentverification.destroy
+call super::destroy
+end on
+
+type m_sendissuedcheques from m_ancestor`m_sendissuedcheques within m_bankreconciliation
+end type
+
+on m_sendissuedcheques.create
+call super::create
+end on
+
+on m_sendissuedcheques.destroy
+call super::destroy
+end on
+
+type m_reconciledchequelistingreport from m_ancestor`m_reconciledchequelistingreport within m_bankreconciliation
+end type
+
+on m_reconciledchequelistingreport.create
+call super::create
+end on
+
+on m_reconciledchequelistingreport.destroy
+call super::destroy
+end on
+
+type m_auditingreports from m_ancestor`m_auditingreports within m_finance
+end type
+
+on m_auditingreports.create
+call super::create
+end on
+
+on m_auditingreports.destroy
+call super::destroy
+end on
+
+type m_journalnoinquiry from m_ancestor`m_journalnoinquiry within m_auditingreports
+end type
+
+on m_journalnoinquiry.create
+call super::create
+end on
+
+on m_journalnoinquiry.destroy
+call super::destroy
+end on
+
+type m_dailychequebalancing from m_ancestor`m_dailychequebalancing within m_auditingreports
+end type
+
+on m_dailychequebalancing.create
+call super::create
+end on
+
+on m_dailychequebalancing.destroy
+call super::destroy
+end on
+
+type m_chequereprintaudit from m_ancestor`m_chequereprintaudit within m_auditingreports
+end type
+
+on m_chequereprintaudit.create
+call super::create
+end on
+
+on m_chequereprintaudit.destroy
+call super::destroy
+end on
+
+type m_gltransfersummary from m_ancestor`m_gltransfersummary within m_auditingreports
+end type
+
+on m_gltransfersummary.create
+call super::create
+end on
+
+on m_gltransfersummary.destroy
+call super::destroy
+end on
+
+type m_t5processing from m_ancestor`m_t5processing within m_finance
+end type
+
+on m_t5processing.create
+call super::create
+end on
+
+on m_t5processing.destroy
+call super::destroy
+end on
+
+type m_t5samplingreport from m_ancestor`m_t5samplingreport within m_t5processing
+end type
+
+on m_t5samplingreport.create
+call super::create
+end on
+
+on m_t5samplingreport.destroy
+call super::destroy
+end on
+
+type m_trusteeassignment from m_ancestor`m_trusteeassignment within m_t5processing
+end type
+
+on m_trusteeassignment.create
+call super::create
+end on
+
+on m_trusteeassignment.destroy
+call super::destroy
+end on
+
+type m_blanksinreport from m_ancestor`m_blanksinreport within m_t5processing
+end type
+
+on m_blanksinreport.create
+call super::create
+end on
+
+on m_blanksinreport.destroy
+call super::destroy
+end on
+
+type m_2 from m_ancestor`m_2 within m_finance
+end type
+
+on m_2.create
+call super::create
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_claimcostmaintenance from m_ancestor`m_claimcostmaintenance within m_finance
+end type
+
+on m_claimcostmaintenance.create
+call super::create
+end on
+
+on m_claimcostmaintenance.destroy
+call super::destroy
+end on
+
+type m_directdepositchequere-issue from menu within m_finance
+end type
+
+event clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_directdepositchequere-issue")
+Else
+	Beep(2)
+End If	
+end event
+
+on m_directdepositchequere-issue.create
+call super::create
+this.text = "Direct Deposit/Cheque Re-Issue"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_directdepositchequere-issue.destroy
+call super::destroy
+end on
+
+type m_tools from menu within m_cmwb
+m_paymentinquiry m_paymentinquiry
+m_correspondence m_correspondence
+m_rxcoverage m_rxcoverage
+m_eventlog m_eventlog
+m_benefits m_benefits
+m_benefitsreadonly m_benefitsreadonly
+m_paymentmaintenance m_paymentmaintenance
+m_claimmaintenance m_claimmaintenance
+m_claimreadonly m_claimreadonly
+m_individualmaintenance m_individualmaintenance
+m_individualreadonly m_individualreadonly
+m_documentarchiving m_documentarchiving
+m_nicorrespondencemaint m_nicorrespondencemaint
+m_nifilesloggedoutmaint m_nifilesloggedoutmaint
+m_documentimport m_documentimport
+m_overpayments m_overpayments
+m_awards m_awards
+m_awardsreadonly m_awardsreadonly
+m_-1 m_-1
+m_senddocuments m_senddocuments
+m_viewdocuments m_viewdocuments
+m_highlightdocuments m_highlightdocuments
+m_printdocumentsmaxof5 m_printdocumentsmaxof5
+m_printdocuments m_printdocuments
+m_-2 m_-2
+m_inbasket m_inbasket
+m_inbasketold m_inbasketold
+m_accountpayment m_accountpayment
+m_accidentstatistics m_accidentstatistics
+m_documentindexing m_documentindexing
+m_documentsearch m_documentsearch
+m_managereportingfees m_managereportingfees
+m_abcc_tools m_abcc_tools
+m_convertmanualtransaction m_convertmanualtransaction
+m_maintaincrarequests m_maintaincrarequests
+m_maintainbankinformation m_maintainbankinformation
+m_form67webaccess m_form67webaccess
+end type
+
+on m_tools.create
+call super::create
+this.text = "&Tools"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_paymentinquiry=create m_paymentinquiry
+this.m_correspondence=create m_correspondence
+this.m_rxcoverage=create m_rxcoverage
+this.m_eventlog=create m_eventlog
+this.m_benefits=create m_benefits
+this.m_benefitsreadonly=create m_benefitsreadonly
+this.m_paymentmaintenance=create m_paymentmaintenance
+this.m_claimmaintenance=create m_claimmaintenance
+this.m_claimreadonly=create m_claimreadonly
+this.m_individualmaintenance=create m_individualmaintenance
+this.m_individualreadonly=create m_individualreadonly
+this.m_documentarchiving=create m_documentarchiving
+this.m_nicorrespondencemaint=create m_nicorrespondencemaint
+this.m_nifilesloggedoutmaint=create m_nifilesloggedoutmaint
+this.m_documentimport=create m_documentimport
+this.m_overpayments=create m_overpayments
+this.m_awards=create m_awards
+this.m_awardsreadonly=create m_awardsreadonly
+this.m_-1=create m_-1
+this.m_senddocuments=create m_senddocuments
+this.m_viewdocuments=create m_viewdocuments
+this.m_highlightdocuments=create m_highlightdocuments
+this.m_printdocumentsmaxof5=create m_printdocumentsmaxof5
+this.m_printdocuments=create m_printdocuments
+this.m_-2=create m_-2
+this.m_inbasket=create m_inbasket
+this.m_inbasketold=create m_inbasketold
+this.m_accountpayment=create m_accountpayment
+this.m_accidentstatistics=create m_accidentstatistics
+this.m_documentindexing=create m_documentindexing
+this.m_documentsearch=create m_documentsearch
+this.m_managereportingfees=create m_managereportingfees
+this.m_abcc_tools=create m_abcc_tools
+this.m_convertmanualtransaction=create m_convertmanualtransaction
+this.m_maintaincrarequests=create m_maintaincrarequests
+this.m_maintainbankinformation=create m_maintainbankinformation
+this.m_form67webaccess=create m_form67webaccess
+this.Item[UpperBound(this.Item)+1]=this.m_paymentinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_correspondence
+this.Item[UpperBound(this.Item)+1]=this.m_rxcoverage
+this.Item[UpperBound(this.Item)+1]=this.m_eventlog
+this.Item[UpperBound(this.Item)+1]=this.m_benefits
+this.Item[UpperBound(this.Item)+1]=this.m_benefitsreadonly
+this.Item[UpperBound(this.Item)+1]=this.m_paymentmaintenance
+this.Item[UpperBound(this.Item)+1]=this.m_claimmaintenance
+this.Item[UpperBound(this.Item)+1]=this.m_claimreadonly
+this.Item[UpperBound(this.Item)+1]=this.m_individualmaintenance
+this.Item[UpperBound(this.Item)+1]=this.m_individualreadonly
+this.Item[UpperBound(this.Item)+1]=this.m_documentarchiving
+this.Item[UpperBound(this.Item)+1]=this.m_nicorrespondencemaint
+this.Item[UpperBound(this.Item)+1]=this.m_nifilesloggedoutmaint
+this.Item[UpperBound(this.Item)+1]=this.m_documentimport
+this.Item[UpperBound(this.Item)+1]=this.m_overpayments
+this.Item[UpperBound(this.Item)+1]=this.m_awards
+this.Item[UpperBound(this.Item)+1]=this.m_awardsreadonly
+this.Item[UpperBound(this.Item)+1]=this.m_-1
+this.Item[UpperBound(this.Item)+1]=this.m_senddocuments
+this.Item[UpperBound(this.Item)+1]=this.m_viewdocuments
+this.Item[UpperBound(this.Item)+1]=this.m_highlightdocuments
+this.Item[UpperBound(this.Item)+1]=this.m_printdocumentsmaxof5
+this.Item[UpperBound(this.Item)+1]=this.m_printdocuments
+this.Item[UpperBound(this.Item)+1]=this.m_-2
+this.Item[UpperBound(this.Item)+1]=this.m_inbasket
+this.Item[UpperBound(this.Item)+1]=this.m_inbasketold
+this.Item[UpperBound(this.Item)+1]=this.m_accountpayment
+this.Item[UpperBound(this.Item)+1]=this.m_accidentstatistics
+this.Item[UpperBound(this.Item)+1]=this.m_documentindexing
+this.Item[UpperBound(this.Item)+1]=this.m_documentsearch
+this.Item[UpperBound(this.Item)+1]=this.m_managereportingfees
+this.Item[UpperBound(this.Item)+1]=this.m_abcc_tools
+this.Item[UpperBound(this.Item)+1]=this.m_convertmanualtransaction
+this.Item[UpperBound(this.Item)+1]=this.m_maintaincrarequests
+this.Item[UpperBound(this.Item)+1]=this.m_maintainbankinformation
+this.Item[UpperBound(this.Item)+1]=this.m_form67webaccess
+end on
+
+on m_tools.destroy
+call super::destroy
+destroy(this.m_paymentinquiry)
+destroy(this.m_correspondence)
+destroy(this.m_rxcoverage)
+destroy(this.m_eventlog)
+destroy(this.m_benefits)
+destroy(this.m_benefitsreadonly)
+destroy(this.m_paymentmaintenance)
+destroy(this.m_claimmaintenance)
+destroy(this.m_claimreadonly)
+destroy(this.m_individualmaintenance)
+destroy(this.m_individualreadonly)
+destroy(this.m_documentarchiving)
+destroy(this.m_nicorrespondencemaint)
+destroy(this.m_nifilesloggedoutmaint)
+destroy(this.m_documentimport)
+destroy(this.m_overpayments)
+destroy(this.m_awards)
+destroy(this.m_awardsreadonly)
+destroy(this.m_-1)
+destroy(this.m_senddocuments)
+destroy(this.m_viewdocuments)
+destroy(this.m_highlightdocuments)
+destroy(this.m_printdocumentsmaxof5)
+destroy(this.m_printdocuments)
+destroy(this.m_-2)
+destroy(this.m_inbasket)
+destroy(this.m_inbasketold)
+destroy(this.m_accountpayment)
+destroy(this.m_accidentstatistics)
+destroy(this.m_documentindexing)
+destroy(this.m_documentsearch)
+destroy(this.m_managereportingfees)
+destroy(this.m_abcc_tools)
+destroy(this.m_convertmanualtransaction)
+destroy(this.m_maintaincrarequests)
+destroy(this.m_maintainbankinformation)
+destroy(this.m_form67webaccess)
+end on
+
+type m_paymentinquiry from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_paymentinquiry")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_paymentinquiry.create
+call super::create
+this.text = "Payment In&quiry"
+this.microhelp = "Inquire on comp, voc rehab and LTD payments for claim"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paymentinquiry.destroy
+call super::destroy
+end on
+
+type m_correspondence from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_correspondence")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_correspondence.create
+call super::create
+this.text = "C&orrespondence"
+this.microhelp = "Maintain correspondence for claim"
+this.toolbaritemname = "custom001!"
+this.toolbaritemtext = "Corresp."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_correspondence.destroy
+call super::destroy
+end on
+
+type m_rxcoverage from menu within m_tools
+end type
+
+on m_rxcoverage.create
+call super::create
+this.text = "&Rx Coverage Inquiry"
+this.microhelp = "Drug Coverage by Claim"
+this.toolbaritemname = "custom093!"
+this.toolbaritemtext = "Rx Cov"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rxcoverage.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_rxcoverage")
+Else
+	Beep(2)
+End If
+end event
+
+type m_eventlog from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_eventlog")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_eventlog.create
+call super::create
+this.text = "E&vent Log"
+this.microhelp = "Maintain events for claim"
+this.toolbaritemname = "dbadmin!"
+this.toolbaritemtext = "Event Log"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_eventlog.destroy
+call super::destroy
+end on
+
+type m_benefits from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_benefits")
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_benefits.create
+call super::create
+this.text = "&Benefit Calculation"
+this.microhelp = "Create and maintain benefit calculations for claim"
+this.toolbaritemname = "compute!"
+this.toolbaritemtext = "Ben Calc"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_benefits.destroy
+call super::destroy
+end on
+
+type m_benefitsreadonly from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_benefitsreadonly")
+Else
+	Beep(2)
+End If
+
+
+
+end on
+
+on m_benefitsreadonly.create
+call super::create
+this.text = "&Benefit Calculation (Read-Only)"
+this.microhelp = "View benefit calculations for claim"
+this.toolbaritemname = "compute!"
+this.toolbaritemtext = "Ben Calc"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_benefitsreadonly.destroy
+call super::destroy
+end on
+
+type m_paymentmaintenance from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_paymentmaintenance")
+Else
+	Beep(2)
+End If
+
+
+
+
+end on
+
+on m_paymentmaintenance.create
+call super::create
+this.text = "&Payment Maintenance"
+this.microhelp = "Maintain comp, voc rehab and LTD payments"
+this.toolbaritemname = "custom048!"
+this.toolbaritemtext = "Payment"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paymentmaintenance.destroy
+call super::destroy
+end on
+
+type m_claimmaintenance from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_claimmaintenance")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_claimmaintenance.create
+call super::create
+this.text = "C&laim Maintenance"
+this.microhelp = "Maintain basic claim data"
+this.toolbaritemname = "move!"
+this.toolbaritemtext = "Claim"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimmaintenance.destroy
+call super::destroy
+end on
+
+type m_claimreadonly from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_claimreadonly")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_claimreadonly.create
+call super::create
+this.text = "C&laim (Read Only)"
+this.microhelp = "View Basic Claim Data "
+this.toolbaritemname = "move!"
+this.toolbaritemtext = "Claim"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_claimreadonly.destroy
+call super::destroy
+end on
+
+type m_individualmaintenance from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable()  Then
+	mf_open_window("m_individualmaintenance")
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_individualmaintenance.create
+call super::create
+this.text = "&Individual Maintenance"
+this.microhelp = "Maintain Individual data"
+this.toolbaritemname = "picture!"
+this.toolbaritemtext = "Individ."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_individualmaintenance.destroy
+call super::destroy
+end on
+
+type m_individualreadonly from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable()  Then
+	mf_open_window("m_individualreadonly")
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_individualreadonly.create
+call super::create
+this.text = "&Individual (Read Only)"
+this.microhelp = "View Individual Data"
+this.toolbaritemname = "picture!"
+this.toolbaritemtext = "Individ."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_individualreadonly.destroy
+call super::destroy
+end on
+
+type m_documentarchiving from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_documentarchiving")
+Else
+	Beep(2)
+End If
+
+
+
+
+end on
+
+on m_documentarchiving.create
+call super::create
+this.text = "Docum&ent Archiving"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_documentarchiving.destroy
+call super::destroy
+end on
+
+type m_nicorrespondencemaint from menu within m_tools
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	mf_open_window("m_nicorrespondencemaint")
+ELSE
+	Beep(2)
+END IF
+
+end on
+
+on m_nicorrespondencemaint.create
+call super::create
+this.text = "Non Ima&ged Correspondence Maintenance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_nicorrespondencemaint.destroy
+call super::destroy
+end on
+
+type m_nifilesloggedoutmaint from menu within m_tools
+end type
+
+on clicked;IF SQLCA.ServiceAvailable() THEN
+	mf_open_window("m_nifilesloggedoutmaint")
+ELSE
+	Beep(2)
+END IF
+end on
+
+on m_nifilesloggedoutmaint.create
+call super::create
+this.text = "Non Imaged Files Logged &Out Maintenance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_nifilesloggedoutmaint.destroy
+call super::destroy
+end on
+
+type m_documentimport from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_documentimport")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_documentimport.create
+call super::create
+this.text = "Docu&ment Import"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_documentimport.destroy
+call super::destroy
+end on
+
+type m_overpayments from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_overpayments")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_overpayments.create
+call super::create
+this.text = "Overpa&yments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_overpayments.destroy
+call super::destroy
+end on
+
+type m_awards from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_awards")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_awards.create
+call super::create
+this.text = "&Awards"
+this.microhelp = "Maintain Awards"
+this.toolbaritemname = "statictext!"
+this.toolbaritemtext = "Awards"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_awards.destroy
+call super::destroy
+end on
+
+type m_awardsreadonly from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_awardsreadonly")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_awardsreadonly.create
+call super::create
+this.text = "&Awards (Inquiry)"
+this.microhelp = "Awards Inquiry"
+this.toolbaritemname = "statictext!"
+this.toolbaritemtext = "Awards"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_awardsreadonly.destroy
+call super::destroy
+end on
+
+type m_-1 from menu within m_tools
+end type
+
+on m_-1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_senddocuments from menu within m_tools
+end type
+
+on clicked;	LONG							ll_claim_no
+	s_send_doc_parameters	ls_sdp
+
+	If ImageTrans.ServiceAvailable() Then
+
+		// Get the name of the active work sheet
+		iwi_active_sheet = w_frame.GetActiveSheet()
+
+		// If valid sheet name found then continue else abort process
+		IF IsValid(iwi_active_sheet) THEN
+
+		   // Open the send window
+			ls_sdp.msg_mode = FALSE
+			ls_sdp.claim_no = iwi_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+			ls_sdp.document_list = iwi_active_sheet.dw_documents
+		   OpenWithParm(w_send_folder,ls_sdp)
+		ELSE
+			MessageBox("Send Documents","Error determining active sheet...Possibly low on resources",StopSign!)
+		End If
+	End If
+
+
+end on
+
+on m_senddocuments.create
+call super::create
+this.text = "Send &Documents"
+this.microhelp = "Send selected documents to a bucket"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_senddocuments.destroy
+call super::destroy
+end on
+
+type m_viewdocuments from menu within m_tools
+end type
+
+event clicked;//  This script checks to see if any documents have been accepted for viewing.
+//  If at least one document is selected, the user may view the documents
+//
+//--------------------------------------------------------------------------
+
+Long    ll_selected_row, &
+		  ll_doc_id
+
+string ls_doc_type
+integer li_rtn 
+
+
+
+If ImageTrans.ServiceAvailable() Then
+	// Get the name of the active work sheet and validate that it exists
+	iwi_active_sheet = w_frame.GetActiveSheet()
+	If IsValid(iwi_active_sheet) = False Then
+	   MessageBox("View Documents","Cannot determine active sheet. Please exit, reboot and try again.")
+		Return
+	End If
+
+	// Get the first highlighted document
+	ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(0)
+	If ll_selected_row = 0 Then
+	    MessageBox("Print Documents", "You must select at least one document to view.")
+	    Return
+	End If
+
+
+
+	
+	// Process the selected rows
+	Do While ll_selected_row <> 0
+		ll_doc_id = iwi_active_sheet.dw_documents.GetItemNumber(ll_selected_row,"ref_docid")
+		
+					
+		if iwi_active_sheet.uo_image_append.of_init(ll_doc_id) <= 0 then
+			RETURN
+		end if
+		
+		
+			
+		ls_doc_type =  iwi_active_sheet.uo_image_append.of_get_file_type()
+			
+		
+		CHOOSE CASE ls_doc_type
+			/*  Imaged document */ 
+			CASE 'IMA', 'TIF'
+				li_rtn = iwi_active_sheet.uo_image_append.of_append_image(ll_doc_id)
+				if li_rtn < 0 then
+					If MessageBox("Unable to View","Unable to view current document. Do you wish to continue?",Question!,YesNo!,2) = 2 Then
+						Return
+					End If
+					
+				end if
+			case else
+				if iwi_active_sheet.iu_dw_document_path.f_manage_document(ll_doc_id,"V","NORMAL") = -1 then
+					If MessageBox("Unable to View","Unable to view current document. Do you wish to continue?",Question!,YesNo!,2) = 2 Then
+						Return
+					End If
+				End If
+			
+		end choose	
+		
+			ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(ll_selected_row)
+	Loop
+	
+	
+Else
+	Beep(2)
+End If
+
+
+
+
+
+end event
+
+on m_viewdocuments.create
+call super::create
+this.text = "View Doc&uments"
+this.microhelp = "View selected documents"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_viewdocuments.destroy
+call super::destroy
+end on
+
+type m_highlightdocuments from menu within m_tools
+end type
+
+on clicked;// Open the highlight document response window
+
+   open(w_highlight_documents)
+
+end on
+
+on m_highlightdocuments.create
+call super::create
+this.text = "&Highlight Documents"
+this.microhelp = "Highlight documents by document type"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_highlightdocuments.destroy
+call super::destroy
+end on
+
+type m_printdocumentsmaxof5 from menu within m_tools
+end type
+
+event clicked;//  This script checks to see if any documents have been accepted for printing.
+//  If at least one document is selected, the user may print the documents
+//
+//--------------------------------------------------------------------------
+
+Long    ll_selected_row, &
+		  ll_doc_id, &
+		  ll_counter = 1
+
+// Get the name of the active work sheet and validate that it exists
+iwi_active_sheet = w_frame.GetActiveSheet()
+If IsValid(iwi_active_sheet) = False Then
+   MessageBox("Print Documents","Cannot determine active sheet. Please exit, reboot and try again.")
+	Return
+End If
+
+// Get the first highlighted document
+ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(0)
+If ll_selected_row = 0 Then
+    MessageBox("Print Documents", "You must select at least one document to print.")
+    Return
+End If
+
+SetPointer(Hourglass!)
+
+// Get the document id for selected rows
+Do While ll_counter <= 5 And ll_selected_row <> 0
+	ll_doc_id = iwi_active_sheet.dw_documents.GetItemNumber(ll_selected_row,"ref_docid")
+	If iwi_active_sheet.iu_dw_document_path.f_manage_document(ll_doc_id,"P","NORMAL") = -1 Then
+		If MessageBox("Unable to Print","Unable to print current document. Do you wish to continue?",Question!,YesNo!,2) = 2 Then
+			Return
+		End If
+	End If
+	
+	// P10189-011 sleep for 3 seconds so the print queue keeps the right order, send these too fast and the print queue just messes up the order....
+	Sleep(3)
+	
+	// Get the next selected row
+	ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(ll_selected_row)
+	ll_counter++
+Loop
+
+SetPointer(Arrow!)
+
+MessageBox("Printing Complete","Printing has completed")
+
+end event
+
+on m_printdocumentsmaxof5.create
+call super::create
+this.text = "P&rint Documents (Max. of 5)"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_printdocumentsmaxof5.destroy
+call super::destroy
+end on
+
+type m_printdocuments from menu within m_tools
+end type
+
+event clicked;//  This script checks to see if any documents have been accepted for printing.
+//  If at least one document is selected, the user may print the documents
+//
+//--------------------------------------------------------------------------
+
+Long    ll_selected_row, ll_doc_id
+
+// Get the name of the active work sheet and validate that it exists
+iwi_active_sheet = w_frame.GetActiveSheet()
+If IsValid(iwi_active_sheet) = False Then
+   MessageBox("Print Documents","Cannot determine active sheet. Please exit, reboot and try again.")
+	Return
+End If
+
+// Get the first highlighted document to determine if at least one document is selected
+ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(0)
+If ll_selected_row = 0 Then
+    MessageBox("Print Documents", "You must select at least one document to print.")
+    Return
+End If
+
+SetPointer(Hourglass!)
+
+
+// Get the document id for selected rows
+Do While ll_selected_row <> 0
+
+	ll_doc_id = iwi_active_sheet.dw_documents.GetItemNumber(ll_selected_row,"ref_docid")
+	If iwi_active_sheet.iu_dw_document_path.f_manage_document(ll_doc_id,"P","NORMAL") = -1 Then
+		If MessageBox("Unable to Print","Unable to print current document. Do you wish to continue?",Question!,YesNo!,2) = 2 Then
+			Return
+		End If		
+	End If
+	
+	// sleep for 3 seconds so the print queue keeps the right order, send these too fast and the print queue just messes up the order....
+	Sleep(3)
+
+	// Get the next selected row
+	ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(ll_selected_row)
+Loop
+
+SetPointer(Arrow!)
+
+MessageBox("Printing Complete","Printing has completed")
+end event
+
+on m_printdocuments.create
+call super::create
+this.text = "Prin&t Documents"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_printdocuments.destroy
+call super::destroy
+end on
+
+type m_-2 from menu within m_tools
+end type
+
+on m_-2.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_inbasket from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_inbasket")
+Else
+	Beep(2)
+End IF
+
+end on
+
+on m_inbasket.create
+call super::create
+this.text = "I&n Basket"
+this.microhelp = "Open Inbasket"
+this.toolbaritemname = "custom039!"
+this.toolbaritemtext = "InBasket"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_inbasket.destroy
+call super::destroy
+end on
+
+type m_inbasketold from menu within m_tools
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_inbasket_old")
+Else
+	Beep(2)
+End IF
+
+end event
+
+on m_inbasketold.create
+call super::create
+this.text = "In-Basket (OLD)"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_inbasketold.destroy
+call super::destroy
+end on
+
+type m_accountpayment from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_accountpayment")
+Else
+	Beep(2)
+End IF
+
+
+end on
+
+on m_accountpayment.create
+call super::create
+this.text = "&Account Payment Maintenance"
+this.microhelp = "Maintain Medical Aid Payments"
+this.toolbaritemname = "custom090!"
+this.toolbaritemtext = "Acct Pay"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_accountpayment.destroy
+call super::destroy
+end on
+
+type m_accidentstatistics from menu within m_tools
+end type
+
+on clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_accidentstatistics")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_accidentstatistics.create
+call super::create
+this.text = "&Accident Statistics Maintenance"
+this.microhelp = "Maintain Accident Statistics"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_accidentstatistics.destroy
+call super::destroy
+end on
+
+type m_documentindexing from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() and SQLCA.ServiceAvailable() Then
+	mf_open_window("m_documentindexing")
+Else
+	Beep(2)
+End If
+
+
+end on
+
+on m_documentindexing.create
+call super::create
+this.text = "Document Inde&xing"
+this.microhelp = "Document Indexing"
+this.toolbaritemname = "createindex!"
+this.toolbaritemtext = "Indexing"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_documentindexing.destroy
+call super::destroy
+end on
+
+type m_documentsearch from menu within m_tools
+end type
+
+on clicked;If ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_documentsearch")
+Else
+	Beep(2)
+End If
+
+end on
+
+on m_documentsearch.create
+call super::create
+this.text = "Document Search"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_documentsearch.destroy
+call super::destroy
+end on
+
+type m_managereportingfees from menu within m_tools
+m_maintainreportingfees m_maintainreportingfees
+m_issuereportingfees m_issuereportingfees
+end type
+
+on m_managereportingfees.create
+call super::create
+this.text = "Manage Reporting &Fees"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_maintainreportingfees=create m_maintainreportingfees
+this.m_issuereportingfees=create m_issuereportingfees
+this.Item[UpperBound(this.Item)+1]=this.m_maintainreportingfees
+this.Item[UpperBound(this.Item)+1]=this.m_issuereportingfees
+end on
+
+on m_managereportingfees.destroy
+call super::destroy
+destroy(this.m_maintainreportingfees)
+destroy(this.m_issuereportingfees)
+end on
+
+type m_maintainreportingfees from menu within m_managereportingfees
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and SQLCA.ServiceAvailable() Then
+	mf_open_window("m_maintainreportingfee")
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintainreportingfees.create
+call super::create
+this.text = "&Maintain Reporting Fees"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainreportingfees.destroy
+call super::destroy
+end on
+
+type m_issuereportingfees from menu within m_managereportingfees
+end type
+
+event clicked;LONG							ll_claim_no
+Long    ll_selected_row, ll_doc_id
+
+string ls_doc_type
+integer li_rtn 
+s_reporting_fee_parameters	ls_sdp
+
+	If ImageTrans.ServiceAvailable() Then
+
+		// Get the name of the active work sheet
+		iwi_active_sheet = w_frame.GetActiveSheet()
+		If IsValid(iwi_active_sheet) = False Then
+	  		 	MessageBox("View Documents","Cannot determine active sheet. Please exit, reboot and try again.")
+				Return
+		End If
+		
+		// Get the first highlighted document
+		ll_selected_row = iwi_active_sheet.dw_documents.GetSelectedRow(0)
+		If ll_selected_row = 0 Then
+			 MessageBox("Issue Reporting Fee", "You must select a claim and document to receive the Reporting Fee Payment",StopSign!)
+			 Return
+		End If
+		
+			IF iwi_active_sheet.dw_basic_claim.rowcount() > 0 THEN
+				IF iwi_active_sheet.dw_documents.rowcount() > 0 THEN
+					// Open the send window
+					ll_doc_id = iwi_active_sheet.dw_documents.GetItemNumber(ll_selected_row,"ref_docid")
+					ls_sdp.doc_id = iwi_active_sheet.dw_documents.GetItemNumber(ll_selected_row,"ref_docid")
+					ls_sdp.claim_no = iwi_active_sheet.dw_basic_claim.GetItemNumber(1,"claim_no")
+					OpenWithParm(w_issue_reporting_fee,ls_sdp)
+				END IF
+			END IF
+		ELSE
+			MessageBox("Issue Reporting Fee","Error determining active sheet...Possibly low on resources",StopSign!)
+		End If
+
+	
+
+
+
+
+
+	
+	
+	
+
+
+
+end event
+
+on m_issuereportingfees.create
+call super::create
+this.text = "&Send for Reporting Fee Pymt"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_issuereportingfees.destroy
+call super::destroy
+end on
+
+type m_abcc_tools from menu within m_tools
+m_excludedclaimmaintenance m_excludedclaimmaintenance
+m_maintainformulary m_maintainformulary
+m_maintainformularyreadonly m_maintainformularyreadonly
+end type
+
+on m_abcc_tools.create
+call super::create
+this.text = "Bluecross"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_excludedclaimmaintenance=create m_excludedclaimmaintenance
+this.m_maintainformulary=create m_maintainformulary
+this.m_maintainformularyreadonly=create m_maintainformularyreadonly
+this.Item[UpperBound(this.Item)+1]=this.m_excludedclaimmaintenance
+this.Item[UpperBound(this.Item)+1]=this.m_maintainformulary
+this.Item[UpperBound(this.Item)+1]=this.m_maintainformularyreadonly
+end on
+
+on m_abcc_tools.destroy
+call super::destroy
+destroy(this.m_excludedclaimmaintenance)
+destroy(this.m_maintainformulary)
+destroy(this.m_maintainformularyreadonly)
+end on
+
+type m_excludedclaimmaintenance from menu within m_abcc_tools
+event clicked ( )
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_excludedclaimmaintenance")
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_excludedclaimmaintenance.create
+call super::create
+this.text = "Excluded Claim Maintenance"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_excludedclaimmaintenance.destroy
+call super::destroy
+end on
+
+type m_maintainformulary from menu within m_abcc_tools
+end type
+
+on m_maintainformulary.create
+call super::create
+this.text = "Rx Maintenance"
+this.toolbaritemname = "plus_blue_16_h.gif"
+this.toolbaritemtext = "Coverage"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainformulary.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_maintainformulary")
+Else
+	Beep(2)
+End If
+end event
+
+type m_maintainformularyreadonly from menu within m_abcc_tools
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_maintainformularyreadonly")
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintainformularyreadonly.create
+call super::create
+this.text = "Rx Maintenance (Read Only)"
+this.toolbaritemname = "plus_blue_16_h.gif"
+this.toolbaritemtext = "Coverage (Read Only)"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainformularyreadonly.destroy
+call super::destroy
+end on
+
+type m_convertmanualtransaction from menu within m_tools
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	OpenSheet(w_manual_txn_conversion,ParentWindow,0,Layered!)
+Else
+	Beep(2)
+End If
+end event
+
+on m_convertmanualtransaction.create
+call super::create
+this.visible = false
+this.text = "Convert Manual Transaction"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_convertmanualtransaction.destroy
+call super::destroy
+end on
+
+type m_maintaincrarequests from menu within m_tools
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_maintaincrarequests")
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintaincrarequests.create
+call super::create
+this.text = "Maintain CRA Requests"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintaincrarequests.destroy
+call super::destroy
+end on
+
+type m_maintainbankinformation from menu within m_tools
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_maintainbankinformation")
+Else
+	Beep(2)
+End If
+end event
+
+on m_maintainbankinformation.create
+call super::create
+this.text = "Maintain Bank Information"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainbankinformation.destroy
+call super::destroy
+end on
+
+type m_form67webaccess from menu within m_tools
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_webform67access")
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_form67webaccess.create
+call super::create
+this.text = "Form67 Web Access"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_form67webaccess.destroy
+call super::destroy
+end on
+
+type m_annuities from menu within m_cmwb
+m_confirmannuityeligibility m_confirmannuityeligibility
+m_maintainbenefitentitlement m_maintainbenefitentitlement
+m_prepareannuitypayout m_prepareannuitypayout
+m_annuitycalculationinquiry m_annuitycalculationinquiry
+m_annuitypayoutinquiry m_annuitypayoutinquiry
+m_managementreports m_managementreports
+end type
+
+on m_annuities.create
+call super::create
+this.text = "&Annuities"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_confirmannuityeligibility=create m_confirmannuityeligibility
+this.m_maintainbenefitentitlement=create m_maintainbenefitentitlement
+this.m_prepareannuitypayout=create m_prepareannuitypayout
+this.m_annuitycalculationinquiry=create m_annuitycalculationinquiry
+this.m_annuitypayoutinquiry=create m_annuitypayoutinquiry
+this.m_managementreports=create m_managementreports
+this.Item[UpperBound(this.Item)+1]=this.m_confirmannuityeligibility
+this.Item[UpperBound(this.Item)+1]=this.m_maintainbenefitentitlement
+this.Item[UpperBound(this.Item)+1]=this.m_prepareannuitypayout
+this.Item[UpperBound(this.Item)+1]=this.m_annuitycalculationinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_annuitypayoutinquiry
+this.Item[UpperBound(this.Item)+1]=this.m_managementreports
+end on
+
+on m_annuities.destroy
+call super::destroy
+destroy(this.m_confirmannuityeligibility)
+destroy(this.m_maintainbenefitentitlement)
+destroy(this.m_prepareannuitypayout)
+destroy(this.m_annuitycalculationinquiry)
+destroy(this.m_annuitypayoutinquiry)
+destroy(this.m_managementreports)
+end on
+
+type m_confirmannuityeligibility from menu within m_annuities
+end type
+
+on m_confirmannuityeligibility.create
+call super::create
+this.text = "&Confirm Annuity Eligibility"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_confirmannuityeligibility.destroy
+call super::destroy
+end on
+
+event clicked;INTEGER              li_count, li_count1, li_count2, li_message_rtn, li_rows, li_rtn
+LONG                 ll_claim_no, ll_individual_no, ll_ss_individual_no, ll_sin_no
+n_common_annuity     lnv_common_annuity
+STRING               ls_annuity_eligibility_run_option_code, ls_history_flag, ls_name, ls_rejected_reason_code
+s_window_message     lstr_message, lstr_ss_message
+U_DS                 lds_validate_new_iw_annuity_eligibility
+w_sheet              lw_active_sheet
+
+IF SQLCA.ServiceAvailable() THEN
+	SetPointer(HourGlass!)
+			
+	// check that Confirm Annuity Eligibility is not already open
+	// if the window is open, then prevent this event from opening one
+	lnv_common_annuity = Create n_common_annuity
+	li_rtn = lnv_common_annuity.nf_check_for_open_window('w_confirm_annuity_eligibility', 'Confirm Annuity Eligibility')
+	IF li_rtn = 1 THEN
+		RETURN
+	END IF
+	
+	lw_active_sheet = w_frame.GetActiveSheet()
+	ll_claim_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,'claim_no')
+	ll_individual_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,'individual_no')
+	
+	IF IsNull(ll_claim_no) THEN ll_claim_no = 0
+	IF IsNull(ll_individual_no) THEN ll_individual_no = 0
+	
+	IF vgst_user_profile.default_admin_region_code = 'PRV' THEN
+		// if user has provincial region
+		IF ll_claim_no = 0 THEN
+			// default the run option normally
+			ls_annuity_eligibility_run_option_code = 'NA'
+		ELSE
+			SELECT	Count(*)
+			INTO		:li_count
+			FROM		CLAIM_PARTICIPANT
+			WHERE	claim_no = :ll_claim_no
+			AND		claim_role_code = 'SS'
+			USING SQLCA;
+			SQLCA.nf_handle_error('m_cmwb.m_annuities.m_confirmannuityeligibility', 'clicked', 'SELECT Count(*) FROM CLAIM_PARTICIPANT...')
+			
+			IF li_count = 0 THEN
+				// only injured worker, default the run option normally
+				ls_annuity_eligibility_run_option_code = 'NA'
+			ELSE
+				// surviving spouse
+				ls_annuity_eligibility_run_option_code = 'SS'
+			END IF
+			
+			IF ls_annuity_eligibility_run_option_code = 'SS' THEN
+		
+				SELECT	a.individual_no
+				INTO		:ll_ss_individual_no
+				FROM		CLAIM_PARTICIPANT	a
+				JOIN		INDIVIDUAL				b ON a.individual_no = b.individual_no
+				JOIN		CLAIM					c ON a.claim_no = c.claim_no
+				JOIN		INDIVIDUAL				d ON c.individual_no = d.individual_no
+				WHERE	a.claim_role_code = 'SS'
+				AND		d.death_date      >= '1982-01-01'
+				AND		c.claim_no			= :ll_claim_no
+				AND NOT EXISTS (	SELECT	*
+										FROM		CLAIM e
+										WHERE		e.claim_no = c.claim_no
+										AND		e.percent_disability = 100
+										AND NOT EXISTS (	SELECT	*
+																FROM		OPENING f
+																WHERE		f.claim_no = e.claim_no
+																AND		f.opening_type_code in ('LTD','RLOE')) )
+				USING SQLCA;
+				SQLCA.nf_handle_error('m_cmwb.m_annuities.m_confirmannuityeligibility', 'clicked', 'SELECT individual_no FROM CLAIM_PARTICIPANT...')
+				
+				IF ll_ss_individual_no > 0 THEN
+					li_message_rtn = MessageBox('Open Confirm Annuity Eligibility','Claim ' +String(ll_claim_no)+ ' has a surviving spouse participant. Do you want to open this module for the surviving spouse?', Question!,YesNoCancel!,1)
+					IF li_message_rtn = 1 THEN
+						// open for surviving spouse
+						IF li_count > 1 THEN
+							OpenWithParm(w_multi_surviving_spouse,ll_claim_no)
+							ll_individual_no = Message.DoubleParm
+						ELSE
+							ll_individual_no = ll_ss_individual_no
+							ls_annuity_eligibility_run_option_code = 'SS'
+						END IF
+					ELSEIF li_message_rtn = 2 THEN
+						// open for injured worker
+						ls_annuity_eligibility_run_option_code = 'IW'
+					ELSE
+						// do not open CAE window
+						RETURN
+					END IF
+				ELSE
+					// SS had IW with death date prior to 1982 OR claim had 100% disability & no LOE openings
+					// so open for IW
+					li_message_rtn = MessageBox('Open Confirm Annuity Eligibility','Claim ' +String(ll_claim_no)+ ' has a surviving spouse participant that cannot be considered for an annuity eligibility.'&
+																									+'~r~nThe surviving spouse has one of two problems:'&
+																									+'~r~n~t - the associated injured worker has a date of death that is prior to 1982'&
+																									+'~r~n~t - the surviving spouse has 100% disability and no LOE openings.'&
+																									+'~r~nEither of these two problems will disqualify a surviving spouse from being eligible for an annuity.'&
+																									+'~r~nDo you want to open this module for the injured worker?', Question!,YesNo!,1)
+					IF li_message_rtn = 1 THEN
+						ls_annuity_eligibility_run_option_code = 'IW'
+					ELSE
+						RETURN
+					END IF
+				END IF
+			END IF
+		END IF
+	ELSE
+		// user not in provincial region, so does not have option of looking at surviving spouses
+		ls_annuity_eligibility_run_option_code = 'NA'
+	END IF
+	
+	
+	IF ll_individual_no <> 0 THEN
+		
+		IF ls_annuity_eligibility_run_option_code <> 'SS' THEN
+			
+			// prevent opening of module for injured worker for specific payout statuses
+			li_rtn = lnv_common_annuity.nf_validate_annuity_payout_for_CAE(ls_annuity_eligibility_run_option_code,ll_individual_no,ll_claim_no)
+			IF li_rtn < 0 THEN RETURN
+
+			
+			// If they have active a/e (a/e status A) or they are already on a list (a/e status P) dont check for SIN or history flag
+			SELECT Count(*)
+			INTO   :li_count1
+			FROM   ANNUITY_ACCOUNT a
+			JOIN   ANNUITY_ELIGIBILITY b ON a.annuity_account_no = b.annuity_account_no
+			WHERE  a.individual_no = :ll_individual_no
+			AND    a.claim_no = 0                             // indicates injured worker
+			AND    b.annuity_eligibility_status_code in ('A','P')
+			USING SQLCA;
+			SQLCA.nf_handle_error('m_cmwb - "Confirm Annuity Eligibility" module menu item', 'embedded SQL: select count(*) from ANNUITY_ACCOUNT...', 'clicked event')
+			
+			
+			SELECT Count(*)
+			INTO   :li_count2
+			FROM   ANNUITY_ACCOUNT a
+			JOIN   ANNUITY_ELIGIBILITY b ON a.annuity_account_no = b.annuity_account_no
+			WHERE  a.individual_no = :ll_individual_no
+			AND    a.claim_no = 0                             // indicates injured worker
+			AND    b.annuity_eligibility_status_code in ('I')
+			AND EXISTS ( SELECT * 
+			             FROM   CHECKLIST c
+							 WHERE  c.checklist_no          = b.confirm_annuity_eligibility_checklist_no
+							 AND    c.checklist_status_code = 'IA' )
+			USING SQLCA;
+			SQLCA.nf_handle_error('m_cmwb - "Confirm Annuity Eligibility" module menu item', 'embedded SQL: select count(*) from ANNUITY_ACCOUNT...', 'clicked event')
+			
+			li_count = li_count1 + li_count2
+						
+			IF li_count = 0 THEN
+				lds_validate_new_iw_annuity_eligibility = Create U_DS
+				lds_validate_new_iw_annuity_eligibility.DataObject = 'ds_validate_new_iw_annuity_eligibility'
+				lds_validate_new_iw_annuity_eligibility.SetTransObject(SQLCA)
+				
+				li_rows = lds_validate_new_iw_annuity_eligibility.Retrieve(ll_claim_no)
+				
+				IF li_rows = 1 THEN
+					ls_rejected_reason_code = lds_validate_new_iw_annuity_eligibility.GetItemString(1,'rejected_reason_code')
+					ls_name = lds_validate_new_iw_annuity_eligibility.GetItemString(1,'iw_name')
+					CHOOSE CASE ls_rejected_reason_code
+						CASE ''
+							// OK
+							
+						CASE 'OPENINGS'
+							MessageBox('Confirm Annuity List Error','This injured worker ('+ls_name+') does not have 24 consecutive months of openings' +&
+																				'~rand cannot be added to the "new" potential eligibility list.',StopSign!)
+							RETURN
+							
+						CASE 'NO_SIN'
+							MessageBox('Confirm Annuity List Error','This injured worker ('+ls_name+') needs a SIN' +&
+																				'~rbefore being added to the "new" potential eligibility list.',StopSign!)
+							RETURN
+							
+						CASE 'HISTORY'
+							MessageBox('Confirm Annuity List Error','This injured worker ('+ls_name+') needs to be reactivated (from history)' +&
+																				'~rbefore being added to the "new" potential eligibility list.',StopSign!)
+							RETURN
+							
+						CASE 'DEATH_DATE'
+							MessageBox('Confirm Annuity List Error','This injured worker ('+ls_name+') has a death date prior to 1998' +&
+																		'~rand cannot be added to a potential eligibility list.',StopSign!)
+							RETURN
+
+					END CHOOSE
+				ELSE
+					// ??
+				END IF
+
+			END IF
+		ELSE
+			// prevent opening of module for surviving spouse for specific payout statuses
+			li_rtn = lnv_common_annuity.nf_validate_annuity_payout_for_CAE(ls_annuity_eligibility_run_option_code,ll_individual_no,ll_claim_no)
+			IF li_rtn < 0 THEN RETURN
+		END IF
+	END IF
+	
+
+	lstr_message.as_stringparm[1] = ls_annuity_eligibility_run_option_code
+	lstr_message.as_stringparm[2] = 'menu'
+	
+	lstr_message.al_doubleparm[1] = ll_claim_no
+	lstr_message.al_doubleparm[2] = ll_individual_no
+	lstr_message.al_doubleparm[3] = 0 // annuity_payout_no
+	OpenWithParm(w_confirm_annuity_eligibility,lstr_message)
+ELSE
+	Beep(2)
+END IF 
+
+end event
+
+type m_maintainbenefitentitlement from menu within m_annuities
+end type
+
+event clicked;INTEGER               li_count, li_rtn
+LONG			          ll_claim_no, ll_individual_no
+n_common_annuity      lnv_common_annuity    
+s_window_message      lstr_message
+w_sheet		          lw_active_sheet
+
+
+/*
+	If accessing the module from the menu item, a search for a claim must first be performed.  
+	The menu item is only enabled if a claim is retrieved into the tombstone.  If the identified
+	claim does not have a surviving spouse then all claims where the identified individual is the 
+	injured worker are loaded into the module.  If the selected claim has a surviving spouse as a 
+	claim participant then the user must select the individual (injured worker or surviving spouse)
+	for which to open the module.  If the injured worker is selected then the data for all claims for
+	the injured worker is displayed.  If the surviving spouse is selected then only the data 
+	for that individual for the selected claim is displayed.
+		
+		il_annuity_account_no 	= lstr_message.al_doubleparm[1]
+		il_annuity_eligibility_no 	= lstr_message.al_doubleparm[2]
+		il_action_code 				= lstr_message.al_doubleparm[3]
+		il_claim_no					= lstr_message.al_doubleparm[4]
+		il_individual_no 			= lstr_message.al_doubleparm[5]
+		is_claim_role_code 		= lstr_message.as_stringparm[1]
+*/
+
+IF SQLCA.ServiceAvailable() THEN
+	
+	// check that Maintain Benefit Entitlement or Verify Benefit Entitlement are not already open
+	// if the window is open, then prevent this event from opening one
+	lnv_common_annuity = Create n_common_annuity
+	li_rtn = lnv_common_annuity.nf_check_for_open_window('w_maintain_benefit_entitlement', 'Maintain Benefit Entitlement')
+	IF li_rtn = 1 THEN
+		RETURN
+	END IF
+			
+	lw_active_sheet 	= w_frame.GetActiveSheet()
+	ll_claim_no 			= lw_active_sheet.dw_basic_claim.GetItemNumber(1,'claim_no')
+	ll_individual_no     = lw_active_sheet.dw_basic_claim.GetItemNumber(1,'individual_no')
+	
+	IF IsNull(ll_claim_no) OR ll_claim_no = 0 THEN
+		// don't allow the module to open
+		messagebox("Module Access", "Module can only be opened through a valid claim")
+		RETURN
+	END IF 
+	
+
+	
+	/* check if the claim has a surviving spouse - if none carry on - if > 0 then open the next window
+	    and allow the user to choose
+	*/
+	SELECT 	COUNT(*) INTO :li_count 
+	FROM 	CLAIM_PARTICIPANT 
+	WHERE 	claim_no 			= :ll_claim_no 
+	AND      	claim_role_code 	= 'SS'
+	USING 	SQLCA;
+	
+	SQLCA.nf_handle_error("m_maintain_benefit_entitlement","m_annuities","SELECT COUNT(*) INTO :li_count")
+	
+	/* if it's provincial open up as if it's the claimant - no SS */
+	IF li_count > 0 AND vgst_user_profile.default_admin_region_code = 'PRV' THEN 
+		// we have a valid claim number - check to see if there is a surviving spouse
+		lstr_message.al_doubleparm[1] 	= ll_claim_no
+		lstr_message.as_stringparm[1] 	= 'w_maintain_benefit_entitlement'
+		
+		OpenWithParm(w_injured_worker_or_ss,lstr_message)
+	ELSE
+		
+		lstr_message.al_doubleparm[1] 	= 0// annuity_account_no
+		lstr_message.al_doubleparm[2] 	= 0// eligibility_account_no	
+		lstr_message.al_doubleparm[3] 	= 2//action code
+		lstr_message.al_doubleparm[4] 	= 0//NO CLAIM_NO
+		lstr_message.al_doubleparm[5] 	= ll_individual_no
+		lstr_message.al_doubleparm[6] 	= 0 // annuity_payout_no
+		lstr_message.as_stringparm[1] 	= "C"
+		
+		//go straight on through with the claim_no with a action_code = 1
+		openwithparm(w_maintain_benefit_entitlement,lstr_message)
+		
+	END IF 
+	
+ELSE
+	Beep(2)
+	RETURN
+END IF 
+end event
+
+on m_maintainbenefitentitlement.create
+call super::create
+this.text = "&Maintain Benefit Entitlement"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_maintainbenefitentitlement.destroy
+call super::destroy
+end on
+
+type m_prepareannuitypayout from menu within m_annuities
+end type
+
+event clicked;INTEGER           li_count, li_rtn, li_rows, li_incomplete_checklist_count, li_other_annuity_accounts, li_msg_rtn
+LONG			      ll_claim_no,ll_individual_no, ll_prepare_annuity_account_checklist_no, ll_confirm_annuity_payout_checklist_no
+LONG              ll_annuity_account_no
+n_common_annuity  lnv_common_annuity
+s_window_message  lstr_message
+STRING            ls_annuity_admin_region_code, ls_checklist_type_list[], ls_exclude_reason, ls_exclude_message
+STRING            ls_message
+U_DS              lds_force_onto_payout, lds_incomplete_checklists
+w_sheet		      lw_active_sheet
+
+
+IF SQLCA.ServiceAvailable() THEN
+	// check that Prepare Annuity for Payout window not already open
+	// if the window is open, then prevent this event from opening one
+	lnv_common_annuity = Create n_common_annuity
+	li_rtn = lnv_common_annuity.nf_check_for_open_window('w_prepare_annuity_account', 'Prepare Annuity for Payout')
+	IF li_rtn = 1 THEN
+		RETURN
+	END IF
+	
+	lw_active_sheet  = w_frame.GetActiveSheet()
+	ll_claim_no      = lw_active_sheet.dw_basic_claim.GetItemNumber(1,'claim_no')
+	ll_individual_no = lw_active_sheet.dw_basic_claim.GetItemNumber(1,'individual_no')
+	
+	IF IsNull(ll_claim_no) OR ll_claim_no = 0 THEN
+		lstr_message.al_doubleparm[1] 	= 0   // claim_no
+		lstr_message.al_doubleparm[2] 	= 0   // individual_no
+		lstr_message.al_doubleparm[3]    = ll_annuity_account_no
+		lstr_message.as_stringparm[1] 	= vgst_user_profile.default_admin_region_code
+		lstr_message.as_stringparm[2]    = 'entry'
+	
+		OpenWithParm(w_prepare_annuity_account,lstr_message)
+		RETURN
+	END IF
+	
+	/* check if the claim has a surviving spouse - if none carry on - if > 0
+	   then open the next window and allow the user to choose
+	*/
+	SELECT Count(*)
+	INTO   :li_count 
+	FROM 	 ANNUITY_ACCOUNT 
+	WHERE  claim_no        = :ll_claim_no 
+	AND    claim_role_code = 'SS'
+	USING SQLCA;
+	SQLCA.nf_handle_error('m_prepareannuityforpayout','m_annuities','SELECT Count(*) FROM ANNUITY_ACCOUNT...')
+	
+	/* if it's provincial open up as if it's the claimant - no SS */
+	IF li_count > 0 AND vgst_user_profile.default_admin_region_code = 'PRV' THEN 
+		// we have a valid claim number - check to see if there is a surviving spouse
+		lstr_message.al_doubleparm[1] 	= ll_claim_no
+		lstr_message.as_stringparm[1] 	= 'w_prepare_annuity_account'
+		lstr_message.as_stringparm[2]    = 'PRV'
+		lstr_message.as_stringparm[3]    = 'entry'
+		
+		OpenWithParm(w_injured_worker_or_ss,lstr_message)
+	ELSE
+		
+		// does claimant have incomplete payout checklist?
+		ls_checklist_type_list[1] = "PAA"
+		ls_checklist_type_list[2] = "CAPAP"
+		ls_checklist_type_list[3] = "CAPLS"
+		
+		lds_incomplete_checklists = CREATE U_DS
+		lds_incomplete_checklists.DataObject = 'ds_incomplete_checklists'
+		lds_incomplete_checklists.SetTransObject(SQLCA)
+		
+		li_incomplete_checklist_count = lds_incomplete_checklists.Retrieve(ls_checklist_type_list,ll_individual_no,0,'C')
+		SQLCA.nf_handle_error('m_prepareannuityforpayout', 'm_annuities', 'retrieve ds_incomplete_checklists')
+		
+		
+		IF li_incomplete_checklist_count = 0 THEN
+			
+			li_msg_rtn = MessageBox('','This individual might be added to the Prepare Annuity Payout list. If you do not want to add ' &
+			             +'this individual to the list, click "No", Clear the person selected on the WorkBench and re-open the module.'&
+							 +'~r~n~r~n'&
+							 +'Do you want to continue?',Question!,YesNo!,2)
+			IF li_msg_rtn = 2 THEN
+				RETURN
+			END IF
+			
+			
+			// if tombstone is populated, and there is not an incomplete payout, then attempt force onto list
+			lds_force_onto_payout = Create U_DS
+			lds_force_onto_payout.DataObject = 'ds_force_onto_payout'
+			lds_force_onto_payout.SetTransObject(SQLCA)
+			
+			// run stored proc to insert data			
+			li_rows = lds_force_onto_payout.Retrieve(0,ll_individual_no,'FORCE')
+			SQLCA.nf_handle_error('m_prepareannuityforpayout','lds_force_onto_payout.retrieve','clicked')
+			
+			IF li_rows < 1 THEN
+				// problem!
+				MessageBox('Payout List Error','The retrieval of the payout list for this individual encountered an error. Contact HELPDESK.')
+				RETURN
+			ELSE			
+				ls_exclude_reason = lds_force_onto_payout.GetItemString(1,'exclude_reason')
+				CHOOSE CASE ls_exclude_reason
+					CASE ''
+						// not excluded, so force onto annuity payout list
+						lstr_message.al_doubleparm[1] 	= 0           // injured worker has claim_no = 0
+						lstr_message.al_doubleparm[2] 	= ll_individual_no
+						lstr_message.as_stringparm[1] 	= lds_force_onto_payout.GetItemString(1,'admin_region_code')
+						lstr_message.as_stringparm[2]    = 'entry'
+				
+						OpenWithParm(w_prepare_annuity_account,lstr_message)
+					CASE 'paid out'
+						ls_exclude_message = 'The injured worker has a post-1992 Annuity Payout processed before the Annuity Payout module became effective.'
+					CASE 'no subledger'
+						ls_exclude_message = 'The injured worker has no post-1992 sub-ledger transactions.'
+					CASE 'zero amount subledger'
+						ls_exclude_message = 'The injured worker has a post-1992 sub-ledger amount of $0.'
+					CASE 'no annuity account'
+						ls_exclude_message = 'The injured worker does not have an annuity account.'
+					CASE 'no active eligibility'
+						ls_exclude_message = 'The injured worker is not eligible for annuity benefits.'
+					CASE 'future end date'
+						ls_exclude_message = 'The annuity end date for this injured worker is in the future.'
+				END CHOOSE
+				
+				IF ls_exclude_reason <> '' THEN
+					MessageBox('Not Eligible for List','This injured worker cannot be forced onto the Prepare Annuity Payout list for the following reason:~r~n' + ls_exclude_message)
+				END IF
+				
+				// open module for all individuals
+				lstr_message.al_doubleparm[1] 	= 0   // claim_no
+				lstr_message.al_doubleparm[2] 	= 0   // individual_no
+				lstr_message.as_stringparm[1] 	= vgst_user_profile.default_admin_region_code
+				lstr_message.as_stringparm[2]    = 'entry'
+				
+				OpenWithParm(w_prepare_annuity_account,lstr_message)
+
+			END IF
+		ELSE
+			// there is an incomplete payout, so set up retrieve in window
+			
+			SELECT a.annuity_admin_region_code
+			INTO   :ls_annuity_admin_region_code
+			FROM   ANNUITY_PAYOUT     a
+			JOIN   ANNUITY_ACCOUNT    b ON a.annuity_account_no = b.annuity_account_no
+			LEFT OUTER JOIN CHECKLIST c ON a.prepare_annuity_payout_checklist_no = c.checklist_no
+			                           AND c.checklist_status_code = 'IA'
+			LEFT OUTER JOIN CHECKLIST d ON a.confirm_annuity_payout_checklist_no  = d.checklist_no
+			                           AND d.checklist_status_code = 'IA'
+			WHERE  b.individual_no = :ll_individual_no
+			USING SQLCA;
+			SQLCA.nf_handle_error('m_prepareannuityforpayout','SELECT annuity_admin_region_code FROM ANNUITY_PAYOUT..','clicked')
+			
+			ll_annuity_account_no = lnv_common_annuity.nf_get_annuity_account(0,ll_individual_no)
+			
+			lstr_message.al_doubleparm[1] 	= 0           // injured worker has claim_no = 0
+			lstr_message.al_doubleparm[2] 	= ll_individual_no
+			lstr_message.al_doubleparm[3]    = ll_annuity_account_no
+			
+			lstr_message.as_stringparm[1] 	= ls_annuity_admin_region_code
+			lstr_message.as_stringparm[2]    = 'entry'
+	
+			li_other_annuity_accounts = lnv_common_annuity.nf_individual_has_other_annuity_accounts(ll_individual_no,0)
+			
+			IF li_other_annuity_accounts > 0 THEN
+				IF vgst_user_profile.default_admin_region_code = 'PRV' THEN 
+					ls_message = 'This individual ('+String(ll_individual_no)+') has other annuity accounts. You can use the individual search to locate these annuity accounts.'
+				ELSE
+					ls_message = 'This individual ('+String(ll_individual_no)+') has other annuity accounts. You can use the individual search to locate these surviving spouse annuity accounts.'
+				END IF
+				MessageBox('',ls_message)
+			END IF
+			
+			
+			OpenWithParm(w_prepare_annuity_account,lstr_message)
+		END IF
+	END IF 
+	
+ELSE
+	Beep(2) 
+END IF
+
+
+end event
+
+on m_prepareannuitypayout.create
+call super::create
+this.text = "&Prepare Annuity Payout"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_prepareannuitypayout.destroy
+call super::destroy
+end on
+
+type m_annuitycalculationinquiry from menu within m_annuities
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_annuityinquiry")
+Else
+	Beep(2)
+End If
+
+
+end event
+
+on m_annuitycalculationinquiry.create
+call super::create
+this.text = "&Annuity Calculation Inquiry"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_annuitycalculationinquiry.destroy
+call super::destroy
+end on
+
+type m_annuitypayoutinquiry from menu within m_annuities
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_annuitypayoutinquiry")
+Else
+	Beep(2)
+End If
+
+
+end event
+
+on m_annuitypayoutinquiry.create
+call super::create
+this.text = "Annuity Pa&yout Inquiry"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_annuitypayoutinquiry.destroy
+call super::destroy
+end on
+
+type m_managementreports from menu within m_annuities
+m_annuityworkinprogressreport m_annuityworkinprogressreport
+m_annuityworkcompletedreport m_annuityworkcompletedreport
+m_approachingannuityenddatereport m_approachingannuityenddatereport
+end type
+
+on m_managementreports.create
+call super::create
+this.text = "Management &Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_annuityworkinprogressreport=create m_annuityworkinprogressreport
+this.m_annuityworkcompletedreport=create m_annuityworkcompletedreport
+this.m_approachingannuityenddatereport=create m_approachingannuityenddatereport
+this.Item[UpperBound(this.Item)+1]=this.m_annuityworkinprogressreport
+this.Item[UpperBound(this.Item)+1]=this.m_annuityworkcompletedreport
+this.Item[UpperBound(this.Item)+1]=this.m_approachingannuityenddatereport
+end on
+
+on m_managementreports.destroy
+call super::destroy
+destroy(this.m_annuityworkinprogressreport)
+destroy(this.m_annuityworkcompletedreport)
+destroy(this.m_approachingannuityenddatereport)
+end on
+
+type m_annuityworkinprogressreport from menu within m_managementreports
+end type
+
+on m_annuityworkinprogressreport.create
+call super::create
+this.text = "Annuity Work In Progress Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_annuityworkinprogressreport.destroy
+call super::destroy
+end on
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_annuity_work_in_progress_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+type m_annuityworkcompletedreport from menu within m_managementreports
+end type
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_annuity_workflow_completed_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+on m_annuityworkcompletedreport.create
+call super::create
+this.text = "Annuity &Work Completed Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_annuityworkcompletedreport.destroy
+call super::destroy
+end on
+
+type m_approachingannuityenddatereport from menu within m_managementreports
+end type
+
+on m_approachingannuityenddatereport.create
+call super::create
+this.text = "Approaching Annuity End Date Report"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_approachingannuityenddatereport.destroy
+call super::destroy
+end on
+
+event clicked;IF SQLCA.ServiceAvailable() THEN
+	OpenSheet(w_approaching_annuity_end_date_report,ParentWindow,0,Layered!)
+ELSE
+	Beep(2)
+END IF
+end event
+
+type m_rehab from menu within m_cmwb
+m_costanalysis m_costanalysis
+m_rehabplan m_rehabplan
+m_rehabplanreadonly m_rehabplanreadonly
+m_treatment m_treatment
+m_actionlist m_actionlist
+m_managementreports0 m_managementreports0
+m_physio_programs m_physio_programs
+end type
+
+on m_rehab.create
+call super::create
+this.text = "R&ehab"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_costanalysis=create m_costanalysis
+this.m_rehabplan=create m_rehabplan
+this.m_rehabplanreadonly=create m_rehabplanreadonly
+this.m_treatment=create m_treatment
+this.m_actionlist=create m_actionlist
+this.m_managementreports0=create m_managementreports0
+this.m_physio_programs=create m_physio_programs
+this.Item[UpperBound(this.Item)+1]=this.m_costanalysis
+this.Item[UpperBound(this.Item)+1]=this.m_rehabplan
+this.Item[UpperBound(this.Item)+1]=this.m_rehabplanreadonly
+this.Item[UpperBound(this.Item)+1]=this.m_treatment
+this.Item[UpperBound(this.Item)+1]=this.m_actionlist
+this.Item[UpperBound(this.Item)+1]=this.m_managementreports0
+this.Item[UpperBound(this.Item)+1]=this.m_physio_programs
+end on
+
+on m_rehab.destroy
+call super::destroy
+destroy(this.m_costanalysis)
+destroy(this.m_rehabplan)
+destroy(this.m_rehabplanreadonly)
+destroy(this.m_treatment)
+destroy(this.m_actionlist)
+destroy(this.m_managementreports0)
+destroy(this.m_physio_programs)
+end on
+
+type m_costanalysis from menu within m_rehab
+end type
+
+event clicked;If SQLCA.ServiceAvailable() Then
+	mf_open_window("m_costanalysis")
+Else
+	Beep(2)
+End If
+
+end event
+
+on m_costanalysis.create
+call super::create
+this.text = "Cost &Analysis"
+this.toolbaritemname = "compute!"
+this.toolbaritemtext = "Cost Analysis"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_costanalysis.destroy
+call super::destroy
+end on
+
+type m_rehabplan from menu within m_rehab
+end type
+
+event clicked;mf_open_rehab('NORMAL')
+end event
+
+on m_rehabplan.create
+call super::create
+this.text = "Rehab &Plan"
+this.toolbaritemname = "sort!"
+this.toolbaritemtext = "Rehab Plan"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rehabplan.destroy
+call super::destroy
+end on
+
+type m_rehabplanreadonly from menu within m_rehab
+end type
+
+event clicked;mf_open_rehab('READ')
+	
+	
+end event
+
+on m_rehabplanreadonly.create
+call super::create
+this.text = "Rehab Plan Read Only"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_rehabplanreadonly.destroy
+call super::destroy
+end on
+
+type m_treatment from menu within m_rehab
+end type
+
+on m_treatment.create
+call super::create
+this.text = "Physio &Treatment"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_treatment.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_treatment")
+Else
+	Beep(2)
+End If
+end event
+
+type m_actionlist from menu within m_rehab
+end type
+
+on m_actionlist.create
+call super::create
+this.text = "Action List"
+this.microhelp = "Search for Action Items"
+this.toolbaritemname = "action_list.bmp"
+this.toolbaritemtext = "Action List"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_actionlist.destroy
+call super::destroy
+end on
+
+event clicked;mf_open_window("m_actionlist")
+end event
+
+type m_managementreports0 from menu within m_rehab
+end type
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_management_reports")
+Else
+	Beep(2)
+End If
+end event
+
+on m_managementreports0.create
+call super::create
+this.text = "Management Reports"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_managementreports0.destroy
+call super::destroy
+end on
+
+type m_physio_programs from menu within m_rehab
+end type
+
+on m_physio_programs.create
+call super::create
+this.text = "Maintain Physio Programs"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_physio_programs.destroy
+call super::destroy
+end on
+
+event clicked;If SQLCA.ServiceAvailable() and ImageTrans.ServiceAvailable() Then
+	mf_open_window("m_physio_programs")
+Else
+	Beep(2)
+End If
+end event
+
+type m_-12 from menu within m_help
+end type
+
+on m_-12.create
+this.Text=""
+end on
+

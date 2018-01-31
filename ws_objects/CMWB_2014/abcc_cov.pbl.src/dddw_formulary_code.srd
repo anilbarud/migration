@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_formulary_code.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(5) updatewhereclause=yes key=yes name=formulary_code dbname="Formulary.formulary_code" )
+ column=(type=char(120) updatewhereclause=yes name=formulary_desc dbname="Formulary.formulary_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dbo.Formulary~" ) COLUMN(NAME=~"dbo.Formulary.formulary_code~") COLUMN(NAME=~"dbo.Formulary.formulary_desc~")WHERE(    EXP1 =~"dbo.Formulary.active_flag~"   OP =~"=~"    EXP2 =~"~~~"Y~~~"~" ) ) " update="dbo.Formulary" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="210" y="4" height="64" width="3511" format="[general]" html.valueishtml="0"  name=formulary_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="0" y="4" height="64" width="192" format="[general]" html.valueishtml="0"  name=formulary_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,16 @@
+﻿$PBExportHeader$dddw_claim_dispostion_type.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=77 color="536870912" )
+table(column=(type=char(40) update=yes name=claim_disposition_desc dbname="Claim_Disposition_Type.claim_disposition_desc" )
+ column=(type=char(3) update=yes name=claim_disposition_code dbname="Claim_Disposition_Type.claim_disposition_code" )
+ column=(type=char(1) name=claim_disposition_type_comment_required_ dbname="Claim_Disposition_Type.comment_required_flag" )
+ column=(type=char(4) name=opening_type_code dbname="Disposition_Combination.opening_type_code" )
+ column=(type=char(1) name=work_restriction_flag dbname="Disposition_Combination.work_restriction_flag" )
+ column=(type=char(1) name=working_flag dbname="Disposition_Combination.working_flag" )
+ column=(type=char(1) name=receiving_ltd_code dbname="Disposition_Combination.receiving_ltd_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Claim_Disposition_Type~" ) TABLE(NAME=~"Disposition_Combination~" ) COLUMN(NAME=~"Claim_Disposition_Type.claim_disposition_desc~") COLUMN(NAME=~"Claim_Disposition_Type.claim_disposition_code~") COLUMN(NAME=~"Claim_Disposition_Type.comment_required_flag~") COLUMN(NAME=~"Disposition_Combination.opening_type_code~") COLUMN(NAME=~"Disposition_Combination.work_restriction_flag~") COLUMN(NAME=~"Disposition_Combination.working_flag~") COLUMN(NAME=~"Disposition_Combination.receiving_ltd_code~") JOIN (LEFT=~"Disposition_Combination.disposition_code~" OP =~"=~"RIGHT=~"Claim_Disposition_Type.claim_disposition_code~" )WHERE( EXP1 =~"Claim_Disposition_Type.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) "  sort="claim_disposition_desc A " )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="10" y="4" height="65" width="1271" format="[general]"  name=claim_disposition_desc edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

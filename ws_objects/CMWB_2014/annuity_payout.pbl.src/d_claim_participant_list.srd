@@ -1,0 +1,87 @@
+﻿$PBExportHeader$d_claim_participant_list.srd
+$PBExportComments$list dw for maintaining claim roles - update capability - used on maintain and invisible on claim create
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=156 color="28027307" )
+summary(height=0 color="536870912" )
+footer(height=0 color="28027307" )
+detail(height=192 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=claim_role_code dbname="claim_role_code" )
+ column=(type=char(42) updatewhereclause=yes name=full_name dbname="full_name" )
+ column=(type=long updatewhereclause=yes name=individual_sin_no dbname="sin_no" )
+ column=(type=long updatewhereclause=yes name=individual_medicare_no dbname="medicare_no" )
+ column=(type=char(30) updatewhereclause=yes name=individual_address_line1 dbname="address_line1" )
+ column=(type=char(25) updatewhereclause=yes name=individual_city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=individual_prov_state_code dbname="prov_state_code" )
+ column=(type=char(10) updatewhereclause=yes name=individual_telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=sex dbname="sex" )
+ column=(type=char(1) updatewhereclause=yes name=selected dbname="selected" values="	Y/	N" )
+ column=(type=char(2) updatewhereclause=yes name=annuity_role_code dbname="annuity_role_code" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ retrieve="  SELECT  cp.claim_no ,          
+              cp.individual_no ,           
+              cp.claim_role_code ,          
+              i.last_name + ', ' + i.given_names as full_name,          
+              i.sin_no ,           i.medicare_no ,           
+              i.address_line1 ,           i.city ,           
+              i.prov_state_code ,          
+              i.telephone_no ,
+              i.sex,          
+              'N' as selected ,
+              '  ' as annuity_role_code,
+              ' '  as recipient_type_code 
+
+FROM      CLAIM_PARTICIPANT cp 
+JOIN       INDIVIDUAL  i ON cp.individual_no = i.individual_no 
+WHERE    cp.claim_no IN (SELECT claim_no 
+                                   FROM    CLAIM_PARTICIPANT x 
+                                   WHERE  x.individual_no = :al_individual_no )
+
+AND        cp.claim_role_code <> 'C'
+AND        cp.individual_no NOT IN (SELECT app.recipient_no 
+                                               FROM   ANNUITY_PAYOUT_PARTICIPANT app 
+                                               WHERE app.annuity_account_no = :al_annuity_account_no
+                                               AND     app.annuity_payout_no  = :al_annuity_payout_no)
+
+AND        i.last_name     NOT LIKE ('WHSC%')
+AND        i.given_names NOT LIKE ('WHSC%')
+order by   full_name, cp.claim_no, cp.individual_no, cp.claim_role_code" arguments=(("al_individual_no", number),("al_annuity_account_no", number),("al_annuity_payout_no", number))  sort="full_name A claim_no A individual_no A claim_role_code A " )
+text(band=header alignment="2" text="Claim No" border="0" color="0" x="14" y="12" height="60" width="229" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Address" border="0" color="0" x="1563" y="12" height="60" width="219" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Select" border="0" color="0" x="2409" y="12" height="60" width="210" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="156" x2="2697" y2="156"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="City / Prov-State" border="0" color="0" x="1563" y="80" height="60" width="411" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Annuity Role" border="0" color="0" x="2679" y="12" height="60" width="320" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Recipient Type" border="0" color="0" x="2679" y="88" height="60" width="379" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Individual No" border="0" color="0" x="9" y="80" height="60" width="325" html.valueishtml="0"  name=individual_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="0" color="0" x="361" y="12" height="60" width="151" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Claim Role" border="0" color="0" x="361" y="80" height="60" width="274" html.valueishtml="0"  name=claim_role_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="SIN" border="0" color="0" x="1157" y="12" height="60" width="87" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Medicare" border="0" color="0" x="1152" y="80" height="60" width="242" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="0" y1="0" x2="3598" y2="0"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="24" height="60" width="251" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1550" y="24" height="60" width="937" format="[general]" html.valueishtml="0"  name=individual_address_line1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=12 alignment="0" tabsequence=10 border="0" color="0" x="2523" y="24" height="56" width="64" format="[general]" html.valueishtml="0"  name=selected visible="1" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1545" y="96" height="56" width="576" format="[general]" html.valueishtml="0"  name=individual_city visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=9 alignment="0" tabsequence=20 border="0" color="0" x="2181" y="96" height="56" width="146" format="[general]" html.valueishtml="0"  name=individual_prov_state_code visible="1"  slideleft=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=14 alignment="0" tabsequence=40 border="5" color="0" x="2661" y="104" height="60" width="585" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" dddw.name=dddw_recipient_type_annuity_participant dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=0 dddw.lines=2 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=30 border="5" color="0" x="2661" y="20" height="60" width="795" format="[general]" html.valueishtml="0"  name=annuity_role_code visible="1" dddw.name=dddw_annuity_role dddw.displaycolumn=annuity_role_desc_e dddw.datacolumn=annuity_role_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=50 border="0" color="33554432" x="23" y="96" height="60" width="256" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1134" y="24" height="60" width="343" format="[general]" html.valueishtml="0"  name=individual_sin_no visible="1" editmask.mask="###-###-###" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1134" y="96" height="60" width="343" format="[general]" html.valueishtml="0"  name=individual_medicare_no visible="1" editmask.mask="###-###-###" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="329" y="24" height="60" width="791" format="[general]" html.valueishtml="0"  name=full_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="329" y="96" height="60" width="704" format="[general]" html.valueishtml="0"  name=claim_role_code visible="1" dddw.name=dddw_claim_role dddw.displaycolumn=claim_role_desc dddw.datacolumn=claim_role_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=2 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="0" y1="4" x2="2875" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

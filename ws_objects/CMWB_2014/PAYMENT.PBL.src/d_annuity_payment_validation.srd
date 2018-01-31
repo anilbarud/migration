@@ -1,0 +1,89 @@
+﻿$PBExportHeader$d_annuity_payment_validation.srd
+$PBExportComments$a dw that selects back all the eligibility payments needed to detemine if claimant is eligibility for set-a-side
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=long update=yes updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=final_payment_flag dbname="final_payment_flag" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paid_days_lost dbname="paid_days_lost" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paid_hours_lost dbname="paid_hours_lost" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paid_from_date dbname="paid_from_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paid_to_date dbname="paid_to_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_award_amount dbname="total_award_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_deductions dbname="total_deductions" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_payment_amount dbname="total_payment_amount" )
+ column=(type=datetime updatewhereclause=yes name=payment_processed_date dbname="processed_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=adjustment_payment_amount dbname="adjustment_payment_amount" )
+ column=(type=char(1) updatewhereclause=yes name=zeroed_flag dbname="zeroed_flag" )
+ retrieve="  SELECT a.payment_no,   
+         a.claim_no,   
+         a.opening_no,   
+         a.benefit_calculation_no,   
+         a.payment_type_code,   
+         a.payment_sub_type_code,   
+         a.final_payment_flag,     
+         a.paid_days_lost,   
+         a.paid_hours_lost,   
+         a.paid_from_date,   
+         a.paid_to_date,   
+         a.total_award_amount,   
+         a.total_deductions,   
+         a.total_payment_amount,   
+         a.processed_date,
+			a.adjustment_payment_amount,
+			a.zeroed_flag
+    FROM PAYMENT a,   
+         Payment_Type b,
+			APPLIED_CLAIM_TXN c  
+   WHERE  	a.payment_type_code = b.payment_type_code  	AND
+				a.payment_no = c.payment_no						and  
+          	a.claim_no =   :r_claim_no							AND 
+				a.processed_date is not NULL    					AND 
+				c.payment_method_code <> 'R'	  					AND
+         	b.annuity_flag = 'Y'  								AND  
+				b.active_flag = 'Y'  								AND  
+          	b.benefit_class_code = 'LOE' 						AND
+				a.zeroed_flag <> 'Y' 
+group by a.payment_no,   
+         a.claim_no,   
+         a.opening_no,   
+         a.benefit_calculation_no,   
+         a.payment_type_code,   
+         a.payment_sub_type_code,   
+         a.final_payment_flag,     
+         a.paid_days_lost,   
+         a.paid_hours_lost,   
+         a.paid_from_date,   
+         a.paid_to_date,   
+         a.total_award_amount,   
+         a.total_deductions,   
+         a.total_payment_amount,   
+         a.processed_date,
+			a.adjustment_payment_amount,
+			a.zeroed_flag" arguments=(("r_claim_no", number))  sort="paid_from_date A paid_to_date A " )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="0" x="361" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="0" x="695" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=opening_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="0" x="1074" y="8" height="76" width="334" format="[general]" html.valueishtml="0"  name=benefit_calculation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="0" x="1701" y="4" height="76" width="110" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="0" x="2290" y="4" height="76" width="82" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=70 border="0" color="0" x="3013" y="4" height="76" width="55" format="[general]" html.valueishtml="0"  name=final_payment_flag visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=90 border="0" color="0" x="4229" y="4" height="76" width="334" format="[general]" html.valueishtml="0"  name=paid_days_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=100 border="0" color="0" x="4663" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=paid_hours_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=110 border="0" color="0" x="5120" y="4" height="76" width="603" format="yyyy-mm-dd" html.valueishtml="0"  name=paid_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=120 border="0" color="0" x="5728" y="4" height="76" width="603" format="yyyy-mm-dd" html.valueishtml="0"  name=paid_to_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=130 border="0" color="0" x="6336" y="4" height="76" width="334" format="[general]" html.valueishtml="0"  name=total_award_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=140 border="0" color="0" x="6939" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=total_deductions visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=150 border="0" color="0" x="7429" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=total_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="8091" y="0" height="64" width="530" format="[shortdate] [time]" html.valueishtml="0"  name=payment_processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0" x="9851" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=zeroed_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="9879" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=adjustment_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

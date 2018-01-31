@@ -1,0 +1,68 @@
+﻿$PBExportHeader$d_compare_options_ltd_inv.srd
+$PBExportComments$LTD benefit calculation detail for a capitalized LTD
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=596 color="-1" height.autosize=yes )
+table(column=(type=decimal(4) updatewhereclause=yes name=benefit_calculation_avg_net_pay dbname="BENEFIT_CALCULATION.avg_net_pay" )
+ column=(type=decimal(4) updatewhereclause=yes name=benefit_calculation_award_amount dbname="BENEFIT_CALCULATION.award_amount" )
+ column=(type=long updatewhereclause=yes name=benefit_calculation_claim_no dbname="BENEFIT_CALCULATION.claim_no" )
+ column=(type=long updatewhereclause=yes name=benefit_calculation_benefit_calculation_ dbname="BENEFIT_CALCULATION.benefit_calculation_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=cpre_net_pay dbname="PRE_NET_PAY" )
+ column=(type=decimal(4) updatewhereclause=yes name=benefit_calculation_preacc_net_pay dbname="BENEFIT_CALCULATION.preacc_net_pay" )
+ column=(type=decimal(4) updatewhereclause=yes name=benefit_calculation_preacc_gross_pay dbname="BENEFIT_CALCULATION.preacc_gross_pay" )
+ column=(type=number updatewhereclause=yes name=benefit_calculation_benefit_level_percen dbname="BENEFIT_CALCULATION.benefit_level_percentage" )
+ retrieve="  SELECT BENEFIT_CALCULATION.avg_net_pay,   
+       BENEFIT_CALCULATION.award_amount,   
+       BENEFIT_CALCULATION.claim_no,   
+       BENEFIT_CALCULATION.benefit_calculation_no,   
+       ISNULL(CAPABLE_EARNING.pre93_capable_net_pay, 0) 'PRE_NET_PAY',  
+       BENEFIT_CALCULATION.preacc_net_pay,   
+       BENEFIT_CALCULATION.preacc_gross_pay,   
+       BENEFIT_CALCULATION.benefit_level_percentage  
+FROM BENEFIT_CALCULATION 
+    LEFT OUTER JOIN CAPABLE_EARNING   ON BENEFIT_CALCULATION.claim_no = CAPABLE_EARNING.claim_no 
+      and BENEFIT_CALCULATION.benefit_calculation_no = CAPABLE_EARNING.benefit_calculation_no
+where    (BENEFIT_CALCULATION.claim_no = :al_ben_calc_claim_no  
+      AND   BENEFIT_CALCULATION.benefit_calculation_no = :al_cap_ben_calc_no ) 
+" arguments=(("al_ben_calc_claim_no", number),("al_cap_ben_calc_no", number)) )
+text(band=summary alignment="0" text="LTD Capitalization Calculation" border="0" color="33554432" x="5" y="4124" height="92" width="1271" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2286" y="6172" height="56" width="539" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_preacc_gross_pay_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="'Page ' + page() + ' of ' + pagecount()"border="0" color="33554432" x="5" y="7264" height="64" width="581" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Item" border="0" color="33554432" x="187" y="4512" height="80" width="146" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Gross Pre-Accident Earnings:" border="0" color="33554432" x="197" y="4640" height="56" width="741" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Gross Pre-Accident Earnings:" border="0" color="33554432" x="197" y="4640" height="56" width="741" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2286" y="4632" height="56" width="539" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_preacc_gross_pay_2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Net Pre-Accident Earnings:" border="0" color="33554432" x="197" y="4700" height="56" width="667" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="2286" y="4700" height="56" width="539" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_preacc_net_pay_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Less - Estimated Capable Earnings (Net):" border="0" color="33554432" x="187" y="4768" height="56" width="1019" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="2286" y="4772" height="56" width="539" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_avg_net_pay visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Monthly LTD:" border="0" color="33554432" x="1422" y="4880" height="56" width="325" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="2286" y="4880" height="56" width="539" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_award_amount_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Gross Pre-Accident Earnings / Gains bruts avant l'accident:" border="0" color="33554432" x="32" y="240" height="56" width="1472" html.valueishtml="0"  name=t_3 visible="1"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="3278" y="236" height="56" width="544" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_preacc_gross_pay visible="1"  slideup=allabove edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Net Pre-Accident Earnings / Gains nets avant l'accident:" border="0" color="33554432" x="32" y="312" height="56" width="2880" html.valueishtml="0"  name=t_4 visible="1"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="3278" y="308" height="56" width="544" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_preacc_net_pay visible="1"  slideup=allabove edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Less - Estimated Capable Earnings (Net) / Moins les gains nets estimatifs que le travailleur est en mesure de tirer:" border="0" color="33554432" x="32" y="384" height="56" width="2880" html.valueishtml="0"  name=t_6 visible="1"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="3278" y1="444" x2="3822" y2="444"  name=l_1 visible="1"  slideup=allabove pen.style="0" pen.width="5" pen.color="33554432"  background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="3278" y="380" height="56" width="544" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=cpre_net_pay visible="1"  slideup=allabove edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="100% Loss of Earnings / 100 % de la perte de gains:" border="0" color="33554432" x="32" y="456" height="56" width="1266" html.valueishtml="0"  name=t_7 visible="1"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" benefit_calculation_preacc_net_pay -  cpre_net_pay "border="0" color="33554432" x="3278" y="456" height="52" width="544" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=loe_100_percent visible="1"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Monthly LTD Award (Earnings - Deductions) / Montant des prestations d'invalidité à long terme mensuelles (gains - déductions):" border="0" color="33554432" x="32" y="528" height="56" width="3214" html.valueishtml="0"  name=t_5 visible="1"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" benefit_calculation_benefit_level_percen *  loe_100_percent "border="0" color="33554432" x="3968" y="528" height="60" width="146" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=loe visible="0"  slideup=allabove  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="3278" y="528" height="56" width="544" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=benefit_calculation_award_amount visible="1"  slideup=allabove edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Item / Article" border="0" color="33554432" x="32" y="120" height="80" width="421" html.valueishtml="0"  name=t_2 visible="1"  slideup=allabove  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="LTD Capitalization Calculation / Calcul de la capitalisation des prestations d'invalidité à long terme" border="0" color="33554432" x="0" y="0" height="92" width="4123" html.valueishtml="0"  name=t_1 visible="1"  slideup=allabove  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

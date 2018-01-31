@@ -1,0 +1,59 @@
+﻿$PBExportHeader$d_contract_beneficiaries.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 92 print.margin.right = 92 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=88 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=104 color="536870912" )
+detail(height=132 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=annuity_contract_no dbname="annuity_contract_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=contract_confirmed_flag dbname="contract_confirmed_flag" initial="N" values="Yes	Y/No	N/" )
+ column=(type=char(80) update=yes updatewhereclause=yes name=annuity_carrier_name dbname="annuity_carrier_name" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=annuity_term_code dbname="annuity_term_code" )
+ column=(type=long updatewhereclause=yes name=bh_individual_no dbname="bh_individual_no" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=char(84) updatewhereclause=yes name=bh_recipient_desc dbname="bh_recipient_desc" )
+ retrieve="SELECT ac.annuity_contract_no,
+           ac.annuity_payout_no,
+           ac.contract_confirmed_flag,
+           ac.annuity_carrier_name,
+           ac.annuity_term_code,
+           aa.individual_no as bh_individual_no,
+           aa.annuity_account_no,
+           i.given_names + ' ' + i.last_name + ' - ' + ar.annuity_role_desc_e  as bh_recipient_desc
+
+FROM ANNUITY_CONTRACT ac 
+JOIN ANNUITY_PAYOUT ap on ap.annuity_payout_no = ac.annuity_payout_no
+JOIN ANNUITY_ACCOUNT aa on aa.annuity_account_no = ap.annuity_account_no 
+JOIN INDIVIDUAL i on i.individual_no = aa.individual_no
+JOIN Annuity_Role ar on ar.annuity_role_code = aa.claim_role_code
+WHERE ac.annuity_payout_no = :al_annuity_payout_no" update="ANNUITY_CONTRACT" updatewhere=1 updatekeyinplace=yes arguments=(("al_annuity_payout_no", number)) )
+text(band=header alignment="2" text="Annuity Payout No" border="0" color="33554432" x="5" y="4" height="60" width="549" html.valueishtml="0"  name=annuity_payout_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Contract No" border="0" color="33554432" x="562" y="4" height="60" width="558" html.valueishtml="0"  name=annuity_contract_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Contract Confirmed" border="0" color="33554432" x="1175" y="4" height="60" width="549" html.valueishtml="0"  name=contract_confirmed_flag_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Annuity Term" border="0" color="33554432" x="1815" y="4" height="60" width="512" html.valueishtml="0"  name=annuity_term_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Annuity Carrier Name (Financial Institution Name only)" border="0" color="33554432" x="2510" y="4" height="60" width="1385" html.valueishtml="0"  name=annuity_recipient_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="72" x2="3744" y2="72"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=detail x1="475" y1="120" x2="3744" y2="120"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="33554432" x="55" y="16" height="68" width="453" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="590" y="16" height="68" width="352" format="[general]" html.valueishtml="0"  name=annuity_contract_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="5~tif ( contract_confirmed_flag = 'Y', 0, 5)" color="33554432" x="2514" y="16" height="68" width="1170" format="[general]" html.valueishtml="0"  name=annuity_carrier_name visible="1" edit.limit=0 edit.case=upper edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(  contract_confirmed_flag = 'Y',553648127,16777215)" )
+column(band=detail id=5 alignment="0" tabsequence=10 border="5~tif ( contract_confirmed_flag = 'Y', 0, 5)" color="33554432" x="1701" y="16" height="68" width="759" format="[general]" html.valueishtml="0"  name=annuity_term_code visible="1" dddw.name=dddw_annuity_term dddw.displaycolumn=annuity_term_desc_e dddw.datacolumn=annuity_term_code dddw.percentwidth=0 dddw.lines=5 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(  contract_confirmed_flag = 'Y',553648127,16777215)" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="5~tif ( contract_confirmed_flag = 'Y', 0, 5)" color="33554432" x="1307" y="16" height="68" width="224" format="[general]" html.valueishtml="0" protect="0~t1"  name=contract_confirmed_flag visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(  contract_confirmed_flag = 'Y',553648127,16777215)" )
+line(band=footer x1="0" y1="12" x2="4544" y2="12"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=footer alignment="2" text="Annuity Account No:" border="0" color="33554432" x="14" y="28" height="64" width="585" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=7 alignment="0" tabsequence=50 border="0" color="33554432" x="622" y="28" height="64" width="448" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=8 alignment="0" tabsequence=60 border="0" color="33554432" x="1152" y="28" height="64" width="1289" format="[general]" html.valueishtml="0"  name=bh_recipient_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Individual No:" border="0" color="33554432" x="2487" y="28" height="64" width="402" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=footer id=6 alignment="0" tabsequence=50 border="0" color="33554432" x="2912" y="28" height="64" width="517" format="[general]" html.valueishtml="0"  name=bh_individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

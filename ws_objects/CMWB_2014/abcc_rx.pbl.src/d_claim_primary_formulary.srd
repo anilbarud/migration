@@ -1,0 +1,25 @@
+﻿$PBExportHeader$d_claim_primary_formulary.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=108 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=formulary_record_no dbname="formulary_record_no" )
+ column=(type=char(5) updatewhereclause=yes name=formulary_code dbname="formulary_code" )
+ retrieve="SELECT claim_no ,
+       formulary_record_no ,
+       formulary_code
+FROM   CLAIM_FORMULARY
+WHERE  claim_no            = :al_claim_no
+AND    formulary_type_code = 'P'
+AND    primary_active_flag = 'Y'
+
+
+
+" arguments=(("al_claim_no", number)) )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="23" y="8" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="370" y="8" height="76" width="677" format="[general]" html.valueishtml="0"  name=formulary_record_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="1138" y="4" height="76" width="741" format="[general]" html.valueishtml="0"  name=formulary_code visible="1" edit.limit=5 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

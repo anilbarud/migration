@@ -1,0 +1,1401 @@
+﻿$PBExportHeader$m_cmwb_notools.srm
+$PBExportComments$Application Driver - This menu is used for all sheets except the worksheet
+forward
+global type m_cmwb_notools from m_ancestor
+end type
+end forward
+
+global type m_cmwb_notools from m_ancestor
+end type
+global m_cmwb_notools m_cmwb_notools
+
+on m_cmwb_notools.create
+m_cmwb_notools=this
+call super::create
+end on
+
+on m_cmwb_notools.destroy
+call super::destroy
+end on
+
+type m_workbench from m_ancestor`m_workbench within m_cmwb_notools
+end type
+
+on m_workbench.create
+call super::create
+end on
+
+on m_workbench.destroy
+call super::destroy
+end on
+
+type m_worksheet from m_ancestor`m_worksheet within m_workbench
+end type
+
+on m_worksheet.create
+call super::create
+end on
+
+on m_worksheet.destroy
+call super::destroy
+end on
+
+type m_authorizations from m_ancestor`m_authorizations within m_workbench
+end type
+
+on m_authorizations.create
+call super::create
+end on
+
+on m_authorizations.destroy
+call super::destroy
+end on
+
+type m_maintainprovider from m_ancestor`m_maintainprovider within m_workbench
+end type
+
+on m_maintainprovider.create
+call super::create
+end on
+
+on m_maintainprovider.destroy
+call super::destroy
+end on
+
+type m_providerinquiry from m_ancestor`m_providerinquiry within m_workbench
+end type
+
+on m_providerinquiry.create
+call super::create
+end on
+
+on m_providerinquiry.destroy
+call super::destroy
+end on
+
+type m_employerinquiry from m_ancestor`m_employerinquiry within m_workbench
+end type
+
+on m_employerinquiry.create
+call super::create
+end on
+
+on m_employerinquiry.destroy
+call super::destroy
+end on
+
+type m_costofclaimsreprint from m_ancestor`m_costofclaimsreprint within m_workbench
+end type
+
+on m_costofclaimsreprint.create
+call super::create
+end on
+
+on m_costofclaimsreprint.destroy
+call super::destroy
+end on
+
+type m_createreportingfeepayments from m_ancestor`m_createreportingfeepayments within m_workbench
+end type
+
+on m_createreportingfeepayments.create
+call super::create
+end on
+
+on m_createreportingfeepayments.destroy
+call super::destroy
+end on
+
+type m_print from m_ancestor`m_print within m_workbench
+end type
+
+on m_print.create
+call super::create
+this.visible = true
+this.enabled = true
+this.toolbaritemvisible = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_close from m_ancestor`m_close within m_workbench
+end type
+
+on m_close.create
+call super::create
+this.visible = true
+this.enabled = true
+this.toolbaritemvisible = true
+end on
+
+on m_close.destroy
+call super::destroy
+end on
+
+type m_printsetup from m_ancestor`m_printsetup within m_workbench
+end type
+
+on m_printsetup.create
+call super::create
+end on
+
+on m_printsetup.destroy
+call super::destroy
+end on
+
+type m_- from m_ancestor`m_- within m_workbench
+end type
+
+on m_-.create
+call super::create
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_exit from m_ancestor`m_exit within m_workbench
+end type
+
+on m_exit.create
+call super::create
+end on
+
+on m_exit.destroy
+call super::destroy
+end on
+
+type m_options from m_ancestor`m_options within m_cmwb_notools
+end type
+
+on m_options.create
+call super::create
+end on
+
+on m_options.destroy
+call super::destroy
+end on
+
+type m_maintainusercategories from m_ancestor`m_maintainusercategories within m_options
+end type
+
+on m_maintainusercategories.create
+call super::create
+end on
+
+on m_maintainusercategories.destroy
+call super::destroy
+end on
+
+type m_maintaincardfile from m_ancestor`m_maintaincardfile within m_options
+end type
+
+on m_maintaincardfile.create
+call super::create
+end on
+
+on m_maintaincardfile.destroy
+call super::destroy
+end on
+
+type m_individualduplicationfix from m_ancestor`m_individualduplicationfix within m_options
+end type
+
+on m_individualduplicationfix.create
+call super::create
+end on
+
+on m_individualduplicationfix.destroy
+call super::destroy
+end on
+
+type m_remoteprintparameters from m_ancestor`m_remoteprintparameters within m_options
+end type
+
+on m_remoteprintparameters.create
+call super::create
+end on
+
+on m_remoteprintparameters.destroy
+call super::destroy
+end on
+
+type m_reports from m_ancestor`m_reports within m_cmwb_notools
+end type
+
+on m_reports.create
+call super::create
+end on
+
+on m_reports.destroy
+call super::destroy
+end on
+
+type m_claimdisposition from m_ancestor`m_claimdisposition within m_reports
+end type
+
+on m_claimdisposition.create
+call super::create
+end on
+
+on m_claimdisposition.destroy
+call super::destroy
+end on
+
+type m_bybenefitenddate from m_ancestor`m_bybenefitenddate within m_claimdisposition
+end type
+
+on m_bybenefitenddate.create
+call super::create
+end on
+
+on m_bybenefitenddate.destroy
+call super::destroy
+end on
+
+type m_bydispositionentereddate from m_ancestor`m_bydispositionentereddate within m_claimdisposition
+end type
+
+on m_bydispositionentereddate.create
+call super::create
+end on
+
+on m_bydispositionentereddate.destroy
+call super::destroy
+end on
+
+type m_coupreports from m_ancestor`m_coupreports within m_reports
+end type
+
+on m_coupreports.create
+call super::create
+end on
+
+on m_coupreports.destroy
+call super::destroy
+end on
+
+type m_coupaging from m_ancestor`m_coupaging within m_coupreports
+end type
+
+on m_coupaging.create
+call super::create
+end on
+
+on m_coupaging.destroy
+call super::destroy
+end on
+
+type m_mailpackageerrorreport from m_ancestor`m_mailpackageerrorreport within m_coupreports
+end type
+
+on m_mailpackageerrorreport.create
+call super::create
+end on
+
+on m_mailpackageerrorreport.destroy
+call super::destroy
+end on
+
+type m_claimstatuschangeerrorreport from m_ancestor`m_claimstatuschangeerrorreport within m_coupreports
+end type
+
+on m_claimstatuschangeerrorreport.create
+call super::create
+end on
+
+on m_claimstatuschangeerrorreport.destroy
+call super::destroy
+end on
+
+type m_preadjclaimsinmaster from m_ancestor`m_preadjclaimsinmaster within m_coupreports
+end type
+
+on m_preadjclaimsinmaster.create
+call super::create
+end on
+
+on m_preadjclaimsinmaster.destroy
+call super::destroy
+end on
+
+type m_mailpackagestatisticsreport from m_ancestor`m_mailpackagestatisticsreport within m_coupreports
+end type
+
+on m_mailpackagestatisticsreport.create
+call super::create
+end on
+
+on m_mailpackagestatisticsreport.destroy
+call super::destroy
+end on
+
+type m_statustracking from m_ancestor`m_statustracking within m_reports
+end type
+
+on m_statustracking.create
+call super::create
+end on
+
+on m_statustracking.destroy
+call super::destroy
+end on
+
+type m_paymentreports from m_ancestor`m_paymentreports within m_reports
+end type
+
+on m_paymentreports.create
+call super::create
+end on
+
+on m_paymentreports.destroy
+call super::destroy
+end on
+
+type m_scheduledpayments from m_ancestor`m_scheduledpayments within m_paymentreports
+end type
+
+on m_scheduledpayments.create
+call super::create
+end on
+
+on m_scheduledpayments.destroy
+call super::destroy
+end on
+
+type m_ltdpayments from m_ancestor`m_ltdpayments within m_paymentreports
+end type
+
+on m_ltdpayments.create
+call super::create
+end on
+
+on m_ltdpayments.destroy
+call super::destroy
+end on
+
+type m_duplicatepaymentexceptionreport from m_ancestor`m_duplicatepaymentexceptionreport within m_paymentreports
+end type
+
+on m_duplicatepaymentexceptionreport.create
+call super::create
+end on
+
+on m_duplicatepaymentexceptionreport.destroy
+call super::destroy
+end on
+
+type m_unpaidaccounts from m_ancestor`m_unpaidaccounts within m_paymentreports
+end type
+
+on m_unpaidaccounts.create
+call super::create
+end on
+
+on m_unpaidaccounts.destroy
+call super::destroy
+end on
+
+type m_invoicelist from m_ancestor`m_invoicelist within m_paymentreports
+end type
+
+on m_invoicelist.create
+call super::create
+end on
+
+on m_invoicelist.destroy
+call super::destroy
+end on
+
+type m_awardsscheduledtobecompleted from m_ancestor`m_awardsscheduledtobecompleted within m_paymentreports
+end type
+
+on m_awardsscheduledtobecompleted.create
+call super::create
+end on
+
+on m_awardsscheduledtobecompleted.destroy
+call super::destroy
+end on
+
+type m_firstbenefitcheque from m_ancestor`m_firstbenefitcheque within m_paymentreports
+end type
+
+on m_firstbenefitcheque.create
+call super::create
+end on
+
+on m_firstbenefitcheque.destroy
+call super::destroy
+end on
+
+type m_periodicawardcontrol from m_ancestor`m_periodicawardcontrol within m_paymentreports
+end type
+
+on m_periodicawardcontrol.create
+call super::create
+end on
+
+on m_periodicawardcontrol.destroy
+call super::destroy
+end on
+
+type m_rejectedclaimswithpayments from m_ancestor`m_rejectedclaimswithpayments within m_paymentreports
+end type
+
+on m_rejectedclaimswithpayments.create
+call super::create
+end on
+
+on m_rejectedclaimswithpayments.destroy
+call super::destroy
+end on
+
+type m_costallocatedtogroupreserve from m_ancestor`m_costallocatedtogroupreserve within m_reports
+end type
+
+on m_costallocatedtogroupreserve.create
+call super::create
+end on
+
+on m_costallocatedtogroupreserve.destroy
+call super::destroy
+end on
+
+type m_claimsadjudicated from m_ancestor`m_claimsadjudicated within m_reports
+end type
+
+on m_claimsadjudicated.create
+call super::create
+end on
+
+on m_claimsadjudicated.destroy
+call super::destroy
+end on
+
+type m_non-pension from m_ancestor`m_non-pension within m_claimsadjudicated
+end type
+
+on m_non-pension.create
+call super::create
+end on
+
+on m_non-pension.destroy
+call super::destroy
+end on
+
+type m_pension from m_ancestor`m_pension within m_claimsadjudicated
+end type
+
+on m_pension.create
+call super::create
+end on
+
+on m_pension.destroy
+call super::destroy
+end on
+
+type m_formofelectionadjudicatedclaims from m_ancestor`m_formofelectionadjudicatedclaims within m_reports
+end type
+
+on m_formofelectionadjudicatedclaims.create
+call super::create
+end on
+
+on m_formofelectionadjudicatedclaims.destroy
+call super::destroy
+end on
+
+type m_overduereports from m_ancestor`m_overduereports within m_reports
+end type
+
+on m_overduereports.create
+call super::create
+end on
+
+on m_overduereports.destroy
+call super::destroy
+end on
+
+type m_12weekreview from m_ancestor`m_12weekreview within m_overduereports
+end type
+
+on m_12weekreview.create
+call super::create
+end on
+
+on m_12weekreview.destroy
+call super::destroy
+end on
+
+type m_annualreview from m_ancestor`m_annualreview within m_overduereports
+end type
+
+on m_annualreview.create
+call super::create
+end on
+
+on m_annualreview.destroy
+call super::destroy
+end on
+
+type m_nonimagedfilesloggedout from m_ancestor`m_nonimagedfilesloggedout within m_reports
+end type
+
+on m_nonimagedfilesloggedout.create
+call super::create
+end on
+
+on m_nonimagedfilesloggedout.destroy
+call super::destroy
+end on
+
+type m_claimscreated from m_ancestor`m_claimscreated within m_reports
+end type
+
+on m_claimscreated.create
+call super::create
+end on
+
+on m_claimscreated.destroy
+call super::destroy
+end on
+
+type m_caseload from m_ancestor`m_caseload within m_reports
+end type
+
+on m_caseload.create
+call super::create
+end on
+
+on m_caseload.destroy
+call super::destroy
+end on
+
+type m_pensionreports from m_ancestor`m_pensionreports within m_reports
+end type
+
+on m_pensionreports.create
+call super::create
+end on
+
+on m_pensionreports.destroy
+call super::destroy
+end on
+
+type m_pensionanniversary from m_ancestor`m_pensionanniversary within m_pensionreports
+end type
+
+on m_pensionanniversary.create
+call super::create
+end on
+
+on m_pensionanniversary.destroy
+call super::destroy
+end on
+
+type m_survivorsanniversaryreport from m_ancestor`m_survivorsanniversaryreport within m_pensionreports
+end type
+
+on m_survivorsanniversaryreport.create
+call super::create
+end on
+
+on m_survivorsanniversaryreport.destroy
+call super::destroy
+end on
+
+type m_p81survivingspouseattaining65 from m_ancestor`m_p81survivingspouseattaining65 within m_pensionreports
+end type
+
+on m_p81survivingspouseattaining65.create
+call super::create
+end on
+
+on m_p81survivingspouseattaining65.destroy
+call super::destroy
+end on
+
+type m_3 from m_ancestor`m_3 within m_pensionreports
+end type
+
+on m_3.create
+call super::create
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+type m_dependentchildrenbybirthdate from m_ancestor`m_dependentchildrenbybirthdate within m_pensionreports
+end type
+
+on m_dependentchildrenbybirthdate.create
+call super::create
+end on
+
+on m_dependentchildrenbybirthdate.destroy
+call super::destroy
+end on
+
+type m_dependentchildrenover18 from m_ancestor`m_dependentchildrenover18 within m_pensionreports
+end type
+
+on m_dependentchildrenover18.create
+call super::create
+end on
+
+on m_dependentchildrenover18.destroy
+call super::destroy
+end on
+
+type m_claimaging from m_ancestor`m_claimaging within m_reports
+end type
+
+on m_claimaging.create
+call super::create
+end on
+
+on m_claimaging.destroy
+call super::destroy
+end on
+
+type m_adjudicationprofile from m_ancestor`m_adjudicationprofile within m_reports
+end type
+
+on m_adjudicationprofile.create
+call super::create
+end on
+
+on m_adjudicationprofile.destroy
+call super::destroy
+end on
+
+type m_rehabplans from m_ancestor`m_rehabplans within m_reports
+end type
+
+on m_rehabplans.create
+call super::create
+end on
+
+on m_rehabplans.destroy
+call super::destroy
+end on
+
+type m_tasklist from m_ancestor`m_tasklist within m_rehabplans
+end type
+
+on m_tasklist.create
+call super::create
+end on
+
+on m_tasklist.destroy
+call super::destroy
+end on
+
+type m_taskcompletion from m_ancestor`m_taskcompletion within m_rehabplans
+end type
+
+on m_taskcompletion.create
+call super::create
+end on
+
+on m_taskcompletion.destroy
+call super::destroy
+end on
+
+type m_taskauthorization from m_ancestor`m_taskauthorization within m_rehabplans
+end type
+
+on m_taskauthorization.create
+call super::create
+end on
+
+on m_taskauthorization.destroy
+call super::destroy
+end on
+
+type m_casemanagement from m_ancestor`m_casemanagement within m_reports
+end type
+
+on m_casemanagement.create
+call super::create
+end on
+
+on m_casemanagement.destroy
+call super::destroy
+end on
+
+type m_activecmwithmorethan70orlesst from m_ancestor`m_activecmwithmorethan70orlesst within m_casemanagement
+end type
+
+on m_activecmwithmorethan70orlesst.create
+call super::create
+end on
+
+on m_activecmwithmorethan70orlesst.destroy
+call super::destroy
+end on
+
+type m_activewithagegreaterthan50 from m_ancestor`m_activewithagegreaterthan50 within m_casemanagement
+end type
+
+on m_activewithagegreaterthan50.create
+call super::create
+end on
+
+on m_activewithagegreaterthan50.destroy
+call super::destroy
+end on
+
+type m_employerslatefilingf67s from m_ancestor`m_employerslatefilingf67s within m_reports
+end type
+
+on m_employerslatefilingf67s.create
+call super::create
+end on
+
+on m_employerslatefilingf67s.destroy
+call super::destroy
+end on
+
+type m_annuityreports from m_ancestor`m_annuityreports within m_reports
+end type
+
+on m_annuityreports.create
+call super::create
+end on
+
+on m_annuityreports.destroy
+call super::destroy
+end on
+
+type m_byclaim from m_ancestor`m_byclaim within m_annuityreports
+end type
+
+on m_byclaim.create
+call super::create
+end on
+
+on m_byclaim.destroy
+call super::destroy
+end on
+
+type m_summarizedtxns from m_ancestor`m_summarizedtxns within m_annuityreports
+end type
+
+on m_summarizedtxns.create
+call super::create
+end on
+
+on m_summarizedtxns.destroy
+call super::destroy
+end on
+
+type m_appliedinterestsummary from m_ancestor`m_appliedinterestsummary within m_annuityreports
+end type
+
+on m_appliedinterestsummary.create
+call super::create
+end on
+
+on m_appliedinterestsummary.destroy
+call super::destroy
+end on
+
+type m_costofclaimsstatements from m_ancestor`m_costofclaimsstatements within m_reports
+end type
+
+on m_costofclaimsstatements.create
+call super::create
+end on
+
+on m_costofclaimsstatements.destroy
+call super::destroy
+end on
+
+type m_paymentprocessingreports from m_ancestor`m_paymentprocessingreports within m_reports
+end type
+
+on m_paymentprocessingreports.create
+call super::create
+end on
+
+on m_paymentprocessingreports.destroy
+call super::destroy
+end on
+
+type m_paymentregisters from m_ancestor`m_paymentregisters within m_paymentprocessingreports
+end type
+
+on m_paymentregisters.create
+call super::create
+end on
+
+on m_paymentregisters.destroy
+call super::destroy
+end on
+
+type m_paymentawardauto-batchreport from m_ancestor`m_paymentawardauto-batchreport within m_paymentprocessingreports
+end type
+
+on m_paymentawardauto-batchreport.create
+call super::create
+end on
+
+on m_paymentawardauto-batchreport.destroy
+call super::destroy
+end on
+
+type m_paymentbalancing1 from m_ancestor`m_paymentbalancing1 within m_paymentprocessingreports
+end type
+
+on m_paymentbalancing1.create
+call super::create
+end on
+
+on m_paymentbalancing1.destroy
+call super::destroy
+end on
+
+type m_medicalaidvouchers from m_ancestor`m_medicalaidvouchers within m_paymentprocessingreports
+end type
+
+on m_medicalaidvouchers.create
+call super::create
+end on
+
+on m_medicalaidvouchers.destroy
+call super::destroy
+end on
+
+type m_processedbatchesbytype from m_ancestor`m_processedbatchesbytype within m_paymentprocessingreports
+end type
+
+on m_processedbatchesbytype.create
+call super::create
+end on
+
+on m_processedbatchesbytype.destroy
+call super::destroy
+end on
+
+type m_gltransactions from m_ancestor`m_gltransactions within m_paymentprocessingreports
+end type
+
+on m_gltransactions.create
+call super::create
+end on
+
+on m_gltransactions.destroy
+call super::destroy
+end on
+
+type m_chequeinquiry from m_ancestor`m_chequeinquiry within m_reports
+end type
+
+on m_chequeinquiry.create
+call super::create
+end on
+
+on m_chequeinquiry.destroy
+call super::destroy
+end on
+
+type m_t5recipientdetails from m_ancestor`m_t5recipientdetails within m_reports
+end type
+
+on m_t5recipientdetails.create
+call super::create
+end on
+
+on m_t5recipientdetails.destroy
+call super::destroy
+end on
+
+type m_deleteddocuments from m_ancestor`m_deleteddocuments within m_reports
+end type
+
+on m_deleteddocuments.create
+call super::create
+end on
+
+on m_deleteddocuments.destroy
+call super::destroy
+end on
+
+type m_survivorsspecialpayment from m_ancestor`m_survivorsspecialpayment within m_reports
+end type
+
+on m_survivorsspecialpayment.create
+call super::create
+end on
+
+on m_survivorsspecialpayment.destroy
+call super::destroy
+end on
+
+type m_specialsurvpaidtodate from m_ancestor`m_specialsurvpaidtodate within m_survivorsspecialpayment
+end type
+
+on m_specialsurvpaidtodate.create
+call super::create
+end on
+
+on m_specialsurvpaidtodate.destroy
+call super::destroy
+end on
+
+type m_docidreferenceassociation from m_ancestor`m_docidreferenceassociation within m_reports
+end type
+
+on m_docidreferenceassociation.create
+call super::create
+end on
+
+on m_docidreferenceassociation.destroy
+call super::destroy
+end on
+
+type m_abcc from m_ancestor`m_abcc within m_reports
+end type
+
+on m_abcc.create
+call super::create
+end on
+
+on m_abcc.destroy
+call super::destroy
+end on
+
+type m_eligibilitydatareport from m_ancestor`m_eligibilitydatareport within m_abcc
+end type
+
+on m_eligibilitydatareport.create
+call super::create
+end on
+
+on m_eligibilitydatareport.destroy
+call super::destroy
+end on
+
+type m_eligibilityexporterrors from m_ancestor`m_eligibilityexporterrors within m_abcc
+end type
+
+on m_eligibilityexporterrors.create
+call super::create
+end on
+
+on m_eligibilityexporterrors.destroy
+call super::destroy
+end on
+
+type m_prescription_report from m_ancestor`m_prescription_report within m_abcc
+end type
+
+on m_prescription_report.create
+call super::create
+end on
+
+on m_prescription_report.destroy
+call super::destroy
+end on
+
+type m_dinreports from m_ancestor`m_dinreports within m_abcc
+end type
+
+on m_dinreports.create
+call super::create
+end on
+
+on m_dinreports.destroy
+call super::destroy
+end on
+
+type m_invoicereconciliationreport from m_ancestor`m_invoicereconciliationreport within m_abcc
+end type
+
+on m_invoicereconciliationreport.create
+call super::create
+end on
+
+on m_invoicereconciliationreport.destroy
+call super::destroy
+end on
+
+type m_converetedmanualtransactions from m_ancestor`m_converetedmanualtransactions within m_reports
+end type
+
+on m_converetedmanualtransactions.create
+call super::create
+end on
+
+on m_converetedmanualtransactions.destroy
+call super::destroy
+end on
+
+type m_open_awards_os_pymts from m_ancestor`m_open_awards_os_pymts within m_reports
+end type
+
+on m_open_awards_os_pymts.create
+call super::create
+end on
+
+on m_open_awards_os_pymts.destroy
+call super::destroy
+end on
+
+type m_form67information from m_ancestor`m_form67information within m_reports
+end type
+
+on m_form67information.create
+call super::create
+end on
+
+on m_form67information.destroy
+call super::destroy
+end on
+
+type m_window from m_ancestor`m_window within m_cmwb_notools
+end type
+
+on m_window.create
+call super::create
+end on
+
+on m_window.destroy
+call super::destroy
+end on
+
+type m_cascade from m_ancestor`m_cascade within m_window
+end type
+
+on m_cascade.create
+call super::create
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_layered from m_ancestor`m_layered within m_window
+end type
+
+on m_layered.create
+call super::create
+end on
+
+on m_layered.destroy
+call super::destroy
+end on
+
+type m_tile from m_ancestor`m_tile within m_window
+end type
+
+on m_tile.create
+call super::create
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_help from m_ancestor`m_help within m_cmwb_notools
+end type
+
+on m_help.create
+call super::create
+end on
+
+on m_help.destroy
+call super::destroy
+end on
+
+type m_contents from m_ancestor`m_contents within m_help
+end type
+
+on m_contents.create
+call super::create
+end on
+
+on m_contents.destroy
+call super::destroy
+end on
+
+type m_-z from m_ancestor`m_-z within m_help
+end type
+
+on m_-z.create
+call super::create
+end on
+
+on m_-z.destroy
+call super::destroy
+end on
+
+type m_aboutworkbench from m_ancestor`m_aboutworkbench within m_help
+end type
+
+on m_aboutworkbench.create
+call super::create
+end on
+
+on m_aboutworkbench.destroy
+call super::destroy
+end on
+
+type m_finance from m_ancestor`m_finance within m_cmwb_notools
+end type
+
+on m_finance.create
+call super::create
+end on
+
+on m_finance.destroy
+call super::destroy
+end on
+
+type m_addmanualtxns from m_ancestor`m_addmanualtxns within m_finance
+end type
+
+on m_addmanualtxns.create
+call super::create
+end on
+
+on m_addmanualtxns.destroy
+call super::destroy
+end on
+
+type m_maintainmanualtxns from m_ancestor`m_maintainmanualtxns within m_finance
+end type
+
+on m_maintainmanualtxns.create
+call super::create
+end on
+
+on m_maintainmanualtxns.destroy
+call super::destroy
+end on
+
+type m_cocsummarybyglaccount from m_ancestor`m_cocsummarybyglaccount within m_finance
+end type
+
+on m_cocsummarybyglaccount.create
+call super::create
+end on
+
+on m_cocsummarybyglaccount.destroy
+call super::destroy
+end on
+
+type m_closepreviousperiod from m_ancestor`m_closepreviousperiod within m_finance
+end type
+
+on m_closepreviousperiod.create
+call super::create
+end on
+
+on m_closepreviousperiod.destroy
+call super::destroy
+end on
+
+type m_1 from m_ancestor`m_1 within m_finance
+end type
+
+on m_1.create
+call super::create
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_maintainannuityinterest from m_ancestor`m_maintainannuityinterest within m_finance
+end type
+
+on m_maintainannuityinterest.create
+call super::create
+end on
+
+on m_maintainannuityinterest.destroy
+call super::destroy
+end on
+
+type m_bankreconciliation from m_ancestor`m_bankreconciliation within m_finance
+end type
+
+on m_bankreconciliation.create
+call super::create
+end on
+
+on m_bankreconciliation.destroy
+call super::destroy
+end on
+
+type m_maintenance from m_ancestor`m_maintenance within m_bankreconciliation
+end type
+
+on m_maintenance.create
+call super::create
+end on
+
+on m_maintenance.destroy
+call super::destroy
+end on
+
+type m_paymentverification from m_ancestor`m_paymentverification within m_bankreconciliation
+end type
+
+on m_paymentverification.create
+call super::create
+end on
+
+on m_paymentverification.destroy
+call super::destroy
+end on
+
+type m_sendissuedcheques from m_ancestor`m_sendissuedcheques within m_bankreconciliation
+end type
+
+on m_sendissuedcheques.create
+call super::create
+end on
+
+on m_sendissuedcheques.destroy
+call super::destroy
+end on
+
+type m_reconciledchequelistingreport from m_ancestor`m_reconciledchequelistingreport within m_bankreconciliation
+end type
+
+on m_reconciledchequelistingreport.create
+call super::create
+end on
+
+on m_reconciledchequelistingreport.destroy
+call super::destroy
+end on
+
+type m_auditingreports from m_ancestor`m_auditingreports within m_finance
+end type
+
+on m_auditingreports.create
+call super::create
+end on
+
+on m_auditingreports.destroy
+call super::destroy
+end on
+
+type m_journalnoinquiry from m_ancestor`m_journalnoinquiry within m_auditingreports
+end type
+
+on m_journalnoinquiry.create
+call super::create
+end on
+
+on m_journalnoinquiry.destroy
+call super::destroy
+end on
+
+type m_dailychequebalancing from m_ancestor`m_dailychequebalancing within m_auditingreports
+end type
+
+on m_dailychequebalancing.create
+call super::create
+end on
+
+on m_dailychequebalancing.destroy
+call super::destroy
+end on
+
+type m_chequereprintaudit from m_ancestor`m_chequereprintaudit within m_auditingreports
+end type
+
+on m_chequereprintaudit.create
+call super::create
+end on
+
+on m_chequereprintaudit.destroy
+call super::destroy
+end on
+
+type m_gltransfersummary from m_ancestor`m_gltransfersummary within m_auditingreports
+end type
+
+on m_gltransfersummary.create
+call super::create
+end on
+
+on m_gltransfersummary.destroy
+call super::destroy
+end on
+
+type m_t5processing from m_ancestor`m_t5processing within m_finance
+end type
+
+on m_t5processing.create
+call super::create
+end on
+
+on m_t5processing.destroy
+call super::destroy
+end on
+
+type m_t5samplingreport from m_ancestor`m_t5samplingreport within m_t5processing
+end type
+
+on m_t5samplingreport.create
+call super::create
+end on
+
+on m_t5samplingreport.destroy
+call super::destroy
+end on
+
+type m_trusteeassignment from m_ancestor`m_trusteeassignment within m_t5processing
+end type
+
+on m_trusteeassignment.create
+call super::create
+end on
+
+on m_trusteeassignment.destroy
+call super::destroy
+end on
+
+type m_blanksinreport from m_ancestor`m_blanksinreport within m_t5processing
+end type
+
+on m_blanksinreport.create
+call super::create
+end on
+
+on m_blanksinreport.destroy
+call super::destroy
+end on
+
+type m_2 from m_ancestor`m_2 within m_finance
+end type
+
+on m_2.create
+call super::create
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_claimcostmaintenance from m_ancestor`m_claimcostmaintenance within m_finance
+end type
+
+on m_claimcostmaintenance.create
+call super::create
+end on
+
+on m_claimcostmaintenance.destroy
+call super::destroy
+end on
+

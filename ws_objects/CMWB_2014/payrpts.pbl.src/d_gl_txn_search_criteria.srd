@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_gl_txn_search_criteria.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=268 color="553648127" )
+table(column=(type=char(1) updatewhereclause=yes name=search_type dbname="search_type" values="Claim #	C/Coc period	P/Processed date	B/" )
+ column=(type=number updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=number updatewhereclause=yes name=coc_period dbname="coc_period" )
+ column=(type=number updatewhereclause=yes name=batch_no dbname="batch_no" )
+ )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="9" y="4" height="256" width="521" format="[general]" html.valueishtml="0"  name=search_type visible="1" radiobuttons.columns=1 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="5" color="33554432" x="549" y="188" height="64" width="782" format="[General]" html.valueishtml="0" protect="0~tif( search_type = 'B',0,1)"  name=batch_no visible="1" dddw.name=dddw_manual_batches dddw.displaycolumn=processed_date dddw.datacolumn=batch_no dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( search_type = 'B',RGB(255,255,255),RGB(214,208,200))" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="5" color="33554432" x="549" y="100" height="64" width="421" format="[general]" html.valueishtml="0" protect="0~tif( search_type = 'P',0,1)"  name=coc_period visible="1" dddw.name=dddw_coc_periods dddw.displaycolumn=coc_period_string dddw.datacolumn=current_coc_period dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( search_type = 'P',RGB(255,255,255),RGB(214,208,200))" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="5" color="33554432" x="549" y="12" height="64" width="421" format="[general]" html.valueishtml="0" protect="0~tif( search_type = 'C',0,1)"  name=claim_no visible="1" editmask.mask="##########" editmask.imemode=0 editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif( search_type = 'C',RGB(255,255,255),RGB(214,208,200))" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

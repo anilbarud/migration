@@ -1,0 +1,12 @@
+﻿$PBExportHeader$d_enter_claim_date.srd
+$PBExportComments$Entry used for Single date entry instead of date range.
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=69 color="-1" )
+table(column=(type=date updatewhereclause=no name=for_date dbname="for_date" )
+ )
+text(band=detail alignment="1" text="For:"border="0" color="33554432" x="55" y="4" height="61" width="97"  name=paid_from_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="33554432" x="179" y="4" height="61" width="311" format="yyyy-mm-dd"  name=for_date editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

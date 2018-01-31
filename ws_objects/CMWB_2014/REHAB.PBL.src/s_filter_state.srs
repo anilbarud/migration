@@ -1,0 +1,24 @@
+﻿$PBExportHeader$s_filter_state.srs
+global type s_filter_state from structure
+	string		main_filter_choice
+	string		sub_filter_choice
+	string		task_type_code
+	string		task_sub_type_code
+	string		task_specific_code
+	datetime		start_date_from
+	datetime		start_date_to
+	string		responsible_user_id
+	string		task_status
+	string		progress_notes_included
+	string		follow_ups_included
+	string		filter_string
+	long		claim_no
+	string		dddw_task_type_filter
+	string		dddw_task_sub_type_filter
+	string		dddw_task_specific_filter
+	string		dddw_mm_task_type_filter
+	string		dddw_mm_task_sub_type_filter
+	string		dddw_responsible_user_id_filter
+	string		dddw_task_status_filter
+end type
+

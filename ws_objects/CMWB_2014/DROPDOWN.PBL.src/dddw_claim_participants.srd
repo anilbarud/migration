@@ -1,0 +1,22 @@
+﻿$PBExportHeader$dddw_claim_participants.srd
+$PBExportComments$Drop Down dw to list all claim participants for a claim.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="-1" )
+table(column=(type=long updatewhereclause=yes name=individual_no dbname="CLAIM_PARTICIPANT.individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=char(2) updatewhereclause=yes name=claim_role_code dbname="CLAIM_PARTICIPANT.claim_role_code" )
+ column=(type=char(1) updatewhereclause=yes name=pen_survivor_eligibility_flag dbname="CLAIM_PARTICIPANT.pen_survivor_eligibility_flag" )
+ column=(type=char(1) updatewhereclause=yes name=claimant_active_flag dbname="CLAIM_PARTICIPANT.claimant_active_flag" )
+ column=(type=long updatewhereclause=yes name=sub_claim_no dbname="CLAIM_PARTICIPANT.sub_claim_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CLAIM_PARTICIPANT~" )  TABLE(NAME=~"INDIVIDUAL~" ) COLUMN(NAME=~"CLAIM_PARTICIPANT.individual_no~") COLUMN(NAME=~"INDIVIDUAL.last_name~") COLUMN(NAME=~"INDIVIDUAL.given_names~") COLUMN(NAME=~"CLAIM_PARTICIPANT.claim_role_code~") COLUMN(NAME=~"CLAIM_PARTICIPANT.pen_survivor_eligibility_flag~") COLUMN(NAME=~"CLAIM_PARTICIPANT.claimant_active_flag~") COLUMN(NAME=~"CLAIM_PARTICIPANT.sub_claim_no~")    JOIN (LEFT=~"CLAIM_PARTICIPANT.individual_no~"    OP =~"=~"RIGHT=~"INDIVIDUAL.individual_no~" )WHERE(    EXP1 =~"CLAIM_PARTICIPANT.claim_no~"   OP =~"=~"    EXP2 =~":claim_no~" ) ) ARG(NAME = ~"claim_no~" TYPE = number) " arguments=(("claim_no", number)) )
+compute(band=detail alignment="0" expression=" Trim(individual_last_name ) + ', ' + Trim( individual_given_names )  + '      ' + String( individual_no )"border="0" color="0" x="14" y="8" height="61" width="997" format="[GENERAL]"  name=name  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1038" y="8" height="61" width="87" format="[general]"  name=claim_role_code edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="2039" y="4" height="69" width="330" format="[general]"  name=individual_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2405" y="4" height="65" width="101" format="[general]"  name=pen_survivor_eligibility_flag edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2602" y="4" height="65" width="60" format="[general]"  name=claimant_active_flag edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2771" y="4" height="65" width="183" format="[general]"  name=sub_claim_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

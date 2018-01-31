@@ -1,0 +1,90 @@
+﻿$PBExportHeader$d_checklist_disabled.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=100 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=checklist_no dbname="checklist_no" )
+ column=(type=char(5) updatewhereclause=yes name=checklist_type_code dbname="checklist_type_code" )
+ column=(type=datetime updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(16) updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=char(256) updatewhereclause=yes name=checklist_comment dbname="checklist_comment" )
+ column=(type=char(2) updatewhereclause=yes name=checklist_status_code dbname="checklist_status_code" )
+ column=(type=char(3) updatewhereclause=yes name=checklist_step_type_code dbname="checklist_step_type_code" )
+ column=(type=long updatewhereclause=yes key=yes name=checklist_step_no dbname="checklist_step_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=checklist_step_status_code dbname="checklist_step_status_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=checklist_concluded_date dbname="checklist_concluded_date" )
+ column=(type=char(16) updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=char(256) updatewhereclause=yes name=step_comment dbname="step_comment" )
+ column=(type=char(256) update=yes updatewhereclause=yes name=cancelled_comment dbname="cancelled_comment" )
+ column=(type=char(1) updatewhereclause=yes name=step_checked dbname="checked" values="	Y/	N" )
+ column=(type=char(1) updatewhereclause=yes name=mandatory_flag dbname="mandatory_flag" )
+ column=(type=char(1) updatewhereclause=yes name=open_module_flag dbname="open_module_flag" )
+ column=(type=char(40) updatewhereclause=yes name=checklist_step_type_desc dbname="checklist_step_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=checklist_step_type_icon dbname="checklist_step_type_icon" )
+ column=(type=char(3) updatewhereclause=yes name=open_module_code dbname="open_module_code" )
+ column=(type=char(40) updatewhereclause=yes name=open_window_name dbname="open_window_name" )
+ column=(type=char(40) updatewhereclause=yes name=checklist_step_status_desc dbname="checklist_step_status_desc" )
+ column=(type=char(60) updatewhereclause=yes name=checklist_status_desc dbname="checklist_status_desc" )
+ column=(type=char(60) updatewhereclause=yes name=checklist_type_desc dbname="checklist_type_desc" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ retrieve="SELECT CHECKLIST.checklist_no ,
+       CHECKLIST.checklist_type_code,
+       CHECKLIST.concluded_date,
+       CHECKLIST.concluded_by_user_id,
+       CHECKLIST.checklist_comment,
+       CHECKLIST.checklist_status_code,
+       CHECKLIST_STEP.checklist_step_type_code,
+       CHECKLIST_STEP.checklist_step_no,
+       CHECKLIST_STEP.checklist_step_status_code,
+       CHECKLIST_STEP.concluded_date 'checklist_concluded_date',
+       CHECKLIST_STEP.concluded_by_user_id,
+       CHECKLIST_STEP.step_comment,
+       CHECKLIST_STEP.cancelled_comment,
+       CASE WHEN CHECKLIST_STEP.checklist_step_status_code = 'INA'
+             THEN 'N'
+       ELSE 'Y'
+       END  'checked',
+       Checklist_Step_Type_Xref.mandatory_flag,
+       Checklist_Step_Type_Xref.open_module_flag,
+       Checklist_Step_Type.checklist_step_type_desc,
+       Checklist_Step_Type.checklist_step_type_icon,
+       Checklist_Step_Type.open_module_code,
+       Checklist_Step_Type.open_window_name,
+       Checklist_Step_Status.checklist_step_status_desc,
+       Checklist_Status.checklist_status_desc,
+       Checklist_Type.checklist_type_desc,
+       User_Profile.user_last_name,
+       User_Profile.user_first_name
+FROM   CHECKLIST
+       INNER JOIN CHECKLIST_STEP ON CHECKLIST.checklist_no = CHECKLIST_STEP.checklist_no
+       INNER JOIN Checklist_Step_Type_Xref ON CHECKLIST.checklist_type_code = Checklist_Step_Type_Xref.checklist_type_code
+             AND CHECKLIST.module_code = Checklist_Step_Type_Xref.module_code
+             AND CHECKLIST_STEP.checklist_step_type_code = Checklist_Step_Type_Xref.checklist_step_type_code
+       INNER JOIN Checklist_Step_Type ON CHECKLIST_STEP.checklist_step_type_code = Checklist_Step_Type.checklist_step_type_code
+       INNER JOIN Checklist_Step_Status ON CHECKLIST_STEP.checklist_step_status_code = Checklist_Step_Status.checklist_step_status_code
+       INNER JOIN Checklist_Status ON CHECKLIST.checklist_status_code = Checklist_Status.checklist_status_code
+       INNER JOIN Checklist_Type ON CHECKLIST.checklist_type_code = Checklist_Type.checklist_type_code
+       LEFT OUTER JOIN User_Profile ON CHECKLIST_STEP.concluded_by_user_id = User_Profile.user_id
+WHERE  CHECKLIST.checklist_no = :ar_checklist_no
+ORDER BY CHECKLIST_STEP.checklist_step_no" update="CHECKLIST_STEP" updatewhere=0 updatekeyinplace=yes arguments=(("ar_checklist_no", number)) )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="32" y="180" height="64" width="73" format="[general]" html.valueishtml="0"  name=cancelled_comment visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=detail text="" filename="~t checklist_step_type_icon " enabled=yes action="0" border="0" color="33554432" x="14" y="0" height="92" width="119" vtextalign="0" htextalign="0"  name=b_1 visible="1~t if ( open_module_flag = 'Y' , if ( open_module_code <> '' , 1 , 0 ), 0)"  font.face="Tahoma" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="151" y="16" height="64" width="869" format="[general]" html.valueishtml="0"  name=checklist_step_type_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400~tIF( mandatory_flag = 'Y', 700,400)"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="2" tabsequence=10 border="0" color="33554432" x="1042" y="20" height="52" width="96" format="[general]" html.valueishtml="0"  name=step_checked visible="1" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=20 border="5" color="33554432" x="1170" y="16" height="64" width="494" format="[general]" html.valueishtml="0"  name=checklist_step_status_code visible="1" dddw.name=dddw_checklist_step_status dddw.displaycolumn=checklist_step_status_desc dddw.datacolumn=checklist_step_status_code dddw.percentwidth=0 dddw.lines=50 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="33554432" x="1687" y="16" height="60" width="325" format="YYYY-MM-DD" html.valueishtml="0"  name=checklist_concluded_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="~" ~"+Trim( user_first_name )+~" ~"+Trim( user_last_name )"border="0" color="33554432" x="2039" y="16" height="60" width="1088" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

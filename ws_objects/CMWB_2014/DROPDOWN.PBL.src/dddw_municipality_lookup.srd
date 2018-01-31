@@ -1,0 +1,14 @@
+﻿$PBExportHeader$dddw_municipality_lookup.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(5) updatewhereclause=yes key=yes name=location_code dbname="Location.location_code" )
+ column=(type=char(25) updatewhereclause=yes name=location_desc1 dbname="Location.location_desc1" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="Location.prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=country_code dbname="Location.country_code" )
+ column=(type=char(36) updatewhereclause=yes name=location_desc2 dbname="Location.location_desc2" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Location~" ) COLUMN(NAME=~"Location.location_code~") COLUMN(NAME=~"Location.location_desc1~") COLUMN(NAME=~"Location.prov_state_code~") COLUMN(NAME=~"Location.country_code~") COLUMN(NAME=~"Location.location_desc2~")WHERE( EXP1 =~"Location.active_flag~" OP =~"=~" EXP2 =~"'Y'~" LOGIC =~"and~" ) WHERE( EXP1 =~"Location.location_type_code~" OP =~"=~" EXP2 =~"'M'~" LOGIC =~"and~" ) WHERE( EXP1 =~"Location.location_code~" OP =~"<>~" EXP2 =~"''~" ) ) " update="Location" updatewhere=1 updatekeyinplace=no  sort="location_desc2 A " )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="4" height="57" width="1102" format="[general]"  name=location_desc2 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

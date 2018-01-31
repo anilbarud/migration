@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_rehab_plan_task_progress_symbols.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=symbol_type_code dbname="Event_Type.symbol_type_code" )
+ column=(type=char(30) updatewhereclause=yes name=event_type_desc dbname="Event_Type.event_type_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Event_Type~" ) COLUMN(NAME=~"Event_Type.symbol_type_code~") COLUMN(NAME=~"Event_Type.event_type_desc~")WHERE(    EXP1 =~"Event_Type.symbol_type_code~"   OP =~"<>~"    EXP2 =~"''~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"Event_Type.symbol_type_code~"   OP =~"<>~"    EXP2 =~"'.'~" ) ) " )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="28" y="8" height="77" width="92" format="[general]"  name=symbol_type_code edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Wingdings" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="2" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="165" y="4" height="61" width="1404" format="[general]"  name=event_type_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+
+sparse(names="symbol_type_code")

@@ -1,0 +1,23 @@
+﻿$PBExportHeader$f_produce_messagebox.srf
+global type f_produce_messagebox from function_object
+end type
+
+forward prototypes
+global function integer f_produce_messagebox (string as_message)
+end prototypes
+
+global function integer f_produce_messagebox (string as_message);s_window_message lstr_window_message
+
+
+
+lstr_window_message.as_stringparm[1] = as_message
+
+
+OpenWithParm(w_popup_messagebox,lstr_window_message)
+
+lstr_window_message = Message.PowerObjectParm
+
+
+return lstr_window_message.al_doubleparm[1]
+end function
+

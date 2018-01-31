@@ -1,0 +1,18 @@
+﻿$PBExportHeader$dddw_task_claim_responsible_user_id.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=char(16) updatewhereclause=yes name=user_profile_user_id dbname="User_Profile.user_id" )
+ column=(type=char(47) updatewhereclause=yes name=full_name dbname="full_name" )
+ retrieve="  SELECT DISTINCT dbo.User_Profile.user_id,
+	User_Profile.user_last_name + ~", ~" + User_Profile.user_first_name full_name
+    FROM dbo.REHAB_TASK,   
+         dbo.User_Profile  
+   WHERE ( dbo.REHAB_TASK.responsible_user_id = dbo.User_Profile.user_id ) and  
+         ( ( REHAB_TASK.claim_no = :claim_no ) )    
+" arguments=(("claim_no", number)) )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="8" height="64" width="1271" format="[general]" html.valueishtml="0"  name=full_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

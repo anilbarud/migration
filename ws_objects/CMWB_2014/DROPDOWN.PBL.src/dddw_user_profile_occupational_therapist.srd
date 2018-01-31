@@ -1,0 +1,23 @@
+﻿$PBExportHeader$dddw_user_profile_occupational_therapist.srd
+$PBExportComments$List of active users who are current users of the WorkBench and with rehab manager flag set on
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(16) update=yes updatewhereclause=yes name=user_id dbname="user_id" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ column=(type=char(47) updatewhereclause=yes name=full_name dbname="full_name" )
+ retrieve="SELECT user_id,
+       user_last_name ,
+       user_first_name ,
+       full_name = user_last_name + ', ' + user_first_name 
+  FROM User_Profile      
+ WHERE occupational_therapist_flag = ~"Y~"  
+   AND active_flag = ~"Y~"  
+   AND workbench_flag <> ~"I~"  
+ ORDER BY user_last_name, user_first_name " )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="9" y="4" height="56" width="965" format="[general]" html.valueishtml="0"  name=full_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

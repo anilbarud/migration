@@ -1,0 +1,16 @@
+﻿$PBExportHeader$gstr_report_fee_documents.srs
+$PBExportComments$global structure to be used to pass information from our response window back to the NVO
+global type gstr_report_fee_documents from structure
+	long		docid[]
+	long		claim_no[]
+	string		reporting_fee_type_code[]
+	string		generated_method_code[]
+	datetime		approved_date[]
+	string		approved_by_user_id[]
+	string		comment[]
+	string		reporting_fee_eligibility_code[]
+	integer		accepted[]
+	long		provider_no[]
+	string		provider_sub_type[]
+end type
+

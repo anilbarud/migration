@@ -1,0 +1,54 @@
+﻿$PBExportHeader$d_overpayment_message_list.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=92 color="536870912" )
+summary(height=104 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(2) updatewhereclause=yes name=overpayment_balance_overpayment_type_cod dbname="overpayment_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=balance_amount dbname="balance_amount" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="given_names" )
+ column=(type=char(2) updatewhereclause=yes name=claim_role_code dbname="claim_role_code" )
+ retrieve="SELECT a.claim_no,
+       a.recipient_no,
+       a.overpayment_type_code,
+       a.balance_amount,
+       b.last_name,
+       b.given_names,
+       c.claim_role_code
+FROM   OVERPAYMENT_BALANCE a
+JOIN   INDIVIDUAL          b ON a.recipient_no = b.individual_no
+JOIN   CLAIM_PARTICIPANT   c ON a.recipient_no = c.individual_no
+                            AND a.claim_no     = c.claim_no
+WHERE  a.recipient_no in ( select individual_no 
+                           from   CLAIM_PARTICIPANT
+                           where  claim_no = :al_claim_no )
+AND    a.balance_amount <> 0.00
+order by a.recipient_no ,
+         a.claim_no,
+         a.overpayment_type_code" arguments=(("al_claim_no", number)) )
+line(band=header x1="9" y1="80" x2="2048" y2="80"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim" border="0" color="0" x="41" y="4" height="60" width="146" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Type" border="0" color="0" x="1381" y="4" height="60" width="123" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Over payments for:" border="0" color="0" x="293" y="4" height="60" width="494" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Balance" border="0" color="0" x="1641" y="4" height="60" width="393" html.valueishtml="0"  name=balance_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="18" y="12" height="60" width="219" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1280" y="12" height="60" width="343" format="[general]" html.valueishtml="0"  name=overpayment_balance_overpayment_type_cod visible="1" dddw.name=dddw_overpayment_type dddw.displaycolumn=overpayment_type_desc dddw.datacolumn=overpayment_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="trim( individual_given_names )  + ' ' + trim( individual_last_name ) + ' ('+claim_role_code+')'"border="0" color="0" x="293" y="12" height="60" width="951" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="1641" y="12" height="60" width="393" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=balance_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  balance_amount  for all )"border="0" color="0" x="1641" y="28" height="60" width="393" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="1605" y1="8" x2="2048" y2="8"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

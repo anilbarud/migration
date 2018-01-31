@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_nature_of_injury_codes_active.srd
+$PBExportComments$Select of all ACTIVE nature_of_injury_code from Nature_Of_Injury.
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 107 print.margin.right = 107 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=-3 color="-1" )
+footer(height=1 color="-1" )
+detail(height=65 color="536870912" )
+table(column=(type=char(5) update=yes key=yes name=nature_of_injury_code dbname="Nature_Of_Injury.nature_of_injury_code" )
+ column=(type=char(86) name=nature_of_injury_code_desc dbname="Nature_Of_Injury.nature_of_injury_code_desc" )
+ retrieve="SELECT Nature_Of_Injury.nature_of_injury_code, Nature_Of_Injury.nature_of_injury_code_desc FROM Nature_Of_Injury WHERE Nature_Of_Injury.active_flag = 'Y'" update="Nature_Of_Injury" updatewhere=1 updatekeyinplace=no  sort="nature_of_injury_code A " )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="0~tif(active_flag = ~"N~", 8388608 ,0)" x="5" y="4" height="57" width="2396" format="[general]"  name=nature_of_injury_code_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

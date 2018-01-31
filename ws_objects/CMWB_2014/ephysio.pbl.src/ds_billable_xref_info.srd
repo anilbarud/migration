@@ -1,0 +1,115 @@
+﻿$PBExportHeader$ds_billable_xref_info.srd
+$PBExportComments$information for item and xref
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1380 color="536870912" )
+table(column=(type=char(1) updatewhereclause=yes name=taxable_flag dbname="taxable_flag" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_service_flag dbname="is_a_service_flag" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_goods_flag dbname="is_a_goods_flag" )
+ column=(type=char(3) updatewhereclause=yes name=billable_unit_code dbname="billable_unit_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=unit_fee dbname="unit_fee" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=datetime updatewhereclause=yes name=effective_to_date dbname="effective_to_date" )
+ column=(type=long updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=long updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=default_authorized_qty dbname="default_authorized_qty" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_qty dbname="max_authorized_qty" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_amount dbname="max_authorized_amount" )
+ column=(type=char(1) updatewhereclause=yes name=explicit_authorization_flag dbname="explicit_authorization_flag" )
+ column=(type=char(1) updatewhereclause=yes name=fixed_fee_flag dbname="fixed_fee_flag" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=fee_no dbname="fee_no" )
+ retrieve="SELECT a.taxable_flag,   
+         a.is_a_service_flag,   
+         a.is_a_goods_flag,   
+        '' as 'billable_unit_code',   
+         0 as 'unit_fee',   
+         null as 'effective_from_date',   
+         null as 'effective_to_date',   
+         c.billable_xref_no,   
+         c.billable_item_no,   
+         c.default_authorized_qty,   
+         c.max_authorized_qty,   
+         c.max_authorized_amount,   
+         c.explicit_authorization_flag,   
+         c.fixed_fee_flag,   
+         c.payment_type_code,   
+         c.payment_sub_type_code ,
+        0 as 'fee_no'
+FROM  billable_item_rehab_task_xref c  
+			join billable_item a on c.billable_item_no = a.billable_item_no       
+WHERE  c.billable_xref_no =  :al_billable_xref_no
+and c.fixed_fee_flag = 'N'
+union
+SELECT a.taxable_flag,   
+         a.is_a_service_flag,   
+         a.is_a_goods_flag,   
+         b.billable_unit_code,   
+         b.unit_fee,   
+         b.effective_from_date,   
+         b.effective_to_date,   
+         c.billable_xref_no,   
+         c.billable_item_no,   
+         c.default_authorized_qty,   
+         c.max_authorized_qty,   
+         c.max_authorized_amount,   
+         c.explicit_authorization_flag,   
+         c.fixed_fee_flag,   
+         c.payment_type_code,   
+         c.payment_sub_type_code ,
+         b.fee_no
+FROM  billable_item_rehab_task_xref c  
+			join billable_item a on c.billable_item_no = a.billable_item_no   
+			left join billable_item_fee b on c.billable_xref_no = b.billable_xref_no        
+WHERE  c.billable_xref_no =  :al_billable_xref_no
+AND 		( 	:adt_datecheck >= b.effective_from_date  AND :adt_datecheck <= b.effective_to_date
+OR        		:adt_datecheck >= b.effective_from_date  AND b.effective_to_date IS NULL )
+and c.fixed_fee_flag = 'Y'" arguments=(("al_billable_xref_no", number),("adt_datecheck", date)) )
+text(band=detail alignment="1" text="Taxable Flag:" border="0" color="33554432" x="37" y="4" height="64" width="786" html.valueishtml="0"  name=taxable_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Is A Service Flag:" border="0" color="33554432" x="37" y="84" height="64" width="786" html.valueishtml="0"  name=is_a_service_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Is A Goods Flag:" border="0" color="33554432" x="37" y="164" height="64" width="786" html.valueishtml="0"  name=is_a_goods_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Billable Unit Code:" border="0" color="33554432" x="37" y="244" height="64" width="786" html.valueishtml="0"  name=billable_unit_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Unit Fee:" border="0" color="33554432" x="37" y="324" height="64" width="786" html.valueishtml="0"  name=unit_fee_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Effective From Date:" border="0" color="33554432" x="37" y="404" height="64" width="786" html.valueishtml="0"  name=effective_from_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Effective To Date:" border="0" color="33554432" x="37" y="484" height="64" width="786" html.valueishtml="0"  name=effective_to_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Billable Xref No:" border="0" color="33554432" x="37" y="564" height="64" width="786" html.valueishtml="0"  name=billable_xref_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Billable Item No:" border="0" color="33554432" x="37" y="644" height="64" width="786" html.valueishtml="0"  name=billable_item_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Default Authorized Qty:" border="0" color="33554432" x="37" y="724" height="64" width="786" html.valueishtml="0"  name=default_authorized_qty_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Max Authorized Qty:" border="0" color="33554432" x="37" y="804" height="64" width="786" html.valueishtml="0"  name=max_authorized_qty_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Max Authorized Amount:" border="0" color="33554432" x="37" y="884" height="64" width="786" html.valueishtml="0"  name=max_authorized_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Explicit Authorization Flag:" border="0" color="33554432" x="37" y="964" height="64" width="786" html.valueishtml="0"  name=explicit_authorization_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Fixed Fee Flag:" border="0" color="33554432" x="37" y="1044" height="64" width="786" html.valueishtml="0"  name=fixed_fee_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Payment Type Code:" border="0" color="33554432" x="37" y="1124" height="64" width="786" html.valueishtml="0"  name=payment_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Payment Sub Type Code:" border="0" color="33554432" x="37" y="1204" height="64" width="786" html.valueishtml="0"  name=payment_sub_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="4" height="76" width="1019" format="[general]" html.valueishtml="0"  name=taxable_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="84" height="76" width="1019" format="[general]" html.valueishtml="0"  name=is_a_service_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="164" height="76" width="1019" format="[general]" html.valueishtml="0"  name=is_a_goods_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="841" y="564" height="76" width="1019" format="[general]" html.valueishtml="0"  name=billable_xref_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="841" y="644" height="76" width="1019" format="[general]" html.valueishtml="0"  name=billable_item_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="841" y="724" height="76" width="1019" format="[general]" html.valueishtml="0"  name=default_authorized_qty visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="841" y="804" height="76" width="1019" format="[general]" html.valueishtml="0"  name=max_authorized_qty visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="841" y="884" height="76" width="1019" format="[general]" html.valueishtml="0"  name=max_authorized_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="964" height="76" width="1019" format="[general]" html.valueishtml="0"  name=explicit_authorization_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="1044" height="76" width="1019" format="[general]" html.valueishtml="0"  name=fixed_fee_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="1124" height="76" width="1019" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=2 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="33554432" x="841" y="1204" height="76" width="1019" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=2 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=0 border="0" color="33554432" x="7269" y="0" height="64" width="2135" html.valueishtml="0"  name=fee_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="33554432" x="850" y="256" height="64" width="1015" html.valueishtml="0"  name=billable_unit_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=0 border="0" color="33554432" x="850" y="332" height="64" width="1015" html.valueishtml="0"  name=unit_fee visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=0 border="0" color="33554432" x="850" y="416" height="64" width="1015" html.valueishtml="0"  name=effective_from_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=0 border="0" color="33554432" x="850" y="488" height="64" width="1015" html.valueishtml="0"  name=effective_to_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,33 @@
+﻿$PBExportHeader$d_cae_tombstone.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=116 color="67108864" )
+table(column=(type=long updatewhereclause=yes name=medicare_no dbname="medicare_no" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=datetime updatewhereclause=yes name=death_date dbname="death_date" )
+ retrieve="SELECT	b.medicare_no ,
+			b.birth_date,
+			b.death_date
+FROM		ANNUITY_ACCOUNT a
+JOIN		INDIVIDUAL b ON a.individual_no = b.individual_no
+WHERE   b.individual_no = :al_individual_no" arguments=(("al_individual_no", number)) )
+text(band=detail alignment="1" text="Medicare No:" border="0" color="33554432" x="14" y="28" height="64" width="384" html.valueishtml="0"  name=medicare_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="421" y="28" height="64" width="329" format="###-###-###" html.valueishtml="0"  name=medicare_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1216" y="28" height="64" width="343" format="yyyy-mm-dd" html.valueishtml="0"  name=birth_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Birth Date:" border="0" color="33554432" x="905" y="28" height="64" width="293" html.valueishtml="0"  name=birth_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Death Date:" border="0" color="33554432" x="1691" y="28" height="64" width="306" html.valueishtml="0"  name=death_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="2043" y="28" height="64" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=death_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

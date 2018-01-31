@@ -1,0 +1,11 @@
+﻿$PBExportHeader$f_get_claim_role_code.srf
+global type f_get_claim_role_code from function_object
+end type
+
+forward prototypes
+global function string f_get_claim_role_code ()
+end prototypes
+
+global function string f_get_claim_role_code ();RETURN gs_claim_role_code
+end function
+

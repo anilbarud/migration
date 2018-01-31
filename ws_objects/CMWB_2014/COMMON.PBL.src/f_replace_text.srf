@@ -1,0 +1,40 @@
+﻿$PBExportHeader$f_replace_text.srf
+$PBExportComments$Function used to substitue characters within a string
+global type f_replace_text from function_object
+end type
+
+forward prototypes
+global subroutine f_replace_text (ref string vas_string, string vas_old_arg, string vas_new_arg)
+end prototypes
+
+global subroutine f_replace_text (ref string vas_string, string vas_old_arg, string vas_new_arg);/* ----------------------------------------------------------------------------------------------------	*/
+/*	Function Name: 	f_replace_text																								*/
+/*																																			*/
+/*	Purpose:				This function replaces all occurrences of vas_old_arg with vas_new_arg					*/
+/*																																			*/
+/*																																			*/
+/*	Arguments:			String	-	vas_string																					*/
+/*							String	-	vas_old_arg																					*/
+/*							String	-	vas_new_arg																					*/
+/*																																			*/
+/* ----------------------------------------------------------------------------------------------------	*/
+
+
+Long	vll_new_pos, vll_old_pos,	vll_len_new_arg,	vll_len_old_arg
+
+vll_len_new_arg= len(vas_new_arg)
+vll_len_old_arg= len(vas_old_arg)
+vll_old_pos    = 1
+vll_new_pos		= 1
+
+Do While vll_new_pos <> 0
+
+	vll_new_pos = Pos(vas_string,vas_old_arg,vll_old_pos)
+	If vll_new_pos <> 0 Then
+		vas_string = Replace(vas_string,vll_new_pos,vll_len_old_arg,vas_new_arg)
+		vll_old_pos= vll_new_pos + vll_len_new_arg
+	End If
+		
+Loop
+end subroutine
+

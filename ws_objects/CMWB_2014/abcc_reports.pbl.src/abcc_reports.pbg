@@ -1,0 +1,32 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "abcc_reports.pbl" "";
+@end;
+@begin Objects 
+ "d_abcc_admin_fee.srd" "abcc_reports.pbl";
+ "d_abcc_elig_expt_composite.srd" "abcc_reports.pbl";
+ "d_abcc_elig_expt_eligibility.srd" "abcc_reports.pbl";
+ "d_abcc_elig_expt_formulary.srd" "abcc_reports.pbl";
+ "d_abcc_elig_expt_house_res_new.srd" "abcc_reports.pbl";
+ "d_abcc_elig_expt_house_res_update.srd" "abcc_reports.pbl";
+ "d_composite_abcc_invoice.srd" "abcc_reports.pbl";
+ "d_din_gp_pin_search.srd" "abcc_reports.pbl";
+ "d_din_gp_pin_search_criteria.srd" "abcc_reports.pbl";
+ "d_din_report_drug_by_physcians.srd" "abcc_reports.pbl";
+ "d_din_report_drugs_by_individual_details.srd" "abcc_reports.pbl";
+ "d_din_report_drugs_by_individual_summary.srd" "abcc_reports.pbl";
+ "d_din_report_individuals_by_drug_details.srd" "abcc_reports.pbl";
+ "d_din_report_individuals_by_drug_summary.srd" "abcc_reports.pbl";
+ "d_din_report_physcians_by_drug.srd" "abcc_reports.pbl";
+ "d_eligibility_export_report_dates.srd" "abcc_reports.pbl";
+ "d_invoice_reconciliation_totals.srd" "abcc_reports.pbl";
+ "d_monthly_rep.srd" "abcc_reports.pbl";
+ "d_physician_search.srd" "abcc_reports.pbl";
+ "d_tax_rates.srd" "abcc_reports.pbl";
+ "dddw_product_type.srd" "abcc_reports.pbl";
+ "w_din_gp_pin_search.srw" "abcc_reports.pbl";
+ "w_din_report.srw" "abcc_reports.pbl";
+ "w_eligibility_export_report.srw" "abcc_reports.pbl";
+ "w_invoice_reconciliation_report.srw" "abcc_reports.pbl";
+ "w_physician_search.srw" "abcc_reports.pbl";
+@end;

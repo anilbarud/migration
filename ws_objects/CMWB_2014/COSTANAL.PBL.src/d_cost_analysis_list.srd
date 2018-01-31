@@ -1,0 +1,20 @@
+﻿$PBExportHeader$d_cost_analysis_list.srd
+$PBExportComments$List of COST_ANALYSIS_MASTERs for a claim
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="10789024" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=81 color="-1" )
+table(column=(type=long updatewhereclause=yes key=yes name=cost_no dbname="COST_ANALYSIS_MASTER.cost_no" )
+ column=(type=long updatewhereclause=yes name=recommended_option_no dbname="COST_ANALYSIS_MASTER.recommended_option_no" )
+ column=(type=char(255) updatewhereclause=yes name=rationale dbname="COST_ANALYSIS_MASTER.rationale" )
+ column=(type=long updatewhereclause=yes key=yes name=claim_no dbname="COST_ANALYSIS_MASTER.claim_no" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"COST_ANALYSIS_MASTER~" ) COLUMN(NAME=~"COST_ANALYSIS_MASTER.cost_no~") COLUMN(NAME=~"COST_ANALYSIS_MASTER.recommended_option_no~") COLUMN(NAME=~"COST_ANALYSIS_MASTER.rationale~") COLUMN(NAME=~"COST_ANALYSIS_MASTER.claim_no~")WHERE(    EXP1 =~"( COST_ANALYSIS_MASTER.claim_no~"   OP =~"=~"    EXP2 =~":al_claim_no )~" ) ) ORDER(NAME=~"COST_ANALYSIS_MASTER.cost_no~" ASC=yes ) ARG(NAME = ~"al_claim_no~" TYPE = number) " update="COST_ANALYSIS_MASTER" updatewhere=0 updatekeyinplace=no arguments=(("al_claim_no", number)) )
+text(band=header alignment="0" text="Cost No"border="0" color="0" x="14" y="8" height="61" width="202"  name=cost_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Option No"border="0" color="0" x="247" y="8" height="61" width="252"  name=recommended_option_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Rationale"border="0" color="0" x="526" y="8" height="61" width="247"  name=rationale_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="5710" y="0" height="65" width="83" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="526" y="4" height="65" width="4389" format="[general]"  name=rationale edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="14" y="4" height="65" width="202" format="[general]"  name=cost_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="247" y="4" height="65" width="202" format="[general]"  name=recommended_option_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

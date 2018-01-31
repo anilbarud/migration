@@ -1,0 +1,31 @@
+﻿$PBExportHeader$f_close_viewer.srf
+global type f_close_viewer from function_object
+end type
+
+forward prototypes
+global function long f_close_viewer ()
+end prototypes
+
+global function long f_close_viewer ();long ll_window_handle
+boolean lb_document_displayed
+STRING LS_NULL
+
+SETNULL(LS_NULL)
+
+// close down viewer if displayed //
+
+	ll_window_handle = FindWindowA(LS_NULL,"VIEWER")
+	
+	if ll_window_handle <> 0 then
+		
+		lb_document_displayed = BringWindowToTop(ll_window_handle)
+		if lb_document_displayed then
+			keybd_event(vk_f3, 0, 0, 0) 
+		end if
+	end if
+
+
+
+RETURN ll_window_handle
+end function
+

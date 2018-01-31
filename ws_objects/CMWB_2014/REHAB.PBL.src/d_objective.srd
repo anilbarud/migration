@@ -1,0 +1,56 @@
+﻿$PBExportHeader$d_objective.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=449 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="REHAB_OBJECTIVE.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=goal_no dbname="REHAB_OBJECTIVE.goal_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=objective_no dbname="REHAB_OBJECTIVE.objective_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=objective_code dbname="REHAB_OBJECTIVE.objective_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=outcome_code dbname="REHAB_OBJECTIVE.outcome_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=outcome_date dbname="REHAB_OBJECTIVE.outcome_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=revised_objective_date dbname="REHAB_OBJECTIVE.revised_objective_date" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="REHAB_OBJECTIVE.timestamp" )
+ column=(type=char(1) updatewhereclause=yes name=revised_objective_flag dbname="revised_objective_flag" values="	Y/	N" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="REHAB_OBJECTIVE.create_date" )
+ column=(type=datetime updatewhereclause=yes name=modify_date dbname="REHAB_OBJECTIVE.modify_date" )
+ column=(type=char(8) updatewhereclause=yes name=create_user_id dbname="REHAB_OBJECTIVE.create_user_id" )
+ column=(type=char(8) updatewhereclause=yes name=modify_user_id dbname="REHAB_OBJECTIVE.modify_user_id" )
+ retrieve="  SELECT REHAB_OBJECTIVE.claim_no,   
+         REHAB_OBJECTIVE.goal_no,   
+         REHAB_OBJECTIVE.objective_no,   
+         REHAB_OBJECTIVE.objective_code,   
+         REHAB_OBJECTIVE.outcome_code,   
+         REHAB_OBJECTIVE.outcome_date,   
+         REHAB_OBJECTIVE.revised_objective_date,   
+         REHAB_OBJECTIVE.timestamp, 
+			~"~" revised_objective_flag,   
+         REHAB_OBJECTIVE.create_date,   
+         REHAB_OBJECTIVE.modify_date,   
+         REHAB_OBJECTIVE.create_user_id,   
+         REHAB_OBJECTIVE.modify_user_id  
+    FROM REHAB_OBJECTIVE  
+   WHERE ( REHAB_OBJECTIVE.claim_no = :al_claim_no ) AND  
+         ( REHAB_OBJECTIVE.goal_no = :ai_goal_no ) AND  
+         ( REHAB_OBJECTIVE.objective_no = :ai_objective_no )  
+
+ 
+" update="REHAB_OBJECTIVE" updatewhere=0 updatekeyinplace=yes arguments=(("al_claim_no", number),("ai_goal_no", number),("ai_objective_no", number)) )
+rectangle(band=detail x="14" y="100" height="341" width="2565" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="33554432" )
+rectangle(band=detail x="19" y="104" height="341" width="2565" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="2" background.color="33554432" )
+text(band=detail alignment="0" text="Objective"border="0" color="0" x="37" y="64" height="65" width="275"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="0" text="Objective: "border="0" color="0" x="37" y="132" height="61" width="270"  name=objective_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="Outcome: "border="0" color="0" x="37" y="216" height="65" width="298"  name=outcome_code_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=20 border="5" color="0" x="343" y="216" height="65" width="1276" format="[general]"  name=outcome_code dddw.name=dddw_outcome dddw.displaycolumn=outcome_desc dddw.datacolumn=outcome_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="0" x="343" y="128" height="65" width="1276" format="[general]" protect="0~tif(isNull( claim_no ),0,1)"  name=objective_code dddw.name=dddw_objective dddw.displaycolumn=objective_desc dddw.datacolumn=objective_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Objective Revised: "border="0" color="0" x="1651" y="132" height="61" width="490"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Outcome Date: "border="0" color="0" x="1651" y="216" height="61" width="398"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=40 border="0" color="0" x="2145" y="136" height="49" width="46" format="[general]"  name=revised_objective_flag checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=30 border="5" color="0" x="2218" y="128" height="65" width="334" format="YYYY-MM-DD"  name=revised_objective_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="5" color="0" x="2218" y="216" height="65" width="334" format="YYYY-MM-DD"  name=outcome_date editmask.mask="YYYY-MM-DD" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="79741120" )
+text(band=detail alignment="0" text="Created/Modified by:"border="0" color="0" x="46" y="340" height="61" width="526"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="if( modify_user_id <> ~" ~", modify_user_id ,  create_user_id  )"border="0" color="0" x="599" y="340" height="61" width="366" format="[general]"  name=user_id  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Created/Modified on:"border="0" color="0" x="1002" y="340" height="61" width="531"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="if( not isnull(modify_date),  modify_date ,  create_date  )"border="0" color="0" x="1578" y="340" height="61" width="348" format="yyyy-mm-dd"  name=update_date  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )

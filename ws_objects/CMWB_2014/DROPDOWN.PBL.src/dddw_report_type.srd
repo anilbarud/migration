@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_report_type.srd
+$PBExportComments$Drop down dw of available report types.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=69 color="536870912" )
+table(column=(type=char(70) update=yes updatewhereclause=yes name=report_type_desc dbname="Report_Type.report_type_desc" )
+ column=(type=char(5) update=yes updatewhereclause=yes key=yes name=report_type_code dbname="Report_Type.report_type_code" )
+ retrieve="PBSELECT(TABLE(NAME=~"Report_Type~") COLUMN(NAME=~"Report_Type.report_type_desc~")COLUMN(NAME=~"Report_Type.report_type_code~"))" update="Report_Type" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="5" y="4" height="65" width="1870" format="[general]"  name=report_type_desc edit.limit=70 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

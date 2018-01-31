@@ -1,0 +1,124 @@
+﻿$PBExportHeader$d_account_payment.srd
+$PBExportComments$Account Payments - Datawindow to display & maintain account payment details
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=772 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=payment_no dbname="payment_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_type_code dbname="payment_type_code" validationmsg="~"You must provide a payment type code~"" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_award_amount dbname="total_award_amount" validation="Real(GetText()) >= 0 " validationmsg="~"The paid amount cannot be negative~" " )
+ column=(type=decimal(4) updatewhereclause=yes name=total_payment_amount dbname="total_payment_amount" initial="0" validation="Real(GetText()) >= 0" validationmsg="~"The paid amount cannot be negative~"" )
+ column=(type=datetime update=yes updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=zeroed_flag dbname="zeroed_flag" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=authorized_by_code dbname="authorized_by_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=authorized_date dbname="authorized_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=submitted_amount dbname="submitted_amount" initial="0" validation="Real(GetText()) >= 0" validationmsg="~"The submitted amount cannot be negative~"" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paid_from_date dbname="paid_from_date" validationmsg="~"You must provide a valid paid from date~"" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paid_to_date dbname="paid_to_date" validationmsg="~"You must provide a valid paid to date~"" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="timestamp" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=adjustment_days_lost dbname="adjustment_days_lost" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=adjustment_hours_lost dbname="adjustment_hours_lost" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=adjustment_payment_amount dbname="adjustment_payment_amount" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=payment_adjustment_flag dbname="payment_adjustment_flag" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=long update=yes updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=final_payment_flag dbname="final_payment_flag" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paid_days_lost dbname="paid_days_lost" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=paid_hours_lost dbname="paid_hours_lost" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_deductions dbname="total_deductions" )
+ column=(type=char(80) update=yes updatewhereclause=yes name=loe_explanation dbname="loe_explanation" )
+ column=(type=datetime updatewhereclause=yes name=scheduled_processing_date dbname="scheduled_processing_date" )
+ column=(type=char(1) updatewhereclause=yes name=effective_from_date dbname="effective_from_date" )
+ column=(type=long updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" )
+ column=(type=long updatewhereclause=yes name=daily_rate dbname="daily_rate" )
+ column=(type=long updatewhereclause=yes name=hourly_rate dbname="hourly_rate" )
+ column=(type=long updatewhereclause=yes name=day_amount dbname="day_amount" )
+ column=(type=long updatewhereclause=yes name=hour_amount dbname="hour_amount" )
+ column=(type=long updatewhereclause=yes name=nmbr_cycles dbname="nmbr_cycles" )
+ column=(type=long updatewhereclause=yes name=award_amount dbname="award_amount" )
+ column=(type=char(1) updatewhereclause=yes name=payment_type_description dbname="payment_type_description" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=long update=yes updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long update=yes updatewhereclause=yes name=paid_quantity dbname="paid_quantity" )
+ column=(type=long update=yes updatewhereclause=yes name=award_no dbname="award_no" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=tax_amount dbname="tax_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=non_tax_amount dbname="non_tax_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=adjustment_tax_amount dbname="adjustment_tax_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=adjustment_quantity dbname="adjustment_quantity" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=adjustment_non_tax_amount dbname="adjustment_non_tax_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=net_days_lost dbname="net_days_lost" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=net_hours_lost dbname="net_hours_lost" )
+ column=(type=long update=yes updatewhereclause=yes name=net_quantity dbname="net_quantity" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=net_tax_amount dbname="net_tax_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=net_non_tax_amount dbname="net_non_tax_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=net_payment_amount dbname="net_payment_amount" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=tax_rate dbname="tax_rate" )
+ retrieve="
+SELECT PAYMENT.payment_no, 	        PAYMENT.claim_no, 	           PAYMENT.payment_type_code, 
+	PAYMENT.total_award_amount,     PAYMENT.total_payment_amount,      PAYMENT.processed_date, 
+	PAYMENT.zeroed_flag, 		PAYMENT.authorized_by_code,        PAYMENT.authorized_date, 
+        PAYMENT.submitted_amount,       PAYMENT.paid_from_date,            PAYMENT.paid_to_date, 
+        PAYMENT.timestamp,              PAYMENT.opening_no,                PAYMENT.adjustment_days_lost, 
+        PAYMENT.adjustment_hours_lost,  PAYMENT.adjustment_payment_amount, PAYMENT.payment_adjustment_flag, 
+        PAYMENT.create_date,            PAYMENT.create_user_id,            PAYMENT.benefit_calculation_no, 
+        PAYMENT.final_payment_flag,     PAYMENT.paid_days_lost,            PAYMENT.paid_hours_lost, 
+        PAYMENT.total_deductions,       PAYMENT.loe_explanation ,          getdate() scheduled_processing_date , 
+        ~"~" effective_from_date,         0 benefit_level_percentage,        0 daily_rate, 
+        0 hourly_rate,                  0 day_amount,                      0 hour_amount,
+	     0 nmbr_cycles ,                 0 award_amount ,                   ~"~" payment_type_description , 
+        payment_sub_type_code,          PAYMENT.authorization_no,        
+        PAYMENT.paid_quantity,          PAYMENT.award_no,                  PAYMENT.tax_amount,
+        PAYMENT.non_tax_amount,         PAYMENT.adjustment_tax_amount,     PAYMENT.adjustment_quantity,
+        PAYMENT.adjustment_non_tax_amount,         PAYMENT.net_days_lost,     PAYMENT.net_hours_lost,
+        PAYMENT.net_quantity,         PAYMENT.net_tax_amount,     PAYMENT.net_non_tax_amount,
+        PAYMENT.net_payment_amount,    PAYMENT.tax_rate
+ FROM 	PAYMENT 
+ WHERE ( PAYMENT.payment_no = :val_payment_no ) " update="PAYMENT" updatewhere=2 updatekeyinplace=yes arguments=(("val_payment_no", number)) )
+groupbox(band=detail text=""border="6" color="33554432" x="23" y="28" height="724" width="2843"  name=gb_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Payment Details" border="0" color="0" x="50" y="4" height="64" width="421" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="If (IsNull(processed_date), ~"~",
+~"Processed on ~" + string(processed_date,~"yyyy-mm-dd~"))"border="0" color="16711680" x="114" y="68" height="64" width="823" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="1" expression="If (IsNull( payment_no ), ~"~",
+~"# ~" + string( payment_no ))"border="0" color="0" x="969" y="72" height="64" width="334" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=11 alignment="0" tabsequence=10 border="5" color="0" x="475" y="144" height="60" width="366" format="yyyy-mm-dd" html.valueishtml="0"  name=paid_from_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="5" color="0" x="475" y="228" height="60" width="974" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" dddw.name=dddw_payment_types_module dddw.displaycolumn=payment_type_desc dddw.datacolumn=payment_type_code dddw.percentwidth=150 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="if ( adjustment_days_lost < 0 or adjustment_hours_lost  <0 or adjustment_payment_amount < 0,~"* Adjusted~",~"~") "border="0" color="16711680" x="2158" y="472" height="60" width="421" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Authorization No:" border="0" color="0" x="791" y="472" height="60" width="439" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=38 alignment="1" tabsequence=80 border="5" color="0" x="1253" y="472" height="60" width="201" format="[general]" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="to" border="0" color="0" x="864" y="144" height="68" width="50" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=12 alignment="0" tabsequence=20 border="5" color="0" x="933" y="144" height="60" width="366" format="yyyy-mm-dd" html.valueishtml="0"  name=paid_to_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=39 alignment="1" tabsequence=90 border="5" color="0" x="475" y="548" height="56" width="283" format="[general]" html.valueishtml="0"  name=paid_quantity visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=41 alignment="1" tabsequence=60 border="5" color="33554432" x="951" y="388" height="56" width="178" format="[general]" html.valueishtml="0"  name=tax_amount visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="- Tax" border="0" color="33554432" x="777" y="384" height="64" width="142" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="=" border="0" color="33554432" x="1166" y="388" height="48" width="41" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=37 alignment="0" tabsequence=40 border="5" color="0" x="475" y="308" height="60" width="974" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" dddw.name=dddw_payment_subtype_active dddw.displaycolumn=payment_sub_type_desc dddw.datacolumn=payment_sub_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="1" tabsequence=50 border="5" color="0" x="475" y="388" height="60" width="283" format="[general]" html.valueishtml="0"  name=total_award_amount visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="1" tabsequence=70 border="5" color="0" x="475" y="468" height="60" width="283" format="[general]" html.valueishtml="0"  name=submitted_amount visible="1" editmask.required=yes editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Period:" border="0" color="0" x="59" y="144" height="68" width="183" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Pymt Code:" border="0" color="0" x="59" y="228" height="64" width="293" html.valueishtml="0"  name=payment_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Pymt Sub Type:" border="0" color="0" x="59" y="308" height="60" width="398" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Amt Paid:" border="0" color="0" x="59" y="384" height="68" width="247" html.valueishtml="0"  name=total_payment_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Submitted:" border="0" color="0" x="59" y="468" height="68" width="279" html.valueishtml="0"  name=submitted_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Quantity:" border="0" color="33554432" x="59" y="552" height="60" width="242" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=42 alignment="0" tabsequence=32766 border="0" color="0" x="1243" y="388" height="64" width="215" format="$#,##0.00" html.valueishtml="0"  name=non_tax_amount visible="1~tIF( tax_amount = 0 and total_award_amount = 0 ,0,1)" editmask.useformat=yes editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Max Effective Tax Rate %:" border="0" color="33554432" x="59" y="628" height="60" width="658" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" tax_rate * 100"border="0" color="0" x="736" y="628" height="60" width="183" format="0.00" html.valueishtml="0"  name=c_tax_rate visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=52 alignment="0" tabsequence=110 border="0" color="0" x="1175" y="624" height="60" width="370" format="[general]" html.valueishtml="0"  name=tax_rate visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Order Date:" border="0" color="0" x="1819" y="144" height="60" width="297" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=27 alignment="0" tabsequence=100 border="5" color="0" x="2153" y="148" height="60" width="366" format="yyyy-mm-dd" html.valueishtml="0"  name=scheduled_processing_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

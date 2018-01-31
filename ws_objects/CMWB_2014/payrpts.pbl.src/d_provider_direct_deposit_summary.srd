@@ -1,0 +1,50 @@
+﻿$PBExportHeader$d_provider_direct_deposit_summary.srd
+$PBExportComments$Shows all Medical Aid Cheque Batch History entries
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=124 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=direct_deposit_xmit_no dbname="direct_deposit_xmit_no" )
+ column=(type=long updatewhereclause=yes key=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(30) updatewhereclause=yes name=name dbname="name" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_amount dbname="total_amount" )
+ column=(type=long updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=voucher_printed_date dbname="voucher_printed_date" )
+ retrieve="   
+SELECT a.direct_deposit_xmit_no,
+           a.recipient_no,
+           b.name,
+   sum (a.txn_amount) as total_amount,
+           b.provider_no,
+           a.voucher_printed_date
+FROM   DIRECT_DEPOSIT_DETAIL a
+JOIN    PROVIDER b on a.recipient_no = b.provider_no and a.recipient_type_code = b.provider_type_code
+WHERE  direct_deposit_xmit_no = :al_number
+group by b.name,
+             a.recipient_no,
+             a.direct_deposit_xmit_no,
+             b.provider_no,
+             a.voucher_printed_date
+order by  b.provider_no" update="DIRECT_DEPOSIT_DETAIL" updatewhere=1 updatekeyinplace=yes arguments=(("al_number", number)) )
+text(band=header alignment="0" text="Deposit No" border="4" color="0" x="18" y="48" height="60" width="283" html.valueishtml="0"  name=direct_deposit_xmit_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Provider Name" border="4" color="0" x="325" y="48" height="60" width="955" html.valueishtml="0"  name=name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="27" y="8" height="64" width="270" format="[general]" html.valueishtml="0"  name=direct_deposit_xmit_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="320" y="8" height="64" width="987" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="1317" y="8" height="64" width="430" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=total_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Deposit Amount" border="4" color="0" x="1326" y="48" height="60" width="421" html.valueishtml="0"  name=total_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Voucher 
+Printed" border="4" color="0" x="1801" y="0" height="112" width="247" html.valueishtml="0"  name=voucher_produced_y_n_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if(isnull(voucher_printed_date),'N','Y') "border="0" color="0" x="1819" y="8" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=voucher_produced_y_n visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

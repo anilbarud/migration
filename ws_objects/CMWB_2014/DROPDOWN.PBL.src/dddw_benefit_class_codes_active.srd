@@ -1,0 +1,18 @@
+﻿$PBExportHeader$dddw_benefit_class_codes_active.srd
+$PBExportComments$Select - Used to display a list of all active benefit_class_codes from Benefit_Class.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes key=yes name=benefit_class_code dbname="Benefit_Class.benefit_class_code" )
+ column=(type=char(30) updatewhereclause=yes name=benefit_class_desc dbname="Benefit_Class.benefit_class_desc" )
+ retrieve="  SELECT Benefit_Class.benefit_class_code,   
+         Benefit_Class.benefit_class_desc  
+    FROM Benefit_Class  
+   WHERE Benefit_Class.active_flag = 'Y' 
+ UNION ALL
+  SELECT 'ALL',
+         'All Benefit Classes' " update="Benefit_Class" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="4" height="65" width="842" format="[general]"  name=benefit_class_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

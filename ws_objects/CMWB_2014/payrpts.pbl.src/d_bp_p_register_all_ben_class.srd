@@ -1,0 +1,92 @@
+﻿$PBExportHeader$d_bp_p_register_all_ben_class.srd
+$PBExportComments$Select - Used to produce the payment register for benefit payments which will include all benefit class codes.
+release 10.5;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=456 color="536870912" )
+summary(height=160 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="553648127" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(30) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(10) updatewhereclause=yes name=country dbname="country" )
+ column=(type=char(9) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=char(1) updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ retrieve="  SELECT APPLIED_CLAIM_TXN.cheque_no,   
+         APPLIED_CLAIM_TXN.recipient_no,   
+         APPLIED_CLAIM_TXN.claim_no,   
+         APPLIED_CLAIM_TXN.recipient_name,   
+         APPLIED_CLAIM_TXN.address_line1,   
+         APPLIED_CLAIM_TXN.address_line2,   
+         APPLIED_CLAIM_TXN.city,   
+         APPLIED_CLAIM_TXN.prov_state_code,   
+         APPLIED_CLAIM_TXN.country,   
+         APPLIED_CLAIM_TXN.postal_code,   
+         APPLIED_CLAIM_TXN.recipient_type_code,   
+         APPLIED_CLAIM_TXN.txn_amount,   
+         APPLIED_CLAIM_TXN.payment_method_code  
+    FROM APPLIED_CLAIM_TXN  
+   WHERE ( APPLIED_CLAIM_TXN.processed_date >= :adt_processed_date1 )   
+     AND ( APPLIED_CLAIM_TXN.processed_date < :adt_processed_date2 )   
+     AND ( txn_amount > 0.00 )
+     AND ( payment_method_code in ('A','C','D','H'))
+     AND ( txn_type_code = '1')
+ 
+" arguments=(("adt_processed_date1", datetime),("adt_processed_date2", datetime))  sort="payment_method_code A calculated_recipient_no A cheque_no A " )
+group(level=1 header.height=0 trailer.height=128 by=("payment_method_code" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="18" y="28" height="336" width="4361"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3785" y="44" height="72" width="549" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="443" y="44" height="72" width="306" format="YYYY-MM-DD" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="64" y="44" height="72" width="366" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="PAYMENT REGISTER" border="0" color="0" x="1399" y="44" height="76" width="2066" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="0" x="558" y="128" height="60" width="649" format="[general]" html.valueishtml="0"  name=payment_method_code visible="1" dddw.name=dddw_payment_method_codes dddw.displaycolumn=payment_method_desc dddw.datacolumn=payment_method_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="0" color="0" x="1179" y="388" height="60" width="183" html.valueishtml="0"  name=applied_claim_txn_recipient_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address" border="0" color="0" x="2245" y="388" height="60" width="265" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Amount" border="0" color="0" x="3840" y="388" height="60" width="261" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Payment Method :" border="0" color="0" x="64" y="128" height="60" width="475" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="'Processed Date >=  ' + String(adt_processed_date1, 'YYYY/MM/DD') + ' and Processed Date < ' + String(adt_processed_date2, 'YYYY/MM/DD')"border="0" color="0" x="411" y="220" height="60" width="2043" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Parameters:" border="0" color="0" x="64" y="220" height="60" width="329" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+line(band=header x1="50" y1="324" x2="4325" y2="320"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Recipient Type" border="0" color="0" x="375" y="388" height="60" width="379" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Cheque No" border="0" color="0" x="55" y="388" height="60" width="297" html.valueishtml="0"  name=applied_claim_txn_cheque_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="46" y1="448" x2="4315" y2="448"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Recipient No" border="0" color="0" x="795" y="388" height="60" width="347" html.valueishtml="0"  name=applied_claim_txn_recipient_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1179" y="4" height="60" width="1024" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" height.autosize=yes edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim(address_line1) + 
+if(isNull(address_line2) OR Trim(address_line2) = ~"~" , ~"~", ~"~~r~" +  address_line2) +  
+if(isNull(city) OR Trim(city) = ~"~" , ~"~~r~", ~"~~r~" + city) + 
+if(isNull(prov_state_code) OR Trim(prov_state_code) = ~"~", ~"~", ~" ~" +  prov_state_code) +  
+if(isNull(country) OR Trim(country) = ~"~" , ~"~", ~" ~" + country) +  
+if(isNull(postal_code) OR Trim(postal_code) = ~"~" , ~"~", ~" ~" +   postal_code)"border="0" color="0" x="2245" y="4" height="60" width="1230" format="[general]" html.valueishtml="0"  name=calculated_address visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127"  height.autosize=yes)
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="3557" y="4" height="60" width="539" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="498" y="4" height="64" width="82" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="73" y="4" height="60" width="279" format="[general]" html.valueishtml="0"  name=cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="if( recipient_type_code = 'I', claim_no , recipient_no )"border="0" color="0" x="864" y="4" height="60" width="279" format="[general]" html.valueishtml="0"  name=calculated_recipient_no visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="0" text="Totals For Payment Type:" border="0" color="0" x="1792" y="36" height="60" width="649" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="3278" y1="24" x2="4110" y2="24"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+column(band=trailer.1 id=13 alignment="0" tabsequence=32766 border="0" color="0" x="2464" y="36" height="60" width="649" format="[general]" html.valueishtml="0"  name=payment_method_code_1 visible="1" dddw.name=dddw_payment_method_codes dddw.displaycolumn=payment_method_desc dddw.datacolumn=payment_method_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="count(  cheque_no  for group 1)"border="0" color="0" x="3296" y="40" height="64" width="224" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(  txn_amount  for group 1)"border="0" color="0" x="3561" y="40" height="64" width="539" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Report Totals:" border="0" color="0" x="1792" y="88" height="60" width="393" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="3278" y1="64" x2="4110" y2="64"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+line(band=summary x1="3278" y1="72" x2="4110" y2="72"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(  cheque_no  for all )"border="0" color="0" x="3296" y="88" height="64" width="224" format="[general]" html.valueishtml="0"  name=calculated_report_count_total visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  txn_amount  for all )"border="0" color="0" x="3561" y="88" height="64" width="539" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=calculated_report_amount_total visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

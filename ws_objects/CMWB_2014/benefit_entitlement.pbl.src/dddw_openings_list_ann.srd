@@ -1,0 +1,56 @@
+﻿$PBExportHeader$dddw_openings_list_ann.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="-1" )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=76 color="-1" )
+table(column=(type=long updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=char(4) updatewhereclause=yes name=opening_type_code dbname="opening_type_code" )
+ column=(type=datetime updatewhereclause=yes name=benefit_start_date dbname="benefit_start_date" )
+ column=(type=datetime updatewhereclause=yes name=benefit_end_date dbname="benefit_end_date" )
+ column=(type=datetime updatewhereclause=yes name=accident_recurrence_date dbname="accident_recurrence_date" )
+ column=(type=char(3) updatewhereclause=yes name=claim_disposition_code dbname="claim_disposition_code" )
+ column=(type=char(1) updatewhereclause=yes name=receiving_ltd_code dbname="receiving_ltd_code" )
+ column=(type=char(1) updatewhereclause=yes name=claimant_working_flag dbname="claimant_working_flag" )
+ column=(type=char(1) updatewhereclause=yes name=recurrence_type_code dbname="recurrence_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=three_day_paid_flag dbname="three_day_paid_flag" )
+ column=(type=char(1) updatewhereclause=yes name=comp_85percent_flag dbname="comp_85percent_flag" )
+ column=(type=datetime updatewhereclause=yes name=review_12_week_date dbname="review_12_week_date" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ retrieve="  SELECT  OPENING.opening_no ,           OPENING.opening_type_code ,           OPENING.benefit_start_date ,           
+OPENING.benefit_end_date ,           OPENING.accident_recurrence_date ,           OPENING.claim_disposition_code ,           
+OPENING.receiving_ltd_code ,           OPENING.claimant_working_flag ,           OPENING.recurrence_type_code ,           
+OPENING.three_day_paid_flag ,           OPENING.comp_85percent_flag ,           OPENING.review_12_week_date , OPENING.claim_no   
+ FROM OPENING     join Claim_Role_Opening_Type_Xref b on OPENING.opening_type_code = b.opening_type_code 
+and b.annuity_eligibility_flag = 'Y'
+and b.claim_role_code = :as_claim_role_code
+ WHERE OPENING.claim_no in (:claim_no )   
+UNION
+ SELECT  0 ,           '',           '1900-01-01' ,           
+'1900-01-01' ,           '1900-01-01' ,           '' ,           
+'' ,           '',          '' ,           
+'' ,           '' ,           '' , 0
+" arguments=(("claim_no", numberlist),("as_claim_role_code", string)) )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="4" height="64" width="73" format="[general]" html.valueishtml="0"  name=opening_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="101" y="4" height="68" width="178" format="[general]" html.valueishtml="0"  name=opening_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="From" border="0" color="0" x="302" y="4" height="64" width="133" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="457" y="4" height="68" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_start_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="to" border="0" color="0" x="768" y="8" height="64" width="46" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="841" y="4" height="68" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_end_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Date of Accident" border="0" color="0" x="1170" y="8" height="64" width="402" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1586" y="8" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=accident_recurrence_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="max(  opening_no  for all )"border="0" color="0" x="2409" y="8" height="60" width="183" format="[GENERAL]" html.valueishtml="0"  name=max_opening_no visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="opening_type_code + ' ' + String( benefit_start_date ,'yyyy-mm-dd') +'      ' +  String( opening_no )"border="0" color="0" x="2629" y="8" height="64" width="571" format="[GENERAL]" html.valueishtml="0"  name=display visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="3200" y="0" height="60" width="1819" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

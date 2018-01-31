@@ -1,0 +1,19 @@
+﻿$PBExportHeader$dddw_document_types.srd
+$PBExportComments$Lists documents types
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(3) update=yes updatewhereclause=yes key=yes name=type_code dbname="type_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=type_desc dbname="type_desc" )
+ column=(type=char(44) updatewhereclause=yes name=description dbname="description" )
+ retrieve="SELECT type_code,
+       type_desc,
+       description = type_code + ~" ~" + type_desc    
+  FROM Document_Type_Code      
+ WHERE active_flag = ~"Y~" 
+   AND claim_flag = ~"Y~" " update="Document_Type_Code" updatewhere=1 updatekeyinplace=yes )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="64" width="1339" format="[general]" html.valueishtml="0"  name=type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

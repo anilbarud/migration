@@ -1,0 +1,97 @@
+﻿$PBExportHeader$d_mail_package_error_report.srd
+release 8;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 2 print.margin.left = 133 print.margin.right = 138 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 1 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=396 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912"  height.autosize=yes)
+table(column=(type=long updatewhereclause=yes name=mail_package_claim_no dbname="MAIL_PACKAGE.claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=print_item_mail_error_code dbname="PRINT_ITEM.mail_error_code" )
+ column=(type=char(40) updatewhereclause=yes name=mail_error_mail_error_code_desc dbname="Mail_Error.mail_error_code_desc" )
+ column=(type=char(2) updatewhereclause=yes name=mail_package_package_type_code dbname="MAIL_PACKAGE.package_type_code" )
+ column=(type=char(20) updatewhereclause=yes name=package_type_package_type_desc dbname="Package_Type.package_type_desc" )
+ column=(type=char(8) updatewhereclause=yes name=claim_claim_manager_user_id dbname="CLAIM.claim_manager_user_id" )
+ column=(type=char(20) updatewhereclause=yes name=user_profile_user_last_name dbname="User_Profile.user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_profile_user_first_name dbname="User_Profile.user_first_name" )
+ column=(type=char(1) updatewhereclause=yes name=print_item_item_type_code dbname="PRINT_ITEM.item_type_code" )
+ column=(type=char(150) updatewhereclause=yes name=print_item_file_name dbname="PRINT_ITEM.file_name" )
+ column=(type=long updatewhereclause=yes name=print_item_item_no dbname="PRINT_ITEM.item_no" )
+ column=(type=long updatewhereclause=yes name=mail_package_package_no dbname="MAIL_PACKAGE.package_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=mail_package_mail_status_code dbname="MAIL_PACKAGE.mail_status_code" )
+ retrieve="  SELECT MAIL_PACKAGE.claim_no,   
+         PRINT_ITEM.mail_error_code,   
+         Mail_Error.mail_error_code_desc,   
+         MAIL_PACKAGE.package_type_code,   
+         Package_Type.package_type_desc,   
+         CLAIM.claim_manager_user_id,   
+         User_Profile.user_last_name,   
+         User_Profile.user_first_name,   
+         PRINT_ITEM.item_type_code,   
+         PRINT_ITEM.file_name,   
+         PRINT_ITEM.item_no,   
+         MAIL_PACKAGE.package_no,   
+         MAIL_PACKAGE.mail_status_code  
+    FROM Mail_Error,   
+         MAIL_PACKAGE,   
+         Package_Type,   
+         CLAIM,   
+         User_Profile,   
+         PRINT_ITEM  
+   WHERE ( PRINT_ITEM.mail_error_code = Mail_Error.mail_error_code ) and  
+         ( MAIL_PACKAGE.package_type_code = Package_Type.package_type_code ) and  
+         ( MAIL_PACKAGE.claim_no = CLAIM.claim_no ) and  
+         ( CLAIM.claim_manager_user_id = User_Profile.user_id ) and  
+         ( MAIL_PACKAGE.package_no = PRINT_ITEM.package_no ) and  
+         ( PRINT_ITEM.mail_error_code > ~"~" ) AND  
+         ( (CLAIM.claim_manager_user_id = :as_claim_manager) OR  
+         ( :as_claim_manager = ~"~" )) AND  
+         ( (MAIL_PACKAGE.create_date >= :adtm_start_date ) OR  
+         ( :adtm_start_date is NULL )) AND  
+         ( (MAIL_PACKAGE.create_date < :adtm_end_date ) OR  
+         ( :adtm_end_date is NULL )) AND 
+			( PRINT_ITEM.mail_error_code <> '620' ) AND 
+         ( ((PRINT_ITEM.item_type_code in ('O','C') ) AND  
+         ( processing_required_flag = 'Y' ) OR  
+         ( completed_pkg_error_rpt_flag = 'Y' )) OR
+			( PRINT_ITEM.item_type_code = 'A' ) AND
+			( completed_pkg_error_rpt_flag = 'Y' ))
+" arguments=(("as_claim_manager", string),("adtm_start_date", datetime),("adtm_end_date", datetime))  sort="user_profile_user_last_name A user_profile_user_first_name A mail_package_package_type_code A mail_package_claim_no A " )
+group(level=1 header.height=88 trailer.height=0 by=("claim_claim_manager_user_id" ) newpage=yes resetpagecount=yes header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="14" y="4" height="228" width="3429"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="76" width="549" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Mail Package Error(s) Report (Claims)" border="0" color="0" x="1202" y="28" height="76" width="1298" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="46" y1="392" x2="3397" y2="392"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="60" width="334" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="76" width="599" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="192" x2="3401" y2="192"  name=l_2 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="All" border="0" color="0" x="411" y="120" height="60" width="73" html.valueishtml="0"  name=t_3 visible="1~tif( as_claim_manager = '', 1, 0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Assigned To:" border="0" color="0" x="50" y="120" height="60" width="338" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="From:" border="0" color="0" x="1335" y="120" height="60" width="169" html.valueishtml="0"  name=t_5 visible="1~tif( isNull(adtm_start_date ), 0, 1)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="To:" border="0" color="0" x="1947" y="120" height="60" width="91" html.valueishtml="0"  name=t_6 visible="1~tif( isNull( adtm_end_date  ), 0, 1)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression=" adtm_start_date "border="0" color="0" x="1541" y="120" height="60" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" adtm_end_date "border="0" color="0" x="2075" y="120" height="60" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="trim( user_profile_user_first_name ) + ' ' + user_profile_user_last_name "border="0" color="0" x="411" y="120" height="60" width="846" format="[general]" html.valueishtml="0"  name=assigned_to visible="1~tif( as_claim_manager = '', 0, 1)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Item" border="0" color="0" x="297" y="256" height="60" width="128" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Letter" border="0" color="0" x="439" y="256" height="60" width="169" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Type" border="0" color="0" x="439" y="320" height="60" width="146" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Mail Error Description" border="0" color="0" x="1097" y="320" height="60" width="649" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Type" border="0" color="0" x="283" y="320" height="60" width="146" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Number" border="0" color="0" x="46" y="320" height="60" width="233" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Claim" border="0" color="0" x="110" y="256" height="60" width="169" html.valueishtml="0"  name=cat_catname_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Type" border="0" color="0" x="2391" y="320" height="60" width="146" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Document" border="0" color="0" x="2391" y="256" height="60" width="297" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Dated" border="0" color="0" x="2592" y="320" height="60" width="187" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Batch ID" border="0" color="0" x="2843" y="320" height="60" width="233" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Ref #/" border="0" color="0" x="2843" y="256" height="60" width="302" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Assigned To:" border="0" color="0" x="50" y="16" height="60" width="334" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=8 alignment="0" tabsequence=32766 border="0" color="0" x="411" y="16" height="60" width="347" format="[general]" html.valueishtml="0"  name=user_profile_user_first_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=7 alignment="0" tabsequence=32766 border="0" color="0" x="777" y="16" height="60" width="462" format="[general]" html.valueishtml="0"  name=user_profile_user_last_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+report(band=detail dataobject="d_mail_package_error_details" x="2386" y="0" height="136" width="1051" border="0"  height.autosize=yes criteria="" nest_arguments=(("mail_package_claim_no"),("print_item_item_no")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="320" y="4" height="60" width="55" format="[general]" html.valueishtml="0"  name=print_item_item_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="430" y="4" height="60" width="640" format="[general]" html.valueishtml="0"  name=package_type_package_type_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1097" y="4" height="60" width="1275" format="[general]" html.valueishtml="0"  name=mail_error_mail_error_code_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="9" y="4" height="60" width="270" format="[general]" html.valueishtml="0"  name=mail_package_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Doc" border="0" color="0" x="3237" y="256" height="60" width="133" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="ID" border="0" color="0" x="3241" y="320" height="60" width="101" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

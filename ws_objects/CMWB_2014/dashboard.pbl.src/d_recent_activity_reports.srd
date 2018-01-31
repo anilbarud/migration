@@ -1,0 +1,113 @@
+﻿$PBExportHeader$d_recent_activity_reports.srd
+release 12.5;
+datawindow(units=0 timer_interval=0 color=16777215 brushmode=0 transparency=93 gradient.angle=0 gradient.color=27940909 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=124 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=88 color="536870912~tif(mod(getrow()-1,2) = 0,0,12632256)" transparency="96" gradient.color="27940909" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" height.autosize=yes )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(50) updatewhereclause=yes name=payment_type_desc dbname="payment_type_desc" )
+ column=(type=char(81) updatewhereclause=yes name=payment_sub_type_desc dbname="payment_sub_type_desc" )
+ column=(type=decimal(4) updatewhereclause=yes name=amount dbname="total_payment_amount" )
+ column=(type=datetime updatewhereclause=yes name=paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=paid_to_date dbname="paid_to_date" )
+ column=(type=decimal(1) updatewhereclause=yes name=quantity dbname="compute_0008" )
+ column=(type=char(24) updatewhereclause=yes name=groups dbname="groups" )
+ retrieve="  SELECT top 3 a.claim_no,  
+        a.processed_date as 'processed_date',   
+         d.payment_type_desc, e.payment_sub_type_desc  ,
+         a.total_payment_amount, a.paid_from_date,  a.paid_to_date, 0, 'Payments' as 'groups'
+    from PAYMENT a, CLAIM b, APPLIED_CLAIM_TXN c, Payment_Type d, Payment_Sub_Type e
+  where   a.claim_no = b.claim_no
+and       b.claim_no = c.claim_no
+and      a.payment_no = c.payment_no
+and      b.individual_no = c.recipient_no
+and      a.payment_type_code = d.payment_type_code
+and     a.payment_type_code = e.payment_type_code
+and     a.payment_sub_type_code = e.payment_sub_type_code
+and      c.recipient_type_code = 'I'
+and     b.individual_no = :al_individual_no
+ union all
+  
+  select top 3 a.claim_no, b.processed_date as 'processed_date', a.din_gp_pin_desc, '', 0, '','', a.drug_quantity, 'Prescriptions Paid' as 'groups'
+from PAYMENT_PRESCRIPTION a, PAYMENT b, CLAIM c, APPLIED_CLAIM_TXN d
+where a.payment_no = b.payment_no
+and     a.claim_no = b.claim_no
+and     b.claim_no = c.claim_no
+and     c.claim_no = d.claim_no
+and    b.payment_no = d.payment_no
+and     c.individual_no = d.recipient_no
+and     d.recipient_type_code = 'I'
+  and    c.individual_no = :al_individual_no
+
+  union all
+  
+  select  top 3 a.claim_no, b.authorized_date as 'processed_date',e.rehab_program_desc_e,f.payment_type_desc + '/' + g.payment_sub_type_desc, 0, '','', 0, 'Treatment Authorizations' as 'groups'
+ FROM   PAYMENT a, REHAB_TASK_AUTHORIZATION b, REHAB_TASK c, CLAIM d, Rehab_Program e, Payment_Type f, Payment_Sub_Type g
+  where  a.authorization_no = b.authorization_no
+  and    a.claim_no = b.claim_no
+  and    b.claim_no = c.claim_no
+  and    b.task_no = c.task_no
+  and    b.claim_no = d.claim_no
+  and    c.rehab_program_code = e.rehab_program_code
+  and    a.payment_type_code = f.payment_type_code
+  and    a.payment_type_code = g.payment_type_code
+  and    a.payment_sub_type_code = g.payment_sub_type_code
+  and    c.task_type_code = 'TR' 
+  and    c.rehab_service_code = 'S022'
+  and    c.rehab_program_code in('P001','P002','P003','P005','P006')
+  and    a.payment_type_code = '50'
+  and    a.payment_sub_type_code = '01'
+and   d.individual_no = :al_individual_no
+
+union all
+
+select top 3 a.claim_no, a.event_date as 'processed_date', c.event_type_desc, d.event_specific_desc, a.event_no, '', '', 0, 'Claim Events' as 'groups'
+from  CLAIM_EVENT a, CLAIM b, Event_Type c, Event_Specific d
+where a.claim_no = b.claim_no
+and     a.event_type_code = c.event_type_code
+and     a.event_type_code = d.event_type_code
+and    a.event_specific_code = d.event_specific_code
+and    ((a.event_type_code = '017' and a.event_specific_code = 'AD')
+OR     (a.event_type_code = '010' and a.event_specific_code <> 'AR')
+OR     (a.event_type_code = '056' and a.event_specific_code <> 'AMD')
+OR      (a.event_type_code = '003')
+OR      (a.event_type_code IN('004','005','006','007') and a.event_specific_code = 'CL')
+OR       (a.event_type_code = '038'))    
+and    d.active_flag = 'Y'
+and   b.individual_no = :al_individual_no
+order by groups desc, processed_date desc" arguments=(("al_individual_no", number)) )
+group(level=1 header.height=120 trailer.height=0 by=("groups" ) header.color="536870912" header.transparency="0" header.gradient.color="8421504" header.gradient.transparency="0" header.gradient.angle="0" header.brushmode="0" header.gradient.repetition.mode="0" header.gradient.repetition.count="0" header.gradient.repetition.length="100" header.gradient.focus="0" header.gradient.scale="100" header.gradient.spread="100" trailer.color="536870912" trailer.transparency="0" trailer.gradient.color="8421504" trailer.gradient.transparency="0" trailer.gradient.angle="0" trailer.brushmode="0" trailer.gradient.repetition.mode="0" trailer.gradient.repetition.count="0" trailer.gradient.repetition.length="100" trailer.gradient.focus="0" trailer.gradient.scale="100" trailer.gradient.spread="100" )
+text(band=header alignment="0" text="Recent Activity" border="0" color="0" x="14" y="20" height="92" width="613" html.valueishtml="0"  name=t_4 visible="1"  font.face="Gill Sans MT" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+line(band=header x1="0" y1="116" x2="3488" y2="116"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" )
+column(band=header.1 id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="24" height="120" width="1161" format="[general]" html.valueishtml="0"  name=groups visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Gill Sans MT" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=detail alignment="0" expression="if (  payment_sub_type_desc > '',  payment_type_desc + ' / ' +  payment_sub_type_desc ,  payment_type_desc )"border="0" color="33554432" x="18" y="4" height="72" width="891" format="[GENERAL]" html.valueishtml="0"  name=payment visible="1"  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0"  height.autosize=yes)
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="919" y="4" height="72" width="370" format="[general]" html.valueishtml="0"  name=amount visible="1~tIF(groups = 'Payments', 1, 0)" editmask.mask="$###,###.00" editmask.focusrectangle=no  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="919" y="4" height="72" width="370" format="[general]" html.valueishtml="0"  name=quantity visible="1~tIF(groups = 'Rx', 1, 0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="~tif(groups = 'Treatment Authorizations', 'Authorized ', IF( groups = 'Claim Events', 'Event Date','Processed '))" border="0" color="33554432" x="2094" y="4" height="72" width="357" html.valueishtml="0"  name=t_2 visible="1~t if( IsNull( processed_date), 0, if(Date(processed_date) = Date('1900-01-01'), 0, 1 ))"  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="1321" y="4" height="72" width="311" format="[shortdate] [time]" html.valueishtml="0"  name=paid_from_date visible="1~tif( IsNull( paid_from_date), 1, if(Date(paid_from_date) = Date('1900-01-01'), 0, 1 ))"  slideleft=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="1710" y="4" height="72" width="311" format="[shortdate] [time]" html.valueishtml="0"  name=paid_to_date visible="1~tif( IsNull( paid_to_date), 1, if(Date(paid_to_date) = Date('1900-01-01'), 0, 1 ))"  slideleft=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="to " border="0" color="33554432" x="1650" y="4" height="72" width="55" html.valueishtml="0"  name=t_3 visible="1~tif( IsNull(paid_from_date) and IsNull(paid_to_date), 
+
+	1, 
+
+	if(Date(paid_from_date) = Date('1900-01-01') and Date(paid_to_date) = Date('1900-01-01'),
+	
+		0, 
+		
+		IF (IsNull(paid_to_date) or Date(paid_to_date) = Date('1900-01-01'),0,1 )))"  slideleft=yes  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="2469" y="4" height="72" width="320" format="[shortdate] [time]" html.valueishtml="0"  name=processed_date visible="1~tif( IsNull( processed_date), 1, if(Date(processed_date) = Date('1900-01-01'), 0, 1 ))"  slideleft=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="1" text="Claim #" border="0" color="33554432" x="2807" y="4" height="72" width="261" html.valueishtml="0"  name=t_1 visible="1~tif( payment_type_desc > '', 1, 0)"  slideleft=yes  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="3104" y="4" height="72" width="370" format="[general]" html.valueishtml="0"  name=claim_no visible="1~tif( payment_type_desc > '', 1, 0)"  slideleft=yes edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Gill Sans MT" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

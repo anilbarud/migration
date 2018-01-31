@@ -1,0 +1,132 @@
+﻿$PBExportHeader$d_basic_claim_everything.srd
+$PBExportComments$a dw containing all the claim and individual
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=576 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=duplicate_of_claim_no dbname="duplicate_of_claim_no" )
+ column=(type=char(1) updatewhereclause=yes name=imaged_flag dbname="imaged_flag" )
+ column=(type=datetime updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=long updatewhereclause=yes name=accident_employer_no dbname="accident_employer_no" )
+ column=(type=long updatewhereclause=yes name=accident_employer_operation_no dbname="accident_employer_operation_no" )
+ column=(type=long updatewhereclause=yes name=sin_no dbname="sin_no" )
+ column=(type=long updatewhereclause=yes name=medicare_no dbname="medicare_no" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=char(10) updatewhereclause=yes name=telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=individual_history_flag dbname="history_flag" )
+ column=(type=char(60) updatewhereclause=yes name=employer_legal_name dbname="employer_legal_name" )
+ column=(type=char(10) updatewhereclause=yes name=employer_address_telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=language_code dbname="language_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_history_flag dbname="history_flag" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(16) updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(5) updatewhereclause=yes name=part_of_body_code dbname="part_of_body_code" )
+ column=(type=char(3) updatewhereclause=yes name=bank_no dbname="bank_no" )
+ column=(type=char(5) updatewhereclause=yes name=bank_transit_no dbname="bank_transit_no" )
+ column=(type=char(18) updatewhereclause=yes name=bank_account_no dbname="bank_account_no" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=country_code dbname="country_code" )
+ column=(type=char(10) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(3) updatewhereclause=yes name=comp_day_code dbname="comp_day_code" )
+ column=(type=char(1) updatewhereclause=yes name=comp_week_code dbname="comp_week_code" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_operation_no dbname="cost_alloc_operation_no" )
+ column=(type=char(1) updatewhereclause=yes name=receiving_salary_flag dbname="receiving_salary_flag" )
+ column=(type=char(1) updatewhereclause=yes name=case_managed_flag dbname="case_managed_flag" )
+ column=(type=char(3) updatewhereclause=yes name=legislation_code dbname="legislation_code" )
+ column=(type=datetime updatewhereclause=yes name=annual_ben_review_due_date dbname="annual_ben_review_due_date" )
+ column=(type=char(3) updatewhereclause=yes name=administering_act_code dbname="administering_act_code" )
+ column=(type=long updatewhereclause=yes name=rejected_wca_claim_no dbname="rejected_wca_claim_no" )
+ retrieve="SELECT  CLAIM.claim_no ,                 CLAIM.duplicate_of_claim_no ,           
+        CLAIM.imaged_flag ,              CLAIM.accident_date ,                  
+        CLAIM.accident_employer_no ,     CLAIM.accident_employer_operation_no ,           
+        INDIVIDUAL.sin_no ,              INDIVIDUAL.medicare_no ,           
+        INDIVIDUAL.birth_date ,          INDIVIDUAL.telephone_no ,           
+        INDIVIDUAL.history_flag ,        EMPLOYER.employer_legal_name ,           
+        EMPLOYER_ADDRESS.telephone_no , 
+        INDIVIDUAL.language_code ,       CLAIM.history_flag ,   
+        CLAIM.claim_status_code ,        CLAIM.claim_status_type_code , 
+        CLAIM.admin_region_code ,        CLAIM.claim_manager_user_id , 
+        INDIVIDUAL.individual_no ,       INDIVIDUAL.last_name ,       
+        INDIVIDUAL.given_names ,         CLAIM.part_of_body_code ,         
+        INDIVIDUAL.bank_no ,             INDIVIDUAL.bank_transit_no ,         
+        INDIVIDUAL.bank_account_no ,     INDIVIDUAL.address_line1 ,   
+        INDIVIDUAL.address_line2 ,       INDIVIDUAL.city ,        
+        INDIVIDUAL.prov_state_code ,     INDIVIDUAL.country_code ,   
+        INDIVIDUAL.postal_code ,         CLAIM.comp_day_code ,      
+        CLAIM.comp_week_code ,           CLAIM.cost_alloc_no ,          
+        CLAIM.cost_alloc_operation_no ,  CLAIM.receiving_salary_flag ,  
+        CLAIM.case_managed_flag ,        CLAIM.legislation_code ,      
+        CLAIM.annual_ben_review_due_date,CLAIM.administering_act_code ,
+        CLAIM.rejected_wca_claim_no     
+FROM  CLAIM 
+    INNER JOIN  INDIVIDUAL             ON CLAIM.individual_no = INDIVIDUAL.individual_no
+    LEFT OUTER JOIN  EMPLOYER          ON CLAIM.accident_employer_no = EMPLOYER.employer_no
+    LEFT OUTER JOIN  EMPLOYER_ADDRESS  ON CLAIM.accident_employer_no = EMPLOYER_ADDRESS.employer_no and EMPLOYER_ADDRESS.operation_no = 0  
+WHERE  CLAIM.claim_no = :claim_no " arguments=(("claim_no", number)) )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="3209" y="268" height="64" width="393" format="" html.valueishtml="0"  name=telephone_no visible="1" editmask.mask="(###)###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=36 alignment="0" tabsequence=32766 border="0" color="0" x="1536" y="476" height="56" width="251" format="[general]" html.valueishtml="0"  name=cost_alloc_operation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=37 alignment="0" tabsequence=32766 border="0" color="0" x="1797" y="388" height="56" width="302" format="[general]" html.valueishtml="0"  name=receiving_salary_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="16" height="64" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=accident_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="92" height="56" width="352" format="[general]" html.valueishtml="0"  name=accident_employer_operation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="160" height="56" width="430" format="[general]" html.valueishtml="0"  name=accident_employer_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="228" height="56" width="745" format="[general]" html.valueishtml="0"  name=claim_manager_user_id visible="1" dddw.name=dddw_user_profile dddw.displaycolumn=computed_user_full_name dddw.datacolumn=user_id dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="296" height="64" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=birth_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="368" height="64" width="325" format="[general]" html.valueishtml="0"  name=sin_no visible="1" editmask.mask="###-###-###" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="436" height="64" width="325" format="[general]" html.valueishtml="0"  name=medicare_no visible="1" editmask.mask="###-###-###" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="12" height="56" width="704" format="[general]" html.valueishtml="0"  name=claim_status_type_code visible="1" dddw.name=dddw_claim_status_type dddw.displaycolumn=claim_status_type_desc dddw.datacolumn=claim_status_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="76" height="56" width="507" format="[general]" html.valueishtml="0"  name=claim_status_code visible="1" dddw.name=dddw_claim_status dddw.displaycolumn=claim_status_desc dddw.datacolumn=claim_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="144" height="60" width="521" format="[general]" html.valueishtml="0"  name=part_of_body_code visible="1" dddw.name=dddw_part_of_body dddw.displaycolumn=part_of_body_desc dddw.datacolumn=part_of_body_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="212" height="60" width="485" format="[general]" html.valueishtml="0"  name=claim_history_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="288" height="56" width="416" format="[general]" html.valueishtml="0"  name=language_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="356" height="56" width="329" format="[general]" html.valueishtml="0"  name=duplicate_of_claim_no visible="1" editmask.mask="#####" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=33 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="424" height="56" width="251" format="[general]" html.valueishtml="0"  name=comp_day_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=34 alignment="0" tabsequence=32766 border="0" color="0" x="795" y="488" height="56" width="338" format="[general]" html.valueishtml="0"  name=comp_week_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="1527" y="12" height="64" width="439" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1527" y="72" height="60" width="581" format="[general]" html.valueishtml="0"  name=individual_history_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1527" y="216" height="60" width="571" format="[general]" html.valueishtml="0"  name=imaged_flag visible="1" edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="1527" y="276" height="56" width="786" format="[general]" html.valueishtml="0"  name=employer_address_telephone_no visible="1" editmask.mask="(###)###-####" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="0" x="1527" y="344" height="56" width="69" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=35 alignment="0" tabsequence=32766 border="0" color="0" x="1527" y="408" height="56" width="201" format="[general]" html.valueishtml="0"  name=cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="4" height="56" width="741" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="68" height="56" width="462" format="[general]" html.valueishtml="0"  name=last_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="128" height="56" width="457" format="[general]" html.valueishtml="0"  name=given_names visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=27 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="184" height="52" width="690" format="[general]" html.valueishtml="0"  name=address_line1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=28 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="248" height="56" width="690" format="[general]" html.valueishtml="0"  name=address_line2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=29 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="308" height="56" width="576" format="[general]" html.valueishtml="0"  name=city visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=30 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="372" height="56" width="192" format="[general]" html.valueishtml="0"  name=prov_state_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="440" height="60" width="242" format="[general]" html.valueishtml="0"  name=country_code visible="1" dddw.name=dddw_country dddw.displaycolumn=location_desc1 dddw.datacolumn=location_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="0" x="2400" y="512" height="56" width="229" format="[general]" html.valueishtml="0"  name=postal_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="0" x="3200" y="8" height="56" width="69" format="[general]" html.valueishtml="0"  name=bank_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="0" x="3200" y="68" height="56" width="114" format="[general]" html.valueishtml="0"  name=bank_transit_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="0" x="3200" y="132" height="56" width="416" format="[general]" html.valueishtml="0"  name=bank_account_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="String( claim_no ) +  ' ' + last_name + ' ' +  given_names + ' '  + admin_region_code "border="0" color="0" x="3154" y="384" height="56" width="773" format="[GENERAL]" html.valueishtml="0"  name=display_claim_info visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=38 alignment="0" tabsequence=32766 border="0" color="0" x="3927" y="0" height="60" width="27" format="[general]" html.valueishtml="0"  name=case_managed_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=39 alignment="0" tabsequence=32766 border="0" color="0" x="3936" y="104" height="60" width="82" format="[general]" html.valueishtml="0"  name=legislation_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=40 alignment="0" tabsequence=32766 border="0" color="0" x="2761" y="488" height="56" width="439" format="yyyy-mm-dd" html.valueishtml="0"  name=annual_ben_review_due_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="73" y="508" height="60" width="526" format="[general]" html.valueishtml="0"  name=claim_history_flag_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="3237" y="200" height="60" width="841" format="[general]" html.valueishtml="0"  name=employer_legal_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=41 alignment="0" tabsequence=0 border="0" color="0" x="3333" y="432" height="60" width="635" html.valueishtml="0"  name=administering_act_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=42 alignment="0" tabsequence=0 border="0" color="0" x="3337" y="484" height="60" width="681" html.valueishtml="0"  name=rejected_wca_claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

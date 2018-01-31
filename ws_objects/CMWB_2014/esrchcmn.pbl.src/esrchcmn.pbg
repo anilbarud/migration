@@ -1,0 +1,15 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "esrchcmn.pbl" "";
+@end;
+@begin Objects 
+ "d_employer_data.srd" "esrchcmn.pbl";
+ "d_employer_operation_list.srd" "esrchcmn.pbl";
+ "d_employer_operation_payroll.srd" "esrchcmn.pbl";
+ "d_employer_search_criteria.srd" "esrchcmn.pbl";
+ "d_personal_coverage.srd" "esrchcmn.pbl";
+ "d_search_employer.srd" "esrchcmn.pbl";
+ "d_seasonal_coverage.srd" "esrchcmn.pbl";
+ "d_volunteer_coverage.srd" "esrchcmn.pbl";
+ "w_employer_search.srw" "esrchcmn.pbl";
+@end;

@@ -1,0 +1,35 @@
+﻿$PBExportHeader$d_mr_pob_treated.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=8 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(2) update=yes updatewhereclause=yes name=pob_treated_code dbname="pob_treated_code" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=pob_treated_desc_e dbname="pob_treated_desc_e" )
+ column=(type=ulong update=yes updatewhereclause=yes name=sort_order dbname="sort_order" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="  SELECT pob_treated_code,   
+         pob_treated_desc_e,   
+         sort_order,   
+         active_flag  
+    FROM pob_treated   
+"  sort="pob_treated_desc_e A " )
+text(band=header alignment="0" text="POB Treated" border="0" color="33554432" x="32" y="16" height="76" width="407" html.valueishtml="0"  name=t_tab_name visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="pob_treated" border="0" color="33554432" x="475" y="12" height="76" width="389" html.valueishtml="0"  name=t_table_name visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="pob_treated_code" border="0" color="33554432" x="887" y="16" height="76" width="622" html.valueishtml="0"  name=t_key_column visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="S" border="0" color="33554432" x="1536" y="16" height="76" width="119" html.valueishtml="0"  name=t_special visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="27" y="8" height="56" width="1394" format="[general]" html.valueishtml="0"  name=pob_treated_desc_e visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" pob_treated_code "border="0" color="33554432" x="41" y="104" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=item_key visible="0"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+compute(band=detail alignment="0" expression=" pob_treated_desc_e "border="0" color="33554432" x="407" y="100" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=item_to_keep visible="0"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

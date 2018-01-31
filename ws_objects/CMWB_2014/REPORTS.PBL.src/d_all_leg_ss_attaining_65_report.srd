@@ -1,0 +1,83 @@
+﻿$PBExportHeader$d_all_leg_ss_attaining_65_report.srd
+$PBExportComments$Datawindow to report all surviving spouses attaining age 65 in user specified time frame (all legislation)
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=384 color="536870912" )
+summary(height=116 color="-1" )
+footer(height=0 color="-1" )
+detail(height=72 color="-1" )
+table(column=(type=char(3) updatewhereclause=yes name=legislation_code dbname="legislation_code" )
+ column=(type=long updatewhereclause=yes name=claim_participant_claim_no dbname="claim_no" )
+ column=(type=char(2) updatewhereclause=yes name=claim_participant_claim_role_code dbname="claim_role_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_participant_dependent_flag dbname="dependent_flag" )
+ column=(type=char(3) updatewhereclause=yes name=claim_participant_dependent_reason_code dbname="dependent_reason_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_participant_pen_survivor_eligibili dbname="pen_survivor_eligibility_flag" )
+ column=(type=datetime updatewhereclause=yes name=individual_birth_date dbname="birth_date" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="given_names" )
+ column=(type=char(4) updatewhereclause=yes name=opening_type_code dbname="opening_type_code" )
+ column=(type=datetime updatewhereclause=yes name=benefit_start_date dbname="benefit_start_date" )
+ column=(type=datetime updatewhereclause=yes name=benefit_end_date dbname="benefit_end_date" )
+ retrieve="SELECT C.legislation_code,
+       CP.claim_no,
+       CP.claim_role_code,
+       CP.dependent_flag,
+       CP.dependent_reason_code,
+       CP.pen_survivor_eligibility_flag,
+       I.birth_date,
+       I.last_name,
+       I.given_names,
+       O.opening_type_code,
+       O.benefit_start_date,
+       O.benefit_end_date
+  FROM CLAIM_PARTICIPANT CP,
+       INDIVIDUAL I,
+       OPENING O,
+       CLAIM C 
+ WHERE O.claim_no = CP.claim_no
+   AND I.individual_no = CP.individual_no
+   AND C.claim_no = CP.claim_no
+   AND (O.opening_type_code = 'SV' OR O.opening_type_code = 'S1' OR O.opening_type_code = 'S2' )
+   AND (O.benefit_end_date IS NULL OR O.benefit_end_date >= :adt_from_date)
+   AND CP.pen_survivor_eligibility_flag = 'Y'
+   AND CP.claim_role_code = 'SS'
+   AND ((I.birth_date >= :adt_birth_from_date
+   AND I.birth_date <= :adt_birth_to_date) OR I.birth_date IS NULL)
+ ORDER BY C.legislation_code, CP.claim_no
+" arguments=(("adt_from_date", datetime),("adt_to_date", datetime),("adt_birth_from_date", datetime),("adt_birth_to_date", datetime)) )
+group(level=1 header.height=120 trailer.height=0 by=("legislation_code" ) header.color="536870912" trailer.color="536870912"  sort="count(legislation_code for group 1) A " )
+rectangle(band=header x="14" y="4" height="196" width="3429"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Surviving Spouses Attaining 65 Report - All Legislation" border="0" color="0" x="859" y="28" height="76" width="1883" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="76" width="549" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="9" y1="368" x2="3424" y2="368"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="60" width="334" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="434" y="28" height="60" width="398" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="50" y="108" height="60" width="521" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="~"From ~" + String( adt_from_date ,~"yyyy-mm-dd~") + ~" to ~" + String( adt_to_date ,~"yyyy-mm-dd~")"border="0" color="0" x="594" y="108" height="60" width="2802" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="24" height="68" width="160" format="[general]" html.valueishtml="0"  name=legislation_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( individual_given_names ) + ~" ~" + Trim( individual_last_name )"border="0" color="0" x="357" y="8" height="64" width="805" format="[GENERAL]" html.valueishtml="0"  name=computed_name visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="64" y="8" height="64" width="256" format="[general]" html.valueishtml="0"  name=claim_participant_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2363" y="8" height="64" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=individual_birth_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="2158" y="8" height="64" width="119" format="[general]" html.valueishtml="0"  name=claim_participant_pen_survivor_eligibili visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1774" y="8" height="64" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_end_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1403" y="8" height="64" width="311" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="9" y1="4" x2="3424" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+compute(band=summary alignment="0" expression="~"Number of Surviving Spouses attaining age 65 : ~" + count(  claim_participant_claim_no  for all )"border="0" color="0" x="41" y="20" height="64" width="2176" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1090519039" )
+line(band=summary x1="9" y1="96" x2="3424" y2="96"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+line(band=summary x1="9" y1="108" x2="3424" y2="108"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="0" x="1211" y="12" height="60" width="123" format="[general]" html.valueishtml="0"  name=opening_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Pen/Surv
+Eligibility" border="0" color="0" x="2071" y="236" height="120" width="261" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Opening
+End Date" border="0" color="0" x="1792" y="236" height="120" width="261" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Opening
+Start Date" border="0" color="0" x="1399" y="236" height="120" width="261" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Opening
+Type" border="0" color="0" x="1083" y="236" height="120" width="251" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Claim" border="0" color="0" x="174" y="296" height="60" width="146" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Name" border="0" color="0" x="361" y="296" height="60" width="151" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Leg." border="0" color="33554432" x="9" y="296" height="60" width="110" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Birth Date" border="0" color="0" x="2363" y="296" height="60" width="256" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+
+sparse(names="claim_participant_claim_no	computed_name")htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

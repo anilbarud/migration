@@ -1,0 +1,111 @@
+﻿$PBExportHeader$d_task_authorization_report.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=316 color="536870912" )
+summary(height=80 color="-1" )
+footer(height=0 color="-1" )
+detail(height=76 color="553648127" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=char(126) updatewhereclause=yes name=authorized_item dbname="authorized_item" )
+ column=(type=long updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=decimal(2) updatewhereclause=yes name=authorized_quantity dbname="authorized_quantity" )
+ column=(type=decimal(4) updatewhereclause=yes name=authorized_amount dbname="authorized_amount" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=char(16) updatewhereclause=yes name=modify_user_id dbname="modify_user_id" )
+ column=(type=char(16) updatewhereclause=yes name=responsible_user_id dbname="responsible_user_id" )
+ column=(type=char(16) updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(1) updatewhereclause=yes name=report_parameters dbname="report_parameters" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ retrieve=" SELECT 	a.claim_no,   
+         		a.task_no,   
+         		Rtrim(f.task_type_desc) + ~" - ~" + Rtrim(g.task_sub_type_desc) + ~" - ~" + Rtrim(h.task_specific_desc) authorized_item,
+         		a.authorization_no,   
+         		a.authorized_quantity,   
+         		a.authorized_amount,   
+        		a.create_date,
+         		a.create_user_id,
+         		a.modify_user_id,
+         		b.responsible_user_id,
+         		c.claim_manager_user_id,
+         		c.admin_region_code,
+		 		~"~" report_parameters,
+         		e.billable_item_desc_e   
+    FROM REHAB_TASK_AUTHORIZATION				a 
+			JOIN		REHAB_TASK									b 	on a.claim_no				= b.claim_no  AND a.task_no	= b.task_no
+        	JOIN		CLAIM											c 	on a.claim_no				= c.claim_no
+			JOIN		Billable_Item_Rehab_Task_Xref		d 	on a.billable_xref_no		= d.billable_xref_no
+        	JOIN		Billable_Item                   				e 	on d.billable_item_no		= e.billable_item_no
+			JOIN		Task_Type									f 	on d.task_type_code   	= f.task_type_code
+			JOIN		Task_Sub_Type                   			g 	on d.task_type_code		= g.task_type_code AND d.task_sub_type_code	= g.task_sub_type_code
+			JOIN		Task_Specific									h 	on d.task_type_code		= h.task_type_code AND d.task_sub_type_code	= h.task_sub_type_code AND d.task_specific_code	= h.task_specific_code
+  
+		
+	
+"  sort="admin_region_code A claim_manager_user_id A " )
+group(level=1 header.height=80 trailer.height=80 by=("admin_region_code" ) newpage=yes header.color="536870912" trailer.color="-1" )
+group(level=2 header.height=280 trailer.height=88 by=("admin_region_code" , "claim_manager_user_id" ) header.color="-1" trailer.color="-1" )
+rectangle(band=header x="14" y="4" height="304" width="3429"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="68" width="334" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="68" width="549" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="268" x2="3401" y2="268"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Rehabilitation Planner - Authorization List" border="0" color="0" x="1010" y="28" height="76" width="1440" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="68" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="0" x="590" y="108" height="132" width="2825" format="[general]" html.valueishtml="0"  name=report_parameters visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="50" y="108" height="68" width="521" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header.1 id=12 alignment="0" tabsequence=32766 border="0" color="0" x="430" y="8" height="60" width="128" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Admin Region:" border="0" color="33554432" x="14" y="8" height="60" width="370" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="Claim Manager:" border="0" color="33554432" x="14" y="24" height="60" width="402" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=11 alignment="0" tabsequence=32766 border="0" color="0" x="430" y="24" height="60" width="311" format="[general]" html.valueishtml="0"  name=claim_manager_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.2 x1="14" y1="268" x2="3493" y2="268"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header.2 alignment="1" text="Number" border="0" color="0" x="32" y="212" height="60" width="206" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Claim" border="0" color="0" x="32" y="148" height="60" width="146" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Number" border="0" color="0" x="261" y="212" height="60" width="206" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Authorized" border="0" color="0" x="261" y="148" height="60" width="279" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Authorized Item" border="0" color="0" x="562" y="148" height="60" width="407" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Quantity" border="0" color="0" x="1435" y="148" height="60" width="215" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Amount" border="0" color="0" x="1760" y="148" height="60" width="201" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="Authorized" border="0" color="0" x="1989" y="148" height="60" width="279" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="Modified" border="0" color="0" x="2299" y="148" height="60" width="219" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Authorized" border="0" color="0" x="2574" y="148" height="60" width="279" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="By" border="0" color="0" x="1989" y="212" height="60" width="64" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="By" border="0" color="0" x="2299" y="212" height="60" width="64" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="Responsible" border="0" color="0" x="2885" y="148" height="60" width="320" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Date" border="0" color="0" x="2574" y="212" height="60" width="119" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="User" border="0" color="0" x="2885" y="212" height="60" width="123" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="0" text="Claim" border="0" color="0" x="3223" y="148" height="60" width="146" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Manager" border="0" color="0" x="3223" y="212" height="60" width="256" html.valueishtml="0"  name=t_22 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="14" y="4" height="64" width="224" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="0" x="261" y="4" height="64" width="224" format="###0" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="1673" y="4" height="64" width="288" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=authorized_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1989" y="4" height="60" width="283" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="2299" y="4" height="60" width="251" format="[general]" html.valueishtml="0"  name=modify_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2574" y="4" height="60" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="2885" y="4" height="60" width="274" format="[general]" html.valueishtml="0"  name=responsible_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="3223" y="4" height="60" width="274" format="[general]" html.valueishtml="0"  name=claim_manager_user_id_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="498" y="8" height="56" width="919" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0" x="1435" y="4" height="64" width="215" format="0" html.valueishtml="0"  name=authorized_quantity visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.2 x1="1426" y1="8" x2="1641" y2="8"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+text(band=trailer.2 alignment="0" text="Claim Manager Totals:" border="0" color="0" x="754" y="20" height="60" width="576" html.valueishtml="0"  name=t_23 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression="sum(  authorized_quantity  for group 2 )"border="0" color="0" x="1435" y="20" height="60" width="215" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.2 x1="1714" y1="8" x2="2162" y2="8"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression="sum(  authorized_amount  for group 2 )"border="0" color="0" x="1719" y="20" height="60" width="439" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="0" text="Admin Region Totals:" border="0" color="0" x="754" y="12" height="60" width="544" html.valueishtml="0"  name=t_24 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(  authorized_quantity  for group 1 )"border="0" color="0" x="1435" y="12" height="60" width="215" format="[general]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(  authorized_amount  for group 1 )"border="0" color="0" x="1719" y="12" height="60" width="439" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Grand Totals:" border="0" color="0" x="754" y="12" height="60" width="343" html.valueishtml="0"  name=t_25 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  authorized_quantity  for all )"border="0" color="0" x="1435" y="12" height="60" width="215" format="[general]" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  authorized_amount  for all )"border="0" color="0" x="1719" y="12" height="60" width="439" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

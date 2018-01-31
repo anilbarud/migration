@@ -1,0 +1,26 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "CMN_PAY.pbl" "";
+@end;
+@begin Objects 
+ "d_account_authorizations_update.srd" "CMN_PAY.pbl";
+ "d_account_payment.srd" "CMN_PAY.pbl";
+ "d_account_payment_list.srd" "CMN_PAY.pbl";
+ "d_account_type_payments_list.srd" "CMN_PAY.pbl";
+ "d_basic_claim_everything.srd" "CMN_PAY.pbl";
+ "d_claim_txn.srd" "CMN_PAY.pbl";
+ "d_claimsmaster_ref_count.srd" "CMN_PAY.pbl";
+ "d_docs_for_payment_no.srd" "CMN_PAY.pbl";
+ "d_filter_dates.srd" "CMN_PAY.pbl";
+ "d_invoice.srd" "CMN_PAY.pbl";
+ "d_module_authorizations.srd" "CMN_PAY.pbl";
+ "d_payment_combination_grouped.srd" "CMN_PAY.pbl";
+ "d_retrieve_ref_entries.srd" "CMN_PAY.pbl";
+ "d_select_taxing_category.srd" "CMN_PAY.pbl";
+ "d_user_authorizations.srd" "CMN_PAY.pbl";
+ "n_account_payment_controller.sru" "CMN_PAY.pbl";
+ "n_payment.sru" "CMN_PAY.pbl";
+ "n_tax_functions.sru" "CMN_PAY.pbl";
+ "n_user_authorizations.sru" "CMN_PAY.pbl";
+ "u_payment.sru" "CMN_PAY.pbl";
+@end;

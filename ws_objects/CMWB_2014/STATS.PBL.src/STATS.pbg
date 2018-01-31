@@ -1,0 +1,11 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "STATS.PBL" "";
+@end;
+@begin Objects 
+ "d_accident_stats_accident.srd" "STATS.PBL";
+ "d_accident_stats_accident_display.srd" "STATS.PBL";
+ "d_accident_stats_claim.srd" "STATS.PBL";
+ "w_accidents.srw" "STATS.PBL";
+ "w_accidents_display.srw" "STATS.PBL";
+@end;

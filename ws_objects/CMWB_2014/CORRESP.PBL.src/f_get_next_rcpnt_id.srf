@@ -1,0 +1,54 @@
+﻿$PBExportHeader$f_get_next_rcpnt_id.srf
+$PBExportComments$Retrieve and update the last recipient id used
+global type f_get_next_rcpnt_id from function_object
+end type
+
+forward prototypes
+global function long f_get_next_rcpnt_id ()
+end prototypes
+
+global function long f_get_next_rcpnt_id ();// *******************************************************************************************************
+// *******************************************************************************************************
+///
+// THIS FUNCTION WILL LOOK AT THE "Last_Correspond_Recipient_Id" TABLE TO DETERMINE THE
+// NEXT AVAILABLE "RECIPIENT_ID".
+//
+// Returns id if successful, -1 if not successful
+///
+
+long	vll_rcpnt_id
+int	vli_rc
+
+/*  T031068 - must first determine if user has a read only role for database access -  if so, we must leave this function,
+	  because it does updates in here, and sometimes this function is being called during the opening of the correspondence window
+	  and this is being done by users without DB update capabilty (ex. IRO staff),  in order to 'view only' some recipient address information.
+	  In order to allow them to get at least that far, we stop any updates for happening for users with no update capabilty. If they go any further
+	  and try something smart like create a new letter, well, then too bad for them,  they are going to get kicked out. 
+*/
+if f_user_is_readonly() then return 0 
+
+SQLCA.nf_begin_transaction()
+
+UPDATE	Last_Correspond_Recipient_Id
+SET		last_correspond_recipient_id = last_correspond_recipient_id + 1
+USING		SQLCA;
+
+// trigger an application error if the number of rows affected is not 1
+SQLCA.nf_handle_error('f_get_next_rcpnt_id','embedded SQL: UPDATE	Last_Correspond_Recipient_Id', 'f_get_next_rcpnt_id', 1)
+
+		
+// ************************************************************************************************
+
+SELECT	last_correspond_recipient_id
+INTO		:vll_rcpnt_id
+FROM		Last_Correspond_Recipient_Id
+USING		SQLCA;
+SQLCA.nf_handle_error("Embedded SQL Select","f_get_next_rcpnt_id","On select Of Last_Correspond_Recipient_Id")
+
+
+SQLCA.nf_commit_transaction()
+
+
+RETURN vll_rcpnt_id
+end function
+

@@ -1,0 +1,57 @@
+﻿$PBExportHeader$d_employer.srd
+$PBExportComments$Used to retrieve a specific employer
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=141 color="28817335" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=101 color="-1" )
+table(column=(type=char(60) updatewhereclause=yes name=employer_name_employer_name dbname="EMPLOYER_NAME.employer_name" )
+ column=(type=char(30) updatewhereclause=yes name=employer_address_address_line1 dbname="EMPLOYER_ADDRESS.address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=employer_address_address_line2 dbname="EMPLOYER_ADDRESS.address_line2" )
+ column=(type=char(30) updatewhereclause=yes name=employer_address_address_line3 dbname="EMPLOYER_ADDRESS.address_line3" )
+ column=(type=char(25) updatewhereclause=yes name=employer_address_city dbname="EMPLOYER_ADDRESS.city" )
+ column=(type=char(2) updatewhereclause=yes name=employer_address_province dbname="EMPLOYER_ADDRESS.prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=employer_address_country dbname="EMPLOYER_ADDRESS.country_code" )
+ column=(type=char(10) updatewhereclause=yes name=employer_address_postal_code dbname="EMPLOYER_ADDRESS.postal_code" )
+ column=(type=char(1) updatewhereclause=yes name=employer_address_contact_name dbname="compute_0009" )
+ retrieve="  SELECT  EMPLOYER_NAME.employer_name ,
+          EMPLOYER_ADDRESS.address_line1 ,
+          EMPLOYER_ADDRESS.address_line2 ,
+          EMPLOYER_ADDRESS.address_line3 ,
+          EMPLOYER_ADDRESS.city ,
+          EMPLOYER_ADDRESS.prov_state_code ,
+          EMPLOYER_ADDRESS.country_code ,
+          EMPLOYER_ADDRESS.postal_code ,
+          ~" ~"    
+     FROM EMPLOYER_ADDRESS , 
+          EMPLOYER_NAME     
+   WHERE ( EMPLOYER_ADDRESS.employer_no = EMPLOYER_NAME.employer_no ) and 
+         ( ( EMPLOYER_NAME.employer_no = :employer_no ) and 
+           ( EMPLOYER_NAME.employer_name_type_code = 'L' ) ) and
+			( EMPLOYER_ADDRESS.address_type_code = 'BA' ) " arguments=(("employer_no", number)) )
+text(band=header alignment="2" text="Employer Name
+Employer Name"border="0" color="33554432" x="366" y="4" height="121" width="407"  name=employer_name_employer_name_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+Address Line1"border="0" color="33554432" x="1322" y="4" height="121" width="476"  name=employer_address_address_line1_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+Address Line2"border="0" color="33554432" x="2177" y="4" height="121" width="476"  name=employer_address_address_line2_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+Address Line3"border="0" color="33554432" x="3031" y="4" height="121" width="476"  name=employer_address_address_line3_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+City"border="0" color="33554432" x="3891" y="4" height="121" width="476"  name=employer_address_city_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+Postal Code"border="0" color="33554432" x="5687" y="4" height="121" width="476"  name=employer_address_postal_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+Province"border="0" color="33554432" x="4581" y="4" height="121" width="476"  name=employer_address_province_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employer Address
+Country"border="0" color="33554432" x="5134" y="4" height="121" width="476"  name=employer_address_country_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="12" height="89" width="1125" format="[general]"  name=employer_name_employer_name edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1134" y="12" height="89" width="851" format="[general]"  name=employer_address_address_line1 edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1989" y="12" height="89" width="851" format="[general]"  name=employer_address_address_line2 edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="2844" y="12" height="89" width="851" format="[general]"  name=employer_address_address_line3 edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="3703" y="12" height="89" width="851" format="[general]"  name=employer_address_city edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="4581" y="12" height="61" width="476" format="[general]"  name=employer_address_province edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="5134" y="12" height="61" width="476" format="[general]"  name=employer_address_country edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="5665" y="12" height="89" width="302" format="[general]"  name=employer_address_postal_code edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=0 border="0" color="33554432" x="6163" y="12" height="61" width="435"  name=employer_address_contact_name  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

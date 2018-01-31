@@ -1,0 +1,26 @@
+﻿$PBExportHeader$f_user_id.srf
+$PBExportComments$Function to acquire user ID
+global type f_user_id from function_object
+end type
+
+forward prototypes
+global subroutine f_user_id (ref string as_user_id)
+end prototypes
+
+global subroutine f_user_id (ref string as_user_id);
+LONG  	ll_get_user
+ulong  	ul_buffer_size
+Boolean 	lb_return
+/*	Purpose:
+
+	This function acquires the user_id of the user logged on
+*/
+
+as_user_id = "                "
+ul_buffer_size   = 16
+								
+lb_return =  GetUserNameA(ref as_user_id, ref ul_buffer_size)
+
+as_user_id = Lower(as_user_id)
+end subroutine
+

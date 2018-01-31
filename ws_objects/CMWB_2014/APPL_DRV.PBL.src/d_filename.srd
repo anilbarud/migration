@@ -1,0 +1,37 @@
+﻿$PBExportHeader$d_filename.srd
+$PBExportComments$Common - Used by u_dw_document_path to retrieve physical pathnames for document pages.
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=1 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 107 print.margin.right = 107 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no grid.lines=0 )
+summary(height=4 color="536870912" )
+footer(height=12 color="536870912" )
+detail(height=68 color="-1" )
+table(column=(type=long updatewhereclause=yes name=pag_pagseq dbname="PAG.pagseq" )
+ column=(type=long updatewhereclause=yes name=pagdocid dbname="PAG.pagdocid" )
+ column=(type=char(255) updatewhereclause=yes name=store_strpath dbname="STORE.strpath" )
+ column=(type=char(32) updatewhereclause=yes name=pgf_pgffilename dbname="PGF.pgffilename" )
+ column=(type=char(255) updatewhereclause=yes name=filename dbname="compute_0005" )
+ column=(type=long updatewhereclause=yes name=document_index_claim_no dbname="DOCUMENT_INDEX.claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=document_index_type_code dbname="DOCUMENT_INDEX.type_code" )
+ retrieve="  SELECT PAG.pagseq,   
+         PAG.pagdocid,   
+         STORE.strpath,   
+         PGF.pgffilename,   
+         Upper(strpath + '\' + pgffilename),   
+         DOCUMENT_INDEX.claim_no ,
+         DOCUMENT_INDEX.type_code  
+FROM  PAG 
+     INNER JOIN  PGF  ON PAG.pagfid = PGF.pgfid
+     INNER JOIN  STORE  ON PGF.pgfstore = STORE.strid
+    LEFT OUTER JOIN  DOCUMENT_INDEX  ON PAG.pagdocid = DOCUMENT_INDEX.docid
+ WHERE PAG.pagdocid = :val_docid   
+" arguments=(("val_docid", number)) )
+text(band=header alignment="0" text="Pag Pagdocid" border="0" color="0" x="9" y="4" height="56" width="297" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Compute 0005" border="0" color="0" x="315" y="4" height="56" width="878" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Document Index Claim No" border="0" color="33554432" x="1202" y="4" height="76" width="73" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="9" y="0" height="56" width="297" format="[general]" html.valueishtml="0"  name=pagdocid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="315" y="4" height="56" width="878" format="[general]" html.valueishtml="0"  name=filename visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1202" y="0" height="60" width="73" format="[general]" html.valueishtml="0"  name=document_index_claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="0" tabsequence=0 border="0" color="0" x="1289" y="0" height="60" width="818" html.valueishtml="0"  name=document_index_type_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Document Index Type Code" border="0" color="33554432" x="1285" y="4" height="76" width="823" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

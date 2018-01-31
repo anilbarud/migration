@@ -1,0 +1,29 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "ACCOUNTP.PBL" "";
+@end;
+@begin Objects 
+ "d_account_authorizations.srd" "ACCOUNTP.PBL";
+ "d_account_list.srd" "ACCOUNTP.PBL";
+ "d_account_period_overlap.srd" "ACCOUNTP.PBL";
+ "d_efb_payment_document_to_delete.srd" "ACCOUNTP.PBL";
+ "d_efb_payment_to_delete.srd" "ACCOUNTP.PBL";
+ "d_efb_txn_to_delete.srd" "ACCOUNTP.PBL";
+ "d_enter_claim_no.srd" "ACCOUNTP.PBL";
+ "d_iw_travel_expense.srd" "ACCOUNTP.PBL";
+ "d_iw_travel_expense_delete.srd" "ACCOUNTP.PBL";
+ "d_med_aid_e_invoice.srd" "ACCOUNTP.PBL";
+ "d_payment_document.srd" "ACCOUNTP.PBL";
+ "d_travel_expense.srd" "ACCOUNTP.PBL";
+ "d_travel_expense_paid.srd" "ACCOUNTP.PBL";
+ "d_travel_expenses_scheduled.srd" "ACCOUNTP.PBL";
+ "ds_admin_act_document_restriction.srd" "ACCOUNTP.PBL";
+ "ds_duplicate_payment_numbers.srd" "ACCOUNTP.PBL";
+ "n_wrc_invoice.sru" "ACCOUNTP.PBL";
+ "w_account_authorizations.srw" "ACCOUNTP.PBL";
+ "w_account_link_maintenance.srw" "ACCOUNTP.PBL";
+ "w_account_payment.srw" "ACCOUNTP.PBL";
+ "w_account_payment_maintenance.srw" "ACCOUNTP.PBL";
+ "w_filter_account_pay_list.srw" "ACCOUNTP.PBL";
+ "w_travel_expense.srw" "ACCOUNTP.PBL";
+@end;

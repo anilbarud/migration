@@ -1,0 +1,11 @@
+﻿$PBExportHeader$d_select_category.srd
+$PBExportComments$Allows users to choose category to select documents from for indexing
+release 6;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=92 color="-1" )
+table(column=(type=number updatewhereclause=yes name=catid dbname="catid" )
+ )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="14" y="4" height="72" width="809" format="[general]"  name=catid dddw.name=dddw_categories_by_set dddw.displaycolumn=catname dddw.datacolumn=catid dddw.percentwidth=150 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.required=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

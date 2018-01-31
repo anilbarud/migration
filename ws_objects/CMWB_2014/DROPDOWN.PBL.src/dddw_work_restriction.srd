@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_work_restriction.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=65 color="536870912" )
+table(column=(type=char(1) name=work_restriction_flag dbname="Disposition_Combination.work_restriction_flag" )
+ column=(type=char(4) name=opening_type_code dbname="Disposition_Combination.opening_type_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Disposition_Combination~" ) COLUMN(NAME=~"Disposition_Combination.work_restriction_flag~") COLUMN(NAME=~"Disposition_Combination.opening_type_code~") GROUP(NAME=~"Disposition_Combination.opening_type_code~") GROUP(NAME=~"Disposition_Combination.work_restriction_flag~")) ORDER(NAME=~"Disposition_Combination.opening_type_code~" ASC=yes ) ORDER(NAME=~"Disposition_Combination.work_restriction_flag~" ASC=yes ) "  sort="work_restriction_flag A " )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="924" y="8" height="57" width="298" format="[general]"  name=work_restriction_flag edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="IF( work_restriction_flag = 'Y', 'Yes', IF( work_restriction_flag = 'N', 'No', 'Inapplicable'))"border="0" color="0" x="10" y="4" height="57" width="380" format="[GENERAL]"  name=desc  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

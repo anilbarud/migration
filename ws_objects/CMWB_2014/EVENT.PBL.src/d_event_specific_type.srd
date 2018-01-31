@@ -1,0 +1,27 @@
+﻿$PBExportHeader$d_event_specific_type.srd
+$PBExportComments$Datawindow to display event specific type codes on w_filter_event_list
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=event_specific_code dbname="event_specific_code" )
+ column=(type=char(1) updatewhereclause=yes name=event_category_code dbname="event_category_code" )
+ retrieve="SELECT	a.event_specific_code,
+			b.event_category_code
+FROM		Event_Specific a,
+			Event_Type				b
+WHERE	a.event_type_code = b.event_type_code" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="18" y="4" height="68" width="951" format="[general]" html.valueishtml="0"  name=event_specific_code visible="1" dddw.name=dddw_event_specific_list dddw.displaycolumn=event_specific_desc dddw.datacolumn=event_specific_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

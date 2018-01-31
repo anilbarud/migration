@@ -1,0 +1,16 @@
+﻿$PBExportHeader$dddw_user_profile_case_manager.srd
+$PBExportComments$List of active users who are current users of the WorkBench and  with claim manager flag set on
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=77 color="536870912" )
+table(column=(type=char(8) update=yes updatewhereclause=yes key=yes name=user_id dbname="User_Profile.user_id" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="User_Profile.user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="User_Profile.user_first_name" )
+ column=(type=char(1) updatewhereclause=yes name=claim_manager_flag dbname="User_Profile.claim_manager_flag" )
+ column=(type=char(6) updatewhereclause=yes name=job_position_code dbname="User_Profile.job_position_code" )
+ column=(type=char(47) updatewhereclause=yes name=full_name dbname="full_name" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"User_Profile~" ) COLUMN(NAME=~"User_Profile.user_id~") COLUMN(NAME=~"User_Profile.user_last_name~") COLUMN(NAME=~"User_Profile.user_first_name~") COLUMN(NAME=~"User_Profile.claim_manager_flag~") COLUMN(NAME=~"User_Profile.job_position_code~") COMPUTE(NAME=~"user_last_name + ', '+ user_first_name full_name~")WHERE(    EXP1 =~"User_Profile.claim_manager_flag~"   OP =~"=~"    EXP2 =~"'Y'~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"User_Profile.active_flag~"   OP =~"=~"    EXP2 =~"'Y'~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"User_Profile.workbench_flag~"   OP =~"<>~"    EXP2 =~"~~~"I~~~"~" ) ) " update="User_Profile" updatewhere=0 updatekeyinplace=no  sort="user_last_name A user_first_name A " )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="4" height="57" width="965" format="[general]"  name=full_name edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

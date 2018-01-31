@@ -1,0 +1,97 @@
+﻿$PBExportHeader$d_rehab_related_outstanding_action_items.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=144 color="10789024" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=60 color="536870912" )
+table(column=(type=char(255) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=long updatewhereclause=yes key=yes name=task_no dbname="task_no" )
+ column=(type=long updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=planned_start_date dbname="planned_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=actual_start_date dbname="actual_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=actual_completion_date dbname="actual_completion_date" )
+ column=(type=char(40) updatewhereclause=yes name=task_sub_type_desc dbname="task_sub_type_desc" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="task_sub_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_specific_desc dbname="task_specific_desc" )
+ column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="task_specific_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_status_desc dbname="task_status_desc" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ column=(type=char(1) updatewhereclause=yes name=progress_note_required_flag dbname="progress_note_required_flag" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=char(1) updatewhereclause=yes name=selection_flag dbname="selection_flag" values="	Y/	N" )
+ column=(type=char(1) updatewhereclause=yes name=cancel_all_flag dbname="cancel_all_flag" values="	Y/	N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=task_success_code dbname="task_success_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=planned_completion_date dbname="planned_completion_date" )
+ retrieve="  SELECT a.comment,
+         a.task_no,
+			a.claim_no,
+			a.task_status_code,
+			a.planned_start_date,
+			a.actual_start_date,
+			a.actual_completion_date,
+			c.task_sub_type_desc,
+			a.task_sub_type_code,
+			d.task_specific_desc,
+			a.task_specific_code,
+			e.task_status_desc,
+			f.user_last_name,
+			f.user_first_name,
+			d.progress_note_required_flag,
+			a.opening_no,
+			'Y' AS selection_flag,
+			'Y' as cancel_all_flag,
+            a.task_success_code,
+            a.planned_completion_date
+    FROM REHAB_TASK   a,
+			Task_Sub_Type c,
+			Task_Specific d,
+			Task_Status e,
+			User_Profile f
+	where a.task_type_code = c.task_type_code
+			and a.task_sub_type_code = c.task_sub_type_code
+
+			and a.task_type_code = d.task_type_code
+			and a.task_sub_type_code = d.task_sub_type_code
+			and a.task_specific_code = d.task_specific_code
+
+			and a.task_status_code = e.task_status_code
+
+			and a.responsible_user_id = f.user_id
+			
+			and a.task_type_code = 'AC'
+
+			and a.claim_no = :al_claim_no
+			and (a.opening_no = :al_opening_no or :al_opening_no = 0)
+			and (a.related_task_no = :al_related_task_no or :al_related_task_no = 0)
+" update="REHAB_TASK" updatewhere=0 updatekeyinplace=yes arguments=(("al_claim_no", number),("al_opening_no", number),("al_related_task_no", number))  sort="c_date A " )
+text(band=header alignment="0" text="Item" border="0" color="33554432" x="91" y="76" height="60" width="133" html.valueishtml="0"  name=task_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="140" x2="3003" y2="140"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Type - Comment" border="0" color="33554432" x="256" y="76" height="60" width="421" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Status" border="0" color="33554432" x="1815" y="76" height="60" width="320" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date" border="0" color="33554432" x="2153" y="76" height="60" width="293" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Responsible User" border="0" color="33554432" x="2523" y="76" height="60" width="462" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="80" height="52" width="59" format="[general]" html.valueishtml="0"  name=cancel_all_flag visible="1" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Claim #" border="0" color="33554432" x="91" y="8" height="60" width="206" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="302" y="8" height="60" width="265" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Opening #" border="0" color="33554432" x="599" y="8" height="60" width="265" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=16 alignment="0" tabsequence=32766 border="0" color="33554432" x="873" y="8" height="60" width="128" format="[general]" html.valueishtml="0"  name=opening_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="96" y="0" height="56" width="110" format="[general]" html.valueishtml="0"  name=task_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" task_sub_type_desc + ~" - ~" +  task_specific_desc + If(  task_specific_desc <> '', ' - ','') +  comment "border="0" color="33554432" x="256" y="0" height="56" width="1550" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="1815" y="0" height="56" width="320" format="[general]" html.valueishtml="0"  name=task_status_desc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="If(Not Isnull( actual_completion_date ), actual_completion_date ,If(not isnull( planned_start_date ), planned_start_date , planned_start_date ))"border="0" color="33554432" x="2153" y="0" height="56" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=c_date visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" user_last_name + ', ' +  user_first_name "border="0" color="33554432" x="2523" y="0" height="56" width="553" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=10 border="0" color="33554432" x="14" y="4" height="60" width="69" format="[general]" html.valueishtml="0"  name=selection_flag visible="1" checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

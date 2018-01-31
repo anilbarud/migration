@@ -1,0 +1,20 @@
+﻿$PBExportHeader$d_rxcov_header.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=108 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=4 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="X001_REGISTRATION.claim_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=registration_date dbname="X001_REGISTRATION.registration_date" )
+ retrieve="  SELECT dbo.X001_REGISTRATION.claim_no,   
+         dbo.X001_REGISTRATION.registration_date  
+    FROM dbo.X001_REGISTRATION
+	WHERE X001_REGISTRATION.claim_no = :ar_claim_no   
+" update="dbo.X001_REGISTRATION" updatewhere=1 updatekeyinplace=no arguments=(("ar_claim_no", number)) )
+column(band=header id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="334" y="24" height="64" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Claim No:" border="0" color="33554432" x="18" y="24" height="64" width="283" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Registration Date:" border="0" color="33554432" x="777" y="24" height="64" width="526" html.valueishtml="0"  name=registration_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="1335" y="24" height="64" width="603" format="yyyy-mm-dd" html.valueishtml="0"  name=registration_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

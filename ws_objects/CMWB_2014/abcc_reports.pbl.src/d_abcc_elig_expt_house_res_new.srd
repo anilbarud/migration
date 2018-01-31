@@ -1,0 +1,29 @@
+﻿$PBExportHeader$d_abcc_elig_expt_house_res_new.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=248 color="536870912" )
+summary(height=76 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(42) updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ retrieve="SELECT a.claim_no, 
+       a.given_names+~"  ~"+ a.last_name
+  FROM X001_RESIDENT a
+ WHERE a.export_no = :ai_export_no 
+   AND a.export_action_code ='A'
+   AND a.claim_no IN( SELECT b.claim_no
+		               	FROM X001_HOUSEHOLD b
+			              WHERE b.export_no = :ai_export_no
+			                AND b.export_action_code ='A')
+ORDER BY  a.claim_no asc" arguments=(("ai_export_no", number)) )
+text(band=header alignment="0" text="Newly Registered" border="0" color="33554432" x="0" y="16" height="92" width="745" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Claim No" border="0" color="33554432" x="0" y="156" height="64" width="270" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Clamaint Name" border="0" color="33554432" x="288" y="156" height="64" width="448" html.valueishtml="0"  name=given_names_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="232" x2="1449" y2="232"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="288" y="4" height="64" width="1170" format="[general]" html.valueishtml="0"  name=compute_0002 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="0" y="4" height="64" width="270" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total Registered:" border="0" color="33554432" x="5" y="4" height="64" width="494" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(compute_0002 for all)"border="0" color="33554432" x="526" y="4" height="64" width="448" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" nowrap="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

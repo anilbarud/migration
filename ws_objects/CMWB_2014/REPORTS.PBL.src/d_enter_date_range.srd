@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_enter_date_range.srd
+$PBExportComments$Used in 15+ reports!!!  Common - External datawindow used for entering a date range
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=73 color="-1" )
+table(column=(type=datetime updatewhereclause=yes name=from_date dbname="from_date" )
+ column=(type=datetime updatewhereclause=yes name=to_date dbname="to_date" )
+ )
+text(band=detail alignment="1" text="From:"border="0" color="33554432" x="5" y="4" height="61" width="147"  name=paid_from_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="33554432" x="197" y="4" height="61" width="311" format="YYYY-MM-DD [time]"  name=from_date editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="To:"border="0" color="33554432" x="778" y="4" height="61" width="78"  name=paid_to_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="5" color="33554432" x="897" y="4" height="61" width="311" format="YYYY-MM-DD [time]"  name=to_date editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

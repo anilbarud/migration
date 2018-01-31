@@ -1,0 +1,78 @@
+﻿$PBExportHeader$d_formulary_pres_individual.srd
+$PBExportComments$based on indivdual_no and not claim_no
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=80 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=din_gp_pin dbname="din_gp_pin" )
+ column=(type=char(50) updatewhereclause=yes name=din_gp_pin_desc dbname="din_gp_pin_desc" )
+ column=(type=decimal(1) updatewhereclause=yes name=drug_quantity dbname="drug_quantity" )
+ column=(type=long updatewhereclause=yes name=days_supply dbname="days_supply" )
+ column=(type=datetime updatewhereclause=yes name=paid_date dbname="paid_date" )
+ column=(type=datetime updatewhereclause=yes name=prescription_date dbname="prescription_date" )
+ column=(type=char(65) updatewhereclause=yes name=physician_name dbname="physician_name" )
+ column=(type=char(65) updatewhereclause=yes name=pharmacy_name dbname="pharmacy_name" )
+ column=(type=char(5) updatewhereclause=yes name=benefit_package_code dbname="benefit_package_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=drug_cost dbname="drug_cost" )
+ column=(type=decimal(0) updatewhereclause=yes name=subscriber_auth_seq_no dbname="subscriber_auth_seq_no" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=decimal(1) updatewhereclause=yes name=paid_quantity dbname="paid_quantity" )
+ retrieve="  SELECT a.claim_no,   
+         a.din_gp_pin,   
+         a.din_gp_pin_desc,   
+         a.drug_quantity,   
+         a.days_supply,   
+         a.paid_date,
+         a.prescription_date,       
+         a.physician_name,   
+         a.pharmacy_name,   
+         a.benefit_package_code,
+         a.drug_cost,
+         a.subscriber_auth_seq_no,
+         a.payment_no, 
+         a.paid_quantity  
+    FROM PAYMENT_PRESCRIPTION a, CLAIM b 
+   WHERE a.claim_no             = b.claim_no
+     AND b.individual_no        = :al_individual_no  
+     AND a.reverse_flag         = 'N'
+     AND a.reverse_reference_no = 0    
+" arguments=(("al_individual_no", number)) )
+text(band=header alignment="0" text="Claim No" border="6" color="33554432" x="0" y="8" height="56" width="288" html.valueishtml="0"  name=claim_no_t  tag="Claim No" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Din Gp Pin Desc" border="6" color="33554432" x="613" y="8" height="56" width="919" html.valueishtml="0"  name=din_gp_pin_desc_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Din Gp Pin" border="6" color="33554432" x="306" y="8" height="56" width="283" html.valueishtml="0"  name=din_gp_pin_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Req Qty" border="6" color="33554432" x="1554" y="8" height="56" width="242" html.valueishtml="0"  name=drug_quantity_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pd Qty" border="6" color="33554432" x="1819" y="8" height="56" width="201" html.valueishtml="0"  name=paid_quantity_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Dispense Dt" border="6" color="33554432" x="2043" y="8" height="56" width="302" html.valueishtml="0"  name=prescription_date_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="D-Supply" border="6" color="33554432" x="2363" y="8" height="56" width="219" html.valueishtml="0"  name=days_supply_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Drug Cost" border="6" color="33554432" x="2606" y="8" height="56" width="256" html.valueishtml="0"  name=drug_cost_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Paid Date" border="6" color="33554432" x="2885" y="8" height="56" width="297" html.valueishtml="0"  name=paid_date_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Form/Auth" border="6" color="33554432" x="3205" y="8" height="56" width="306" html.valueishtml="0"  name=t_11  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Physician Name" border="6" color="33554432" x="3538" y="8" height="56" width="526" html.valueishtml="0"  name=physician_name_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pharmacy Name" border="6" color="33554432" x="4091" y="8" height="56" width="617" html.valueishtml="0"  name=pharmacy_name_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="14" y="4" height="56" width="274" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="320" y="4" height="56" width="265" format="[general]" html.valueishtml="0"  name=din_gp_pin visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="603" y="4" height="56" width="955" format="[general]" html.valueishtml="0"  name=din_gp_pin_desc visible="1" edit.limit=50 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=90 border="0" color="33554432" x="2610" y="4" height="56" width="256" format="###,###.00" html.valueishtml="0"  name=drug_cost visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="IF ( subscriber_auth_seq_no > 0,~"SDA~", benefit_package_code )"border="0" color="33554432" x="3209" y="4" height="56" width="315" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=100 border="0" color="33554432" x="3543" y="4" height="56" width="530" format="[general]" html.valueishtml="0"  name=physician_name visible="1" edit.limit=65 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=110 border="0" color="33554432" x="4091" y="4" height="56" width="631" format="[general]" html.valueishtml="0"  name=pharmacy_name visible="1" edit.limit=65 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=70 border="0" color="33554432" x="2368" y="4" height="56" width="224" format="[general]" html.valueishtml="0"  name=days_supply visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=80 border="0" color="33554432" x="2885" y="4" height="56" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=paid_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=60 border="0" color="33554432" x="2048" y="4" height="56" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=prescription_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd" edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="33554432" x="1573" y="4" height="56" width="210" format="[general]" html.valueishtml="0"  name=drug_quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=50 border="0" color="33554432" x="1797" y="4" height="56" width="210" format="[general]" html.valueishtml="0"  name=paid_quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="" border="5" color="0" x="23" y="12" height="56" width="2565" html.valueishtml="0"  name=st_filter visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="2" background.color="134217752" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

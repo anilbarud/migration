@@ -1,0 +1,16 @@
+﻿$PBExportHeader$d_claim_individual.srd
+$PBExportComments$used to update the individual no on the claim when the claimant role changes
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=185 color="536870912" )
+table(column=(type=number key=yes name=claim_no dbname="CLAIM.claim_no" )
+ column=(type=number update=yes name=individual_no dbname="CLAIM.individual_no" )
+ column=(type=timestamp name=timestamp dbname="CLAIM.timestamp" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CLAIM~" ) COLUMN(NAME=~"CLAIM.claim_no~") COLUMN(NAME=~"CLAIM.individual_no~") COLUMN(NAME=~"CLAIM.timestamp~")WHERE( EXP1 =~"CLAIM.claim_no~" OP =~"=~" EXP2 =~":claim_no~" ) ) ARG(NAME = ~"claim_no~" TYPE = number) " update="CLAIM" updatewhere=0 updatekeyinplace=yes arguments=(("claim_no", number)) )
+text(band=detail alignment="1" text="Claim No:"border="0" color="0" x="37" y="4" height="61" width="339"  name=claim_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="394" y="4" height="73" width="275" format="[general]"  name=claim_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Individual No:"border="0" color="0" x="37" y="100" height="61" width="339"  name=individual_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="5" color="0" x="394" y="100" height="73" width="275" format="[general]"  name=individual_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

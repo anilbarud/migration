@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dddw_recipient_types_active.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=65 color="536870912" )
+table(column=(type=char(1) update=yes key=yes name=recipient_type_code dbname="Recipient_Type.recipient_type_code" )
+ column=(type=char(20) update=yes name=recipient_type_desc dbname="Recipient_Type.recipient_type_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Recipient_Type~" ) COLUMN(NAME=~"Recipient_Type.recipient_type_code~") COLUMN(NAME=~"Recipient_Type.recipient_type_desc~")WHERE( EXP1 =~"Recipient_Type.active_flag~" OP =~"=~" EXP2 =~"'Y'~" LOGIC =~"and~" ) WHERE( EXP1 =~"Recipient_Type.recipient_type_code~" OP =~"<>~" EXP2 =~"'E'~" ) ) " update="Recipient_Type" updatewhere=1 updatekeyinplace=no  sort="recipient_type_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="10" y="4" height="61" width="727" format="[general]"  name=recipient_type_desc edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

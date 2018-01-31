@@ -1,0 +1,103 @@
+﻿$PBExportHeader$d_entitlement_award_ss.srd
+$PBExportComments$PERIODIC_AWARD portion (master) of maintain entitlement benefit
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=96 color="134217752" )
+detail(height=84 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=award_no dbname="award_no" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=award_type_code dbname="award_type_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=award_start_date dbname="award_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=award_end_date dbname="award_end_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_award_amount dbname="total_award_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_deductions dbname="total_deductions" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=total_payment_amount dbname="total_payment_amount" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(80) update=yes updatewhereclause=yes name=explanation dbname="explanation" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no dbname="opening_no" )
+ column=(type=long update=yes updatewhereclause=yes name=benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=authorized_user_id dbname="authorized_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=authorized_date dbname="authorized_date" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=long updatewhereclause=yes name=paid_indicator dbname="paid_indicator" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ retrieve=" SELECT distinct a.claim_no,   
+         a.award_no,   
+         a.award_type_code,   
+         a.award_start_date,   
+         a.award_end_date,   
+         a.total_award_amount,   
+         a.total_deductions,   
+         a.total_payment_amount,   
+         a.payment_type_code,   
+         a.explanation,   
+         a.opening_no,   
+         a.benefit_calculation_no,   
+         a.authorized_user_id,   
+         a.authorized_date,
+         h.recipient_no ,
+         h.recipient_type_code, '' as recipient_name,
+         ( SELECT COUNT(*) FROM PAYMENT  where PAYMENT.award_no = a.award_no and PAYMENT.claim_no = a.claim_no) as 'paid_indicator', 
+         h.txn_amount
+    FROM PERIODIC_AWARD a 
+INNER JOIN CLAIM_PARTICIPANT 	b ON a.claim_no = b.claim_no
+INNER JOIN OPENING                   	c ON a.opening_no = c.opening_no AND a.claim_no = c.claim_no
+INNER JOIN Claim_Role_Opening_Type_Xref d ON c.opening_type_code = d.opening_type_code 	AND d.claim_role_code 	= 'SS'
+INNER JOIN ANNUITY_ACCOUNT 	e ON b.individual_no = e.individual_no AND b.claim_no = e.claim_no 
+INNER JOIN Payment_Combination f ON d.opening_type_code = f.opening_type_code
+INNER JOIN Payment_Type g ON f.payment_type_code = g.payment_type_code   and a.payment_type_code = g.payment_type_code
+INNER JOIN PERIODIC_RECIPIENT h ON h.claim_no  = a.claim_no AND  h.award_no = a.award_no
+AND      e.claim_role_code	= 'SS'
+AND      e.individual_no    	= :al_individual_no
+AND      b.claim_no 			= :al_claim_no
+AND  	   d.annuity_eligibility_flag 	= 'Y'
+AND 		 b.claim_role_code	= 'SS'
+AND      g.annuity_flag = 'Y'
+" arguments=(("al_individual_no", number),("al_claim_no", number)) )
+text(band=header alignment="0" text="Claim No" border="6" color="33554432" x="5" y="4" height="64" width="279" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Award" border="6" color="33554432" x="302" y="4" height="64" width="274" html.valueishtml="0"  name=award_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Type" border="6" color="33554432" x="594" y="4" height="64" width="155" html.valueishtml="0"  name=payment_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Start Date" border="6" color="33554432" x="768" y="4" height="64" width="306" html.valueishtml="0"  name=award_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="End Date" border="6" color="33554432" x="1093" y="4" height="64" width="297" html.valueishtml="0"  name=award_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Award" border="6" color="33554432" x="1408" y="4" height="64" width="320" html.valueishtml="0"  name=total_award_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Deductions" border="6" color="33554432" x="1746" y="4" height="64" width="343" html.valueishtml="0"  name=total_deductions_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Payments" border="6" color="33554432" x="2107" y="4" height="64" width="311" html.valueishtml="0"  name=total_payment_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Explanation" border="6" color="33554432" x="2437" y="4" height="64" width="786" html.valueishtml="0"  name=explanation_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Opening" border="6" color="33554432" x="3241" y="4" height="64" width="247" html.valueishtml="0"  name=opening_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="BenCalc" border="6" color="33554432" x="3506" y="4" height="64" width="247" html.valueishtml="0"  name=benefit_calculation_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Recipient" border="6" color="33554432" x="4142" y="4" height="64" width="960" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Txn Amount" border="6" color="33554432" x="3771" y="4" height="64" width="352" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Authorized date" border="6" color="33554432" x="5120" y="4" height="64" width="462" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="IF( paid_indicator > 0,'','*')"border="0" color="255" x="5038" y="4" height="68" width="69" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="68" width="279" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="302" y="4" height="68" width="110" format="[general]" html.valueishtml="0"  name=award_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="425" y="4" height="68" width="155" format="[general]" html.valueishtml="0"  name=award_type_code visible="1" edit.limit=4 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="594" y="4" height="68" width="155" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="768" y="4" height="68" width="306" format="YYYY-MM-DD" html.valueishtml="0"  name=award_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1093" y="4" height="68" width="297" format="YYYY-MM-DD" html.valueishtml="0"  name=award_end_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="1408" y="4" height="68" width="320" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=total_award_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="1746" y="4" height="68" width="343" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=total_deductions visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="2107" y="4" height="68" width="311" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=total_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="2437" y="4" height="68" width="786" format="[general]" html.valueishtml="0"  name=explanation visible="1" edit.limit=80 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="3241" y="4" height="68" width="247" format="[general]" html.valueishtml="0"  name=opening_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="3506" y="4" height="68" width="247" format="[general]" html.valueishtml="0"  name=benefit_calculation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="4137" y="4" height="64" width="887" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="33554432" x="3771" y="4" height="64" width="352" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=txn_amount_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="5120" y="4" height="64" width="462" format="YYYY-MM-DD" html.valueishtml="0"  name=authorized_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="'*' Indicates award number is not associated with a payment " border="0" color="33554432" x="18" y="4" height="80" width="2089" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+
+sparse(names="compute_1	claim_no	award_no	total_award_amount	benefit_calculation_no	opening_no	authorized_date	explanation	total_deductions	total_payment_amount	payment_type_code	award_start_date	award_end_date")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,42 @@
+﻿$PBExportHeader$f_check_word_doc_open.srf
+$PBExportComments$This function returns true if Word document is already open.
+global type f_check_word_doc_open from function_object
+end type
+
+forward prototypes
+global function integer f_check_word_doc_open (string as_file_path, window aw_window)
+end prototypes
+
+global function integer f_check_word_doc_open (string as_file_path, window aw_window);// f_check_word_doc_open - Checks if document is already open and displays a messagebox if it is. 
+// 
+// Returns:   1 - if document is NOT already open
+//          -99 - if document is already open
+// 
+Long    ll_rtn 
+Integer li_rtn
+String  ls_reverse_file_name, ls_file_name, ls_file_name_without_extension, ls_file_name_with_extension, ls_classname
+n_search_window_titlebars ln_search_window_titlebars
+
+// Get the filename without the extension
+ls_reverse_file_name = Reverse(as_file_path)
+ls_file_name = Reverse(Left(ls_reverse_file_name, (Pos(ls_reverse_file_name, '\') - 1) ))
+ls_file_name_with_extension = Trim(ls_file_name)
+ls_file_name_without_extension = Trim(Left(ls_file_name, (Pos(ls_file_name, '.') - 1) )) 
+
+ln_search_window_titlebars = CREATE n_search_window_titlebars 
+
+ls_classname = "OpusApp"
+
+ll_rtn = ln_search_window_titlebars.nf_search_window_titlebars(ls_classname, ls_file_name_without_extension)
+IF ll_rtn > 0 THEN
+	li_rtn = -99  // document is already open
+	aw_window.BringToTop = TRUE
+	MessageBox('Already Open', 'This document: ' + ls_file_name_with_extension + ' is already open, please close the document and try again.')
+ELSE
+	li_rtn = 1    // document is not already open 
+END IF	
+
+RETURN li_rtn
+
+end function
+

@@ -1,0 +1,64 @@
+﻿$PBExportHeader$d_foe_claims_adjudicated.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=560 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_name_given_names dbname="given_names" )
+ column=(type=char(20) updatewhereclause=yes name=individual_name_last_name dbname="last_name" )
+ column=(type=char(10) updatewhereclause=yes name=claim_status_change_create_date dbname="create_date" )
+ column=(type=char(1) updatewhereclause=yes name=new_claim_status_code dbname="new_claim_status_code" )
+ retrieve="SELECT	b.claim_no,
+			e.given_names,
+			e.last_name,
+			Convert(varchar(10),b.create_date,120) as create_date ,
+			b.new_claim_status_code
+FROM		CLAIM a JOIN CLAIM_STATUS_CHANGE b ON a.claim_no = b.claim_no
+JOIN		DIFFICULT_CLAIM c ON a.claim_no = c.claim_no
+JOIN		CORRESPONDENCE d ON a.claim_no = d.claim_no
+JOIN		INDIVIDUAL e ON a.individual_no = e.individual_no
+WHERE	c.form_of_election_sent_flag = 'Y'
+AND		(	(b.new_claim_status_code = 'F'	and b.new_claim_status_type_code in ('01','02','03','04'))
+			or	(b.new_claim_status_code = 'R'	and b.new_claim_status_type_code in ('06','07','08','09'))
+			or	(b.new_claim_status_code = 'A'))
+AND		d.template_code = 'ELECTION'
+AND		Convert(varchar(10),b.create_date,120) >= :adt_start_date
+AND		Convert(varchar(10),b.create_date,120) <= :adt_end_date
+AND		d.correspond_status_code = 'S'
+GROUP BY
+			b.claim_no,
+			e.given_names,
+			e.last_name,
+			Convert(varchar(10),b.create_date,120),
+			b.new_claim_status_code
+ORDER BY Convert(varchar(10),b.create_date,120) desc" arguments=(("adt_start_date", date),("adt_end_date", date)) )
+rectangle(band=header x="14" y="0" height="368" width="3177"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="2" text="Form of Election Adjudicated Claims Report" border="0" color="0" x="658" y="40" height="76" width="1701" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="69" y1="324" x2="3113" y2="324"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2601" y="32" height="76" width="549" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="41" y="476" height="60" width="247" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="425" y="168" height="60" width="393" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="168" height="60" width="334" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="New Claim Status" border="0" color="33554432" x="2697" y="476" height="60" width="466" html.valueishtml="0"  name=claim_status_claim_status_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="548" x2="3200" y2="548"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Claimant Name" border="0" color="33554432" x="471" y="476" height="60" width="466" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Date of Change" border="0" color="33554432" x="1970" y="476" height="60" width="448" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="50" y="240" height="60" width="521" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="parameters" border="0" color="0" x="635" y="240" height="60" width="1513" html.valueishtml="0"  name=t_report_parameters visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="33554432" x="18" y="24" height="64" width="288" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="2697" y="24" height="64" width="466" format="[general]" html.valueishtml="0"  name=new_claim_status_code visible="1" dddw.name=dddw_claim_status_active dddw.displaycolumn=claim_status_desc dddw.datacolumn=claim_status_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="2034" y="28" height="60" width="320" format="[general]" html.valueishtml="0"  name=claim_status_change_create_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" individual_name_given_names + ' ' + individual_name_last_name "border="0" color="33554432" x="471" y="24" height="64" width="1294" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

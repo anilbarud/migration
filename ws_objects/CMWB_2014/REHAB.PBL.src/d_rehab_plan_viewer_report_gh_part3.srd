@@ -1,0 +1,29 @@
+﻿$PBExportHeader$d_rehab_plan_viewer_report_gh_part3.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=161 color="536870912" )
+table(column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="CLAIM.claim_status_code" )
+ column=(type=char(4) updatewhereclause=yes name=occupation_code dbname="ACCIDENT.occupation_code" )
+ column=(type=datetime updatewhereclause=yes name=c_create_date dbname="CLAIM.create_date" )
+ column=(type=datetime updatewhereclause=yes name=a_create_date2 dbname="ACCIDENT.create_date" )
+ retrieve="    SELECT CLAIM.claim_status_code,   
+         ACCIDENT.occupation_code,   
+         CLAIM.create_date,   
+         ACCIDENT.create_date
+FROM  ACCIDENT 
+    INNER JOIN  CLAIM  ON CLAIM.claim_no = ACCIDENT.claim_no
+ WHERE CLAIM.claim_no = :al_claim_no
+" arguments=(("al_claim_no", number)) )
+compute(band=header alignment="0" expression="/* if(country = 'CAN' and postal_code > ~"~",
+if(len(postal_code) = 6,Mid(postal_code,1,3) + ~" ~" + Mid(postal_code,4,3),postal_code),
+if(postal_code > ~"~",postal_code,~"~")) */"border="0" color="0" x="1212" y="64" height="61" width="225" format="[general]"  name=postal_country  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="/* if(city > ~"~",city  + if(province_state > ~"~",~", ~" + province_state,~"~"),~"~" + if(province_state > ~"~",province_state,~"~")) */"border="0" color="0" x="874" y="52" height="61" width="225" format="[general]"  name=city_province  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Claim Status:"border="0" color="0" x="10" y="8" height="61" width="343"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="773" y="8" height="61" width="293" format="yyyy-mm-dd"  name=c_create_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="1098" y="8" height="61" width="2085" format="[general]"  name=claim_status_code dddw.name=dddw_claim_status dddw.displaycolumn=claim_status_desc dddw.datacolumn=claim_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Occupation:"border="0" color="0" x="10" y="88" height="61" width="311"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="773" y="88" height="61" width="293" format="yyyy-mm-dd"  name=a_create_date edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1098" y="88" height="61" width="2085" format="[general]"  name=occupation_code dddw.name=dddw_occupation_codes_active dddw.displaycolumn=occupation_code_desc dddw.datacolumn=occupation_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

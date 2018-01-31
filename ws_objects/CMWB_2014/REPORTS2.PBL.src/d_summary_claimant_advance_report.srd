@@ -1,0 +1,20 @@
+﻿$PBExportHeader$d_summary_claimant_advance_report.srd
+$PBExportComments$Datawidow used as a nested report for a regional total advance report.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=73 color="-1" )
+table(column=(type=decimal(4) updatewhereclause=yes name=balance_amount dbname="OVERPAYMENT_BALANCE.balance_amount" )
+ column=(type=char(12) updatewhereclause=yes name=overpament_date dbname="compute_0002" )
+ retrieve="  SELECT OVERPAYMENT_BALANCE.balance_amount,   
+         ISNULL(CONVERT ( char(12),OVERPAYMENT_BALANCE.scheduled_repayment_date,107),'Unknown')   
+           
+    FROM OVERPAYMENT_BALANCE  
+   WHERE ( OVERPAYMENT_BALANCE.claim_no = :al_claim_no ) AND  
+         ( OVERPAYMENT_BALANCE.overpayment_type_code = 'A' ) AND  
+         ( OVERPAYMENT_BALANCE.balance_amount <> 0 )    
+" arguments=(("al_claim_no", number)) )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="1" y="4" height="61" width="439" format=""  name=overpament_date edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="439" y="4" height="61" width="659" format="$#,##0.00;($#,##0.00)"  name=balance_amount  slideup=directlyabove edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

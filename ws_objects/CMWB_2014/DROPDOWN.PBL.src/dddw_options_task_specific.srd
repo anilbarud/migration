@@ -1,0 +1,38 @@
+﻿$PBExportHeader$dddw_options_task_specific.srd
+$PBExportComments$SELECT from Task_Specific. Used in data object 'd_options_tasks'.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="task_specific_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_specific_desc dbname="task_specific_desc" )
+ column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="task_sub_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=comment_required_flag dbname="comment_required_flag" )
+ column=(type=char(8) updatewhereclause=yes name=task_and_sub_and_specific dbname="task_and_sub_and_specific" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="  SELECT  task_specific_code ,           
+task_specific_desc ,          
+ task_type_code ,           
+task_sub_type_code ,        
+   comment_required_flag ,     
+      task_type_code + task_sub_type_code + task_specific_code 'task_and_sub_and_specific',  
+         active_flag     
+FROM   Cost_Analysis_Option_Task_Specific
+ ORDER BY task_type_code    
+      ASC,           task_sub_type_code          ASC,  
+         task_specific_desc          ASC  " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="9" y="4" height="60" width="791" format="[general]" html.valueishtml="0"  name=task_specific_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

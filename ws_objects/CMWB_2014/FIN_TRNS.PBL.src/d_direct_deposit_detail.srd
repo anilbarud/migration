@@ -1,0 +1,67 @@
+﻿$PBExportHeader$d_direct_deposit_detail.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=108 color="536870912" )
+summary(height=68 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=direct_deposit_xmit_no dbname="direct_deposit_xmit_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(20) updatewhereclause=yes name=recipient_type_desc dbname="recipient_type_desc" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=long updatewhereclause=yes name=checkbox_group dbname="checkbox_group" initial="0" values="	1/	0" )
+ column=(type=datetime update=yes updatewhereclause=yes name=cheque_deposit_date dbname="cheque_deposit_date" )
+ column=(type=long updatewhereclause=yes key=yes name=txn_no dbname="txn_no" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=direct_deposit_detail_no dbname="direct_deposit_detail_no" )
+ retrieve="  SELECT a.direct_deposit_xmit_no,
+                   a.recipient_no,
+                   b.recipient_type_desc,
+                   a.recipient_type_code,
+                   a.txn_amount,
+                   0 as checkbox_group,
+                   a.cheque_deposit_date,
+                   a.txn_no,
+                   a.payment_no,
+                   a.claim_no,
+                   c.direct_deposit_detail_no
+FROM       APPLIED_CLAIM_TXN a
+INNER JOIN Recipient_Type b ON a.recipient_type_code = b.recipient_type_code
+LEFT OUTER JOIN DIRECT_DEPOSIT_DETAIL c ON a.txn_no = c.txn_no
+			                           AND a.recipient_no = c.recipient_no
+	                                   AND a.recipient_type_code = c.recipient_type_code
+	                                   AND a.direct_deposit_xmit_no = c.direct_deposit_xmit_no
+WHERE a.payment_method_code = :as_payment_method
+AND               a.txn_type_code = '1'
+AND               a.maintain_allowed_flag = 'Y'" update="APPLIED_CLAIM_TXN" updatewhere=1 updatekeyinplace=yes arguments=(("as_payment_method", string))  sort="direct_deposit_xmit_no D recipient_no A txn_no A " )
+group(level=1 header.height=0 trailer.height=0 by=("direct_deposit_xmit_no" , "recipient_no" , "recipient_type_code" ) header.color="536870912" trailer.color="536870912" )
+line(band=header x1="0" y1="104" x2="3141" y2="104"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="" border="0" color="33554432" x="229" y="24" height="56" width="283" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Xmit No." border="0" color="33554432" x="169" y="24" height="56" width="283" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Deposit Date" border="0" color="33554432" x="901" y="24" height="56" width="361" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Txn No." border="0" color="33554432" x="576" y="24" height="56" width="283" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Recipient Type/No." border="0" color="33554432" x="1394" y="24" height="56" width="549" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="1" text="Total Amount" border="0" color="33554432" x="2217" y="24" height="56" width="389" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=10 border="5" color="33554432" x="2738" y="8" height="56" width="64" format="[general]" html.valueishtml="0" protect="0~t1"  name=checkbox_group visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="174" y="8" height="56" width="261" format="[general]" html.valueishtml="0"  name=direct_deposit_xmit_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="896" y="8" height="56" width="347" format="yyyy-mm-dd" html.valueishtml="0"  name=cheque_deposit_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="576" y="8" height="56" width="283" format="[general]" html.valueishtml="0"  name=txn_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" recipient_type_desc + ' : '  + STRING( recipient_no ) "border="0" color="33554432" x="1381" y="8" height="56" width="823" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="2272" y="8" height="56" width="347" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Total Selected Txns:" border="0" color="33554432" x="155" y="8" height="56" width="507" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=summary alignment="0" expression="sum( IF(checkbox_group = 1, 1, 0)  for all )"border="0" color="33554432" x="686" y="8" height="56" width="137" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Total Amt of Selected Txns:" border="0" color="33554432" x="1554" y="8" height="56" width="690" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=summary alignment="0" expression="sum( IF(checkbox_group = 1, txn_amount, 0) for all )"border="0" color="33554432" x="2263" y="4" height="56" width="347" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

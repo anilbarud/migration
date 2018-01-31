@@ -1,0 +1,31 @@
+﻿$PBExportHeader$d_med_aid_e_invoice_indexing.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=datetime updatewhereclause=yes name=date_of_service dbname="date_of_service" )
+ column=(type=datetime updatewhereclause=yes name=invoice_date dbname="invoice_date" )
+ column=(type=long updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(1) updatewhereclause=yes name=provider_type_code dbname="provider_type_code" )
+ retrieve="  SELECT CASE 
+				WHEN  patient_type_code = 'O' THEN outpatient_treatment_date
+				ELSE  hospitalized_start_date 
+			END as date_of_service,
+			invoice_date,
+         provider_no,
+	      provider_type_code          
+    FROM MED_AID_E_INVOICE a
+	WHERE doc_id = :al_docid" arguments=(("al_docid", number)) )
+text(band=header alignment="2" text="Patient Bill No" border="0" color="33554432" x="5" y="4" height="64" width="416" html.valueishtml="0"  name=patient_bill_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient Account No" border="0" color="33554432" x="425" y="4" height="64" width="553" html.valueishtml="0"  name=patient_account_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Period From Date" border="0" color="33554432" x="983" y="4" height="64" width="603" html.valueishtml="0"  name=period_from_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Period To Date" border="0" color="33554432" x="1591" y="4" height="64" width="603" html.valueishtml="0"  name=period_to_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total Submitted Amount" border="0" color="33554432" x="2199" y="4" height="64" width="704" html.valueishtml="0"  name=total_submitted_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="33554432" x="2903" y="0" height="76" width="608" html.valueishtml="0"  name=date_of_service visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="33554432" x="3511" y="0" height="76" width="608" html.valueishtml="0"  name=invoice_date visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="33554432" x="4119" y="0" height="76" width="96" html.valueishtml="0"  name=provider_no visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="33554432" x="4215" y="0" height="76" width="32" html.valueishtml="0"  name=provider_type_code visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

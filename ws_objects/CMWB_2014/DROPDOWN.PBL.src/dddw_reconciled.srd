@@ -1,0 +1,14 @@
+﻿$PBExportHeader$dddw_reconciled.srd
+$PBExportComments$DDDW for Reconciled table
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=69 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes key=yes name=reconciled_code dbname="reconciled.reconciled_code" )
+ column=(type=char(40) updatewhereclause=yes name=reconciled_desc dbname="reconciled.reconciled_desc" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="reconciled.active_flag" )
+ column=(type=char(1) updatewhereclause=yes name=generated_method_code dbname="reconciled.generated_method_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Reconciled~" ) COLUMN(NAME=~"Reconciled.reconciled_code~") COLUMN(NAME=~"Reconciled.reconciled_desc~") COLUMN(NAME=~"Reconciled.active_flag~") COLUMN(NAME=~"Reconciled.generated_method_code~")WHERE(    EXP1 =~"reconciled_code~"   OP =~"<>~"    EXP2 =~"''~" ) ) " update="Reconciled" updatewhere=0 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="61" width="1125" format="[general]"  name=reconciled_desc edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

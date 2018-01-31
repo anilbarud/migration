@@ -1,0 +1,144 @@
+﻿$PBExportHeader$d_benefit_calculation_details.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=684 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" initial="null" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=benefit_calculation_no dbname="benefit_calculation_no" initial="null" )
+ column=(type=long update=yes updatewhereclause=yes name=opening_no dbname="opening_no" initial="null" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=calculation_type_code dbname="calculation_type_code" initial="A" values="Automatic	A/Manual	M/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=transitional_claim_flag dbname="transitional_claim_flag" initial="null" values="Yes	Y/No	N/Inapplicable	I/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=top_up_flag dbname="top_up_flag" initial="null" values="Yes	Y/No	N/" )
+ column=(type=datetime update=yes updatewhereclause=yes name=effective_from_date dbname="effective_from_date" initial="null" validationmsg="~"You must provide a valid effective date~"" )
+ column=(type=long update=yes updatewhereclause=yes name=index_taxation_year dbname="index_taxation_year" initial="null" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=benefit_level_percentage dbname="benefit_level_percentage" initial="null" values="80%	0.8/85%	0.85/90%	0.9/100%	1.0/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=award_freq_code dbname="award_freq_code" initial="W" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=award_amount dbname="award_amount" initial="0" validation="Dec(gettext()) >= 0" validationmsg="~"The award amount cannot be less than zero~"" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=calculation_note dbname="calculation_note" initial="null" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=cppd_monthly_amount dbname="cppd_monthly_amount" initial="0" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=cppd_net_amount dbname="cppd_net_amount" initial="0" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=td1_exemption_amount dbname="td1_exemption_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=preacc_gross_pay_base_year dbname="preacc_gross_pay_base_year" initial="0" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=preacc_earn_freq_code dbname="preacc_earn_freq_code" initial="W" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=preacc_gross_pay dbname="preacc_gross_pay" initial="0" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=preacc_net_pay dbname="preacc_net_pay" initial="0" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=preacc_paid_uic_flag dbname="preacc_paid_uic_flag" initial="Y" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=preacc_paid_cpp_flag dbname="preacc_paid_cpp_flag" initial="Y" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=preacc_work_days_per_week dbname="preacc_work_days_per_week" initial="5" validation="Real(gettext()) >=0 and Real(gettext()) <= 7" validationmsg="~"The number of days must be greater than or equal to zero, and cannot exceed 7~"" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=preacc_work_hours_per_day dbname="preacc_work_hours_per_day" initial="8" validation="Real(gettext()) >= 0 and Real(gettext()) <= 24" validationmsg="~"The hours per day must be greater than or equal to zero, but cannot exceed 24~"" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=avg_earn_freq_code dbname="avg_earn_freq_code" initial="W" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=avg_gross_pay dbname="avg_gross_pay" initial="0" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=avg_net_pay dbname="avg_net_pay" initial="0" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=avg_paid_uic_flag dbname="avg_paid_uic_flag" initial="Y" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=avg_paid_cpp_flag dbname="avg_paid_cpp_flag" initial="Y" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0029 dbname="compute_0029" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0030 dbname="compute_0030" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0031 dbname="compute_0031" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0032 dbname="compute_0032" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0033 dbname="compute_0033" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0034 dbname="compute_0034" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0035 dbname="compute_0035" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0036 dbname="compute_0036" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0037 dbname="compute_0037" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0038 dbname="compute_0038" )
+ column=(type=decimal(2) updatewhereclause=yes name=compute_0039 dbname="compute_0039" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=calculation_reason_code dbname="calculation_reason_code" )
+ column=(type=long update=yes updatewhereclause=yes name=cppd_base_year dbname="cppd_base_year" initial="0" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=cppd_indexed_monthly_amount dbname="cppd_indexed_monthly_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=preacc_indexed_gross_pay dbname="preacc_indexed_gross_pay" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=avg_indexed_gross_pay dbname="avg_indexed_gross_pay" )
+ column=(type=datetime update=yes updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=yearly_factor_date dbname="yearly_factor_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=prov_td1_exemption_amount dbname="prov_td1_exemption_amount" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=release_no dbname="release_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=rtw_incentive_flag dbname="rtw_incentive_flag" values="RTW Incentive	Y/RTW Incentive	N" )
+ column=(type=long update=yes updatewhereclause=yes name=copied_from_benefit_calc_no dbname="copied_from_benefit_calc_no" )
+ column=(type=char(4) updatewhereclause=yes name=opening_type_code dbname="opening_type_code" )
+ column=(type=long updatewhereclause=yes name=opening_opening_no dbname="opening_opening_no" )
+ retrieve="SELECT a.claim_no , 	a.benefit_calculation_no , 	
+		 a.opening_no , 	 a.calculation_type_code , 
+		 a.transitional_claim_flag , 	a.top_up_flag ,
+		 a.effective_from_date , 	 a.index_taxation_year ,
+		 a.benefit_level_percentage , 	 a.award_freq_code ,
+		 a.award_amount , 	a.calculation_note , 	
+		 a.cppd_monthly_amount , a.cppd_net_amount ,
+		 a.td1_exemption_amount ,
+	 	 a.preacc_gross_pay_base_year , 
+		 a.preacc_earn_freq_code , 	a.preacc_gross_pay , 
+		 a.preacc_net_pay , 	a.preacc_paid_uic_flag ,
+		 a.preacc_paid_cpp_flag , a.preacc_work_days_per_week , 
+		 a.preacc_work_hours_per_day , 	 a.avg_earn_freq_code ,
+		 a.avg_gross_pay , 	a.avg_net_pay , 	
+		 a.avg_paid_uic_flag , a.avg_paid_cpp_flag ,
+		 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, a.calculation_reason_code ,
+		 a.cppd_base_year , 	a.cppd_indexed_monthly_amount , 
+		 a.preacc_indexed_gross_pay , 	 a.avg_indexed_gross_pay ,
+		 a.create_date, a.create_user_id, a.yearly_factor_date ,
+		 a.prov_td1_exemption_amount,
+		 a.release_no,
+           a.rtw_incentive_flag,
+		 a.copied_from_benefit_calc_no,
+           IsNull(b.opening_type_code,'') as 'opening_type_code',
+           IsNull(b.opening_no,0) as 'opening_opening_no'
+  FROM BENEFIT_CALCULATION a
+LEFT  OUTER JOIN OPENING b ON a.claim_no = b.claim_no AND a.opening_no = b.opening_no
+ WHERE a.claim_no = :al_claim_no
+   AND  a.benefit_calculation_no = :al_benefit_calculation_no
+ " update="BENEFIT_CALCULATION" updatewhere=0 updatekeyinplace=no arguments=(("al_claim_no", number),("al_benefit_calculation_no", number)) )
+line(band=detail x1="23" y1="280" x2="2569" y2="280"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="5" color="33554432" x="2048" y="132" height="64" width="393" format="[general]" html.valueishtml="0"  name=top_up_flag visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.required=yes ddlb.nilisnull=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Top Up Provision in effect?" border="0" color="33554432" x="1294" y="132" height="60" width="690" html.valueishtml="0"  name=top_up_flag_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Accident/Recurrence Date:" border="0" color="0" x="27" y="132" height="60" width="695" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="" border="0" color="33554432" x="745" y="132" height="60" width="343" html.valueishtml="0"  name=st_accident_recurrence_date visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=70 border="5" color="33554432" x="2048" y="204" height="64" width="393" format="[general]" html.valueishtml="0"  name=transitional_claim_flag visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.required=yes ddlb.nilisnull=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Transitional Claim?" border="0" color="33554432" x="1486" y="208" height="60" width="498" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=10 border="5" color="33554432" x="466" y="208" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Effective Date:" border="0" color="33554432" x="78" y="208" height="60" width="370" html.valueishtml="0"  name=effective_from_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=120 border="5" color="33554432" x="1623" y="580" height="60" width="869" format="[general]" html.valueishtml="0"  name=calculation_note visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=50 alignment="1" tabsequence=130 border="0" color="33554432" x="2098" y="488" height="60" width="466" format="[general]" html.valueishtml="0"  name=rtw_incentive_flag visible="1" checkbox.text="RTW Incentive" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=23 alignment="2" tabsequence=110 border="5" color="0" x="1883" y="488" height="60" width="169" format="[general]" html.valueishtml="0"  name=preacc_work_hours_per_day visible="1" editmask.required=yes editmask.mask="##0.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="/" border="0" color="0" x="1819" y="488" height="60" width="32" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="2" tabsequence=100 border="5" color="0" x="1632" y="488" height="60" width="169" format="[general]" html.valueishtml="0"  name=preacc_work_days_per_week visible="1" editmask.required=yes editmask.mask="##0.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Cost Analysis Note:" border="0" color="0" x="1088" y="580" height="60" width="498" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Work Days/Hrs:" border="0" color="33554432" x="1088" y="488" height="60" width="402" html.valueishtml="0"  name=work_days_per_week_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text=" " border="0" color="33554432" x="2034" y="396" height="56" width="206" html.valueishtml="0"  name=st_award_frequency visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="/" border="0" color="0" x="1993" y="396" height="60" width="32" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=90 border="5" color="0" x="1632" y="396" height="60" width="334" format="$#,##0.00" html.valueishtml="0" protect="0~tIf(calculation_type_code=~"M~",0,1)"  name=award_amount visible="1"  resizeable=1 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Award Amount/Freq:" border="0" color="33554432" x="1088" y="396" height="60" width="526" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=40 alignment="0" tabsequence=80 border="5" color="33554432" x="1632" y="304" height="68" width="603" format="[general]" html.valueishtml="0"  name=calculation_reason_code visible="1" dddw.name=dddw_calculation_reasons dddw.displaycolumn=calculation_reason_desc dddw.datacolumn=calculation_reason_code dddw.percentwidth=200 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Reason:" border="0" color="33554432" x="1088" y="304" height="60" width="210" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=50 border="5" color="0" x="498" y="596" height="60" width="398" format="[general]" html.valueishtml="0"  name=calculation_type_code visible="1" ddlb.limit=1 ddlb.allowedit=no ddlb.case=any ddlb.required=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=40 border="5" color="33554432" x="37" y="596" height="60" width="215" format="0%" html.valueishtml="0"  name=benefit_level_percentage visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.required=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Percentage:" border="0" color="0" x="37" y="520" height="60" width="320" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Calc Type :" border="0" color="0" x="498" y="520" height="60" width="279" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=48 alignment="0" tabsequence=30 border="5" color="33554432" x="498" y="444" height="60" width="453" format="$#,##0.00" html.valueishtml="0" protect="0~tif (  yearly_factor_date   < 2001-01-01, 1,0)"  name=prov_td1_exemption_amount visible="1" ddlb.limit=0 ddlb.allowedit=yes ddlb.case=any ddlb.required=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="TD1 (Provincial):" border="0" color="0" x="37" y="444" height="60" width="421" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="TD1 (Federal):" border="0" color="0" x="37" y="368" height="60" width="416" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="0" tabsequence=20 border="5" color="33554432" x="498" y="368" height="60" width="453" format="$#,##0.00" html.valueishtml="0"  name=td1_exemption_amount visible="1" ddlb.limit=0 ddlb.allowedit=yes ddlb.case=any ddlb.required=yes ddlb.useasborder=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=47 alignment="0" tabsequence=32766 border="0" color="33554432" x="475" y="292" height="60" width="517" format="YYYY-MM-DD" html.valueishtml="0"  name=yearly_factor_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Taxation Period:" border="0" color="33554432" x="37" y="292" height="60" width="416" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=52 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="4" height="60" width="137" format="[general]" html.valueishtml="0"  name=opening_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Copied From:" border="0" color="33554432" x="1207" y="4" height="60" width="338" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=51 alignment="0" tabsequence=32766 border="0" color="33554432" x="1554" y="4" height="60" width="110" format="[general]" html.valueishtml="0"  name=copied_from_benefit_calc_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1010" y="4" height="60" width="110" format="[general]" html.valueishtml="0"  name=benefit_calculation_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Ben Calc No:" border="0" color="33554432" x="677" y="4" height="60" width="325" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+groupbox(band=detail text="Calculation Parameters"border="5" color="33554432" x="14" y="72" height="600" width="2569"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Created:" border="0" color="33554432" x="1746" y="4" height="60" width="219" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=45 alignment="0" tabsequence=32766 border="0" color="33554432" x="1979" y="4" height="60" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=46 alignment="0" tabsequence=32766 border="0" color="33554432" x="2331" y="4" height="60" width="247" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Opening No:" border="0" color="33554432" x="174" y="4" height="60" width="311" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=53 alignment="0" tabsequence=150 border="0" color="33554432" x="494" y="4" height="60" width="123" format="[general]" html.valueishtml="0"  name=opening_opening_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

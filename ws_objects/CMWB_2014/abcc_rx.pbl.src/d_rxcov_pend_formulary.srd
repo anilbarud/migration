@@ -1,0 +1,36 @@
+﻿$PBExportHeader$d_rxcov_pend_formulary.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=192 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=char(1) updatewhereclause=yes name=formulary_type_code dbname="formulary_type_code" )
+ column=(type=char(5) updatewhereclause=yes name=formulary_code dbname="formulary_code" )
+ column=(type=char(120) updatewhereclause=yes name=formulary_desc dbname="formulary_desc" )
+ column=(type=datetime updatewhereclause=yes name=formulary_start_date dbname="formulary_start_date" )
+ column=(type=datetime updatewhereclause=yes name=formulary_end_date dbname="formulary_end_date" )
+ retrieve="  SELECT CLAIM_FORMULARY.formulary_type_code,   
+         CLAIM_FORMULARY.formulary_code,   
+         Formulary.formulary_desc,   
+         CLAIM_FORMULARY.formulary_start_date,   
+         CLAIM_FORMULARY.formulary_end_date  
+    FROM CLAIM_FORMULARY,   
+         Formulary  
+   WHERE ( CLAIM_FORMULARY.claim_no = :ar_claim_no) and
+         ( CLAIM_FORMULARY.formulary_code = Formulary.formulary_code ) and  
+			(( CLAIM_FORMULARY.formulary_type_code <> 'P' OR CLAIM_FORMULARY.primary_active_flag <> 'N')) and
+         ( CLAIM_FORMULARY.export_no = 0)
+" arguments=(("ar_claim_no", number)) )
+line(band=header x1="14" y1="180" x2="2999" y2="180"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Desc" border="0" color="33554432" x="1070" y="96" height="64" width="146" html.valueishtml="0"  name=formulary_formulary_desc_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Start Date" border="0" color="33554432" x="14" y="96" height="64" width="293" html.valueishtml="0"  name=claim_formulary_formulary_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Formulary " border="0" color="33554432" x="14" y="16" height="64" width="315" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="End Date" border="0" color="33554432" x="425" y="96" height="64" width="274" html.valueishtml="0"  name=claim_formulary_formulary_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1070" y="12" height="64" width="1938" format="[general]" html.valueishtml="0"  name=formulary_desc visible="1" edit.limit=120 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=formulary_start_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="IF( IsNULL ( formulary_end_date), ~"Open-Ended~" , STRING(DATE( formulary_end_date  ),~"yyyy-mm-dd~"))"border="0" color="33554432" x="425" y="8" height="64" width="384" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Code" border="0" color="33554432" x="850" y="96" height="64" width="155" html.valueishtml="0"  name=claim_formulary_formulary_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="850" y="8" height="64" width="192" format="[general]" html.valueishtml="0"  name=formulary_code visible="1" edit.limit=5 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

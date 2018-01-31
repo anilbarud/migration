@@ -1,0 +1,16 @@
+﻿$PBExportHeader$d_med_service_providers.srd
+$PBExportComments$List all the medical Service Providers that are documents senders for a Claim.
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=61 color="536870912" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=9 color="536870912" )
+table(column=(type=number name=provider_no dbname="PROVIDER.provider_no" )
+ column=(type=char(1) name=provider_type_code dbname="PROVIDER.provider_type_code" )
+ column=(type=char(30) name=name dbname="PROVIDER.name" )
+ retrieve="SELECT DISTINCT PROVIDER.provider_no , PROVIDER.provider_type_code , PROVIDER.name FROM PROVIDER WHERE (PROVIDER.provider_no = :provider_no ) and ( PROVIDER.provider_type_code = 'M' ) " arguments=(("provider_no", number)) )
+text(band=header alignment="0" text="Lists all Medical Aid Service Providers that match a sender no"border="0" color="0" x="28" y="8" height="65" width="1797"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="0" x="1" y="4" height="57" width="238"  name=provider_no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="0" x="311" y="4" height="57" width="165"  name=provider_type_code  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="0" x="659" y="4" height="57" width="691"  name=name  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

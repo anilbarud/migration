@@ -1,0 +1,44 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "payrpts.pbl" "";
+@end;
+@begin Objects 
+ "d_awards_balancing_report.srd" "payrpts.pbl";
+ "d_batch_list.srd" "payrpts.pbl";
+ "d_batch_report_grouping_list.srd" "payrpts.pbl";
+ "d_batch_type_select.srd" "payrpts.pbl";
+ "d_bp_chq_register_all_ben_class.srd" "payrpts.pbl";
+ "d_bp_chq_register_one_ben_class.srd" "payrpts.pbl";
+ "d_bp_dd_register_one_ben_class.srd" "payrpts.pbl";
+ "d_bp_p_register_all_ben_class.srd" "payrpts.pbl";
+ "d_bp_p_register_one_ben_class.srd" "payrpts.pbl";
+ "d_cheque_payment_register_criteria.srd" "payrpts.pbl";
+ "d_direct_deposit.srd" "payrpts.pbl";
+ "d_direct_deposit_voucher.srd" "payrpts.pbl";
+ "d_enter_auto_batch_no.srd" "payrpts.pbl";
+ "d_enter_batch_no.srd" "payrpts.pbl";
+ "d_er_chq_register_all_ben_class.srd" "payrpts.pbl";
+ "d_gl_txn_report.srd" "payrpts.pbl";
+ "d_gl_txn_report_unapplied.srd" "payrpts.pbl";
+ "d_gl_txn_search_criteria.srd" "payrpts.pbl";
+ "d_ma_cheque_batch_history.srd" "payrpts.pbl";
+ "d_med_aid_voucher.srd" "payrpts.pbl";
+ "d_other_chq_register_all_ben_class.srd" "payrpts.pbl";
+ "d_payment_balancing_report.srd" "payrpts.pbl";
+ "d_payment_processing_by_batch.srd" "payrpts.pbl";
+ "d_payment_processing_by_batch_type.srd" "payrpts.pbl";
+ "d_processed_date.srd" "payrpts.pbl";
+ "d_provider_direct_deposit_summary.srd" "payrpts.pbl";
+ "d_txns_for_cheque2.srd" "payrpts.pbl";
+ "dddw_direct_deposit.srd" "payrpts.pbl";
+ "nvo_payment_cheque_register.sru" "payrpts.pbl";
+ "w_batch_type_report.srw" "payrpts.pbl";
+ "w_direct_deposit_vouchers.srw" "payrpts.pbl";
+ "w_direct_deposit_vouchers_cmwb.srw" "payrpts.pbl";
+ "w_direct_deposit_vouchers_ext.srw" "payrpts.pbl";
+ "w_gl_txn_report.srw" "payrpts.pbl";
+ "w_med_aid_vouchers.srw" "payrpts.pbl";
+ "w_payment_cheque_register.srw" "payrpts.pbl";
+ "w_payment_processing_autobatch.srw" "payrpts.pbl";
+ "w_payment_processing_report.srw" "payrpts.pbl";
+@end;

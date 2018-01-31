@@ -1,0 +1,64 @@
+﻿$PBExportHeader$ds_nonexistent_annuity_interest_rates.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=year dbname="year" )
+ column=(type=long updatewhereclause=yes name=missing_quarter dbname="missing_quarter" )
+ retrieve="select distinct a.year , a.quarter_no + 1 as 'missing_quarter'
+from   Annuity_Interest_Rate a
+join   Annuity_Interest_Rate b on b.year = a.year
+join   Annuity_Interest_Rate c on c.year > a.year
+where  a.quarter_no = 1
+and    b.quarter_no in (3,4)
+and not exists ( select *
+                 from   Annuity_Interest_Rate x
+                 where  x.year = a.year
+                 and    x.quarter_no = 2 )
+union all
+select distinct a.year , a.quarter_no + 1 as 'missing_quarter'
+from   Annuity_Interest_Rate a
+join   Annuity_Interest_Rate b on b.year = a.year
+join   Annuity_Interest_Rate c on c.year > a.year
+where  a.quarter_no = 2
+and    b.quarter_no = 4
+and not exists ( select *
+                 from   Annuity_Interest_Rate x
+                 where  x.year = a.year
+                 and    x.quarter_no = 3 )
+union all
+select distinct a.year , a.quarter_no + 1 as 'missing_quarter'
+from   Annuity_Interest_Rate a
+join   Annuity_Interest_Rate b on b.year > a.year
+where  a.quarter_no = 3
+and not exists ( select *
+                 from   Annuity_Interest_Rate x
+                 where  x.year = a.year
+                 and    x.quarter_no = 4 )
+union all
+select distinct a.year , a.quarter_no + 1 as 'missing_quarter'
+from   Annuity_Interest_Rate a
+join   Annuity_Interest_Rate b on b.year > a.year
+where  a.quarter_no = 4
+and not exists ( select *
+                 from   Annuity_Interest_Rate x
+                 where  x.year = a.year + 1
+                 and    x.quarter_no = 1 )
+" )
+text(band=header alignment="0" text="Year" border="0" color="33554432" x="5" y="4" height="60" width="251" html.valueishtml="0"  name=year_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="0" height="76" width="247" format="[general]" html.valueishtml="0"  name=year visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="33554432" x="270" y="0" height="60" width="599" html.valueishtml="0"  name=missing_quarter visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Missing Quarter" border="0" color="33554432" x="265" y="4" height="60" width="603" html.valueishtml="0"  name=missing_quarter_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,24 @@
+﻿$PBExportHeader$s_corr_data.srs
+$PBExportComments$Stores correspondence data
+global type s_corr_data from structure
+	long		corr_no
+	string		template_type
+	string		document_type
+	string		version_no
+	string		language_code
+	string		comments
+	string		corr_action
+	string		document_name
+	string		composed_path
+	string		engl_tmplt_path
+	string		french_tmplt_path
+	string		signature_path
+	string		word_path
+	string		signature_required_yn
+	string		cc_allowed_yn
+	long		doc_id
+	string		remote_mail_yn
+	string		auto_email_yn
+	string		template_extension
+end type
+

@@ -1,0 +1,18 @@
+﻿$PBExportHeader$dddw_award_types_active_all.srd
+$PBExportComments$Drop down datawindow of all active award types with an entry for 'All'
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(4) updatewhereclause=yes name=award_code dbname="compute_0001" )
+ column=(type=char(40) updatewhereclause=yes name=award_desc dbname="compute_0002" )
+ retrieve="select '', 'All'
+from Award_Type
+union
+  SELECT Award_Type.award_type_code,   
+         Award_Type.award_type_desc  
+    FROM Award_Type  
+   WHERE Award_Type.active_flag = 'Y'    " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="60" width="919" format="[general]"  name=award_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

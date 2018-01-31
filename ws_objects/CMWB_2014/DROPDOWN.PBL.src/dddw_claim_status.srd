@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_claim_status.srd
+$PBExportComments$Common - Drop Down Data Window to display the claim status discription from the Claim_Status table
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=77 color="536870912" )
+table(column=(type=char(1) update=yes key=yes name=claim_status_code dbname="Claim_Status.claim_status_code" )
+ column=(type=char(15) update=yes name=claim_status_desc dbname="Claim_Status.claim_status_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Claim_Status~" ) COLUMN(NAME=~"Claim_Status.claim_status_code~") COLUMN(NAME=~"Claim_Status.claim_status_desc~")) " update="Claim_Status" updatewhere=1 updatekeyinplace=no  sort="claim_status_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="19" y="4" height="69" width="1038" format="[general]"  name=claim_status_desc edit.limit=15 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="Upper(Left( claim_status_desc ,3))"border="0" color="0" x="2177" y="12" height="57" width="183" format="[GENERAL]"  name=desc3  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

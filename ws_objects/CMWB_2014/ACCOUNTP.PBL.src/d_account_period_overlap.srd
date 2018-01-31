@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_account_period_overlap.srd
+$PBExportComments$Account Payments - Datawindow used to query for possible overlapping payment periods
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=73 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=5 color="536870912" )
+table(column=(type=number name=payment_no dbname="PAYMENT.payment_no" )
+ column=(type=number name=payment_claim_no dbname="PAYMENT.claim_no" )
+ column=(type=char(3) name=payment_type_code dbname="PAYMENT.payment_type_code" )
+ column=(type=datetime name=paid_from_date dbname="PAYMENT.paid_from_date" )
+ column=(type=datetime name=paid_to_date dbname="PAYMENT.paid_to_date" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"PAYMENT~" ) COLUMN(NAME=~"PAYMENT.payment_no~") COLUMN(NAME=~"PAYMENT.claim_no~") COLUMN(NAME=~"PAYMENT.payment_type_code~") COLUMN(NAME=~"PAYMENT.paid_from_date~") COLUMN(NAME=~"PAYMENT.paid_to_date~")WHERE( EXP1 =~"( PAYMENT.claim_no~" OP =~"=~" EXP2 =~":al_claim_no )~" LOGIC =~"and~" ) WHERE( EXP1 =~"( PAYMENT.total_payment_amount~" OP =~"=~" EXP2 =~":ac_amount)~" LOGIC =~"and~" ) WHERE( EXP1 =~"( PAYMENT.payment_no~" OP =~"<>~" EXP2 =~":al_payment_no)~" LOGIC =~"and~" ) WHERE( EXP1 =~"( PAYMENT.payment_type_code~" OP =~"=~" EXP2 =~":as_payment_type_code )~" LOGIC =~"and~" ) WHERE( EXP1 =~"((PAYMENT.paid_from_date~" OP =~"<=~" EXP2 =~":adt_paid_from_date~" LOGIC =~"and~" ) WHERE( EXP1 =~"PAYMENT.paid_to_date~" OP =~">=~" EXP2 =~":adt_paid_from_date)~" LOGIC =~"or~" ) WHERE( EXP1 =~"(PAYMENT.paid_from_date~" OP =~"<=~" EXP2 =~":adt_paid_to_date~" LOGIC =~"and~" ) WHERE( EXP1 =~"PAYMENT.paid_to_date~" OP =~">=~" EXP2 =~":adt_paid_to_date)~" LOGIC =~"or~" ) WHERE( EXP1 =~"(PAYMENT.paid_from_date~" OP =~">=~" EXP2 =~":adt_paid_from_date~" LOGIC =~"and~" ) WHERE( EXP1 =~"PAYMENT.paid_to_date~" OP =~"<=~" EXP2 =~":adt_paid_to_date))~" ) ) ARG(NAME = ~"al_claim_no~" TYPE = number) ARG(NAME = ~"as_payment_type_code~" TYPE = string) ARG(NAME = ~"ac_amount~" TYPE = number) ARG(NAME = ~"adt_paid_from_date~" TYPE = date) ARG(NAME = ~"adt_paid_to_date~" TYPE = date) ARG(NAME = ~"al_payment_no~" TYPE = number) " arguments=(("al_claim_no", number),("as_payment_type_code", string),("ac_amount", number),("adt_paid_from_date", date),("adt_paid_to_date", date),("al_payment_no", number)) )
+text(band=header alignment="0" text="d_account_period_overlap"border="0" color="0" x="60" y="12" height="61" width="695"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="2" background.color="67108864" )

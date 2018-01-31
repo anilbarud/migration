@@ -1,0 +1,32 @@
+﻿$PBExportHeader$f_user_is_readonly.srf
+global type f_user_is_readonly from function_object
+end type
+
+forward prototypes
+global function boolean f_user_is_readonly ()
+end prototypes
+
+global function boolean f_user_is_readonly ();//T031068 - 2016-12-09 - RS - we need to prevent users that have a database role of grp_read_only from  doing any updates
+
+INT li_role_count
+
+select COUNT(*)
+INTO :li_role_count
+from  CLAIM.sys.database_principals   a,
+		CLAIM.sys.database_role_members b,
+		CLAIM.sys.database_principals   c
+where a.principal_id      = b.member_principal_id
+and    b.role_principal_id = c.principal_id
+and    c.name = 'grp_read_only'
+and    a.name = :vgst_user_profile.user_id  
+USING SQLCA;
+
+SQLCA.nf_handle_error('w_correspond', 'Embedded SQL: SELECT principle Role member','wf_update_claimant_address',1)  
+
+IF li_role_count > 0 THEN
+	RETURN TRUE
+ELSE
+	RETURN FALSE
+END IF
+end function
+

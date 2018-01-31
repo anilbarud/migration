@@ -1,0 +1,112 @@
+﻿$PBExportHeader$d_annuity_eligibility_history.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=yes )
+header(height=76 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=156 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=annuity_eligibility_no dbname="annuity_eligibility_no" )
+ column=(type=char(40) updatewhereclause=yes name=annuity_eligibility_status_desc dbname="annuity_eligibility_status_desc" )
+ column=(type=datetime updatewhereclause=yes name=annuity_start_date dbname="annuity_start_date" )
+ column=(type=datetime updatewhereclause=yes name=annuity_end_date dbname="annuity_end_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=annuity_set_aside_percent dbname="annuity_set_aside_percent" )
+ column=(type=char(1) updatewhereclause=yes name=pre_1993_annuity_eligibility_flag dbname="pre_1993_annuity_eligibility_flag" )
+ column=(type=datetime updatewhereclause=yes name=confirmed_date dbname="confirmed_date" )
+ column=(type=char(16) updatewhereclause=yes name=confirmed_by_user_id dbname="confirmed_by_user_id" )
+ column=(type=char(3) updatewhereclause=yes name=benefit_option_code dbname="benefit_option_code" )
+ column=(type=char(40) updatewhereclause=yes name=annuity_eligibility_reason_desc dbname="annuity_eligibility_reason_desc" )
+ column=(type=char(256) updatewhereclause=yes name=annuity_eligibility_comment dbname="annuity_eligibility_comment" )
+ column=(type=char(1) updatewhereclause=yes name=converted_flag dbname="converted_flag" )
+ column=(type=char(40) updatewhereclause=yes name=claim_role_desc dbname="claim_role_desc" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=confirm_annuity_eligibility_checklist_no dbname="confirm_annuity_eligibility_checklist_no" )
+ column=(type=long updatewhereclause=yes name=verify_benefit_entitlement_checklist_no dbname="verify_benefit_entitlement_checklist_no" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(16) updatewhereclause=yes name=modify_user_id dbname="modify_user_id" )
+ column=(type=datetime updatewhereclause=yes name=modify_date dbname="modify_date" )
+ column=(type=char(25) updatewhereclause=yes name=user_first_name dbname="user_first_name" )
+ column=(type=char(20) updatewhereclause=yes name=user_last_name dbname="user_last_name" )
+ retrieve="SELECT 	a.annuity_account_no,
+			a.annuity_eligibility_no,
+        		c.annuity_eligibility_status_desc,
+			a.annuity_start_date, 
+			a.annuity_end_date, 
+			a.annuity_set_aside_percent,
+        		a.pre_1993_annuity_eligibility_flag,
+			a.confirmed_date,
+        		a.confirmed_by_user_id,
+        		a.benefit_option_code,
+        		d.annuity_eligibility_reason_desc,
+			a.annuity_eligibility_comment,
+			a.converted_flag,
+			e.claim_role_desc,
+			b.claim_no,
+        		a.confirm_annuity_eligibility_checklist_no,
+			a.verify_benefit_entitlement_checklist_no,
+        		a.create_user_id,
+			a.create_date,
+			a.modify_user_id,
+			a.modify_date,
+             g.user_first_name,
+             g.user_last_name    
+FROM 	   ANNUITY_ELIGIBILITY 			a 
+		JOIN ANNUITY_ACCOUNT 			b	on a.annuity_account_no					= b.annuity_account_no
+		JOIN Annuity_Eligibility_Status 		c	on a.annuity_eligibility_status_code	= c.annuity_eligibility_status_code
+		JOIN Annuity_Eligibility_Reason 	d	on a.annuity_eligibility_reason_code 	= d.annuity_eligibility_reason_code
+		JOIN Claim_Role 						e	on b.claim_role_code 					= e.claim_role_code
+ LEFT JOIN User_Profile 						g	on g.user_id									= a.confirmed_by_user_id
+WHERE   b.individual_no = :al_individual_no
+Order By a.annuity_account_no DESC,	a.annuity_eligibility_no DESC
+" arguments=(("al_individual_no", number)) )
+group(level=1 header.height=72 trailer.height=0 by=("annuity_account_no" , "compute_1" ) header.color="134217752" trailer.color="536870912" )
+text(band=header alignment="0" text="Eligibility No" border="6" color="33554432" x="329" y="8" height="56" width="297" html.valueishtml="0"  name=t_2  tag="Checklist Step Status Description" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Account No" border="6" color="33554432" x="14" y="8" height="56" width="297" html.valueishtml="0"  name=checklist_step_no_t  tag="Checklist Step Number" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Eligibility Status" border="6" color="33554432" x="645" y="8" height="56" width="407" html.valueishtml="0"  name=t_1  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Start Date" border="6" color="33554432" x="1070" y="8" height="56" width="329" html.valueishtml="0"  name=t_3  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="End Date" border="6" color="33554432" x="1417" y="8" height="56" width="329" html.valueishtml="0"  name=t_4  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Set Aside %" border="6" color="33554432" x="1765" y="8" height="56" width="311" html.valueishtml="0"  name=t_7  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pre-1993 Eligible" border="6" color="33554432" x="2094" y="8" height="56" width="407" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Confirmed By" border="6" color="33554432" x="2519" y="8" height="56" width="631" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Confirmed Date" border="6" color="33554432" x="3168" y="8" height="56" width="393" html.valueishtml="0"  name=t_10  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Benefit Option Code" border="6" color="33554432" x="3579" y="8" height="56" width="512" html.valueishtml="0"  name=t_5  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Eligibility Reason" border="6" color="33554432" x="4110" y="8" height="56" width="1047" html.valueishtml="0"  name=t_8  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=header.1 alignment="0" expression="IF(claim_no = 0,~"~",~"Claim: ~"+string(claim_no)) +~" Role: ~"+ Trim ( claim_role_desc )"border="0" color="33554432" x="5" y="4" height="64" width="1184" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="4" height="64" width="297" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="329" y="4" height="64" width="297" format="[general]" html.valueishtml="0"  name=annuity_eligibility_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="645" y="4" height="64" width="407" format="[general]" html.valueishtml="0"  name=annuity_eligibility_status_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="33554432" x="1765" y="4" height="64" width="311" format="[general]" html.valueishtml="0"  name=annuity_set_aside_percent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="0" color="33554432" x="2094" y="4" height="64" width="416" format="[general]" html.valueishtml="0"  name=pre_1993_annuity_eligibility_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="1070" y="4" height="64" width="329" format="YYYY-MM-DD" html.valueishtml="0"  name=annuity_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="33554432" x="1417" y="4" height="64" width="329" format="YYYY-MM-DD" html.valueishtml="0"  name=annuity_end_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" user_first_name + ' ' +  user_last_name "border="0" color="33554432" x="2528" y="4" height="64" width="626" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="33554432" x="3173" y="4" height="64" width="393" format="YYYY-MM-DD" html.valueishtml="0"  name=confirmed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="33554432" x="3579" y="4" height="64" width="512" format="[general]" html.valueishtml="0"  name=benefit_option_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="4110" y="4" height="64" width="1047" format="[general]" html.valueishtml="0"  name=annuity_eligibility_reason_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="14" y="84" height="64" width="8059" format="[general]" html.valueishtml="0"  name=annuity_eligibility_comment visible="1"  slideup=directlyabove height.autosize=yes edit.limit=256 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Converted Flag" border="6" color="33554432" x="5175" y="8" height="56" width="393" html.valueishtml="0"  name=t_11  tag="Concluded By" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="CAE Checklist No" border="6" color="33554432" x="5586" y="8" height="56" width="434" html.valueishtml="0"  name=checklist_step_status_desc_t  tag="Checklist Step Status Description" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="VBE Checklist No" border="6" color="33554432" x="6039" y="8" height="56" width="425" html.valueishtml="0"  name=concluded_date_t  tag="Concluded Date" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Create User" border="6" color="33554432" x="6482" y="8" height="56" width="416" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Create Date" border="6" color="33554432" x="6917" y="8" height="56" width="343" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=13 alignment="2" tabsequence=32766 border="0" color="33554432" x="5179" y="4" height="64" width="393" format="[general]" html.valueishtml="0"  name=converted_flag visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="2" tabsequence=32766 border="0" color="33554432" x="5586" y="4" height="64" width="434" format="[general]" html.valueishtml="0"  name=confirm_annuity_eligibility_checklist_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="2" tabsequence=32766 border="0" color="33554432" x="6043" y="4" height="64" width="425" format="[general]" html.valueishtml="0"  name=verify_benefit_entitlement_checklist_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="2" tabsequence=32766 border="0" color="33554432" x="6930" y="4" height="64" width="329" format="YYYY-MM-DD" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="6482" y="4" height="64" width="434" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Modify User" border="6" color="33554432" x="7278" y="8" height="56" width="434" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Modify Date" border="6" color="33554432" x="7730" y="8" height="56" width="343" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="7278" y="4" height="64" width="434" format="[general]" html.valueishtml="0"  name=modify_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="2" tabsequence=32766 border="0" color="33554432" x="7735" y="4" height="64" width="338" format="YYYY-MM-DD" html.valueishtml="0"  name=modify_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

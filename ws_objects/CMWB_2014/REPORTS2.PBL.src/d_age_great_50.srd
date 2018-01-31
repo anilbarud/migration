@@ -1,0 +1,79 @@
+﻿$PBExportHeader$d_age_great_50.srd
+$PBExportComments$Report of All Active Claims with Age > 50.
+release 10.5;
+datawindow(units=2 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 250 print.margin.right = 250 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=1145 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=218 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=user_profile_default_admin_region_code dbname="default_admin_region_code" )
+ column=(type=char(20) updatewhereclause=yes name=user_profile_user_last_name dbname="user_last_name" )
+ column=(type=char(46) updatewhereclause=yes name=compute_0003 dbname="compute_0003" )
+ column=(type=long updatewhereclause=yes name=claim_claim_no dbname="claim_no" )
+ column=(type=char(41) updatewhereclause=yes name=claim_name dbname="compute_0005" )
+ column=(type=datetime updatewhereclause=yes name=individual_birth_date dbname="birth_date" )
+ column=(type=datetime updatewhereclause=yes name=individual_death_date dbname="death_date" )
+ column=(type=char(4) updatewhereclause=yes name=opening_opening_type_code dbname="opening_type_code" )
+ column=(type=datetime updatewhereclause=yes name=opening_accident_recurrence_date dbname="accident_recurrence_date" )
+ retrieve="  SELECT DISTINCT
+         User_Profile.default_admin_region_code,
+         User_Profile.user_last_name,
+         RTRIM(User_Profile.user_first_name) + ' ' + User_Profile.user_last_name,
+         CLAIM.claim_no,
+         RTRIM(INDIVIDUAL.given_names) + ' ' + INDIVIDUAL.last_name,
+         INDIVIDUAL.birth_date,
+         INDIVIDUAL.death_date,
+         OPENING.opening_type_code,
+         OPENING.accident_recurrence_date
+    FROM User_Profile, CLAIM, INDIVIDUAL, OPENING
+   WHERE User_Profile.job_position_code = 'CASMGR' AND
+         User_Profile.user_id = CLAIM.claim_manager_user_id AND
+         CLAIM.claim_status_code = 'A' AND
+         CLAIM.individual_no = INDIVIDUAL.individual_no AND
+         CLAIM.claim_no = OPENING.claim_no AND
+         INDIVIDUAL.birth_date between :adt_date_begin and  :adt_date_end
+ORDER BY User_Profile.default_admin_region_code,
+         User_Profile.user_last_name,
+         CLAIM.claim_no,
+         OPENING.accident_recurrence_date,
+OPENING.opening_type_code
+" arguments=(("adt_date_begin", date),("adt_date_end", date)) )
+group(level=1 header.height=187 trailer.height=197 by=("user_profile_default_admin_region_code" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=385 trailer.height=239 by=("user_profile_user_last_name" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="Report Date:" border="0" color="33554432" x="31" y="52" height="156" width="760" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Turning Age 50" border="0" color="33554432" x="729" y="270" height="197" width="4489" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pagecount()"border="0" color="33554432" x="4458" y="62" height="166" width="1322" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="1072" x2="5833" y2="1072"  name=l_2 visible="1" pen.style="0" pen.width="10" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Claim No" border="0" color="33554432" x="166" y="729" height="166" width="604" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Name" border="0" color="33554432" x="1322" y="729" height="166" width="385" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Age" border="0" color="33554432" x="4916" y="729" height="166" width="260" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Birth" border="0" color="33554432" x="4239" y="729" height="166" width="312" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Date" border="0" color="33554432" x="4239" y="906" height="166" width="302" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Accident/" border="0" color="33554432" x="3125" y="729" height="166" width="614" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Recurrence Date" border="0" color="33554432" x="2864" y="906" height="166" width="1104" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Opening" border="0" color="33554432" x="5270" y="729" height="166" width="562" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Type" border="0" color="33554432" x="5385" y="906" height="166" width="322" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="885" y="52" height="208" width="666" format="YYYY-MM-DD [time]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Active Claims Where Claimant Is" border="0" color="33554432" x="1760" y="52" height="197" width="2552" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Region:" border="0" color="33554432" x="20" y="10" height="166" width="510" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="635" y="10" height="166" width="375" format="[general]" html.valueishtml="0"  name=user_profile_default_admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="0" text="Case Manager:" border="0" color="33554432" x="187" y="11" height="166" width="989" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="1270" y="11" height="166" width="1947" format="[general]" html.valueishtml="0"  name=compute_0003 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="3125" y="10" height="197" width="885" format="YYYY-MM-DD" html.valueishtml="0"  name=opening_accident_recurrence_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="4041" y="10" height="197" width="770" format="YYYY-MM-DD" html.valueishtml="0"  name=individual_birth_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( isNull( individual_death_date ), Left(Space(8 - Len(String(Long(String( today() ,~"YYYYMMDD~")) - Long(String( individual_birth_date ,~"YYYYMMDD~"))))) + String(String(Long(String( today() ,~"YYYYMMDD~")) - Long(String( individual_birth_date ,~"YYYYMMDD~")))), 4),  Left(Space(8 - Len(String(Long(String(  individual_death_date  ,~"YYYYMMDD~")) - Long(String(  individual_birth_date  ,~"YYYYMMDD~"))))) + String(String(Long(String(  individual_death_date  ,~"YYYYMMDD~")) - Long(String(  individual_birth_date  ,~"YYYYMMDD~")))), 4))"border="0" color="33554432" x="4906" y="10" height="197" width="250" format="[general]" html.valueishtml="0"  name=the_age visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="5385" y="10" height="197" width="437" format="[general]" html.valueishtml="0"  name=opening_opening_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="166" y="10" height="197" width="677" format="[general]" html.valueishtml="0"  name=claim_claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="875" y="10" height="197" width="2218" format="[general]" html.valueishtml="0"  name=claim_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="claim_claim_no	claim_name	individual_birth_date	the_age")htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

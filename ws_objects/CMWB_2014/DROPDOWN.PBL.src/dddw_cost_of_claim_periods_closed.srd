@@ -1,0 +1,17 @@
+﻿$PBExportHeader$dddw_cost_of_claim_periods_closed.srd
+$PBExportComments$List of all cost of claim periods that have been closed.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=current_coc_period dbname="Coc_Control.current_coc_period" )
+ retrieve="  SELECT Coc_Control.current_coc_period
+    FROM Coc_Control (NOLOCK)
+   WHERE Coc_Control.current_coc_period <> (SELECT max(Coc_Control.current_coc_period)
+                                              FROM Coc_Control)
+     AND Coc_Control.previous_coc_closed_flag = 'Y'
+     AND Coc_Control.current_coc_period >= 199907
+ ORDER BY Coc_Control.current_coc_period DESC" update="Coc_Control" updatewhere=1 updatekeyinplace=yes )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="0" x="14" y="4" height="65" width="371" format="[general]"  name=current_coc_period edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

@@ -1,0 +1,93 @@
+﻿$PBExportHeader$d_din_report_individuals_by_drug_summary.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=624 color="536870912" )
+summary(height=93 color="536870912" )
+footer(height=83 color="536870912" )
+detail(height=67 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=long updatewhereclause=yes name=din_gp_pin dbname="din_gp_pin" )
+ column=(type=char(50) updatewhereclause=yes name=din_gp_pin_desc dbname="din_gp_pin_desc" )
+ column=(type=datetime updatewhereclause=yes name=first_filled_date dbname="compute_0007" )
+ column=(type=datetime updatewhereclause=yes name=last_filled_date dbname="compute_0008" )
+ column=(type=long updatewhereclause=yes name=number_of_prescriptions dbname="compute_0009" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=decimal(1) updatewhereclause=yes name=drug_quantity dbname="compute_0012" )
+ column=(type=decimal(1) updatewhereclause=yes name=paid_quantity dbname="compute_0013" )
+ retrieve="SELECT PP.claim_no, 
+       I.individual_no, 
+       I.given_names, 
+       I.last_name, 
+       PP.din_gp_pin, 
+       DGP.din_gp_pin_desc, 
+       MIN(PP.prescription_date), 
+       MAX(PP.prescription_date), 
+       COUNT(PP.prescription_date), 
+       C.admin_region_code, 
+       I.birth_date, 
+       SUM(PP.drug_quantity), 
+       SUM(PP.paid_quantity) 
+  FROM PAYMENT_PRESCRIPTION PP, 
+       CLAIM C, 
+       INDIVIDUAL I, 
+       Din_Gp_Pin DGP 
+ WHERE (:as_din_gp_pin_flag = ~"N~" OR PP.din_gp_pin = :an_din_gp_pin)
+   AND (:as_claim_no_flag = ~"N~" OR C.claim_no = :an_claim_no)
+   AND (:as_individual_no_flag = ~"N~" OR I.individual_no = :an_individual_no)
+   AND (:as_start_date_flag = ~"N~" OR PP.prescription_date >= :adt_start_date)
+   AND (:as_end_date_flag = ~"N~" OR PP.prescription_date <= :adt_end_date)
+   AND PP.claim_no = C.claim_no 
+   AND C.individual_no = I.individual_no 
+   AND PP.din_gp_pin = DGP.din_gp_pin
+   AND PP.reverse_flag = 'N'
+   AND PP.reverse_reference_no = 0  
+ GROUP BY I.last_name, I.given_names, I.individual_no, I.birth_date, PP.claim_no, PP.din_gp_pin, DGP.din_gp_pin_desc, C.admin_region_code 
+ ORDER BY I.last_name, I.given_names, I.individual_no, I.birth_date, PP.claim_no " arguments=(("as_din_gp_pin_flag", string),("an_din_gp_pin", number),("as_claim_no_flag", string),("an_claim_no", number),("as_individual_no_flag", string),("an_individual_no", number),("as_start_date_flag", string),("adt_start_date", datetime),("as_end_date_flag", string),("adt_end_date", datetime)) )
+text(band=header alignment="2" text="Individuals Receiving a Rx Drug - Summary" border="0" color="33554432" x="929" y="16" height="77" width="1507" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="388" y="16" height="61" width="395" format="mmm d, yyyy" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=header alignment="0" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2849" y="16" height="64" width="549" format="[general]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="18" y="16" height="61" width="347" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="18" y="275" height="61" width="519" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="" border="0" color="0" x="567" y="275" height="202" width="2384" html.valueishtml="0"  name=t_report_parameters visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215"  height.autosize=yes)
+text(band=header alignment="2" text="Claim #" border="4" color="33554432" x="15" y="554" height="58" width="293" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="" border="0" color="0" x="329" y="109" height="144" width="2864" html.valueishtml="0"  name=t_sub_heading1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Region" border="4" color="33554432" x="336" y="554" height="58" width="179" html.valueishtml="0"  name=admin_region_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="4" color="33554432" x="549" y="554" height="58" width="695" html.valueishtml="0"  name=name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="15" y="3" height="61" width="293" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=20 border="0" color="33554432" x="336" y="3" height="61" width="179" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" given_names + ' ' +  last_name "border="0" color="33554432" x="549" y="3" height="61" width="695" format="[GENERAL]" html.valueishtml="0"  name=name visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=30 border="0" color="33554432" x="1276" y="3" height="61" width="369" format="mmm d, yyyy" html.valueishtml="0"  name=birth_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="15" y1="7" x2="3273" y2="7"  name=l_1 visible="1" pen.style="0" pen.width="7" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=summary alignment="0" text="Number of Individuals:" border="0" color="33554432" x="15" y="19" height="61" width="574" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="0" expression="count(  claim_no  for all )"border="0" color="33554432" x="607" y="19" height="61" width="391" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Number of Prescriptions:" border="0" color="33554432" x="1905" y="19" height="61" width="651" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(number_of_prescriptions for all )"border="0" color="33554432" x="2582" y="19" height="61" width="219" format="[GENERAL]" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(  drug_quantity  for all )"border="0" color="33554432" x="2959" y="19" height="61" width="274" format="#,###,###.0" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Filter: " border="0" color="33554432" x="15" y="13" height="61" width="161" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="IF (describe(~"datawindow.table.filter~") = ~"?~", ~" ~", describe(~"datawindow.table.filter~"))"border="5" color="33554432" x="201" y="13" height="61" width="3200" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Birth Date" border="4" color="33554432" x="1280" y="554" height="58" width="369" html.valueishtml="0"  name=birth_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=40 border="0" color="33554432" x="1679" y="3" height="61" width="307" format="yyyy-mm-dd" html.valueishtml="0"  name=first_filled_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="FirstFilled Date" border="4" color="33554432" x="1679" y="496" height="115" width="307" html.valueishtml="0"  name=first_filled_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="LastFilled Date" border="4" color="33554432" x="2019" y="496" height="115" width="307" html.valueishtml="0"  name=last_filled_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=50 border="0" color="33554432" x="2019" y="3" height="61" width="304" format="yyyy-mm-dd" html.valueishtml="0"  name=last_filled_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Number ofPrescriptions" border="4" color="33554432" x="2359" y="493" height="118" width="384" html.valueishtml="0"  name=number_of_prescriptions_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=60 border="0" color="33554432" x="2395" y="3" height="61" width="219" format="[general]" html.valueishtml="0"  name=number_of_prescriptions visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=70 border="0" color="33554432" x="2776" y="3" height="61" width="282" format="#,###,##0.0" html.valueishtml="0"  name=drug_quantity visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Req Qty" border="4" color="33554432" x="2776" y="554" height="58" width="282" html.valueishtml="0"  name=drug_quantity_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=80 border="0" color="33554432" x="3090" y="3" height="54" width="282" format="#,###,##0.0" html.valueishtml="0"  name=paid_quantity visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Pd Qty" border="4" color="33554432" x="3090" y="554" height="58" width="282" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

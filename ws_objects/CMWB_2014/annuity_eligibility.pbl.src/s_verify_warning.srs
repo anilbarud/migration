@@ -1,0 +1,15 @@
+﻿$PBExportHeader$s_verify_warning.srs
+global type s_verify_warning from structure
+	long		annuity_account_no
+	long		annuity_eligibility_no
+	long		annuity_payout_no
+	long		claim_no
+	long		individual_no
+	string		claim_role_code
+	string		window_mode
+	datetime		annuity_start_date
+	datetime		annuity_eligibility_end_date_used
+	datetime		annuity_end_date
+	decimal { 0 }		annuity_percentage
+end type
+

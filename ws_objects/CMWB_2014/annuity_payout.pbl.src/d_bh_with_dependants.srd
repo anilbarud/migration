@@ -1,0 +1,35 @@
+﻿$PBExportHeader$d_bh_with_dependants.srd
+$PBExportComments$Benefit-holder (i.e., injured worker, surviving spouse) annuity payout txn detail where dependants are included in the payout
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=104 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=annuity_role_code dbname="annuity_role_code" )
+ column=(type=char(40) updatewhereclause=yes name=annuity_role_desc_e dbname="annuity_role_desc_e" )
+ column=(type=char(41) updatewhereclause=yes name=benefit_holder_name dbname="benefit_holder_name" )
+ retrieve="SELECT b.annuity_role_code,
+       c.annuity_role_desc_e,
+       d.given_names +' '+ d.last_name AS 'benefit_holder_name'
+FROM   ANNUITY_PAYOUT_PARTICIPANT b
+JOIN   Annuity_Role               c ON b.annuity_role_code = c.annuity_role_code
+JOIN   INDIVIDUAL                 d ON b.recipient_no = d.individual_no
+WHERE  b.recipient_type_code = 'I'
+and    c.annuity_eligibility_flag = 'Y'
+and    c.annuity_entitlement_flag = 'Y'
+AND    b.recipient_type_code = 'I'
+AND    b.annuity_payout_no = :al_annuity_payout_no
+" arguments=(("al_annuity_payout_no", number)) )
+compute(band=detail alignment="0" expression=" benefit_holder_name + ' - ' +  annuity_role_desc_e "border="0" color="33554432" x="357" y="12" height="76" width="4133" format="[GENERAL]" html.valueishtml="0"  name=benefit_holder_desc visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~t16510444" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

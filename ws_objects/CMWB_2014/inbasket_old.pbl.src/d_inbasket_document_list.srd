@@ -1,0 +1,80 @@
+﻿$PBExportHeader$d_inbasket_document_list.srd
+$PBExportComments$Lists documents found in specific work folder
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=88 color="27304096" )
+summary(height=0 color="536870912" )
+footer(height=92 color="27304096" )
+detail(height=68 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=ref_docid dbname="docid" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=ref_docfldid dbname="docfldid" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=ref_doccatid dbname="doccatid" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=ref_docsetid dbname="docsetid" )
+ column=(type=char(3) updatewhereclause=yes name=type_code dbname="type_code" )
+ column=(type=char(2) updatewhereclause=yes name=doc_subtype_code dbname="doc_subtype_code" )
+ column=(type=datetime updatewhereclause=yes name=date_on_document dbname="date_on_document" )
+ column=(type=char(20) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=document_index_service_provider_no dbname="service_provider_no" )
+ column=(type=char(1) updatewhereclause=yes name=electronic_flag dbname="electronic_flag" )
+ column=(type=char(1) updatewhereclause=yes name=paid_status_code dbname="paid_status_code" )
+ retrieve="SELECT  REF.docid ,           
+        REF.docfldid ,           
+        REF.doccatid ,           
+        REF.docsetid ,           
+        DOCUMENT_INDEX.type_code ,
+        DOCUMENT_INDEX.doc_subtype_code ,           
+        DOCUMENT_INDEX.date_on_document ,           
+        DOCUMENT_INDEX.comment ,           
+        DOCUMENT_INDEX.claim_no ,           
+        DOCUMENT_INDEX.service_provider_no,
+        'electronic_flag' = 
+		CASE  
+		 WHEN CLAIM..I009_FORM67_IMPORT.docid > 0 THEN  'Y'
+		 ELSE 'N'
+		 END,
+        CLAIM..PAYMENT_DOCUMENT.paid_status_code
+FROM    DOC 
+ INNER JOIN REF ON DOC.docid = REF.docid
+ LEFT OUTER JOIN DOCUMENT_INDEX ON REF.docid  = DOCUMENT_INDEX.docid
+ LEFT OUTER JOIN CLAIM..I009_FORM67_IMPORT ON CLAIM..I009_FORM67_IMPORT.docid = DOCUMENT_INDEX.docid
+ LEFT OUTER JOIN CLAIM..PAYMENT_DOCUMENT ON CLAIM..PAYMENT_DOCUMENT.doc_id = DOCUMENT_INDEX.docid
+WHERE   REF.docfldid = :al_fldid
+GROUP BY REF.docid ,           
+        REF.docfldid ,           
+        REF.doccatid ,           
+        REF.docsetid ,           
+        DOCUMENT_INDEX.type_code ,
+        DOCUMENT_INDEX.doc_subtype_code ,           
+        DOCUMENT_INDEX.date_on_document ,           
+        DOCUMENT_INDEX.comment ,           
+        DOCUMENT_INDEX.claim_no ,           
+        DOCUMENT_INDEX.service_provider_no,
+		CLAIM..I009_FORM67_IMPORT.docid,
+        CLAIM..PAYMENT_DOCUMENT.paid_status_code" update="REF" updatewhere=0 updatekeyinplace=yes arguments=(("al_fldid", number)) )
+line(band=header x1="0" y1="76" x2="1632" y2="76"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Type" border="0" color="0" x="50" y="4" height="60" width="123" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Date" border="0" color="0" x="361" y="4" height="60" width="119" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Comment" border="0" color="0" x="791" y="4" height="60" width="251" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="782" y="4" height="60" width="859" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="55" y="4" height="60" width="119" format="[general]" html.valueishtml="0"  name=type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="e" border="0" color="255" x="14" y="4" height="60" width="27" html.valueishtml="0"  name=t_5 visible="1~tIF(electronic_flag = 'Y', 1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="187" y="4" height="60" width="146" format="[general]" html.valueishtml="0"  name=doc_subtype_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="352" y="4" height="60" width="320" format="[shortdate] [time]" html.valueishtml="0"  name=date_on_document visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="if(paid_status_code = 'P', 'PD', 
+if(paid_status_code = 'R' OR paid_status_code = 'S' OR paid_status_code = 'H' OR paid_status_code = 'O', 
+paid_status_code, '' ) )"border="0" color="0" x="686" y="4" height="60" width="69" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+line(band=footer x1="0" y1="4" x2="1623" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=footer alignment="0" text="Document Count:" border="0" color="0" x="9" y="24" height="60" width="443" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count(  ref_docid  for all )"border="0" color="0" x="485" y="24" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

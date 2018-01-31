@@ -1,0 +1,7 @@
+﻿$PBExportHeader$s_send_doc_parameters.srs
+global type s_send_doc_parameters from structure
+    long claim_no
+    datawindow document_list
+    boolean msg_mode
+end type
+

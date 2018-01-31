@@ -1,0 +1,76 @@
+﻿$PBExportHeader$f_vrfy_pstl_cd.srf
+$PBExportComments$Verify postal code format and make necessary modifications
+global type f_vrfy_pstl_cd from function_object
+end type
+
+forward prototypes
+global function string f_vrfy_pstl_cd (string p_pc, string p_country)
+end prototypes
+
+global function string f_vrfy_pstl_cd (string p_pc, string p_country);//////////////////////////////////////////////////////////////////////////////////
+////
+//Purpose: Verify the postal code format and make any necessary corrections.
+//			  Proper canadian format "@@@ @@@"
+//
+//Parms: string	p_pc
+//			string	p_country
+//			return	string	
+//
+//Use: variable = f_vrfy_pstl_cd(string p_pc, string p_country)
+//		 if variable = "" THEN Error
+//
+//Log:
+//
+//			Date			Who				What
+//-------....--------...------------....------------------------------------------
+//		 95/09/11		B.Burton			Initial Version
+//
+// Global function
+//////////////////////////////////////////////////////////////////////////////////
+//	
+
+int		vli_lnght
+string	vls_pc
+
+vli_lnght = Len(Trim(p_pc))		// Get lenght of postal code
+
+CHOOSE CASE UPPER(Trim(p_country))
+	CASE "CAN"						
+		CHOOSE CASE vli_lnght		
+			CASE 6						// Postal code is NOT OK "@@@@@@"
+				vls_pc = string(p_pc,"@@@ @@@")				
+			CASE ELSE
+				vls_pc = p_pc			// Postal code is OK "@@@ @@@", unknown format or blank	
+		END CHOOSE
+
+	CASE	"USA"
+		CHOOSE CASE vli_lnght	
+			CASE 9						// Postal code is NOT OK "#####-####"
+				vls_pc = string(p_pc,"@@@@@-@@@@")				
+			CASE ELSE					// Postal code is OK "#####", unknown format or blank	 
+				vls_pc = p_pc	
+		END CHOOSE
+
+	CASE	ELSE							// No country specified
+		IF IsNumber(Trim(p_pc))	THEN
+			IF vli_lnght = 9 THEN	// Must be USA	
+				vls_pc = string(p_pc,"@@@@@-@@@@")
+			ELSE
+				vls_pc = p_pc
+			END IF	
+		ELSE
+			IF vli_lnght = 6 THEN	// Must be Canada	
+				vls_pc = string(p_pc,"@@@ @@@")
+			ELSE
+				vls_pc = p_pc
+			END IF
+		END IF	
+END CHOOSE
+
+
+Return vls_pc
+
+
+
+end function
+

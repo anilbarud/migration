@@ -1,0 +1,30 @@
+﻿$PBExportHeader$dddw_province_can_lookup.srd
+$PBExportComments$only canadian provinces
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(5) updatewhereclause=yes name=location_code dbname="location_code" )
+ column=(type=char(25) updatewhereclause=yes name=location_desc1 dbname="location_desc1" )
+ column=(type=char(3) updatewhereclause=yes name=country_code dbname="country_code" )
+ retrieve="  SELECT  Location.location_code ,           Location.location_desc1 ,           Location.country_code    
+ FROM Location     
+ WHERE  Location.active_flag = 'Y' 
+and          Location.location_type_code = 'P' 
+ and           Location.location_code <> ''   
+and country_code ='CAN' "  sort="location_desc1 A " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1472" y="8" height="56" width="1079" format="[general]" html.valueishtml="0"  name=location_desc1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" location_code + ' - ' +  location_desc1 "border="0" color="0" x="9" y="4" height="60" width="1006" format="[GENERAL]" html.valueishtml="0"  name=desc visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,26 @@
+﻿$PBExportHeader$d_override_termination.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=80 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=eligibility_end_date dbname="eligibility_end_date" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=record_no dbname="record_no" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=comment dbname="comment" )
+ retrieve="  SELECT claim_no,
+			eligibility_end_date,
+			record_no,
+			comment  
+    FROM X001_OVERRIDE_ELIGIBILITY   
+	WHERE claim_no = :al_claim_no
+     AND record_no = 0 
+" update="X001_OVERRIDE_ELIGIBILITY" updatewhere=0 updatekeyinplace=yes arguments=(("al_claim_no", number)) )
+text(band=header alignment="0" text="Override Termination: " border="0" color="33554432" x="9" y="4" height="64" width="567" html.valueishtml="0"  name=eligibility_end_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="594" y="4" height="64" width="320" format="yyyy-mm-dd" html.valueishtml="0"  name=eligibility_end_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="24" height="60" width="311" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="96" height="60" width="306" format="[general]" html.valueishtml="0"  name=record_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="176" height="60" width="2702" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,54 @@
+﻿$PBExportHeader$d_case_monitoring.srd
+$PBExportComments$Case Monitoring updates
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=668 color="-1" height.autosize=yes )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="CASE_MONITORING.claim_no" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=employer_contact dbname="CASE_MONITORING.employer_contact" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=case_mgmt_intensity_code dbname="CASE_MONITORING.case_mgmt_intensity_code" values="Low	L/Medium	M/High	H/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=working_status_code dbname="CASE_MONITORING.working_status_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=medical_functional_status_code dbname="CASE_MONITORING.medical_functional_status_code" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="CASE_MONITORING.timestamp" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=accident_desc dbname="CASE_MONITORING.accident_desc" )
+ column=(type=datetime update=yes updatewhereclause=yes name=work_status_date dbname="CASE_MONITORING.work_status_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=medical_functional_status_date dbname="CASE_MONITORING.medical_functional_status_date" )
+ retrieve="  SELECT CASE_MONITORING.claim_no,   
+         CASE_MONITORING.employer_contact,   
+         CASE_MONITORING.case_mgmt_intensity_code,   
+         CASE_MONITORING.working_status_code,   
+         CASE_MONITORING.medical_functional_status_code,   
+         CASE_MONITORING.timestamp,     
+         CASE_MONITORING.accident_desc,
+         CASE_MONITORING.work_status_date,   
+         CASE_MONITORING.medical_functional_status_date
+    FROM CASE_MONITORING  
+   WHERE CASE_MONITORING.claim_no = :al_claim_no    
+" update="CASE_MONITORING" updatewhere=2 updatekeyinplace=yes arguments=(("al_claim_no", number)) )
+groupbox(band=detail text=""border="5" color="33554432" x="23" y="8" height="612" width="2574"  name=gb_1 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Employer Contact:" border="0" color="0" x="91" y="32" height="60" width="471" html.valueishtml="0"  name=employer_contact_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="800" y="32" height="60" width="1687" format="[general]" html.valueishtml="0"  name=employer_contact visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Case Mgmt Intensity:" border="0" color="0" x="96" y="116" height="60" width="539" html.valueishtml="0"  name=case_mgmt_intensity_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="0" x="782" y="116" height="60" width="992" format="[general]" html.valueishtml="0"  name=case_mgmt_intensity_code visible="1" radiobuttons.columns=3 radiobuttons.scale=yes radiobuttons.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Working Status:" border="0" color="0" x="96" y="196" height="60" width="416" html.valueishtml="0"  name=working_status_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=30 border="5" color="0" x="800" y="196" height="60" width="846" format="[general]" html.valueishtml="0"  name=working_status_code visible="1" dddw.name=dddw_working_status dddw.displaycolumn=working_status_desc dddw.datacolumn=working_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="0" tabsequence=40 border="5" color="0" x="2121" y="196" height="60" width="361" format="yyyy-mm-dd" html.valueishtml="0"  name=work_status_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=70 border="5" color="0" x="795" y="360" height="244" width="1687" format="[general]" html.valueishtml="0"  name=accident_desc visible="1" edit.limit=255 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Medical Functional Status:" border="0" color="0" x="96" y="280" height="60" width="677" html.valueishtml="0"  name=medical_functional_status_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="5" color="0" x="800" y="280" height="60" width="1157" format="[general]" html.valueishtml="0"  name=medical_functional_status_code visible="1" dddw.name=dddw_medical_functional_status dddw.displaycolumn=medical_functional_status_desc dddw.datacolumn=medical_functional_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=60 border="5" color="0" x="2121" y="280" height="60" width="361" format="yyyy-mm-dd" html.valueishtml="0"  name=medical_functional_status_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="1" text="Description of Accident/
+Injury:" border="0" color="0" x="96" y="364" height="120" width="617" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

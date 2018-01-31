@@ -1,0 +1,20 @@
+﻿$PBExportHeader$dddw_task_type_action_item_only.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=char(2) update=yes updatewhereclause=yes key=yes name=task_type_code dbname="Task_Type.task_type_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=task_type_desc dbname="Task_Type.task_type_desc" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=active_flag dbname="Task_Type.active_flag" )
+ column=(type=char(1) updatewhereclause=yes name=success_code_required dbname="Task_Type.success_code_required" )
+ retrieve="  SELECT dbo.Task_Type.task_type_code,   
+         dbo.Task_Type.task_type_desc,   
+         dbo.Task_Type.active_flag ,
+			dbo.Task_Type.success_code_required 
+    FROM dbo.Task_Type  
+		where action_item_entry_flag = 'Y' 
+" update="dbo.Task_Type" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="9" y="4" height="68" width="1125" format="[general]" html.valueishtml="0"  name=task_type_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

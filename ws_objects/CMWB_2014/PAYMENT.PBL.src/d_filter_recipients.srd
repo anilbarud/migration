@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_filter_recipients.srd
+$PBExportComments$Payment Inquiry (Select Filter Option)
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=356 color="-1" )
+table(column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=number updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ )
+groupbox(band=detail text="Select Recipient"border="5" color="0" x="27" y="28" height="308" width="1554"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="558" y="148" height="64" width="553" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" dddw.name=dddw_recipient_types_active_act dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Recipient Type: " border="0" color="0" x="78" y="148" height="60" width="407" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Recipient No:" border="0" color="0" x="78" y="228" height="60" width="338" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="5" color="0" x="558" y="228" height="64" width="224" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

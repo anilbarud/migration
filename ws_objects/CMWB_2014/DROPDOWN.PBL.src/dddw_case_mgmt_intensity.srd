@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_case_mgmt_intensity.srd
+$PBExportComments$Case Management Intensity List for DropDown
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=char(1) updatewhereclause=yes name=case_mgmt_intensity_code dbname="Case_Mgmt_Intensity.case_mgmt_intensity_code" )
+ column=(type=char(15) updatewhereclause=yes name=case_mgmt_intensity_desc dbname="Case_Mgmt_Intensity.case_mgmt_intensity_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Case_Mgmt_Intensity~" ) COLUMN(NAME=~"Case_Mgmt_Intensity.case_mgmt_intensity_code~") COLUMN(NAME=~"Case_Mgmt_Intensity.case_mgmt_intensity_desc~")) ORDER(NAME=~"Case_Mgmt_Intensity.case_mgmt_intensity_desc~" ASC=yes ) " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="14" y="4" height="65" width="668" format="[general]"  name=case_mgmt_intensity_desc edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

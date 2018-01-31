@@ -1,0 +1,93 @@
+﻿$PBExportHeader$d_annuity_sub_ledger_all_accounts.srd
+$PBExportComments$The report is to be accessed by annuity account, which is defined as by claim for surviving spouse or by individual for injured workers (includes all claims where the individual has the injured worker role).
+release 10.5;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=364 color="536870912" )
+summary(height=160 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="given_names" )
+ column=(type=char(2) updatewhereclause=yes name=claim_participant_claim_role_code dbname="claim_role_code" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=datetime updatewhereclause=yes name=claim_accident_date dbname="accident_date" )
+ column=(type=long updatewhereclause=yes name=employer_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=age dbname="compute_0008" )
+ column=(type=decimal(4) updatewhereclause=yes name=balance dbname="compute_0009" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ retrieve="SELECT c.claim_no,
+       b.last_name,
+       b.given_names,
+       c.claim_role_code,
+       b.birth_date,
+       d.accident_date,
+       d.cost_alloc_no,
+       DateDiff(year, b.birth_date, GetDate()),
+       Sum(f.txn_amount),
+       c.individual_no
+FROM   INDIVIDUAL b
+join   CLAIM_PARTICIPANT c on b.individual_no = c.individual_no 
+join   CLAIM d on c.claim_no = d.claim_no
+join   PAYMENT e on d.claim_no = e.claim_no
+join   APPLIED_CLAIM_TXN f on e.payment_no = f.payment_no 
+                          and  c.individual_no = f.recipient_no
+WHERE  e.payment_type_code = '97' 
+and    f.txn_type_code <> '4'
+group by c.claim_no,
+         b.last_name,
+         b.given_names,
+         c.claim_role_code,
+         b.birth_date,
+         d.accident_date,
+         d.cost_alloc_no,
+         c.individual_no
+having Sum(f.txn_amount) <> 0.00
+order by b.last_name,
+         b.given_names,
+         c.individual_no,
+         c.claim_role_code,
+         c.claim_no
+" )
+group(level=1 header.height=4 trailer.height=0 by=("concat_name" , "individual_no" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="32" y="0" height="192" width="4384"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="60" width="334" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="407" y="28" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Annuity Sub-Ledger Report - All" border="0" color="0" x="1504" y="12" height="76" width="1376" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3913" y="28" height="76" width="471" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+rectangle(band=header x="69" y="156" height="16" width="4315"  name=r_2 visible="1" brush.hatch="6" brush.color="16777215" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="15987699" )
+line(band=header x1="32" y1="352" x2="4416" y2="352"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Name" border="0" color="0" x="14" y="292" height="60" width="1015" html.valueishtml="0"  name=concat_name_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Individual No" border="0" color="0" x="1056" y="292" height="60" width="439" html.valueishtml="0"  name=individual_no_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Claim Role" border="0" color="0" x="1518" y="292" height="60" width="658" html.valueishtml="0"  name=claim_role_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Claim No" border="0" color="0" x="2199" y="292" height="60" width="265" html.valueishtml="0"  name=claim_no_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Employer No" border="0" color="0" x="2496" y="292" height="60" width="453" html.valueishtml="0"  name=employer_no_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Accident Date" border="0" color="0" x="2967" y="292" height="60" width="384" html.valueishtml="0"  name=claim_accident_date_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Birth Date" border="0" color="0" x="3369" y="292" height="60" width="384" html.valueishtml="0"  name=birth_date_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Age" border="0" color="0" x="3771" y="292" height="60" width="146" html.valueishtml="0"  name=age_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Balance" border="0" color="0" x="3936" y="292" height="60" width="457" html.valueishtml="0"  name=balance_tx visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="/* if( payment_sub_type_code <> 'IN', txn_amount ,0) */"border="0" color="16777215" x="2473" y="8" height="64" width="9" format="[general]" html.valueishtml="0"  name=com2 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215"  height.autosize=yes)
+compute(band=detail alignment="0" expression="/* if( payment_sub_type_code = 'IN', txn_amount ,0) */"border="0" color="16777215" x="2391" y="8" height="64" width="5" format="[general]" html.valueishtml="0"  name=com1 visible="1"  slideup=directlyabove  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215"  height.autosize=yes)
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="2213" y="8" height="64" width="274" format="[general]" html.valueishtml="0"  name=claim_no visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Trim( individual_last_name ) + ~", ~" + Trim( individual_given_names )"border="0" color="0" x="14" y="8" height="64" width="1024" format="[general]" html.valueishtml="0"  name=concat_name visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1056" y="8" height="64" width="439" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if(  claim_participant_claim_role_code = 'C', 'Claimant', 'Surviving Spouse' )"border="0" color="0" x="1518" y="8" height="64" width="658" format="[general]" html.valueishtml="0"  name=claim_role visible="1"  slideup=directlyabove  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2496" y="8" height="64" width="453" format="[general]" html.valueishtml="0"  name=employer_no visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="2967" y="8" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=claim_accident_date visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="3369" y="8" height="64" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=birth_date visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="3771" y="8" height="64" width="146" format="[general]" html.valueishtml="0"  name=age visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="3936" y="8" height="64" width="457" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=balance visible="1"  slideup=directlyabove height.autosize=yes edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="3936" y1="24" x2="4393" y2="24"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="15987699" )
+compute(band=summary alignment="1" expression="sum( balance for all )"border="0" color="0" x="3479" y="48" height="60" width="914" format="[currency]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="concat_name")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

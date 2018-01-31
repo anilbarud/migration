@@ -1,0 +1,54 @@
+﻿$PBExportHeader$d_rehab_plan_viewer_report_gh_part1.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=157 color="-1" )
+table(column=(type=long updatewhereclause=yes name=goal_no dbname="REHAB_GOAL.goal_no" )
+ column=(type=char(2) updatewhereclause=yes name=goal_code dbname="REHAB_GOAL.goal_code" )
+ column=(type=char(2) updatewhereclause=yes name=rehab_type_code dbname="REHAB_GOAL.rehab_type_code" )
+ column=(type=datetime updatewhereclause=yes name=rg_create_date2 dbname="REHAB_GOAL.create_date" )
+ column=(type=long updatewhereclause=yes name=objective_no dbname="REHAB_OBJECTIVE.objective_no" )
+ column=(type=char(2) updatewhereclause=yes name=objective_code dbname="REHAB_OBJECTIVE.objective_code" )
+ column=(type=char(2) updatewhereclause=yes name=outcome_code dbname="REHAB_OBJECTIVE.outcome_code" )
+ column=(type=datetime updatewhereclause=yes name=outcome_date dbname="REHAB_OBJECTIVE.outcome_date" )
+ column=(type=datetime updatewhereclause=yes name=revised_objective_date dbname="REHAB_OBJECTIVE.revised_objective_date" )
+ column=(type=datetime updatewhereclause=yes name=ro_create_date dbname="REHAB_OBJECTIVE.create_date" )
+ retrieve="  SELECT REHAB_GOAL.goal_no,   
+         REHAB_GOAL.goal_code,   
+         REHAB_GOAL.rehab_type_code,   
+         REHAB_GOAL.create_date,   
+         REHAB_OBJECTIVE.objective_no,   
+         REHAB_OBJECTIVE.objective_code,   
+         REHAB_OBJECTIVE.outcome_code,   
+         REHAB_OBJECTIVE.outcome_date,   
+         REHAB_OBJECTIVE.revised_objective_date,   
+         REHAB_OBJECTIVE.create_date  
+    FROM CLAIM,   
+         REHAB_GOAL,   
+         REHAB_OBJECTIVE  
+   WHERE ( CLAIM.claim_no = REHAB_GOAL.claim_no ) and  
+         ( REHAB_GOAL.claim_no = REHAB_OBJECTIVE.claim_no ) and  
+         ( REHAB_GOAL.goal_no = REHAB_OBJECTIVE.goal_no ) and  
+         ( ( CLAIM.claim_no = :al_claim_no ) )   
+ORDER BY REHAB_GOAL.goal_no ASC,   
+         REHAB_GOAL.rehab_type_code ASC,   
+         REHAB_OBJECTIVE.objective_no ASC   
+" arguments=(("al_claim_no", number)) )
+group(level=1 header.height=153 trailer.height=45 by=("goal_no" , "rehab_type_code" ) header.color="-1" trailer.color="536870912" )
+text(band=header.1 alignment="0" text="Rehab Type:"border="0" color="0" x="14" y="4" height="61" width="316"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=4 alignment="0" tabsequence=32766 border="0" color="0" x="778" y="4" height="61" width="293" format="yyyy-mm-dd"  name=rg_create_date2 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1098" y="4" height="61" width="2090" format="[general]"  name=rehab_type_code dddw.name=dddw_rehab_type dddw.displaycolumn=rehab_type_desc dddw.datacolumn=rehab_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="Goal:"border="0" color="0" x="14" y="84" height="61" width="129"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="0" x="357" y="84" height="61" width="110" format="[general]"  name=goal_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=4 alignment="0" tabsequence=32766 border="0" color="0" x="778" y="84" height="61" width="293" format="yyyy-mm-dd"  name=rg_create_date edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1098" y="84" height="61" width="2090" format="[general]"  name=goal_code dddw.name=dddw_goal dddw.displaycolumn=goal_desc dddw.datacolumn=goal_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Objective:"border="0" color="0" x="14" y="8" height="61" width="257"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=10 border="0" color="0" x="357" y="8" height="61" width="110" format="[general]"  name=objective_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=20 border="0" color="0" x="778" y="8" height="61" width="293" format="yyyy-mm-dd"  name=ro_create_date edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=30 border="0" color="0" x="1098" y="8" height="61" width="2090" format="[general]"  name=objective_code dddw.name=dddw_objective dddw.displaycolumn=objective_desc dddw.datacolumn=objective_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Outcome:"border="0" color="0" x="14" y="88" height="61" width="252"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if(isnull(revised_objective_date),outcome_date,revised_objective_date)
+"border="0" color="0" x="778" y="88" height="61" width="293" format="yyyy-mm-dd"  name=calculated_outcome_date  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=40 border="0" color="0" x="1098" y="88" height="61" width="2090" format="[general]"  name=outcome_code dddw.name=dddw_outcome dddw.displaycolumn=outcome_desc dddw.datacolumn=outcome_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

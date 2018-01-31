@@ -1,0 +1,333 @@
+﻿$PBExportHeader$m_rehab_plan.srm
+$PBExportComments$menu for the rehab plan sheet
+forward
+global type m_rehab_plan from menu
+end type
+type m_rehabplan from menu within m_rehab_plan
+end type
+type m_print from menu within m_rehabplan
+end type
+type m_close from menu within m_rehabplan
+end type
+type m_- from menu within m_rehabplan
+end type
+type m_exit from menu within m_rehabplan
+end type
+type m_rehabplan from menu within m_rehab_plan
+m_print m_print
+m_close m_close
+m_- m_-
+m_exit m_exit
+end type
+type m_window from menu within m_rehab_plan
+end type
+type m_cascade from menu within m_window
+end type
+type m_layered from menu within m_window
+end type
+type m_tile from menu within m_window
+end type
+type m_window from menu within m_rehab_plan
+m_cascade m_cascade
+m_layered m_layered
+m_tile m_tile
+end type
+type m_help from menu within m_rehab_plan
+end type
+type m_contents from menu within m_help
+end type
+type m_-1 from menu within m_help
+end type
+type m_aboutworkbench from menu within m_help
+end type
+type m_help from menu within m_rehab_plan
+m_contents m_contents
+m_-1 m_-1
+m_aboutworkbench m_aboutworkbench
+end type
+end forward
+
+global type m_rehab_plan from menu
+m_rehabplan m_rehabplan
+m_window m_window
+m_help m_help
+end type
+global m_rehab_plan m_rehab_plan
+
+type variables
+w_sheet		iwi_active_sheet
+end variables
+
+on m_rehab_plan.create
+m_rehab_plan=this
+this.m_rehabplan=create m_rehabplan
+this.m_window=create m_window
+this.m_help=create m_help
+this.Item[]={this.m_rehabplan, &
+this.m_window, &
+this.m_help}
+end on
+
+on m_rehab_plan.destroy
+destroy(this.m_rehabplan)
+destroy(this.m_window)
+destroy(this.m_help)
+end on
+
+type m_rehabplan from menu within m_rehab_plan
+m_print m_print
+m_close m_close
+m_- m_-
+m_exit m_exit
+end type
+
+on m_rehabplan.create
+this.Text="&Rehab Plan"
+this.m_print=create m_print
+this.m_close=create m_close
+this.m_-=create m_-
+this.m_exit=create m_exit
+this.Item[]={this.m_print, &
+this.m_close, &
+this.m_-, &
+this.m_exit}
+end on
+
+on m_rehabplan.destroy
+destroy(this.m_print)
+destroy(this.m_close)
+destroy(this.m_-)
+destroy(this.m_exit)
+end on
+
+type m_print from menu within m_rehabplan
+end type
+
+on clicked;/*	At this level, the print menu option should remain disabled and invisible.
+	and so should its menu bar item.
+
+	This is because it will not always be required.  For example, the Frames'
+	menu does not have a print since there is nothing to print.
+
+	It should be set to enabled and visible in descendant menu's that have a print.  
+*/
+
+WINDOW						vlw_active_sheet
+
+
+
+/*	Check to see if we actually have an active sheet, and if so trigger it's print
+	event.  Note: Powerbuilder will be ok if the active sheet doesn't have a print
+	event.  It just won't do anything.  However, any descendant menu that has print 
+	enabled should also have an active sheet with a ue_print user event.
+*/
+
+	vlw_active_sheet = w_frame.GetActiveSheet()
+	
+	IF IsValid(vlw_active_sheet) THEN
+		SetPointer(HourGlass!)
+		vlw_active_sheet.triggerevent("ue_print")
+	ELSE
+		Beep(1)
+	END IF
+
+
+
+end on
+
+on m_print.create
+this.Text="&Print"
+this.Microhelp="Print current sheet or report"
+this.ToolBarItemName="Print!"
+this.ToolBarItemText="Print"
+end on
+
+type m_close from menu within m_rehabplan
+end type
+
+on clicked;/*	At this level, the close menu option should remain disabled and invisible.
+	and so should it's toolbaritem.
+
+	This is because it will not always be required.  For example, the Frames'
+	menu does not have a close since you don't see the Frames' menu unless
+	all active sheets are closed.
+
+	It should be set to enabled and visible in descendant menu's that have a close.  
+*/
+
+
+	window						vlw_active_sheet
+
+
+/*	Check to see if we actually have an active sheet, and if so try to close it
+*/
+	vlw_active_sheet = w_frame.GetActiveSheet()
+	
+	IF IsValid(vlw_active_sheet) THEN
+		SetPointer(HourGlass!)
+		Close (vlw_active_sheet)
+	ELSE
+		Beep(1)
+	END IF
+
+
+
+end on
+
+on m_close.create
+this.Text="&Close"
+this.Microhelp="Close current sheet"
+this.ToolBarItemName="Exit!"
+this.ToolBarItemText="Close"
+this.ToolBarItemOrder=14
+end on
+
+type m_- from menu within m_rehabplan
+end type
+
+on m_-.create
+this.Text="-"
+end on
+
+type m_exit from menu within m_rehabplan
+end type
+
+on clicked;/*	Exits toolbar item is invisible since it's not always displayed.  Ie. When 
+	a sheet is open we want them to see close instead of exit.  Probably only on 
+	the frames menu do we want to see the exit toolbar item.
+*/
+
+	SetPointer(HourGlass!)
+	Close (w_frame)
+end on
+
+on m_exit.create
+this.Text="E&xit ~tAlt+X"
+this.Microhelp="Exit the Case Management Workbench"
+this.ToolBarItemName="Exit!"
+this.ToolBarItemText="Exit"
+this.ToolBarItemVisible=false
+this.ToolBarItemOrder=15
+this.Shortcut=600
+end on
+
+type m_window from menu within m_rehab_plan
+m_cascade m_cascade
+m_layered m_layered
+m_tile m_tile
+end type
+
+on m_window.create
+this.Text="&Window"
+this.ShiftToRight=true
+this.m_cascade=create m_cascade
+this.m_layered=create m_layered
+this.m_tile=create m_tile
+this.Item[]={this.m_cascade, &
+this.m_layered, &
+this.m_tile}
+end on
+
+on m_window.destroy
+destroy(this.m_cascade)
+destroy(this.m_layered)
+destroy(this.m_tile)
+end on
+
+type m_cascade from menu within m_window
+end type
+
+on clicked;ParentWindow.ArrangeSheets(Cascade!)
+end on
+
+on m_cascade.create
+this.Text="&Cascade"
+end on
+
+type m_layered from menu within m_window
+end type
+
+on clicked;ParentWindow.ArrangeSheets(Layer!)
+end on
+
+on m_layered.create
+this.Text="&Layer"
+end on
+
+type m_tile from menu within m_window
+end type
+
+on clicked;ParentWindow.ArrangeSheets(Tile!)
+end on
+
+on m_tile.create
+this.Text="&Tile"
+end on
+
+type m_help from menu within m_rehab_plan
+m_contents m_contents
+m_-1 m_-1
+m_aboutworkbench m_aboutworkbench
+end type
+
+on m_help.create
+this.Text="&Help"
+this.ShiftToRight=true
+this.m_contents=create m_contents
+this.m_-1=create m_-1
+this.m_aboutworkbench=create m_aboutworkbench
+this.Item[]={this.m_contents, &
+this.m_-1, &
+this.m_aboutworkbench}
+end on
+
+on m_help.destroy
+destroy(this.m_contents)
+destroy(this.m_-1)
+destroy(this.m_aboutworkbench)
+end on
+
+type m_contents from menu within m_help
+end type
+
+event clicked;STRING ls_help_file
+
+/* Open the appropriate Help file and display its' index
+*/
+
+	
+	ls_help_file = gs_default_dir + 'cmwb.hlp'
+
+	IF CanACCESS(ls_help_file,0) < 0 THEN
+		MessageBox("System Error","Error locating help file...Please call the Help Desk!",StopSign!)
+	ELSE
+		ShowHelp (ls_help_file, Index!)
+	END IF
+
+
+
+end event
+
+on m_contents.create
+this.Text="&Contents"
+this.Microhelp="View Case Management WorkBench Help File"
+end on
+
+type m_-1 from menu within m_help
+end type
+
+on m_-1.create
+this.Text="-"
+end on
+
+type m_aboutworkbench from menu within m_help
+end type
+
+event clicked;Open(w_about)
+end event
+
+on m_aboutworkbench.create
+this.Text="&About Workbench..."
+this.Microhelp="View workbench version and development information"
+end on
+

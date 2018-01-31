@@ -1,0 +1,28 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "bankrec.pbl" "";
+@end;
+@begin Objects 
+ "d_bank_extract_control_report.srd" "bankrec.pbl";
+ "d_bank_extract_error_report.srd" "bankrec.pbl";
+ "d_bank_reconcile_control_report.srd" "bankrec.pbl";
+ "d_bank_reconcile_error_report.srd" "bankrec.pbl";
+ "d_bank_reconciled_report.srd" "bankrec.pbl";
+ "d_bank_reconciliation_extract.srd" "bankrec.pbl";
+ "d_bankrec_parameters.srd" "bankrec.pbl";
+ "d_cheque_details.srd" "bankrec.pbl";
+ "d_cheque_filter_list.srd" "bankrec.pbl";
+ "d_cheque_list.srd" "bankrec.pbl";
+ "d_cheque_stub.srd" "bankrec.pbl";
+ "d_imported_processed_cheque.srd" "bankrec.pbl";
+ "d_issued_but_not_reconciled_sp.srd" "bankrec.pbl";
+ "d_issued_but_not_transmitted.srd" "bankrec.pbl";
+ "d_processed_cheque_detail.srd" "bankrec.pbl";
+ "d_reconciled.srd" "bankrec.pbl";
+ "nvo_verify_bank_reconciliation.sru" "bankrec.pbl";
+ "w_bank_reconcile_cheques.srw" "bankrec.pbl";
+ "w_bank_reconciliation_extract.srw" "bankrec.pbl";
+ "w_bank_reconciliation_reports.srw" "bankrec.pbl";
+ "w_cheque_filter.srw" "bankrec.pbl";
+ "w_maintain_cheques.srw" "bankrec.pbl";
+@end;

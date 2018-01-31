@@ -1,0 +1,20 @@
+﻿$PBExportHeader$s_name_address_change.srs
+global type s_name_address_change from structure
+	string		change_header
+	string		change_message[]
+	string		change_footer
+	string		old_name[]
+	string		new_name[]
+	string		old_address_line1[]
+	string		new_address_line1[]
+	string		old_address_line2[]
+	string		new_address_line2[]
+	string		old_address_line3[]
+	string		new_address_line3[]
+	string		old_address_line4[]
+	string		new_address_line4[]
+	string		old_address_line5[]
+	string		new_address_line5[]
+	string		annuity_purchase_step
+end type
+

@@ -1,0 +1,61 @@
+﻿$PBExportHeader$dddw_payment_benefit_list.srd
+$PBExportComments$Major Claim Payments - Drop down datawindow on d_payment_details to show list of benefit calculations for an occurrence
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="-1" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=68 color="-1" )
+table(column=(type=number updatewhereclause=yes key=yes name=claim_no dbname="BENEFIT_CALCULATION.claim_no" )
+ column=(type=number updatewhereclause=yes key=yes name=benefit_calculation_no dbname="BENEFIT_CALCULATION.benefit_calculation_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=preacc_gross_pay dbname="BENEFIT_CALCULATION.preacc_gross_pay" )
+ column=(type=decimal(4) updatewhereclause=yes name=preacc_net_pay dbname="BENEFIT_CALCULATION.preacc_net_pay" )
+ column=(type=number updatewhereclause=yes name=benefit_level_percentage dbname="BENEFIT_CALCULATION.benefit_level_percentage" )
+ column=(type=number updatewhereclause=yes name=preacc_work_days_per_week dbname="BENEFIT_CALCULATION.preacc_work_days_per_week" )
+ column=(type=number updatewhereclause=yes name=preacc_work_hours_per_day dbname="BENEFIT_CALCULATION.preacc_work_hours_per_day" )
+ column=(type=decimal(4) updatewhereclause=yes name=award_amount dbname="BENEFIT_CALCULATION.award_amount" )
+ column=(type=char(1) updatewhereclause=yes name=award_freq_code dbname="BENEFIT_CALCULATION.award_freq_code" )
+ column=(type=datetime updatewhereclause=yes name=effective_from_date dbname="BENEFIT_CALCULATION.effective_from_date" )
+ column=(type=number updatewhereclause=yes name=opening_no dbname="BENEFIT_CALCULATION.opening_no" )
+ column=(type=datetime updatewhereclause=yes name=benefit_review_date dbname="BENEFIT_CALCULATION.benefit_review_date" )
+ column=(type=char(1) updatewhereclause=yes name=calculation_type_code dbname="BENEFIT_CALCULATION.calculation_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=rtw_incentive_flag dbname="BENEFIT_CALCULATION.rtw_incentive_flag" )
+ retrieve="SELECT  claim_no ,
+        benefit_calculation_no ,
+        preacc_gross_pay ,
+        preacc_net_pay ,
+        benefit_level_percentage ,
+        preacc_work_days_per_week ,
+        preacc_work_hours_per_day ,
+        award_amount ,
+        award_freq_code ,
+        effective_from_date ,
+        opening_no ,
+        benefit_review_date ,
+        calculation_type_code ,
+        rtw_incentive_flag
+FROM    BENEFIT_CALCULATION
+WHERE   claim_no   = :val_claim_no
+AND     opening_no > 0" update="BENEFIT_CALCULATION" updatewhere=0 updatekeyinplace=no arguments=(("val_claim_no", number)) )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="0" y="4" height="60" width="137" format="000" html.valueishtml="0"  name=benefit_calculation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="174" y="4" height="60" width="261" format="$#,##0.00" html.valueishtml="0"  name=award_amount visible="1" editmask.mask="$#,##0.00"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="if (award_freq_code[0] = ~"W~",~"/ ~" + string(preacc_work_days_per_week,'#.0') + ~" days per week~",~"/ per month~")"border="0" color="0" x="448" y="4" height="60" width="498" format="[GENERAL]" html.valueishtml="0"  name=display_text1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="2" expression="~"at~""border="0" color="0" x="960" y="4" height="60" width="55" format="[GENERAL]" html.valueishtml="0"  name=display_text3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1029" y="4" height="60" width="119" format="0%" html.valueishtml="0"  name=benefit_level_percentage visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Effective From:" border="0" color="0" x="1239" y="4" height="60" width="366" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1637" y="4" height="60" width="315" format="yyyy-mm-dd" html.valueishtml="0"  name=effective_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="RTW Incentive" border="0" color="33554432" x="1979" y="4" height="60" width="357" html.valueishtml="0"  name=t_2 visible="1~tif(  rtw_incentive_flag = ~"Y~" , 1, 0 )"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="max(  benefit_calculation_no  for all )"border="0" color="0" x="2542" y="4" height="64" width="1074" format="[GENERAL]" html.valueishtml="0"  name=max_benefit_calculation_no visible="0"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="If (benefit_calculation_no = 0,~"N/A~",string(award_amount,~"$#,##0.00~") + '     '+ String( benefit_calculation_no,'###' ))"border="0" color="0" x="3717" y="4" height="60" width="306" format="[GENERAL]" html.valueishtml="0"  name=display_award_amount visible="0"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="4037" y="4" height="60" width="23" format="[general]" html.valueishtml="0"  name=calculation_type_code visible="0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

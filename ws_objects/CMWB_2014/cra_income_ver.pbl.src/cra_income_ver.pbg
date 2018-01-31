@@ -1,0 +1,22 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "cra_income_ver.pbl" "";
+@end;
+@begin Objects 
+ "d_comp_request_match.srd" "cra_income_ver.pbl";
+ "d_crosstab_comp_response.srd" "cra_income_ver.pbl";
+ "d_pending_details.srd" "cra_income_ver.pbl";
+ "d_pending_details_years.srd" "cra_income_ver.pbl";
+ "d_processed_request_details.srd" "cra_income_ver.pbl";
+ "d_requests_pending.srd" "cra_income_ver.pbl";
+ "d_requests_processed.srd" "cra_income_ver.pbl";
+ "d_requests_processed_by_individual.srd" "cra_income_ver.pbl";
+ "d_requests_processed_by_individual_years.srd" "cra_income_ver.pbl";
+ "d_requests_processed_years.srd" "cra_income_ver.pbl";
+ "d_response_request_match.srd" "cra_income_ver.pbl";
+ "d_response_request_match_yr.srd" "cra_income_ver.pbl";
+ "str_tax_years.srs" "cra_income_ver.pbl";
+ "n_income_verification.sru" "cra_income_ver.pbl";
+ "w_income_requests.srw" "cra_income_ver.pbl";
+ "w_view_response.srw" "cra_income_ver.pbl";
+@end;

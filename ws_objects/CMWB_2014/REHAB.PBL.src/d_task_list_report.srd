@@ -1,0 +1,94 @@
+﻿$PBExportHeader$d_task_list_report.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=268 color="536870912" )
+summary(height=120 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=char(2) updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ column=(type=char(1) updatewhereclause=yes name=rehab_task_task_success_code dbname="task_success_code" )
+ column=(type=datetime updatewhereclause=yes name=planned_start_date dbname="planned_start_date" )
+ column=(type=datetime updatewhereclause=yes name=actual_start_date dbname="actual_start_date" )
+ column=(type=char(16) updatewhereclause=yes name=responsible_user_id dbname="responsible_user_id" )
+ column=(type=char(40) updatewhereclause=yes name=task_type_desc dbname="task_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=task_sub_type_desc dbname="task_sub_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=task_specific_desc dbname="task_specific_desc" )
+ column=(type=char(40) updatewhereclause=yes name=provider_name dbname="name" )
+ column=(type=char(16) updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=char(3) updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ retrieve="  SELECT REHAB_TASK.claim_no,   
+         REHAB_TASK.task_no,   
+         REHAB_TASK.task_status_code,   
+         REHAB_TASK.task_success_code,   
+         REHAB_TASK.planned_start_date,
+         REHAB_TASK.actual_start_date,   
+         REHAB_TASK.responsible_user_id,   
+         Task_Type.task_type_desc,   
+         Task_Sub_Type.task_sub_type_desc,   
+         Task_Specific.task_specific_desc,   
+         PROVIDER.name,
+         CLAIM.claim_manager_user_id,
+         CLAIM.admin_region_code
+FROM  REHAB_TASK 
+     INNER JOIN  CLAIM  ON CLAIM.claim_no = REHAB_TASK.claim_no
+    LEFT OUTER JOIN  PROVIDER  ON REHAB_TASK.provider_type_code = PROVIDER.provider_type_code and REHAB_TASK.provider_no = PROVIDER.provider_no 
+     INNER JOIN  Task_Specific  ON REHAB_TASK.task_type_code = Task_Specific.task_type_code and REHAB_TASK.task_sub_type_code = Task_Specific.task_sub_type_code and REHAB_TASK.task_specific_code = Task_Specific.task_specific_code
+     INNER JOIN  Task_Sub_Type  ON REHAB_TASK.task_type_code = Task_Sub_Type.task_type_code and REHAB_TASK.task_sub_type_code = Task_Sub_Type.task_sub_type_code
+     INNER JOIN  Task_Type  ON REHAB_TASK.task_type_code = Task_Type.task_type_code"  sort="admin_region_code A claim_manager_user_id A " )
+group(level=1 header.height=80 trailer.height=76 by=("admin_region_code" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=276 trailer.height=184 by=("admin_region_code" , "claim_manager_user_id" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="14" y="4" height="236" width="3429"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+line(band=header x1="50" y1="192" x2="3401" y2="192"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="68" width="334" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Rehabilitation Planner - Task List" border="0" color="0" x="1157" y="28" height="76" width="1143" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2853" y="28" height="68" width="549" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="50" y="108" height="68" width="521" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="68" width="293" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="~" ~""border="0" color="0" x="590" y="108" height="68" width="2816" format="[general]" html.valueishtml="0"  name=report_parameters visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header.1 alignment="0" text="Admin Region:" border="0" color="33554432" x="14" y="8" height="60" width="370" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.1 id=13 alignment="0" tabsequence=32766 border="0" color="0" x="434" y="8" height="60" width="142" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.2 x1="9" y1="268" x2="3438" y2="268"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header.2 alignment="0" text="Claim Manager:" border="0" color="33554432" x="14" y="20" height="60" width="402" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header.2 id=12 alignment="0" tabsequence=32766 border="0" color="0" x="434" y="20" height="60" width="224" format="[general]" html.valueishtml="0"  name=claim_manager_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.2 alignment="1" text="Claim" border="0" color="0" x="14" y="144" height="60" width="146" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Task" border="0" color="0" x="261" y="144" height="60" width="128" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Service" border="0" color="0" x="1207" y="144" height="60" width="197" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Status" border="0" color="0" x="1815" y="144" height="60" width="169" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Result" border="0" color="0" x="2139" y="144" height="60" width="165" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Planned" border="0" color="0" x="2555" y="144" height="60" width="210" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Number" border="0" color="0" x="14" y="204" height="60" width="206" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Provider" border="0" color="0" x="1207" y="204" height="60" width="219" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Date" border="0" color="0" x="2875" y="204" height="60" width="133" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="User" border="0" color="0" x="3205" y="204" height="60" width="128" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Actual" border="0" color="0" x="2875" y="144" height="60" width="183" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Resp." border="0" color="0" x="3205" y="140" height="64" width="160" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.2 alignment="1" text="Date" border="0" color="0" x="2555" y="204" height="60" width="133" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1728" y="4" height="60" width="27" format="YYYY-MM-DD" html.valueishtml="0"  name=planned_start_date visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="14" y="4" height="60" width="224" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="trim(task_type_desc) + ' - ' + trim(task_sub_type_desc) + ' - ' + '~~n~~r' + trim(task_specific_desc)
+"border="0" color="0" x="261" y="4" height="64" width="923" format="[general]" html.valueishtml="0"  name=calculated_task_desc visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1207" y="4" height="60" width="581" format="[general]" html.valueishtml="0"  name=provider_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1815" y="4" height="60" width="302" format="[general]" html.valueishtml="0"  name=task_status_code visible="1" dddw.name=dddw_task_status dddw.displaycolumn=task_status_desc dddw.datacolumn=task_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2135" y="4" height="64" width="407" format="[general]" html.valueishtml="0"  name=rehab_task_task_success_code visible="1" dddw.name=dddw_task_success_code dddw.displaycolumn=task_success_desc dddw.datacolumn=task_success_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2875" y="4" height="60" width="297" format="YYYY-MM-DD" html.valueishtml="0"  name=actual_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" planned_start_date"border="0" color="0" x="2555" y="4" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=c_planned_date visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="3195" y="4" height="60" width="247" format="[general]" html.valueishtml="0"  name=responsible_user_id visible="1" edit.limit=8 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.2 alignment="0" text="Claim Manager Totals:" border="0" color="0" x="251" y="104" height="60" width="576" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression="count(task_no for group 2)"border="0" color="0" x="1207" y="104" height="60" width="229" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="0" text="Admin Region Totals:" border="0" color="0" x="251" y="8" height="60" width="544" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="count(task_no for group 1)"border="0" color="0" x="1207" y="8" height="60" width="229" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Grand Totals:" border="0" color="0" x="251" y="56" height="60" width="343" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="count(task_no for all)"border="0" color="0" x="1207" y="56" height="60" width="229" format="[general]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

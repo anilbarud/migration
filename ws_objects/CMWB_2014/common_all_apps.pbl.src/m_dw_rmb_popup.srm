@@ -1,0 +1,867 @@
+﻿$PBExportHeader$m_dw_rmb_popup.srm
+forward
+global type m_dw_rmb_popup from menu
+end type
+type m_options from menu within m_dw_rmb_popup
+end type
+type m_print from menu within m_options
+end type
+type m_sort from menu within m_options
+end type
+type m_filterlist from menu within m_options
+end type
+type m_0 from menu within m_options
+end type
+type m_manualtxn from menu within m_options
+end type
+type m_transferdetails from menu within m_options
+end type
+type m_to from menu within m_transferdetails
+end type
+type m_from from menu within m_transferdetails
+end type
+type m_transferdetails from menu within m_options
+m_to m_to
+m_from m_from
+end type
+type m_ from menu within m_options
+end type
+type m_moredetails from menu within m_options
+end type
+type m_tooltips from menu within m_options
+end type
+type m_saveas from menu within m_options
+end type
+type m_gotoformulary from menu within m_options
+end type
+type m_1 from menu within m_options
+end type
+type m_cut from menu within m_options
+end type
+type m_copy from menu within m_options
+end type
+type m_paste from menu within m_options
+end type
+type m_delete from menu within m_options
+end type
+type m_2 from menu within m_options
+end type
+type m_selectall from menu within m_options
+end type
+type m_options from menu within m_dw_rmb_popup
+m_print m_print
+m_sort m_sort
+m_filterlist m_filterlist
+m_0 m_0
+m_manualtxn m_manualtxn
+m_transferdetails m_transferdetails
+m_ m_
+m_moredetails m_moredetails
+m_tooltips m_tooltips
+m_saveas m_saveas
+m_gotoformulary m_gotoformulary
+m_1 m_1
+m_cut m_cut
+m_copy m_copy
+m_paste m_paste
+m_delete m_delete
+m_2 m_2
+m_selectall m_selectall
+end type
+global type m_dw_rmb_popup from menu
+m_options m_options
+end type
+end forward
+
+global type m_dw_rmb_popup from menu
+m_options m_options
+end type
+global m_dw_rmb_popup m_dw_rmb_popup
+
+type variables
+u_datawindow	idw_datawindow	// Contains instance of search list dw from u_claim_search
+end variables
+
+forward prototypes
+public subroutine mf_set_datawindow (datawindow adw_datawindow)
+end prototypes
+
+public subroutine mf_set_datawindow (datawindow adw_datawindow);/*	This funciton sets the pointer so the menu can reference the
+	search list datawindow for sorting and printing.
+*/
+	idw_datawindow = adw_datawindow
+
+/*
+	 on start up set off all options but print
+*/
+
+
+
+end subroutine
+
+on m_dw_rmb_popup.create
+m_dw_rmb_popup=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_options=create m_options
+this.Item[UpperBound(this.Item)+1]=this.m_options
+end on
+
+on m_dw_rmb_popup.destroy
+call super::destroy
+destroy(this.m_options)
+end on
+
+event clicked;idw_datawindow.TriggerEvent('ue_to_formulary')
+end event
+
+type m_options from menu within m_dw_rmb_popup
+m_print m_print
+m_sort m_sort
+m_filterlist m_filterlist
+m_0 m_0
+m_manualtxn m_manualtxn
+m_transferdetails m_transferdetails
+m_ m_
+m_moredetails m_moredetails
+m_tooltips m_tooltips
+m_saveas m_saveas
+m_gotoformulary m_gotoformulary
+m_1 m_1
+m_cut m_cut
+m_copy m_copy
+m_paste m_paste
+m_delete m_delete
+m_2 m_2
+m_selectall m_selectall
+end type
+
+on m_options.create
+call super::create
+this.text = "Options"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_print=create m_print
+this.m_sort=create m_sort
+this.m_filterlist=create m_filterlist
+this.m_0=create m_0
+this.m_manualtxn=create m_manualtxn
+this.m_transferdetails=create m_transferdetails
+this.m_=create m_
+this.m_moredetails=create m_moredetails
+this.m_tooltips=create m_tooltips
+this.m_saveas=create m_saveas
+this.m_gotoformulary=create m_gotoformulary
+this.m_1=create m_1
+this.m_cut=create m_cut
+this.m_copy=create m_copy
+this.m_paste=create m_paste
+this.m_delete=create m_delete
+this.m_2=create m_2
+this.m_selectall=create m_selectall
+this.Item[UpperBound(this.Item)+1]=this.m_print
+this.Item[UpperBound(this.Item)+1]=this.m_sort
+this.Item[UpperBound(this.Item)+1]=this.m_filterlist
+this.Item[UpperBound(this.Item)+1]=this.m_0
+this.Item[UpperBound(this.Item)+1]=this.m_manualtxn
+this.Item[UpperBound(this.Item)+1]=this.m_transferdetails
+this.Item[UpperBound(this.Item)+1]=this.m_
+this.Item[UpperBound(this.Item)+1]=this.m_moredetails
+this.Item[UpperBound(this.Item)+1]=this.m_tooltips
+this.Item[UpperBound(this.Item)+1]=this.m_saveas
+this.Item[UpperBound(this.Item)+1]=this.m_gotoformulary
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_cut
+this.Item[UpperBound(this.Item)+1]=this.m_copy
+this.Item[UpperBound(this.Item)+1]=this.m_paste
+this.Item[UpperBound(this.Item)+1]=this.m_delete
+this.Item[UpperBound(this.Item)+1]=this.m_2
+this.Item[UpperBound(this.Item)+1]=this.m_selectall
+end on
+
+on m_options.destroy
+call super::destroy
+destroy(this.m_print)
+destroy(this.m_sort)
+destroy(this.m_filterlist)
+destroy(this.m_0)
+destroy(this.m_manualtxn)
+destroy(this.m_transferdetails)
+destroy(this.m_)
+destroy(this.m_moredetails)
+destroy(this.m_tooltips)
+destroy(this.m_saveas)
+destroy(this.m_gotoformulary)
+destroy(this.m_1)
+destroy(this.m_cut)
+destroy(this.m_copy)
+destroy(this.m_paste)
+destroy(this.m_delete)
+destroy(this.m_2)
+destroy(this.m_selectall)
+end on
+
+type m_print from menu within m_options
+end type
+
+on clicked;/*---------------------------------------------------------------------------------------*/
+/*  Trigger the user object event to print the current search list.                      */
+/*---------------------------------------------------------------------------------------*/
+
+idw_datawindow.TriggerEvent('ue_print')
+//ParentWindow.ue_print()
+end on
+
+on m_print.create
+call super::create
+this.text = "Print..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_sort from menu within m_options
+end type
+
+on clicked;/*	Call powerbuilders sort dialog box to let the user select the sort they
+	want.  Then sort the list and bring the current row into view.
+*/
+	STRING	ls_null
+	LONG		ll_selectedrow
+
+	SetNull(ls_null)
+	IF idw_datawindow.SetSort(ls_null) < 0 THEN
+		Return
+	END IF
+
+	idw_datawindow.Sort()
+	ll_selectedrow = idw_datawindow.GetSelectedRow(0)
+	idw_datawindow.GroupCalc()
+	IF ll_selectedrow > 0 THEN
+		idw_datawindow.ScrollToRow(ll_selectedrow)
+	END IF
+end on
+
+on m_sort.create
+call super::create
+this.visible = false
+this.text = "Sort List..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sort.destroy
+call super::destroy
+end on
+
+type m_filterlist from menu within m_options
+end type
+
+on clicked;idw_datawindow.TriggerEvent('ue_filter')
+end on
+
+on m_filterlist.create
+call super::create
+this.visible = false
+this.text = "Filter List ..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_filterlist.destroy
+call super::destroy
+end on
+
+type m_0 from menu within m_options
+end type
+
+on m_0.create
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_0.destroy
+call super::destroy
+end on
+
+type m_manualtxn from menu within m_options
+end type
+
+event clicked;idw_datawindow.TriggerEvent('ue_manualtxn')
+end event
+
+on m_manualtxn.create
+call super::create
+this.visible = false
+this.text = "Manual Txn..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_manualtxn.destroy
+call super::destroy
+end on
+
+type m_transferdetails from menu within m_options
+m_to m_to
+m_from m_from
+end type
+
+on m_transferdetails.create
+call super::create
+this.visible = false
+this.text = "Transfer Details"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_to=create m_to
+this.m_from=create m_from
+this.Item[UpperBound(this.Item)+1]=this.m_to
+this.Item[UpperBound(this.Item)+1]=this.m_from
+end on
+
+on m_transferdetails.destroy
+call super::destroy
+destroy(this.m_to)
+destroy(this.m_from)
+end on
+
+type m_to from menu within m_transferdetails
+end type
+
+on m_to.create
+call super::create
+this.text = "To ..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_to.destroy
+call super::destroy
+end on
+
+event clicked;idw_datawindow.event dynamic ue_show_transfer_details('TO')
+end event
+
+type m_from from menu within m_transferdetails
+end type
+
+on m_from.create
+call super::create
+this.text = "From ..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_from.destroy
+call super::destroy
+end on
+
+event clicked;idw_datawindow.event dynamic ue_show_transfer_details('FROM')
+end event
+
+type m_ from menu within m_options
+end type
+
+on m_.create
+call super::create
+this.text = " "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_.destroy
+call super::destroy
+end on
+
+type m_moredetails from menu within m_options
+end type
+
+on clicked;idw_datawindow.TriggerEvent('ue_more_details')
+end on
+
+on m_moredetails.create
+call super::create
+this.visible = false
+this.text = "More Details..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_moredetails.destroy
+call super::destroy
+end on
+
+type m_tooltips from menu within m_options
+end type
+
+event clicked;u_datawindow		ldw_datawindow
+
+ldw_datawindow = idw_datawindow
+
+this.checked = not this.checked
+ldw_datawindow.uf_settooltip(this.checked)
+end event
+
+on m_tooltips.create
+call super::create
+this.visible = false
+this.text = "Tooltips"
+this.microhelp = "Turn tooltips on and off"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tooltips.destroy
+call super::destroy
+end on
+
+type m_saveas from menu within m_options
+event clicked ( )
+end type
+
+event clicked;idw_datawindow.SaveAs()
+end event
+
+on m_saveas.create
+call super::create
+this.visible = false
+this.text = "Save As ..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_saveas.destroy
+call super::destroy
+end on
+
+type m_gotoformulary from menu within m_options
+end type
+
+on m_gotoformulary.create
+call super::create
+this.visible = false
+this.text = "Goto Formulary"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_gotoformulary.destroy
+call super::destroy
+end on
+
+event clicked;idw_datawindow.TriggerEvent('ue_to_formulary')
+end event
+
+type m_1 from menu within m_options
+end type
+
+on m_1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_cut from menu within m_options
+end type
+
+event clicked;idw_datawindow.TriggerEvent('ue_cut')
+end event
+
+on m_cut.create
+call super::create
+this.visible = false
+this.text = "Cut"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cut.destroy
+call super::destroy
+end on
+
+type m_copy from menu within m_options
+end type
+
+event clicked;idw_datawindow.TriggerEvent('ue_copy')
+end event
+
+on m_copy.create
+call super::create
+this.visible = false
+this.text = "Copy"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_copy.destroy
+call super::destroy
+end on
+
+type m_paste from menu within m_options
+end type
+
+event clicked;idw_datawindow.TriggerEvent('ue_paste')
+end event
+
+on m_paste.create
+call super::create
+this.visible = false
+this.text = "Paste"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_paste.destroy
+call super::destroy
+end on
+
+type m_delete from menu within m_options
+end type
+
+event clicked;idw_datawindow.TriggerEvent('ue_delete')
+end event
+
+on m_delete.create
+call super::create
+this.visible = false
+this.text = "Delete"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_delete.destroy
+call super::destroy
+end on
+
+type m_2 from menu within m_options
+end type
+
+on m_2.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_selectall from menu within m_options
+end type
+
+event clicked;idw_datawindow.TriggerEvent('ue_selectall')
+end event
+
+on m_selectall.create
+call super::create
+this.visible = false
+this.text = "Select All"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_selectall.destroy
+call super::destroy
+end on
+

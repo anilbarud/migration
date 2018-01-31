@@ -1,0 +1,13 @@
+﻿$PBExportHeader$d_lookup_correspond_recipient_type.srd
+$PBExportComments$Contains drop down list of Recipient types.
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=89 color="-1" )
+table(column=(type=char(4) update=yes key=yes name=correspond_recipient_type_cd dbname="Correspond_Recipient_Type.correspond_recipient_type_cd" )
+ column=(type=char(20) update=yes name=recipient_type dbname="Correspond_Recipient_Type.correspond_recipient_type_desc" )
+ retrieve="PBSELECT(TABLE(NAME=~"Correspond_Recipient_Type~") COLUMN(NAME=~"Correspond_Recipient_Type.correspond_recipient_type_cd~")COLUMN(NAME=~"Correspond_Recipient_Type.correspond_recipient_type_desc~"))" update="Correspond_Recipient_Type" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="0" text="Display Valid Correspondence Recipient Types"border="0" color="0" x="1" y="4" height="65" width="1354"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="1" y="4" height="81" width="878" format="[general]"  name=recipient_type dddw.name=dddw_correspond_recipient_type dddw.displaycolumn=correspond_recipient_type_desc dddw.datacolumn=correspond_recipient_type_cd dddw.percentwidth=100 dddw.limit=20 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.required=yes dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

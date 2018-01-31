@@ -1,0 +1,57 @@
+﻿$PBExportHeader$d_annuity_account_summary_comp.srd
+$PBExportComments$used in composite report window for all account information.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=156 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=324 color="536870912" height.autosize=yes )
+table(column=(type=datetime updatewhereclause=yes name=annuity_start_date dbname="annuity_start_date" )
+ column=(type=datetime updatewhereclause=yes name=annuity_end_date dbname="annuity_end_date" )
+ column=(type=datetime updatewhereclause=yes name=confirmed_date dbname="confirmed_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=annuity_set_aside_percent dbname="annuity_set_aside_percent" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=long updatewhereclause=yes name=annuity_calc_no dbname="annuity_calc_no" )
+ column=(type=char(2) updatewhereclause=yes name=claim_role_code dbname="claim_role_code" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=datetime updatewhereclause=yes name=death_date dbname="death_date" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=annuity_eligibility_no dbname="annuity_eligibility_no" )
+ column=(type=long updatewhereclause=yes name=age dbname="age" )
+ retrieve="SELECT 	a.annuity_start_date,		 		a.annuity_end_date, 	a.confirmed_date,   
+        		a.annuity_set_aside_percent, 	b.create_user_id,   	b.create_date,      
+			b.annuity_calc_no,           		c.claim_role_code,  	c.individual_no,    
+			c.claim_no,					 		d.last_name ,            d.given_names,				 	
+             d.birth_date,			                  d.death_date ,          a.annuity_account_no  ,
+              a.annuity_eligibility_no, 	0 age   
+FROM 	ANNUITY_ELIGIBILITY 	a 
+JOIN   	ANNUITY_ACCOUNT     	c on a.annuity_account_no 	= c.annuity_account_no
+JOIN 		INDIVIDUAL          			d on c.individual_no      		= d.individual_no
+LEFT JOIN  ANNUITY_CALC_ACCOUNT_HEADER b ON a.annuity_account_no	= b.annuity_account_no 
+            and a.annuity_eligibility_no	= b.annuity_eligibility_no
+            and b.annuity_calc_no			= :al_annuity_calc_no
+WHERE a.annuity_eligibility_no = ( SELECT max(annuity_eligibility_no) 
+								   			 FROM   ANNUITY_ELIGIBILITY b
+								   			 WHERE  a.annuity_account_no = b.annuity_account_no )
+AND a.annuity_account_no 	= :al_annuity_account_no
+" arguments=(("al_annuity_calc_no", number),("al_annuity_account_no", number),("as_claim_role_code", string)) )
+line(band=header x1="9" y1="136" x2="4009" y2="136"  name=l_1 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="2" text="Account Summary" border="0" color="33554432" x="18" y="24" height="80" width="4000" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+report(band=detail dataobject="d_annuity_calc_account_detail_return" x="14" y="176" height="140" width="4498" border="0"  height.autosize=yes criteria="" nest_arguments=(("al_annuity_account_no "),(" al_annuity_calc_no "),(" as_claim_role_code ")) trail_footer = yes  name=dw_account_detail visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_dummy_group_for_page_break" x="14" y="24" height="136" width="1563" border="0"  height.autosize=yes criteria="" nest_arguments=((" al_annuity_calc_no ")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,29 @@
+﻿$PBExportHeader$d_entitlement_worker_info_calculate.srd
+$PBExportComments$contains name and number of the injured worker - used in calculate module
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=172 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=individual_no dbname="INDIVIDUAL.individual_no" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=given_names dbname="INDIVIDUAL.given_names" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="INDIVIDUAL.birth_date" )
+ column=(type=datetime updatewhereclause=yes name=death_date dbname="INDIVIDUAL.death_date" )
+ retrieve="  SELECT  dbo.INDIVIDUAL.individual_no ,           dbo.INDIVIDUAL.last_name ,           dbo.INDIVIDUAL.given_names, birth_date, death_date     FROM dbo.INDIVIDUAL    
+where individual_no = :al_individual_no" update="dbo.INDIVIDUAL" updatewhere=1 updatekeyinplace=no arguments=(("al_individual_no", number),("as_claim_no", string)) )
+text(band=detail alignment="0" text="Name" border="0" color="33554432" x="9" y="84" height="60" width="160" html.valueishtml="0"  name=last_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( trim(as_claim_no) = '0', 'Injured Worker - Individual: ' + string( individual_no ) , 'Surviving Spouse - Individual: ' + string( individual_no ) ) + if( trim(as_claim_no) = '0' ,'',' ' + ' Claim: ' + as_claim_no )"border="0" color="33554432" x="9" y="4" height="76" width="1623" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression=" given_names + ~" ~" +  last_name "border="0" color="33554432" x="466" y="84" height="76" width="1170" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

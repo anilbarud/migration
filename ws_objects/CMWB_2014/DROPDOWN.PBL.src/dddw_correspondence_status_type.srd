@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_correspondence_status_type.srd
+$PBExportComments$Used to lookup the status of Correspondence.
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=77 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(1) update=yes key=yes name=correspond_status_code dbname="Correspondence_Status.correspond_status_code" )
+ column=(type=char(20) update=yes name=description dbname="Correspondence_Status.correspond_status_desc" )
+ retrieve="PBSELECT(TABLE(NAME=~"Correspondence_Status~") COLUMN(NAME=~"Correspondence_Status.correspond_status_code~")COLUMN(NAME=~"Correspondence_Status.correspond_status_desc~"))" update="Correspondence_Status" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="0" text="List Correspondence Status Codes"border="0" color="0" x="14" y="8" height="61" width="906"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="8" height="65" width="631" format="[general]"  name=description edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

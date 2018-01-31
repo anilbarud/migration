@@ -1,0 +1,10 @@
+﻿$PBExportHeader$d_recipient_types.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=93 color="536870912" )
+table(column=(type=char(1) name=recipient_type_code dbname="recipient_type_code" )
+ )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="0" x="14" y="8" height="73" width="1125" format="[general]"  name=recipient_type_code dddw.name=dddw_recipient_types_active dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=100 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

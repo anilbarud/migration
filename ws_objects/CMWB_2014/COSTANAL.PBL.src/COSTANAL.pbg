@@ -1,0 +1,21 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "COSTANAL.PBL" "";
+@end;
+@begin Objects 
+ "d_c_a_summary_report_by_option.srd" "COSTANAL.PBL";
+ "d_compare_options.srd" "COSTANAL.PBL";
+ "d_compare_options_cap_factor.srd" "COSTANAL.PBL";
+ "d_compare_options_ltd.srd" "COSTANAL.PBL";
+ "d_compare_options_ltd_inv.srd" "COSTANAL.PBL";
+ "d_cost_analysis_list.srd" "COSTANAL.PBL";
+ "d_cost_analysis_master.srd" "COSTANAL.PBL";
+ "d_cost_analysis_summary_report.srd" "COSTANAL.PBL";
+ "d_cost_analysis_summary_report_print.srd" "COSTANAL.PBL";
+ "d_options_costs.srd" "COSTANAL.PBL";
+ "d_options_list.srd" "COSTANAL.PBL";
+ "d_options_tasks.srd" "COSTANAL.PBL";
+ "n_cost_analysis.sru" "COSTANAL.PBL";
+ "uo_tabpage_summary_report.sru" "COSTANAL.PBL";
+ "w_cost_analysis.srw" "COSTANAL.PBL";
+@end;

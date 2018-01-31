@@ -1,0 +1,167 @@
+﻿$PBExportHeader$d_target_txn.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=target_payment_no dbname="target_payment_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_payment_amount dbname="total_payment_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=net_payment_amount dbname="net_payment_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_tax_amount dbname="payment_tax_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_net_tax_amount dbname="payment_net_tax_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=tax_rate dbname="tax_rate" )
+ column=(type=long updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long updatewhereclause=yes name=paid_quantity dbname="paid_quantity" )
+ column=(type=long updatewhereclause=yes name=net_quantity dbname="net_quantity" )
+ column=(type=long updatewhereclause=yes name=award_no dbname="award_no" )
+ column=(type=long updatewhereclause=yes name=target_txn_no dbname="target_txn_no" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=datetime updatewhereclause=yes name=cheque_deposit_date dbname="cheque_deposit_date" )
+ column=(type=long updatewhereclause=yes name=direct_deposit_xmit_no dbname="direct_deposit_xmit_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_amount dbname="txn_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=txn_tax_amount dbname="txn_tax_amount" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_sub_type_code dbname="txn_sub_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=maintain_allowed_flag dbname="maintain_allowed_flag" )
+ column=(type=char(1) updatewhereclause=yes name=claim_status_code dbname="claim_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=datetime updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_operation_no dbname="cost_alloc_operation_no" )
+ column=(type=long updatewhereclause=yes name=prescription_set_no dbname="prescription_set_no" )
+ column=(type=char(1) updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ column=(type=datetime updatewhereclause=yes name=paid_from_date dbname="paid_from_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=paid_days_lost dbname="paid_days_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=paid_hours_lost dbname="paid_hours_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=net_days_lost dbname="net_days_lost" )
+ column=(type=decimal(2) updatewhereclause=yes name=net_hours_lost dbname="net_hours_lost" )
+ column=(type=decimal(4) updatewhereclause=yes name=net_tax_amount dbname="net_tax_amount" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=tax_rate dbname="tax_rate" )
+ column=(type=long updatewhereclause=yes name=award_no dbname="award_no" )
+ column=(type=datetime updatewhereclause=yes name=paid_to_date dbname="paid_to_date" )
+ column=(type=char(1) updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ column=(type=long updatewhereclause=yes name=coc_period dbname="coc_period" )
+ retrieve="SELECT a.claim_no,
+		 a.payment_no as target_payment_no,
+       a.payment_type_code,
+       a.payment_sub_type_code,
+       a.total_payment_amount,
+		 a.net_payment_amount,
+       a.tax_amount as payment_tax_amount,
+       a.net_tax_amount as payment_net_tax_amount,
+       a.tax_rate,
+       a.authorization_no,
+       a.paid_quantity,
+       a.net_quantity,
+       a.award_no,
+		 b.txn_no as target_txn_no,
+       b.cheque_no,
+		 b.cheque_deposit_date,
+       b.direct_deposit_xmit_no,
+       b.txn_amount,
+       b.tax_amount as txn_tax_amount,
+       b.recipient_no,
+		 b.recipient_type_code,
+       b.txn_type_code,
+       b.txn_sub_type_code,
+       b.maintain_allowed_flag,
+       c.claim_status_code,
+       c.claim_status_type_code,
+       c.accident_date,
+       c.individual_no,
+       IsNull(d.cost_alloc_no,0) as cost_alloc_no,
+       IsNull(d.cost_alloc_operation_no,0) as cost_alloc_operation_no,
+       IsNull(e.prescription_set_no,0) as prescription_set_no,
+       b.payment_method_code,
+       a.paid_from_date,
+		 a.paid_days_lost,
+		 a.paid_hours_lost,
+		 a.net_days_lost,
+       a.net_hours_lost,
+		 a.net_tax_amount,
+		 a.processed_date,
+		 a.tax_rate,
+       a.award_no,
+		 a.paid_to_date,
+		 b.payment_method_code,
+		 b.coc_period
+FROM PAYMENT a 
+     INNER JOIN APPLIED_CLAIM_TXN b  ON a.payment_no = b.payment_no
+     INNER JOIN CLAIM c  ON c.claim_no = b.claim_no
+    LEFT OUTER JOIN COST_OF_CLAIMS_ALLOCATED d  ON b.txn_no = d.txn_no
+    LEFT OUTER JOIN PAYMENT_PRESCRIPTION e  ON b.payment_no = e.payment_no
+ WHERE b.txn_no IN (:al_txn_no)" arguments=(("al_txn_no", numberlist)) )
+text(band=header alignment="2" text="Claim No" border="0" color="33554432" x="5" y="4" height="64" width="329" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment No" border="0" color="33554432" x="338" y="4" height="64" width="352" html.valueishtml="0"  name=payment_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment Type Code" border="0" color="33554432" x="695" y="4" height="64" width="585" html.valueishtml="0"  name=payment_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment Sub Type Code" border="0" color="33554432" x="1285" y="4" height="64" width="718" html.valueishtml="0"  name=payment_sub_type_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Tax Amount" border="0" color="33554432" x="2007" y="4" height="64" width="352" html.valueishtml="0"  name=tax_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Net Tax Amount" border="0" color="33554432" x="2368" y="4" height="64" width="466" html.valueishtml="0"  name=net_tax_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Tax Rate" border="0" color="33554432" x="2839" y="4" height="64" width="329" html.valueishtml="0"  name=tax_rate_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Authorization No" border="0" color="33554432" x="3173" y="4" height="64" width="485" html.valueishtml="0"  name=authorization_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Paid Quantity" border="0" color="33554432" x="3662" y="4" height="64" width="393" html.valueishtml="0"  name=paid_quantity_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Net Quantity" border="0" color="33554432" x="4059" y="4" height="64" width="357" html.valueishtml="0"  name=net_quantity_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Award No" border="0" color="33554432" x="4421" y="4" height="64" width="329" html.valueishtml="0"  name=award_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="695" y="4" height="76" width="82" format="[general]" html.valueishtml="0"  name=payment_type_code visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1285" y="4" height="76" width="82" format="[general]" html.valueishtml="0"  name=payment_sub_type_code visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="2839" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=tax_rate visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="3173" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=authorization_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="3662" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=paid_quantity visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="4059" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=net_quantity visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="33554432" x="4421" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=award_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="4750" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=target_payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="4832" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=target_txn_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="4914" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="4997" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=direct_deposit_xmit_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="7401" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="33554432" x="7483" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=txn_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="33554432" x="7511" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=txn_sub_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="33554432" x="7538" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=maintain_allowed_flag visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="33554432" x="7566" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=claim_status_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="33554432" x="7593" y="0" height="64" width="55" format="[general]" html.valueishtml="0"  name=claim_status_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=29 alignment="0" tabsequence=32766 border="0" color="33554432" x="7648" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=30 alignment="0" tabsequence=32766 border="0" color="33554432" x="7730" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=cost_alloc_operation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="33554432" x="7813" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=prescription_set_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="7895" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=payment_tax_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="9056" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=payment_net_tax_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="33554432" x="10217" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=txn_tax_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="11378" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="12539" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=total_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="13701" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=net_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="33554432" x="14862" y="0" height="64" width="517" format="[shortdate] [time]" html.valueishtml="0"  name=cheque_deposit_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="33554432" x="15378" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=27 alignment="0" tabsequence=32766 border="0" color="33554432" x="15406" y="0" height="64" width="512" format="[shortdate] [time]" html.valueishtml="0"  name=accident_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=28 alignment="0" tabsequence=32766 border="0" color="33554432" x="15918" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="33554432" x="16000" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=payment_method_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=33 alignment="0" tabsequence=32766 border="0" color="33554432" x="16027" y="0" height="64" width="512" format="[shortdate] [time]" html.valueishtml="0"  name=paid_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=34 alignment="0" tabsequence=32766 border="0" color="33554432" x="16539" y="0" height="64" width="2350" format="[general]" html.valueishtml="0"  name=paid_days_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=35 alignment="0" tabsequence=32766 border="0" color="33554432" x="18889" y="0" height="64" width="2350" format="[general]" html.valueishtml="0"  name=paid_hours_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=36 alignment="0" tabsequence=32766 border="0" color="33554432" x="21239" y="0" height="64" width="2350" format="[general]" html.valueishtml="0"  name=net_days_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=37 alignment="0" tabsequence=32766 border="0" color="33554432" x="23589" y="0" height="64" width="2350" format="[general]" html.valueishtml="0"  name=net_hours_lost visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=38 alignment="0" tabsequence=32766 border="0" color="33554432" x="25938" y="0" height="64" width="1161" format="[general]" html.valueishtml="0"  name=net_tax_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=39 alignment="0" tabsequence=32766 border="0" color="33554432" x="27099" y="0" height="64" width="512" format="[shortdate] [time]" html.valueishtml="0"  name=processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=40 alignment="0" tabsequence=32766 border="0" color="33554432" x="27611" y="0" height="64" width="2350" format="[general]" html.valueishtml="0"  name=tax_rate_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=41 alignment="0" tabsequence=32766 border="0" color="33554432" x="29961" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=award_no_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=42 alignment="0" tabsequence=32766 border="0" color="33554432" x="30043" y="0" height="64" width="512" format="[shortdate] [time]" html.valueishtml="0"  name=paid_to_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=43 alignment="0" tabsequence=32766 border="0" color="33554432" x="30555" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=payment_method_code_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=44 alignment="0" tabsequence=32766 border="0" color="33554432" x="30583" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=coc_period visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml( template=(comment="" name="ss" xhtml="﻿<form name=~"d_target_txn_dataForm~"><div class=~"d_target_txn_band_0~"><div class=~"d_target_txn_claim_no_t~">claim_no_t</div><div class=~"d_target_txn_payment_no_t~">payment_no_t</div><div class=~"d_target_txn_payment_type_code_t~">payment_type_code_t</div><div class=~"d_target_txn_payment_sub_type_code_t~">payment_sub_type_code_t</div><div class=~"d_target_txn_tax_amount_t~">tax_amount_t</div><div class=~"d_target_txn_net_tax_amount_t~">net_tax_amount_t</div><div class=~"d_target_txn_tax_rate_t~">tax_rate_t</div><div class=~"d_target_txn_authorization_no_t~">authorization_no_t</div><div class=~"d_target_txn_paid_quantity_t~">paid_quantity_t</div><div class=~"d_target_txn_net_quantity_t~">net_quantity_t</div><div class=~"d_target_txn_award_no_t~">award_no_t</div></div><div class=~"d_target_txn_detail_0~" __pbband=~"detail~"><input name=~"d_target_txn_claim_no~" type=~"text~" value=~"claim_no~"/><input name=~"d_target_txn_payment_type_code~" type=~"text~" value=~"payment_type_code~"/><input name=~"d_target_txn_payment_sub_type_code~" type=~"text~" value=~"payment_sub_type_code~"/><input name=~"d_target_txn_tax_rate~" type=~"text~" value=~"tax_rate~"/><input name=~"d_target_txn_authorization_no~" type=~"text~" value=~"authorization_no~"/><input name=~"d_target_txn_paid_quantity~" type=~"text~" value=~"paid_quantity~"/><input name=~"d_target_txn_net_quantity~" type=~"text~" value=~"net_quantity~"/><input name=~"d_target_txn_award_no~" type=~"text~" value=~"award_no~"/><input name=~"d_target_txn_target_payment_no~" type=~"text~" value=~"target_payment_no~"/><input name=~"d_target_txn_target_txn_no~" type=~"text~" value=~"target_txn_no~"/><input name=~"d_target_txn_cheque_no~" type=~"text~" value=~"cheque_no~"/><input name=~"d_target_txn_direct_deposit_xmit_no~" type=~"text~" value=~"direct_deposit_xmit_no~"/><input name=~"d_target_txn_recipient_no~" type=~"text~" value=~"recipient_no~"/><input name=~"d_target_txn_txn_type_code~" type=~"text~" value=~"txn_type_code~"/><input name=~"d_target_txn_txn_sub_type_code~" type=~"text~" value=~"txn_sub_type_code~"/><input name=~"d_target_txn_maintain_allowed_flag~" type=~"text~" value=~"maintain_allowed_flag~"/><input name=~"d_target_txn_claim_status_code~" type=~"text~" value=~"claim_status_code~"/><input name=~"d_target_txn_claim_status_type_code~" type=~"text~" value=~"claim_status_type_code~"/><input name=~"d_target_txn_cost_alloc_no~" type=~"text~" value=~"cost_alloc_no~"/><input name=~"d_target_txn_cost_alloc_operation_no~" type=~"text~" value=~"cost_alloc_operation_no~"/><input name=~"d_target_txn_prescription_set_no~" type=~"text~" value=~"prescription_set_no~"/><input name=~"d_target_txn_payment_tax_amount~" type=~"text~" value=~"payment_tax_amount~"/><input name=~"d_target_txn_payment_net_tax_amount~" type=~"text~" value=~"payment_net_tax_amount~"/><input name=~"d_target_txn_txn_tax_amount~" type=~"text~" value=~"txn_tax_amount~"/><input name=~"d_target_txn_txn_amount~" type=~"text~" value=~"txn_amount~"/><input name=~"d_target_txn_total_payment_amount~" type=~"text~" value=~"total_payment_amount~"/><input name=~"d_target_txn_net_payment_amount~" type=~"text~" value=~"net_payment_amount~"/><input name=~"d_target_txn_cheque_deposit_date~" type=~"text~" value=~"cheque_deposit_date~"/><input name=~"d_target_txn_recipient_type_code~" type=~"text~" value=~"recipient_type_code~"/><input name=~"d_target_txn_accident_date~" type=~"text~" value=~"accident_date~"/><input name=~"d_target_txn_individual_no~" type=~"text~" value=~"individual_no~"/><input name=~"d_target_txn_payment_method_code~" type=~"text~" value=~"payment_method_code~"/><input name=~"d_target_txn_paid_from_date~" type=~"text~" value=~"paid_from_date~"/><input name=~"d_target_txn_paid_days_lost~" type=~"text~" value=~"paid_days_lost~"/><input name=~"d_target_txn_paid_hours_lost~" type=~"text~" value=~"paid_hours_lost~"/><input name=~"d_target_txn_net_days_lost~" type=~"text~" value=~"net_days_lost~"/><input name=~"d_target_txn_net_hours_lost~" type=~"text~" value=~"net_hours_lost~"/><input name=~"d_target_txn_net_tax_amount~" type=~"text~" value=~"net_tax_amount~"/><input name=~"d_target_txn_processed_date~" type=~"text~" value=~"processed_date~"/><input name=~"d_target_txn_tax_rate_1~" type=~"text~" value=~"tax_rate_1~"/><input name=~"d_target_txn_award_no_1~" type=~"text~" value=~"award_no_1~"/><input name=~"d_target_txn_paid_to_date~" type=~"text~" value=~"paid_to_date~"/><input name=~"d_target_txn_payment_method_code_1~" type=~"text~" value=~"payment_method_code_1~"/><input name=~"d_target_txn_coc_period~" type=~"text~" value=~"coc_period~"/></div></form>"))
+ 

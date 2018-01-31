@@ -1,0 +1,72 @@
+﻿$PBExportHeader$d_recall_document.srd
+$PBExportComments$List of archived documents for a claim
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=8 color="536870912" )
+summary(height=0 color="67108864" )
+footer(height=0 color="67108864" )
+detail(height=976 color="-1" )
+table(column=(type=long updatewhereclause=yes name=docid dbname="docid" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=type_code dbname="type_code" )
+ column=(type=datetime updatewhereclause=yes name=date_on_document dbname="date_on_document" )
+ column=(type=long updatewhereclause=yes name=service_provider_no dbname="service_provider_no" )
+ column=(type=datetime updatewhereclause=yes name=date_received dbname="date_received" )
+ column=(type=char(5) updatewhereclause=yes name=date_received_cb dbname="compute_0007" values="	1/	0" )
+ column=(type=char(8) updatewhereclause=yes name=claim_cb dbname="compute_0008" values="	1/	0" )
+ column=(type=char(11) updatewhereclause=yes name=provider_cb dbname="compute_0009" values="	1/	0" )
+ column=(type=char(9) updatewhereclause=yes name=date_on_doc_cb dbname="compute_0010" values="	1/	0" )
+ column=(type=char(13) updatewhereclause=yes name=type_code_cb dbname="compute_0011" values="	1/	0" )
+ column=(type=char(41) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(20) updatewhereclause=yes name=comment dbname="comment" )
+ column=(type=char(7) updatewhereclause=yes name=comment_cb dbname="compute_0014" values="	1/	0" )
+ column=(type=char(10) updatewhereclause=yes name=select_all_cb dbname="compute_0015" values="	1/	0" )
+ column=(type=char(1) updatewhereclause=yes name=doc_class_code dbname="doc_class_code" )
+ column=(type=char(40) updatewhereclause=yes name=doc_type_desc_e dbname="doc_type_desc_e" )
+ column=(type=char(2) updatewhereclause=yes name=doc_subtype_code dbname="doc_subtype_code" )
+ column=(type=char(1) updatewhereclause=yes name=service_provider_type_code dbname="service_provider_type_code" )
+ retrieve="
+ SELECT  a.docid, a.claim_no, a.type_code, a.date_on_document,a.service_provider_no, 
+         a.date_received,'claim','provider','date_on_doc','type_code',
+         'date_received','name' =  c.given_names + ' ' + c.last_name,
+         a.comment,'comment','select_all', d.doc_class_code, d.doc_type_desc_e, a.doc_subtype_code, a.service_provider_type_code
+   FROM DOCUMENT_INDEX a 
+   JOIN CLAIM..CLAIM b on a.claim_no = b.claim_no
+   JOIN CLAIM..INDIVIDUAL c on b.individual_no = c.individual_no
+   JOIN Doc_Type d on a.type_code = d.doc_type_code
+  WHERE a.docid = :al_docid" arguments=(("al_docid", number)) )
+text(band=detail alignment="0" text="Doc Id:" border="0" color="33554432" x="32" y="12" height="60" width="219" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="274" y="12" height="60" width="398" format="[general]" html.valueishtml="0"  name=docid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="33554432" x="695" y="12" height="60" width="1047" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=15 alignment="0" tabsequence=10 border="0" color="33554432" x="1586" y="220" height="64" width="96" format="[general]" html.valueishtml="0"  name=select_all_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+text(band=detail alignment="0" text="Claim #:" border="0" color="33554432" x="32" y="428" height="64" width="238" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Service Provider #:" border="0" color="33554432" x="32" y="524" height="60" width="489" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Date On Document:" border="0" color="33554432" x="32" y="616" height="60" width="498" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Date Received:" border="0" color="33554432" x="32" y="800" height="60" width="384" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Comment:" border="0" color="33554432" x="32" y="892" height="60" width="265" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Carry Forward" border="0" color="33554432" x="1417" y="312" height="80" width="411" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=20 border="0" color="33554432" x="1591" y="428" height="64" width="137" format="[general]" html.valueishtml="0"  name=claim_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=9 alignment="0" tabsequence=30 border="0" color="33554432" x="1591" y="524" height="64" width="114" format="[general]" html.valueishtml="0"  name=provider_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=10 alignment="0" tabsequence=40 border="0" color="33554432" x="1591" y="616" height="64" width="119" format="[general]" html.valueishtml="0"  name=date_on_doc_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=11 alignment="0" tabsequence=50 border="0" color="33554432" x="1591" y="708" height="64" width="142" format="[general]" html.valueishtml="0"  name=type_code_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=7 alignment="0" tabsequence=60 border="0" color="33554432" x="1591" y="800" height="64" width="137" format="[general]" html.valueishtml="0"  name=date_received_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=14 alignment="0" tabsequence=70 border="0" color="33554432" x="1591" y="892" height="64" width="137" format="[general]" html.valueishtml="0"  name=comment_cb visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+text(band=detail alignment="0" text="Select/Deselect All" border="0" color="33554432" x="1367" y="140" height="64" width="544" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="553" y="892" height="64" width="992" format="[general]" html.valueishtml="0"  name=comment visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="553" y="428" height="64" width="425" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="553" y="524" height="64" width="425" format="[general]" html.valueishtml="0"  name=service_provider_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="553" y="616" height="64" width="649" format="yyyy-mm-dd " html.valueishtml="0"  name=date_on_document visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="553" y="800" height="64" width="649" format="yyyy-mm-dd " html.valueishtml="0"  name=date_received visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+text(band=detail alignment="0" text="Doc Class - Type:" border="0" color="33554432" x="32" y="708" height="60" width="453" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="Trim( doc_class_code )+' - '+Trim(  doc_type_desc_e )"border="0" color="33554432" x="553" y="708" height="60" width="928" format="[GENERAL]" html.valueishtml="0"  name=class_type visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217750" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

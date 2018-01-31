@@ -1,0 +1,657 @@
+﻿$PBExportHeader$m_rx_popup.srm
+forward
+global type m_rx_popup from menu
+end type
+type m_options from menu within m_rx_popup
+end type
+type m_print from menu within m_options
+end type
+type m_sort from menu within m_options
+end type
+type m_filterlist from menu within m_options
+end type
+type m_ from menu within m_options
+end type
+type m_moredetails from menu within m_options
+end type
+type m_tooltips from menu within m_options
+end type
+type m_restriction_history from menu within m_options
+end type
+type m_viewformularyhistory from menu within m_options
+end type
+type m_terminatedrugalert from menu within m_options
+end type
+type m_fulleventcomments from menu within m_options
+end type
+type m_fullalertcomments from menu within m_options
+end type
+type m_fullterminationcomments from menu within m_options
+end type
+type m_sendmessage from menu within m_options
+end type
+type m_formularylegend from menu within m_options
+end type
+type m_options from menu within m_rx_popup
+m_print m_print
+m_sort m_sort
+m_filterlist m_filterlist
+m_ m_
+m_moredetails m_moredetails
+m_tooltips m_tooltips
+m_restriction_history m_restriction_history
+m_viewformularyhistory m_viewformularyhistory
+m_terminatedrugalert m_terminatedrugalert
+m_fulleventcomments m_fulleventcomments
+m_fullalertcomments m_fullalertcomments
+m_fullterminationcomments m_fullterminationcomments
+m_sendmessage m_sendmessage
+m_formularylegend m_formularylegend
+end type
+global type m_rx_popup from menu
+m_options m_options
+end type
+end forward
+
+global type m_rx_popup from menu
+m_options m_options
+end type
+global m_rx_popup m_rx_popup
+
+type variables
+w_sheet iw_sheet
+u_dw_online	idw_datawindow	// Contains instance of search list dw from u_claim_search
+end variables
+
+forward prototypes
+public subroutine mf_set_datawindow (datawindow adw_datawindow)
+public subroutine mf_set_window (window adw_window)
+end prototypes
+
+public subroutine mf_set_datawindow (datawindow adw_datawindow);/*	This funciton sets the pointer so the menu can reference the
+	search list datawindow for sorting and printing.
+*/
+	idw_datawindow = adw_datawindow
+
+/*
+	 on start up set off all options but print
+*/
+
+
+
+end subroutine
+
+public subroutine mf_set_window (window adw_window);iw_sheet = adw_window
+end subroutine
+
+on m_rx_popup.create
+m_rx_popup=this
+call super::create
+this.text = "m_test"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_options=create m_options
+this.Item[UpperBound(this.Item)+1]=this.m_options
+end on
+
+on m_rx_popup.destroy
+call super::destroy
+destroy(this.m_options)
+end on
+
+event clicked;idw_datawindow.TriggerEvent('ue_to_formulary')
+end event
+
+type m_options from menu within m_rx_popup
+m_print m_print
+m_sort m_sort
+m_filterlist m_filterlist
+m_ m_
+m_moredetails m_moredetails
+m_tooltips m_tooltips
+m_restriction_history m_restriction_history
+m_viewformularyhistory m_viewformularyhistory
+m_terminatedrugalert m_terminatedrugalert
+m_fulleventcomments m_fulleventcomments
+m_fullalertcomments m_fullalertcomments
+m_fullterminationcomments m_fullterminationcomments
+m_sendmessage m_sendmessage
+m_formularylegend m_formularylegend
+end type
+
+on m_options.create
+call super::create
+this.text = "Options"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_print=create m_print
+this.m_sort=create m_sort
+this.m_filterlist=create m_filterlist
+this.m_=create m_
+this.m_moredetails=create m_moredetails
+this.m_tooltips=create m_tooltips
+this.m_restriction_history=create m_restriction_history
+this.m_viewformularyhistory=create m_viewformularyhistory
+this.m_terminatedrugalert=create m_terminatedrugalert
+this.m_fulleventcomments=create m_fulleventcomments
+this.m_fullalertcomments=create m_fullalertcomments
+this.m_fullterminationcomments=create m_fullterminationcomments
+this.m_sendmessage=create m_sendmessage
+this.m_formularylegend=create m_formularylegend
+this.Item[UpperBound(this.Item)+1]=this.m_print
+this.Item[UpperBound(this.Item)+1]=this.m_sort
+this.Item[UpperBound(this.Item)+1]=this.m_filterlist
+this.Item[UpperBound(this.Item)+1]=this.m_
+this.Item[UpperBound(this.Item)+1]=this.m_moredetails
+this.Item[UpperBound(this.Item)+1]=this.m_tooltips
+this.Item[UpperBound(this.Item)+1]=this.m_restriction_history
+this.Item[UpperBound(this.Item)+1]=this.m_viewformularyhistory
+this.Item[UpperBound(this.Item)+1]=this.m_terminatedrugalert
+this.Item[UpperBound(this.Item)+1]=this.m_fulleventcomments
+this.Item[UpperBound(this.Item)+1]=this.m_fullalertcomments
+this.Item[UpperBound(this.Item)+1]=this.m_fullterminationcomments
+this.Item[UpperBound(this.Item)+1]=this.m_sendmessage
+this.Item[UpperBound(this.Item)+1]=this.m_formularylegend
+end on
+
+on m_options.destroy
+call super::destroy
+destroy(this.m_print)
+destroy(this.m_sort)
+destroy(this.m_filterlist)
+destroy(this.m_)
+destroy(this.m_moredetails)
+destroy(this.m_tooltips)
+destroy(this.m_restriction_history)
+destroy(this.m_viewformularyhistory)
+destroy(this.m_terminatedrugalert)
+destroy(this.m_fulleventcomments)
+destroy(this.m_fullalertcomments)
+destroy(this.m_fullterminationcomments)
+destroy(this.m_sendmessage)
+destroy(this.m_formularylegend)
+end on
+
+type m_print from menu within m_options
+end type
+
+on clicked;/*---------------------------------------------------------------------------------------*/
+/*  Trigger the user object event to print the current search list.                      */
+/*---------------------------------------------------------------------------------------*/
+
+idw_datawindow.TriggerEvent('ue_print')
+//ParentWindow.ue_print()
+end on
+
+on m_print.create
+call super::create
+this.text = "Print..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_sort from menu within m_options
+end type
+
+on clicked;/*	Call powerbuilders sort dialog box to let the user select the sort they
+	want.  Then sort the list and bring the current row into view.
+*/
+	STRING	ls_null
+	LONG		ll_selectedrow
+
+	SetNull(ls_null)
+	IF idw_datawindow.SetSort(ls_null) < 0 THEN
+		Return
+	END IF
+
+	idw_datawindow.Sort()
+	ll_selectedrow = idw_datawindow.GetSelectedRow(0)
+	idw_datawindow.GroupCalc()
+	IF ll_selectedrow > 0 THEN
+		idw_datawindow.ScrollToRow(ll_selectedrow)
+	END IF
+end on
+
+on m_sort.create
+call super::create
+this.visible = false
+this.text = "Sort List..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sort.destroy
+call super::destroy
+end on
+
+type m_filterlist from menu within m_options
+end type
+
+on clicked;idw_datawindow.TriggerEvent('ue_filter')
+end on
+
+on m_filterlist.create
+call super::create
+this.visible = false
+this.text = "Filter List ..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_filterlist.destroy
+call super::destroy
+end on
+
+type m_ from menu within m_options
+end type
+
+on m_.create
+call super::create
+this.text = " "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_.destroy
+call super::destroy
+end on
+
+type m_moredetails from menu within m_options
+end type
+
+on clicked;idw_datawindow.TriggerEvent('ue_more_details')
+end on
+
+on m_moredetails.create
+call super::create
+this.visible = false
+this.text = "More Details..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_moredetails.destroy
+call super::destroy
+end on
+
+type m_tooltips from menu within m_options
+end type
+
+event clicked;u_dw_online		ldw_datawindow
+
+ldw_datawindow = idw_datawindow
+
+this.checked = not this.checked
+ldw_datawindow.uf_settooltip(this.checked)
+end event
+
+on m_tooltips.create
+call super::create
+this.visible = false
+this.text = "Tooltips"
+this.microhelp = "Turn tooltips on and off"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tooltips.destroy
+call super::destroy
+end on
+
+type m_restriction_history from menu within m_options
+end type
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("VIEW_RESTRICTION_HISTORY")
+end event
+
+on m_restriction_history.create
+call super::create
+this.visible = false
+this.text = "View Restriction History"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_restriction_history.destroy
+call super::destroy
+end on
+
+type m_viewformularyhistory from menu within m_options
+end type
+
+on m_viewformularyhistory.create
+call super::create
+this.visible = false
+this.text = "View Formulary History"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_viewformularyhistory.destroy
+call super::destroy
+end on
+
+event clicked;iw_sheet.dynamic wf_call_function("VIEW_FORMULARY_HISTORY")
+end event
+
+type m_terminatedrugalert from menu within m_options
+end type
+
+on m_terminatedrugalert.create
+call super::create
+this.visible = false
+this.text = "Terminate Drug Alert"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_terminatedrugalert.destroy
+call super::destroy
+end on
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("TERMINATE_ALERT")
+end event
+
+type m_fulleventcomments from menu within m_options
+end type
+
+on m_fulleventcomments.create
+call super::create
+this.visible = false
+this.text = "Full Event Comments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fulleventcomments.destroy
+call super::destroy
+end on
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("FULL_EVENT_COMMENTS")
+end event
+
+type m_fullalertcomments from menu within m_options
+end type
+
+on m_fullalertcomments.create
+call super::create
+this.visible = false
+this.text = "Full Alert Comments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fullalertcomments.destroy
+call super::destroy
+end on
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("FULL_ALERT_COMMENTS")
+end event
+
+type m_fullterminationcomments from menu within m_options
+end type
+
+on m_fullterminationcomments.create
+call super::create
+this.visible = false
+this.text = "Full Termination Comments"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_fullterminationcomments.destroy
+call super::destroy
+end on
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("FULL_TERMINATED_COMMENTS")
+end event
+
+type m_sendmessage from menu within m_options
+end type
+
+on m_sendmessage.create
+call super::create
+this.visible = false
+this.text = "Send Message"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sendmessage.destroy
+call super::destroy
+end on
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("SEND_MESSAGE")
+end event
+
+type m_formularylegend from menu within m_options
+end type
+
+event clicked;PARENTWINDOW.dynamic wf_call_function("FORMULARY_LEGEND")
+
+
+end event
+
+on m_formularylegend.create
+call super::create
+this.text = "Formulary Legend"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_formularylegend.destroy
+call super::destroy
+end on
+

@@ -1,0 +1,58 @@
+﻿$PBExportHeader$d_daily_cheque_balancing_log.srd
+$PBExportComments$SELECT - Report showing count / amount of cheques produced and printed and voided and replaced.
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 1 print.prompt=no )
+header(height=289 color="16777215" )
+summary(height=281 color="536870912" )
+footer(height=1 color="16777215" )
+detail(height=81 color="536870912" )
+table(column=(type=char(20) updatewhereclause=yes name=payment_method_desc dbname="Payment_Method.payment_method_desc" )
+ column=(type=char(3) updatewhereclause=yes name=cheque_type_code dbname="CHEQUE_HEADER.cheque_type_code" )
+ column=(type=long updatewhereclause=yes name=min_cheque_no dbname="min_cheque_no" )
+ column=(type=long updatewhereclause=yes name=max_cheque_no dbname="max_cheque_no" )
+ column=(type=long updatewhereclause=yes name=group_count dbname="group_count" )
+ column=(type=decimal(4) updatewhereclause=yes name=group_amount dbname="group_amount" )
+ column=(type=long updatewhereclause=yes name=voided_cheque dbname="voided_cheque" )
+ retrieve="select Payment_Method.payment_method_desc, cheque_type_code, 
+       min(cheque_no) min_cheque_no, max(cheque_no) max_cheque_no, count(*) group_count,
+       sum(cheque_amount) group_amount, voided_cheque = (select count(*)
+                                                           from CHEQUE_HEADER
+                                                          where processed_date = :adt_processed_date
+                                                            and replacement_cheque_no > 0)
+  from CHEQUE_HEADER, Payment_Method
+ where CHEQUE_HEADER.payment_method_code = Payment_Method.payment_method_code
+   and processed_date = :adt_processed_date
+   and replacement_cheque_no = 0
+ group by Payment_Method.payment_method_desc, cheque_type_code
+ order by Payment_Method.payment_method_desc, cheque_type_code
+" arguments=(("adt_processed_date", datetime)) )
+group(level=1 header.height=265 trailer.height=237 by=("payment_method_desc" ) header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=1 trailer.height=1 by=("cheque_type_code" ) header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="19" y="28" height="257" width="3329" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+line(band=header x1="51" y1="244" x2="3301" y2="244" pen.style="0" pen.width="28" pen.color="16777215"  background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2721" y="60" height="73" width="549" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="DAILY CHEQUE BALANCING LOG"border="0" color="0" x="988" y="60" height="77" width="1203"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="444" y="60" height="73" width="302" format="YYYY-MM-DD"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Report Date:"border="0" color="0" x="65" y="56" height="73" width="366"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="0" x="42" y="32" height="61" width="801" format="[general]"  name=payment_method_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="Cheque Type"border="0" color="0" x="42" y="196" height="61" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="StartingCheque No."border="0" color="0" x="609" y="136" height="121" width="311"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="EndingCheque No."border="0" color="0" x="942" y="136" height="121" width="311"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="TotalNumber"border="0" color="0" x="1340" y="136" height="121" width="220"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="TotalAmount"border="0" color="0" x="1825" y="136" height="121" width="220"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header.1 x1="42" y1="260" x2="2195" y2="260" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="42" y="12" height="61" width="535" format="[general]"  name=cheque_type_code dddw.name=dddw_cheque_types_active dddw.displaycolumn=cheque_type_desc dddw.datacolumn=cheque_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="609" y="12" height="61" width="293" format="[general]"  name=min_cheque_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="942" y="12" height="61" width="293" format="[general]"  name=max_cheque_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="1596" y="12" height="61" width="430" format="$#,##0.00;($#,##0.00)"  name=group_amount edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1340" y="12" height="61" width="206" format="[general]"  name=group_count edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(group_amount for group 1)"border="0" color="0" x="1596" y="24" height="65" width="430" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="sum(group_count for group 1)"border="0" color="0" x="1340" y="24" height="65" width="206" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression=" payment_method_desc + ' Totals:'"border="0" color="0" x="339" y="24" height="61" width="915" format="[general]"  name=calcualted_pament_method_totals_text  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(group_amount for all)"border="0" color="0" x="1596" y="72" height="65" width="430" format="$#,##0.00;($#,##0.00)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Total Cheques / Amount Issued:"border="0" color="0" x="339" y="76" height="61" width="837"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="0" expression="sum(group_count for all)"border="0" color="0" x="1340" y="72" height="65" width="206" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total Cheques Voided By Reprinting:"border="0" color="0" x="339" y="208" height="61" width="947"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=summary id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1340" y="208" height="61" width="206" format="[general]"  name=voided_cheque edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Parameters:"border="0" color="0" x="65" y="156" height="61" width="330"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="'processed_date = ' +  adt_processed_date "border="0" color="0" x="430" y="152" height="61" width="1020"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )

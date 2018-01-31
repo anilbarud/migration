@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_compare_options_cap_factor.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=52 color="-1" height.autosize=yes )
+table(column=(type=decimal(4) updatewhereclause=yes name=capitalization_factor dbname="Capitalization_Factor.capitalization_factor" )
+ retrieve=" SELECT Capitalization_Factor.capitalization_factor 
+    FROM Capitalization_Factor  
+   WHERE Capitalization_Factor.sex = :as_cap_factor_sex AND  
+         Capitalization_Factor.age = :ai_cap_factor_age AND       
+         Capitalization_Factor.capitalization_factor_yyyymm =
+             ( select max(Capitalization_Factor.capitalization_factor_yyyymm ) from Capitalization_Factor
+                WHERE ( Capitalization_Factor.sex = :as_cap_factor_sex AND  
+                  Capitalization_Factor.age = :ai_cap_factor_age and 
+             Capitalization_Factor.capitalization_factor_yyyymm <= :ai_cap_factor_yyyymm)) 
+
+
+
+" arguments=(("as_cap_factor_sex", string),("ai_cap_factor_age", number),("ai_cap_factor_yyyymm", number)) )
+column(band=header id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="18" y="56" height="68" width="480" format="[general]" html.valueishtml="0"  name=capitalization_factor visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="0" height="52" width="274" format="0.00" html.valueishtml="0"  name=capitalization_factor_1 visible="1"  slideup=allabove edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="LTD Capitalization Calculation" border="0" color="33554432" x="5" y="1828" height="92" width="1271" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="0" expression="'Page ' + page() + ' of ' + pagecount()"border="0" color="33554432" x="5" y="4848" height="64" width="581" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Item" border="0" color="33554432" x="187" y="2096" height="80" width="146" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Gross Pre-Accident Earnings:" border="0" color="33554432" x="197" y="2224" height="56" width="741" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Gross Pre-Accident Earnings:" border="0" color="33554432" x="197" y="2224" height="56" width="741" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Net Pre-Accident Earnings:" border="0" color="33554432" x="197" y="2284" height="56" width="667" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Less - Estimated Capable Earnings (Net):" border="0" color="33554432" x="187" y="2352" height="56" width="1019" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Monthly LTD:" border="0" color="33554432" x="1422" y="2464" height="56" width="325" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Age of the Client:" border="0" color="33554432" x="165" y="2040" height="56" width="434" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Gender - M or F:" border="0" color="33554432" x="160" y="2120" height="56" width="443" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Age of the Client:" border="0" color="33554432" x="165" y="2040" height="56" width="434" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Gender - M or F:" border="0" color="33554432" x="160" y="2120" height="56" width="443" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

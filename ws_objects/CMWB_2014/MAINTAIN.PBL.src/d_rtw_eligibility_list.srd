@@ -1,0 +1,41 @@
+﻿$PBExportHeader$d_rtw_eligibility_list.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=134217750 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=168 color="8421504" )
+summary(height=0 color="536870912" )
+footer(height=12 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=tier_no dbname="tier_no" )
+ column=(type=long updatewhereclause=yes name=rtw_incentive_no dbname="rtw_incentive_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=avg_monthly_employment_income_amt dbname="avg_monthly_employment_income_amt" )
+ column=(type=char(1) updatewhereclause=yes name=payment_eligibility_flag dbname="payment_eligibility_flag" )
+ retrieve="  SELECT RTW_INCENTIVE_PAYMENT_ELIGIBILITY.tier_no,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.rtw_incentive_no,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.avg_monthly_employment_income_amt,   
+              RTW_INCENTIVE_PAYMENT_ELIGIBILITY.payment_eligibility_flag  
+    FROM RTW_INCENTIVE_PAYMENT_ELIGIBILITY   
+  WHERE RTW_INCENTIVE_PAYMENT_ELIGIBILITY.claim_no = :ar_claim_no
+      AND RTW_INCENTIVE_PAYMENT_ELIGIBILITY.rtw_incentive_no = :ar_qualification_no
+      AND RTW_INCENTIVE_PAYMENT_ELIGIBILITY.rtw_incentive_type_code = 'JS'
+" arguments=(("ar_claim_no", number),("ar_qualification_no", number)) )
+text(band=header alignment="2" text="Monthly Average" border="0" color="33554432" x="814" y="12" height="64" width="613" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Eligible For" border="0" color="33554432" x="1509" y="12" height="64" width="379" html.valueishtml="0"  name=payment_eligibility_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Qual No" border="0" color="33554432" x="14" y="12" height="64" width="256" html.valueishtml="0"  name=rtw_incentive_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Tier No" border="0" color="33554432" x="443" y="12" height="64" width="242" html.valueishtml="0"  name=tier_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Employment Income" border="0" color="33554432" x="814" y="96" height="64" width="613" html.valueishtml="0"  name=avg_monthly_employment_income_amt_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment" border="0" color="33554432" x="1509" y="92" height="64" width="379" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="33554432" x="14" y="8" height="64" width="256" format="[general]" html.valueishtml="0"  name=rtw_incentive_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="33554432" x="443" y="8" height="64" width="242" format="[general]" html.valueishtml="0"  name=tier_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="814" y="8" height="64" width="613" format="$###,##0.00" html.valueishtml="0"  name=avg_monthly_employment_income_amt visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="33554432" x="1509" y="8" height="64" width="379" format="[general]" html.valueishtml="0"  name=payment_eligibility_flag visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

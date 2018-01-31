@@ -1,0 +1,46 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "abcc_cov.pbl" "";
+@end;
+@begin Objects 
+ "d_alert_event.srd" "abcc_cov.pbl";
+ "d_basic_claim_formulary.srd" "abcc_cov.pbl";
+ "d_claim_name_formulary.srd" "abcc_cov.pbl";
+ "d_drug_alert_comments.srd" "abcc_cov.pbl";
+ "d_drug_alerts.srd" "abcc_cov.pbl";
+ "d_eligibility_composite.srd" "abcc_cov.pbl";
+ "d_eligibility_history.srd" "abcc_cov.pbl";
+ "d_eligibility_main.srd" "abcc_cov.pbl";
+ "d_event_composite.srd" "abcc_cov.pbl";
+ "d_formulary_code_legend.srd" "abcc_cov.pbl";
+ "d_formulary_composite.srd" "abcc_cov.pbl";
+ "d_formulary_event.srd" "abcc_cov.pbl";
+ "d_formulary_history.srd" "abcc_cov.pbl";
+ "d_formulary_main.srd" "abcc_cov.pbl";
+ "d_formulary_pres_individual.srd" "abcc_cov.pbl";
+ "d_formulary_pres_individual_composite.srd" "abcc_cov.pbl";
+ "d_formulary_prescription.srd" "abcc_cov.pbl";
+ "d_full_event_comments.srd" "abcc_cov.pbl";
+ "d_generate_report_formulary.srd" "abcc_cov.pbl";
+ "d_restriction_history.srd" "abcc_cov.pbl";
+ "d_rx_composite.srd" "abcc_cov.pbl";
+ "d_rx_sa_restriction.srd" "abcc_cov.pbl";
+ "d_rx_sa_restriction_hist.srd" "abcc_cov.pbl";
+ "d_rx_special_auth.srd" "abcc_cov.pbl";
+ "d_rx_special_auth_history.srd" "abcc_cov.pbl";
+ "d_sa_composite.srd" "abcc_cov.pbl";
+ "d_terminated_comments.srd" "abcc_cov.pbl";
+ "dddw_drug_alert.srd" "abcc_cov.pbl";
+ "dddw_formulary_code.srd" "abcc_cov.pbl";
+ "dddw_formulary_type.srd" "abcc_cov.pbl";
+ "f_is_exported.srf" "abcc_cov.pbl";
+ "m_rx_popup.srm" "abcc_cov.pbl";
+ "s_generate_formulary_report.srs" "abcc_cov.pbl";
+ "n_maintain_formulary.sru" "abcc_cov.pbl";
+ "w_formulary_code_legend.srw" "abcc_cov.pbl";
+ "w_formulary_history.srw" "abcc_cov.pbl";
+ "w_formulary_report_viewer.srw" "abcc_cov.pbl";
+ "w_full_event_comments.srw" "abcc_cov.pbl";
+ "w_maintain_formulary.srw" "abcc_cov.pbl";
+ "w_restriction_history.srw" "abcc_cov.pbl";
+@end;

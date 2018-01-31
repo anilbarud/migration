@@ -1,0 +1,27 @@
+﻿$PBExportHeader$d_doc_sender.srd
+$PBExportComments$Lists all sender ids of imaged documents within a Claim.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=96 color="28817335" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="-1" )
+table(column=(type=long updatewhereclause=yes name=sender dbname="service_provider_no" )
+ retrieve="SELECT DISTINCT  DOCUMENT_INDEX.service_provider_no     
+FROM DOCUMENT_INDEX      
+WHERE ( DOCUMENT_INDEX.claim_no = :al_claim_no ) 
+and      ( DOCUMENT_INDEX.service_provider_no > 0 )
+and (DOCUMENT_INDEX.type_code IN ('MPC' , 'MPD', 'SDC', 'SDD', 'SP')  OR ( DOCUMENT_INDEX.type_code like 'A%'))" arguments=(("al_claim_no", number)) )
+text(band=header alignment="0" text="List of service provider numbers on documents in a certain claim" border="0" color="0" x="41" y="16" height="68" width="1682" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="27" y="4" height="64" width="411" format="[general]" html.valueishtml="0"  name=sender visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

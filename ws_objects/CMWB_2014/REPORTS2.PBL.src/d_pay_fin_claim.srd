@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_pay_fin_claim.srd
+$PBExportComments$Report on Active Claims First Benefit Cheque
+release 5;
+datawindow(units=2 timer_interval=0 color=1090519039 processing=0 print.documentname="" print.orientation = 2 print.margin.left = 250 print.margin.right = 250 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1208 color="-1" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=197 color="-1" )
+table(column=(type=long updatewhereclause=yes name=claim_claim_no dbname="CLAIM.claim_no" )
+ column=(type=char(20) updatewhereclause=yes name=individual_last_name dbname="INDIVIDUAL.last_name" )
+ column=(type=char(20) updatewhereclause=yes name=individual_given_names dbname="INDIVIDUAL.given_names" )
+ retrieve="  SELECT DISTINCT
+         cla1.claim_no,   
+         ind1.last_name,   
+         ind1.given_names  
+    FROM CLAIM cla1,   
+         PAYMENT pay1,   
+         INDIVIDUAL ind1  
+   WHERE ( cla1.claim_no = pay1.claim_no ) and  
+         ( cla1.individual_no = ind1.individual_no ) and  
+         ( ( cla1.claim_status_code = 'A' ) AND  
+         ( pay1.payment_type_code IN (' 1','.1','-1') ) AND  
+         ( pay1.processed_date < DATEADD(day, 1, :adt_for_date) ) AND  
+         ( pay1.processed_date > :adt_for_date ) AND  
+         ( pay1.processed_date = (SELECT MIN(pay2.processed_date)
+                                  FROM   CLAIM cla2, PAYMENT pay2 
+                                  WHERE  cla2.claim_no = cla1.claim_no AND
+                                         cla2.claim_no = pay2.claim_no AND
+                                         pay2.payment_type_code IN (' 1','.1','-1') AND
+                                         pay2.processed_date IS NOT NULL) ) )   
+ORDER BY cla1.claim_no ASC   
+" arguments=(("adt_for_date", date)) )
+group(level=1 header.height=0 trailer.height=0 by=("" ) header.color="-1" trailer.color="-1" )
+text(band=header alignment="2" text="Active Claims First Benefit Cheque"border="0" color="33554432" x="1260" y="20" height="260" width="3687"  font.face="Arial" font.height="-16" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+rectangle(band=header x="1281" y="270" height="41" width="3656" brush.hatch="6" brush.color="0" pen.style="5" pen.width="10" pen.color="553648127"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="for:"border="0" color="0" x="2343" y="385" height="166" width="218"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression=" adt_for_date "border="0" color="33554432" x="2593" y="385" height="166" width="1083" format="YYYY-MM-DD"  name=the_date2  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Claim No"border="0" color="33554432" x="1177" y="968" height="166" width="604"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Name"border="0" color="33554432" x="2062" y="968" height="166" width="385"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="1177" y1="1114" x2="1770" y2="1114" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+line(band=header x1="2062" y1="1114" x2="2447" y2="1114" pen.style="0" pen.width="10" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="0" x="1177" y="21" height="166" width="604" format="[general]"  name=claim_claim_no edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="2062" y="21" height="166" width="1239" format="[general]"  name=individual_last_name edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="3343" y="21" height="166" width="1239" format="[general]"  name=individual_given_names edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="/*  vadt_for_date  */"border="0" color="33554432" x="1979" y="9833" height="197" width="572" format="[shortdate] [time]"  name=the_date  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+compute(band=footer alignment="0" expression="'Page ' + page() + ' of ' + pagecount()"border="0" color="33554432" x="10" y="30521" height="166" width="1322" format="[general]"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

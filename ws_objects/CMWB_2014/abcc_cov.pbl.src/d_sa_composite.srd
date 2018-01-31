@@ -1,0 +1,93 @@
+﻿$PBExportHeader$d_sa_composite.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=228 color="16777215" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=148 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=rx_special_auth_no dbname="RX_SPECIAL_AUTHORIZATION.rx_special_auth_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="RX_SPECIAL_AUTHORIZATION.claim_no" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="RX_SPECIAL_AUTHORIZATION.birth_date" )
+ column=(type=char(35) updatewhereclause=yes name=claimant_name dbname="RX_SPECIAL_AUTHORIZATION.claimant_name" )
+ column=(type=datetime updatewhereclause=yes name=special_authorization_start_date dbname="RX_SPECIAL_AUTHORIZATION.special_authorization_start_date" )
+ column=(type=datetime updatewhereclause=yes name=special_authorization_end_date dbname="RX_SPECIAL_AUTHORIZATION.special_authorization_end_date" )
+ column=(type=long updatewhereclause=yes name=din_gp_pin dbname="RX_SPECIAL_AUTHORIZATION.din_gp_pin" )
+ column=(type=char(50) updatewhereclause=yes name=din_gp_pin_desc dbname="RX_SPECIAL_AUTHORIZATION.din_gp_pin_desc" )
+ column=(type=char(10) updatewhereclause=yes name=benefit_set_code dbname="RX_SPECIAL_AUTHORIZATION.benefit_set_code" )
+ column=(type=char(50) updatewhereclause=yes name=benefit_set_desc dbname="RX_SPECIAL_AUTHORIZATION.benefit_set_desc" )
+ column=(type=decimal(0) updatewhereclause=yes name=max_quantity_per_period dbname="RX_SPECIAL_AUTHORIZATION.max_quantity_per_period" )
+ column=(type=long updatewhereclause=yes name=period_number_months dbname="RX_SPECIAL_AUTHORIZATION.period_number_months" )
+ column=(type=long updatewhereclause=yes name=period_number_weeks dbname="RX_SPECIAL_AUTHORIZATION.period_number_weeks" )
+ column=(type=long updatewhereclause=yes name=period_number_days dbname="RX_SPECIAL_AUTHORIZATION.period_number_days" )
+ column=(type=long updatewhereclause=yes name=grace_days dbname="RX_SPECIAL_AUTHORIZATION.grace_days" )
+ column=(type=char(40) updatewhereclause=yes name=authorized_by_name dbname="RX_SPECIAL_AUTHORIZATION.authorized_by_name" )
+ column=(type=char(255) updatewhereclause=yes name=comments dbname="RX_SPECIAL_AUTHORIZATION.comments" )
+ column=(type=char(1) updatewhereclause=yes name=restriction_flag dbname="RX_SPECIAL_AUTHORIZATION.restriction_flag" )
+ column=(type=char(1) updatewhereclause=yes name=inclusion_exclusion_type_code dbname="RX_SPECIAL_AUTHORIZATION.inclusion_exclusion_type_code" )
+ column=(type=char(8) updatewhereclause=yes name=abcc_create_user_id dbname="RX_SPECIAL_AUTHORIZATION.abcc_create_user_id" )
+ column=(type=datetime updatewhereclause=yes name=abcc_create_date dbname="RX_SPECIAL_AUTHORIZATION.abcc_create_date" )
+ column=(type=char(8) updatewhereclause=yes name=abcc_modified_user_id dbname="RX_SPECIAL_AUTHORIZATION.abcc_modified_user_id" )
+ column=(type=datetime updatewhereclause=yes name=abcc_modified_date dbname="RX_SPECIAL_AUTHORIZATION.abcc_modified_date" )
+ retrieve="  SELECT dbo.RX_SPECIAL_AUTHORIZATION.rx_special_auth_no,   
+         dbo.RX_SPECIAL_AUTHORIZATION.claim_no,   
+         dbo.RX_SPECIAL_AUTHORIZATION.birth_date,   
+         dbo.RX_SPECIAL_AUTHORIZATION.claimant_name,   
+         dbo.RX_SPECIAL_AUTHORIZATION.special_authorization_start_date,   
+         dbo.RX_SPECIAL_AUTHORIZATION.special_authorization_end_date,   
+         dbo.RX_SPECIAL_AUTHORIZATION.din_gp_pin,   
+         dbo.RX_SPECIAL_AUTHORIZATION.din_gp_pin_desc,   
+         dbo.RX_SPECIAL_AUTHORIZATION.benefit_set_code,   
+         dbo.RX_SPECIAL_AUTHORIZATION.benefit_set_desc,   
+         dbo.RX_SPECIAL_AUTHORIZATION.max_quantity_per_period,   
+         dbo.RX_SPECIAL_AUTHORIZATION.period_number_months,   
+         dbo.RX_SPECIAL_AUTHORIZATION.period_number_weeks,   
+         dbo.RX_SPECIAL_AUTHORIZATION.period_number_days,   
+         dbo.RX_SPECIAL_AUTHORIZATION.grace_days,   
+         dbo.RX_SPECIAL_AUTHORIZATION.authorized_by_name,   
+         dbo.RX_SPECIAL_AUTHORIZATION.comments,   
+         dbo.RX_SPECIAL_AUTHORIZATION.restriction_flag,   
+         dbo.RX_SPECIAL_AUTHORIZATION.inclusion_exclusion_type_code,   
+         dbo.RX_SPECIAL_AUTHORIZATION.abcc_create_user_id,   
+         dbo.RX_SPECIAL_AUTHORIZATION.abcc_create_date,   
+         dbo.RX_SPECIAL_AUTHORIZATION.abcc_modified_user_id,   
+         dbo.RX_SPECIAL_AUTHORIZATION.abcc_modified_date  
+    FROM dbo.RX_SPECIAL_AUTHORIZATION   
+Order By dbo.RX_SPECIAL_AUTHORIZATION.rx_special_auth_no DESC
+  
+" arguments=(("ar_claim_no", number)) )
+text(band=header alignment="0" text="RX SPECIAL AUTHORIZATION" border="0" color="33554432" x="18" y="16" height="80" width="1243" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Rx Special Auth No" border="0" color="33554432" x="14" y="148" height="60" width="677" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Claim No" border="0" color="33554432" x="718" y="148" height="64" width="242" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Din/ Benefit Set" border="0" color="33554432" x="992" y="148" height="60" width="434" html.valueishtml="0"  name=din_gp_pin_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="224" x2="4384" y2="224"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="1" text="End Date" border="0" color="33554432" x="2638" y="148" height="60" width="261" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Max Qty" border="0" color="33554432" x="2949" y="148" height="60" width="219" html.valueishtml="0"  name=drug_quantity_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Months" border="0" color="33554432" x="3250" y="148" height="60" width="210" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Weeks" border="0" color="33554432" x="3584" y="148" height="60" width="210" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Day" border="0" color="33554432" x="3808" y="148" height="60" width="142" html.valueishtml="0"  name=days_supply_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Authorized By" border="0" color="33554432" x="3991" y="152" height="60" width="398" html.valueishtml="0"  name=drug_cost_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Start Date" border="0" color="33554432" x="2327" y="148" height="60" width="261" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Desc" border="0" color="33554432" x="1454" y="148" height="60" width="146" html.valueishtml="0"  name=din_gp_pin_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=120 border="0" color="33554432" x="0" y="80" height="60" width="4389" format="[general]" html.valueishtml="0"  name=comments visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=40 border="0" color="33554432" x="9" y="4" height="60" width="681" format="[general]" html.valueishtml="0"  name=rx_special_auth_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=10 border="0" color="33554432" x="709" y="4" height="60" width="265" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="if(  din_gp_pin = 0,  benefit_set_code,String(din_gp_pin) )"border="0" color="33554432" x="992" y="4" height="60" width="434" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=110 border="0" color="33554432" x="3991" y="4" height="60" width="402" format="[general]" html.valueishtml="0"  name=authorized_by_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="2" tabsequence=90 border="0" color="33554432" x="3799" y="4" height="60" width="169" format="[general]" html.valueishtml="0"  name=period_number_weeks visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="2" tabsequence=80 border="0" color="33554432" x="3584" y="4" height="60" width="192" format="[general]" html.valueishtml="0"  name=period_number_months visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="2" tabsequence=70 border="0" color="33554432" x="3154" y="4" height="60" width="416" format="[general]" html.valueishtml="0"  name=max_quantity_per_period visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="2" tabsequence=100 border="0" color="33554432" x="2958" y="4" height="60" width="174" format="[general]" html.valueishtml="0"  name=period_number_days visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="33554432" x="2638" y="4" height="60" width="302" format="YYYY-MM-DD" html.valueishtml="0"  name=special_authorization_end_date visible="1" edit.limit=0 edit.case=any edit.format="YYYY-MM-DD" edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="0" color="33554432" x="2313" y="4" height="60" width="302" format="YYYY-MM-DD" html.valueishtml="0"  name=special_authorization_start_date visible="1" edit.limit=0 edit.case=any edit.format="YYYY-MM-DD" edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if(  din_gp_pin = 0, benefit_set_desc , din_gp_pin_desc  )"border="0" color="33554432" x="1449" y="4" height="60" width="837" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

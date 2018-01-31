@@ -1,0 +1,56 @@
+﻿$PBExportHeader$d_ephysio_users.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912~tif(mod(getrow(),2) = 0,16510444,16777215)" )
+table(column=(type=char(165) updatewhereclause=yes name=wif_principal_name dbname="wif_principal_name" )
+ column=(type=char(64) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(64) updatewhereclause=yes name=first_name dbname="first_name" )
+ column=(type=long updatewhereclause=yes name=general_email_contact_flag_enum dbname="general_email_contact_flag_enum" )
+ retrieve="select d.wif_principal_name,  d.last_name,  d.first_name, 1  as general_email_contact_flag_enum
+from  WIF_GROUP                     a
+join WIF_GROUP_MEMBERS    b on a.wif_group_id = b.wif_group_id
+join PROVIDER          c on a.wif_entity_no = c.provider_no and c.provider_type_code = 'M'
+join wif_custom_principal d on d.wif_principal_id = b.wif_principal_id
+where c.provider_no = :al_entity_no and c.provider_type_code = 'M' and c.active_flag = 'Y'
+and   d.wif_principal_id in  ( select e.wif_principal_id 
+								from	wif_group d ,  wif_group_members  e 
+								where	d.wif_entity_no			= c.provider_no 
+								and		d.wif_entity_type_code	= 'P'
+								and		d.wif_group_type_code	= 4
+								and		e.wif_group_id			= d.wif_group_id )
+
+union
+select d.wif_principal_name,  d.last_name,  d.first_name, 0  as general_email_contact_flag_enum
+from  WIF_GROUP                     a
+join WIF_GROUP_MEMBERS    b on a.wif_group_id = b.wif_group_id
+join PROVIDER          c on a.wif_entity_no = c.provider_no and c.provider_type_code = 'M'
+join wif_custom_principal d on d.wif_principal_id = b.wif_principal_id
+where c.provider_no = :al_entity_no and c.provider_type_code = 'M' and c.active_flag = 'Y'
+and   d.wif_principal_id not in  ( select e.wif_principal_id 
+									from  wif_group d ,  wif_group_members  e
+									where	d.wif_entity_no			= c.provider_no 
+									and		d.wif_entity_type_code	= 'P' 
+									and		d.wif_group_type_code	= 4
+									and		e.wif_group_id			= d.wif_group_id )
+
+
+
+" arguments=(("al_entity_no", number))  sort="last_name A " )
+compute(band=detail alignment="0" expression="last_name + ',  ' + first_name"border="0" color="33554432" x="18" y="12" height="64" width="777" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( general_email_contact_flag_enum = 1,'General Contact','')"border="0" color="33554432" x="818" y="12" height="64" width="475" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="1317" y="12" height="64" width="1152" format="[general]" html.valueishtml="0"  name=wif_principal_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="compute_1	compute_2	wif_principal_name")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

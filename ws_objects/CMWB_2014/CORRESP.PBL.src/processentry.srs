@@ -1,0 +1,6 @@
+﻿$PBExportHeader$processentry.srs
+$PBExportComments$Used in enumerating process modules for closing Word processes in w_correspondence's wf_nt4_close_winword. Applies to Windows NT4 only.
+global type processentry from structure
+	unsignedlong		lpidprocess[500]
+end type
+

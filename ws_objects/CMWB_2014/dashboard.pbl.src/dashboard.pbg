@@ -1,0 +1,41 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "dashboard.pbl" "";
+@end;
+@begin Objects 
+ "d_alerts.srd" "dashboard.pbl";
+ "d_alerts_report.srd" "dashboard.pbl";
+ "d_annuity_elig.srd" "dashboard.pbl";
+ "d_appeals.srd" "dashboard.pbl";
+ "d_cacl.srd" "dashboard.pbl";
+ "d_claim_event_details.srd" "dashboard.pbl";
+ "d_claim_summary.srd" "dashboard.pbl";
+ "d_claim_summary_reports.srd" "dashboard.pbl";
+ "d_court_order.srd" "dashboard.pbl";
+ "d_cppd_status.srd" "dashboard.pbl";
+ "d_dashboard_report.srd" "dashboard.pbl";
+ "d_elig.srd" "dashboard.pbl";
+ "d_individual_dashboard_profile.srd" "dashboard.pbl";
+ "d_individual_dashboard_profile_header.srd" "dashboard.pbl";
+ "d_individual_dashboard_profile_name.srd" "dashboard.pbl";
+ "d_individual_dashboard_profile_name_small.srd" "dashboard.pbl";
+ "d_iro.srd" "dashboard.pbl";
+ "d_keys.srd" "dashboard.pbl";
+ "d_keys_report.srd" "dashboard.pbl";
+ "d_modified_duties.srd" "dashboard.pbl";
+ "d_payment_details_calendar.srd" "dashboard.pbl";
+ "d_ppd.srd" "dashboard.pbl";
+ "d_ppi.srd" "dashboard.pbl";
+ "d_recent_activity.srd" "dashboard.pbl";
+ "d_recent_activity_reports.srd" "dashboard.pbl";
+ "d_recent_events.srd" "dashboard.pbl";
+ "d_recent_missed.srd" "dashboard.pbl";
+ "d_recent_payments.srd" "dashboard.pbl";
+ "d_recent_reports.srd" "dashboard.pbl";
+ "d_recent_rx.srd" "dashboard.pbl";
+ "d_recent_tasks.srd" "dashboard.pbl";
+ "d_surgeries.srd" "dashboard.pbl";
+ "d_work_restriction.srd" "dashboard.pbl";
+ "n_dashboard.sru" "dashboard.pbl";
+ "w_dashboard.srw" "dashboard.pbl";
+@end;

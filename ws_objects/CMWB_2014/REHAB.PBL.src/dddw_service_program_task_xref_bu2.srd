@@ -1,0 +1,41 @@
+﻿$PBExportHeader$dddw_service_program_task_xref_bu2.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="task_sub_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="task_specific_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_type_desc dbname="task_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=task_sub_type_desc dbname="task_sub_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=task_specific_desc dbname="task_specific_desc" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_service_code dbname="rehab_service_code" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ column=(type=char(1) updatewhereclause=yes name=task_entry_flag dbname="task_entry_flag" )
+ retrieve="select a.task_type_code, a.task_sub_type_code, a.task_specific_code, 
+       b.task_type_desc, c.task_sub_type_desc, d.task_specific_desc,
+       a.rehab_service_code, a.rehab_program_code, a.active_flag, d.task_entry_flag
+from Rehab_Service_Program_Task_Xref a
+join Task_Type     b on a.task_type_code		= b.task_type_code
+join Task_Sub_Type c on a.task_sub_type_code	= c.task_sub_type_code and a.task_type_code	= c.task_type_code
+join Task_Specific d on a.task_specific_code	= d.task_specific_code and a.task_type_code	= d.task_type_code and a.task_sub_type_code	= d.task_sub_type_code
+where d.task_entry_flag = 'Y'
+group by a.task_type_code, a.task_sub_type_code, a.task_specific_code, 
+       b.task_type_desc, c.task_sub_type_desc, d.task_specific_desc,
+       a.rehab_service_code, a.rehab_program_code, a.active_flag, d.task_entry_flag
+order by  b.task_type_desc,  c.task_sub_type_desc, d.task_specific_desc"  sort="task_type_desc A task_sub_type_desc A task_specific_desc A " )
+compute(band=detail alignment="0" expression=" if(trim(task_sub_type_desc) = '' ,'', trim(task_sub_type_desc)) + if(trim( task_specific_desc) = '' ,'', ~" - ~" +  trim(task_specific_desc )) + ~" - ~" +  trim(task_type_desc) "border="0" color="33554432" x="14" y="8" height="64" width="2487" format="[GENERAL]" html.valueishtml="0"  name=rehab_task_sub_specific_computed visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

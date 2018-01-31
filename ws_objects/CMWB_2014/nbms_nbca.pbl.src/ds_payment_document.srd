@@ -1,0 +1,22 @@
+﻿$PBExportHeader$ds_payment_document.srd
+$PBExportComments$datastore used to update the PAYMENT_DOCUMENT table  used in the window w_maintain_reporting_fees
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=84 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=100 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=doc_id dbname="PAYMENT_DOCUMENT.doc_id" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=payment_no dbname="PAYMENT_DOCUMENT.payment_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=paid_status_code dbname="PAYMENT_DOCUMENT.paid_status_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=paid_status_explanation_code dbname="PAYMENT_DOCUMENT.paid_status_explanation_code" )
+ retrieve="PBSELECT(TABLE(NAME=~"PAYMENT_DOCUMENT~") COLUMN(NAME=~"PAYMENT_DOCUMENT.doc_id~")COLUMN(NAME=~"PAYMENT_DOCUMENT.payment_no~")COLUMN(NAME=~"PAYMENT_DOCUMENT.paid_status_code~")COLUMN(NAME=~"PAYMENT_DOCUMENT.paid_status_explanation_code~"))" update="PAYMENT_DOCUMENT" updatewhere=2 updatekeyinplace=yes )
+text(band=header alignment="1" text="Doc Id:"border="0" color="0" x="23" y="12" height="64" width="192"  name=doc_id_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Payment No:"border="0" color="0" x="251" y="12" height="64" width="379"  name=payment_no_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Paid Status Code:"border="0" color="0" x="672" y="12" height="64" width="521"  name=paid_status_code_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Paid Status Explanation Code:"border="0" color="0" x="1234" y="12" height="64" width="882"  name=paid_status_explanation_code_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="9" y="8" height="76" width="329" format="[general]"  name=doc_id edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="0" x="370" y="4" height="76" width="329" format="[general]"  name=payment_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="0" x="722" y="4" height="76" width="55" format="[general]"  name=paid_status_code edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="0" color="0" x="1239" y="4" height="76" width="82" format="[general]"  name=paid_status_explanation_code edit.limit=2 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

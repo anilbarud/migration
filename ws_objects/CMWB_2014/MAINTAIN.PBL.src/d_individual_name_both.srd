@@ -1,0 +1,13 @@
+﻿$PBExportHeader$d_individual_name_both.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=101 color="536870912" )
+table(column=(type=number update=yes key=yes name=individual_no dbname="INDIVIDUAL_NAME.individual_no" )
+ column=(type=timestamp name=timestamp dbname="INDIVIDUAL_NAME.timestamp" )
+ column=(type=char(1) update=yes key=yes name=name_type_code dbname="INDIVIDUAL_NAME.name_type_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"INDIVIDUAL_NAME~" ) COLUMN(NAME=~"INDIVIDUAL_NAME.individual_no~") COLUMN(NAME=~"INDIVIDUAL_NAME.timestamp~") COLUMN(NAME=~"INDIVIDUAL_NAME.name_type_code~")WHERE( EXP1 =~"( INDIVIDUAL_NAME.individual_no~" OP =~"=~" EXP2 =~":individual_no )~" ) ) ARG(NAME = ~"individual_no~" TYPE = number) " update="INDIVIDUAL_NAME" updatewhere=0 updatekeyinplace=yes arguments=(("individual_no", number)) )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="37" y="16" height="73" width="275" format="[general]"  name=individual_no edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="0" x="311" y="0" height="57" width="23"  name=name_type_code  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

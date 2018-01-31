@@ -1,0 +1,14 @@
+﻿$PBExportHeader$dddw_paid_status_explanation.srd
+$PBExportComments$Valid paid status explanations used for explaining why a document is not/will not be paid
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=77 color="536870912" )
+table(column=(type=char(1) update=yes key=yes name=paid_status_code dbname="Paid_Status_Explanation.paid_status_code" )
+ column=(type=char(2) update=yes key=yes name=paid_status_explanation_code dbname="Paid_Status_Explanation.paid_status_explanation_code" )
+ column=(type=char(30) update=yes name=paid_status_explanation_desc dbname="Paid_Status_Explanation.paid_status_explanation_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Paid_Status_Explanation~" ) COLUMN(NAME=~"Paid_Status_Explanation.paid_status_code~") COLUMN(NAME=~"Paid_Status_Explanation.paid_status_explanation_code~") COLUMN(NAME=~"Paid_Status_Explanation.paid_status_explanation_desc~")) " update="Paid_Status_Explanation" updatewhere=1 updatekeyinplace=no  sort="paid_status_explanation_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="10" y="4" height="65" width="83" format="[general]"  name=paid_status_explanation_code edit.limit=2 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="0" x="106" y="4" height="69" width="1075" format="[general]"  name=paid_status_explanation_desc edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

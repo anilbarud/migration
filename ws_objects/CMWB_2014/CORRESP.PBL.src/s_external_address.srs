@@ -1,0 +1,10 @@
+﻿$PBExportHeader$s_external_address.srs
+$PBExportComments$Stores the address location of external recipients
+global type s_external_address from structure
+    string address_location_code
+    long address_id
+    string address_type_code
+    string address_subtype_code
+    string address_card_file
+end type
+

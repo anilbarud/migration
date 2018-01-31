@@ -1,0 +1,20 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "remote.pbl" "";
+@end;
+@begin Objects 
+ "d_claim_managers.srd" "remote.pbl";
+ "d_claim_status_change_error_report.srd" "remote.pbl";
+ "d_claim_status_change_error_report_det.srd" "remote.pbl";
+ "d_mail_package_error_details.srd" "remote.pbl";
+ "d_mail_package_error_report.srd" "remote.pbl";
+ "d_mail_package_statistics_report.srd" "remote.pbl";
+ "d_remote_print_parameter.srd" "remote.pbl";
+ "d_user_profile.srd" "remote.pbl";
+ "dddw_package_type.srd" "remote.pbl";
+ "dddw_queue_name.srd" "remote.pbl";
+ "w_claim_status_change_error_report.srw" "remote.pbl";
+ "w_mail_package_error_report.srw" "remote.pbl";
+ "w_mail_package_statistics_report.srw" "remote.pbl";
+ "w_remote_print_parameters.srw" "remote.pbl";
+@end;

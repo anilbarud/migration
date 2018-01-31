@@ -1,0 +1,19 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "common_annuity.pbl" "";
+@end;
+@begin Objects 
+ "d_claims.srd" "common_annuity.pbl";
+ "d_individual_document_list.srd" "common_annuity.pbl";
+ "dddw_annuity_eligibility_status.srd" "common_annuity.pbl";
+ "dddw_benefit_option.srd" "common_annuity.pbl";
+ "ds_reexamine_benefit_entitlement_iw.srd" "common_annuity.pbl";
+ "ds_reexamine_benefit_entitlement_ss.srd" "common_annuity.pbl";
+ "m_annuity.srm" "common_annuity.pbl";
+ "m_doclist_popup.srm" "common_annuity.pbl";
+ "s_window_array.srs" "common_annuity.pbl";
+ "n_common_annuity.sru" "common_annuity.pbl";
+ "w_annuity_comment.srw" "common_annuity.pbl";
+ "w_individual_doclist.srw" "common_annuity.pbl";
+ "w_select_claims.srw" "common_annuity.pbl";
+@end;

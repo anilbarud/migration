@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_task_type_rpt.srd
+$PBExportComments$used on rehab viewer authorizations tab report to provide desc for task type codes
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(2) update=yes updatewhereclause=yes key=yes name=task_type_code dbname="Task_Type.task_type_code" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=task_type_desc dbname="Task_Type.task_type_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Task_Type~" ) COLUMN(NAME=~"Task_Type.task_type_code~") COLUMN(NAME=~"Task_Type.task_type_desc~")) " update="Task_Type" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="8" height="61" width="1121" format=""  name=task_type_desc edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

@@ -1,0 +1,41 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "annuity.pbl" "";
+@end;
+@begin Objects 
+ "d_admin_region_select.srd" "annuity.pbl";
+ "d_annuity_applied_interest_summary.srd" "annuity.pbl";
+ "d_annuity_eligibility_turning_65_2line.srd" "annuity.pbl";
+ "d_annuity_eligibility_turning_65_summary.srd" "annuity.pbl";
+ "d_annuity_interest_rate.srd" "annuity.pbl";
+ "d_annuity_interest_rate_details.srd" "annuity.pbl";
+ "d_annuity_interest_results.srd" "annuity.pbl";
+ "d_annuity_sub_ledger_all_accounts.srd" "annuity.pbl";
+ "d_annuity_sub_ledger_individual_details.srd" "annuity.pbl";
+ "d_annuity_sub_ledger_individual_summary.srd" "annuity.pbl";
+ "d_annuity_sub_ledger_summary.srd" "annuity.pbl";
+ "d_annuity_work_completed_detail_and_summary.srd" "annuity.pbl";
+ "d_annuity_work_completed_summary.srd" "annuity.pbl";
+ "d_annuity_work_in_progress_detail.srd" "annuity.pbl";
+ "d_annuity_work_in_progress_summary.srd" "annuity.pbl";
+ "d_enter_claim_date2.srd" "annuity.pbl";
+ "d_enter_claim_range.srd" "annuity.pbl";
+ "d_error_report_negative.srd" "annuity.pbl";
+ "d_error_report_positive.srd" "annuity.pbl";
+ "d_error_report_zero.srd" "annuity.pbl";
+ "dddw_admin_region_all.srd" "annuity.pbl";
+ "ds_annuity_applied_interest_summary_excel.srd" "annuity.pbl";
+ "ds_annuity_sub_ledger_all_accounts_excel.srd" "annuity.pbl";
+ "ds_annuity_sub_ledger_individual_details_excel.srd" "annuity.pbl";
+ "ds_annuity_sub_ledger_individual_summary_excel.srd" "annuity.pbl";
+ "ds_annuity_subledger_gl_summary_excel.srd" "annuity.pbl";
+ "n_annuity_interest.sru" "annuity.pbl";
+ "w_annuity_interest.srw" "annuity.pbl";
+ "w_annuity_interest_summary.srw" "annuity.pbl";
+ "w_annuity_sub_ledger_individuals.srw" "annuity.pbl";
+ "w_annuity_sub_ledger_summary.srw" "annuity.pbl";
+ "w_annuity_work_in_progress_report.srw" "annuity.pbl";
+ "w_annuity_workflow_completed_report.srw" "annuity.pbl";
+ "w_approaching_annuity_end_date_report.srw" "annuity.pbl";
+ "w_select_iw_or_ss.srw" "annuity.pbl";
+@end;

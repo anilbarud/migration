@@ -1,0 +1,66 @@
+﻿$PBExportHeader$d_account_payment_list.srd
+$PBExportComments$Account Payments - Datawindow used to list all PAYMENT_DOCUMENT entries by document id number
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=80 color="553648127" )
+summary(height=0 color="553648127" )
+footer(height=68 color="134217752" )
+detail(height=68 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=paid_status_code dbname="paid_status_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_payment_type_code dbname="payment_type_code" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_to_date dbname="paid_to_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_processed_date dbname="processed_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_submitted_amount dbname="submitted_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=doc_id dbname="doc_id" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=paid_status_explanation dbname="paid_status_explanation_code" )
+ column=(type=timestamp updatewhereclause=yes name=payment_document_timestamp dbname="timestamp" )
+ column=(type=datetime updatewhereclause=yes name=payment_modify_date dbname="modify_date" )
+ column=(type=char(16) updatewhereclause=yes name=payment_modify_user_id dbname="modify_user_id" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_total_payment_amount dbname="total_payment_amount" )
+ column=(type=char(2) updatewhereclause=yes name=payment_payment_sub_type_code dbname="payment_sub_type_code" )
+ retrieve="  SELECT   PAYMENT_DOCUMENT.payment_no , 
+           PAYMENT_DOCUMENT.paid_status_code ,
+           PAYMENT.payment_type_code ,
+           PAYMENT.paid_from_date ,
+           PAYMENT.paid_to_date ,
+           PAYMENT.processed_date ,
+           PAYMENT.submitted_amount ,
+           PAYMENT_DOCUMENT.doc_id ,
+           PAYMENT_DOCUMENT.paid_status_explanation_code ,
+           PAYMENT_DOCUMENT.timestamp ,
+           PAYMENT.modify_date ,
+           PAYMENT.modify_user_id ,
+           PAYMENT.total_payment_amount ,
+           PAYMENT.payment_sub_type_code
+     FROM  PAYMENT_DOCUMENT 
+           LEFT OUTER JOIN PAYMENT on PAYMENT_DOCUMENT.payment_no = PAYMENT.payment_no
+     WHERE PAYMENT_DOCUMENT.doc_id = :val_docid" arguments=(("val_docid", number))  sort="paid_status_code A payment_no A payment_payment_type_code A payment_paid_from_date A payment_paid_to_date A " )
+text(band=header alignment="0" text="Pay Status " border="6" color="33554432" x="14" y="12" height="56" width="457" html.valueishtml="0"  name=payment_document_paid_status_code_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pay No" border="6" color="33554432" x="494" y="12" height="56" width="297" html.valueishtml="0"  name=payment_document_payment_no_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Paid Date" border="6" color="33554432" x="814" y="12" height="56" width="311" html.valueishtml="0"  name=t_3  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pay Type" border="6" color="33554432" x="1147" y="12" height="56" width="338" html.valueishtml="0"  name=payment_payment_type_code_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Period" border="6" color="33554432" x="1504" y="12" height="56" width="736" html.valueishtml="0"  name=payment_paid_from_date_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Paid Amt" border="6" color="33554432" x="2258" y="12" height="56" width="393" html.valueishtml="0"  name=t_1  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Submitted Amt" border="6" color="33554432" x="2670" y="12" height="56" width="393" html.valueishtml="0"  name=t_4  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="60" width="448" format="[general]" html.valueishtml="0"  name=paid_status_code visible="1" dddw.name=dddw_paid_status dddw.displaycolumn=paid_status_desc dddw.datacolumn=paid_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=1 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="489" y="4" height="60" width="288" format="[general]" html.valueishtml="0"  name=payment_no visible="1" editmask.mask="######" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="795" y="4" height="56" width="338" format="yyyy-mm-dd" html.valueishtml="0"  name=payment_processed_date visible="1" edit.limit=0 edit.case=any edit.format="yyyy-mm-dd" edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1157" y="4" height="56" width="183" format="[general]" html.valueishtml="0"  name=payment_payment_type_code visible="1" edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="1353" y="4" height="60" width="142" format="[general]" html.valueishtml="0"  name=payment_payment_sub_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="string( payment_paid_from_date ,~"yyyy-mm-dd~") + ~"  to  ~" + string( payment_paid_to_date ,~"yyyy-mm-dd~")"border="0" color="0" x="1522" y="4" height="60" width="713" format="[GENERAL]" html.valueishtml="0"  name=display_period visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="0" x="2258" y="4" height="60" width="384" format="#,##0.00" html.valueishtml="0"  name=payment_total_payment_amount visible="1" edit.limit=0 edit.case=any edit.format="$#,##0.00" edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0" x="2670" y="4" height="60" width="370" format="#,##0.00" html.valueishtml="0"  name=payment_submitted_amount visible="1" edit.limit=0 edit.case=any edit.format="$#,##0.00" edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="~"Payments on document # ~" + string(val_docid)"border="0" color="0" x="23" y="4" height="56" width="1065" format="[GENERAL]" html.valueishtml="0"  name=display_docid visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

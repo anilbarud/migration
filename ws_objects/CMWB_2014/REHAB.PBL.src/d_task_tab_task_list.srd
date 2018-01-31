@@ -1,0 +1,79 @@
+﻿$PBExportHeader$d_task_tab_task_list.srd
+$PBExportComments$the list displaying the task to update on the maintain task tab
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="10789024" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=60 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="task_sub_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="task_specific_code" )
+ column=(type=char(2) updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime updatewhereclause=yes name=planned_start_date dbname="planned_start_date" )
+ column=(type=char(1) updatewhereclause=yes name=task_success_code dbname="task_success_code" )
+ column=(type=char(1) updatewhereclause=yes name=medical_management_flag dbname="medical_management_flag" )
+ column=(type=long updatewhereclause=yes name=follow_up_count dbname="follow_up_count" )
+ column=(type=long updatewhereclause=yes name=follow_ups_completed dbname="follow_ups_completed" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_service_code dbname="rehab_service_code" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_program_code dbname="rehab_program_code" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=char(40) updatewhereclause=yes name=rehab_program_desc_e dbname="rehab_program_desc_e" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ retrieve="SELECT  a.task_no ,
+        a.task_type_code ,
+        a.task_sub_type_code ,
+        a.task_specific_code ,
+        a.task_status_code ,
+        a.claim_no ,
+        a.planned_start_date ,
+        a.task_success_code ,
+	b.medical_management_flag,
+	sum(	case IsNull(follow_up.task_no,0)
+	 	when 0 then 0
+		else 1
+		end) AS follow_up_count,
+	sum(	case IsNull(follow_up.actual_completion_date,0)
+		when 0 then 0
+		else 1
+		END)as follow_ups_completed    , 
+        a.rehab_service_code,
+        a.rehab_program_code,
+        a.create_user_id,
+        c.rehab_program_desc_e,
+      a.create_date
+FROM REHAB_TASK a 
+     INNER JOIN Task_Specific b      ON a.task_type_code = b.task_type_code and a.task_sub_type_code = b.task_sub_type_code and a.task_specific_code = b.task_specific_code
+	 INNER JOIN Rehab_Program c      ON a.rehab_program_code = c.rehab_program_code
+LEFT OUTER JOIN REHAB_TASK follow_up ON a.claim_no = follow_up.claim_no and a.task_no = follow_up.related_task_no   
+WHERE a.claim_no        = :claim_no
+  and b.task_entry_flag = 'Y'
+group by a.task_no ,             a.task_type_code ,             a.task_sub_type_code ,             a.task_specific_code ,             a.task_status_code ,             a.claim_no ,             a.planned_start_date ,             a.task_success_code ,        b.medical_management_flag  ,
+        a.rehab_service_code,    a.rehab_program_code, a.create_user_id  , c.rehab_program_desc_e,   a.create_date
+ORDER BY a.task_no          DESC  
+
+ " arguments=(("claim_no", number)) )
+line(band=header x1="5" y1="68" x2="2642" y2="68"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Tasks" border="0" color="0" x="5" y="4" height="60" width="293" html.valueishtml="0"  name=task_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Planned Start" border="0" color="0" x="2153" y="4" height="60" width="357" html.valueishtml="0"  name=task_status_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Program" border="0" color="0" x="1664" y="0" height="60" width="229" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="bitmap( If(  follow_up_count = follow_ups_completed  and  IsSelected() , 'followup_white_selected.gif',If( follow_up_count = follow_ups_completed and not IsSelected(),'followup_white_unselected.gif',IF(follow_up_count > 0 and IsSelected(),'followup_red_selected.gif', 'followup_red_unselected.gif'))))"border="0" color="33554432" x="5" y="4" height="48" width="55" format="[GENERAL]" html.valueishtml="0"  name=c_follow_up_flag visible="1~tif(  follow_up_count > 0,1,0)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="50" y="0" height="56" width="110" format="[general]" html.valueishtml="0"  name=task_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="654" y="0" height="56" width="530" format="[general]" html.valueishtml="0"  name=task_sub_type_code visible="1" dddw.name=dddw_task_sub_type_all dddw.displaycolumn=task_sub_type_desc dddw.datacolumn=task_sub_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="183" y="0" height="56" width="457" format="[general]" html.valueishtml="0"  name=task_type_code visible="1" dddw.name=dddw_task_type_all dddw.displaycolumn=task_type_desc dddw.datacolumn=task_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1198" y="0" height="56" width="453" format="[general]" html.valueishtml="0"  name=task_specific_code visible="1" dddw.name=dddw_task_specific_all dddw.displaycolumn=task_specific_desc dddw.datacolumn=task_specific_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" planned_start_date "border="0" color="0" x="2171" y="0" height="56" width="357" format="yyyy-mm-dd" html.valueishtml="0"  name=rev_planned_start visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="1664" y="0" height="56" width="494" format="[general]" html.valueishtml="0"  name=rehab_program_desc_e visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

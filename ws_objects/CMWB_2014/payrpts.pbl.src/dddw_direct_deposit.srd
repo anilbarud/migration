@@ -1,0 +1,37 @@
+﻿$PBExportHeader$dddw_direct_deposit.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=84 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=direct_deposit_xmit_no dbname="direct_deposit_xmit_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=benefit_class_code dbname="benefit_class_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=processed_xmit_date dbname="processed_xmit_date" )
+ retrieve="SELECT distinct a.direct_deposit_xmit_no,   
+                a.benefit_class_code,   
+                a.processed_xmit_date  
+FROM DIRECT_DEPOSIT_HISTORY a, APPLIED_CLAIM_TXN b
+         
+WHERE  b.direct_deposit_xmit_no > 6000   AND
+       a.direct_deposit_xmit_no = b.direct_deposit_xmit_no AND
+       b.recipient_type_code    in ('M','V','O') 
+order by  a.processed_xmit_date DESC, a.direct_deposit_xmit_no ASC
+" )
+text(band=header alignment="0" text="Direct Deposit No" border="4" color="33554432" x="5" y="4" height="64" width="480" html.valueishtml="0"  name=direct_deposit_xmit_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Benefit Class" border="4" color="33554432" x="489" y="4" height="64" width="384" html.valueishtml="0"  name=benefit_class_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Processed Date" border="4" color="33554432" x="873" y="4" height="64" width="434" html.valueishtml="0"  name=processed_xmit_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="23" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=direct_deposit_xmit_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="494" y="4" height="76" width="169" format="[general]" html.valueishtml="0"  name=benefit_class_code visible="1" edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="882" y="4" height="76" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=processed_xmit_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

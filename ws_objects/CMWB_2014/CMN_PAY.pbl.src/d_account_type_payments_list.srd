@@ -1,0 +1,82 @@
+﻿$PBExportHeader$d_account_type_payments_list.srd
+$PBExportComments$Account Payments - Datawindow used to list all account type payments by claim number
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=80 color="553648127" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=68 color="-1" )
+table(column=(type=char(2) updatewhereclause=yes name=payment_payment_type_code dbname="payment_type_code" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_to_date dbname="paid_to_date" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_submitted_amount dbname="submitted_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_total_payment_amount dbname="total_payment_amount" )
+ column=(type=char(1) updatewhereclause=yes name=payment_document_paid_status_code dbname="paid_status_code" )
+ column=(type=long updatewhereclause=yes name=payment_document_doc_id dbname="doc_id" )
+ column=(type=char(2) updatewhereclause=yes name=payment_document_paid_status_explanation dbname="paid_status_explanation_code" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(4) updatewhereclause=yes name=authorization_type_code dbname="authorization_type_code" )
+ column=(type=long updatewhereclause=yes name=related_document dbname="related_document" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ retrieve="
+SELECT PAYMENT.payment_type_code ,PAYMENT.paid_from_date ,PAYMENT.paid_to_date ,
+           PAYMENT.processed_date ,PAYMENT.submitted_amount ,PAYMENT.total_payment_amount ,
+           PAYMENT_DOCUMENT.paid_status_code , PAYMENT_DOCUMENT.doc_id ,
+           PAYMENT_DOCUMENT.paid_status_explanation_code ,PAYMENT.payment_no ,
+           Payment_Combination.authorization_type_code  , 0 as related_document, UNAPPLIED_CLAIM_TXN.recipient_type_code 'recipient_type_code',
+           REHAB_INVOICE_LINE_ITEM.rehab_invoice_no
+ FROM PAYMENT 
+     INNER JOIN Payment_Type            ON PAYMENT.payment_type_code 	= Payment_Type.payment_type_code
+     INNER JOIN Payment_Combination     ON Payment_Type.payment_type_code = Payment_Combination.payment_type_code
+LEFT OUTER JOIN PAYMENT_DOCUMENT        ON PAYMENT.payment_no 	    = PAYMENT_DOCUMENT.payment_no 
+     INNER JOIN UNAPPLIED_CLAIM_TXN     ON PAYMENT.payment_no 	    = UNAPPLIED_CLAIM_TXN.payment_no
+LEFT OUTER JOIN REHAB_INVOICE_LINE_ITEM ON PAYMENT.payment_no   = REHAB_INVOICE_LINE_ITEM.payment_no
+WHERE  PAYMENT.claim_no 		           =  :val_claim_no
+  and  Payment_Combination.authorization_type_code = 'act'
+  and  Payment_Combination.opening_type_code 	   = 'I'
+  and  UNAPPLIED_CLAIM_TXN.txn_type_code 	   = '1'
+
+UNION 
+SELECT  PAYMENT.payment_type_code ,PAYMENT.paid_from_date ,PAYMENT.paid_to_date ,
+           PAYMENT.processed_date ,PAYMENT.submitted_amount ,PAYMENT.total_payment_amount ,
+           PAYMENT_DOCUMENT.paid_status_code ,PAYMENT_DOCUMENT.doc_id ,
+           PAYMENT_DOCUMENT.paid_status_explanation_code ,PAYMENT.payment_no ,
+           Payment_Combination.authorization_type_code , 0 as related_document, APPLIED_CLAIM_TXN.recipient_type_code 'recipient_type_code',
+           REHAB_INVOICE_LINE_ITEM.rehab_invoice_no
+  FROM PAYMENT 
+	     INNER JOIN Payment_Type        ON PAYMENT.payment_type_code = Payment_Type.payment_type_code
+         INNER JOIN Payment_Combination ON Payment_Type.payment_type_code = Payment_Combination.payment_type_code
+    LEFT OUTER JOIN PAYMENT_DOCUMENT    ON PAYMENT.payment_no 	    = PAYMENT_DOCUMENT.payment_no 
+         INNER JOIN APPLIED_CLAIM_TXN   ON PAYMENT.payment_no = APPLIED_CLAIM_TXN.payment_no
+LEFT OUTER JOIN REHAB_INVOICE_LINE_ITEM ON PAYMENT.payment_no   = REHAB_INVOICE_LINE_ITEM.payment_no
+ WHERE PAYMENT.claim_no                            =  :val_claim_no
+   and Payment_Combination.authorization_type_code = 'act'
+   and Payment_Combination.opening_type_code       = 'I'
+   and APPLIED_CLAIM_TXN.txn_type_code             = '1'" arguments=(("val_claim_no", number))  sort="payment_no D " )
+text(band=header alignment="0" text="Pay No" border="6" color="33554432" x="14" y="12" height="56" width="270" html.valueishtml="0"  name=payment_document_payment_no_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Paid Date" border="6" color="33554432" x="302" y="12" height="56" width="325" html.valueishtml="0"  name=t_1  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Paid Amt" border="6" color="33554432" x="1646" y="12" height="56" width="306" html.valueishtml="0"  name=t_2  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Submitted Amt" border="6" color="33554432" x="1975" y="12" height="56" width="983" html.valueishtml="0"  name=payment_submitted_amount_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Pay Type" border="6" color="33554432" x="649" y="12" height="56" width="251" html.valueishtml="0"  name=payment_payment_type_code_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Period" border="6" color="33554432" x="923" y="12" height="56" width="699" html.valueishtml="0"  name=payment_paid_from_date_t  tag="" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="80" height="60" width="229" format="[general]" html.valueishtml="0"  name=related_document visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0~tIF(ISNULL( rehab_invoice_no ), 0,13158600)" x="9" y="4" height="60" width="270" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0~tIF(ISNULL( rehab_invoice_no ), 0,13158600)" x="288" y="4" height="60" width="343" format="yyyy-mm-dd" html.valueishtml="0"  name=processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0~tIF(ISNULL( rehab_invoice_no ), 0,13158600)" x="1655" y="4" height="60" width="311" format="$#,##0.00" html.valueishtml="0"  name=payment_total_payment_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="0~tIF(ISNULL( rehab_invoice_no ), 0,13158600)" x="1984" y="4" height="60" width="379" format="$#,##0.00" html.valueishtml="0"  name=payment_submitted_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="If (  isnull(payment_document_doc_id) and  related_document  <> 1 ,~"~",~"2~")"border="0" color="16711680" x="2395" y="4" height="60" width="91" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Wingdings" font.height="-11" font.weight="700"  font.family="0" font.pitch="2" font.charset="2" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="0~tIF(ISNULL( rehab_invoice_no ), 0,13158600)" x="654" y="4" height="60" width="247" format="[general]" html.valueishtml="0"  name=payment_payment_type_code visible="1" edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="string( payment_paid_from_date ,~"yyyy-mm-dd~") + ~"  to  ~" + string( payment_paid_to_date ,~"yyyy-mm-dd~")"border="0" color="0~tIF(ISNULL( rehab_invoice_no ), 0,13158600)" x="919" y="4" height="68" width="718" format="[GENERAL]" html.valueishtml="0"  name=display_period visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

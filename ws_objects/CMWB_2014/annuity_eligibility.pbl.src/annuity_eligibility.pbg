@@ -1,0 +1,32 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "annuity_eligibility.pbl" "";
+@end;
+@begin Objects 
+ "d_annuity_eligibility_run_option.srd" "annuity_eligibility.pbl";
+ "d_cae_tombstone.srd" "annuity_eligibility.pbl";
+ "d_current_eligibility.srd" "annuity_eligibility.pbl";
+ "d_history_eligibility.srd" "annuity_eligibility.pbl";
+ "d_iw_all_eligibility.srd" "annuity_eligibility.pbl";
+ "d_iw_eligibility.srd" "annuity_eligibility.pbl";
+ "d_multi_surviving_spouse.srd" "annuity_eligibility.pbl";
+ "d_ss_all_eligibility.srd" "annuity_eligibility.pbl";
+ "d_ss_eligibility.srd" "annuity_eligibility.pbl";
+ "d_sub_ledger_adjustments_by_claim_inquiry.srd" "annuity_eligibility.pbl";
+ "d_sub_ledger_adjustments_by_claim_warning.srd" "annuity_eligibility.pbl";
+ "dddw_annuity_eligibility_reason.srd" "annuity_eligibility.pbl";
+ "dddw_annuity_eligibility_run_option.srd" "annuity_eligibility.pbl";
+ "ds_identify_changed_iw_annuity_eligibilities.srd" "annuity_eligibility.pbl";
+ "ds_identify_changed_ss_annuity_eligibilities.srd" "annuity_eligibility.pbl";
+ "ds_identify_new_iw_annuity_eligibilities.srd" "annuity_eligibility.pbl";
+ "ds_identify_new_ss_annuity_eligibilities.srd" "annuity_eligibility.pbl";
+ "ds_inactive_unapplied_annuity_interest_rates.srd" "annuity_eligibility.pbl";
+ "ds_incomplete_checklists.srd" "annuity_eligibility.pbl";
+ "ds_nonexistent_annuity_interest_rates.srd" "annuity_eligibility.pbl";
+ "ds_select_claim.srd" "annuity_eligibility.pbl";
+ "s_payout_individuals.srs" "annuity_eligibility.pbl";
+ "s_verify_warning.srs" "annuity_eligibility.pbl";
+ "w_confirm_annuity_eligibility.srw" "annuity_eligibility.pbl";
+ "w_multi_surviving_spouse.srw" "annuity_eligibility.pbl";
+ "w_verify_step_warning.srw" "annuity_eligibility.pbl";
+@end;

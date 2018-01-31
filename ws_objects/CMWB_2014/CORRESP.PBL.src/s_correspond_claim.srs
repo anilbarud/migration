@@ -1,0 +1,36 @@
+﻿$PBExportHeader$s_correspond_claim.srs
+$PBExportComments$Stores claim recipient address data (NOTE - main structure throughout module)
+global type s_correspond_claim from structure
+	long		individual_no
+	long		claim_no
+	string		last_name
+	string		first_name
+	string		street
+	string		city
+	string		province
+	string		country
+	string		postal_code
+	string		region_code
+	date		accident_date
+	date		birth_date
+	long		employer_no
+	string		case_manager
+	string		claimant_phone_no
+	string		language
+	string		sin_no
+	string		accident_employer_name
+	string		accident_employer_phone_no
+	string		address_line1
+	string		address_line2
+	string		medicare_no
+	s_corr_data		corr
+	s_claim_rcpnt_data		rcpnt
+	s_external_address		ext_addr
+	window		parent_window
+	window		sheet_window
+	string		image_status
+	boolean		set_default_addressee
+	long		annuity_payout_individual_no
+	string		annuity_individual_claim_role
+end type
+

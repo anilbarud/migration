@@ -1,0 +1,17 @@
+﻿$PBExportHeader$ds_t5_y2k_old.srd
+$PBExportComments$DataStore for T5007_Y2K_PREPAYMENT table with t5007_recipient_no that is about to be archived.
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=t5007_recipient_no dbname="T5007_Y2K_PREPAYMENT.t5007_recipient_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=annuity_payout_flag dbname="T5007_Y2K_PREPAYMENT.annuity_payout_flag" )
+ retrieve="  SELECT t5007_recipient_no,   
+         annuity_payout_flag  
+    FROM T5007_Y2K_PREPAYMENT  
+   WHERE t5007_recipient_no = :ll_id    
+" update="T5007_Y2K_PREPAYMENT" updatewhere=1 updatekeyinplace=no arguments=(("ll_id", number)) )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="0" x="87" y="4" height="76" width="873" format="[general]"  name=t5007_recipient_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="1070" y="4" height="76" width="869" format="[general]"  name=annuity_payout_flag edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

@@ -1,0 +1,27 @@
+﻿$PBExportHeader$f_populate_ole_error.srf
+$PBExportComments$Common function for triggering system error as a result of OLE error.
+global type f_populate_ole_error from function_object
+end type
+
+forward prototypes
+global subroutine f_populate_ole_error (string as_win_menu, string as_object, string as_object_event, string as_type, integer ai_line, string as_argument, string as_template)
+end prototypes
+
+global subroutine f_populate_ole_error (string as_win_menu, string as_object, string as_object_event, string as_type, integer ai_line, string as_argument, string as_template);Error.WindowMenu = as_win_menu
+Error.Object = as_object
+Error.ObjectEvent = as_object_event
+Error.Line = ai_line
+CHOOSE CASE as_type
+	CASE 'OLE'
+		Error.Text = 'OLE object was invalid.'
+	CASE 'BKMK'
+		Error.Text = 'Bookmark "' + as_argument + '" did not exist in template: ' + as_template + '.'
+	CASE 'FIELD'
+		Error.Text = 'Field "'+as_argument+'" did not exist in template: ' + as_template + '.'
+	CASE 'TEXT'
+		Error.Text = 'Text string "' + as_argument + '" did not exist in document.'
+	CASE ELSE
+		Error.Text = 'Unknown error.'
+END CHOOSE
+end subroutine
+

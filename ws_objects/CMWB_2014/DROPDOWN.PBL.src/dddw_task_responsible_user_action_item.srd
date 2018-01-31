@@ -1,0 +1,16 @@
+﻿$PBExportHeader$dddw_task_responsible_user_action_item.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=char(16) update=yes updatewhereclause=yes key=yes name=user_id dbname="User_Profile.user_id" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=user_last_name dbname="User_Profile.user_last_name" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=user_first_name dbname="User_Profile.user_first_name" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=active_flag dbname="User_Profile.active_flag" )
+ column=(type=char(6) update=yes updatewhereclause=yes name=job_position_code dbname="User_Profile.job_position_code" )
+ column=(type=char(1) updatewhereclause=yes name=rehab_task_responsible_flag dbname="User_Profile.rehab_task_responsible_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dbo.User_Profile~" ) COLUMN(NAME=~"dbo.User_Profile.user_id~") COLUMN(NAME=~"dbo.User_Profile.user_last_name~") COLUMN(NAME=~"dbo.User_Profile.user_first_name~") COLUMN(NAME=~"dbo.User_Profile.active_flag~") COLUMN(NAME=~"dbo.User_Profile.job_position_code~") COLUMN(NAME=~"dbo.User_Profile.rehab_task_responsible_flag~")) " update="dbo.User_Profile" updatewhere=1 updatekeyinplace=no  sort="c_full_name A " )
+compute(band=detail alignment="0" expression=" user_last_name + ~", ~" +  user_first_name "border="0" color="33554432" x="9" y="4" height="56" width="1358" format="[GENERAL]" html.valueishtml="0"  name=c_full_name visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

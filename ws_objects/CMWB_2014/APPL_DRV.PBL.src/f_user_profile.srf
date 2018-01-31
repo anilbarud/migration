@@ -1,0 +1,196 @@
+﻿$PBExportHeader$f_user_profile.srf
+$PBExportComments$Application Driver - Acquires user profile and authorization information and loads the structure s_user_profile (called only during startup of application)
+global type f_user_profile from function_object
+end type
+
+forward prototypes
+global function integer f_user_profile ()
+end prototypes
+
+global function integer f_user_profile ();DATETIME	ldtm_today
+LONG 		ll_return_code
+LONG		ll_row_counter
+LONG		ll_rows
+Long		ll_row
+
+datastore lds_authorizations
+
+
+lds_authorizations = create u_ds
+lds_authorizations.dataobject = 'd_authorizations'
+lds_authorizations.settransobject(SQLCA)
+
+
+
+ldtm_today = f_server_datetime()
+
+
+/* Retrieve and store user profile data in global structure */
+
+	SELECT Position.position_english_desc, 
+			 Position.position_french_desc,   
+			 User_Profile.user_first_name + " " + User_Profile.user_last_name, 
+			 User_Profile.job_position_code, 
+			 User_Profile.phone_no,
+			 User_Profile.default_admin_region_code,
+  	     	 User_Profile.default_image_working_setid,
+			 User_Profile.maintain_action_item_flag  ,
+			 User_Profile.maintain_nonzero_sin_med_flag,
+			 User_Profile.maintain_3rd_party_status_flag,
+			 User_Profile.work_group_code, 
+			 User_Profile.registry_viewer_setting_flag,
+			 User_Profile.maintain_formulary_flag
+	INTO  :vgst_user_profile.position_english_desc,
+			:vgst_user_profile.position_french_desc,    
+			:vgst_user_profile.user_name,
+			:vgst_user_profile.position_code,   
+			:vgst_user_profile.phone_no,
+			:vgst_user_profile.default_admin_region_code,
+	         :vgst_user_profile.default_image_working_setid,
+			:vgst_user_profile.maintain_action_item_flag  ,
+			:vgst_user_profile.maintain_sin_med_flag,
+			:vgst_user_profile.maintain_3rd_party_status_flag,
+			:vgst_user_profile.work_group_code, 
+			:vgst_user_profile.registry_viewer_setting_flag,
+			:vgst_user_profile.maintain_formulary_flag
+	FROM Position, User_Profile  
+	WHERE ( Position.position_code = User_Profile.job_position_code ) and  
+			( ( Position.active_flag = 'Y' ) AND  
+			( User_Profile.user_id = :vgst_user_profile.user_id ) AND  
+			( User_Profile.active_flag = 'Y' ) )  
+	USING SQLCA;
+
+	ll_return_code = SQLCA.nf_handle_error('Embedded SQL: Select from Position', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+
+	vgst_user_profile.user_initials = " "
+
+	IF vgst_user_profile.user_id = "" THEN
+		Return -1
+	END IF
+
+/* Get the user's "loss of earnings" Authorizations record(s)
+*/
+
+	ll_rows = lds_authorizations.retrieve(vgst_user_profile.user_id,"loe")
+	
+	ll_return_code = SQLCA.nf_handle_error('Retrieve authorizations loe', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+		
+	/* only allowed max 5 authorizations */
+	IF ll_rows > 5 THEN
+		ll_rows = 5
+	END IF 
+	
+	FOR ll_row = 1 TO ll_rows
+		vgst_user_profile.authorizations[ll_row,1] = lds_authorizations.getitemstring(ll_row,"admin_region_code")
+		vgst_user_profile.authorizations[ll_row,2] = string(lds_authorizations.getitemdecimal(ll_row,"authorization_limit"))
+	NEXT
+
+/* Get the user's "account payments" Authorizations record(s)
+*/
+
+	ll_rows = lds_authorizations.retrieve(vgst_user_profile.user_id,"act")
+	
+	ll_return_code = SQLCA.nf_handle_error('Retrieve authorizations act', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+	
+	/* only allowed max 5 authorizations */
+	IF ll_rows > 5 THEN
+		ll_rows = 5
+	END IF 
+	
+	FOR ll_row = 1 TO ll_rows
+		vgst_user_profile.account_authorizations[ll_row,1] = lds_authorizations.getitemstring(ll_row,"admin_region_code")
+		vgst_user_profile.account_authorizations[ll_row,2] = string(lds_authorizations.getitemdecimal(ll_row,"authorization_limit"))
+	NEXT
+
+/* Get the user's "pension" Authorizations record(s)
+*/
+
+	ll_rows = lds_authorizations.retrieve(vgst_user_profile.user_id,"pen")
+	
+	ll_return_code = SQLCA.nf_handle_error('Retrieve authorizations pen', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+	
+	/* only allowed max 5 authorizations */
+	IF ll_rows > 5 THEN
+		ll_rows = 5
+	END IF 
+	
+	FOR ll_row = 1 TO ll_rows
+		vgst_user_profile.pension_authorizations[ll_row,1] = lds_authorizations.getitemstring(ll_row,"admin_region_code")
+		vgst_user_profile.pension_authorizations[ll_row,2] = string(lds_authorizations.getitemdecimal(ll_row,"authorization_limit"))
+	NEXT
+
+/* Get the user's "cost analysis" Authorizations record(s)
+*/
+	ll_rows = lds_authorizations.retrieve(vgst_user_profile.user_id,"cst")
+	
+	ll_return_code = SQLCA.nf_handle_error('Retrieve authorizations cst', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+	
+	/* only allowed max 5 authorizations */
+	if ll_rows > 5 then
+		ll_rows = 5
+	end if 
+	
+	FOR ll_row = 1 TO ll_rows
+		vgst_user_profile.cost_analysis_authorizations[ll_row,1] = lds_authorizations.getitemstring(ll_row,"admin_region_code")
+		vgst_user_profile.cost_analysis_authorizations[ll_row,2] = string(lds_authorizations.getitemdecimal(ll_row,"authorization_limit"))
+	NEXT
+
+//SR70 - Added new Authorization Code for Special Survivor Payments - JAN 2001 - SMANZER
+/* Get the user's "Special Survivor Payment" Authorizations record(s)
+*/
+	ll_rows = lds_authorizations.retrieve(vgst_user_profile.user_id,"ssp")
+	
+	ll_return_code = SQLCA.nf_handle_error('Retrieve authorizations ssp', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+	
+	/* only allowed max 5 authorizations */
+	if ll_rows > 5 then
+		ll_rows = 5
+	end if 
+	
+	FOR ll_row = 1 TO ll_rows
+		vgst_user_profile.survivor_authorizations[ll_row,1] = lds_authorizations.getitemstring(ll_row,"admin_region_code")
+		vgst_user_profile.survivor_authorizations[ll_row,2] = string(lds_authorizations.getitemdecimal(ll_row,"authorization_limit"))
+	NEXT
+
+//P10273-2-3 - Added new Authorization Code for Annuities
+/* Get the user's Annuity Authorizations record(s)
+*/
+	ll_rows = lds_authorizations.retrieve(vgst_user_profile.user_id,"ann")
+	
+	ll_return_code = SQLCA.nf_handle_error('Retrieve authorizations "ann"', 'f_user_profile', 'function f_user_profile') 
+	IF ll_return_code < 0 THEN
+		Return -1
+	END IF
+	
+	/* only allowed max 5 authorizations */
+	if ll_rows > 5 then
+		ll_rows = 5
+	end if 
+	
+	FOR ll_row = 1 TO ll_rows
+		vgst_user_profile.annuity_authorizations[ll_row,1] = lds_authorizations.getitemstring(ll_row,"admin_region_code")
+		vgst_user_profile.annuity_authorizations[ll_row,2] = string(lds_authorizations.getitemdecimal(ll_row,"authorization_limit"))
+	NEXT
+
+	RETURN 0
+
+end function
+

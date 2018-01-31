@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_annuity_interest_results.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=548 color="536870912" )
+summary(height=152 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=100 color="536870912" )
+table(column=(type=char(6) updatewhereclause=yes name=compute_0001 dbname="compute_0001" )
+ column=(type=decimal(4) updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ retrieve="SELECT 'other:', Sum(a.txn_amount)  
+  from UNAPPLIED_CLAIM_TXN a,   PAYMENT b,  CLAIM c ,EMPLOYER d
+ WHERE ( b.payment_no 		= a.payment_no) 
+   and ( b.payment_no 		>= :r_payment_no_from ) 
+   and ( b.payment_no 		<= :r_payment_no_to) 
+   and ( b.claim_no 			= c.claim_no) 
+   and ( a.txn_type_code 	<> '4' ) 
+	and d.employer_type_code <> ~"S~"
+   and c.cost_alloc_no = d.employer_no
+union		
+SELECT Substring(Convert(varchar(7),c.cost_alloc_no),1,2) ,Sum(a.txn_amount)  
+  from UNAPPLIED_CLAIM_TXN a, PAYMENT b,  CLAIM c  ,EMPLOYER d
+ WHERE ( b.payment_no 		= a.payment_no) 
+   and ( b.payment_no 		>= :r_payment_no_from  ) 
+   and ( b.payment_no 		<= :r_payment_no_to ) 
+   and ( b.claim_no 			= c.claim_no) 
+   and ( a.txn_type_code 	<> '4') 
+   and d.employer_type_code = ~"S~"
+   and c.cost_alloc_no = d.employer_no
+group by Substring(Convert(varchar(7),c.cost_alloc_no),1,2) 
+	
+" arguments=(("r_payment_no_from", number),("r_payment_no_to", number),("r_year", number),("r_quarter", number),("r_interest_rate", number))  sort="compute_0001 A compute_0002 A " )
+rectangle(band=header x="9" y="0" height="516" width="3410"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="169" y="28" height="60" width="315" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="590" y="28" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Annuity Interest Posting Report  
+Summarized Transactions" border="0" color="0" x="1243" y="32" height="160" width="1042" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2862" y="16" height="76" width="471" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Report Parameter:    Year ' + string( r_year) + '      Quarter ' + string ( r_quarter ) + '     Interest rate   ' + string( r_interest_rate ) +  '    Payment no from ' + string  ( r_payment_no_from ) +  '     Payment No to '  + string( r_payment_no_to )"border="0" color="0" x="96" y="288" height="64" width="3081" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="CLASS:" border="0" color="0" x="297" y="12" height="64" width="215" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="562" y="4" height="76" width="430" format="[general]" html.valueishtml="0"  name=compute_0001 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="1033" y="4" height="76" width="791" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_0002 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(compute_0002 for all)"border="0" color="33554432" x="1033" y="20" height="80" width="791" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+line(band=summary x1="1262" y1="124" x2="1838" y2="124"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="16777215" )
+line(band=summary x1="1262" y1="144" x2="1838" y2="140"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

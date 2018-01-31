@@ -1,0 +1,11 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "docktest.pbl" "";
+@end;
+@begin Objects 
+ "docktest.sra" "docktest.pbl";
+ "m_mdimenu.srm" "docktest.pbl";
+ "w_explorer.srw" "docktest.pbl";
+ "w_mdiwindow.srw" "docktest.pbl";
+ "w_sheet.srw" "docktest.pbl";
+@end;

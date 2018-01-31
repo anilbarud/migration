@@ -1,0 +1,17 @@
+﻿$PBExportHeader$d_goal_list.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=61 color="10789024" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=69 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=goal_no dbname="REHAB_GOAL.goal_no" )
+ column=(type=char(2) updatewhereclause=yes name=goal_code dbname="REHAB_GOAL.goal_code" )
+ column=(type=char(2) updatewhereclause=yes name=rehab_type_code dbname="REHAB_GOAL.rehab_type_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"REHAB_GOAL~" ) COLUMN(NAME=~"REHAB_GOAL.goal_no~") COLUMN(NAME=~"REHAB_GOAL.goal_code~") COLUMN(NAME=~"REHAB_GOAL.rehab_type_code~")WHERE(    EXP1 =~"REHAB_GOAL.claim_no~"   OP =~"=~"    EXP2 =~":al_claim_no~" ) ) ORDER(NAME=~"REHAB_GOAL.goal_no~" ASC=no) ARG(NAME = ~"al_claim_no~" TYPE = number) " arguments=(("al_claim_no", number)) )
+text(band=header alignment="0" text="No"border="0" color="0" x="5" y="0" height="61" width="69"  name=rehab_goal_goal_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Goal"border="0" color="0" x="206" y="0" height="61" width="115"  name=goal_goal_desc_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Rehab Type"border="0" color="0" x="1491" y="0" height="61" width="302"  name=rehab_type_rehab_type_desc_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="5" y="4" height="61" width="170" format="[general]"  name=goal_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="206" y="4" height="61" width="1253" format="[general]"  name=goal_code dddw.name=dddw_goal dddw.displaycolumn=goal_desc dddw.datacolumn=goal_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1495" y="4" height="61" width="1395" format="[general]"  name=rehab_type_code dddw.name=dddw_rehab_type dddw.displaycolumn=rehab_type_desc dddw.datacolumn=rehab_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

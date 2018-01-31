@@ -1,0 +1,84 @@
+﻿$PBExportHeader$d_non_bh_ap_txn_detail_w_dependants.srd
+$PBExportComments$Non-benefit-holder (i.e., survivors) annuity payout txn detail where dependants are included in the payout
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=24 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" height.autosize=yes )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=annuity_payout_recipient_no dbname="annuity_payout_recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_payout_recipient_type_code dbname="annuity_payout_recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=payment_amount dbname="payment_amount" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(2) updatewhereclause=yes name=annuity_role_code dbname="annuity_role_code" )
+ column=(type=char(40) updatewhereclause=yes name=annuity_role_desc_e dbname="annuity_role_desc_e" )
+ column=(type=char(41) updatewhereclause=yes name=non_benefit_holder_name dbname="non_benefit_holder_name" )
+ column=(type=char(41) updatewhereclause=yes name=annuity_payout_individual_non_benefit_holder_name dbname="annuity_payout_individual_non_benefit_holder_name" )
+ column=(type=char(30) updatewhereclause=yes name=annuity_payout_provider_non_benefit_holder_name dbname="annuity_payout_provider_non_benefit_holder_name" )
+ column=(type=char(40) updatewhereclause=yes name=payment_sub_type_desc dbname="payment_sub_type_desc" )
+ retrieve="SELECT a.claim_no,
+       a.annuity_payout_no,
+       a.recipient_no,
+       a.recipient_type_code,
+       a.annuity_payout_recipient_no,
+       a.annuity_payout_recipient_type_code,
+       a.annuity_account_no,
+       a.payment_type_code,
+       a.payment_sub_type_code,
+       a.payment_amount,
+       a.payment_no,
+       b.annuity_role_code,
+       c.annuity_role_desc_e,
+       d.given_names +' '+ d.last_name AS 'non_benefit_holder_name',
+       e.given_names +' '+ e.last_name AS 'annuity_payout_individual_non_benefit_holder_name',
+       f.name                          AS 'annuity_payout_provider_non_benefit_holder_name',
+       g.payment_sub_type_desc
+FROM   ANNUITY_PAYOUT_TXN_DETAIL  a
+JOIN   ANNUITY_PAYOUT_PARTICIPANT b ON a.annuity_payout_no   = b.annuity_payout_no
+                                   AND a.recipient_no        = b.recipient_no
+                                   AND a.recipient_type_code = b.recipient_type_code
+JOIN   Annuity_Role               c ON b.annuity_role_code = c.annuity_role_code
+JOIN   INDIVIDUAL                 d ON b.recipient_no = d.individual_no
+LEFT OUTER JOIN INDIVIDUAL        e ON a.annuity_payout_recipient_no = e.individual_no
+                                   AND a.annuity_payout_recipient_type_code = 'I'
+LEFT OUTER JOIN PROVIDER          f ON a.annuity_payout_recipient_no = f.provider_no
+                                   AND a.annuity_payout_recipient_type_code = f.provider_type_code
+JOIN   Payment_Sub_Type           g ON a.payment_sub_type_code = g.payment_sub_type_code
+WHERE  b.recipient_type_code = 'I'
+and    c.annuity_eligibility_flag = 'N'
+and    c.annuity_entitlement_flag = 'Y'
+AND    b.recipient_type_code = 'I'
+AND    a.annuity_payout_no = :al_annuity_payout_no
+AND    a.claim_no = :al_claim_no
+ORDER BY a.claim_no,
+         a.annuity_payout_no,
+         a.recipient_no,
+         a.recipient_type_code,
+         a.annuity_payout_recipient_no,
+         a.annuity_payout_recipient_type_code
+" arguments=(("al_annuity_payout_no", number),("al_claim_no", number)) )
+group(level=1 header.height=0 header.height.autosize=yes trailer.height=16 by=("non_benefit_holder_desc" ) header.color="536870912" trailer.color="536870912" )
+compute(band=header.1 alignment="0" expression="non_benefit_holder_name + ' - ' +  annuity_role_desc_e"border="0" color="33554432" x="448" y="12" height="68" width="2080" format="[GENERAL]" html.valueishtml="0"  name=non_benefit_holder_desc visible="1~tIF (IsNull( non_benefit_holder_name),0,1)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="4146" y="8" height="68" width="329" format="[general]" html.valueishtml="0"  name=payment_no visible="1~tIF (IsNull( non_benefit_holder_name),0,1)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Payout Recipient:" border="0" color="33554432" x="526" y="16" height="68" width="453" html.valueishtml="0"  name=t_13 visible="1~tIF (IsNull( non_benefit_holder_name),0,1)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="IF ( annuity_payout_recipient_type_code = 'I',    annuity_payout_individual_non_benefit_holder_name + ' - INDIVIDUAL', annuity_payout_provider_non_benefit_holder_name + ' - OTHER PAYEE')"border="0" color="33554432" x="1001" y="16" height="68" width="1170" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1~tIF (IsNull( non_benefit_holder_name),0,1)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="'97/' +   payment_sub_type_code +' - '+  payment_sub_type_desc"border="0" color="33554432" x="2181" y="16" height="68" width="1179" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1~tIF (IsNull( non_benefit_holder_name),0,1)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="3579" y="16" height="68" width="329" format="$#,##0.00;[RED]($#,##0.00)" html.valueishtml="0"  name=payment_amount visible="1~tIF (IsNull( non_benefit_holder_name),0,1)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

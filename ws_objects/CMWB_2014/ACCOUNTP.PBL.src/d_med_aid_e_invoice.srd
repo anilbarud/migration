@@ -1,0 +1,38 @@
+﻿$PBExportHeader$d_med_aid_e_invoice.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=patient_bill_no dbname="patient_bill_no" )
+ column=(type=char(12) updatewhereclause=yes name=patient_account_no dbname="patient_account_no" )
+ column=(type=datetime updatewhereclause=yes name=period_from_date dbname="period_from_date" )
+ column=(type=datetime updatewhereclause=yes name=period_to_date dbname="period_to_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_submitted_amount dbname="total_submitted_amount" )
+ retrieve="  SELECT patient_bill_no,   
+         patient_account_no,  
+			CASE 
+				WHEN  patient_type_code = 'O' THEN outpatient_treatment_date
+				ELSE  hospitalized_start_date 
+			END as period_from_date,
+			CASE 
+				WHEN  patient_type_code = 'O' THEN outpatient_treatment_date
+				ELSE  hospitalized_end_date 
+			END as period_to_date,  
+         total_submitted_amount  
+    FROM MED_AID_E_INVOICE a
+	WHERE doc_id = :al_docid
+" arguments=(("al_docid", number)) )
+text(band=header alignment="2" text="Patient Bill No" border="0" color="33554432" x="5" y="4" height="64" width="416" html.valueishtml="0"  name=patient_bill_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Patient Account No" border="0" color="33554432" x="425" y="4" height="64" width="553" html.valueishtml="0"  name=patient_account_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Period From Date" border="0" color="33554432" x="983" y="4" height="64" width="603" html.valueishtml="0"  name=period_from_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Period To Date" border="0" color="33554432" x="1591" y="4" height="64" width="603" html.valueishtml="0"  name=period_to_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Total Submitted Amount" border="0" color="33554432" x="2199" y="4" height="64" width="704" html.valueishtml="0"  name=total_submitted_amount_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=patient_bill_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="425" y="4" height="76" width="357" format="[general]" html.valueishtml="0"  name=patient_account_no visible="1" edit.limit=12 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="983" y="4" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=period_from_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1591" y="4" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=period_to_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2199" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=total_submitted_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

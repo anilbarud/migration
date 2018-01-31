@@ -1,0 +1,12 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "webform67access.pbl" "";
+@end;
+@begin Objects 
+ "d_email_notification_operation_f67.srd" "webform67access.pbl";
+ "d_employer_address.srd" "webform67access.pbl";
+ "d_operation_list.srd" "webform67access.pbl";
+ "d_web_form67.srd" "webform67access.pbl";
+ "dddw_email_notification_type.srd" "webform67access.pbl";
+ "w_form67_web_access.srw" "webform67access.pbl";
+@end;

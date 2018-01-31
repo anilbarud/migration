@@ -1,0 +1,18 @@
+﻿$PBExportHeader$d_document_type.srd
+release 6;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=120 color="536870912" )
+table(column=(type=char(3) update=yes updatewhereclause=yes name=type_code dbname="DOCUMENT_INDEX.type_code" )
+ column=(type=char(40) updatewhereclause=yes name=document_type_code_type_desc dbname="Document_Type_Code.type_desc" )
+ column=(type=datetime updatewhereclause=yes name=document_index_date_on_document dbname="DOCUMENT_INDEX.date_on_document" )
+ column=(type=char(1) updatewhereclause=yes name=document_index_source_code dbname="DOCUMENT_INDEX.source_code" )
+ column=(type=char(3) updatewhereclause=yes name=document_type_code_type_code dbname="Document_Type_Code.type_code" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"DOCUMENT_INDEX~" )  TABLE(NAME=~"Document_Type_Code~" ) COLUMN(NAME=~"DOCUMENT_INDEX.type_code~") COLUMN(NAME=~"Document_Type_Code.type_desc~") COLUMN(NAME=~"DOCUMENT_INDEX.date_on_document~") COLUMN(NAME=~"DOCUMENT_INDEX.source_code~") COLUMN(NAME=~"Document_Type_Code.type_code~")    JOIN (LEFT=~"DOCUMENT_INDEX.type_code~"    OP =~"=~"RIGHT=~"Document_Type_Code.type_code~" )WHERE(    EXP1 =~"( ( DOCUMENT_INDEX.docid~"   OP =~"=~"    EXP2 =~":al_docid ) )~" ) ) ARG(NAME = ~"al_docid~" TYPE = number) " arguments=(("al_docid", number)) )
+column(band=header id=1 alignment="0" tabsequence=20 border="1" color="0" x="407" y="36" height="76" width="110" format="[general]"  name=type_code edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="41" y="16" height="64" width="1083" format="[general]"  name=document_type_code_type_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="0" x="2066" y="36" height="64" width="512"  name=document_index_date_on_document  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="0" x="1637" y="0" height="64" width="27"  name=document_index_source_code  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=0 border="0" color="0" x="1298" y="8" height="64" width="82"  name=document_type_code_type_code  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

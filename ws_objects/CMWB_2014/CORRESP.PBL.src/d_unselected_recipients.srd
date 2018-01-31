@@ -1,0 +1,128 @@
+﻿$PBExportHeader$d_unselected_recipients.srd
+$PBExportComments$Claim recipients available to be selected.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="16777215" )
+footer(height=0 color="16777215" )
+detail(height=70 color="67108864" )
+table(column=(type=char(40) updatewhereclause=yes name=label dbname="claim_recipient_label" )
+ column=(type=char(1) updatewhereclause=yes name=card_file_flag dbname="card_file_flag" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=rl_recipient_id dbname="correspond_recipient_id" )
+ column=(type=char(4) updatewhereclause=yes name=rl_recipient_type_cd dbname="correspond_recipient_type_cd" )
+ column=(type=char(1) updatewhereclause=yes name=rl_recipient_subtyp_cd dbname="correspond_recipient_subtyp_cd" )
+ column=(type=long updatewhereclause=yes name=rl_recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=default_address_flag dbname="default_address_flag" )
+ column=(type=char(1) updatewhereclause=yes name=address_location_code dbname="address_location_code" )
+ column=(type=char(1) updatewhereclause=yes name=provider_active_flag dbname="active_flag" )
+ retrieve="SELECT DISTINCT r.claim_recipient_label, 
+                r.card_file_flag, 
+                r.claim_no, 
+                r.correspond_recipient_id, 
+                r.correspond_recipient_type_cd,
+                r.correspond_recipient_subtyp_cd, 
+                r.recipient_no, 
+                r.default_address_flag, 
+                r.address_location_code, 
+                p.active_flag
+  FROM RECIPIENT_LIST r 
+       INNER JOIN PROVIDER p ON r.recipient_no = p.provider_no AND r.correspond_recipient_subtyp_cd = p.provider_type_code 
+ WHERE r.claim_no = :al_claim_no
+   and r.correspond_recipient_type_cd = 'SVPV' 
+   and r.correspond_recipient_subtyp_cd IN (SELECT provider_type_code FROM Provider_Type) 
+   and p.active_flag = 'Y' 
+   AND NOT EXISTS (SELECT *
+                     FROM CORRESPONDENCE_RECIPIENT c
+                    where r.correspond_recipient_id = c.correspond_recipient_id
+                      and c.claim_no = :al_claim_no
+                      AND c.correspond_no = :al_corr_no )
+
+union
+
+SELECT DISTINCT r.claim_recipient_label, 
+                r.card_file_flag, 
+                r.claim_no, 
+                r.correspond_recipient_id, 
+                r.correspond_recipient_type_cd,
+                r.correspond_recipient_subtyp_cd, 
+                r.recipient_no, 
+                r.default_address_flag, 
+                r.address_location_code, 
+                p.active_flag
+  FROM RECIPIENT_LIST r 
+       INNER JOIN PROVIDER p ON r.recipient_no = p.provider_no
+ WHERE r.claim_no = :al_claim_no
+   and r.correspond_recipient_type_cd = 'SVPV'
+   and r.correspond_recipient_subtyp_cd NOT IN (SELECT provider_type_code FROM Provider_Type) 
+   and p.active_flag = 'Y'
+   AND NOT EXISTS (SELECT *
+                     FROM CORRESPONDENCE_RECIPIENT c
+                    where r.correspond_recipient_id = c.correspond_recipient_id
+                      and c.claim_no = :al_claim_no
+                      AND c.correspond_no = :al_corr_no )
+
+union
+
+SELECT DISTINCT r.claim_recipient_label, 
+                r.card_file_flag, 
+                r.claim_no, 
+                r.correspond_recipient_id, 
+                r.correspond_recipient_type_cd,
+                r.correspond_recipient_subtyp_cd, 
+                r.recipient_no, 
+                r.default_address_flag, 
+                r.address_location_code, 
+                p.active_flag
+  FROM RECIPIENT_LIST r 
+       LEFT OUTER JOIN PROVIDER p  ON r.recipient_no = p.provider_no and p.active_flag <> 'N'
+ WHERE r.claim_no = :al_claim_no
+   and r.correspond_recipient_type_cd <> 'SVPV'
+   AND NOT EXISTS (SELECT *
+                     FROM CORRESPONDENCE_RECIPIENT c
+                    WHERE c.claim_no                = :al_claim_no
+                      AND c.correspond_no           = :al_corr_no
+                      AND r.correspond_recipient_id = c.correspond_recipient_id )
+
+union
+
+SELECT DISTINCT r.claim_recipient_label, 
+                r.card_file_flag, 
+                r.claim_no, 
+                r.correspond_recipient_id, 
+                r.correspond_recipient_type_cd,
+                r.correspond_recipient_subtyp_cd, 
+                r.recipient_no, 
+                r.default_address_flag, 
+                r.address_location_code, 
+                p.active_flag 
+  FROM RECIPIENT_LIST r 
+       LEFT OUTER JOIN PROVIDER p  ON r.recipient_no = p.provider_no
+ WHERE r.claim_no     = :al_claim_no
+   AND r.recipient_no = -1
+   AND NOT EXISTS (SELECT *
+                     FROM CORRESPONDENCE_RECIPIENT c
+                    WHERE c.claim_no                = :al_claim_no
+                      AND c.correspond_no           = :al_corr_no
+                      AND r.correspond_recipient_id = c.correspond_recipient_id   )
+" arguments=(("al_claim_no", number),("al_corr_no", number))  sort="rl_recipient_type_cd A label A " )
+group(level=1 header.height=83 trailer.height=0 by=("rl_recipient_type_cd" ) header.color="536870912" trailer.color="536870912" )
+compute(band=header.1 alignment="0" expression="if(  rl_recipient_type_cd  = ~"SVPV~", ~"Service Provider~",
+if(  rl_recipient_type_cd  = ~"CLMT~", ~"Claimant~", 
+if(  rl_recipient_type_cd  = ~"LAWY~", ~"Represntv~", 
+if(  rl_recipient_type_cd  = ~"OTHR~", ~"Other~", 
+if(  rl_recipient_type_cd  = ~"EMPL~", ~"Employer~", 
+if(  rl_recipient_type_cd  = ~"WADV~", ~"Worker's Advocate~",~"Unknown~"))))))"border="0" color="33554432" x="33" y="3" height="74" width="603" format="[general]" html.valueishtml="0"  name=recipient_type  tag="recipient_type" visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if( card_file_flag = 'Y', '*', ' ')"border="0" color="33554432" x="15" y="3" height="64" width="95" format="[GENERAL]" html.valueishtml="0"  name=card_file visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="132" y="3" height="64" width="1364" format="[general]" html.valueishtml="0"  name=label visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

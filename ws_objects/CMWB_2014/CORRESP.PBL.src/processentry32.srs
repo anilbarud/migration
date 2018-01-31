@@ -1,0 +1,15 @@
+﻿$PBExportHeader$processentry32.srs
+$PBExportComments$Used in enumerating process modules for closing Word processes in w_correspondence's wf_2000_close_winword(). Applies to Windows 2000, 95, 98 and ME.
+global type processentry32 from structure
+	unsignedlong		dwsize
+	unsignedlong		cntusage
+	unsignedlong		th32processid
+	unsignedlong		th32defaultheapid
+	unsignedlong		th32moduleid
+	unsignedlong		cntthreads
+	unsignedlong		th32parentprocessid
+	long		pcpriclassbase
+	unsignedlong		dwflags
+	character		szexefile[260]
+end type
+

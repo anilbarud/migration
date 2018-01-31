@@ -1,0 +1,20 @@
+﻿$PBExportHeader$d_sin_check.srd
+$PBExportComments$display a list of individual names with a given SIN
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=81 color="28027307" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=93 color="536870912" )
+table(column=(type=number update=yes key=yes name=individual_no dbname="INDIVIDUAL.individual_no" )
+ column=(type=number update=yes name=sin_no dbname="INDIVIDUAL.sin_no" )
+ column=(type=char(42) update=yes name=full_name dbname="full_name" )
+ column=(type=char(1) name=history_flag dbname="INDIVIDUAL.history_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"INDIVIDUAL~" ) COLUMN(NAME=~"INDIVIDUAL.individual_no~") COLUMN(NAME=~"INDIVIDUAL.sin_no~") COMPUTE(NAME=~"INDIVIDUAL.last_name + ', ' + INDIVIDUAL.given_names full_name ~") COLUMN(NAME=~"INDIVIDUAL.history_flag~")WHERE( EXP1 =~"( INDIVIDUAL.sin_no~" OP =~"=~" EXP2 =~":sin_no )~" ) ) ARG(NAME = ~"sin_no~" TYPE = number) " update="INDIVIDUAL" updatewhere=1 updatekeyinplace=no arguments=(("sin_no", number)) )
+text(band=header alignment="2" text="Individual No"border="0" color="0" x="5" y="4" height="61" width="325"  name=individual_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Full Name"border="0" color="0" x="901" y="4" height="61" width="252"  name=full_name_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="SIN"border="0" color="0" x="490" y="4" height="61" width="87"  name=sin_no_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="76" x2="2391" y2="76" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="5" y="4" height="73" width="275" format="[general]"  name=individual_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="759" y="4" height="73" width="983" format="[general]"  name=full_name edit.limit=42 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="353" y="4" height="73" width="371" format="[general]"  name=sin_no editmask.mask="###-###-###"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

@@ -1,0 +1,80 @@
+﻿$PBExportHeader$ds_billable_item_rehab_task_xref.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=billable_xref_no dbname="Billable_Item_Rehab_Task_Xref.billable_xref_no" dbalias=".billable_xref_no" )
+ column=(type=long update=yes updatewhereclause=yes name=billable_item_no dbname="Billable_Item_Rehab_Task_Xref.billable_item_no" dbalias=".billable_item_no" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=default_authorized_qty dbname="Billable_Item_Rehab_Task_Xref.default_authorized_qty" dbalias=".default_authorized_qty" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=fixed_fee_flag dbname="Billable_Item_Rehab_Task_Xref.fixed_fee_flag" dbalias=".fixed_fee_flag" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_service_code dbname="Billable_Item_Rehab_Task_Xref.rehab_service_code" dbalias=".rehab_service_code" )
+ column=(type=char(4) updatewhereclause=yes name=rehab_program_code dbname="Billable_Item_Rehab_Task_Xref.rehab_program_code" dbalias=".rehab_program_code" )
+ column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="Billable_Item_Rehab_Task_Xref.task_type_code" dbalias=".task_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_sub_type_code dbname="Billable_Item_Rehab_Task_Xref.task_sub_type_code" dbalias=".task_sub_type_code" )
+ column=(type=char(3) updatewhereclause=yes name=task_specific_code dbname="Billable_Item_Rehab_Task_Xref.task_specific_code" dbalias=".task_specific_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_qty dbname="Billable_Item_Rehab_Task_Xref.max_authorized_qty" dbalias=".max_authorized_qty" )
+ column=(type=decimal(2) updatewhereclause=yes name=max_authorized_amount dbname="Billable_Item_Rehab_Task_Xref.max_authorized_amount" dbalias=".max_authorized_amount" )
+ column=(type=char(1) updatewhereclause=yes name=authorized_amount_required_flag dbname="Billable_Item_Rehab_Task_Xref.authorized_amount_required_flag" dbalias=".authorized_amount_required_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=auto_create_authorization_flag dbname="Billable_Item_Rehab_Task_Xref.auto_create_authorization_flag" dbalias=".auto_create_authorization_flag" )
+ column=(type=char(1) updatewhereclause=yes name=explicit_authorization_flag dbname="Billable_Item_Rehab_Task_Xref.explicit_authorization_flag" dbalias=".explicit_authorization_flag" )
+ column=(type=char(1) updatewhereclause=yes name=auto_invoice_flag dbname="Billable_Item_Rehab_Task_Xref.auto_invoice_flag" dbalias=".auto_invoice_flag" )
+ column=(type=char(1) updatewhereclause=yes name=manual_invoice_flag dbname="Billable_Item_Rehab_Task_Xref.manual_invoice_flag" dbalias=".manual_invoice_flag" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="Billable_Item_Rehab_Task_Xref.active_flag" dbalias=".active_flag" )
+ retrieve="  SELECT dbo.Billable_Item_Rehab_Task_Xref.billable_xref_no,   
+         dbo.Billable_Item_Rehab_Task_Xref.billable_item_no,   
+         dbo.Billable_Item_Rehab_Task_Xref.default_authorized_qty,   
+         dbo.Billable_Item_Rehab_Task_Xref.fixed_fee_flag,   
+         dbo.Billable_Item_Rehab_Task_Xref.rehab_service_code,   
+         dbo.Billable_Item_Rehab_Task_Xref.rehab_program_code,   
+         dbo.Billable_Item_Rehab_Task_Xref.task_type_code,   
+         dbo.Billable_Item_Rehab_Task_Xref.task_sub_type_code,   
+         dbo.Billable_Item_Rehab_Task_Xref.task_specific_code,   
+         dbo.Billable_Item_Rehab_Task_Xref.max_authorized_qty,   
+         dbo.Billable_Item_Rehab_Task_Xref.max_authorized_amount,   
+         dbo.Billable_Item_Rehab_Task_Xref.authorized_amount_required_flag,   
+         dbo.Billable_Item_Rehab_Task_Xref.auto_create_authorization_flag,   
+         dbo.Billable_Item_Rehab_Task_Xref.explicit_authorization_flag,   
+         dbo.Billable_Item_Rehab_Task_Xref.auto_invoice_flag,   
+         dbo.Billable_Item_Rehab_Task_Xref.manual_invoice_flag,
+         dbo.Billable_Item_Rehab_Task_Xref.active_flag  
+    FROM dbo.Billable_Item_Rehab_Task_Xref  
+   WHERE ( rehab_service_code = :as_service_code ) AND  
+         ( rehab_program_code = :as_program_code ) AND  
+         ( auto_create_authorization_flag = 'Y' )  AND
+         ( active_flag = 'Y')
+" update="dbo.Billable_Item_Rehab_Task_Xref" updatewhere=1 updatekeyinplace=no arguments=(("as_service_code", string),("as_program_code", string)) )
+text(band=header alignment="2" text="Billable Xref No" border="0" color="33554432" x="5" y="4" height="64" width="457" html.valueishtml="0"  name=billable_xref_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Billable Item No" border="0" color="33554432" x="466" y="4" height="64" width="466" html.valueishtml="0"  name=billable_item_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Default Authorized Qty" border="0" color="33554432" x="937" y="4" height="64" width="654" html.valueishtml="0"  name=default_authorized_qty_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Auto Create Authorization Flag" border="0" color="33554432" x="1595" y="4" height="64" width="896" html.valueishtml="0"  name=auto_create_authorization_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Fixed Fee Flag" border="0" color="33554432" x="2496" y="4" height="64" width="439" html.valueishtml="0"  name=fixed_fee_flag_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=billable_xref_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=20 border="0" color="33554432" x="466" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=billable_item_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="33554432" x="937" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=default_authorized_qty visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=40 border="0" color="33554432" x="1595" y="4" height="76" width="55" format="[general]" html.valueishtml="0"  name=auto_create_authorization_flag visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=50 border="0" color="33554432" x="2496" y="4" height="76" width="55" format="[general]" html.valueishtml="0"  name=fixed_fee_flag visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=60 border="0" color="33554432" x="2935" y="0" height="64" width="110" format="[general]" html.valueishtml="0"  name=rehab_service_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=70 border="0" color="33554432" x="3045" y="0" height="64" width="110" format="[general]" html.valueishtml="0"  name=rehab_program_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=80 border="0" color="33554432" x="3154" y="0" height="64" width="55" format="[general]" html.valueishtml="0"  name=task_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=90 border="0" color="33554432" x="3209" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=task_sub_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=100 border="0" color="33554432" x="3291" y="0" height="64" width="82" format="[general]" html.valueishtml="0"  name=task_specific_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=110 border="0" color="33554432" x="3374" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=max_authorized_qty visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=120 border="0" color="33554432" x="5509" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=max_authorized_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=130 border="0" color="33554432" x="7643" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=authorized_amount_required_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=140 border="0" color="33554432" x="7671" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=explicit_authorization_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=150 border="0" color="33554432" x="7698" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=auto_invoice_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=160 border="0" color="33554432" x="7726" y="0" height="64" width="27" format="[general]" html.valueishtml="0"  name=manual_invoice_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=170 border="0" color="33554432" x="7753" y="0" height="64" width="27" html.valueishtml="0"  name=active_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

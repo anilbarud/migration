@@ -1,0 +1,19 @@
+﻿$PBExportHeader$dddw_categories_by_set_ltd.srd
+$PBExportComments$Lists categories by setid
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=72 color="-1" )
+table(column=(type=long updatewhereclause=yes name=setid dbname="setid" )
+ column=(type=long updatewhereclause=yes name=catid dbname="catid" )
+ column=(type=char(32) updatewhereclause=yes name=catname dbname="catname" )
+ retrieve="SELECT  a.setid , a.catid , a.catname     
+        FROM CAT a    , REF b
+        WHERE a.setid = :val_setid    
+          AND a.setid = b.docsetid
+          AND a.catid = doccatid
+group by a.setid , a.catid , a.catname  " arguments=(("val_setid", number))  sort="catname A " )
+column(band=detail id=3 alignment="0" tabsequence=20 border="0" color="0" x="9" y="4" height="64" width="745" format="[general]" html.valueishtml="0"  name=catname visible="1" edit.limit=32 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

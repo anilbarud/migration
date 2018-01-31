@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_pending_details.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=300 color="536870912" height.autosize=yes )
+table(column=(type=char(80) update=yes updatewhereclause=yes name=iv_request_comment dbname="comment" )
+ column=(type=long update=yes updatewhereclause=yes name=iv_request_inbasket_catid_all dbname="inbasket_catid" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=iv_request_no dbname="iv_request_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=worksafe_request_status_code dbname="worksafe_request_status_code" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=request_user_id dbname="request_user_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=request_date dbname="request_date" )
+ column=(type=long update=yes updatewhereclause=yes name=x015_export_no dbname="x015_export_no" )
+ column=(type=long update=yes updatewhereclause=yes name=i015_import_no dbname="i015_import_no" )
+ retrieve="  SELECT comment,   
+        inbasket_catid,   
+        iv_request_no,   
+        worksafe_request_status_code,   
+         claim_no,   
+         individual_no,   
+         request_user_id,   
+         request_date,   
+        x015_export_no,   
+         i015_import_no  
+    FROM IV_REQUEST  
+   WHERE ( iv_request_no = :al_request_no ) AND  
+         ( worksafe_request_status_code = 'RP' )    
+" update="IV_REQUEST" updatewhere=0 updatekeyinplace=no arguments=(("al_request_no", number)) )
+column(band=detail id=2 alignment="1" tabsequence=10 border="5" color="33554432" x="361" y="28" height="76" width="1010" format="[general]" html.valueishtml="0"  name=iv_request_inbasket_catid visible="1" dddw.name=dddw_users_inbasket dddw.displaycolumn=catname dddw.datacolumn=catid dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=20 border="5" color="33554432" x="361" y="140" height="132" width="1001" format="[general]" html.valueishtml="0"  name=iv_request_comment visible="1" edit.limit=80 edit.case=any edit.autoselect=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Notification Inbasket: " border="0" color="33554432" x="9" y="4" height="112" width="293" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Comment: " border="0" color="33554432" x="9" y="136" height="56" width="315" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

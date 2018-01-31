@@ -1,0 +1,29 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "abcc_rx.pbl" "";
+@end;
+@begin Objects 
+ "d_claim_primary_formulary.srd" "abcc_rx.pbl";
+ "d_claim_secondary_formulary.srd" "abcc_rx.pbl";
+ "d_exclude_flag.srd" "abcc_rx.pbl";
+ "d_excluded_errors.srd" "abcc_rx.pbl";
+ "d_prescription_payment_report.srd" "abcc_rx.pbl";
+ "d_registration_error_report.srd" "abcc_rx.pbl";
+ "d_rx_pending_coverage.srd" "abcc_rx.pbl";
+ "d_rxcov_bc_eligibility.srd" "abcc_rx.pbl";
+ "d_rxcov_bc_formulary.srd" "abcc_rx.pbl";
+ "d_rxcov_header.srd" "abcc_rx.pbl";
+ "d_rxcov_pend_fcoverage.srd" "abcc_rx.pbl";
+ "d_rxcov_pend_formulary.srd" "abcc_rx.pbl";
+ "d_rxcov_pending_ecoverage.srd" "abcc_rx.pbl";
+ "d_rxcov_pending_eligibility.srd" "abcc_rx.pbl";
+ "f_host_name.srf" "abcc_rx.pbl";
+ "n_br_bluecross.sru" "abcc_rx.pbl";
+ "n_directory.sru" "abcc_rx.pbl";
+ "n_last_no.sru" "abcc_rx.pbl";
+ "u_progress_bar.sru" "abcc_rx.pbl";
+ "w_excluded_flag.srw" "abcc_rx.pbl";
+ "w_prescription_payment_report.srw" "abcc_rx.pbl";
+ "w_registration_error_report.srw" "abcc_rx.pbl";
+ "w_rx_coverage.srw" "abcc_rx.pbl";
+@end;

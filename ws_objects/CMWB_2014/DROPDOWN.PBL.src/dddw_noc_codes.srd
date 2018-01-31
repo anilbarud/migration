@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_noc_codes.srd
+$PBExportComments$List of the active National Occupational Codes
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(4) update=yes updatewhereclause=yes key=yes name=unit_group_code dbname="Noc_Unit_Group.unit_group_code" )
+ column=(type=char(255) update=yes updatewhereclause=yes name=unit_group_desc dbname="Noc_Unit_Group.unit_group_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Noc_Unit_Group~" ) COLUMN(NAME=~"Noc_Unit_Group.unit_group_code~") COLUMN(NAME=~"Noc_Unit_Group.unit_group_desc~")WHERE(    EXP1 =~"Noc_Unit_Group.active_flag~"   OP =~"=~"    EXP2 =~"~~~"Y~~~"~" ) ) ORDER(NAME=~"Noc_Unit_Group.unit_group_code~" ASC=yes ) " update="Noc_Unit_Group" updatewhere=1 updatekeyinplace=no )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="8" height="69" width="183" format="[general]"  name=unit_group_code edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="225" y="8" height="73" width="2067" format="[general]"  name=unit_group_desc edit.limit=255 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

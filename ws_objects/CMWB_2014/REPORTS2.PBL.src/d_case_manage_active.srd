@@ -1,0 +1,38 @@
+﻿$PBExportHeader$d_case_manage_active.srd
+$PBExportComments$Report of All CM > 70 or < 50 Avtive Claims.
+release 5;
+datawindow(units=2 timer_interval=0 color=1090519039 processing=0 print.documentname="" print.orientation = 2 print.margin.left = 250 print.margin.right = 250 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1166 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=187 color="536870912" )
+detail(height=364 color="536870912" )
+table(column=(type=char(3) updatewhereclause=yes name=user_profile_default_admin_region_code dbname="User_Profile.default_admin_region_code" )
+ column=(type=char(46) updatewhereclause=yes name=compute_0002 dbname="compute_0002" )
+ column=(type=long updatewhereclause=yes name=compute_0003 dbname="compute_0003" )
+ retrieve="  SELECT User_Profile.default_admin_region_code,
+         RTRIM(User_Profile.user_first_name) + ' ' + User_Profile.user_last_name,
+         count(CLAIM.claim_no)
+FROM  User_Profile 
+    LEFT OUTER JOIN  CLAIM  ON User_Profile.user_id = CLAIM.claim_manager_user_id and CLAIM.claim_status_code = 'A'
+ WHERE User_Profile.job_position_code = 'CASMGR'
+GROUP BY User_Profile.default_admin_region_code, RTRIM(User_Profile.user_first_name) + ' ' + User_Profile.user_last_name    
+HAVING count(CLAIM.claim_no) > 70 OR count(CLAIM.claim_no) < 50
+"  sort="user_profile_default_admin_region_code A " )
+group(level=1 header.height=437 trailer.height=0 by=("user_profile_default_admin_region_code" ) header.color="553648127" trailer.color="536870912"  sort="count(user_profile_default_admin_region_code for group 1) A " )
+text(band=header alignment="0" text="Report Date:"border="0" color="33554432" x="31" y="52" height="156" width="760"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pagecount()"border="0" color="33554432" x="4427" y="20" height="166" width="1322" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="885" y="52" height="208" width="666" format="YYYY-MM-DD [time]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="NAME"border="0" color="33554432" x="1697" y="833" height="166" width="385"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="1104" x2="5760" y2="1104" pen.style="0" pen.width="10" pen.color="33554432"  background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Case Managers With More "border="0" color="33554432" x="2093" y="31" height="197" width="2114"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Than 70 OR Less Than 50"border="0" color="0" x="2135" y="208" height="197" width="2031"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+line(band=header x1="2593" y1="385" x2="2770" y2="385" pen.style="0" pen.width="20" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Active Claims"border="0" color="0" x="2593" y="385" height="197" width="1072"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="553648127" )
+line(band=header x1="3979" y1="385" x2="4156" y2="385" pen.style="0" pen.width="20" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Number of Active"border="0" color="33554432" x="4604" y="833" height="166" width="1135"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cases"border="0" color="33554432" x="4937" y="958" height="166" width="385"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="614" y="53" height="166" width="625" format="[general]"  name=user_profile_default_admin_region_code  hidesnaked=1 edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="0" text="Region: "border="0" color="33554432" x="0" y="53" height="166" width="552"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Case Manager:"border="0" color="33554432" x="625" y="11" height="197" width="989"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="4968" y="11" height="197" width="322" format="[general]"  name=compute_0003 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1781" y="11" height="197" width="3083" format="[general]"  name=compute_0002 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

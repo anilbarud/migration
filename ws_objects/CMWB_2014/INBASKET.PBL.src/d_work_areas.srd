@@ -1,0 +1,12 @@
+﻿$PBExportHeader$d_work_areas.srd
+$PBExportComments$External datawindow to display Imaging Sets
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="-1" )
+table(column=(type=number name=setid dbname="setid" )
+ )
+text(band=detail alignment="1" text="Work Area:"border="0" color="0" x="14" y="4" height="65" width="311"  name=setid_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="343" y="4" height="65" width="970" format="[general]"  name=setid dddw.name=dddw_imaging_working_sets dddw.displaycolumn=setname dddw.datacolumn=setid dddw.percentwidth=100 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

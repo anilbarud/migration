@@ -1,0 +1,249 @@
+﻿$PBExportHeader$d_search_list_basic_individual.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=264 color="28817335" )
+summary(height=0 color="-1" )
+footer(height=72 color="28817335" )
+detail(height=284 color="-1" )
+table(column=(type=long updatewhereclause=yes name=compute_0001 dbname="compute_0001" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(1) updatewhereclause=yes name=name_type_code dbname="name_type_code" )
+ column=(type=long updatewhereclause=yes name=individual_sin_no dbname="sin_no" )
+ column=(type=long updatewhereclause=yes name=individual_medicare_no dbname="medicare_no" )
+ column=(type=datetime updatewhereclause=yes name=individual_birth_date dbname="birth_date" )
+ column=(type=datetime updatewhereclause=yes name=individual_death_date dbname="death_date" )
+ column=(type=char(30) updatewhereclause=yes name=individual_address_line1 dbname="address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=individual_address_line2 dbname="address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=individual_city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=individual_prov_state_code dbname="prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=individual_country_code dbname="country_code" )
+ column=(type=char(10) updatewhereclause=yes name=individual_postal_code dbname="postal_code" )
+ column=(type=char(1) updatewhereclause=yes name=sex dbname="sex" )
+ column=(type=char(1) updatewhereclause=yes name=individual_caution_flag dbname="caution_flag" )
+ column=(type=char(1) updatewhereclause=yes name=court_order_flag dbname="court_order_flag" )
+ column=(type=char(1) updatewhereclause=yes name=claimant_participant_flag dbname="claimant_participant_flag" )
+ column=(type=char(1) updatewhereclause=yes name=other_claim_participant_flag dbname="other_claim_participant_flag" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_participant_only_flag dbname="annuity_participant_only_flag" )
+ column=(type=char(1) updatewhereclause=yes name=non_participant_flag dbname="non_participant_flag" )
+ retrieve="SELECT 0,
+       INDIVIDUAL.individual_no ,
+       INDIVIDUAL_NAME.last_name ,
+       INDIVIDUAL_NAME.given_names ,
+       INDIVIDUAL_NAME.name_type_code ,
+       INDIVIDUAL.sin_no ,
+       INDIVIDUAL.medicare_no ,
+       INDIVIDUAL.birth_date ,
+       INDIVIDUAL.death_date ,
+       INDIVIDUAL.address_line1 ,
+       INDIVIDUAL.address_line2 ,
+       INDIVIDUAL.city ,
+       INDIVIDUAL.prov_state_code ,
+       INDIVIDUAL.country_code ,
+       INDIVIDUAL.postal_code ,
+       INDIVIDUAL.sex,
+       INDIVIDUAL.caution_flag,
+       INDIVIDUAL.court_order_flag,
+       'Y',
+       'N',
+       'N',
+       'N'
+FROM   INDIVIDUAL
+JOIN   INDIVIDUAL_NAME   ON INDIVIDUAL.individual_no = INDIVIDUAL_NAME.individual_no
+JOIN   CLAIM_PARTICIPANT ON INDIVIDUAL.individual_no = CLAIM_PARTICIPANT.individual_no
+WHERE  CLAIM_PARTICIPANT.claim_role_code      = 'C'
+AND    CLAIM_PARTICIPANT.claimant_active_flag = 'Y'
+AND NOT EXISTS ( SELECT *
+                 FROM   CLAIM_PARTICIPANT a
+                 WHERE  a.individual_no = INDIVIDUAL.individual_no
+                 AND  (  a.claim_role_code <> 'C'
+                  OR   ( a.claim_role_code      = 'C' 
+                     AND a.claimant_active_flag = 'N' ) ) )
+-- add_to_where_clause_here
+UNION 
+SELECT 0,
+       INDIVIDUAL.individual_no ,
+       INDIVIDUAL_NAME.last_name ,
+       INDIVIDUAL_NAME.given_names ,
+       INDIVIDUAL_NAME.name_type_code ,
+       INDIVIDUAL.sin_no ,
+       INDIVIDUAL.medicare_no ,
+       INDIVIDUAL.birth_date ,
+       INDIVIDUAL.death_date ,
+       INDIVIDUAL.address_line1 ,
+       INDIVIDUAL.address_line2 ,
+       INDIVIDUAL.city ,
+       INDIVIDUAL.prov_state_code ,
+       INDIVIDUAL.country_code ,
+       INDIVIDUAL.postal_code ,
+       INDIVIDUAL.sex,
+       INDIVIDUAL.caution_flag,
+       INDIVIDUAL.court_order_flag,
+       'Y',
+       'Y',
+       'N',
+       'N'
+FROM   INDIVIDUAL
+JOIN   INDIVIDUAL_NAME   ON INDIVIDUAL.individual_no = INDIVIDUAL_NAME.individual_no
+JOIN   CLAIM_PARTICIPANT ON INDIVIDUAL.individual_no = CLAIM_PARTICIPANT.individual_no
+WHERE  CLAIM_PARTICIPANT.claim_role_code      = 'C'
+AND    CLAIM_PARTICIPANT.claimant_active_flag = 'Y'
+AND     EXISTS ( SELECT *
+                 FROM   CLAIM_PARTICIPANT a
+                 WHERE  a.individual_no = INDIVIDUAL.individual_no
+                 AND  ( a.claim_role_code <> 'C'
+                  OR   ( a.claim_role_code      = 'C' 
+                     AND a.claimant_active_flag = 'N' ) ) )
+-- add_to_where_clause_here
+UNION 
+SELECT 0,
+       INDIVIDUAL.individual_no ,
+       INDIVIDUAL_NAME.last_name ,
+       INDIVIDUAL_NAME.given_names ,
+       INDIVIDUAL_NAME.name_type_code ,
+       INDIVIDUAL.sin_no ,
+       INDIVIDUAL.medicare_no ,
+       INDIVIDUAL.birth_date ,
+       INDIVIDUAL.death_date ,
+       INDIVIDUAL.address_line1 ,
+       INDIVIDUAL.address_line2 ,
+       INDIVIDUAL.city ,
+       INDIVIDUAL.prov_state_code ,
+       INDIVIDUAL.country_code ,
+       INDIVIDUAL.postal_code ,
+       INDIVIDUAL.sex,
+       INDIVIDUAL.caution_flag,
+       INDIVIDUAL.court_order_flag,
+       'N',
+       'Y',
+       'N',
+       'N'
+FROM   INDIVIDUAL
+JOIN   INDIVIDUAL_NAME   ON INDIVIDUAL.individual_no = INDIVIDUAL_NAME.individual_no
+JOIN   CLAIM_PARTICIPANT ON INDIVIDUAL.individual_no = CLAIM_PARTICIPANT.individual_no
+WHERE (CLAIM_PARTICIPANT.claim_role_code <> 'C'
+OR   ( CLAIM_PARTICIPANT.claim_role_code      = 'C' 
+   AND CLAIM_PARTICIPANT.claimant_active_flag = 'N' ) )
+AND NOT EXISTS ( SELECT *
+                 FROM   CLAIM_PARTICIPANT a
+                 WHERE  a.individual_no        = INDIVIDUAL.individual_no
+                 AND    a.claim_role_code      = 'C'
+                 AND    a.claimant_active_flag = 'Y' )
+-- add_to_where_clause_here
+UNION
+SELECT 0,
+       INDIVIDUAL.individual_no ,
+       INDIVIDUAL_NAME.last_name ,
+       INDIVIDUAL_NAME.given_names ,
+       INDIVIDUAL_NAME.name_type_code ,
+       INDIVIDUAL.sin_no ,
+       INDIVIDUAL.medicare_no ,
+       INDIVIDUAL.birth_date ,
+       INDIVIDUAL.death_date ,
+       INDIVIDUAL.address_line1 ,
+       INDIVIDUAL.address_line2 ,
+       INDIVIDUAL.city ,
+       INDIVIDUAL.prov_state_code ,
+       INDIVIDUAL.country_code ,
+       INDIVIDUAL.postal_code ,
+       INDIVIDUAL.sex,
+       INDIVIDUAL.caution_flag,
+       INDIVIDUAL.court_order_flag,
+       'N',
+       'N',
+       'Y',
+       'N'
+FROM   INDIVIDUAL
+JOIN   INDIVIDUAL_NAME            ON INDIVIDUAL.individual_no = INDIVIDUAL_NAME.individual_no
+JOIN   ANNUITY_PAYOUT_PARTICIPANT ON INDIVIDUAL.individual_no = ANNUITY_PAYOUT_PARTICIPANT.recipient_no
+WHERE  ANNUITY_PAYOUT_PARTICIPANT.recipient_type_code = 'I'
+AND NOT EXISTS ( SELECT *
+                 FROM   CLAIM_PARTICIPANT d
+                 WHERE  d.individual_no = ANNUITY_PAYOUT_PARTICIPANT.recipient_no )
+-- add_to_where_clause_here
+UNION
+SELECT 0,
+       INDIVIDUAL.individual_no ,
+       INDIVIDUAL_NAME.last_name ,
+       INDIVIDUAL_NAME.given_names ,
+       INDIVIDUAL_NAME.name_type_code ,
+       INDIVIDUAL.sin_no ,
+       INDIVIDUAL.medicare_no ,
+       INDIVIDUAL.birth_date ,
+       INDIVIDUAL.death_date ,
+       INDIVIDUAL.address_line1 ,
+       INDIVIDUAL.address_line2 ,
+       INDIVIDUAL.city ,
+       INDIVIDUAL.prov_state_code ,
+       INDIVIDUAL.country_code ,
+       INDIVIDUAL.postal_code ,
+       INDIVIDUAL.sex,
+       INDIVIDUAL.caution_flag,
+       INDIVIDUAL.court_order_flag,
+       'N',
+       'N',
+       'N',
+       'Y'
+FROM   INDIVIDUAL
+JOIN   INDIVIDUAL_NAME ON INDIVIDUAL.individual_no = INDIVIDUAL_NAME.individual_no
+WHERE NOT EXISTS ( SELECT *
+                   FROM   ANNUITY_PAYOUT_PARTICIPANT
+                   WHERE  ANNUITY_PAYOUT_PARTICIPANT.recipient_no        = INDIVIDUAL.individual_no
+                   AND    ANNUITY_PAYOUT_PARTICIPANT.recipient_type_code = 'I' )
+AND   NOT EXISTS ( SELECT *
+                   FROM   CLAIM_PARTICIPANT
+                   WHERE  CLAIM_PARTICIPANT.individual_no = INDIVIDUAL.individual_no )
+AND   NOT EXISTS ( SELECT *
+                   FROM   PATIENT_DETAILS
+                   WHERE  PATIENT_DETAILS.individual_no = INDIVIDUAL.individual_no )
+-- add_to_where_clause_here
+"  sort="last_name A given_names A individual_no A " )
+line(band=header x1="5" y1="260" x2="3205" y2="260"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="SIN" border="0" color="0" x="1760" y="0" height="52" width="87" html.valueishtml="0"  name=individual_sin_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Medicare No" border="0" color="0" x="1760" y="60" height="60" width="325" html.valueishtml="0"  name=individual_medicare_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Name" border="0" color="0" x="375" y="128" height="60" width="201" html.valueishtml="0"  name=individual_last_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Address" border="0" color="0" x="375" y="196" height="60" width="233" html.valueishtml="0"  name=individual_telephone_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Individual No" border="0" color="0" x="9" y="196" height="60" width="325" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Death Date" border="0" color="0" x="1760" y="196" height="60" width="283" html.valueishtml="0"  name=individual_death_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Birth Date" border="0" color="0" x="1760" y="128" height="60" width="256" html.valueishtml="0"  name=individual_birth_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="343" y="140" height="60" width="1312" format="[general]" html.valueishtml="0"  name=individual_address_line2 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Caution" border="0" color="255" x="18" y="136" height="60" width="224" html.valueishtml="0"  name=t_6 visible="1~tif( individual_caution_flag = 'Y',1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="1760" y="140" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=individual_birth_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Annuity Payout Participant Only" border="0" color="0" x="2290" y="140" height="60" width="763" html.valueishtml="0"  name=annuity_payout_participant_t visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text=" X~tIF (  annuity_participant_only_flag = 'Y', ' X', '')" border="2" color="0" x="2213" y="144" height="52" width="59" html.valueishtml="0"  name=annuity_payout_participant_only_x visible="1"  font.face="Microsoft Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="IF ( individual_country_code = 'CAN',  individual_city + '  ' + individual_prov_state_code  + ' ' + individual_postal_code ,  individual_city + '  ' +  individual_prov_state_code  + ' ' + individual_country_code  + ' ' + individual_postal_code)"border="0" color="0" x="343" y="208~tif( individual_address_line2 > '', 232, 156)" height="60" width="1312" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Court Order" border="0" color="16711680" x="18" y="208" height="60" width="306" html.valueishtml="0"  name=t_2 visible="1~tIf (  court_order_flag = 'Y',1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text=" X~tIF ( claimant_participant_flag = 'Y' ,' X','')" border="2" color="0" x="2213" y="8" height="52" width="59" html.valueishtml="0"  name=claim_participant_x visible="1"  font.face="Microsoft Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Claimant Participant" border="0" color="0" x="2290" y="4" height="60" width="507" html.valueishtml="0"  name=claimant_participant_t visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1760" y="4" height="60" width="329" format="[general]" html.valueishtml="0"  name=individual_sin_no visible="1" editmask.mask="000-000-000"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if(name_type_code = 'A',  '(A)' , ~"~")"border="0" color="0" x="1563" y="4" height="60" width="91" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression=" last_name + ', ' +  given_names "border="0" color="0" x="343" y="4" height="60" width="1193" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="32" y="4" height="60" width="279" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="343" y="72" height="60" width="1312" format="[general]" html.valueishtml="0"  name=individual_address_line1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Other Claim Participant" border="0" color="0" x="2290" y="72" height="60" width="599" html.valueishtml="0"  name=other_claim_participant_t visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text=" X~tIF ( other_claim_participant_flag = 'Y', ' X', '')" border="2" color="0" x="2213" y="76" height="52" width="59" html.valueishtml="0"  name=other_claim_participant_x visible="1"  font.face="Microsoft Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1760" y="72" height="60" width="329" format="[general]" html.valueishtml="0"  name=individual_medicare_no visible="1" editmask.mask="000-000-000"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Not a Participant" border="0" color="0" x="2290" y="208" height="60" width="421" html.valueishtml="0"  name=non_participant_t visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text=" X~tIF (  non_participant_flag = 'Y', ' X', '')" border="2" color="0" x="2213" y="212" height="52" width="59" html.valueishtml="0"  name=non_participant_x visible="1"  font.face="Microsoft Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="1760" y="208" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=individual_death_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="0" y1="276" x2="3200" y2="276"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="4622" y="140" height="60" width="425" format="[general]" html.valueishtml="0"  name=compute_0001 visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="0" x="2990" y="208" height="60" width="887" format="[general]" html.valueishtml="0"  name=non_participant_flag visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="2985" y="16" height="60" width="919" format="[general]" html.valueishtml="0"  name=claimant_participant_flag visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="0" x="2990" y="72" height="60" width="731" format="[general]" html.valueishtml="0"  name=other_claim_participant_flag visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="0" x="2990" y="144" height="60" width="896" format="[general]" html.valueishtml="0"  name=annuity_participant_only_flag visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="count(individual_no for all)"border="0" color="0" x="773" y="8" height="60" width="151" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="1" text="Number of individuals found: " border="0" color="33554432" x="9" y="8" height="60" width="745" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=footer x1="0" y1="0" x2="3200" y2="0"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,37 @@
+﻿$PBExportHeader$d_checklist_step_notes_entered.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=332 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=checklist_no dbname="checklist_no" )
+ column=(type=long updatewhereclause=yes key=yes name=checklist_step_no dbname="checklist_step_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=char(256) update=yes updatewhereclause=yes name=step_comment dbname="step_comment" )
+ column=(type=char(40) updatewhereclause=yes name=checklist_step_type_desc dbname="checklist_step_type_desc" )
+ retrieve="  SELECT CHECKLIST_STEP.checklist_no,   
+              CHECKLIST_STEP.checklist_step_no,
+              CHECKLIST_STEP.concluded_date,
+              CHECKLIST_STEP.concluded_by_user_id,   
+              CHECKLIST_STEP.step_comment,
+              Checklist_Step_Type.checklist_step_type_desc  
+    FROM CHECKLIST_STEP, Checklist_Step_Type
+WHERE   CHECKLIST_STEP.checklist_step_type_code = Checklist_Step_Type.checklist_step_type_code
+AND       CHECKLIST_STEP.checklist_no = :ar_checklist_no
+AND       CHECKLIST_STEP.checklist_step_no = :ar_step_no" update="CHECKLIST_STEP" updatewhere=1 updatekeyinplace=yes arguments=(("ar_checklist_no", number),("ar_step_no", number)) )
+compute(band=header alignment="0" expression="checklist_step_no +' '+Trim( checklist_step_type_desc )"border="6" color="33554432" x="288" y="8" height="56" width="1678" format="[GENERAL]" html.valueishtml="0"  name=step_no_desc visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text=" Step" border="6" color="33554432" x="14" y="8" height="56" width="256" html.valueishtml="0"  name=t_5  tag="Step" visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=5 alignment="0" tabsequence=10 border="0" color="33554432" x="5" y="8" height="304" width="1947" format="[general]" html.valueishtml="0"  name=step_comment visible="1" edit.limit=256 edit.case=any edit.focusrectangle=no edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

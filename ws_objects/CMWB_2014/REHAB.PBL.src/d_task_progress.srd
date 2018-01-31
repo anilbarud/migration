@@ -1,0 +1,50 @@
+﻿$PBExportHeader$d_task_progress.srd
+$PBExportComments$Task progress information (actual start and completion dates and task status and results)
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=276 color="-1" )
+table(column=(type=datetime updatewhereclause=yes name=actual_completion_date dbname="actual_completion_date" )
+ column=(type=char(1) updatewhereclause=yes name=task_success_code dbname="task_success_code" values="Successful	Y/Not Successful	N/Not Yet Determined	X/" )
+ column=(type=datetime updatewhereclause=yes name=actual_start_date dbname="actual_start_date" )
+ column=(type=char(2) updatewhereclause=yes name=task_status_code dbname="task_status_code" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=datetime updatewhereclause=yes name=planned_start_date dbname="planned_start_date" )
+ column=(type=char(1) updatewhereclause=yes name=success_code_required dbname="success_code_required" )
+ retrieve="  SELECT REHAB_TASK.actual_completion_date,   
+         REHAB_TASK.task_success_code,   
+         REHAB_TASK.actual_start_date,   
+         REHAB_TASK.task_status_code,   
+         REHAB_TASK.claim_no,   
+         REHAB_TASK.task_no,   
+         REHAB_TASK.planned_start_date,   
+         Task_Type.success_code_required  
+    FROM REHAB_TASK,   
+         Task_Type  
+   WHERE ( REHAB_TASK.task_type_code = Task_Type.task_type_code ) and  
+         ( ( REHAB_TASK.claim_no = :al_claim_no ) AND  
+         ( REHAB_TASK.task_no = :al_task_no ) )    
+" arguments=(("al_claim_no", number),("al_task_no", number)) )
+groupbox(band=detail text="Task Progress"border="5" color="33554432" x="18" y="0" height="260" width="2583"  name=gb_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Actual Start:" border="0" color="0" x="32" y="76" height="60" width="320" html.valueishtml="0"  name=rehab_task_planned_completion_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="530" y="76" height="56" width="338" format="yyyy-mm-dd" html.valueishtml="0"  name=actual_start_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Status:" border="0" color="0" x="928" y="76" height="60" width="183" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1147" y="76" height="60" width="599" format="[general]" html.valueishtml="0"  name=task_status_code visible="1" dddw.name=dddw_task_status dddw.displaycolumn=task_status_desc dddw.datacolumn=task_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Result:" border="0" color="0" x="1787" y="76" height="60" width="178" html.valueishtml="0"  name=task_success_label visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Actual Completion:" border="0" color="0" x="27" y="172" height="60" width="485" html.valueishtml="0"  name=rehab_task_actual_completion_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="530" y="172" height="48" width="338" format="yyyy-mm-dd" html.valueishtml="0"  name=actual_completion_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1989" y="36" height="216" width="603" format="[general]" html.valueishtml="0"  name=task_success_code visible="1" radiobuttons.columns=1 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

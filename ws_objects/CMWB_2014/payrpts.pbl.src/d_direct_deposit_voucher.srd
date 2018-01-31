@@ -1,0 +1,122 @@
+﻿$PBExportHeader$d_direct_deposit_voucher.srd
+$PBExportComments$Medical Aid Voucher (Also found in CMWB Payrpts.pbl)
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=1080 color="536870912" )
+summary(height=168 color="536870912" )
+footer(height=92 color="536870912" )
+detail(height=148 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=txn_no dbname="txn_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(42) updatewhereclause=yes name=claimant_name dbname="claimant_name" )
+ column=(type=long updatewhereclause=yes name=medicare_no dbname="medicare_no" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(40) updatewhereclause=yes name=payment_type_payment_type_desc dbname="payment_type_desc" )
+ column=(type=char(60) updatewhereclause=yes name=payment_type_payment_type_french_desc dbname="payment_type_french_desc" )
+ column=(type=char(30) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(10) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(3) updatewhereclause=yes name=country_code dbname="country_code" )
+ column=(type=datetime updatewhereclause=yes name=processed_xmit_date dbname="processed_xmit_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_from_date dbname="paid_from_date" )
+ column=(type=datetime updatewhereclause=yes name=payment_paid_to_date dbname="paid_to_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=payment_submitted_amount dbname="submitted_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=applied_claim_txn_txn_amount dbname="txn_amount" )
+ column=(type=char(1) updatewhereclause=yes name=individual_language_code dbname="language_code" )
+ column=(type=char(40) updatewhereclause=yes name=applied_claim_txn_explanation dbname="explanation" )
+ retrieve="
+ SELECT  dd.txn_no,   
+         	a.claim_no,
+         	d.last_name + ~", ~" + d.given_names as claimant_name,  
+         	d.medicare_no,
+         	a.payment_no,   
+         	p.provider_no,      
+	 		c.payment_type_desc,
+             c.payment_type_french_desc,
+			p.name,
+			p.address_line1,
+			p.address_line2,
+			p.city,
+			p.prov_state_code,
+			p.postal_code,
+			p.country_code,
+			dd.create_date as processed_xmit_date,
+			b.paid_from_date,
+			b.paid_to_date,
+			b.submitted_amount,
+			dd.txn_amount,
+			d.language_code,
+            a.explanation
+  FROM   APPLIED_CLAIM_TXN a,   
+            	PAYMENT          b,
+		   	Payment_Type   c,
+	       	INDIVIDUAL	      d,
+	       	CLAIM		      e,
+           	PROVIDER         p,
+        		DIRECT_DEPOSIT_DETAIL dd
+   WHERE  b.payment_no            = a.payment_no        AND 
+	       	c.payment_type_code    = b.payment_type_code AND
+             p.provider_no               = dd.recipient_no    AND
+            p.provider_type_code      = dd.recipient_type_code  AND
+            dd.txn_no                     = a.txn_no            AND
+	  	    e.claim_no 		   	         = b.claim_no          AND
+	  	    d.individual_no 	             = e.individual_no     AND
+            dd.direct_deposit_xmit_no = :al_deposit_no      AND
+             dd.recipient_no               = :al_provider_no   
+order by dd.txn_no  
+" arguments=(("al_deposit_no", number),("al_provider_no", number)) )
+group(level=1 header.height=168 trailer.height=16 by=("claim_no" ) header.color="553648127" trailer.color="536870912" )
+rectangle(band=header x="9" y="616" height="372" width="3483"  name=r_1 visible="1" brush.hatch="6" brush.color="1073741824" pen.style="5" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+bitmap(band=header filename="Logo_Only.jpg" x="2789" y="128" height="200" width="713" border="0"  name=p_2 visible="1" )
+bitmap(band=header filename="Address_Head_Office.jpg" x="1655" y="20" height="360" width="1125" border="0"  name=p_1 visible="1" )
+line(band=header x1="3154" y1="596" x2="3502" y2="596"  name=l_5 visible="1~tif( page() = pageCount(),1,0)" pen.style="0" pen.width="14" pen.color="0"  background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="1" text="Submitted / Soumis" border="0" color="0" x="2487" y="100" height="60" width="494" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Name / Nom:" border="0" color="0" x="1787" y="4" height="60" width="325" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="0" text="Explanation / Explication" border="0" color="0" x="1787" y="100" height="60" width="603" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=3 alignment="0" tabsequence=32766 border="0" color="0" x="2130" y="4" height="60" width="937" format="[general]" html.valueishtml="0"  name=claimant_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="1" text="Paid / Payé" border="0" color="0" x="3186" y="104" height="60" width="293" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.1 alignment="0" expression="string(medicare_no, ~"000-000-000~")"border="0" color="0" x="3077" y="4" height="60" width="407" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Claim / Réclamation :" border="0" color="0" x="14" y="4" height="60" width="539" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=2 alignment="0" tabsequence=32766 border="0" color="0" x="571" y="4" height="60" width="229" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="payment_type_payment_type_desc +~"/~"  "border="0" color="0" x="23" y="4" height="64" width="937" format="[general]" html.valueishtml="0"  name=payment_descr_eng_french visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="23" y="80" height="60" width="919" format="[general]" html.valueishtml="0"  name=payment_type_payment_type_desc visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="String ( payment_paid_from_date , 'yyyy-mm-dd' ) + ' to/du '  "border="0" color="0" x="1106" y="4" height="64" width="466" format="[GENERAL]" html.valueishtml="0"  name=c_paid_from_date visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="String ( payment_paid_to_date , 'yyyy-mm-dd' )"border="0" color="0" x="1106" y="80" height="60" width="379" format="[GENERAL]" html.valueishtml="0"  name=c_paid_to_date visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="1" tabsequence=32766 border="0" color="0" x="2624" y="12" height="64" width="361" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=payment_submitted_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="applied_claim_txn_explanation"border="0" color="0" x="1778" y="12" height="64" width="622" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="1" tabsequence=32766 border="0" color="0" x="3118" y="12" height="64" width="361" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=applied_claim_txn_txn_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="23" y1="8" x2="3483" y2="8"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="10789024"  background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="This total should agree with the amount of your direct deposit/ Ce total devrait être identique à la somme de votre direct dépot." border="0" color="0" x="183" y="20" height="120" width="1755" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="2971" y1="12" x2="3479" y2="12"  name=l_2 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(  applied_claim_txn_txn_amount  for all )"border="0" color="0" x="2971" y="24" height="60" width="507" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=footer x1="55" y1="104" x2="3474" y2="104"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="10789024"  background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="'Page ' + page() + ' of / de ' + pageCount()"border="0" color="0" x="2798" y="8" height="76" width="690" format="[general]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Provider Number / N° du bénéficiaire" border="0" color="0" x="1897" y="704" height="60" width="1120" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Deposit Number / N° du dépôt" border="0" color="0" x="1897" y="780" height="60" width="1120" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Deposit Date / Date du dépôt" border="0" color="0" x="1897" y="856" height="60" width="1120" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" al_deposit_no "border="0" color="0" x="3045" y="780" height="60" width="375" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=6 alignment="0" tabsequence=32766 border="0" color="0" x="3045" y="700" height="60" width="329" format="[general]" html.valueishtml="0"  name=provider_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=16 alignment="0" tabsequence=32766 border="0" color="0" x="3045" y="852" height="60" width="439" format="yyyy-mm-dd" html.valueishtml="0"  name=processed_xmit_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="if (Trim(name) = ~"~", ~" ~", name) +
+if (Trim( address_line1 ) = ~"~", ~" ~",  ~"~~r~" +  address_line1 ) +  
+if (Trim( address_line2 ) = ~"~" , ~" ~", ~"~~r~" +  address_line2 ) +  
+if (Trim(city) = ~"~",  ~" ~", ~"~~r~" + city) +  
+if (Trim( prov_state_code ) = ~"~",  ~" ~", ~"  ~" +  prov_state_code ) +  
+if (Trim( postal_code ) = ~"~",  ~" ~", ~"  ~" +  postal_code ) +
+if (Trim( country_code ) = ~"~" or Trim( country_code) = 'CAN',  ~" ~", ~"~~r~" +  country_code )"border="0" color="0" x="201" y="664" height="288" width="1413" format="[general]" html.valueishtml="0"  name=calc_address visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="DIRECT DEPOSIT VOUCHER / FICHE DE DÉPÔT DIRECT" border="0" color="0" x="14" y="416" height="80" width="2514" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

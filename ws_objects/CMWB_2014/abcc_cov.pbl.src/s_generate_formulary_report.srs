@@ -1,0 +1,12 @@
+﻿$PBExportHeader$s_generate_formulary_report.srs
+$PBExportComments$Application Driver - contains user profile and authorization information
+global type s_generate_formulary_report from structure
+	long		al_claim_no
+	datawindow		aw_formulary
+	datawindow		aw_eligibility
+	datawindow		aw_rx
+	datawindow		aw_event
+	datawindow		aw_sa
+	datawindow		aw_rx_by_individual
+end type
+

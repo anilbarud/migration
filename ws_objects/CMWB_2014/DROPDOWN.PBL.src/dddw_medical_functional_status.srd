@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_medical_functional_status.srd
+$PBExportComments$Medical Functional Status List for DropDown
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=85 color="-1" )
+table(column=(type=char(2) updatewhereclause=yes name=medical_functional_status_code dbname="Medical_Functional_Status.medical_functional_status_code" )
+ column=(type=char(40) updatewhereclause=yes name=medical_functional_status_desc dbname="Medical_Functional_Status.medical_functional_status_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Medical_Functional_Status~" ) COLUMN(NAME=~"Medical_Functional_Status.medical_functional_status_code~") COLUMN(NAME=~"Medical_Functional_Status.medical_functional_status_desc~")) ORDER(NAME=~"Medical_Functional_Status.medical_functional_status_desc~" ASC=yes ) " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1" y="4" height="73" width="1070" format="[general]"  name=medical_functional_status_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=footer id=2 alignment="0" tabsequence=20 border="0" color="0" x="10" y="120" height="77" width="1125" format="[general]" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

@@ -1,0 +1,6 @@
+﻿$PBExportHeader$s_window_array.srs
+global type s_window_array from structure
+	window		window_element
+	ulong		handle_element
+end type
+

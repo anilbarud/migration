@@ -1,0 +1,17 @@
+﻿$PBExportHeader$dddw_manual_maintenance_txns.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=txn_type_desc dbname="txn_type_desc" )
+ retrieve="SELECT TT.txn_type_code, TT.txn_type_desc 
+  FROM Txn_Type TT, 
+       Txn_Type_Combination TTC 
+ WHERE TT.txn_type_code = TTC.txn_type_code 
+   AND TTC.manual_finance_txn_maint_flag = ~"Y~"  
+ " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="60" width="1591" format="[general]" html.valueishtml="0"  name=txn_type_desc visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

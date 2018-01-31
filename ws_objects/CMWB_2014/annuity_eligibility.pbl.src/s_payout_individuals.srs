@@ -1,0 +1,6 @@
+﻿$PBExportHeader$s_payout_individuals.srs
+global type s_payout_individuals from structure
+	LONG		payout_individual_no
+	long		payout_claim_no
+end type
+

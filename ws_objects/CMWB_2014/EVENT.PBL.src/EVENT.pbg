@@ -1,0 +1,24 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "EVENT.PBL" "";
+@end;
+@begin Objects 
+ "d_add_event.srd" "EVENT.PBL";
+ "d_claim_event_print.srd" "EVENT.PBL";
+ "d_claim_event2.srd" "EVENT.PBL";
+ "d_event_cost_alloc_change.srd" "EVENT.PBL";
+ "d_event_specific_type.srd" "EVENT.PBL";
+ "d_event_status_change.srd" "EVENT.PBL";
+ "d_event_type.srd" "EVENT.PBL";
+ "d_event_type_multiple.srd" "EVENT.PBL";
+ "d_events.srd" "EVENT.PBL";
+ "d_events_comments.srd" "EVENT.PBL";
+ "d_individual_event.srd" "EVENT.PBL";
+ "d_individual_event_print.srd" "EVENT.PBL";
+ "ds_add_claim_event.srd" "EVENT.PBL";
+ "n_event_log.sru" "EVENT.PBL";
+ "u_event_log.sru" "EVENT.PBL";
+ "w_event_details.srw" "EVENT.PBL";
+ "w_event_log.srw" "EVENT.PBL";
+ "w_filter_event_type_list.srw" "EVENT.PBL";
+@end;

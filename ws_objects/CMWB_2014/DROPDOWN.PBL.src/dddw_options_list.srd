@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dddw_options_list.srd
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=81 color="-1" )
+table(column=(type=number updatewhereclause=no name=option_no dbname="option_no" )
+ column=(type=char(40) updatewhereclause=no name=option_name dbname="option_name" )
+ column=(type=date updatewhereclause=no name=start_date dbname="start_date" )
+ column=(type=date updatewhereclause=no name=end_date dbname="end_date" )
+ )
+compute(band=detail alignment="0" expression="String(option_no) + '    ' + RightTrim(option_name) + '  with Start / End Dates of : ' + string(start_date,'YYYY-MM-DD') + ' / ' + string(end_date,'YYYY-MM-DD')"border="0" color="0" x="14" y="4" height="65" width="2625" format=""  name=display_value  slideleft=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

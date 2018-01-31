@@ -1,0 +1,14 @@
+﻿$PBExportHeader$f_invalid_character_test1.srf
+global type f_invalid_character_test1 from function_object
+end type
+
+forward prototypes
+global function boolean f_invalid_character_test1 (string as_string)
+end prototypes
+
+global function boolean f_invalid_character_test1 (string as_string);IF MATCH(as_string, '[`[~~!@#}{$%^&*()_+=|\\":;?/><,]') or POS(as_string, ']') > 0 THEN
+	RETURN TRUE
+END IF
+return false
+end function
+

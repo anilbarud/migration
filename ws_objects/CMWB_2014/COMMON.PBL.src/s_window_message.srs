@@ -1,0 +1,12 @@
+﻿$PBExportHeader$s_window_message.srs
+global type s_window_message from structure
+	window		awi_parent_window
+	string		as_mode
+	string		as_stringparm[]
+	long		al_doubleparm[]
+	powerobject		apo_powerobjectparm[]
+	datetime		adtm_datetimeparm[]
+	date		adt_dateparm[]
+	decimal		adec_decimalparm[]
+end type
+

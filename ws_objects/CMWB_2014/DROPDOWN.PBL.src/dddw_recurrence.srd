@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dddw_recurrence.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=char(1) update=yes key=yes name=recurrence_type_code dbname="Recurrence_Type.recurrence_type_code" )
+ column=(type=char(40) update=yes name=recurrence_type_desc dbname="Recurrence_Type.recurrence_type_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Recurrence_Type~" ) COLUMN(NAME=~"Recurrence_Type.recurrence_type_code~") COLUMN(NAME=~"Recurrence_Type.recurrence_type_desc~")WHERE( EXP1 =~"Recurrence_Type.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="Recurrence_Type" updatewhere=1 updatekeyinplace=no  sort="recurrence_type_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="10" y="4" height="65" width="462" format="[general]"  name=recurrence_type_desc edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

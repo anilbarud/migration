@@ -1,0 +1,50 @@
+﻿$PBExportHeader$d_progress_note_event_print.srd
+$PBExportComments$Progress Note Claim Event
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=752 color="536870912" height.autosize=yes )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=event_no dbname="event_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=event_date dbname="event_date" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=event_type_code dbname="event_type_code" )
+ column=(type=char(2500) update=yes updatewhereclause=yes name=event_comment dbname="event_comment" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=event_specific_code dbname="event_specific_code" )
+ retrieve="  SELECT CLAIM_EVENT.claim_no,   
+         CLAIM_EVENT.event_no,   
+         CLAIM_EVENT.event_date,   
+         CLAIM_EVENT.event_type_code,   
+         CLAIM_EVENT.event_comment,   
+         CLAIM_EVENT.event_specific_code
+    FROM CLAIM_EVENT,   
+         REHAB_TASK_PROGRESS_NOTE  
+   WHERE ( REHAB_TASK_PROGRESS_NOTE.claim_no = CLAIM_EVENT.claim_no ) and  
+         ( REHAB_TASK_PROGRESS_NOTE.event_no = CLAIM_EVENT.event_no ) and  
+         ( ( CLAIM_EVENT.claim_no = :al_claim_no ) AND  
+         ( CLAIM_EVENT.event_no = :al_event_no ) AND  
+         ( REHAB_TASK_PROGRESS_NOTE.task_no = :al_task_no ) )    
+" update="CLAIM_EVENT" updatewhere=0 updatekeyinplace=yes arguments=(("al_claim_no", number),("al_event_no", number),("al_task_no", number)) )
+text(band=detail alignment="0" text="Progress Note" border="0" color="0" x="23" y="12" height="80" width="1193" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=40 border="0" color="0" x="82" y="392" height="332" width="2779" format="[general]" html.valueishtml="0"  name=event_comment visible="1" height.autosize=yes edit.limit=2500 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autovscroll=yes edit.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=3 alignment="0" tabsequence=10 border="0" color="0" x="210" y="200" height="60" width="407" format="yyyy-mm-dd" html.valueishtml="0"  name=event_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="210" y="120" height="60" width="110" format="[general]" html.valueishtml="0"  name=event_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="No:" border="0" color="0" x="59" y="120" height="60" width="101" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Type:" border="0" color="0" x="928" y="120" height="60" width="137" html.valueishtml="0"  name=event_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Specific:" border="0" color="0" x="928" y="200" height="60" width="229" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="0" color="0" x="1175" y="120" height="60" width="818" format="[general]" html.valueishtml="0"  name=event_type_code visible="1" dddw.name=dddw_manual_event_type_list dddw.displaycolumn=event_type_desc dddw.datacolumn=event_type_code dddw.percentwidth=175 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=30 border="0" color="0" x="1175" y="200" height="60" width="800" format="[general]" html.valueishtml="0"  name=event_specific_code visible="1" dddw.name=dddw_event_specific_list dddw.displaycolumn=event_specific_desc dddw.datacolumn=event_specific_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Date:" border="0" color="0" x="59" y="200" height="60" width="133" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Note:" border="0" color="0" x="59" y="332" height="60" width="133" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

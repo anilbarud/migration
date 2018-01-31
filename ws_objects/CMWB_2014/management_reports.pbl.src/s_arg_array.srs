@@ -1,0 +1,7 @@
+﻿$PBExportHeader$s_arg_array.srs
+global type s_arg_array from structure
+	string		key[]
+	string		value[]
+	string		populated_flag[]
+end type
+

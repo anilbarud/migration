@@ -1,0 +1,11 @@
+﻿$PBExportHeader$s_claim_search_defaults.srs
+$PBExportComments$This structure is used by both the indexing search and the confirm annuity eligibility modules.
+global type s_claim_search_defaults from structure
+	string		last_name
+	string		given_names
+	datetime		birth_date
+	long		sin_no
+	long		medicare_no
+	long		claim_no
+end type
+

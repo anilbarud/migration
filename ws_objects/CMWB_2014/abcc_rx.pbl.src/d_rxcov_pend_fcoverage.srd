@@ -1,0 +1,57 @@
+﻿$PBExportHeader$d_rxcov_pend_fcoverage.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=192 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=char(5) updatewhereclause=yes name=formulary_code dbname="formulary_code" )
+ column=(type=char(120) updatewhereclause=yes name=formulary_desc dbname="formulary_desc" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(1) updatewhereclause=yes name=formulary_type_code dbname="formulary_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=start_date dbname="start_date" )
+ column=(type=char(1) updatewhereclause=yes name=end_date dbname="end_date" )
+ retrieve="  SELECT Formulary.formulary_code,   
+         Formulary.formulary_desc,
+			ACCIDENT.claim_no ,
+         'P' formulary_type_code ,
+         '' start_date ,
+         '' end_date
+    FROM Formulary,   
+         X001_Noi_Formulary_Xref,
+			ACCIDENT  
+   WHERE ACCIDENT.claim_no = :ar_claim_no
+	AND   ACCIDENT.nature_of_injury_code = X001_Noi_Formulary_Xref.noi_code
+	AND	Formulary.formulary_code = X001_Noi_Formulary_Xref.formulary_code
+UNION all
+  SELECT  XASF.secondary_formulary_code ,
+         Secondary_Formulary.formulary_desc,
+	A.claim_no,
+         'S' formulary_type_code ,
+         '' start_date ,
+         '' end_date
+    FROM Formulary                      Primary_Formulary ,   
+         X001_Noi_Formulary_Xref        XNFX ,
+	ACCIDENT                        A ,
+         X001_Auto_Secondary_Formulary  XASF ,
+         Formulary                      Secondary_Formulary
+   WHERE A.claim_no = :ar_claim_no
+	AND   A.nature_of_injury_code = XNFX.noi_code
+	AND	Primary_Formulary.formulary_code = XNFX.formulary_code
+ AND   Primary_Formulary.formulary_code = XASF.primary_formulary_code
+ AND   Secondary_Formulary.formulary_code = XASF.secondary_formulary_code
+order by 4" arguments=(("ar_claim_no", number)) )
+line(band=header x1="14" y1="180" x2="2999" y2="180"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Desc" border="0" color="33554432" x="1070" y="96" height="64" width="146" html.valueishtml="0"  name=formulary_formulary_desc_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Start Date" border="0" color="33554432" x="14" y="96" height="64" width="293" html.valueishtml="0"  name=claim_formulary_formulary_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Formulary " border="0" color="33554432" x="14" y="16" height="64" width="315" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="End Date" border="0" color="33554432" x="425" y="96" height="64" width="274" html.valueishtml="0"  name=claim_formulary_formulary_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Code" border="0" color="33554432" x="850" y="96" height="64" width="155" html.valueishtml="0"  name=claim_formulary_formulary_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="" border="0" color="33554432" x="425" y="8" height="64" width="384" html.valueishtml="0"  name=st_formulary_end_date visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="3008" y="0" height="64" width="123" format="[general]" html.valueishtml="0"  name=formulary_type_code visible="0" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="8" height="64" width="366" format="[general]" html.valueishtml="0"  name=start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="443" y="8" height="64" width="366" format="[general]" html.valueishtml="0"  name=end_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="850" y="8" height="64" width="192" format="[general]" html.valueishtml="0"  name=formulary_code visible="1" edit.limit=5 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1070" y="8" height="64" width="1938" format="[general]" html.valueishtml="0"  name=formulary_desc visible="1" edit.limit=120 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

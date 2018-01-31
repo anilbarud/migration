@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_county.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=char(2) key=yes name=county_code dbname="County.county_code" )
+ column=(type=char(20) name=county_desc dbname="County.county_desc" )
+ column=(type=char(1) name=active_flag dbname="County.active_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"County~" ) COLUMN(NAME=~"County.county_code~") COLUMN(NAME=~"County.county_desc~") COLUMN(NAME=~"County.active_flag~")WHERE( EXP1 =~"County.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="County" updatewhere=1 updatekeyinplace=no  sort="county_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="10" y="4" height="65" width="1093" format="[general]"  name=county_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

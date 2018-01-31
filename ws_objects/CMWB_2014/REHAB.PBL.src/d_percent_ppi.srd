@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_percent_ppi.srd
+$PBExportComments$used to display CLAIM.percent_impaired on the Vocational Profile tab of Rehab Planner
+release 5;
+datawindow(units=0 timer_interval=0 color=79741120 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=73 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="CLAIM.claim_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=percent_impaired dbname="CLAIM.percent_impaired" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"CLAIM~" ) COLUMN(NAME=~"CLAIM.claim_no~") COLUMN(NAME=~"CLAIM.percent_impaired~")WHERE(    EXP1 =~"CLAIM.claim_no~"   OP =~"=~"    EXP2 =~":al_claim_no~" ) ) ARG(NAME = ~"al_claim_no~" TYPE = number) " update="CLAIM" updatewhere=1 updatekeyinplace=no arguments=(("al_claim_no", number)) )
+text(band=detail alignment="1" text="PPI:"border="0" color="0" x="19" y="8" height="61" width="101"  name=percent_disability_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="138" y="8" height="61" width="170" format="#,##0.00"  name=percent_impaired edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="%"border="0" color="0" x="325" y="8" height="61" width="42"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

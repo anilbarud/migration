@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_complicating_factors.srd
+$PBExportComments$Complicating Factors list for DropDown
+release 5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=89 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=complicating_factor_code dbname="Complicating_Factor.complicating_factor_code" )
+ column=(type=char(40) updatewhereclause=yes name=complicating_factor_desc dbname="Complicating_Factor.complicating_factor_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Complicating_Factor~" ) COLUMN(NAME=~"Complicating_Factor.complicating_factor_code~") COLUMN(NAME=~"Complicating_Factor.complicating_factor_desc~")) ORDER(NAME=~"Complicating_Factor.complicating_factor_desc~" ASC=yes ) " )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="16" height="65" width="1121" format="[general]"  name=complicating_factor_desc edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

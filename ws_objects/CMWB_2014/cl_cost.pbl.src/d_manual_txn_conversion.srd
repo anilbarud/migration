@@ -1,0 +1,53 @@
+﻿$PBExportHeader$d_manual_txn_conversion.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=68 color="67108864" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=ntr_conversion_no dbname="ntr_conversion_no" )
+ column=(type=long update=yes updatewhereclause=yes name=ultimate_payment_no dbname="ultimate_payment_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=new_txn_type_code dbname="new_txn_type_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=new_txn_sub_type_code dbname="new_txn_sub_type_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=converted_flag dbname="converted_flag" )
+ column=(type=long update=yes updatewhereclause=yes name=ultimate_payment_no dbname="ultimate_payment_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=ntr_payment_group_code dbname="ntr_payment_group_code" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=explanation dbname="explanation" )
+ retrieve="SELECT ntr_conversion_no,
+       ultimate_payment_no,
+       new_txn_type_code,
+       new_txn_sub_type_code,
+       converted_flag,
+		 a.ultimate_payment_no,
+		 c.claim_no,
+       a.create_user_id,
+ 		 a.create_date,
+       ntr_payment_group_code,
+       explanation
+  FROM NTR_MANUAL_TXN_CONVERSION a,
+       PAYMENT c
+ WHERE converted_flag = 'N'
+
+   and c.payment_no = a.ultimate_payment_no" update="NTR_MANUAL_TXN_CONVERSION" updatewhere=0 updatekeyinplace=yes  sort="ntr_conversion_no D " )
+text(band=header alignment="2" text="#" border="6" color="33554432" x="165" y="4" height="60" width="119" html.valueishtml="0"  name=ntr_conversion_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text="Txn Typ" border="6" color="33554432" x="302" y="4" height="60" width="247" html.valueishtml="0"  name=new_txn_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Sub Typ" border="6" color="33554432" x="567" y="4" height="60" width="251" html.valueishtml="0"  name=new_txn_sub_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Explanation" border="6" color="33554432" x="1198" y="4" height="60" width="1198" html.valueishtml="0"  name=explanation_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Payment #" border="6" color="33554432" x="832" y="4" height="60" width="347" html.valueishtml="0"  name=ultimate_payment_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Created by" border="6" color="33554432" x="2414" y="4" height="60" width="434" html.valueishtml="0"  name=create_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="0" text=" Created on" border="6" color="33554432" x="2866" y="4" height="60" width="480" html.valueishtml="0"  name=create_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="" border="6" color="33554432" x="9" y="4" height="60" width="142" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="" border="6" color="33554432" x="9" y="4" height="60" width="142" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="306" y="8" height="64" width="247" format="[general]" html.valueishtml="0"  name=new_txn_type_code visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="33554432" x="169" y="8" height="60" width="119" format="[general]" html.valueishtml="0"  name=ntr_conversion_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="u" border="0" color="33554432" x="9" y="4" height="60" width="142" html.valueishtml="0"  name=t_6 visible="1~tif( currentRow() = GetRow(),1,0)"  font.face="Wingdings 3" font.height="-10" font.weight="400"  font.family="1" font.pitch="2" font.charset="2" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=10 border="5" color="33554432" x="576" y="8" height="64" width="215" format="[general]" html.valueishtml="0"  name=new_txn_sub_type_code visible="1" dddw.name=dddw_txn_sub_type_desc dddw.displaycolumn=txn_sub_type_code dddw.datacolumn=txn_sub_type_code dddw.percentwidth=500 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="837" y="8" height="64" width="347" format="[general]" html.valueishtml="0"  name=ultimate_payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="2418" y="8" height="64" width="434" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="2871" y="8" height="64" width="480" format="yyyy-mm-dd" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=20 border="5" color="33554432" x="1198" y="8" height="64" width="1198" format="[general]" html.valueishtml="0"  name=explanation visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,61 @@
+﻿$PBExportHeader$ds_rtw_incentive_linked_bencalcs.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=564 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=curr_yr_reg_ltd_benefit_calculation_no dbname="benefit_calculation_no" )
+ column=(type=datetime updatewhereclause=yes name=curr_yr_reg_ltd_effective_from_date dbname="effective_from_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=curr_yrs_reg_ltd_award_amount dbname="award_amount" )
+ column=(type=decimal(4) updatewhereclause=yes name=curr_yr_reg_pre93_capable_gross_pay dbname="pre93_capable_gross_pay" )
+ column=(type=char(1) updatewhereclause=yes name=curr_yr_reg_pre93_capable_earn_type_code dbname="pre93_capable_earn_type_code" )
+ column=(type=datetime updatewhereclause=yes name=prev_yrs_ltd_effective_from_date dbname="effective_from_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=prev_yrs_capable_pre93_capable_gross_pay dbname="prev_yrs_capable_pre93_capable_gross_pay" )
+ column=(type=char(1) updatewhereclause=yes name=prev_yrs_capable_pre93_capable_earn_type_code dbname="prev_yrs_capable_pre93_capable_earn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=prev_yrs_capable_pre93_capable_uic_flag dbname="prev_yrs_capable_pre93_capable_uic_flag" )
+ column=(type=char(1) updatewhereclause=yes name=prev_yrs_capable_pre93_capable_cpp_flag dbname="prev_yrs_capable_pre93_capable_cpp_flag" )
+ retrieve="SELECT  CURR_YRS_REG_LTD.claim_no,
+              CURR_YRS_REG_LTD.benefit_calculation_no,
+              CURR_YRS_REG_LTD.effective_from_date,
+              CURR_YRS_REG_LTD.award_amount,
+              CURR_YRS_REG_CAPABLE.pre93_capable_gross_pay,
+              CURR_YRS_REG_CAPABLE.pre93_capable_earn_type_code,
+              PREV_YRS_LTD.effective_from_date,
+              IsNull(PREV_YRS_CAPABLE.pre93_capable_gross_pay,0) AS prev_yrs_capable_pre93_capable_gross_pay,
+              IsNull(PREV_YRS_CAPABLE.pre93_capable_earn_type_code,'') AS prev_yrs_capable_pre93_capable_earn_type_code,
+              IsNull(PREV_YRS_CAPABLE.pre93_capable_uic_flag,'') AS prev_yrs_capable_pre93_capable_uic_flag,
+              IsNull(PREV_YRS_CAPABLE.pre93_capable_cpp_flag,'') AS prev_yrs_capable_pre93_capable_cpp_flag
+FROM    BENEFIT_CALCULATION     AS PREV_YRS_LTD
+JOIN      BENEFIT_CALCULATION     AS CURR_YRS_REG_LTD    ON  PREV_YRS_LTD.claim_no                       = CURR_YRS_REG_LTD.claim_no
+                                                                                                    AND PREV_YRS_LTD.benefit_calculation_no = CURR_YRS_REG_LTD.copied_from_benefit_calc_no
+                                                                                                    AND Year(PREV_YRS_LTD.effective_from_date) = Year(CURR_YRS_REG_LTD.effective_from_date) - 1
+JOIN      CAPABLE_EARNING             AS CURR_YRS_REG_CAPABLE  ON  CURR_YRS_REG_LTD.claim_no                       = CURR_YRS_REG_CAPABLE.claim_no
+                                                                                                            AND CURR_YRS_REG_LTD.benefit_calculation_no = CURR_YRS_REG_CAPABLE.benefit_calculation_no
+LEFT OUTER JOIN CAPABLE_EARNING   AS PREV_YRS_CAPABLE   ON  PREV_YRS_LTD.claim_no                       = PREV_YRS_CAPABLE.claim_no
+                                                                                                         AND PREV_YRS_LTD.benefit_calculation_no = PREV_YRS_CAPABLE.benefit_calculation_no
+WHERE   CURR_YRS_REG_LTD.claim_no                        = :al_claim_no
+AND        CURR_YRS_REG_LTD.benefit_calculation_no  = :al_curr_yrs_reg_bencalc_no
+" arguments=(("al_claim_no", number),("al_curr_yrs_reg_bencalc_no", number)) )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1038" y="88" height="60" width="1038" format="[general]" html.valueishtml="0"  name=curr_yr_reg_pre93_capable_earn_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="88" height="60" width="974" format="yyyy-mm-dd" html.valueishtml="0"  name=curr_yr_reg_ltd_effective_from_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="164" height="60" width="896" format="[general]" html.valueishtml="0"  name=curr_yrs_reg_ltd_award_amount visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="12" height="60" width="261" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1038" y="12" height="60" width="928" format="[general]" html.valueishtml="0"  name=curr_yr_reg_pre93_capable_gross_pay visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="18" y="268" height="60" width="891" format="yyyy-mm-dd" html.valueishtml="0"  name=prev_yrs_ltd_effective_from_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="1038" y="268" height="60" width="1221" format="[general]" html.valueishtml="0"  name=prev_yrs_capable_pre93_capable_gross_pay visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="1038" y="344" height="60" width="1417" format="[general]" html.valueishtml="0"  name=prev_yrs_capable_pre93_capable_earn_type_code visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=0 border="0" color="33554432" x="1038" y="420" height="60" width="1221" html.valueishtml="0"  name=prev_yrs_capable_pre93_capable_cpp_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=0 border="0" color="33554432" x="1038" y="496" height="60" width="1221" html.valueishtml="0"  name=prev_yrs_capable_pre93_capable_uic_flag visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

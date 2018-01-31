@@ -1,0 +1,14 @@
+﻿$PBExportHeader$d_opening_date_parameters.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=217 color="536870912" )
+table(column=(type=date name=benefit_start_date dbname="accident_recurrence_date" )
+ column=(type=date name=accident_recurrence_date dbname="benefit_start_date" )
+ )
+column(band=detail id=1 alignment="0" tabsequence=20 border="5" color="0" x="869" y="112" height="73" width="494" format="[general]"  name=benefit_start_date editmask.required=yes editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Benefit Start Date:"border="0" color="0" x="353" y="116" height="61" width="471"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Accident/Recurrence Date:"border="0" color="0" x="129" y="12" height="61" width="695"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="869" y="12" height="77" width="485" format="[general]"  name=accident_recurrence_date editmask.required=yes editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

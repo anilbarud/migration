@@ -1,0 +1,10 @@
+﻿$PBExportHeader$s_calc_reason_data.srs
+global type s_calc_reason_data from structure
+	long		individual_no
+	long		claim_no
+	string		claim_role_code
+	long		annuity_eligibility_no
+	long		annuity_payout_no
+	datetime		annuity_end_date
+end type
+

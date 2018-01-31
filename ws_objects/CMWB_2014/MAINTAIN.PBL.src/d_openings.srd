@@ -1,0 +1,77 @@
+﻿$PBExportHeader$d_openings.srd
+$PBExportComments$list dw for maintaining openings - the list is display only but updatable. Data is shared with d_openings_details on update
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=68 color="28027307" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="OPENING.claim_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=opening_no dbname="OPENING.opening_no" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=opening_type_code dbname="OPENING.opening_type_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=accident_recurrence_date dbname="OPENING.accident_recurrence_date" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=recurrence_type_code dbname="OPENING.recurrence_type_code" initial="R" )
+ column=(type=datetime update=yes updatewhereclause=yes name=benefit_start_date dbname="OPENING.benefit_start_date" )
+ column=(type=datetime update=yes updatewhereclause=yes name=benefit_end_date dbname="OPENING.benefit_end_date" )
+ column=(type=char(80) update=yes updatewhereclause=yes name=comment dbname="OPENING.comment" )
+ column=(type=char(80) update=yes updatewhereclause=yes name=disposition_comment dbname="OPENING.disposition_comment" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=claim_disposition_code dbname="OPENING.claim_disposition_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=work_restriction_flag dbname="OPENING.work_restriction_flag" initial="N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=receiving_ltd_code dbname="OPENING.receiving_ltd_code" initial="N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=claimant_working_flag dbname="OPENING.claimant_working_flag" initial="N" values="	Y/	N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=three_day_paid_flag dbname="OPENING.three_day_paid_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=comp_85percent_flag dbname="OPENING.comp_85percent_flag" )
+ column=(type=datetime update=yes updatewhereclause=yes name=review_12_week_date dbname="OPENING.review_12_week_date" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="OPENING.timestamp" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=three_day_exempt_code dbname="OPENING.three_day_exempt_code" )
+ column=(type=char(1) updatewhereclause=yes name=claim_disposition_type_comment_required_ dbname="Claim_Disposition_Type.comment_required_flag" )
+ column=(type=datetime update=yes updatewhereclause=yes name=opening_disposition_code_entry_date dbname="OPENING.disposition_code_entry_date" )
+ retrieve=" SELECT OPENING.claim_no,   
+         OPENING.opening_no,   
+         OPENING.opening_type_code,   
+         OPENING.accident_recurrence_date,   
+         OPENING.recurrence_type_code,   
+         OPENING.benefit_start_date,   
+         OPENING.benefit_end_date,   
+         OPENING.comment,   
+         OPENING.disposition_comment,   
+         OPENING.claim_disposition_code,   
+         OPENING.work_restriction_flag,   
+         OPENING.receiving_ltd_code,   
+         OPENING.claimant_working_flag,   
+         OPENING.three_day_paid_flag,   
+         OPENING.comp_85percent_flag,   
+         OPENING.review_12_week_date,   
+         OPENING.timestamp,   
+         OPENING.three_day_exempt_code,   
+         Claim_Disposition_Type.comment_required_flag,   
+         OPENING.disposition_code_entry_date  
+FROM  OPENING 
+    LEFT OUTER JOIN  Claim_Disposition_Type  ON OPENING.claim_disposition_code = Claim_Disposition_Type.claim_disposition_code
+ WHERE OPENING.claim_no = :claim_no
+" update="OPENING" updatewhere=0 updatekeyinplace=yes arguments=(("claim_no", number)) )
+text(band=header alignment="2" text="Openings-" border="0" color="0" x="0" y="8" height="60" width="274" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Type" border="0" color="0" x="274" y="8" height="56" width="123" html.valueishtml="0"  name=benefit_category_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Date" border="0" color="0" x="2327" y="8" height="56" width="137" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Recurrence" border="0" color="0" x="416" y="8" height="56" width="306" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Start Date" border="0" color="0" x="745" y="8" height="56" width="261" html.valueishtml="0"  name=benefit_start_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="End Date" border="0" color="0" x="1097" y="8" height="56" width="229" html.valueishtml="0"  name=benefit_end_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Disposition" border="0" color="0" x="1463" y="8" height="56" width="288" html.valueishtml="0"  name=claim_disposition_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="27" y="4" height="56" width="183" format="[general]" html.valueishtml="0"  name=opening_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="247" y="4" height="56" width="151" format="[general]" html.valueishtml="0"  name=opening_type_code visible="1" dddw.name=dddw_opening_type_active dddw.displaycolumn=opening_type_code dddw.datacolumn=opening_type_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="0" x="2245" y="4" height="56" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=opening_disposition_code_entry_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="4" height="56" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=accident_recurrence_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="731" y="4" height="56" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_start_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1051" y="4" height="56" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=benefit_end_date visible="1" editmask.mask="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1362" y="4" height="56" width="869" format="[general]" html.valueishtml="0"  name=claim_disposition_code visible="1" dddw.name=dddw_claim_dispostion_type dddw.displaycolumn=claim_disposition_desc dddw.datacolumn=claim_disposition_code dddw.percentwidth=150 dddw.lines=0 dddw.limit=3 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.nilisnull=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

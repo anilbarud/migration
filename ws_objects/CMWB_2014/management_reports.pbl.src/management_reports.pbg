@@ -1,0 +1,39 @@
+﻿Save Format v3.0(19990112)
+@begin Libraries
+ "management_reports.pbl" "";
+@end;
+@begin Objects 
+ "d_items_to_keep.srd" "management_reports.pbl";
+ "d_management_report_sql.srd" "management_reports.pbl";
+ "d_mr_admin_region.srd" "management_reports.pbl";
+ "d_mr_billable_item_is_a_good.srd" "management_reports.pbl";
+ "d_mr_billable_item_is_a_service.srd" "management_reports.pbl";
+ "d_mr_billable_items.srd" "management_reports.pbl";
+ "d_mr_diagnostic_group.srd" "management_reports.pbl";
+ "d_mr_diagnostic_group_report.srd" "management_reports.pbl";
+ "d_mr_diagnostic_group_report_summary.srd" "management_reports.pbl";
+ "d_mr_diagnostic_group_report_w_data.srd" "management_reports.pbl";
+ "d_mr_pob_comp_test.srd" "management_reports.pbl";
+ "d_mr_pob_treated.srd" "management_reports.pbl";
+ "d_mr_program.srd" "management_reports.pbl";
+ "d_mr_provider.srd" "management_reports.pbl";
+ "d_mr_rehab_program.srd" "management_reports.pbl";
+ "d_mr_rehab_program_dddw.srd" "management_reports.pbl";
+ "d_mr_return_to_work_sp_counts.srd" "management_reports.pbl";
+ "d_mr_return_to_work_sp_detail.srd" "management_reports.pbl";
+ "d_mr_return_to_work_sp_summary.srd" "management_reports.pbl";
+ "d_mr_search_criteria.srd" "management_reports.pbl";
+ "d_mr_therapist.srd" "management_reports.pbl";
+ "d_mr_therapists_by_clinic_report.srd" "management_reports.pbl";
+ "d_mr_treatment_discharge_disposition.srd" "management_reports.pbl";
+ "d_mr_treatment_goal.srd" "management_reports.pbl";
+ "d_physio_docid_for_filter.srd" "management_reports.pbl";
+ "s_arg_array.srs" "management_reports.pbl";
+ "u_tab_selection.sru" "management_reports.pbl";
+ "u_tabpg.sru" "management_reports.pbl";
+ "u_tabpg_selection.sru" "management_reports.pbl";
+ "uo_report_criteria_selector.sru" "management_reports.pbl";
+ "w_management_report_add_text.srw" "management_reports.pbl";
+ "w_management_report_sql.srw" "management_reports.pbl";
+ "w_management_reports.srw" "management_reports.pbl";
+@end;

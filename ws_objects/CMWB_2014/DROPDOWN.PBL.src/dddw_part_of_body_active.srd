@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dddw_part_of_body_active.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=char(5) update=yes key=yes name=part_of_body_code dbname="Part_Of_Body.part_of_body_code" )
+ column=(type=char(80) update=yes name=part_of_body_desc dbname="Part_Of_Body.part_of_body_desc" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Part_Of_Body~" ) COLUMN(NAME=~"Part_Of_Body.part_of_body_code~") COLUMN(NAME=~"Part_Of_Body.part_of_body_desc~")WHERE( EXP1 =~"Part_Of_Body.active_flag~" OP =~"=~" EXP2 =~"'Y'~" ) ) " update="Part_Of_Body" updatewhere=1 updatekeyinplace=no  sort="part_of_body_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="1" y="4" height="65" width="1838" format="[general]"  name=part_of_body_desc edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )

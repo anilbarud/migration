@@ -1,0 +1,129 @@
+﻿$PBExportHeader$d_journal_number_inquiry.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=540 color="536870912" )
+summary(height=80 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=txn_no dbname="txn_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(1) updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_sub_type_code dbname="txn_sub_type_code" )
+ column=(type=datetime updatewhereclause=yes name=applied_claim_txn_processed_date dbname="processed_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=applied_claim_txn_txn_amount dbname="txn_amount" )
+ column=(type=char(3) updatewhereclause=yes name=applied_claim_txn_admin_region_code dbname="admin_region_code" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_operation_no dbname="cost_alloc_operation_no" )
+ column=(type=long updatewhereclause=yes name=applied_claim_txn_cheque_no dbname="cheque_no" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=datetime updatewhereclause=yes name=cheque_deposit_date dbname="cheque_deposit_date" )
+ column=(type=datetime updatewhereclause=yes name=txn_entry_date dbname="txn_entry_date" )
+ column=(type=char(16) updatewhereclause=yes name=txn_entry_user_id dbname="txn_entry_user_id" )
+ column=(type=char(30) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=char(30) updatewhereclause=yes name=gl_debit_account_no dbname="gl_debit_account_no" )
+ column=(type=char(30) updatewhereclause=yes name=gl_credit_account_no dbname="gl_credit_account_no" )
+ column=(type=datetime updatewhereclause=yes name=gl_transfer_date dbname="gl_transfer_date" )
+ column=(type=decimal(4) updatewhereclause=yes name=gl_transfer_amount dbname="gl_transfer_amount" )
+ column=(type=char(41) updatewhereclause=yes name=individual_name dbname="individual_name" )
+ column=(type=char(30) updatewhereclause=yes name=provider_name dbname="provider_name" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ retrieve=" SELECT ACT.txn_no,
+       ACT.claim_no,
+       ACT.txn_type_code,
+       ACT.txn_sub_type_code,
+       ACT.processed_date,
+       ACT.txn_amount,
+       ACT.admin_region_code,
+       IsNull(COCA.cost_alloc_no,0) 'cost_alloc_no',
+       IsNull(COCA.cost_alloc_operation_no,0) 'cost_alloc_operation_no',
+       ACT.cheque_no,
+       ACT.payment_no,
+       ACT.recipient_no,
+       ACT.cheque_deposit_date,
+       ACT.txn_entry_date,
+       ACT.txn_entry_user_id,
+       ACT.recipient_name,
+       GT.gl_debit_account_no,
+       GT.gl_credit_account_no,
+       GT.gl_transfer_date,
+       GT.gl_transfer_amount, 
+       (SELECT RTRIM(given_names) + ' ' + last_name 
+          FROM INDIVIDUAL 
+         WHERE individual_no = ACT.recipient_no 
+           AND ACT.recipient_type_code = 'I') AS individual_name,
+       (SELECT name 
+          FROM PROVIDER 
+         WHERE provider_no = ACT.recipient_no 
+           AND provider_type_code = ACT.recipient_type_code 
+           AND provider_sub_type_code = ACT.recipient_sub_type_code 
+           AND ACT.recipient_type_code IN ('M', 'O', 'V')) AS provider_name,
+	PMT.payment_type_code,
+        PMT.payment_sub_type_code 
+FROM APPLIED_CLAIM_TXN ACT 
+     INNER JOIN GL_TXN GT  ON ACT.txn_no = GT.txn_no
+    LEFT OUTER JOIN COST_OF_CLAIMS_ALLOCATED COCA  ON GT.coc_allocated_no = COCA.coc_allocated_no
+     INNER JOIN PAYMENT PMT  ON ACT.payment_no = PMT.payment_no
+WHERE GT.gl_journal_control_no = :as_journal_control_no
+ORDER BY ACT.txn_no ASC
+ " arguments=(("as_journal_control_no", string)) )
+rectangle(band=header x="23" y="4" height="380" width="4283"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+line(band=header x1="50" y1="352" x2="4256" y2="352"  name=l_1 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="GL Journal Control Number Inquiry" border="0" color="0" x="1746" y="28" height="80" width="1134" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3781" y="32" height="76" width="471" format="[general]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date:" border="0" color="0" x="50" y="28" height="60" width="315" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="594" y="28" height="60" width="306" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Processed Date:  " border="0" color="0" x="50" y="188" height="60" width="448" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Parameters:" border="0" color="0" x="50" y="108" height="60" width="489" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="~"Journal Control No = ~" +  as_journal_control_no "border="0" color="0" x="594" y="108" height="60" width="1029" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="1" text="GL Transfer Date: " border="0" color="0" x="50" y="268" height="60" width="453" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="5" y1="532" x2="4274" y2="532"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+column(band=header id=19 alignment="0" tabsequence=32766 border="0" color="0" x="594" y="268" height="60" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=gl_transfer_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+column(band=header id=5 alignment="0" tabsequence=32766 border="0" color="0" x="594" y="188" height="60" width="384" format="yyyy-mm-dd" html.valueishtml="0"  name=applied_claim_txn_processed_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Txn No" border="0" color="0" x="18" y="464" height="56" width="155" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="DR Account: " border="0" color="0" x="3456" y="196" height="60" width="325" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="CR Account: " border="0" color="0" x="3456" y="268" height="60" width="325" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+column(band=header id=17 alignment="1" tabsequence=32766 border="0" color="0" x="3799" y="196" height="56" width="453" format="[general]" html.valueishtml="0"  name=gl_debit_account_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+column(band=header id=18 alignment="1" tabsequence=32766 border="0" color="0" x="3799" y="268" height="56" width="453" format="[general]" html.valueishtml="0"  name=gl_credit_account_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Txn
+Type" border="0" color="0" x="270" y="412" height="112" width="201" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Pmt
+Type" border="0" color="0" x="503" y="412" height="112" width="197" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Claim No" border="0" color="0" x="718" y="464" height="56" width="187" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Payment No" border="0" color="0" x="978" y="464" height="56" width="261" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Recipient
+Name" border="0" color="0" x="1641" y="412" height="108" width="224" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Recipient
+No" border="0" color="0" x="1253" y="412" height="108" width="251" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Txn Entry
+User Id" border="0" color="0" x="2267" y="412" height="108" width="210" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Txn Entry
+Date" border="0" color="0" x="2565" y="412" height="108" width="210" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cheque/Direct Deposit Date" border="0" color="0" x="2839" y="412" height="108" width="338" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cheque No" border="0" color="0" x="3232" y="412" height="108" width="219" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Cost
+Allocation" border="0" color="33554432" x="3945" y="412" height="108" width="215" html.valueishtml="0"  name=occurrence_date_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Transfer Amount" border="0" color="0" x="3598" y="412" height="108" width="219" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="18" y="4" height="60" width="265" format="[general]" html.valueishtml="0"  name=txn_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="txn_type_code+'/'+txn_sub_type_code"border="0" color="0" x="311" y="4" height="60" width="192" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" payment_type_code+~"/~"+ payment_sub_type_code "border="0" color="0" x="530" y="4" height="60" width="183" format="[GENERAL]" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="722" y="4" height="60" width="261" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1001" y="4" height="60" width="261" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1303" y="4" height="60" width="215" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="2281" y="4" height="60" width="261" format="[general]" html.valueishtml="0"  name=txn_entry_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="2546" y="4" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=txn_entry_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="2880" y="4" height="60" width="297" format="yyyy-mm-dd" html.valueishtml="0"  name=cheque_deposit_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="0" x="3186" y="4" height="60" width="270" format="[general]" html.valueishtml="0"  name=applied_claim_txn_cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="3822" y="4" height="60" width="242" format="[general]" html.valueishtml="0"  name=cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="/" border="0" color="134217749" x="4069" y="4" height="60" width="14" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="4091" y="4" height="60" width="201" format="[general]" html.valueishtml="0"  name=cost_alloc_operation_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="1" tabsequence=32766 border="0" color="0" x="3483" y="4" height="60" width="325" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=gl_transfer_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="0" x="1522" y="4" height="60" width="731" format="[general]" html.valueishtml="0"  name=provider_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="0" x="1522" y="4" height="60" width="731" format="[general]" html.valueishtml="0"  name=individual_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="1522" y="4" height="60" width="731" format="[general]" html.valueishtml="0"  name=recipient_name visible="1~tIF(ISNULL(individual_name) AND ISNULL(provider_name), 1, 0)" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="'Total Number of Transactions: ' +  Count(txn_no for all)"border="0" color="0" x="576" y="4" height="60" width="1723" format="[general]" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="'Total for Journal Control No: ' +  as_journal_control_no "border="0" color="0" x="2272" y="4" height="60" width="1175" format="[general]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum( gl_transfer_amount  for all)"border="0" color="0" x="3479" y="4" height="68" width="329" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

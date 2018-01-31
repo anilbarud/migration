@@ -1,0 +1,71 @@
+﻿$PBExportHeader$dddw_rtw_incentive_pymt_elig.srd
+$PBExportComments$note that this drop down includes two derived tables in the first half of the union clause
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="16777215" )
+table(column=(type=decimal(4) updatewhereclause=yes name=rtw_incentive_amount dbname="rtw_incentive_amount" )
+ column=(type=long updatewhereclause=yes name=months_from_employment_start dbname="months_from_employment_start" )
+ column=(type=datetime updatewhereclause=yes name=employment_start_date dbname="employment_start_date" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(3) updatewhereclause=yes name=rtw_incentive_type_code dbname="rtw_incentive_type_code" )
+ column=(type=long updatewhereclause=yes name=rtw_incentive_no dbname="rtw_incentive_no" )
+ column=(type=long updatewhereclause=yes name=rtw_incentive_payment_xref_tier_no dbname="tier_no" )
+ retrieve="SELECT  b.rtw_incentive_amount ,
+        b.months_from_employment_start ,
+        c.employment_start_date ,
+        d.claim_no ,
+        d.rtw_incentive_type_code,
+        d.rtw_incentive_no ,
+        d.tier_no
+FROM       RTW_INCENTIVE_PAYMENT_ELIGIBILITY a
+INNER JOIN Rtw_Incentive_Tier                b ON a.tier_no  = b.tier_no
+INNER JOIN RTW_INCENTIVE_QUALIFICATION       c ON a.claim_no         = c.claim_no
+                                              AND a.rtw_incentive_no = c.rtw_incentive_no
+INNER JOIN RTW_INCENTIVE_PAYMENT_XREF        d ON a.claim_no         = d.claim_no
+                                              AND a.tier_no          = d.tier_no
+                                              AND a.rtw_incentive_no = d.rtw_incentive_no
+WHERE	a.claim_no						= :al_claim_no
+AND	a.payment_eligibility_flag	= 'Y'
+and	c.opening_no = :al_opening_no
+UNION ALL
+SELECT 
+        b.rtw_incentive_amount ,
+        b.months_from_employment_start ,
+        c.employment_start_date ,
+        a.claim_no ,
+        a.rtw_incentive_type_code ,
+        c.rtw_incentive_no ,
+        a.tier_no
+FROM       RTW_INCENTIVE_PAYMENT_ELIGIBILITY a
+INNER JOIN Rtw_Incentive_Tier                b ON a.tier_no  = b.tier_no
+INNER JOIN RTW_INCENTIVE_QUALIFICATION       c ON a.claim_no         = c.claim_no
+                                              AND a.rtw_incentive_no = c.rtw_incentive_no
+INNER JOIN OPENING                            f ON a.claim_no = f.claim_no
+                                              AND c.opening_no = f.opening_no
+WHERE	a.claim_no						= :al_claim_no
+AND	a.payment_eligibility_flag	= 'Y'
+and	f.opening_no = :al_opening_no
+and     not exists ( select *
+                     from RTW_INCENTIVE_PAYMENT_XREF d
+                     where a.claim_no       = d.claim_no
+                     AND a.tier_no          = d.tier_no
+                     AND a.rtw_incentive_no = d.rtw_incentive_no )
+order by d.tier_no" arguments=(("al_claim_no", number),("al_opening_no", number)) )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="8" height="60" width="123" format="[general]" html.valueishtml="0"  name=rtw_incentive_payment_xref_tier_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="261" y="8" height="60" width="517" format="[general]" html.valueishtml="0"  name=rtw_incentive_amount visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1166" y="8" height="60" width="457" format="[general]" html.valueishtml="0"  name=rtw_incentive_no visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="rtw_incentive_payment_xref_tier_no")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

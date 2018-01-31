@@ -1,0 +1,20 @@
+﻿$PBExportHeader$d_inbasket_document_flag.srd
+$PBExportComments$Datawindow used to look at document's english flag for Inbasket filtering
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=73 color="536870912" )
+summary(height=5 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=157 color="536870912" )
+table(column=(type=number name=fldid dbname="REF.docfldid" )
+ column=(type=number name=docid dbname="REF.docid" )
+ column=(type=char(1) name=english_flag dbname="DOCUMENT_INDEX.english_flag" )
+ column=(type=number name=doccatid dbname="REF.doccatid" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"DOCUMENT_INDEX~" ) TABLE(NAME=~"REF~" ) COLUMN(NAME=~"REF.docfldid~") COLUMN(NAME=~"REF.docid~") COLUMN(NAME=~"DOCUMENT_INDEX.english_flag~") COLUMN(NAME=~"REF.doccatid~") JOIN (LEFT=~"DOCUMENT_INDEX.docid~" OP =~"=~"RIGHT=~"REF.docid~" )WHERE( EXP1 =~"REF.doccatid~" OP =~"=~" EXP2 =~":al_catid~" ) ) ARG(NAME = ~"al_catid~" TYPE = number) " arguments=(("al_catid", number)) )
+text(band=header alignment="0" text="Document English Flag"border="0" color="0" x="33" y="12" height="65" width="668"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Folder:"border="0" color="0" x="206" y="4" height="65" width="206"  name=ref_docfldid_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="430" y="4" height="65" width="330" format="[general]"  name=fldid edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="English Flag:"border="0" color="0" x="42" y="80" height="65" width="375"  name=document_index_english_flag_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="435" y="80" height="65" width="55" format="[general]"  name=english_flag edit.limit=1 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Docid:"border="0" color="0" x="782" y="4" height="65" width="183"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="979" y="4" height="65" width="375" format="[general]"  name=docid edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

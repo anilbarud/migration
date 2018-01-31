@@ -1,0 +1,15 @@
+﻿$PBExportHeader$d_template_fields.srd
+$PBExportComments$List all template fields for a specific template
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=81 color="28817335" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=81 color="536870912" )
+table(column=(type=char(40) name=template_field_id dbname="TEMPLATE_FIELD.template_field_id" )
+ column=(type=char(1) name=access_code dbname="TEMPLATE_FIELD.access_code" )
+ retrieve="PBSELECT(TABLE(NAME=~"TEMPLATE_FIELD~" ) TABLE(NAME=~"TEMPLATE_FIELD_XREF~" ) COLUMN(NAME=~"TEMPLATE_FIELD.template_field_id~") COLUMN(NAME=~"TEMPLATE_FIELD.access_code~") JOIN (LEFT=~"TEMPLATE_FIELD.template_field_id~" OP =~"=~"RIGHT=~"TEMPLATE_FIELD_XREF.template_field_id~" )WHERE( EXP1 =~"TEMPLATE_FIELD_XREF.template_code~" OP =~"=~" EXP2 =~":template_code~" LOGIC =~"and~" ) WHERE( EXP1 =~"TEMPLATE_FIELD_XREF.template_version_no~" OP =~"=~" EXP2 =~":template_version_no~" ) ) ORDER(NAME=~"TEMPLATE_FIELD.access_code~" ASC=yes ) ARG(NAME = ~"template_code~" TYPE = string) ARG(NAME = ~"template_version_no~" TYPE = string) " arguments=(("template_code", string),("template_version_no", string)) )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="61" width="439" format="[general]"  name=template_field_id edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="476" y="4" height="61" width="348" format="[general]"  name=access_code edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="0" text="Label"border="0" color="33554432" x="14" y="8" height="61" width="142"  name=label  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Access Code"border="0" color="33554432" x="490" y="8" height="61" width="343"  name=template_field_access_code_t  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )

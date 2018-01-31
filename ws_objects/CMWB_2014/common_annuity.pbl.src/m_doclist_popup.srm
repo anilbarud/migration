@@ -1,0 +1,352 @@
+﻿$PBExportHeader$m_doclist_popup.srm
+forward
+global type m_doclist_popup from menu
+end type
+type m_sort from menu within m_doclist_popup
+end type
+type m_bydocumentdate from menu within m_sort
+end type
+type m_presenttopast from menu within m_bydocumentdate
+end type
+type m_pasttopresent from menu within m_bydocumentdate
+end type
+type m_bydocumentdate from menu within m_sort
+m_presenttopast m_presenttopast
+m_pasttopresent m_pasttopresent
+end type
+type m_bydateindexed from menu within m_sort
+end type
+type m_presenttopast_date_indexed from menu within m_bydateindexed
+end type
+type m_pasttopresent_date_indexed from menu within m_bydateindexed
+end type
+type m_bydateindexed from menu within m_sort
+m_presenttopast_date_indexed m_presenttopast_date_indexed
+m_pasttopresent_date_indexed m_pasttopresent_date_indexed
+end type
+type m_sort from menu within m_doclist_popup
+m_bydocumentdate m_bydocumentdate
+m_bydateindexed m_bydateindexed
+end type
+type m_otheroptions from menu within m_doclist_popup
+end type
+global type m_doclist_popup from menu
+m_sort m_sort
+m_otheroptions m_otheroptions
+end type
+end forward
+
+global type m_doclist_popup from menu
+m_sort m_sort
+m_otheroptions m_otheroptions
+end type
+global m_doclist_popup m_doclist_popup
+
+type variables
+u_datawindow      idw_doclist
+boolean   ib_other_sort_requested
+end variables
+
+forward prototypes
+public subroutine mf_set_datawindow (datawindow adw_datawindow)
+end prototypes
+
+public subroutine mf_set_datawindow (datawindow adw_datawindow);idw_doclist = adw_datawindow
+end subroutine
+
+on m_doclist_popup.create
+m_doclist_popup=this
+call super::create
+this.text = "m_doclist_popup"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_sort=create m_sort
+this.m_otheroptions=create m_otheroptions
+this.Item[UpperBound(this.Item)+1]=this.m_sort
+this.Item[UpperBound(this.Item)+1]=this.m_otheroptions
+end on
+
+on m_doclist_popup.destroy
+call super::destroy
+destroy(this.m_sort)
+destroy(this.m_otheroptions)
+end on
+
+type m_sort from menu within m_doclist_popup
+m_bydocumentdate m_bydocumentdate
+m_bydateindexed m_bydateindexed
+end type
+
+on m_sort.create
+call super::create
+this.text = "Sort"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_bydocumentdate=create m_bydocumentdate
+this.m_bydateindexed=create m_bydateindexed
+this.Item[UpperBound(this.Item)+1]=this.m_bydocumentdate
+this.Item[UpperBound(this.Item)+1]=this.m_bydateindexed
+end on
+
+on m_sort.destroy
+call super::destroy
+destroy(this.m_bydocumentdate)
+destroy(this.m_bydateindexed)
+end on
+
+type m_bydocumentdate from menu within m_sort
+m_presenttopast m_presenttopast
+m_pasttopresent m_pasttopresent
+end type
+
+on m_bydocumentdate.create
+call super::create
+this.text = "By Document Date"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_presenttopast=create m_presenttopast
+this.m_pasttopresent=create m_pasttopresent
+this.Item[UpperBound(this.Item)+1]=this.m_presenttopast
+this.Item[UpperBound(this.Item)+1]=this.m_pasttopresent
+end on
+
+on m_bydocumentdate.destroy
+call super::destroy
+destroy(this.m_presenttopast)
+destroy(this.m_pasttopresent)
+end on
+
+type m_presenttopast from menu within m_bydocumentdate
+end type
+
+on m_presenttopast.create
+call super::create
+this.text = "Present to Past"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_presenttopast.destroy
+call super::destroy
+end on
+
+event clicked;
+idw_doclist.setSort("date_on_document D, docindex_type A, docindex_comment A" )
+idw_doclist.Sort()
+end event
+
+type m_pasttopresent from menu within m_bydocumentdate
+end type
+
+on m_pasttopresent.create
+call super::create
+this.text = "Past to Present"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pasttopresent.destroy
+call super::destroy
+end on
+
+event clicked;
+idw_doclist.setSort("date_on_document A, docindex_type A, docindex_comment A" )
+idw_doclist.Sort()
+end event
+
+type m_bydateindexed from menu within m_sort
+m_presenttopast_date_indexed m_presenttopast_date_indexed
+m_pasttopresent_date_indexed m_pasttopresent_date_indexed
+end type
+
+on m_bydateindexed.create
+call super::create
+this.text = "By Date Indexed"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_presenttopast_date_indexed=create m_presenttopast_date_indexed
+this.m_pasttopresent_date_indexed=create m_pasttopresent_date_indexed
+this.Item[UpperBound(this.Item)+1]=this.m_presenttopast_date_indexed
+this.Item[UpperBound(this.Item)+1]=this.m_pasttopresent_date_indexed
+end on
+
+on m_bydateindexed.destroy
+call super::destroy
+destroy(this.m_presenttopast_date_indexed)
+destroy(this.m_pasttopresent_date_indexed)
+end on
+
+type m_presenttopast_date_indexed from menu within m_bydateindexed
+end type
+
+on m_presenttopast_date_indexed.create
+call super::create
+this.text = "Present to Past"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_presenttopast_date_indexed.destroy
+call super::destroy
+end on
+
+event clicked;
+//create_date refers to DOCUMENT_INDEX.create_date, therefore, the date the document was indexed
+idw_doclist.setSort("create_date D, docindex_type A, docindex_comment A" )
+idw_doclist.Sort()
+end event
+
+type m_pasttopresent_date_indexed from menu within m_bydateindexed
+end type
+
+on m_pasttopresent_date_indexed.create
+call super::create
+this.text = "Past to Present"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pasttopresent_date_indexed.destroy
+call super::destroy
+end on
+
+event clicked;
+//create_date refers to DOCUMENT_INDEX.create_date, therefore, the date the document was indexed
+idw_doclist.setSort("create_date A, docindex_type A, docindex_comment A" )
+idw_doclist.Sort()
+end event
+
+type m_otheroptions from menu within m_doclist_popup
+end type
+
+event clicked;ib_other_sort_requested = true
+end event
+
+on m_otheroptions.create
+call super::create
+this.text = "Other Options..."
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_otheroptions.destroy
+call super::destroy
+end on
+

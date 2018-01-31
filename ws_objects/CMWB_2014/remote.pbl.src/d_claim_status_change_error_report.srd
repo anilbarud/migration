@@ -1,0 +1,49 @@
+﻿$PBExportHeader$d_claim_status_change_error_report.srd
+$PBExportComments$Error Report for Automated Claim Status Change
+release 6;
+datawindow(units=0 timer_interval=60000 color=16777215 processing=0 print.documentname="" print.orientation = 2 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=412 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912"  height.autosize=yes)
+table(column=(type=long updatewhereclause=yes name=claim_status_process_exception_claim_no dbname="claim_no" )
+ column=(type=char(8) updatewhereclause=yes name=claim_claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=char(25) updatewhereclause=yes name=user_profile_user_first_name dbname="user_first_name" )
+ column=(type=char(20) updatewhereclause=yes name=user_profile_user_last_name dbname="user_last_name" )
+ column=(type=long updatewhereclause=yes name=claim_claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=caged dbname="aged" )
+ retrieve=" SELECT DISTINCT CLAIM_STATUS_PROCESS_EXCEPTION.claim_no,
+         CLAIM.claim_manager_user_id,   
+         User_Profile.user_first_name,   
+         User_Profile.user_last_name,   
+         CLAIM.claim_no, 
+         aged = DATEDIFF(day, CLAIM.create_date, getdate())   
+FROM  CLAIM 
+     INNER JOIN  CLAIM_STATUS_PROCESS_EXCEPTION  ON CLAIM_STATUS_PROCESS_EXCEPTION.claim_no = CLAIM.claim_no
+    LEFT OUTER JOIN  Claim_Status_Exception  ON CLAIM_STATUS_PROCESS_EXCEPTION.claim_status_exception_code = Claim_Status_Exception.claim_status_exception_code
+    LEFT OUTER JOIN  Claim_Status_Process  ON CLAIM_STATUS_PROCESS_EXCEPTION.claim_status_process_code = Claim_Status_Process.claim_status_process_code
+    LEFT OUTER JOIN  User_Profile  ON CLAIM.claim_manager_user_id = User_Profile.user_id
+ WHERE (:as_claim_manager = '' OR CLAIM.claim_manager_user_id = :as_claim_manager) 
+" arguments=(("as_claim_manager", string))  sort="sort_name_age A claim_status_process_exception_claim_no A " )
+group(level=1 header.height=232 trailer.height=0 by=("user_profile_user_last_name" ) newpage=yes resetpagecount=yes header.color="536870912" trailer.color="536870912" )
+rectangle(band=header x="14" y="4" height="408" width="3369" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+text(band=header alignment="0" text="Report Date:"border="0" color="0" x="50" y="28" height="60" width="334"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="443" y="28" height="76" width="677" format="yyyy-mm-dd"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="2789" y="24" height="76" width="549" format="[general]"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="50" y1="380" x2="3346" y2="380" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="2" text="Coup AutomationClaim Status ChangeException Report
+(Manual Status Change Needed)"border="0" color="0" x="1275" y="36" height="304" width="1262"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+compute(band=header.1 alignment="0" expression="Trim(user_profile_user_first_name) + ~" ~" +  Trim(user_profile_user_last_name) +~", Total : ~" + Trim(String(count(  claim_status_process_exception_claim_no for group 1 ))) + ~".~""border="0" color="0" x="23" y="4" height="112" width="2043" format="[GENERAL]"  name=name  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="2" text="Exception Code"border="0" color="0" x="1623" y="132" height="64" width="457"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Age (Days)"border="0" color="0" x="3072" y="132" height="64" width="306"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Claim"border="0" color="0" x="3209" y="56" height="64" width="169"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header.1 x1="0" y1="220" x2="3383" y2="220" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="15987699" )
+text(band=header.1 alignment="2" text="Process Code"border="0" color="0" x="517" y="132" height="64" width="393"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="2" text="Claim No"border="0" color="0" x="201" y="132" height="64" width="265"  name=claim_status_process_exception_claim_no_  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="GetRow() - first( current for group 1 ) + 1"border="0" color="0" x="14" y="4" height="60" width="133" format="[GENERAL]"  name=counter  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="3223" y="4" height="60" width="155" format="[general]"  name=caged edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="174" y="4" height="60" width="293" format="[general]"  name=claim_status_process_exception_claim_no edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+report(band=detail dataobject="d_claim_status_change_error_report_det" x="512" y="0" height="136" width="2441" border="0"  height.autosize=yes criteria="" nest_arguments=(("claim_status_process_exception_claim_no")) trail_footer = yes  slideup=directlyabove )
+compute(band=detail alignment="0" expression=" user_profile_user_last_name + STRING(abs( caged  -100000))"border="0" color="0" x="3401" y="4" height="60" width="64" format="[GENERAL]"  name=sort_name_age visible="1~t0"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="GetRow()"border="0" color="0" x="3479" y="4" height="92" width="46" format="[GENERAL]"  name=current visible="1~t0"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" cellpadding="0" cellspacing="0" generatecss="no" nowrap="yes")

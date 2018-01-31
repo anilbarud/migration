@@ -1,0 +1,43 @@
+﻿$PBExportHeader$d_mr_billable_items.srd
+$PBExportComments$all goods and services
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=60 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ column=(type=char(70) update=yes updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=char(7) updatewhereclause=yes name=compute_0003 dbname="compute_0003" )
+ retrieve="SELECT a.billable_item_no,  a.billable_item_desc_e , 'Goods'
+    FROM  billable_item  a
+join Billable_Item_Rehab_Task_Xref b on a.billable_item_no 	= b.billable_item_no
+WHERE a.is_a_goods_flag = 'Y'
+AND b.rehab_service_code = 'S022'
+group by a.billable_item_no,  a.billable_item_desc_e 
+union
+SELECT a.billable_item_no,  a.billable_item_desc_e , 'Service'
+    FROM  billable_item  a
+join Billable_Item_Rehab_Task_Xref b on a.billable_item_no 	= b.billable_item_no
+WHERE  is_a_service_flag = 'Y'
+AND b.rehab_service_code = 'S022'
+group by a.billable_item_no,  a.billable_item_desc_e "  sort="billable_item_desc_e A " )
+text(band=header alignment="0" text="Services & Supplies  " border="0" color="33554432" x="46" y="36" height="60" width="507" html.valueishtml="0"  name=t_tab_name visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Billable_Item" border="0" color="33554432" x="453" y="36" height="60" width="357" html.valueishtml="0"  name=t_table_name visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="billable_item_no" border="0" color="33554432" x="850" y="36" height="60" width="517" html.valueishtml="0"  name=t_key_column visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="N" border="0" color="33554432" x="1435" y="48" height="76" width="119" html.valueishtml="0"  name=t_special visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+compute(band=detail alignment="0" expression="string( billable_item_no )"border="0" color="33554432" x="187" y="148" height="76" width="256" format="[General]" html.valueishtml="0"  name=item_key visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+compute(band=detail alignment="0" expression=" billable_item_desc_e "border="0" color="33554432" x="759" y="180" height="76" width="256" format="[GENERAL]" html.valueishtml="0"  name=item_to_keep visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="14" y="4" height="56" width="1056" format="[general]" html.valueishtml="0"  name=billable_item_desc_e visible="1" edit.limit=70 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="0" color="33554432" x="1097" y="4" height="56" width="297" format="[general]" html.valueishtml="0"  name=compute_0003 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,123 @@
+﻿$PBExportHeader$d_claim_create.srd
+$PBExportComments$displays only the columns necessary for creating claims but selects every column
+release 12.5;
+datawindow(units=0 timer_interval=0 color=67108864 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=492 color="-1" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=claim_no dbname="claim_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=claim_status_code dbname="claim_status_code" initial="P" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=case_managed_flag dbname="case_managed_flag" )
+ column=(type=long update=yes updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=claim_status_type_code dbname="claim_status_type_code" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=rehab_officer_user_id dbname="rehab_officer_user_id" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=comp_week_code dbname="comp_week_code" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=comp_day_code dbname="comp_day_code" )
+ column=(type=long update=yes updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=long update=yes updatewhereclause=yes name=cost_alloc_operation_no dbname="cost_alloc_operation_no" )
+ column=(type=long update=yes updatewhereclause=yes name=duplicate_of_claim_no dbname="duplicate_of_claim_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=receiving_salary_flag dbname="receiving_salary_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=imaged_flag dbname="imaged_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=history_flag dbname="history_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=coding_complete_flag dbname="coding_complete_flag" )
+ column=(type=datetime update=yes updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=accident_county_code dbname="accident_county_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=accident_residence_county_code dbname="accident_residence_county_code" )
+ column=(type=long update=yes updatewhereclause=yes name=accident_employer_no dbname="accident_employer_no" )
+ column=(type=long update=yes updatewhereclause=yes name=accident_employer_operation_no dbname="accident_employer_operation_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=employer_type_code dbname="employer_type_code" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=part_of_body_code dbname="part_of_body_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=side_of_body_code dbname="side_of_body_code" )
+ column=(type=char(6) update=yes updatewhereclause=yes name=classification_system_code dbname="classification_system_code" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=classification_system_type_code dbname="classification_system_type_code" )
+ column=(type=long update=yes updatewhereclause=yes name=years_of_service dbname="years_of_service" )
+ column=(type=long update=yes updatewhereclause=yes name=months_of_service dbname="months_of_service" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="timestamp" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cost_alloc_type_code dbname="cost_alloc_type_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=difficult_claim_flag dbname="difficult_claim_flag" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=disallow_reason_code dbname="disallow_reason_code" )
+ column=(type=long update=yes updatewhereclause=yes name=pen_cost_alloc_no dbname="pen_cost_alloc_no" )
+ column=(type=long update=yes updatewhereclause=yes name=pen_cost_alloc_operation_no dbname="pen_cost_alloc_operation_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=pen_cost_alloc_type_code dbname="pen_cost_alloc_type_code" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=percent_disability dbname="percent_disability" )
+ column=(type=datetime update=yes updatewhereclause=yes name=disability_determination_date dbname="disability_determination_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=percent_change_disability dbname="percent_change_disability" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=legislation_code dbname="legislation_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=annual_ben_review_due_date dbname="annual_ben_review_due_date" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=percent_impaired dbname="percent_impaired" )
+ column=(type=datetime updatewhereclause=yes name=impaired_determination_date dbname="impaired_determination_date" )
+ column=(type=char(16) update=yes updatewhereclause=yes name=occupational_therapist_user_id dbname="occupational_therapist_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ retrieve="SELECT  CLAIM.claim_no ,
+           CLAIM.claim_status_code ,
+           CLAIM.admin_region_code ,
+           CLAIM.case_managed_flag ,
+           CLAIM.individual_no ,
+           CLAIM.claim_status_type_code ,
+           CLAIM.claim_manager_user_id ,
+           CLAIM.rehab_officer_user_id ,
+           CLAIM.comp_week_code ,
+           CLAIM.comp_day_code ,
+           CLAIM.cost_alloc_no ,
+           CLAIM.cost_alloc_operation_no ,
+           CLAIM.duplicate_of_claim_no ,
+           CLAIM.receiving_salary_flag ,
+           CLAIM.imaged_flag ,
+           CLAIM.history_flag ,
+           CLAIM.coding_complete_flag ,
+           CLAIM.accident_date ,
+           CLAIM.accident_county_code ,
+           CLAIM.accident_residence_county_code ,
+           CLAIM.accident_employer_no ,
+           CLAIM.accident_employer_operation_no ,
+           CLAIM.employer_type_code ,
+           CLAIM.part_of_body_code ,
+           CLAIM.side_of_body_code ,
+           CLAIM.classification_system_code ,
+           CLAIM.classification_system_type_code,
+           CLAIM.years_of_service ,
+           CLAIM.months_of_service ,
+           CLAIM.timestamp ,
+           CLAIM.cost_alloc_type_code ,
+           CLAIM.difficult_claim_flag ,
+           CLAIM.disallow_reason_code ,
+           CLAIM.pen_cost_alloc_no ,
+           CLAIM.pen_cost_alloc_operation_no ,
+           CLAIM.pen_cost_alloc_type_code ,
+           CLAIM.percent_disability ,
+           CLAIM.disability_determination_date ,
+           CLAIM.percent_change_disability ,
+           CLAIM.legislation_code ,
+           CLAIM.annual_ben_review_due_date ,
+           CLAIM.percent_impaired ,
+           CLAIM.impaired_determination_date , 
+           CLAIM.occupational_therapist_user_id,
+           CLAIM.create_date
+        FROM CLAIM    " update="CLAIM" updatewhere=0 updatekeyinplace=yes )
+groupbox(band=detail text=""border="5" color="33554432" x="27" y="4" height="480" width="1618"  name=gb_1 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Side of Body:" border="0" color="0" x="32" y="412" height="60" width="334" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=24 alignment="0" tabsequence=30 border="5" color="0" x="443" y="332" height="60" width="997" format="[general]" html.valueishtml="0"  name=part_of_body_code visible="1" dddw.name=dddw_part_of_body_active dddw.displaycolumn=part_of_body_desc dddw.datacolumn=part_of_body_code dddw.percentwidth=180 dddw.lines=0 dddw.limit=5 dddw.allowedit=no dddw.useasborder=yes dddw.case=upper dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Part of Body:" border="0" color="0" x="32" y="332" height="60" width="329" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="443" y="252" height="60" width="741" format="[general]" html.valueishtml="0"  name=claim_status_code visible="1" dddw.name=dddw_claim_status_active dddw.displaycolumn=claim_status_desc dddw.datacolumn=claim_status_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=2 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Status:" border="0" color="0" x="32" y="252" height="60" width="183" html.valueishtml="0"  name=claim_status_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=18 alignment="0" tabsequence=20 border="5" color="0" x="443" y="176" height="60" width="402" format="yyyy-mm-dd" html.valueishtml="0"  name=accident_date visible="1" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Accident Date:" border="0" color="0" x="32" y="176" height="60" width="375" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Region:" border="0" color="0" x="32" y="100" height="60" width="192" html.valueishtml="0"  name=current_admin_region_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="5" color="0" x="443" y="24" height="56" width="361" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.nilisnull=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Claim No:" border="0" color="0" x="32" y="20" height="60" width="242" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="0" tabsequence=10 border="5" color="0" x="443" y="100" height="60" width="613" format="[general]" html.valueishtml="0"  name=admin_region_code visible="1" dddw.name=dddw_admin_region_active dddw.displaycolumn=admin_region_desc dddw.datacolumn=admin_region_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=25 alignment="0" tabsequence=40 border="5" color="0" x="443" y="412" height="60" width="613" format="[general]" html.valueishtml="0" protect="0~tif( isNull(part_of_body_code) or  part_of_body_code = '' , 1, 0 )"  name=side_of_body_code visible="1" dddw.name=dddw_side_of_body dddw.displaycolumn=side_of_body_side_of_body_desc_e dddw.datacolumn=side_of_body_side_of_body_code dddw.percentwidth=0 dddw.lines=4 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" background.transparency="0" background.gradient.color="16777215" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

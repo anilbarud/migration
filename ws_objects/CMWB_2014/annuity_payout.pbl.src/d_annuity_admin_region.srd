@@ -1,0 +1,43 @@
+﻿$PBExportHeader$d_annuity_admin_region.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=long updatewhereclause=yes key=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=datetime updatewhereclause=yes name=prepared_date dbname="prepared_date" )
+ column=(type=char(16) updatewhereclause=yes name=prepared_by_user_id dbname="prepared_by_user_id" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=annuity_payout_annuity_admin_region_code dbname="annuity_admin_region_code" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_annuity_benefit_amount dbname="total_annuity_benefit_amount" )
+ retrieve="SELECT annuity_payout_no,
+       annuity_account_no,
+       prepared_date,
+       prepared_by_user_id,
+       annuity_admin_region_code,
+       total_annuity_benefit_amount
+FROM   ANNUITY_PAYOUT
+WHERE  annuity_payout_no = :al_annuity_payout_no
+" update="ANNUITY_PAYOUT" updatewhere=0 updatekeyinplace=no arguments=(("al_annuity_payout_no", number)) )
+text(band=detail alignment="1" text="Annuity Admin Region Code:" border="0" color="33554432" x="2766" y="20" height="60" width="741" html.valueishtml="0"  name=annuity_payout_annuity_admin_region_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=10 border="5" color="33554432" x="3529" y="20" height="60" width="626" format="[general]" html.valueishtml="0"  name=annuity_payout_annuity_admin_region_code visible="1" dddw.name=dddw_admin_region_active dddw.displaycolumn=admin_region_desc dddw.datacolumn=admin_region_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Annuity Acct No:" border="0" color="33554432" x="37" y="20" height="60" width="421" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=30 border="0" color="33554432" x="475" y="20" height="60" width="215" format="[general]" html.valueishtml="0"  name=annuity_account_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Annuity Payout No:" border="0" color="33554432" x="750" y="20" height="60" width="480" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=40 border="0" color="33554432" x="1248" y="20" height="60" width="215" format="[general]" html.valueishtml="0"  name=annuity_payout_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=50 border="0" color="33554432" x="2391" y="20" height="60" width="338" format="yyyy-mm-dd" html.valueishtml="0"  name=prepared_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Date:" border="0" color="33554432" x="2222" y="20" height="60" width="151" html.valueishtml="0"  name=checklist_concluded_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Prepared By:" border="0" color="33554432" x="1536" y="20" height="60" width="338" html.valueishtml="0"  name=checklist_concluded_by_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=60 border="0" color="33554432" x="1897" y="20" height="60" width="265" format="[general]" html.valueishtml="0"  name=prepared_by_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

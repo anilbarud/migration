@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_calculation_reasons.srd
+release 4;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="536870912" )
+summary(height=1 color="536870912" )
+footer(height=1 color="536870912" )
+detail(height=65 color="536870912" )
+table(column=(type=char(3) update=yes key=yes name=calculation_reason_code dbname="Calculation_Reason.calculation_reason_code" )
+ column=(type=char(20) update=yes name=calculation_reason_desc dbname="Calculation_Reason.calculation_reason_desc" )
+ column=(type=char(1) update=yes name=active_flag dbname="Calculation_Reason.active_flag" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"Calculation_Reason~" ) COLUMN(NAME=~"Calculation_Reason.calculation_reason_code~") COLUMN(NAME=~"Calculation_Reason.calculation_reason_desc~") COLUMN(NAME=~"Calculation_Reason.active_flag~")) " update="Calculation_Reason" updatewhere=1 updatekeyinplace=no  sort="calculation_reason_desc A " )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="0" x="5" y="4" height="61" width="691" format="[general]"  name=calculation_reason_desc edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

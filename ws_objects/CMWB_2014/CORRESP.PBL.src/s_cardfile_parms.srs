@@ -1,0 +1,6 @@
+﻿$PBExportHeader$s_cardfile_parms.srs
+global type s_cardfile_parms from structure
+    window parent_window
+    string recipient_type
+end type
+

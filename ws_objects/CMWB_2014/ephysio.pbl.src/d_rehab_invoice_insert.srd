@@ -1,0 +1,55 @@
+﻿$PBExportHeader$d_rehab_invoice_insert.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=372 color="536870912" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=external_invoice_id dbname="external_invoice_id" )
+ column=(type=datetime update=yes updatewhereclause=yes name=invoice_date dbname="invoice_date" )
+ column=(type=long update=yes updatewhereclause=yes name=provider_no dbname="provider_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=provider_type_code dbname="provider_type_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=submitted_date dbname="submitted_date" )
+ column=(type=long update=yes updatewhereclause=yes name=submitted_by_no dbname="submitted_by_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=submitted_by_type_code dbname="submitted_by_type_code" values="Clinic	C/Another Provider	A/Individual	I/" )
+ column=(type=char(1) updatewhereclause=yes name=name dbname="name" )
+ column=(type=char(1) updatewhereclause=yes name=submitted_by_name dbname="submitted_by_name" )
+ column=(type=long update=yes updatewhereclause=yes name=doc_id dbname="doc_id" )
+ retrieve="  SELECT 	rehab_invoice_no,   
+         		external_invoice_id,   
+         		invoice_date,   
+         		provider_no,   
+         		provider_type_code,   
+         		submitted_date,   
+         		submitted_by_no,   
+         		submitted_by_type_code,  
+               '' as Name,
+               '' as submitted_by_name,
+               doc_id
+    FROM rehab_invoice   
+WHERE rehab_invoice_no = :al_rehab_invoice_no
+" update="rehab_invoice" updatewhere=1 updatekeyinplace=yes arguments=(("al_rehab_invoice_no", number)) )
+button(band=detail text="?" enabled=yes action="0" border="0" color="33554432" x="2208" y="100" height="60" width="73" vtextalign="0" htextalign="0"  name=b_provider visible="1~tIf(IsRowNew(), 1, 0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Service Provided By:" border="0" color="134217856" x="1522" y="16" height="128" width="325" html.valueishtml="0"  name=provider_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=30 border="5" color="33554432" x="1874" y="20" height="60" width="727" format="[general]" html.valueishtml="0" protect="0~tIf(IsRowNew(), 0, 1)"  name=provider_type_code visible="1" dddw.name=dddw_provider_type dddw.displaycolumn=provider_type_desc dddw.datacolumn=provider_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(not isrownew() ,79741120,1090519039)" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="5" color="33554432" x="1874" y="100" height="60" width="293" format="[general]" html.valueishtml="0" protect="0~tIf(IsRowNew(), 0, 1)"  name=provider_no visible="1" editmask.mask="##########" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(not isrownew() ,79741120,1090519039)" )
+text(band=detail alignment="0" text="Invoice Submitted By:" border="0" color="16711680" x="73" y="16" height="124" width="361" html.valueishtml="0"  name=submitted_by_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Invoice #:" border="0" color="33554432" x="46" y="292" height="60" width="384" html.valueishtml="0"  name=external_invoice_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+button(band=detail text="?" enabled=yes action="0" border="0" color="33554432" x="800" y="104" height="60" width="73" vtextalign="0" htextalign="0"  name=b_submitted_by visible="1~tIf(IsRowNew(), 1, 0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=8 alignment="0" tabsequence=10 border="5" color="33554432" x="462" y="24" height="60" width="727" format="[general]" html.valueishtml="0" protect="0~tIf(IsRowNew(), 0, 1)"  name=submitted_by_type_code visible="1" dddw.name=dddw_recipient_types_active dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=0 dddw.lines=4 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(not isrownew() ,79741120,1090519039)" )
+column(band=detail id=7 alignment="1" tabsequence=20 border="5" color="33554432" x="462" y="104" height="60" width="293" format="[general]" html.valueishtml="0" protect="0~tif(  submitted_by_type_code = 'I' and not IsRowNew(),1,0)"  name=submitted_by_no visible="1" editmask.mask="##########" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(not isrownew() ,79741120,1090519039)" )
+column(band=detail id=2 alignment="0" tabsequence=50 border="5" color="33554432" x="462" y="296" height="60" width="681" format="[general]" html.valueishtml="0" protect="0~tIf(IsRowNew(), 0, 1)"  name=external_invoice_id visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(not isrownew() ,79741120,1090519039)" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="462" y="184" height="60" width="965" format="[general]" html.valueishtml="0"  name=submitted_by_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="1874" y="184" height="60" width="965" format="[general]" html.valueishtml="0"  name=name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

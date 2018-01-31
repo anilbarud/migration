@@ -1,0 +1,31 @@
+﻿$PBExportHeader$dddw_options_task_type_bil.srd
+$PBExportComments$SELECT from Task_Type. Used in data object 'd_options_tasks'.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=char(2) updatewhereclause=yes name=task_type_code dbname="task_type_code" )
+ column=(type=char(40) updatewhereclause=yes name=task_type_desc dbname="task_type_desc" )
+ column=(type=char(60) updatewhereclause=yes name=task_type_desc_f dbname="task_type_desc_f" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ retrieve="SELECT  Task_Type.task_type_code ,
+           Task_Type.task_type_desc ,
+           Task_Type.task_type_desc_f,
+           Task_Type.active_flag     
+        FROM Task_Type   
+WHERE task_type_code <> 'AC'
+        ORDER BY Task_Type.task_type_desc          ASC  " )
+compute(band=detail alignment="0" expression=" task_type_desc + ' / ' +  task_type_desc_f "border="0" color="0" x="14" y="4" height="64" width="805" format="[GENERAL]" html.valueishtml="0"  name=task_type_desc_bil visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

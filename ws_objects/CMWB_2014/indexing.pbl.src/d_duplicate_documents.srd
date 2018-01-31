@@ -1,0 +1,35 @@
+﻿$PBExportHeader$d_duplicate_documents.srd
+$PBExportComments$Datawindow used to retrieve possible duplicate documents.
+release 8;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=184 color="27304096" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=docid dbname="DOCUMENT_INDEX.docid" )
+ column=(type=long updatewhereclause=yes name=document_index_reference_no dbname="DOCUMENT_INDEX.reference_no" )
+ column=(type=datetime updatewhereclause=yes name=document_index_date_received dbname="DOCUMENT_INDEX.date_received" )
+ column=(type=datetime updatewhereclause=yes name=document_index_date_on_document dbname="DOCUMENT_INDEX.date_on_document" )
+ retrieve="SELECT DISTINCT DOCUMENT_INDEX.docid ,
+				    DOCUMENT_INDEX.reference_no ,
+					 DOCUMENT_INDEX.date_received ,
+					 DOCUMENT_INDEX.date_on_document
+FROM DOCUMENT_INDEX, PAG, PGF, STORE 
+WHERE ( DOCUMENT_INDEX.docid = PAG.pagdocid ) 
+and ( PAG.pagfid = PGF.pgfid ) 
+and ( STORE.strid = PGF.pgfstore ) 
+and ( claim_no = :val_claim_no ) 
+AND ( type_code = :vas_type ) 
+AND ( date_on_document = :vadt_date ) " arguments=(("val_claim_no", number),("vas_type", string),("vadt_date", datetime)) )
+text(band=header alignment="0" text="Possible Duplicates" border="0" color="0" x="14" y="12" height="60" width="512" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="14" y1="180" x2="1696" y2="180"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="67108864" )
+text(band=header alignment="1" text="Doc ID" border="0" color="0" x="119" y="104" height="60" width="165" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Ref #" border="0" color="0" x="425" y="104" height="60" width="155" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Date Received" border="0" color="0" x="795" y="104" height="60" width="384" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Date on Document" border="0" color="0" x="1216" y="104" height="60" width="489" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="0" x="123" y="8" height="60" width="297" format="[general]" html.valueishtml="0"  name=docid visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="434" y="8" height="60" width="338" format="[general]" html.valueishtml="0"  name=document_index_reference_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="791" y="8" height="60" width="320" format="yyyy-mm-dd" html.valueishtml="0"  name=document_index_date_received visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1207" y="8" height="60" width="366" format="yyyy-mm-dd" html.valueishtml="0"  name=document_index_date_on_document visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

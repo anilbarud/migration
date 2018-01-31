@@ -1,0 +1,143 @@
+﻿$PBExportHeader$d_rehab_invoice_line_item_insert.srd
+$PBExportComments$e-physio
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=156 color="536870912" )
+summary(height=132 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="553648127" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=rehab_invoice_no dbname="rehab_invoice_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=line_no dbname="line_no" initial="0" )
+ column=(type=long update=yes updatewhereclause=yes name=authorization_no dbname="authorization_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=task_no dbname="task_no" )
+ column=(type=datetime update=yes updatewhereclause=yes name=service_date dbname="service_date" )
+ column=(type=long update=yes updatewhereclause=yes name=fee_no dbname="fee_no" )
+ column=(type=long update=yes updatewhereclause=yes name=billable_xref_no dbname="billable_xref_no" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=billable_unit_code dbname="billable_unit_code" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=quantity dbname="quantity" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=units_billed dbname="units_billed" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=unit_price dbname="unit_price" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_non_tax_amount dbname="total_non_tax_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_tax_amount dbname="total_tax_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_amount dbname="total_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=tax_rate_no dbname="tax_rate_no" initial="0" values="	1/	0" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=tax_rate dbname="tax_rate" initial="0.00" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=tax_applied_flag dbname="tax_applied_flag" initial="N" values="	Y/	N" )
+ column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=submitted_amount dbname="submitted_amount" )
+ column=(type=decimal(2) updatewhereclause=yes name=total_paid_amount dbname="total_paid_amount" )
+ column=(type=char(1) updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=fixed_fee dbname="fixed_fee" )
+ column=(type=char(1) updatewhereclause=yes name=is_a_service_flag dbname="is_a_service_flag" )
+ column=(type=long updatewhereclause=yes name=scenario_number dbname="scenario_number" )
+ column=(type=char(1) updatewhereclause=yes name=item_allows_tax dbname="item_allows_tax" )
+ column=(type=long updatewhereclause=yes name=apply_tax_confiqured dbname="apply_tax_confiqured" values="	1/	0" )
+ column=(type=char(1) updatewhereclause=yes name=allow_payable_amount_entry dbname="allow_payable_amount_entry" )
+ column=(type=char(1) updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ column=(type=long updatewhereclause=yes name=billable_item_no dbname="billable_item_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=total_award_amount dbname="total_award_amount" )
+ column=(type=char(70) updatewhereclause=yes name=billable_item_desc_e dbname="billable_item_desc_e" )
+ column=(type=char(80) updatewhereclause=yes name=other_billable_item_desc dbname="other_billable_item_desc" )
+ column=(type=long updatewhereclause=yes name=web_create_id dbname="web_create_id" )
+ retrieve="SELECT  a.rehab_invoice_no,   
+        a.line_no,   
+        a.authorization_no,   
+        a.claim_no,   
+        a.task_no,   
+        a.service_date,   
+        a.fee_no,   
+        a.billable_xref_no,   
+        a.billable_unit_code,   
+        a.quantity,   
+        a.units_billed,   
+        a.unit_price,   
+        a.total_non_tax_amount,   
+        a.total_tax_amount,   
+        a.total_amount,   
+        a.tax_rate_no,   
+        a.tax_rate,   
+        a.tax_applied_flag,   
+        a.payment_no,
+        b.submitted_amount,
+        0.00 as 'total_paid_amount',
+        c.recipient_type_code,
+		c.recipient_no,
+        '' as 'fixed_fee',
+        '' as 'is_a_service_flag',
+		0 AS 'scenario_number',
+        ' ' AS 'item_allows_tax',
+        0 as 'apply_tax_confiqured',
+        ' ' as 'allow_payable_amount_entry',
+        c.payment_method_code,
+        d.billable_item_no,
+        b.total_award_amount,
+        e.billable_item_desc_e,
+        f.other_billable_item_desc,
+       a.web_create_id
+FROM   		REHAB_INVOICE_LINE_ITEM 		a
+JOIN 		PAYMENT 						b on a.payment_no 		= b.payment_no
+JOIN		UNAPPLIED_CLAIM_TXN 			c on a.claim_no 		= c.claim_no and a.payment_no = c.payment_no
+LEFT JOIN  	Billable_Item_Rehab_Task_Xref 	d on a.billable_xref_no = d.billable_xref_no
+JOIN        Billable_Item 					e on e.billable_item_no = d.billable_item_no
+JOIN		REHAB_TASK_AUTHORIZATION		f on a.authorization_no = f.authorization_no
+WHERE     	a.claim_no 				= :al_claim_no
+AND			a.rehab_invoice_no 		= :al_rehab_invoice_no
+
+" update="REHAB_INVOICE_LINE_ITEM" updatewhere=1 updatekeyinplace=no arguments=(("al_claim_no", number),("al_rehab_invoice_no", number))  sort="billable_xref_no A " )
+line(band=header x1="9" y1="144" x2="3383" y2="144"  name=l_5 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+button(band=header text="?" enabled=yes action="0" border="0" color="134217857" x="946" y="72" height="60" width="73" vtextalign="0" htextalign="0"  name=b_info visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Apply Tax" border="0" color="33554432" x="1783" y="12" height="116" width="142" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Submitted Amount" border="0" color="33554432" x="2551" y="12" height="116" width="370" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Payable
+Amount" border="0" color="33554432" x="2930" y="12" height="116" width="370" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Service Date" border="0" color="33554432" x="14" y="68" height="60" width="379" html.valueishtml="0"  name=service_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Authorized Item       " border="0" color="33554432" x="402" y="68" height="60" width="535" html.valueishtml="0"  name=billable_xref_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Units" border="0" color="33554432" x="1307" y="68" height="60" width="174" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Unit Price" border="0" color="33554432" x="1490" y="68" height="60" width="283" html.valueishtml="0"  name=unit_price_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Tax" border="0" color="33554432" x="1934" y="68" height="60" width="229" html.valueishtml="0"  name=total_tax_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=header alignment="2" text="Total Amount" border="0" color="33554432" x="2171" y="68" height="60" width="370" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=6 alignment="0" tabsequence=10 border="5" color="33554432" x="18" y="8" height="64" width="379" format="yyyy-mm-dd" html.valueishtml="0" protect="0~tif(line_no>0 ,1,0)"  name=service_date visible="1" editmask.ddcalendar=yes editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(line_no>0 ,79741120,1090519039)" )
+column(band=detail id=18 alignment="0" tabsequence=60 border="0" color="33554432" x="1829" y="12" height="64" width="82" format="[general]" html.valueishtml="0"  name=tax_applied_flag visible="1~tif(   item_allows_tax = 'N' or line_no > 0 ,0,1) " checkbox.text="" checkbox.on="Y" checkbox.off="N" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="67108864~tif(line_no>0 ,79741120,1090519039)" )
+button(band=detail text="+" enabled=yes action="0" border="0" color="0" x="3328" y="4" height="72" width="69" vtextalign="0" htextalign="0"  name=b_plus visible="1~tif(getrow() = rowcount(),1,0)"  font.face="Tahoma" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=detail text="-" enabled=yes action="0" border="0" color="255" x="3401" y="4" height="72" width="69" vtextalign="0" htextalign="0"  name=b_minus visible="1"  font.face="Tahoma" font.height="-14" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=11 alignment="1" tabsequence=30 border="5" color="33554432" x="1317" y="8" height="64" width="165" format="#,##0" html.valueishtml="0" protect="0~tif( is_a_service_flag = 'Y' and  billable_unit_code = 'EA' or line_no > 0 ,1,0)"  name=units_billed visible="1" editmask.mask="###,###" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(line_no>0 ,79741120,1090519039)" )
+column(band=detail id=12 alignment="1" tabsequence=40 border="5" color="33554432" x="1495" y="8" height="64" width="293" format="$#,##0.00" html.valueishtml="0" protect="0~tIF(line_no > 0 or  scenario_number = 1 , 1,0)"  name=unit_price visible="1" editmask.mask="$#,##0.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(line_no>0 ,79741120,1090519039)" )
+compute(band=detail alignment="1" expression="if ( tax_applied_flag = 'Y',round(( units_billed *  unit_price ) * tax_rate,2), 0.00)"border="0" color="33554432" x="1938" y="8" height="64" width="233" format="$#,##0.00" html.valueishtml="0"  name=compute_total_tax visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=20 alignment="1" tabsequence=50 border="5" color="33554432" x="2565" y="8" height="64" width="366" format="$#,##0.00" html.valueishtml="0" protect="0~tif(line_no>0 ,1,0)"  name=submitted_amount visible="1" editmask.mask="$#,##0.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(line_no>0 ,79741120,1090519039)" )
+column(band=detail id=32 alignment="1" tabsequence=70 border="5" color="33554432" x="2944" y="8" height="64" width="370" format="$#,##0.00" html.valueishtml="0" protect="0~tIF(  allow_payable_amount_entry = 'Y' , 0,1)"  name=total_award_amount visible="1" editmask.mask="$#,##0.00" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(line_no>0 ,79741120,1090519039)" )
+compute(band=detail alignment="1" expression=" (units_billed * unit_price ) +  compute_total_tax"border="0" color="33554432" x="2181" y="8" height="64" width="370" format="$#,##0.00" html.valueishtml="0"  name=compute_total_amount visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="33554432" x="869" y="96" height="80" width="686" format="###,###.00" html.valueishtml="0"  name=total_tax_amount visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.displayonly=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="46" y="100" height="64" width="69" format="[general]" html.valueishtml="0"  name=line_no visible="0~tif(line_no = 0,0,1)" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="min(  service_date  for all )"border="0" color="33554432" x="2007" y="108" height="76" width="750" format="[SHORTDATE] [TIME]" html.valueishtml="0"  name=compute_min_service_date visible="0"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=24 alignment="0" tabsequence=90 border="0" color="33554432" x="462" y="112" height="60" width="361" format="[general]" html.valueishtml="0"  name=fixed_fee visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="134217744" )
+column(band=detail id=5 alignment="0" tabsequence=80 border="0" color="33554432" x="283" y="192" height="60" width="128" format="[general]" html.valueishtml="0"  name=task_no visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="33554432" x="448" y="192" height="64" width="174" format="[general]" html.valueishtml="0"  name=is_a_service_flag visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="33554432" x="640" y="192" height="64" width="78" format="[general]" html.valueishtml="0"  name=scenario_number visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=27 alignment="0" tabsequence=32766 border="0" color="33554432" x="741" y="188" height="64" width="256" format="[general]" html.valueishtml="0"  name=item_allows_tax visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="33554432" x="1024" y="192" height="60" width="160" format="[general]" html.valueishtml="0"  name=billable_item_no visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="33554432" x="1202" y="192" height="56" width="201" format="[general]" html.valueishtml="0"  name=tax_rate visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=3 alignment="0" tabsequence=100 border="0" color="33554432" x="1472" y="184" height="76" width="288" format="[general]" html.valueishtml="0"  name=authorization_no visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+column(band=detail id=29 alignment="0" tabsequence=110 border="5" color="33554432" x="1787" y="180" height="60" width="187" format="[general]" html.valueishtml="0"  name=allow_payable_amount_entry visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=33 alignment="0" tabsequence=32766 border="0" color="33554432" x="411" y="8" height="64" width="882" format="[general]" html.valueishtml="0" protect="0~tif(line_no>0 ,1,0)"  name=billable_item_desc_e visible="1~tif(line_no>0  and trim( other_billable_item_desc ) = '' ,1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=34 alignment="0" tabsequence=32766 border="0" color="33554432" x="411" y="8" height="64" width="882" format="[general]" html.valueishtml="0" protect="0~tif(line_no>0 ,1,0)"  name=other_billable_item_desc visible="1~tif(line_no>0  and trim( other_billable_item_desc ) <> '' ,1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=8 alignment="1" tabsequence=20 border="5" color="33554432" x="416" y="8" height="64" width="882" format="[general]" html.valueishtml="0" protect="0~tif(line_no>0 ,1,0)"  name=billable_xref_no visible="1~tif(line_no>0 ,0,1)" dddw.name=dddw_billable_item_for_invoice dddw.displaycolumn=compute_1 dddw.datacolumn=billablexrefno dddw.percentwidth=225 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tif(line_no>0 ,79741120,1090519039)" )
+text(band=summary alignment="0" text="Totals" border="0" color="33554432" x="0" y="8" height="64" width="183" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="2158" y1="16" x2="2560" y2="16"  name=l_1 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="2158" y1="36" x2="2560" y2="36"  name=l_2 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=summary alignment="1" expression="sum(compute_total_amount  for all)"border="0" color="33554432" x="2158" y="56" height="72" width="402" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=summary alignment="1" expression=" sum(total_award_amount for all)"border="0" color="33554432" x="2907" y="56" height="72" width="430" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="2894" y1="36" x2="3333" y2="36"  name=l_4 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=summary x1="2894" y1="16" x2="3333" y2="16"  name=l_3 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

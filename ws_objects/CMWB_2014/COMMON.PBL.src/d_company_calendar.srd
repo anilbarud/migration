@@ -1,0 +1,46 @@
+﻿$PBExportHeader$d_company_calendar.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=datetime update=yes updatewhereclause=yes name=calendar_date dbname="calendar_date" )
+ column=(type=char(6) update=yes updatewhereclause=yes name=parent_company_code dbname="parent_company_code" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=working_days dbname="working_days" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=statutory_holiday_days dbname="statutory_holiday_days" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=nonstatutory_holiday_days dbname="nonstatutory_holiday_days" )
+ column=(type=char(9) update=yes updatewhereclause=yes name=day_of_week dbname="day_of_week" )
+ column=(type=long update=yes updatewhereclause=yes name=day_of_year dbname="day_of_year" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=day_desc dbname="day_desc" )
+ retrieve="  SELECT calendar_date,   
+         parent_company_code,   
+         working_days,   
+         statutory_holiday_days,   
+         nonstatutory_holiday_days,   
+         day_of_week,   
+         day_of_year,   
+         day_desc  
+    FROM Company_Calendar 
+where parent_company_code = 'WHSCC'
+AND  DatePart(yyyy,calendar_date) = :ai_year
+and  (statutory_holiday_days <> 0 or  nonstatutory_holiday_days <> 0) 
+" arguments=(("ai_year", number)) )
+text(band=header alignment="2" text="Calendar Date" border="0" color="33554432" x="5" y="4" height="64" width="603" html.valueishtml="0"  name=calendar_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Parent Company Code" border="0" color="33554432" x="613" y="4" height="64" width="654" html.valueishtml="0"  name=parent_company_code_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Working Days" border="0" color="33554432" x="1271" y="4" height="64" width="398" html.valueishtml="0"  name=working_days_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Statutory Holiday Days" border="0" color="33554432" x="1673" y="4" height="64" width="654" html.valueishtml="0"  name=statutory_holiday_days_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Nonstatutory Holiday Days" border="0" color="33554432" x="2336" y="4" height="64" width="754" html.valueishtml="0"  name=nonstatutory_holiday_days_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Day Of Week" border="0" color="33554432" x="3095" y="4" height="64" width="375" html.valueishtml="0"  name=day_of_week_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Day Of Year" border="0" color="33554432" x="3474" y="4" height="64" width="343" html.valueishtml="0"  name=day_of_year_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Day Desc" border="0" color="33554432" x="3822" y="4" height="64" width="1399" html.valueishtml="0"  name=day_desc_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="0" color="33554432" x="5" y="4" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=calendar_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="0" color="33554432" x="613" y="4" height="76" width="192" format="[general]" html.valueishtml="0"  name=parent_company_code visible="1" edit.limit=6 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=30 border="0" color="33554432" x="1271" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=working_days visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=40 border="0" color="33554432" x="1673" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=statutory_holiday_days visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=50 border="0" color="33554432" x="2336" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=nonstatutory_holiday_days visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="0" color="33554432" x="3095" y="4" height="76" width="274" format="[general]" html.valueishtml="0"  name=day_of_week visible="1" edit.limit=9 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=70 border="0" color="33554432" x="3474" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=day_of_year visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=80 border="0" color="33554432" x="3822" y="4" height="76" width="1399" format="[general]" html.valueishtml="0"  name=day_desc visible="1" edit.limit=50 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

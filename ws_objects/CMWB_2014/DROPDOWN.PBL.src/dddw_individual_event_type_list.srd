@@ -1,0 +1,27 @@
+﻿$PBExportHeader$dddw_individual_event_type_list.srd
+$PBExportComments$Drop Down DataWindow of event type codes
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=68 color="-1" )
+table(column=(type=char(3) updatewhereclause=yes name=event_type_code dbname="event_type_code" )
+ column=(type=char(30) updatewhereclause=yes name=event_type_desc dbname="event_type_desc" )
+ column=(type=char(1) updatewhereclause=yes name=generated_method_code dbname="generated_method_code" )
+ column=(type=char(1) updatewhereclause=yes name=event_log_entry_flag dbname="event_log_entry_flag" )
+ column=(type=char(1) updatewhereclause=yes name=active_flag dbname="active_flag" )
+ column=(type=char(1) updatewhereclause=yes name=event_category_code dbname="event_category_code" )
+ retrieve="SELECT	event_type_code,
+			event_type_desc,
+			generated_method_code,
+			event_log_entry_flag,
+			active_flag,
+			event_category_code
+FROM		Event_Type
+WHERE	event_category_code = 'I'
+ORDER BY event_type_desc ASC  "  sort="event_type_desc A " )
+text(band=header alignment="2" text="Event Type Code" border="0" color="0" x="5" y="4" height="64" width="425" html.valueishtml="0"  name=event_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Event Type Desc" border="0" color="0" x="434" y="4" height="64" width="526" html.valueishtml="0"  name=event_type_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="0" color="0" x="14" y="4" height="68" width="933" format="[general]" html.valueishtml="0"  name=event_type_desc visible="1" edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.autovscroll=yes edit.imemode=0 edit.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

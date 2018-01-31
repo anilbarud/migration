@@ -1,0 +1,108 @@
+﻿$PBExportHeader$d_annuity_participant_list.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 92 print.margin.right = 92 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=108 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=96 color="536870912" )
+detail(height=84 color="536870912" height.autosize=yes )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=annuity_payout_no dbname="annuity_payout_no" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=char(41) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=char(2) updatewhereclause=yes name=annuity_role_code dbname="annuity_role_code" )
+ column=(type=long update=yes updatewhereclause=yes key=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) updatewhereclause=yes key=yes name=recipient_type_code dbname="recipient_type_code" )
+ column=(type=long updatewhereclause=yes name=represented_by_recipient_no dbname="represented_by_recipient_no" )
+ column=(type=char(1) updatewhereclause=yes name=represented_by_recipient_type_code dbname="represented_by_recipient_type_code" )
+ column=(type=char(41) updatewhereclause=yes name=represented_by_name dbname="represented_by_name" )
+ column=(type=char(2) updatewhereclause=yes name=represented_by_annuity_role_code dbname="represented_by_annuity_role_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=annuity_payout_writeoff_flag dbname="annuity_payout_writeoff_flag" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=annuity_payout_garnish_flag dbname="annuity_payout_garnish_flag" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_eligibility_flag dbname="annuity_eligibility_flag" )
+ column=(type=char(1) updatewhereclause=yes name=annuity_entitlement_flag dbname="annuity_entitlement_flag" )
+ retrieve="SELECT  app.annuity_account_no,   
+            app.annuity_payout_no,
+			aa.individual_no ,
+            recipient_name = 
+            case 
+            when app.recipient_type_code = 'I' Then 
+                 i.given_names + ' ' + i.last_name 
+            when app.recipient_type_code = 'O' Then 
+                 p.name                          
+            END ,           
+            app.annuity_role_code,   
+            app.recipient_no,   
+            app.recipient_type_code,
+
+            app.represented_by_recipient_no,   
+            app.represented_by_recipient_type_code , 
+
+            represented_by_name = 
+            case 
+            when app.represented_by_recipient_type_code = 'I' THEN
+                 ii.given_names + ' ' + ii.last_name 
+            when app.represented_by_recipient_type_code = 'O' THEN
+                 pp.name                         
+            END ,
+             
+            represented_by_annuity_role_code = app2.annuity_role_code ,
+            app.annuity_payout_writeoff_flag,
+            app.annuity_payout_garnish_flag,
+            ar.annuity_eligibility_flag,
+            ar.annuity_entitlement_flag
+
+FROM  ANNUITY_PAYOUT_PARTICIPANT app
+JOIN  ANNUITY_PAYOUT_PARTICIPANT app2   ON app.annuity_account_no = app2.annuity_account_no 
+                                       AND app.annuity_payout_no  = app2.annuity_payout_no 
+                                       AND app2.recipient_no = app.represented_by_recipient_no                                                                  
+JOIN  ANNUITY_ACCOUNT            aa     ON aa.annuity_account_no = app.annuity_account_no 
+LEFT OUTER JOIN INDIVIDUAL       i      ON i.individual_no = app.recipient_no 
+                                       AND app.recipient_type_code = 'I'
+LEFT OUTER JOIN PROVIDER         p      ON p.provider_no = app.recipient_no
+                                       AND p.provider_type_code = app.recipient_type_code 
+                                       AND app.recipient_type_code = 'O'
+LEFT OUTER JOIN INDIVIDUAL       ii     ON ii.individual_no = app.represented_by_recipient_no 
+                                       AND app.represented_by_recipient_type_code = 'I'
+LEFT OUTER JOIN PROVIDER         pp     ON pp.provider_no = app.represented_by_recipient_no 
+                                       AND pp.provider_type_code = app.represented_by_recipient_type_code 
+                                       AND app.represented_by_recipient_type_code = 'O'
+JOIN Annuity_Role                ar     ON app.annuity_role_code = ar.annuity_role_code
+WHERE  app.annuity_payout_no  = :al_annuity_payout_no
+order by app.create_date, app.annuity_role_code
+" update="ANNUITY_PAYOUT_PARTICIPANT" updatewhere=2 updatekeyinplace=yes arguments=(("al_annuity_payout_no", number)) )
+line(band=header x1="5" y1="92" x2="4635" y2="92"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="0" text="Participant" border="0" color="33554432" x="23" y="16" height="64" width="347" html.valueishtml="0"  name=participant_name_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Write-off *" border="0" color="33554432" x="3127" y="16" height="64" width="288" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Garnish *" border="0" color="33554432" x="3451" y="16" height="64" width="265" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Annuity Role" border="0" color="33554432" x="1202" y="16" height="64" width="411" html.valueishtml="0"  name=annuity_role_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Type" border="0" color="33554432" x="2382" y="16" height="64" width="142" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="-" border="0" color="33554432" x="2546" y="8" height="64" width="32" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="No." border="0" color="33554432" x="2592" y="16" height="64" width="101" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="   " border="0" color="16777215" x="27" y="84" height="92" width="114" html.valueishtml="0"  name=t_dummy_for_sizing visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="8" height="68" width="1166" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="If( annuity_payout_writeoff_flag = 'Y', 'Yes', '')"border="0" color="33554432" x="3136" y="8" height="68" width="256" format="[GENERAL]" html.valueishtml="0"  name=compute_write_off visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression=" If (annuity_payout_garnish_flag = 'Y', 'Yes', '')"border="0" color="33554432" x="3442" y="12" height="64" width="256" format="[GENERAL]" html.valueishtml="0"  name=compute_garnish visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1202" y="8" height="68" width="837" format="[general]" html.valueishtml="0"  name=annuity_role_code visible="1" dddw.name=dddw_annuity_role dddw.displaycolumn=annuity_role_desc_e dddw.datacolumn=annuity_role_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2062" y="8" height="68" width="466" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" dddw.name=dddw_recipient_type_annuity_participant dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="-" border="0" color="33554432" x="2546" y="0" height="68" width="37" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2592" y="8" height="68" width="315" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Role:" border="0" color="33554432" x="1819" y="76" height="68" width="165" html.valueishtml="0"  name=t_2 visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideup=allabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="33554432" x="1989" y="76" height="68" width="809" format="[general]" html.valueishtml="0"  name=represented_by_annuity_role_code visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideup=allabove height.autosize=yes dddw.name=dddw_annuity_role dddw.displaycolumn=annuity_role_desc_e dddw.datacolumn=annuity_role_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="Type - No:" border="0" color="33554432" x="2821" y="76" height="64" width="311" html.valueishtml="0"  name=t_5 visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideup=allabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="3154" y="76" height="68" width="375" format="[general]" html.valueishtml="0"  name=represented_by_recipient_type_code visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideup=allabove height.autosize=yes dddw.name=dddw_recipient_type_annuity_participant dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="-" border="0" color="33554432" x="3547" y="68" height="68" width="32" html.valueishtml="0"  name=t_6 visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideleft=yes  slideup=allabove  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="3598" y="76" height="68" width="256" format="[general]" html.valueishtml="0"  name=represented_by_recipient_no visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideleft=yes  slideup=allabove height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Represented By:" border="0" color="33554432" x="165" y="76" height="68" width="485" html.valueishtml="0"  name=t_1 visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideup=allabove  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912"  height.autosize=yes)
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="663" y="76" height="68" width="1134" format="[general]" html.valueishtml="0"  name=represented_by_name visible="1~tif( represented_by_recipient_no <>  recipient_no ,1,0)"  slideup=allabove height.autosize=yes edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="2" text="* 'Yes' if flag is set, otherwise blank" border="0" color="33554432" x="3049" y="24" height="64" width="914" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

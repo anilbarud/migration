@@ -1,0 +1,106 @@
+﻿$PBExportHeader$d_gl_txn_report.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=332 color="553648127" )
+summary(height=0 color="536870912" )
+footer(height=72 color="28225198" )
+detail(height=80 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(30) updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=long updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(2) updatewhereclause=yes name=payment_type_code dbname="payment_type_code" )
+ column=(type=char(2) updatewhereclause=yes name=payment_sub_type_code dbname="payment_sub_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=char(1) updatewhereclause=yes name=txn_sub_type_code dbname="txn_sub_type_code" )
+ column=(type=long updatewhereclause=yes name=cost_alloc_no dbname="cost_alloc_no" )
+ column=(type=char(16) updatewhereclause=yes name=txn_entry_user_id dbname="txn_entry_user_id" )
+ column=(type=long updatewhereclause=yes name=related_txn_no dbname="related_txn_no" )
+ column=(type=long updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=decimal(4) updatewhereclause=yes name=sum_gl_transfer_amount dbname="sum_gl_transfer_amount" )
+ retrieve="SELECT	b.claim_no,
+			b.recipient_no,
+			b.recipient_name,
+			c.payment_no,
+			c.payment_type_code,
+			c.payment_sub_type_code,
+			b.txn_type_code,
+			b.txn_sub_type_code,
+			e.cost_alloc_no,
+			b.txn_entry_user_id,
+			b.related_txn_no,
+			b.cheque_no,
+			Sum(a.gl_transfer_amount) as sum_gl_transfer_amount
+FROM		GL_TXN									a
+			left outer join
+			COST_OF_CLAIMS_ALLOCATED	e
+			on a.coc_allocated_no = e.coc_allocated_no,
+			APPLIED_CLAIM_TXN					b,
+			PAYMENT 								c
+WHERE	a.txn_no			= b.txn_no
+AND		b.payment_no	= c.payment_no
+AND		(	left(a.gl_debit_account_no,4)	= '1102'
+		OR	left(a.gl_credit_account_no,4)	= '1102'	)
+AND		(	b.txn_type_code			= 'J'
+		AND	b.txn_sub_type_code	in ('2','3')	)
+GROUP BY
+			b.claim_no,
+			b.recipient_no,
+			b.recipient_name,
+			c.payment_no,
+			c.payment_type_code,
+			c.payment_sub_type_code,
+			b.txn_type_code,
+			b.txn_sub_type_code,
+			e.cost_alloc_no,
+			b.txn_entry_user_id,
+			b.txn_type_code,
+			b.txn_sub_type_code,
+			b.related_txn_no,
+			b.cheque_no,
+			b.batch_no"  sort="bank_deposit_flag D claim_no A payment_no A " )
+group(level=1 header.height=76 trailer.height=108 by=("bank_deposit_flag" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="" border="0" color="33554432" x="0" y="4" height="228" width="4507" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="28225198" )
+text(band=header alignment="2" text="Processed Claim Cash Receipt Transactions" border="0" color="33554432" x="0" y="20" height="92" width="4503" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="228" x2="4503" y2="228"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="1" text="Claim #" border="0" color="33554432" x="5" y="264" height="60" width="256" html.valueishtml="0"  name=claim_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="33554432" x="3785" y="160" height="60" width="649" format="[general]" html.valueishtml="0"  name=page_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Recipient #" border="0" color="33554432" x="293" y="264" height="60" width="297" html.valueishtml="0"  name=recipient_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Recipient Name" border="0" color="33554432" x="617" y="264" height="60" width="759" html.valueishtml="0"  name=recipient_name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Payment #" border="0" color="33554432" x="1349" y="264" height="60" width="352" html.valueishtml="0"  name=payment_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Transfer Amount" border="0" color="33554432" x="2455" y="264" height="60" width="453" html.valueishtml="0"  name=gl_transfer_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Cheque #" border="0" color="33554432" x="3858" y="264" height="60" width="247" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Entered by" border="0" color="33554432" x="3429" y="264" height="60" width="315" html.valueishtml="0"  name=txn_entry_user_id_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Txn Type" border="0" color="33554432" x="2121" y="264" height="60" width="238" html.valueishtml="0"  name=txn_type_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Pay Type" border="0" color="33554432" x="1778" y="264" height="60" width="256" html.valueishtml="0"  name=payment_type_desc_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="today()"border="0" color="33554432" x="361" y="44" height="60" width="347" format="yyyy-mm-dd" html.valueishtml="0"  name=date_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="" border="0" color="33554432" x="576" y="144" height="60" width="2386" html.valueishtml="0"  name=t_parameters visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Report Parameters: " border="0" color="33554432" x="18" y="144" height="60" width="526" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Report Date:" border="0" color="33554432" x="18" y="44" height="60" width="320" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Cost Alloc #" border="0" color="33554432" x="3022" y="264" height="60" width="315" html.valueishtml="0"  name=cost_alloc_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=header.1 alignment="0" expression="If(bank_deposit_flag = 'Y','Total Bank Deposits','Total Other')"border="0" color="33554432" x="14" y="4" height="68" width="1125" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" if ( txn_type_code = 'J' and  txn_sub_type_code = '3' and sum_gl_transfer_amount < 0 ,'Y','N') "border="0" color="33554432" x="4206" y="12" height="60" width="183" format="[General]" html.valueishtml="0"  name=bank_deposit_flag visible="0"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="60" width="256" format="[general]" html.valueishtml="0"  name=claim_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="288" y="4" height="60" width="256" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="571" y="4" height="60" width="850" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="1445" y="4" height="60" width="256" format="[general]" html.valueishtml="0"  name=payment_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="33554432" x="3429" y="4" height="60" width="315" format="[general]" html.valueishtml="0"  name=txn_entry_user_id visible="1" edit.limit=16 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="33554432" x="2528" y="4" height="60" width="379" format="$###,##0.00" html.valueishtml="0"  name=sum_gl_transfer_amount visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="txn_type_code + If(txn_sub_type_code <> '',' / ' +  txn_sub_type_code ,'') "border="0" color="33554432" x="2117" y="4" height="60" width="247" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression=" payment_type_code + If( payment_sub_type_code  <> '',' / ' +  payment_sub_type_code ,'') "border="0" color="33554432" x="1778" y="4" height="60" width="251" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="3840" y="8" height="60" width="288" format="[general]" html.valueishtml="0"  name=cheque_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="3022" y="4" height="60" width="315" format="[general]" html.valueishtml="0"  name=cost_alloc_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2569" y1="76" x2="2903" y2="76"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=trailer.1 x1="2569" y1="68" x2="2903" y2="68"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+line(band=trailer.1 x1="2569" y1="0" x2="2903" y2="0"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="sum(sum_gl_transfer_amount for group 1) "border="0" color="33554432" x="2574" y="4" height="60" width="329" format="$#,##0.00;($#,##0.00)" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="If(bank_deposit_flag = 'Y','Total Bank Deposits','Total Other')"border="0" color="33554432" x="1536" y="4" height="68" width="978" format="[GENERAL]" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="3995" y1="0" x2="4128" y2="0"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="If(bank_deposit_flag = 'Y','Count of Bank Deposits','Count of Other')"border="0" color="33554432" x="3214" y="4" height="64" width="695" format="[GENERAL]" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="3995" y1="68" x2="4128" y2="68"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=trailer.1 alignment="1" expression="count(payment_no for group 1)"border="0" color="33554432" x="3954" y="4" height="60" width="174" format="[general]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="3995" y1="76" x2="4128" y2="76"  name=l_7 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+compute(band=footer alignment="0" expression="rowcount()"border="0" color="33554432" x="489" y="8" height="60" width="251" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Records returned:" border="0" color="33554432" x="27" y="8" height="60" width="453" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

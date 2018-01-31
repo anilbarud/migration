@@ -1,0 +1,12 @@
+﻿$PBExportHeader$d_select_taxing_category.srd
+$PBExportComments$Medical Aid - External datawindow used to enter the PC taxing category for making medical aid payments
+release 4;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no )
+header(height=1 color="-1" )
+summary(height=1 color="-1" )
+footer(height=1 color="-1" )
+detail(height=105 color="-1" )
+table(column=(type=number name=catid dbname="catid" )
+ )
+text(band=detail alignment="1" text="Category:"border="0" color="0" x="10" y="4" height="65" width="247"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="334" y="4" height="65" width="746" format="[general]"  name=catid dddw.name=dddw_taxing_categories_by_set dddw.displaycolumn=catname dddw.datacolumn=catid dddw.percentwidth=150 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.required=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )

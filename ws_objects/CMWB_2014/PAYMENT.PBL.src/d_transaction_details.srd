@@ -1,0 +1,140 @@
+﻿$PBExportHeader$d_transaction_details.srd
+$PBExportComments$Major Claim Payments - Datawindow used to show the recipient information for a payment
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=624 color="-1" )
+table(column=(type=long update=yes updatewhereclause=yes key=yes name=txn_no dbname="txn_no" )
+ column=(type=long update=yes updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=long update=yes updatewhereclause=yes name=payment_no dbname="payment_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=txn_type_code dbname="txn_type_code" )
+ column=(type=long updatewhereclause=yes name=batch_no dbname="batch_no" )
+ column=(type=long update=yes updatewhereclause=yes name=recipient_no dbname="recipient_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=recipient_type_code dbname="recipient_type_code" validationmsg="~"You must enter a valid Recipient Type Code~"" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=recipient_sub_type_code dbname="recipient_sub_type_code" )
+ column=(type=long update=yes updatewhereclause=yes name=cheque_no dbname="cheque_no" )
+ column=(type=long update=yes updatewhereclause=yes name=manual_cheque_req_no dbname="manual_cheque_req_no" initial="0" )
+ column=(type=datetime update=yes updatewhereclause=yes name=cheque_deposit_date dbname="cheque_deposit_date" )
+ column=(type=char(3) updatewhereclause=yes name=bank_no dbname="bank_no" )
+ column=(type=char(18) updatewhereclause=yes name=bank_account_no dbname="bank_account_no" )
+ column=(type=char(5) updatewhereclause=yes name=bank_transit_no dbname="bank_transit_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=payment_method_code dbname="payment_method_code" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=txn_amount dbname="txn_amount" initial="0" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=admin_region_code dbname="admin_region_code" )
+ column=(type=datetime update=yes updatewhereclause=yes name=scheduled_processing_date dbname="scheduled_processing_date" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=explanation dbname="explanation" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=recipient_name dbname="recipient_name" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=prov_state_code dbname="prov_state_code" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=country dbname="country" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=use_default_address_flag dbname="use_default_address_flag" values="Use default address	Y/Use default address	N" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cheque_print_group_code dbname="cheque_print_group_code" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=timestamp updatewhereclause=yes name=timestamp dbname="timestamp" )
+ column=(type=char(1) updatewhereclause=yes name=source_table_code dbname="source_table_code" )
+ column=(type=datetime updatewhereclause=yes name=processed_date dbname="processed_date" )
+ column=(type=long update=yes updatewhereclause=yes name=related_txn_no dbname="related_txn_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=txn_sub_type_code dbname="txn_sub_type_code" )
+ column=(type=long update=yes updatewhereclause=yes name=direct_deposit_xmit_no dbname="direct_deposit_xmit_no" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=tax_amount dbname="tax_amount" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=non_tax_amount dbname="non_tax_amount" )
+ column=(type=long update=yes updatewhereclause=yes name=txn_unit_of_work_no dbname="txn_unit_of_work_no" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=maintain_allowed_flag dbname="maintain_allowed_flag" )
+ column=(type=long update=yes updatewhereclause=yes name=coc_period dbname="coc_period" )
+ column=(type=char(1) updatewhereclause=yes name=canceled_txn_flag dbname="canceled_txn_flag" )
+ column=(type=char(40) updatewhereclause=yes name=txn_type_desc dbname="txn_type_desc" )
+ column=(type=char(40) updatewhereclause=yes name=txn_sub_type_desc dbname="txn_sub_type_desc" )
+ retrieve="SELECT 	txn_no, claim_no, payment_no, a.txn_type_code,batch_no,  recipient_no, 
+			recipient_type_code, recipient_sub_type_code, cheque_no, 
+			manual_cheque_req_no, cheque_deposit_date, '' bank_no,
+			'' bank_account_no,'' bank_transit_no,payment_method_code, 
+			txn_amount,admin_region_code, scheduled_processing_date, 
+			null as processed_date,explanation,	recipient_name, 
+			address_line1, address_line2, city, 
+			prov_state_code, country, postal_code, 
+			use_default_address_flag,cheque_print_group_code,a.create_user_id, 
+			a.create_date,  a.timestamp, 'U' source_table_code ,null as processed_date, related_txn_no,
+       a.txn_sub_type_code, direct_deposit_xmit_no, tax_amount, non_tax_amount,
+       txn_unit_of_work_no, maintain_allowed_flag,coc_period ,
+			'N' AS canceled_txn_flag, b.txn_type_desc,c.txn_sub_type_desc
+FROM UNAPPLIED_CLAIM_TXN a,
+     Txn_Type b,
+     Txn_Sub_Type c
+WHERE payment_no = :val_payment_no 
+and   a.txn_type_code = b.txn_type_code
+and   a.txn_sub_type_code = c.txn_sub_type_code
+UNION ALL 
+SELECT 	txn_no, claim_no, payment_no, a.txn_type_code,batch_no, recipient_no, 
+			recipient_type_code, recipient_sub_type_code, cheque_no, 
+			manual_cheque_req_no, cheque_deposit_date, bank_no, 
+			bank_account_no, bank_transit_no,payment_method_code, 
+			txn_amount, admin_region_code, scheduled_processing_date, 
+			processed_date,explanation, recipient_name, 
+			address_line1, address_line2, city, 
+			prov_state_code, country, postal_code, 
+			use_default_address_flag, cheque_print_group_code,a.create_user_id, 
+			txn_entry_date, a.timestamp, 'A' source_table_code ,processed_date, related_txn_no,
+        a.txn_sub_type_code,direct_deposit_xmit_no, tax_amount,non_tax_amount,txn_unit_of_work_no,maintain_allowed_flag,coc_period 	 ,
+			'N' AS canceled_txn_flag, b.txn_type_desc,c.txn_sub_type_desc			
+FROM APPLIED_CLAIM_TXN a,
+     Txn_Type b,
+     Txn_Sub_Type c
+WHERE payment_no = :val_payment_no
+and   a.txn_type_code = b.txn_type_code
+and   a.txn_sub_type_code = c.txn_sub_type_code" update="UNAPPLIED_CLAIM_TXN" updatewhere=1 updatekeyinplace=yes arguments=(("val_payment_no", number))  sort="txn_no A " )
+rectangle(band=detail x="0" y="32" height="588" width="2839"  name=r_1 visible="1" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+rectangle(band=detail x="5" y="24" height="588" width="2834"  name=r_2 visible="1" brush.hatch="7" brush.color="553648127" pen.style="0" pen.width="5" pen.color="8421504"  background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Payable To:" border="0" color="0" x="1234" y="72" height="60" width="297" html.valueishtml="0"  name=t_address_on_cheque visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=28 alignment="0" tabsequence=80 border="0" color="0" x="1563" y="72" height="56" width="594" format="[general]" html.valueishtml="0" protect="0~tif(recipient_type_code = 'I' and payment_method_code in('A','H'),0,1)"  name=use_default_address_flag visible="1~tIf (payment_method_code <> ~"D~" and payment_method_code <> ~"R~" and recipient_type_code = 'I' ,1,0)" checkbox.text="Use default address" checkbox.on="Y" checkbox.off="N" checkbox.lefttext=yes checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="1" expression="getrow()"border="0" color="16711680" x="2354" y="72" height="60" width="69" format="[GENERAL]" html.valueishtml="0"  name=compute_row_number visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="2" text="  of  " border="0" color="16711680" x="2432" y="72" height="60" width="69" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+compute(band=detail alignment="0" expression="RowCount()"border="0" color="16711680" x="2505" y="72" height="60" width="69" format="[GENERAL]" html.valueishtml="0"  name=compute_nmbr_recipients visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="0" text="Name:" border="0" color="0" x="1234" y="152" height="60" width="165" html.valueishtml="0"  name=name_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="33554432" x="1509" y="152" height="60" width="846" format="[general]" html.valueishtml="0"  name=recipient_name visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Care Of:" border="0" color="33554432" x="1234" y="232" height="60" width="210" html.valueishtml="0"  name=t_address_line1 visible="1~tIf (payment_method_code <> ~"D~" and payment_method_code <> ~"R~" ,1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="trim( bank_no) + ' - ' + trim(  bank_transit_no ) + ' - ' + trim(  bank_account_no )"border="0" color="0" x="1513" y="236" height="56" width="635" format="[GENERAL]" html.valueishtml="0"  name=bank_info visible="1~tif( payment_method_code = 'D',1,0)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Bank Info:" border="0" color="33554432" x="1234" y="236" height="60" width="256" html.valueishtml="0"  name=t_3 visible="1~tif( payment_method_code = 'D', 1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=60 border="5" color="33554432" x="480" y="464" height="60" width="297" format="[general]" html.valueishtml="0"  name=manual_cheque_req_no visible="1~tIf (payment_method_code = ~"H~",1,0)" editmask.mask="#######" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=15 alignment="0" tabsequence=30 border="5" color="33554432~tif(payment_method_code = 'R',RGB(0,0,255),RGB(0,0,0))" x="480" y="232" height="60" width="690" format="[general]" html.valueishtml="0"  name=payment_method_code visible="1" dddw.name=dddw_payment_method_pay_maint dddw.displaycolumn=payment_method_desc dddw.datacolumn=payment_method_code dddw.percentwidth=150 dddw.lines=5 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=6 alignment="0" tabsequence=20 border="5" color="33554432" x="480" y="152" height="60" width="622" format="[general]" html.valueishtml="0"  name=recipient_no visible="1" dddw.name=dddw_recipients_for_claim dddw.displaycolumn=name dddw.datacolumn=individual_no dddw.percentwidth=250 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=10 border="5" color="33554432" x="480" y="72" height="60" width="626" format="[general]" html.valueishtml="0"  name=recipient_type_code visible="1" dddw.name=dddw_recipient_types_pay_maint dddw.displaycolumn=recipient_type_desc dddw.datacolumn=recipient_type_code dddw.percentwidth=0 dddw.lines=3 dddw.limit=0 dddw.allowedit=no dddw.useasborder=yes dddw.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Recipient Type:" border="0" color="33554432" x="32" y="72" height="60" width="393" html.valueishtml="0"  name=recipient_type_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Number:" border="0" color="33554432" x="32" y="148" height="60" width="219" html.valueishtml="0"  name=recipient_number_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Method:" border="0" color="33554432" x="32" y="228" height="60" width="206" html.valueishtml="0"  name=payment_method_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Issue Date:" border="0" color="33554432" x="32" y="312" height="60" width="288" html.valueishtml="0"  name=t_manual_cheque_date visible="1~tIf (payment_method_code IN (~"H~", ~"D~", ~"A~"),1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Cheque No:" border="0" color="33554432" x="32" y="388" height="60" width="293" html.valueishtml="0"  name=t_manual_cheque_no visible="1~tIf (payment_method_code IN (~"H~", ~"A~"),1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Req No:" border="0" color="33554432" x="32" y="460" height="60" width="197" html.valueishtml="0"  name=t_manual_cheque_req_no visible="1~tIf (payment_method_code = ~"H~",1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Amount Payable:" border="0" color="33554432" x="32" y="544" height="60" width="434" html.valueishtml="0"  name=txn_amount_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=70 border="5" color="33554432" x="480" y="540" height="60" width="297" format="$#,##0.00" html.valueishtml="0" protect="0~tif( payment_method_code = 'R',1,0)"  name=txn_amount visible="1" edit.limit=0 edit.case=any edit.format="###0.00" edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=40 border="5" color="33554432" x="480" y="308" height="60" width="297" format="[shortdate] [time]" html.valueishtml="0" protect="0~tIf (payment_method_code = ~"H~",0,1)"  name=cheque_deposit_date visible="1~tIf (payment_method_code IN (~"H~", ~"D~", ~"A~"),1,0)" editmask.mask="yyyy-mm-dd" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=50 border="5" color="33554432" x="480" y="388" height="60" width="297" format="[general]" html.valueishtml="0" protect="0~tIf (payment_method_code = ~"H~",0,1)"  name=cheque_no visible="1~tIf (payment_method_code IN (~"H~", ~"A~"),1,0)" editmask.mask="##########" editmask.focusrectangle=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Post Cd:" border="0" color="33554432" x="2025" y="468" height="60" width="215" html.valueishtml="0"  name=t_postal_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Prov:" border="0" color="33554432" x="2030" y="384" height="60" width="133" html.valueishtml="0"  name=t_prov_state_code visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Country:" border="0" color="33554432" x="1234" y="468" height="60" width="215" html.valueishtml="0"  name=t_country visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="City:" border="0" color="33554432" x="1234" y="384" height="60" width="110" html.valueishtml="0"  name=t_city visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Street:" border="0" color="33554432" x="1234" y="308" height="60" width="174" html.valueishtml="0"  name=t_address_line2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=90 border="5" color="33554432" x="1509" y="232" height="60" width="1056" format="[general]" html.valueishtml="0"  name=address_line1 visible="1" edit.limit=29 edit.case=upper edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=23 alignment="0" tabsequence=100 border="5" color="33554432" x="1509" y="308" height="60" width="1056" format="[general]" html.valueishtml="0"  name=address_line2 visible="1" edit.limit=30 edit.case=upper edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" txn_type_desc + if( txn_sub_type_desc = '','',' \ ') +  txn_sub_type_desc "border="0" color="0" x="41" y="0" height="60" width="1435" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=24 alignment="0" tabsequence=110 border="5" color="33554432" x="1509" y="384" height="60" width="489" format="[general]" html.valueishtml="0"  name=city visible="1" dddw.name=dddw_municipality_lookup dddw.displaycolumn=location_desc2 dddw.datacolumn=location_code dddw.percentwidth=175 dddw.lines=0 dddw.limit=25 dddw.allowedit=yes dddw.useasborder=yes dddw.case=upper dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=25 alignment="0" tabsequence=120 border="5" color="0" x="2267" y="384" height="60" width="302" format="[general]" html.valueishtml="0"  name=prov_state_code visible="1" dddw.name=dddw_province_state_lookup dddw.displaycolumn=location_desc1 dddw.datacolumn=location_code dddw.percentwidth=250 dddw.lines=0 dddw.limit=2 dddw.allowedit=yes dddw.useasborder=yes dddw.case=upper dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=26 alignment="0" tabsequence=130 border="5" color="33554432" x="1509" y="468" height="60" width="485" format="[general]" html.valueishtml="0"  name=country visible="1" dddw.name=dddw_country dddw.displaycolumn=location_desc1 dddw.datacolumn=location_desc1 dddw.percentwidth=100 dddw.lines=0 dddw.limit=20 dddw.allowedit=no dddw.useasborder=yes dddw.case=any dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=27 alignment="0" tabsequence=140 border="5" color="33554432" x="2263" y="468" height="60" width="302" format="[general]" html.valueishtml="0"  name=postal_code visible="1" edit.limit=7 edit.case=upper edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

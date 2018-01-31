@@ -1,0 +1,119 @@
+﻿$PBExportHeader$d_annuity_account_header_comp.srd
+$PBExportComments$used in composite report window for all account information.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 70 print.margin.right = 70 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=no hidegrayline=no )
+header(height=716 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=580 color="536870912" height.autosize=yes )
+table(column=(type=datetime updatewhereclause=yes name=annuity_start_date dbname="annuity_start_date" )
+ column=(type=datetime updatewhereclause=yes name=annuity_end_date dbname="annuity_end_date" )
+ column=(type=datetime updatewhereclause=yes name=confirmed_date dbname="confirmed_date" )
+ column=(type=decimal(2) updatewhereclause=yes name=annuity_set_aside_percent dbname="annuity_set_aside_percent" )
+ column=(type=char(16) updatewhereclause=yes name=create_user_id dbname="create_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ column=(type=long updatewhereclause=yes name=annuity_calc_no dbname="annuity_calc_no" )
+ column=(type=char(2) updatewhereclause=yes name=claim_role_code dbname="claim_role_code" )
+ column=(type=long updatewhereclause=yes name=individual_no dbname="individual_no" )
+ column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=datetime updatewhereclause=yes name=death_date dbname="death_date" )
+ column=(type=long updatewhereclause=yes name=annuity_account_no dbname="annuity_account_no" )
+ column=(type=long updatewhereclause=yes name=annuity_eligibility_no dbname="annuity_eligibility_no" )
+ column=(type=long updatewhereclause=yes name=age dbname="age" )
+ column=(type=char(2) updatewhereclause=yes name=annuity_calc_reason_code dbname="annuity_calc_reason_code" )
+ column=(type=datetime updatewhereclause=yes name=concluded_date dbname="concluded_date" )
+ column=(type=char(16) updatewhereclause=yes name=concluded_by_user_id dbname="concluded_by_user_id" )
+ column=(type=datetime updatewhereclause=yes name=create_date dbname="create_date" )
+ retrieve="SELECT a.annuity_start_date,
+       a.annuity_end_date,
+       a.confirmed_date,
+       a.annuity_set_aside_percent,
+       b.create_user_id,
+       b.create_date,
+       b.annuity_calc_no,
+       c.claim_role_code,
+       c.individual_no,
+       c.claim_no,
+       d.last_name,
+       d.given_names,
+       d.birth_date,
+       d.death_date,
+       a.annuity_account_no,
+       a.annuity_eligibility_no,
+       0 age,
+       b.annuity_calc_reason_code,
+       e.concluded_date,
+       e.concluded_by_user_id,
+       b.create_date
+FROM 	 ANNUITY_ELIGIBILITY         a 
+JOIN   ANNUITY_CALC_ACCOUNT_HEADER b ON a.annuity_account_no	  = b.annuity_account_no 
+                                    AND a.annuity_eligibility_no = b.annuity_eligibility_no
+JOIN   ANNUITY_ACCOUNT             c ON a.annuity_account_no = c.annuity_account_no
+JOIN 	 INDIVIDUAL                  d ON c.individual_no = d.individual_no
+JOIN	 CHECKLIST_STEP              e ON a.confirm_annuity_eligibility_checklist_no = e.checklist_no
+WHERE  a.annuity_account_no 	    = :al_annuity_account_no
+AND    b.annuity_calc_no	       = :al_annuity_calc_no
+AND    e.checklist_step_type_code = '007'
+" arguments=(("al_annuity_calc_no", number),("al_annuity_account_no", number)) )
+rectangle(band=header x="0" y="4" height="280" width="3991"  name=r_1 visible="1" brush.hatch="6" brush.color="15987699" pen.style="0" pen.width="5" pen.color="16777215"  background.mode="2" background.color="0" )
+line(band=header x1="9" y1="704" x2="4009" y2="704"  name=l_1 visible="1" pen.style="0" pen.width="14" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=header alignment="2" text="Annuity Calculation Report" border="0" color="0" x="37" y="40" height="76" width="3950" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-12" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.italic="1" background.mode="2" background.color="15987699" )
+line(band=header x1="55" y1="240" x2="3406" y2="240"  name=l_3 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+text(band=header alignment="0" text="Report Date: " border="0" color="0" x="50" y="40" height="64" width="379" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15987699" )
+compute(band=header alignment="1" expression="'Page ' + page() + ' of ' + pageCount()"border="0" color="0" x="3214" y="40" height="80" width="549" format="[general]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15987699" )
+line(band=header x1="73" y1="244" x2="3941" y2="244"  name=l_2 visible="1" pen.style="0" pen.width="27" pen.color="16777215"  background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="439" y="40" height="64" width="549" format="yyyy-mm-dd" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Report Parameters: Account: " border="0" color="0" x="50" y="144" height="64" width="841" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="string( al_annuity_account_no )"border="0" color="33554432" x="901" y="144" height="64" width="233" format="[GENERAL]" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Calculation:" border="0" color="0" x="1230" y="144" height="64" width="347" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15987699" )
+compute(band=header alignment="0" expression="string( al_annuity_calc_no )"border="0" color="33554432" x="1595" y="144" height="64" width="215" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Date:" border="0" color="0" x="1829" y="144" height="64" width="151" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="15987699" )
+column(band=header id=21 alignment="0" tabsequence=32766 border="0" color="33554432" x="1998" y="144" height="64" width="571" format="yyyy-mm-dd h:mm:ss" html.valueishtml="0"  name=create_date_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="~tif (claim_role_code = 'SS','Surviving Spouse','Injured Worker')" border="0" color="33554432" x="18" y="372" height="64" width="800" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression=" given_names + ' ' +  last_name "border="0" color="33554432" x="18" y="456" height="64" width="1426" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Annuity Eligibility:" border="0" color="33554432" x="18" y="540" height="64" width="526" html.valueishtml="0"  name=annuity_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=16 alignment="0" tabsequence=32766 border="0" color="33554432" x="562" y="540" height="64" width="265" format="[general]" html.valueishtml="0"  name=annuity_eligibility_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Calculation Reason:" border="0" color="33554432" x="18" y="624" height="64" width="581" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=18 alignment="0" tabsequence=32766 border="0" color="33554432" x="613" y="624" height="64" width="1495" format="[general]" html.valueishtml="0"  name=annuity_calc_reason_code_1 visible="1" dddw.name=dddw_annuity_calc_reason dddw.displaycolumn=annuity_calc_reason_desc_e dddw.datacolumn=annuity_calc_reason_code dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Period:" border="0" color="0" x="901" y="540" height="64" width="215" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression=" annuity_set_aside_percent /100"border="0" color="33554432" x="1943" y="540" height="64" width="215" format="0.00%" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1586" y="540" height="64" width="325" format="yyyy-mm-dd" html.valueishtml="0"  name=annuity_end_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="To" border="0" color="33554432" x="1481" y="540" height="64" width="91" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="1134" y="540" height="64" width="325" format="yyyy-mm-dd" html.valueishtml="0"  name=annuity_start_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Confirmed On:" border="0" color="33554432" x="2185" y="540" height="64" width="425" html.valueishtml="0"  name=confirmed_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Calculated On:" border="0" color="33554432" x="2185" y="624" height="64" width="430" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2629" y="624" height="64" width="599" format="yyyy-mm-dd h:mm:ss" html.valueishtml="0"  name=create_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="2629" y="540" height="64" width="599" format="yyyy-mm-dd h:mm:ss" html.valueishtml="0"  name=confirmed_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=20 alignment="0" tabsequence=32766 border="0" color="33554432" x="3365" y="540" height="64" width="608" format="[general]" html.valueishtml="0"  name=concluded_by_user_id visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="3365" y="624" height="64" width="466" format="[general]" html.valueishtml="0"  name=create_user_id visible="1" edit.limit=16 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="By:" border="0" color="33554432" x="3255" y="540" height="64" width="96" html.valueishtml="0"  name=create_user_id_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="By:" border="0" color="33554432" x="3255" y="628" height="64" width="96" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="3365" y="372" height="64" width="329" format="[general]" html.valueishtml="0"  name=claim_no visible="1~tif  (claim_role_code = 'SS',1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="3365" y="456" height="64" width="325" format="yyyy-mm-dd" html.valueishtml="0"  name=death_date visible="1~tif(isnull(death_date),1,0)" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Claim:" border="0" color="33554432" x="3159" y="372" height="64" width="192" html.valueishtml="0"  name=claim_no_t visible="1~tif  (claim_role_code = 'SS',1,0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Death Date:" border="0" color="33554432" x="3013" y="456" height="64" width="338" html.valueishtml="0"  name=death_date_t visible="1~tif(isnull(death_date),1,0)"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Age:" border="0" color="33554432" x="3703" y="456" height="64" width="133" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="0" expression="if(isnull(death_date),year(f_server_datetime()) - year( birth_date ),year(death_date) - year(birth_date))"border="0" color="33554432" x="3849" y="456" height="64" width="142" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Individual:" border="0" color="33554432" x="2304" y="372" height="64" width="306" html.valueishtml="0"  name=individual_no_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Birth Date:" border="0" color="33554432" x="2304" y="456" height="64" width="306" html.valueishtml="0"  name=birth_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="2624" y="456" height="64" width="325" format="yyyy-mm-dd" html.valueishtml="0"  name=birth_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="2624" y="372" height="64" width="329" format="[general]" html.valueishtml="0"  name=individual_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+report(band=detail dataobject="d_account_info_for_treeview_comp" x="18" y="4" height="136" width="1394" border="0"  height.autosize=yes criteria="" nest_arguments=((" al_annuity_account_no "),(" al_annuity_calc_no ")) trail_footer = yes  name=dw_claims_for_account_comp visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_annuity_account_summary_comp" x="18" y="152" height="136" width="4498" border="0"  height.autosize=yes criteria="" nest_arguments=((" al_annuity_calc_no "),(" al_annuity_account_no "),(" claim_role_code ")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_sub_ledger_adjustments_by_account" x="18" y="296" height="136" width="4503" border="0"  height.autosize=yes criteria="" nest_arguments=((" al_annuity_account_no "),(" al_annuity_calc_no "),(" claim_role_code ")) trail_footer = yes  name=dw_2 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="d_annuity_claim_comp" x="18" y="440" height="136" width="4503" border="0"  height.autosize=yes criteria="" nest_arguments=((" al_annuity_account_no "),(" al_annuity_calc_no "),(" claim_role_code ")) trail_footer = yes  name=dw_3 visible="1"  slideup=directlyabove )
+text(band=foreground alignment="2" text="DO NOT SCAN" border="0" color="134217728" x="23" y="2040" height="180" width="4027" html.valueishtml="0"  name=t_scan visible="0~tif (page() = 1,1,0)"  font.face="Bookman Old Style" font.height="-32" font.weight="700"  font.family="1" font.pitch="2" font.charset="0"font.escapement="0~t360"  background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

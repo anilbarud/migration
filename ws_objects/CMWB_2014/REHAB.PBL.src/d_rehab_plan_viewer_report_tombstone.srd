@@ -1,0 +1,107 @@
+﻿$PBExportHeader$d_rehab_plan_viewer_report_tombstone.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 1 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=yes print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="-1" )
+footer(height=0 color="-1" )
+detail(height=712 color="-1" )
+table(column=(type=long updatewhereclause=yes name=claim_no dbname="claim_no" )
+ column=(type=datetime updatewhereclause=yes name=accident_date dbname="accident_date" )
+ column=(type=long updatewhereclause=yes name=claim_accident_employer_no dbname="accident_employer_no" )
+ column=(type=long updatewhereclause=yes name=claim_accident_employer_operation_no dbname="accident_employer_operation_no" )
+ column=(type=datetime updatewhereclause=yes name=birth_date dbname="birth_date" )
+ column=(type=char(10) updatewhereclause=yes name=telephone_no dbname="telephone_no" )
+ column=(type=char(10) updatewhereclause=yes name=employer_address_telephone_no dbname="telephone_no" )
+ column=(type=char(1) updatewhereclause=yes name=language_code dbname="language_code" )
+ column=(type=char(20) updatewhereclause=yes name=last_name dbname="last_name" )
+ column=(type=char(20) updatewhereclause=yes name=given_names dbname="given_names" )
+ column=(type=char(5) updatewhereclause=yes name=part_of_body_code dbname="part_of_body_code" )
+ column=(type=char(30) updatewhereclause=yes name=address_line1 dbname="address_line1" )
+ column=(type=char(30) updatewhereclause=yes name=address_line2 dbname="address_line2" )
+ column=(type=char(25) updatewhereclause=yes name=city dbname="city" )
+ column=(type=char(2) updatewhereclause=yes name=province_state dbname="prov_state_code" )
+ column=(type=char(3) updatewhereclause=yes name=country dbname="country_code" )
+ column=(type=char(10) updatewhereclause=yes name=postal_code dbname="postal_code" )
+ column=(type=char(16) updatewhereclause=yes name=claim_manager_user_id dbname="claim_manager_user_id" )
+ column=(type=char(4) updatewhereclause=yes name=occupation_code dbname="occupation_code" )
+ column=(type=char(40) updatewhereclause=yes name=employer_contact dbname="employer_contact" )
+ column=(type=char(60) updatewhereclause=yes name=employer_employer_legal_name dbname="employer_legal_name" )
+ column=(type=char(10) updatewhereclause=yes name=individual_cellphone_no dbname="cellphone_no" )
+ column=(type=char(10) updatewhereclause=yes name=individual_pager_no dbname="pager_no" )
+ retrieve=" SELECT  CLAIM.claim_no ,
+           CLAIM.accident_date ,
+           CLAIM.accident_employer_no ,
+           CLAIM.accident_employer_operation_no ,
+           INDIVIDUAL.birth_date ,
+           INDIVIDUAL.telephone_no ,
+           EMPLOYER_ADDRESS.telephone_no ,
+           INDIVIDUAL.language_code ,
+           INDIVIDUAL.last_name ,
+           INDIVIDUAL.given_names ,
+           CLAIM.part_of_body_code ,
+           INDIVIDUAL.address_line1 ,
+           INDIVIDUAL.address_line2 ,
+           INDIVIDUAL.city ,
+           INDIVIDUAL.prov_state_code ,
+           INDIVIDUAL.country_code ,
+           INDIVIDUAL.postal_code ,
+           CLAIM.claim_manager_user_id ,
+           ACCIDENT.occupation_code ,
+           CASE_MONITORING.employer_contact ,
+           EMPLOYER.employer_legal_name,
+           INDIVIDUAL.cellphone_no,
+          INDIVIDUAL.pager_no	     
+FROM  CLAIM 
+     INNER JOIN  INDIVIDUAL  ON CLAIM.individual_no = INDIVIDUAL.individual_no
+    LEFT OUTER JOIN  EMPLOYER_ADDRESS  ON CLAIM.accident_employer_no = EMPLOYER_ADDRESS.employer_no and EMPLOYER_ADDRESS.operation_no = 0 
+               and EMPLOYER_ADDRESS.address_type_code = ~"BA~"
+    INNER JOIN  ACCIDENT  ON CLAIM.claim_no = ACCIDENT.claim_no
+    LEFT OUTER JOIN  CASE_MONITORING  ON CLAIM.claim_no = CASE_MONITORING.claim_no
+    LEFT OUTER JOIN  EMPLOYER  ON CLAIM.accident_employer_no = EMPLOYER.employer_no        
+where CLAIM.claim_no = :claim_no   " arguments=(("claim_no", number)) )
+text(band=detail alignment="0" text="Address:" border="0" color="33554432" x="18" y="28" height="60" width="233" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if(address_line1 > ~"~",address_line1 + if(address_line2 > ~"~",'~~n~~r' + address_line2,~"~"),~"~"
++ if(address_line2 > ~"~",address_line2,~"~")) + '~~n~~r' + city_province + '~~n~~r' + postal_country
+"border="0" color="33554432" x="416" y="28" height="232" width="1024" format="[general]" html.valueishtml="0"  name=address visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Employer:" border="0" color="0" x="1513" y="28" height="60" width="256" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Emp Phone:" border="0" color="0" x="1513" y="276" height="60" width="306" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="276" height="56" width="425" format="~tIf (employer_address_telephone_no > ~"          ~",'(@@@)@@@-@@@@','')" html.valueishtml="0"  name=employer_address_telephone_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="18" y1="4" x2="4480" y2="4"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+text(band=detail alignment="0" text="Employer Contact:" border="0" color="33554432" x="1513" y="184" height="60" width="471" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=20 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="184" height="60" width="905" format="[general]" html.valueishtml="0"  name=employer_contact visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="32" height="60" width="2171" format="[general]" html.valueishtml="0"  name=employer_employer_legal_name visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Occupation:" border="0" color="33554432" x="1513" y="340" height="60" width="311" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="340" height="56" width="905" format="[general]" html.valueishtml="0"  name=occupation_code visible="1" dddw.name=dddw_occupation_codes_active dddw.displaycolumn=occupation_code_desc dddw.datacolumn=occupation_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Case Manager:" border="0" color="0" x="1513" y="404" height="60" width="389" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="0" color="0" x="2007" y="404" height="56" width="453" format="[general]" html.valueishtml="0"  name=claim_manager_user_id visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Contact #:" border="0" color="0" x="18" y="276" height="60" width="293" html.valueishtml="0"  name=individual_telephone_no_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Language:" border="0" color="33554432" x="18" y="456" height="56" width="270" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Birth Date:" border="0" color="0" x="18" y="516" height="56" width="270" html.valueishtml="0"  name=individual_birth_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Accident Date:" border="0" color="0" x="18" y="576" height="56" width="375" html.valueishtml="0"  name=claim_accident_date_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Injury:" border="0" color="0" x="18" y="636" height="56" width="155" html.valueishtml="0"  name=claim_part_of_body_code_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="if(language_code = 'E','English',if(language_code = 'F','French','Unknown'))"border="0" color="33554432" x="416" y="456" height="56" width="453" format="[general]" html.valueishtml="0"  name=language visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="516" height="56" width="425" format="yyyy-mm-dd" html.valueishtml="0"  name=birth_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="576" height="56" width="425" format="yyyy-mm-dd" html.valueishtml="0"  name=accident_date visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="636" height="56" width="2053" format="[general]" html.valueishtml="0"  name=part_of_body_code visible="1" dddw.name=dddw_part_of_body dddw.displaycolumn=part_of_body_desc dddw.datacolumn=part_of_body_code dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="18" y1="704" x2="4480" y2="704"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="33554432"  background.mode="2" background.color="268435456" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="276" height="56" width="411" format="~tIf (telephone_no > ~" ~",'(@@@) @@@-@@@@','')" html.valueishtml="0"  name=telephone_no visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="336" height="56" width="411" format="~tif( individual_cellphone_no = '','','(@@@) @@@-@@@@')" html.valueishtml="0"  name=individual_cellphone_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="-  Main" border="0" color="0" x="832" y="276" height="60" width="201" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="-  Cell" border="0" color="0" x="832" y="336" height="60" width="169" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="-  Pager" border="0" color="0" x="832" y="396" height="60" width="229" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=23 alignment="0" tabsequence=32766 border="0" color="0" x="416" y="396" height="56" width="411" format="~tif( individual_pager_no = '','','(@@@) @@@-@@@@')" html.valueishtml="0"  name=individual_pager_no visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="0" expression="if(country = 'CAN' and postal_code > ~"~",
+if(len(postal_code) = 6,Mid(postal_code,1,3) + ~" ~" + Mid(postal_code,4,3),postal_code),
+if(postal_code > ~"~",postal_code,~"~"))"border="0" color="33554432" x="1929" y="4" height="76" width="261" format="[general]" html.valueishtml="0"  name=postal_country visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+compute(band=summary alignment="0" expression="if(city > ~"~",city  + if(province_state > ~"~",~", ~" + province_state,~"~"),~"~" + if(province_state > ~"~",province_state,~"~"))"border="0" color="33554432" x="2272" y="4" height="76" width="261" format="[general]" html.valueishtml="0"  name=city_province visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="268435456" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

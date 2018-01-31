@@ -1,0 +1,24 @@
+﻿$PBExportHeader$d_cost_alloc_seasonal_coverage.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=datetime updatewhereclause=yes name=coverage_start_date dbname="coverage_start_date" )
+ column=(type=datetime updatewhereclause=yes name=coverage_end_date dbname="coverage_end_date" )
+ retrieve="  SELECT coverage_start_date,   
+         coverage_end_date  
+    FROM SEASONAL_COVERAGE   
+   WHERE employer_no = :al_employer_no
+    and  operation_no = :al_operation_no
+    and  active_flag = 'Y'
+    and  assessment_year = DatePart(year,:adt_accident_date)
+
+" arguments=(("al_employer_no", number),("al_operation_no", number),("adt_accident_date", datetime)) )
+text(band=header alignment="2" text="Coverage Start Date" border="0" color="33554432" x="5" y="4" height="64" width="603" html.valueishtml="0"  name=coverage_start_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Coverage End Date" border="0" color="33554432" x="613" y="4" height="64" width="603" html.valueishtml="0"  name=coverage_end_date_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=coverage_start_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="613" y="4" height="76" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=coverage_end_date visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )
